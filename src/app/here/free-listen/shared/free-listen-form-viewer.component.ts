@@ -1,7 +1,7 @@
-import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import {TimeslotItem, Timetable} from 'core/models';
-import {FreeListenForm, FreeListenSettings} from './free-listen-form.model';
+import { TimeslotItem, Timetable } from 'core/models';
+import { FreeListenForm, FreeListenSettings } from './free-listen-form.model';
 
 @Component({
     selector: 'tm-free-listen-form-viewer',

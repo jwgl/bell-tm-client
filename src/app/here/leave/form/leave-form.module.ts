@@ -24,4 +24,3 @@ import { LeaveFormService } from './leave-form.service';
     ],
 })
 export class LeaveFormModule { }
-

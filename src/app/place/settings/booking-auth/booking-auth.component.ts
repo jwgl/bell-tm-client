@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+
 import * as _ from 'lodash';
 
 import { CommonDialog } from 'core/common-dialogs';
 import { Dialog } from 'core/dialogs';
-import { groupBy } from 'core/utils';
 
 import { BookingAuthDialog } from './booking-auth.dialog';
 import { BookingAuth, BookingType, Department } from './booking-auth.model';

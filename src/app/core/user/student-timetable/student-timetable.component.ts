@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {Schedule, ScheduleDto, Term, Timetable} from 'core/models';
+import { Schedule, ScheduleDto, Term, Timetable } from 'core/models';
 
-import {StudentTimetableService} from './student-timetable.service';
+import { StudentTimetableService } from './student-timetable.service';
 
 @Component({
     styleUrls: ['student-timetable.component.scss'],
@@ -12,7 +12,7 @@ export class StudentTimetableComponent implements OnInit {
     term: Term;
     timetable: Timetable;
 
-    constructor(private service: StudentTimetableService) {}
+    constructor(private service: StudentTimetableService) { }
 
     ngOnInit(): void {
         this.service.loadList().subscribe((dto: any) => {

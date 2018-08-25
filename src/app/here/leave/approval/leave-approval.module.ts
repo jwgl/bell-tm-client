@@ -27,4 +27,3 @@ import { LeaveApprovalItemComponent } from './approval-item.component';
     ],
 })
 export class LeaveApprovalModule { }
-

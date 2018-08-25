@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { CommonDialog } from 'core/common-dialogs';
 import { Dialog } from 'core/dialogs';

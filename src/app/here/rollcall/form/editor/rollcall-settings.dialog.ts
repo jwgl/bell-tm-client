@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { BaseDialog } from 'core/dialogs';
 
 @Component({
-    styleUrls: ['rollcall-settings.dialog.scss'],
     templateUrl: 'rollcall-settings.dialog.html',
 })
 export class RollcallSettingsDialog extends BaseDialog {

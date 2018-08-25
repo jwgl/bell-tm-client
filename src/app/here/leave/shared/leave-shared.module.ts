@@ -1,9 +1,9 @@
-import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import {CommonDirectivesModule} from 'core/common-directives';
-import {LeaveFormViewerComponent} from './leave-form-viewer.component';
-import {LeaveTypePipe} from './leave-type.pipe';
+import { CommonDirectivesModule } from 'core/common-directives';
+import { LeaveFormViewerComponent } from './leave-form-viewer.component';
+import { LeaveTypePipe } from './leave-type.pipe';
 
 @NgModule({
     imports: [
@@ -19,4 +19,4 @@ import {LeaveTypePipe} from './leave-type.pipe';
         LeaveTypePipe,
     ],
 })
-export class LeaveSharedModule {}
+export class LeaveSharedModule { }

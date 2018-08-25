@@ -1,10 +1,10 @@
-import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import {CommonDirectivesModule} from 'core/common-directives';
+import { CommonDirectivesModule } from 'core/common-directives';
 
-import {FreeFormViewerComponent} from './free-listen-form-viewer.component';
-import {TimeslotLimitPipe} from './timeslot-limit.pipe';
+import { FreeFormViewerComponent } from './free-listen-form-viewer.component';
+import { TimeslotLimitPipe } from './timeslot-limit.pipe';
 
 @NgModule({
     imports: [
@@ -19,4 +19,4 @@ import {TimeslotLimitPipe} from './timeslot-limit.pipe';
         FreeFormViewerComponent,
     ],
 })
-export class FreeListenSharedModule {}
+export class FreeListenSharedModule { }

@@ -26,4 +26,3 @@ import { LeaveViewService } from './leave-view.service';
     ],
 })
 export class LeaveViewModule { }
-

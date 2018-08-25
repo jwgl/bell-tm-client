@@ -8,33 +8,29 @@ $item-count: 5;
 $list-border: 1px;
 
 .list-pane {
-	outline: none;
-	outline-style: none;
-	box-shadow: none;
-	border-color: transparent;
-
+    outline: none;
+    outline-style: none;
+    box-shadow: none;
+    border-color: transparent;
     ul {
-      	cursor: default;
+        cursor: default;
         overflow-y: scroll;
         overflow-x: hidden;
         list-style: none;
         padding: 0px;
         margin: 0px;
         border: solid $list-border $border-color;
-        height: $item-height * $item-count + 2 * $list-border;
+        height: $item-height * $item-count+2 * $list-border;
         position: relative;
-
         li {
-          	background-color: #fff;
+            background-color: #fff;
             height: $item-height;
             display: flex;
             align-items: flex-end;
-
             rollcall-status {
                 font-size: 1.5rem;
                 margin-bottom: 0.5rem;
             }
-
             .name {
                 font-size: $item-font-size;
                 line-height: 1;
@@ -42,12 +38,10 @@ $list-border: 1px;
                 margin-right: 0.5rem;
                 padding-bottom: 0.75rem;
             }
-
             .statis {
                 font-size: 1.25rem;
                 line-height: 1;
             }
-
             &.active {
                 background-color: $component-active-bg;
                 color: $component-active-color;

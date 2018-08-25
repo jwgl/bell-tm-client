@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
-import {Schedule, TimeslotItem} from 'core/components/schedule-timetable/schedule-timetable.model';
-import {multipleWeekRangesText} from 'core/utils';
+import { Schedule, TimeslotItem } from 'core/components/schedule-timetable/schedule-timetable.model';
+import { multipleWeekRangesText } from 'core/utils';
 
 declare module 'core/components/schedule-timetable/schedule-timetable.model' {
     interface Schedule {
@@ -16,24 +16,24 @@ declare module 'core/components/schedule-timetable/schedule-timetable.model' {
     }
 }
 
-TimeslotItem.prototype.getFreeListenSchedule = function(this: TimeslotItem): Schedule {
+TimeslotItem.prototype.getFreeListenSchedule = function (this: TimeslotItem): Schedule {
     const schedule = this.schedules[0];
     return schedule.root ? schedule.root : schedule;
 };
 
-TimeslotItem.prototype.getFreeListenClass = function(this: TimeslotItem, form: FreeListenForm): string {
+TimeslotItem.prototype.getFreeListenClass = function (this: TimeslotItem, form: FreeListenForm): string {
     const schedule = this.getFreeListenSchedule();
     switch (schedule.owner) {
         case 'department':
             return 'slotitem-other';
         case 'self':
             return form.scheduleSelected(schedule)
-                 ? 'slotitem-current'
-                 : form.scheduleApproved(schedule)
-                 ? 'slotitem-approved'
-                 : form.scheduleExisted(schedule)
-                 ? 'slotitem-exists'
-                 : 'slotitem-normal';
+                ? 'slotitem-current'
+                : form.scheduleApproved(schedule)
+                    ? 'slotitem-approved'
+                    : form.scheduleExisted(schedule)
+                        ? 'slotitem-exists'
+                        : 'slotitem-normal';
     }
 };
 
@@ -55,13 +55,13 @@ export class FreeListenForm {
     /**
      * 无效的免听项，免听申请成功后，由于调整班级，该安排已不属于当前学生
      */
-    invalidItems = [] as Array<{id: number, scheduleId: string}>;
+    invalidItems = [] as Array<{ id: number, scheduleId: string }>;
     /**
      * 其它表单中免听项
      */
-    existedItems: Array<{taskScheduleId: string, status: string}>;
+    existedItems: Array<{ taskScheduleId: string, status: string }>;
 
-    scheduleMap: {[key: string]: Schedule} = {};
+    scheduleMap: { [key: string]: Schedule } = {};
 
     constructor(dto: any, schedules: Schedule[]) {
         this.id = dto.id;
@@ -98,7 +98,7 @@ export class FreeListenForm {
             }
         });
 
-        for (const item of dto.items as Array<{id: number, scheduleId: string}>) {
+        for (const item of dto.items as Array<{ id: number, scheduleId: string }>) {
             const schedule = this.scheduleMap[item.scheduleId];
             if (schedule) {
                 this.items.push(new FreeListenItem(item, schedule));
@@ -152,7 +152,7 @@ export class FreeListenItem {
                 return it.dayOfWeek * 10000 + it.startSection * 100 + it.totalSection;
             }).map((schedules: Schedule[]) => {
                 return `${multipleWeekRangesText(schedules)} ${schedules[0].dayOfWeekText} ${schedules[0].sectionsText} / `
-                     + `${_.uniq(schedules.map(it => it.teacherName)).join(',')}`;
+                    + `${_.uniq(schedules.map(it => it.teacherName)).join(',')}`;
             }).value();
             if (childrenInfo.length === 1) {
                 return `${this.schedule.courseText} / ${childrenInfo[0]}`;
@@ -161,8 +161,8 @@ export class FreeListenItem {
             }
         } else {
             return `${this.schedule.courseText} / `
-                 + `${this.schedule.weeksText} ${this.schedule.dayOfWeekText} ${this.schedule.sectionsText} / `
-                 + `${this.schedule.teacherName}`;
+                + `${this.schedule.weeksText} ${this.schedule.dayOfWeekText} ${this.schedule.sectionsText} / `
+                + `${this.schedule.teacherName}`;
         }
     }
 }
