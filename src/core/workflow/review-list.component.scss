@@ -1,0 +1,14 @@
+.table-responsive {
+    margin-bottom: 1rem;
+}
+
+.table ::ng-deep {
+    margin-bottom: 0;
+    thead th {
+        border-top-width: 0;
+    }
+}
+
+.alert {
+    margin-top: 1rem;
+}

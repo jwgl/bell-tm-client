@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="btn-toolbar">
+            <select class="form-control" [(ngModel)]="selectedTerm" (change)="onTermChanged()">
+                <option *ngFor="let term of terms" [ngValue]="term">{{term | termName}}</option>
+            </select>
+        </div>
+        <div class="list-group" *ngIf="adminClasses">
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                [routerLink]="[{termId: selectedTerm}, 'all']"
+                [routerLinkActiveOptions]="{exact: true}"
+                routerLinkActive="active">
+                全部
+                <span class="badge badge-secondary badge-pill">{{totalCount}}</span>
+            </a>
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                *ngFor="let adminClass of adminClasses"
+                [routerLink]="[{termId: selectedTerm}, adminClass.id]"
+                routerLinkActive="active">
+                {{adminClass.name}}
+                <span class="badge badge-secondary badge-pill">{{adminClass.count}}</span>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="btn-toolbar">
+            <div class="btn-group ml-auto">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">导出</button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" download href="{{statisReportUrl}}">考勤统计数据</a>
+                    <a class="dropdown-item" download href="{{detailReportUrl}}">考勤明细数据</a>
+                    <a class="dropdown-item" download href="{{disqualReportUrl}}" *ngIf="isAdmin">取消考试资格情况</a>
+                </div>
+            </div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

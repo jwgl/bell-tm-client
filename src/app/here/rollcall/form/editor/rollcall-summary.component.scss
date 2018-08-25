@@ -1,0 +1,35 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '../../shared/variables';
+
+:host {
+    white-space: nowrap;
+}
+
+.absent {
+    color: $absent-bg;
+}
+
+.late {
+    color: $late-bg;
+}
+
+.early {
+    color: $early-bg;
+}
+
+.attend {
+    color: $attend-bg;
+}
+
+.visible {
+    color: theme_color("success");
+}
+
+.leave {
+    color: color("gray");
+}
+
+.free {
+    color: color("gray");
+}

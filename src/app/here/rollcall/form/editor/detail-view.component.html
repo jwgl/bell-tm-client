@@ -1,0 +1,42 @@
+<table class="table table-sm" *ngIf="rollcallForm">
+    <thead>
+        <tr>
+            <th>操作</th>
+            <th>序号</th>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>旷/迟/退/假</th>
+            <th>班级</th>
+            <th>专业</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student of rollcallForm.visibleStudents">
+            <td>
+                <ng-container *ngIf="!student.absence; else status">
+                    <rollcall-toggle-bar
+                        [rollcallType]="student.rollcallType"
+                        [disabled]="student.pending"
+                        (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
+                    <fa-icon icon="spinner"
+                        pulse="true"
+                        fix-width="true"
+                        [style.visibility]="student.pending ? 'visible' : 'hidden'"
+                        [style.marginLeft]="'2px'"
+                        class="text-success"></fa-icon>
+                </ng-container>
+                <ng-template #status>
+                    <rollcall-status [student]="student"></rollcall-status>
+                </ng-template>
+            </td>
+            <td>{{student.index}}</td>
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.attendances.join(' / ')}}</td>
+            <td>{{student.adminClass}}</td>
+            <td>{{student.subject}}</td>
+            <td><label *ngIf="student.disqualified" class="badge badge-secondary">取消考试资格</label></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,26 @@
+<table class="table" *ngIf="departments">
+    <thead>
+        <tr>
+            <th>学院</th>
+            <th>专业</th>
+            <th *ngFor="let grade of grades">
+                <button type="button" class="btn btn-sm btn-secondary"
+                    [ngClass]="{active: selectedGrade == grade}"
+                    (click)="onGradeChange(grade)">{{grade}}级</button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let department of departments; let i = index">
+            <ng-container *ngFor="let subject of department.subjects | gradeFilter:selectedGrade; let j = index">
+                <tr>
+                    <td *ngIf="j == 0" [rowSpan]="(department.subjects | gradeFilter:selectedGrade).length">{{department.name}}</td>
+                    <td>{{subject.id}} {{subject.name}}</td>
+                    <td *ngFor="let grade of grades" class="grade" [class.empty]="!subject.grades[grade]">
+                        <a *ngIf="subject.grades[grade]" [routerLink]="[subject.grades[grade]]">{{grade}}</a>
+                    </td>
+                </tr>
+            </ng-container>
+        </ng-container>
+    </tbody>
+</table>

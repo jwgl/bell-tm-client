@@ -1,0 +1,40 @@
+<ng-container *ngIf="settings">
+    <div class="btn-toolbar" *ngIf="settings.isApplyDateValid">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-primary" routerLink="create">新建</button>
+        </div>
+    </div>
+    <div class="alert alert-info">
+        <div [markdown]="notice"></div>
+        <h4>免听起止时间（{{settings.term | termName}}）</h4>
+        <ol>
+            <li>学生申请时间：{{settings.applyStartDate | date: 'y-MM-dd'}} 至 {{settings.applyEndDate | date: 'y-MM-dd'}}</li>
+            <li>教师审核时间：{{settings.checkStartDate | date: 'y-MM-dd'}} 至 {{settings.checkEndDate | date: 'y-MM-dd'}}</li>
+        </ol>
+    </div>
+</ng-container>
+<ng-container *ngIf="forms">
+    <div class="table-responsive" *ngIf="forms.length > 0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>申请单号</th>
+                    <th>学期</th>
+                    <th>免听事由</th>
+                    <th>创建时间</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let form of forms">
+                    <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
+                    <td>{{form.term | termName: 'short'}}</td>
+                    <td><div class="reason">{{form.reason}}</div></td>
+                    <td>{{form.dateCreated | date: 'y-MM-dd HH:mm'}}</td>
+                    <td><audit-status [status]="form.status"></audit-status></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <tm-pager [total]="totalCount" [max]="max" [length]="forms.length" (prev)="loadList($event)" (next)="loadList($event)"></tm-pager>
+</ng-container>

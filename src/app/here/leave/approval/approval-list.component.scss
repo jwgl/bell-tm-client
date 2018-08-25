@@ -1,0 +1,36 @@
+.table-responsive {
+    margin-bottom: 1rem;
+}
+
+.table {
+    margin-bottom: 0;
+    th {
+        white-space: nowrap;
+        border-top-width: 0;
+    }
+    td {
+        white-space: nowrap;
+        &:nth-child(1) {
+            width: 3rem;
+        }
+        &:nth-child(2) {
+            width: 4rem;
+        }
+        &:nth-child(3) {
+            width: 5rem;
+        }
+        &:nth-child(4) {
+            width: 8rem;
+        }
+        &:nth-child(5) {
+            width: 3rem;
+        }
+        &:nth-child(7) {
+            width: 10rem;
+        }
+    }
+}
+
+.alert {
+    margin-top: 1rem;
+}

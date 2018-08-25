@@ -1,0 +1,30 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-primary" routerLink="create">新建</button>
+    </div>
+</div>
+<ng-container *ngIf="items">
+    <div class="table-responsive" *ngIf="items.length > 0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>报表编号</th>
+                    <th>创建人</th>
+                    <th>创建时间</th>
+                    <th>修改人</th>
+                    <th>修改时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of items">
+                    <td><a [routerLink]="[report.id]">#{{report.id}}</a></td>
+                    <td>{{report.creator}}</td>
+                    <td>{{report.dateCreated | date: 'y-MM-dd HH:mm'}}</td>
+                    <td>{{report.modifier}}</td>
+                    <td>{{report.dateModified | date: 'y-MM-dd HH:mm'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <tm-pager [total]="totalCount" [max]="max" [length]="items.length" (prev)="loadList($event)" (next)="loadList($event)"></tm-pager>
+</ng-container>

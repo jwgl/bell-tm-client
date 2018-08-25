@@ -1,0 +1,14 @@
+<tm-workflow-list expend="true">
+    <ng-template #theadTpl>
+        <th>借用单位</th>
+        <th>借用类别</th>
+        <th>借用人</th>
+        <th>借用事由</th>
+    </ng-template>
+    <ng-template #tbodyTpl let-form="form">
+        <td>{{form.department}}</td>
+        <td>{{form.type}}</td>
+        <td>{{form.userName}}</td>
+        <td class="expand">{{form.reason}}</td>
+    </ng-template>
+</tm-workflow-list>

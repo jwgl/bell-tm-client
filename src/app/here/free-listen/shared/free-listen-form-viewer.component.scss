@@ -1,0 +1,52 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import 'src/core/components/schedule-timetable/schedule-timetable.shared';
+
+.form-control-plaintext:not(.text-muted) {
+    border-bottom: solid 1px rgba(0,0,0,.15);
+}
+
+ul {
+    padding: 0.5rem 0 0.5rem 0;
+}
+
+.slotitem, .slotitem-sample {
+    &.slotitem-normal {
+        @include schedule-variant(theme_color("light"));
+    }
+    &.slotitem-current {
+        @include schedule-variant(theme_color("danger"));
+    }
+    &.slotitem-exists {
+        @include schedule-variant(theme_color("info"));
+    }
+    &.slotitem-approved {
+        @include schedule-variant(theme_color("success"));
+    }
+    &.slotitem-other {
+        @include schedule-variant(theme_color("warning"));
+    }
+
+    &.highlight {
+        &.slotitem-normal {
+            @include schedule-variant(darken(theme_color("light"), 10%));
+        }
+        &.slotitem-current {
+            @include schedule-variant(darken(theme_color("danger"), 10%));
+        }
+        &.slotitem-exists {
+            @include schedule-variant(darken(theme_color("info"), 10%));
+        }
+        &.slotitem-approved {
+            @include schedule-variant(darken(theme_color("success"), 10%));
+        }
+        &.slotitem-other {
+            @include schedule-variant(darken(theme_color("warning"), 10%));
+        }
+    }
+}
+
+.slotitem.hightlight+.slotitem,
+.slotitem+.slotitem,.hightlight{
+    border-top: dashed 1px rgba(0, 0, 0, 0.4)
+}

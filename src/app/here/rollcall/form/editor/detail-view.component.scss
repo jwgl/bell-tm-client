@@ -1,0 +1,22 @@
+.table {
+    th {
+        white-space: nowrap;
+    }
+    td {
+        white-space: nowrap;
+        border-top-width: 0;
+        vertical-align: middle;
+
+        &:nth-child(2) {
+            text-align: center;
+        }
+
+        &:nth-child(8) {
+            width: 100%;
+        }
+
+        rollcall-toggle-bar {
+            display: inline-block
+        }
+    }
+}

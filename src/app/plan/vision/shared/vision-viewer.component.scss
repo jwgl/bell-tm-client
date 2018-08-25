@@ -1,0 +1,41 @@
+h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+:host /deep/ p {
+    text-indent: 2em;
+}
+
+@media print {
+    :host {
+        font-family: '宋体';
+
+        h1 {
+            font-weight: bold;
+        }
+
+        h2 {
+            text-indent: 2em;
+            font-family: '黑体';
+            margin-bottom: 1em;
+        }
+
+        ol {
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 1em;
+        }
+
+        ul {
+            li {
+                margin-left: -1.5em;
+            }
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+}

@@ -1,0 +1,72 @@
+@import '/~bootstrap/scss/functions';
+@import '/~bootstrap/scss/mixins';
+@import '/~bootstrap/scss/variables';
+@import '../../shared/variables';
+
+$btn-late-bg:   $late-bg;
+$btn-absent-bg: $absent-bg;
+$btn-early-bg:  $early-bg;
+$btn-attend-bg: $attend-bg;
+
+@mixin rollcall-button-variant($color) {
+    @include button-outline-variant($color);
+    border-color: #ccc;
+    color: $gray-900;
+    background-color: #fff;
+
+    @include hover {
+        color: #000;
+        background-color: darken($white, 10%);
+        border-color: darken($white, 12%);
+    }
+
+    &[disabled] {
+        color: #888;
+    }
+
+    &:focus,
+    &.focus,
+    &:not([disabled]):not(.disabled):active,
+    &:not([disabled]):not(.disabled).active {
+        box-shadow: none;
+        color: color-yiq($color);
+        @include hover {
+            background-color: darken($color, 10%);
+            border-color: darken($color, 12%);
+        }
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.btn-outline-late {
+    @include rollcall-button-variant($btn-late-bg);
+}
+
+.btn-outline-absent {
+    @include rollcall-button-variant($btn-absent-bg);
+}
+
+.btn-outline-early {
+    @include rollcall-button-variant($btn-early-bg);
+}
+
+.btn-outline-attend {
+    @include rollcall-button-variant($btn-attend-bg);
+}
+
+.btn-group {
+    display: flex;
+    white-space: nowrap;
+}
+
+.col {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.btn-sm {
+    font-size: 75%;
+    line-height: 1.25;
+}

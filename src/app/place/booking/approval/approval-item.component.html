@@ -1,0 +1,10 @@
+<tm-workflow-item reviewType="approve"
+    [reviewable]="form?.status === 'CHECKED'"
+    [reviewTitle]="form?.title"
+    [acceptEnabled]="!form?.occupied"
+    [revokable] = "form?.status === 'APPROVED'"
+    (itemLoaded)="onItemLoaded($event)">
+    <ng-template #viewerTpl *ngIf="form">
+        <tm-booking-form-viewer [form]="form"></tm-booking-form-viewer>
+    </ng-template>
+</tm-workflow-item>

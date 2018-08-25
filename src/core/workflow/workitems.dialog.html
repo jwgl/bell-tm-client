@@ -1,0 +1,14 @@
+<modal-dialog modalTitle="处理流程">
+    <modal-body>
+        <ul *ngIf="options.data && options.data.length > 0" style="max-height: 400px; overflow-y: auto">
+            <li *ngIf="showLast"><b>{{lastToUser}}</b>{{lastStatus}}</li>
+            <li *ngFor="let item of options.data">
+                <div><b>{{item.fromUser}}</b>于{{item.dateCreated | fromNow}}<workitem-status [status]="item.state"></workitem-status></div>
+                <div *ngIf="item.note">{{item.note}}</div>
+            </li>
+        </ul>
+    </modal-body>
+    <modal-footer>
+        <button modalOk (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

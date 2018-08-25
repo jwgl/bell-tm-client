@@ -1,0 +1,15 @@
+<schedule-weektab [term]="term" #weektab></schedule-weektab>
+<schedule-timetable [timetable]="timetable" [week]="weektab.selectedWeek">
+    <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
+        <div class="timeslot btn-group-vertical">
+            <button class="btn btn-secondary slotitem" *ngFor="let item of timeslot.items" [routerLink]="['../timeslots', timeslot.id, 'weeks', week, service.viewType]">
+                <div class="course">
+                    <span class="course-name">{{item.course}}</span>
+                    <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
+                </div>
+                <div>{{item.weeksText}}{{item.sectionsText}}</div>
+                <div>{{item.place}}</div>
+            </button>
+        </div>
+    </ng-template>
+</schedule-timetable>

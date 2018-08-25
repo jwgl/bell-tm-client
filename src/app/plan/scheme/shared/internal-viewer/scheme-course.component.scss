@@ -1,0 +1,50 @@
+$prevCreated: #eaffea;
+$prevDeleted: #ffecec;
+$plus: '+';
+$minus: '-';
+
+:host {
+    &.Deleted {
+        display: none;
+    }
+}
+
+:host-context(.show-diff) {
+    &.Created {
+        background-color: $prevCreated;
+    }
+    &.Deleted {
+        background-color: $prevDeleted;
+        display: table-row;
+    }
+    &.highlight {
+        color: red;
+    }
+}
+
+@media print {
+    :host {
+        .course-id {
+            &::before, &::after {
+                content: '';
+                position: absolute;
+                left: 0rem;
+                font-family: '宋体';
+            }
+        }
+    }
+
+    :host-context(.show-diff) {
+        &.Created {
+            .course-id::before {
+                content: $plus;
+            }
+        }
+        &.Deleted {
+            display: table-row;
+            .course-id::before {
+                content: $minus;
+            }
+        }
+    }
+}

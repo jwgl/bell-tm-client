@@ -1,0 +1,43 @@
+<table class="table table-sm" *ngIf="timetable">
+    <colgroup>
+        <col class="c1"/>
+        <col class="c2"/>
+        <ng-container *ngFor="let day of timetable.days">
+            <col *ngFor="let column of timetable.getDayColumns(day)" [ngClass]="'nth' + timetable.getDayColumnCount(day)"/>
+        </ng-container>
+    </colgroup>
+    <thead>
+        <tr>
+            <th colspan="2">
+                <ng-container *ngIf="weekTemplate; else defaultWeek">
+                    <ng-template [ngTemplateOutlet]="weekTemplate" [ngTemplateOutletContext]="{week: week}"></ng-template>
+                </ng-container>
+                <ng-template #defaultWeek>{{timetable.weekText}}</ng-template>
+            </th>
+            <th *ngFor="let day of timetable.days" [colSpan]="timetable.getDayColumnCount(day)">
+                <ng-container *ngIf="dayOfWeekTemplate; else defaultDay">
+                    <ng-template [ngTemplateOutlet]="dayOfWeekTemplate" [ngTemplateOutletContext]="{week: week, day: day}"></ng-template>
+                </ng-container>
+                <ng-template #defaultDay>{{day | dayOfWeek}}</ng-template>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let section of timetable.sections" [class.seperator]="timetable.isStartSection(section)">
+            <td class="c1" *ngIf="timetable.getSectionSpan(section) as span" [rowSpan]="span.span">{{span.label}}</td>
+            <td class="c2">{{section}}</td>
+            <ng-container *ngFor="let day of timetable.days">
+                <ng-container *ngFor="let column of timetable.getDayColumns(day)">
+                    <ng-container *ngIf="timetable.getTimeslot(day, section, column) as timeslot; else noslot">
+                        <td class="active" [rowSpan]="timeslot.totalSection" [colSpan]="timeslot.colSpan">
+                            <ng-template [ngTemplateOutlet]="timeslotTemplate" [ngTemplateOutletContext]="{timeslot: timeslot, week: week}"></ng-template>
+                        </td>
+                    </ng-container>
+                    <ng-template #noslot>
+                        <td *ngIf="!timetable.isHidden(day, section, column)"></td>
+                    </ng-template>
+                </ng-container>
+            </ng-container>
+        </tr>
+    </tbody>
+</table>

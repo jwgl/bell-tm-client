@@ -1,0 +1,24 @@
+@import '../student/student-attendance.component.scss';
+
+.form-group {
+    min-width: 0;
+    .form-control-plaintext {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow:hidden;
+    }
+}
+
+td {
+    &:nth-child(1),
+    &:nth-child(12) {
+        text-align: center;
+    }
+    &:nth-child(7),
+    &:nth-child(8),
+    &:nth-child(9),
+    &:nth-child(10),
+    &:nth-child(11) {
+        text-align: right;
+    }
+}

@@ -1,0 +1,8 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button [workflow-workitems]="form.workflowInstanceId">流程</button>
+        </div>
+    </div>
+    <tm-free-listen-form-viewer [form]="form" [settings]="settings" [timetable]="timetable"></tm-free-listen-form-viewer>
+</ng-container>

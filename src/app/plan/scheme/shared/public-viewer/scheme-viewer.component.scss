@@ -1,0 +1,62 @@
+@mixin short-term() {
+    background-color: rgba(240, 240, 240, 0.5);
+}
+
+:host ::ng-deep {
+    display: block;
+    margin-bottom: 1rem;
+
+    .table {
+        th.group-name {
+            width: 3rem;
+        }
+
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+            padding: 0.25rem;
+            &.short-term {
+                @include short-term();
+            }
+        }
+
+        td {
+            &.course-name {
+                text-align: left;
+                white-space: normal;
+            }
+
+            .vertical {
+                writing-mode: vertical-rl;
+                -webkit-writing-mode: vertical-rl;
+                -ms-writing-mode: tb-rl;
+            }
+        }
+
+        tr {
+            &.group {
+                background-color: #fafafa;
+                .summary {
+                    white-space: normal;
+                }
+            }
+        }
+    }
+}
+
+@media print {
+    body {
+        font-size: 12px;
+    }
+
+    :host ::ng-deep {
+        table {
+            font-family: '宋体';
+            color: #000;
+            td, th {
+                border-color: #000 !important;
+            }
+        }
+    }
+}

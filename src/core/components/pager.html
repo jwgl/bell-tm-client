@@ -1,0 +1,6 @@
+<div class="d-flex justify-content-center" *ngIf="length < total">
+    <div class="btn-group">
+        <button class="btn btn-secondary" (click)="onPrev()" [disabled]="offset <= 0">上一页</button>
+        <button class="btn btn-secondary" (click)="onNext()" [disabled]="offset + length >= total">下一页</button>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+@import 'src/core/components/schedule-timetable/schedule-timetable.shared';
+
+.btn-head {
+    width: 100%;
+    padding: 0.25rem 0;
+}
+
+.btn-success + .btn-success {
+    border-top-color: darken(theme_color("success"), 10%);
+}
+
+ul {
+    padding: 0;
+}

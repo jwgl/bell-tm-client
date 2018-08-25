@@ -1,0 +1,12 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+@import '../../shared/rollcall-status';
+
+:host {
+    display: flex;
+}
+
+.badge {
+    margin-left: 0.25rem;
+}
