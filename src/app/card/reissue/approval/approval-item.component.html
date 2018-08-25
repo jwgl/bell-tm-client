@@ -1,0 +1,8 @@
+<tm-workflow-item reviewType="approve"
+    [reviewable]="form?.status === 'SUBMITTED'"
+    [reviewTitle]="form?.workflowTitle"
+    (itemLoaded)="onItemLoaded($event)">
+    <ng-template #viewerTpl *ngIf="form">
+        <tm-reissue-form-viewer [form]="form"></tm-reissue-form-viewer>
+    </ng-template>
+</tm-workflow-item>

@@ -1,0 +1,81 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+@import '~@angular/cdk/_overlay.scss';
+
+body {
+    overflow-y: scroll;
+}
+
+app-login-dialog .modal {
+    background-color: #888;
+}
+
+tm-navbar {
+    min-height: 56px;
+    margin-bottom: 1rem;
+}
+
+.btn-toolbar {
+    margin-bottom: 1rem;
+}
+
+th {
+    white-space: nowrap
+}
+
+td {
+    .btn-link {
+        border: none;
+        padding: 0;
+    }
+}
+
+.table-sm {
+    .btn-sm {
+        line-height: 1;
+    }
+}
+
+label {
+    font-weight: bold;
+}
+
+.form-check label {
+    font-weight: normal;
+}
+
+.form-control-plaintext {
+    border-bottom: solid 1px $input-border-color;
+}
+
+.table-expand td.expand {
+	max-width: 1px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-expand td:not(.expand) {
+    white-space: nowrap;
+    width: 1px;
+}
+
+.form-inline {
+    label {
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .form-group {
+        flex-flow: row nowrap;
+    }
+
+    .form-control-plaintext {
+        margin-left: 10px;
+        margin-right: 20px;
+        padding: 0;
+    }
+}
+
+@include cdk-overlay()

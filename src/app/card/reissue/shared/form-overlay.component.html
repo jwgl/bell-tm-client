@@ -1,0 +1,10 @@
+<ng-template #viewerTpl let-form="form" let-close="close">
+    <div class="container-fluid">
+        <div class="btn-toolbar">
+            <div class="btn-group ml-auto">
+                <button type="button" class="close" (click)="close()">&times;</button>
+            </div>
+        </div>
+        <tm-reissue-form-viewer [form]="form"></tm-reissue-form-viewer>
+    </div>
+</ng-template>

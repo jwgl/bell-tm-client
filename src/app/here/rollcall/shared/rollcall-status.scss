@@ -1,0 +1,33 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+@import './variables';
+
+.badge {
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.badge + :not(.badge), :not(.badge) + .badge {
+    margin-left: 0.5rem;
+}
+
+.badge + .badge {
+    margin-left: 0.25rem;
+}
+
+.badge-absent {
+    @include badge-variant($absent-bg);
+}
+
+.badge-late {
+    @include badge-variant($late-bg);
+}
+
+.badge-early {
+    @include badge-variant($early-bg);
+}
+
+.badge-attend {
+    @include badge-variant($attend-bg);
+}

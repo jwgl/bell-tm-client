@@ -1,0 +1,11 @@
+<tm-workflow-form-item reviewType="approve" [convert]="convert" #wfi>
+    <ng-template #toolbarTpl let-form="form">
+        <div class="btn-group ml-2" *ngIf="form.status === 'APPROVED'">
+            <button class="btn btn-primary" (click)="finish(form.id, wfi)">销假</button>
+        </div>
+    </ng-template>
+    <ng-template #viewerTpl let-form="form">
+        <tm-leave-form-viewer [form]="form"></tm-leave-form-viewer>
+    </ng-template>
+</tm-workflow-form-item>
+    

@@ -1,0 +1,66 @@
+<ng-container *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" routerLink="../">返回</button>
+        </div>
+    </div>
+    <div class="form-inline mb-3">
+        <div class="form-group">
+            <label>订单编号</label>
+            <p class="form-control-plaintext">{{vm.id}}</p>
+        </div>
+        <div class="form-group">
+            <label>创建人</label>
+            <p class="form-control-plaintext">{{vm.creatorName}}</p>
+        </div>
+        <div class="form-group">
+            <label>创建时间</label>
+            <p class="form-control-plaintext">{{vm.dateCreated | date: 'y-MM-dd HH:mm'}}</p>
+        </div>
+        <div class="form-group" *ngIf="vm.modifierName">
+            <label>修改人</label>
+            <p class="form-control-plaintext">{{vm.modifierName}}</p>
+        </div>
+        <div class="form-group" *ngIf="vm.modifierName">
+            <label>修改时间</label>
+            <p class="form-control-plaintext">{{vm.dateModified | date: 'y-MM-dd HH:mm'}}</p>
+        </div>
+    </div>
+    <table class="table table-bordered table-sm table-expand">
+        <thead>
+            <tr>
+                <th>单号</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>学院</th>
+                <th>专业</th>
+                <th>申请时间</th>
+                <th>审批时间</th>
+                <th>状态</th>
+                <th class="text-center">
+                    <input type="checkbox"
+                           (change)="receiveAll(vm.items, $event.target.checked)"
+                           [checked]="vm.allFinished">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of vm.items">
+                <td><button class="btn btn-link" (click)="overlay.show(item.formId)">#{{item.formId}}</button></td>
+                <td>{{item.studentId}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.sex}}</td>
+                <td>{{item.department}}</td>
+                <td class="expand" title="{{item.subject}}">{{item.subject}}</td>
+                <td>{{item.dateSubmitted | date: 'y-MM-dd HH:mm'}}</td>
+                <td>{{item.dateApproved | date: 'y-MM-dd HH:mm'}}</td>
+                <td>{{item.status | formStatus}}</td>
+                <td class="text-center">
+                    <input type="checkbox" (change)="receive(item, $event.target.checked)" [checked]="item.status == 'FINISHED'">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>
+<tm-reissue-form-overlay #overlay></tm-reissue-form-overlay>

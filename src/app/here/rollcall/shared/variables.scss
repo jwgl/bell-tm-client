@@ -1,0 +1,7 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+$late-bg: theme-color("warning");
+$absent-bg: theme-color("danger");
+$early-bg: $pink;
+$attend-bg: theme-color("info");

@@ -1,0 +1,27 @@
+.table {
+    td {
+        &:nth-child(1) {
+            width: 5rem;
+        }
+        &:nth-child(2) {
+            width: 5rem;
+        }
+        &:nth-child(3) {
+            width: 5rem;
+        }
+        &:nth-child(4) {
+            width: 4rem;
+        }
+        &:nth-child(5) {
+            width: 10rem;
+        }
+        &:nth-child(6) {
+            width: 4rem;
+        }
+
+    }
+}
+
+.number {
+    text-align: right
+}

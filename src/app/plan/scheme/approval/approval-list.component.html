@@ -1,0 +1,12 @@
+<tm-workflow-list>
+    <ng-template #theadTpl>
+        <th>单位</th>
+        <th>专业</th>
+        <th>专业负责人</th>
+    </ng-template>
+    <ng-template #tbodyTpl let-form="form">
+        <td>{{form.department}}</td>
+        <td>{{form.grade}}级{{form.subject}}专业（{{form.versionNumber | versionNumber}}）</td>
+        <td>{{form.creator}}</td>
+    </ng-template>
+</tm-workflow-list>

@@ -1,0 +1,124 @@
+<ng-container *ngIf="courseClass">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <a class="btn btn-secondary" download href="{{reportUrl}}/{{courseClass.id}}/report">导出</a>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label>选课课号</label>
+            <p class="form-control-plaintext">{{courseClass.code}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>课程名称</label>
+            <p class="form-control-plaintext">{{courseClass.course}}
+        </div>
+        <div class="form-group col-md-4">
+            <label>教学班名称</label>
+            <p class="form-control-plaintext">{{courseClass.name ? courseClass.name : '<空>'}}</p>
+        </div>                
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label>开课单位</label>
+            <p class="form-control-plaintext">{{courseClass.department}}</p>
+        </div>        
+        <div class="form-group col-md-4">
+            <label>开始结束周</label>
+            <p class="form-control-plaintext">{{courseClass.startWeek}}-{{courseClass.endWeek}}周</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>总学时</label>
+            <p class="form-control-plaintext">{{courseClass.totalSection}}节</p>
+        </div>
+    </div>
+    <div style="text-align: right">
+        考勤单位：节
+    </div>
+    <table class="table table-sm table-hover table-expand">
+        <thead>
+            <tr>
+                <th></th>
+                <th>序号</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>班级</th>
+                <th>专业</th>
+                <th>旷课</th>
+                <th>迟到</th>
+                <th>早退</th>
+                <th>合计</th>
+                <th>请假</th>
+                <th [colSpan]="courseClass.activeTerm ? 2 : 1">考试资格</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let student of courseClass.students; let i = index">
+                <tr [ngClass]="{
+                    'table-danger': student.disqualified, 
+                    'table-warning': student.absentOverflow || student.attendOverflow,
+                    'table-active' : e.expended
+                }" (dblclick)="e.click()">
+                    <td><tm-row-expender #e (toggle)="toggle($event, student)" [enabled]="student.showDetails"></tm-row-expender></td>
+                    <td>{{i + 1}}</td>
+                    <td>{{student.id}}</td>
+                    <td>{{student.name}}</td>
+                    <td class="expand">{{student.adminClass}}</td>
+                    <td class="expand">{{student.subject}}</td>
+                    <td>{{student.absent}}</td>
+                    <td>{{student.late}}</td>
+                    <td>{{student.early}}</td>
+                    <td>{{student.total}}</td>
+                    <td>{{student.leave}}</td>
+                    <td>{{student.disqualified ? '无' : '有'}}</td>
+                    <td class="py-0 align-middle" *ngIf="courseClass.activeTerm">
+                        <button *ngIf="isAdmin || student.showDisqual"
+                                class="btn btn-sm"
+                                [ngClass]="student.disqualifyButtonClass"
+                                (click)="disqualify(student)">
+                                {{student.disqualified ? '恢复' : '取消'}}
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="e.expended" class="table-info">
+                    <td colspan="2"></td>
+                    <td colspan="11" class="pt-3">
+                        <section *ngIf="student.rollcalls && student.rollcalls.length > 0">
+                            <h6>考勤情况</h6>
+                            <ul class="list-unstyled">
+                                <li *ngFor="let item of student.rollcalls">
+                                    <label *ngFor="let label of item.labels" class="badge badge-{{label.class}}">{{label.text}}</label>
+                                    <span [class.invalid]="item.invalid">{{item}}</span>
+                                    <a *ngIf="item.freeListenFormId" class="badge badge-success" href="/here/freeListens/{{item.freeListenFormId}}" target="_blank">免听</a>
+                                </li>
+                            </ul>
+                        </section>
+                        <section *ngIf="student.leaves && student.leaves.length > 0">
+                            <h6>请假情况</h6>
+                            <ul class="list-unstyled">
+                                <li *ngFor="let item of student.leaves">
+                                    <a class="badge badge-secondary" href="/here/leaves/{{item.studentLeaveFormId}}" target="_blank">{{item.label}}</a>
+                                    <span [class.invalid]="item.invalid">{{item}}</span>
+                                    <a *ngIf="item.freeListenFormId" class="badge badge-success" href="/here/freeListens/{{item.freeListenFormId}}" target="_blank">免听</a>
+                                </li>
+                            </ul>
+                        </section>
+                        <section *ngIf="student.showDisqual">
+                            <h6>考试资格</h6>
+                            <p *ngIf="student.absentOverflow || student.attendOverflow; else qualify">
+                                <span *ngIf="student.absentOverflow">旷课节数达到取消考试资格条件，</span>
+                                <span *ngIf="student.attendOverflow">缺勤节数达到取消考试资格条件，</span>
+                                {{student.disqualified ? '已' : '可'}}考试资格取消。
+                            </p>
+                            <ng-template #qualify>
+                                <p>
+                                  旷课和缺勤节数未达到取消考试资格条件，{{student.disqualified ? '可' : '未'}}恢复考试资格。
+                                </p>
+                            </ng-template>
+                        </section>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</ng-container>

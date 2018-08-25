@@ -1,0 +1,43 @@
+<div class="row" tabindex="-1" *ngIf="rollcallForm">
+    <div class="tips-pane col-md-3 d-none d-lg-block">
+        <ul class="list-unstyled">
+            <li>回车键：旷课 / 取消 / 查看假条</li>
+            <li>方向键：选择</li>
+            <li>数字1：旷课</li>
+            <li>数字2：迟到</li>
+            <li>数字3：早退</li>
+            <li>数字4：调课</li>
+        </ul>
+    </div>
+    <div class="list-pane col-md-8 col-lg-6 mb-3" tabindex="-1" (keydown)="onKeydown($event)" focus (focus)="scrollItem()">
+        <ul #list>
+            <li *ngFor="let student of rollcallForm.visibleStudents"
+                [class.active]="student == rollcallForm.activeStudent"
+                (click)="onClick(student)">
+                <span class="name ml-2">{{student.name}}</span>
+                <rollcall-status [student]="student"></rollcall-status>
+                <div class="d-flex flex-column align-items-end h-100 ml-auto p-2">
+                    <div class="statis">{{student.attendances.join(' ')}}</div>
+                    <div class="mt-auto">
+                        <fa-icon icon="spinner"
+                            pulse="true"
+                            fix-width="true"
+                            [style.visibility]="student.pending ? 'visible' : 'hidden'"
+                            [style.marginLeft]="'2px'"
+                            class="text-success">
+                        </fa-icon>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="detail-pane col-md-4 col-lg-3">
+        <ul class="list-unstyled" *ngIf="rollcallForm.activeStudent">
+            <li>序号：{{rollcallForm.activeStudent.index}}</li>
+            <li>学号：{{rollcallForm.activeStudent.id}}</li>
+            <li>姓名：{{rollcallForm.activeStudent.name}}</li>
+            <li>专业：{{rollcallForm.activeStudent.subject}}</li>
+            <li>班级：{{rollcallForm.activeStudent.adminClass}}</li>
+        </ul>
+    </div>
+</div>

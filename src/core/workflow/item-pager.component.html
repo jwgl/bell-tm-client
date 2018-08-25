@@ -1,0 +1,8 @@
+<div class="btn-group">
+    <button class="btn btn-secondary" [routerLink]="['../', prevId]" [disabled]="!prevId">
+        <fa-icon icon="chevron-left"></fa-icon>
+    </button>
+    <button class="btn btn-secondary" [routerLink]="['../', nextId]" [disabled]="!nextId">
+        <fa-icon icon="chevron-right"></fa-icon>
+    </button>
+</div>

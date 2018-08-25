@@ -1,0 +1,5 @@
+<tm-workflow-form-item reviewType="check" [convert]="bindedConvert">
+    <ng-template #viewerTpl let-form="form" *ngIf="settings">
+        <tm-free-listen-form-viewer [form]="form" [settings]="settings" [timetable]="timetable"></tm-free-listen-form-viewer>
+    </ng-template>
+</tm-workflow-form-item>

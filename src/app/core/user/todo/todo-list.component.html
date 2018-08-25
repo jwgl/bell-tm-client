@@ -1,0 +1,40 @@
+<div class="row" *ngIf="todos">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a *ngFor="let item of statuses" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center "
+                [routerLink]="['../', item.status]" routerLinkActive="active">
+                {{item.label}}
+                <span class="badge badge-pill" [ngClass]="item.class">
+                    {{counts[item.status] ? counts[item.status] : 0}}
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <ng-container *ngIf="todos">
+            <div class="table-responsive" *ngIf="todos.length > 0">
+                <table class="table table-hover table-expand">
+                    <thead>
+                        <tr>
+                            <th>类别</th>
+                            <th>标题</th>
+                            <th>提交人</th>
+                            <th>提交时间</th>
+                            <th *ngIf="status=='closed'">处理时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let todo of todos">
+                            <td>{{todo.type}}</td>
+                            <td class="expand"><button class="btn btn-link border-0 p-0" (click)="onClick(todo)">{{todo.title}}</button></td>
+                            <td>{{todo.fromUser}}</td>
+                            <td><from-now [date]="todo.dateCreated"></from-now></td>
+                            <td *ngIf="status=='closed'"><from-now [date]="todo.dateProcessed"></from-now></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <tm-pager [total]="totalCount" [offset]="offset" [max]="max" [length]="todos.length" (prev)="loadList($event)" (next)="loadList($event)"></tm-pager>
+        </ng-container>
+    </div>
+</div>

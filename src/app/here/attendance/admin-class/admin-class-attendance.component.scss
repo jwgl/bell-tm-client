@@ -1,0 +1,14 @@
+@import '../student/student-attendance.component.scss';
+
+th, td {
+    &:nth-child(1) {
+        text-align: center;
+    }
+    &:nth-child(6),
+    &:nth-child(7),
+    &:nth-child(8),
+    &:nth-child(9),
+    &:nth-child(10) {
+        text-align: right;
+    }
+}

@@ -1,0 +1,8 @@
+<tm-workflow-item reviewType="check"
+    [reviewable]="form?.status === 'SUBMITTED' && settings?.isCheckDateValid"
+    [reviewTitle]="form?.title"
+    (itemLoaded)="onItemLoaded($event)">
+    <ng-template #viewerTpl *ngIf="form">
+        <tm-free-listen-form-viewer [form]="form" [settings]="settings" [timetable]="timetable"></tm-free-listen-form-viewer>
+    </ng-template>
+</tm-workflow-item>

@@ -1,0 +1,63 @@
+<ng-container *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" routerLink="../">返回</button>
+        </div>
+        <div class="btn-group ml-2">
+            <button class="btn btn-secondary" routerLink="edit">编辑</button>
+            <button class="btn btn-secondary" (click)="remove()">删除</button>
+            <a class="btn btn-secondary" download href="{{bookingReportApiUrl}}/{{vm.id}}/report">导出</a>
+        </div>
+    </div>
+    <form class="form-inline mb-3">
+        <div class="form-group">
+            <label>报表编号</label>
+            <p class="form-control-plaintext">{{vm.id}}</p>
+        </div>
+        <div class="form-group">
+            <label>创建人</label>
+            <p class="form-control-plaintext">{{vm.creator}}</p>
+        </div>
+        <div class="form-group">
+            <label>创建时间</label>
+            <p class="form-control-plaintext">{{vm.dateCreated | date: 'y-MM-dd HH:mm'}}</p>
+        </div>
+        <div class="form-group" *ngIf="vm.modifierName">
+            <label>修改人</label>
+            <p class="form-control-plaintext">{{vm.modifier}}</p>
+        </div>
+        <div class="form-group" *ngIf="vm.modifierName">
+            <label>修改时间</label>
+            <p class="form-control-plaintext">{{vm.dateModified | date: 'y-MM-dd HH:mm'}}</p>
+        </div>
+    </form>
+    <table class="table table-bordered table-sm table-expand">
+        <thead>
+            <tr>
+                <th>单号</th>
+                <th>借用人</th>
+                <th>借用单位</th>
+                <th>借用事由</th>
+                <th>审核人</th>
+                <th>审核时间</th>
+                <th>审批人</th>
+                <th>审批时间</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of vm.items">
+                <td><button class="btn btn-link" (click)="overlay.show(item.formId)">#{{item.formId}}</button></td>
+                <td>{{item.userName}}</td>
+                <td>{{item.department}}</td>
+                <td class="expand" title="{{item.reason}}">{{item.reason}}</td>
+                <td>{{item.checker}}</td>
+                <td>{{item.dateChecked | date: 'MM-dd HH:mm'}}</td>
+                <td>{{item.approver}}</td>
+                <td>{{item.dateApproved | date: 'MM-dd HH:mm'}}</td>
+                <td><audit-status [status]="item.status"></audit-status></td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>
+<tm-booking-form-overlay #overlay></tm-booking-form-overlay>

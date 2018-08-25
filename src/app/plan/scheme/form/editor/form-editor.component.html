@@ -1,0 +1,21 @@
+<div class='scheme' *ngIf="vm">
+    <div class="btn-toolbar d-print-none">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" routerLink="../">取消</button>
+            <button class="btn btn-primary" (click)="save()">保存</button>
+        </div>
+    </div>
+    <tm-plan-title [title]="vm.title"
+        [program]="vm.programId"
+        [version]="vm.versionNumber"
+        [editable]="canEditVersion"
+        [previousVersion]="vm.previousVersionNumber"
+        (versionChanged)="versionChanged($event)"></tm-plan-title>
+    <tm-scheme-table [scheme]="vm"
+        [editMode]="editMode"
+        (add)="addCourse($event)"
+        (import)="importCourses($event)"
+        (edit)="editCourse($event)"
+        (delete)="deleteCourse($event)"
+        (restore)="restoreCourse($event)"></tm-scheme-table>
+</div>

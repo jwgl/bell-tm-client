@@ -1,0 +1,87 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-secondary' routerLink="../">取消</button>
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving || !form.isValid()">保存</button>
+        </div>
+    </div>
+    <tm-form-title>{{form.title}}</tm-form-title>
+    <form class="row">
+        <div class="col-md">
+            <div class="form-group">
+                <label>请假类型</label>
+                <div>
+                    <div class="form-check form-check-inline" *ngFor="let leaveType of leaveTypes" >
+                        <input class="form-check-input" type="radio" name="leaveType" [value]="leaveType.type" [(ngModel)]="form.type" id="type{{leaveType.type}}">
+                        <label class="form-check-label" for="type{{leaveType.type}}">{{leaveType.label}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>请假事由</label>
+                <textarea class="form-control" name="reason" rows="6"
+                    [class.is-invalid]="!reason.pristine && !reason.valid"
+                    [(ngModel)]="form.reason"
+                    maxlength="200" minlength="10"
+                    required
+                    #reason="ngModel"
+                    #reasonControl></textarea>
+                <p class="invalid-feedback">
+                    <span *ngIf="reason.errors?.required">请假事由不能为空。</span>
+                    <span *ngIf="reason.errors?.minlength">请假事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
+                    <span *ngIf="reason.errors?.maxlength">请假事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
+                </p>
+                <small class="form-text text-muted" *ngIf="reason.pristine || reason.valid">请假事由不能为空（{{reasonControl.minLength}} - {{reasonControl.maxLength}}个字符）。</small>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="form-group">
+                <label>请假明细</label>
+                <ul *ngIf="form.items && form.items.length > 0; else emptyList">
+                    <li *ngFor="let item of form.items">
+                        {{item}} <tm-remove-item (click)="form.removeItem(item)"></tm-remove-item>
+                    </li>
+                </ul>
+                <ng-template #emptyList>
+                    <small class="form-text text-muted">尚未选择请假项，点击课表选择具体节次、天、周。</small>
+                </ng-template>
+            </div>
+        </div>
+    </form>
+    <schedule-weektab [term]="term" #weektab>
+        <ng-template #weekTabTpl let-week="week">
+            {{week}}<ng-container *ngIf="form.containsWeek(week)">*</ng-container>
+        </ng-template>
+    </schedule-weektab>
+    <schedule-timetable [timetable]="timetable" [week]="weektab.selectedWeek">
+        <ng-template #weekTpl let-week="week">
+            <button class="btn btn-head"
+                    [ngClass]="form.weekSelected(week) ? 'btn-warning' : 'btn-secondary'"
+                    [disabled]="form.weekDisabled(week)"
+                    (click)="form.toggleWeek(week)">第{{week}}周</button>
+        </ng-template>
+        <ng-template #dayOfWeekTpl let-week="week" let-day="day">
+            <button class="btn btn-head"
+                    [ngClass]="form.dayOfWeekSelected(week, day) ? 'btn-info' : 'btn-secondary'"
+                    [disabled]="form.dayOfWeekDisabled(week, day)"
+                    (click)="form.toggleDayOfWeek(week, day)">{{day | dayOfWeek}}</button>
+        </ng-template>
+        <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
+            <div class="timeslot btn-group-vertical">
+                <button class="btn slotitem" *ngFor="let item of timeslot.items"
+                    [ngClass]="form.scheduleSelected(week, item.schedules[0]) ? 'btn-success' : 'btn-secondary'"
+                    [disabled]="form.scheduleDisabled(week, item.schedules[0])"
+                    (click)="form.toggleSchedule(week, item.schedules[0])">
+                    <div class="course">
+                        <span class="course-name">{{item.course}}</span>
+                        <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
+                    </div>
+                    <div>{{item.weeksText}}{{item.sectionsText}}</div>
+                    <div>{{item.place}}</div>
+                    <div>{{item.teachers}}</div>
+                </button>
+            </div>
+        </ng-template>
+    </schedule-timetable>
+
+</ng-container>

@@ -1,0 +1,37 @@
+<div class="btn-toolbar align-items-center mb-2" style="height: 38px">
+    <div class="btn-group" *ngIf="timeslot">
+        <span>
+            <a routerLink="../../../../timetable">课表</a>
+        </span>
+        <span class="dropdown ml-2 hidden-xs-down">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">第{{week}}周</a>
+            <div class="dropdown-menu">
+                <a *ngFor="let w of weeks" class="dropdown-item" [routerLink]="['../../../../timeslots', timeslot.id, 'weeks', w, service.viewType]">第{{w}}周</a>
+            </div>
+        </span>
+        <span class="dropdown ml-2 hidden-sm-down">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{timeslot.label}}</a>
+            <div class="dropdown-menu">
+                <a *ngFor="let t of timeslots" class="dropdown-item" [routerLink]="['../../../..//timeslots', t.id, 'weeks', week, service.viewType]">{{t.label}}</a>
+            </div>
+        </span>
+        <br>
+    </div>
+    <div class="btn-group ml-auto">
+        <ng-container  *ngIf="!rollcallForm || !rollcallForm.locked; else locked">
+            <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'detail')"><fa-icon icon="table"></fa-icon></button>
+            <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'list')"><fa-icon icon="list"></fa-icon></button>
+            <button class="btn btn-secondary" routerLink="tile"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'tile')"><fa-icon icon="th"></fa-icon></button>
+        </ng-container>
+        <ng-template #locked>
+            <span class="ml-auto" title="已锁定"><fa-icon icon="lock"></fa-icon></span>
+        </ng-template>
+    </div>
+    <div class="btn-group ml-2" *ngIf="!rollcallForm || !rollcallForm.locked">
+        <button class="btn btn-secondary" (click)="showSettingsDialog()"><fa-icon icon="cog"></fa-icon></button>
+    </div>
+</div>
+<div *ngIf="rollcallForm" class="mb-2 text-center">
+    <rollcall-summary [summary]="rollcallForm.summary"></rollcall-summary>
+</div>
+<router-outlet></router-outlet>

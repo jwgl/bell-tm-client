@@ -1,0 +1,27 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-secondary' routerLink="../">取消</button>
+            <button class='btn btn-primary' (click)="save()" [disabled]="!reason.valid || saving">保存</button>
+        </div>
+    </div>
+    <form class="frame">
+        <tm-student-info [student]="form.student"></tm-student-info>
+        <div class="form-group form-row">
+            <label class="col-sm-2 col-form-label">补办理由</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="8" name="reason"
+                    [class.is-invalid]="!reason.valid"
+                    [(ngModel)]="form.reason"
+                    maxlength="250"
+                    minlength="10"
+                    required #reason="ngModel"></textarea>
+                <p class="invalid-feedback">
+                    <span *ngIf="reason.errors?.required">补办理由不能为空。</span>
+                    <span *ngIf="reason.errors?.minlength">补办理由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
+                    <span *ngIf="reason.errors?.maxlength">补办理由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
+                </p>
+            </div>
+        </div>
+    </form>
+</ng-container>

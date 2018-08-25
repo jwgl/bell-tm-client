@@ -1,0 +1,83 @@
+<tm-form-title>{{form.title}}</tm-form-title>
+<form>
+    <div class="row">
+        <div class="form-group col-md">
+            <label>学期</label>
+            <p class="form-control-plaintext">{{form.term | termName}}</p>
+        </div>
+        <div class="form-group col-md" *ngIf="settings">
+            <label>申请起止日期</label>
+            <p class="form-control-plaintext">{{settings.applyStartDate | date: 'y-MM-dd'}} 至 {{settings.applyEndDate | date: 'y-MM-dd'}}</p>
+        </div>
+        <div class="form-group col-md" *ngIf="settings">
+            <label>审核起止日期</label>
+            <p class="form-control-plaintext">{{settings.checkStartDate | date: 'y-MM-dd'}} 至 {{settings.checkEndDate | date: 'y-MM-dd'}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md">
+            <label>学号</label>
+            <p class="form-control-plaintext">{{form.studentId}}</p>
+        </div>
+        <div class="form-group col-md">
+            <label>姓名</label>
+            <p class="form-control-plaintext">{{form.studentName}}</p>
+        </div>
+        <div class="form-group col-md">
+            <label>专业</label>
+            <p class="form-control-plaintext">{{form.subject}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md">
+            <label>年级</label>
+            <p class="form-control-plaintext">{{form.grade}}</p>
+        </div>
+        <div class="form-group col-md">
+            <label>班级</label>
+            <p class="form-control-plaintext">{{form.adminClass}}</p>
+        </div>
+        <div class="form-group col-md">
+            <label>主讲教师</label>
+            <p class="form-control-plaintext">{{form.checkerName}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>免听事由</label>
+        <p class="form-control-plaintext">{{form.reason}}</p>
+    </div>
+    <div class="form-group">
+        <label>免听明细</label>
+        <schedule-timetable [timetable]="timetable">
+            <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
+                <div class="timeslot">
+                    <div class="slotitem" *ngFor="let item of timeslot.items | timeslotLimit: 3"
+                        [ngClass]="item.getFreeListenClass(form)"
+                        [class.highlight] = "item.highlight"
+                        (mouseenter)="mouseenter(item)"
+                        (mouseleave)="mouseleave(item)">
+                        <div>
+                            <span class="course-name">{{item.course}}</span>
+                            <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
+                        </div>
+                        <div>{{item.weeksText}}{{item.sectionsText}}</div>
+                        <div>{{item.place}}</div>
+                        <div>{{item.teachers}}</div>
+                        <div>{{item.courseClassNames}}</div>
+                    </div>
+                </div>
+            </ng-template>
+        </schedule-timetable>
+        <div class="d-flex">
+            图例：
+            <div class="slotitem-sample slotitem-normal">学生课表</div>
+            <div class="slotitem-sample slotitem-current">当前申请</div>
+            <div class="slotitem-sample slotitem-exists">其它申请-未审批</div>
+            <div class="slotitem-sample slotitem-approved">其它申请-已审批</div>
+            <div class="slotitem-sample slotitem-other">其它教学班</div>
+        </div>
+        <ul>
+            <li *ngFor="let item of form.items">{{item}}</li>
+        </ul>
+    </div>
+</form>

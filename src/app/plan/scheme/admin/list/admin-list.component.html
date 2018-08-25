@@ -1,0 +1,36 @@
+<div class="btn-toolbar form-inline" *ngIf="departments && grades">
+    <select class="form-control mr-2" [(ngModel)]="departmentId" (ngModelChange)="onDepartmentChange($event)">
+        <option *ngFor="let department of departments" [ngValue]="department.id">{{department.name}}</option>
+    </select>
+    <select class="form-control mr-2" [(ngModel)]="grade">
+        <option [ngValue]="0">所有年级</option>
+        <option *ngFor="let grade of grades" [ngValue]="grade">{{grade}}级</option>
+    </select>
+    <button class="form-control" (click)="search()" [disabled]="!departmentId">查询</button>
+</div>
+<table class="table" *ngIf="programs">
+    <thead>
+        <tr>
+            <th>教学计划号</th>
+            <th>专业</th>
+            <th>版本</th>
+            <th>状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let program of programs">
+            <td>{{program.id}}</td>
+            <td>{{program.grade}}级{{program.subject}}专业</td>
+            <td>
+                <a [routerLink]="[program.versions[0].id]">{{program.versions[0].versionNumber | versionNumber}}</a>
+                <div class="dropdown d-inline ml-1" *ngIf="program.versions.length > 1">
+                    <a class="dropdown-toggle" data-toggle="dropdown"></a>
+                    <div class="dropdown-menu">
+                        <a *ngFor="let version of program.versions" class="dropdown-item" [routerLink]="[version.id]">{{version.versionNumber | versionNumber}}</a>
+                    </div>
+                </div>
+            </td>
+            <td><audit-status [status]="program.versions[0].status"></audit-status></td>
+        </tr>
+    </tbody>
+</table>

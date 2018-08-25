@@ -1,0 +1,24 @@
+td {
+    white-space: nowrap;
+
+    &:nth-child(1),
+    &:nth-child(5),
+    &:nth-child(6),
+    &:nth-child(7),
+    &:nth-child(8),
+    &:nth-child(9),
+    &:nth-child(11),
+    &:nth-child(12){
+        text-align: center;
+    }
+
+    &:nth-child(3),
+    &:nth-child(4) {
+        white-space: normal;
+    }
+}
+
+.badge {
+    margin-bottom: 0;
+    font-weight: normal;
+}

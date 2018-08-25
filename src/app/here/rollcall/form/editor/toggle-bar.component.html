@@ -1,0 +1,9 @@
+<div class="btn-group" [class.w-100]="stretch">
+    <button *ngFor="let action of actions"
+            class="btn btn-sm"
+            [ngClass]="getClass(action)"
+            [class.col]="stretch"
+            [class.active]="hasType(action)"
+            [disabled]="disabled"
+            (click)="toggleType(action)">{{getText(action)}}</button>
+</div>

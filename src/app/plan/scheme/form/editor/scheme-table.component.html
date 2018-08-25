@@ -1,0 +1,40 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>课程编码</th>
+            <th>课程名称</th>
+            <th>学分</th>
+            <th>实践<br>学分</th>
+            <th>总<br>学时</th>
+            <th [attr.colspan]="scheme.terms.length">开课学期和周学时数</th>
+            <th>考核<br>方式</th>
+            <th class="d-print-none">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let property of scheme.properties">
+            <tr [scheme-property]="property"></tr>
+            <ng-container *ngFor="let direction of property.directions">
+                <tr *ngFor="let sc of direction.courses"
+                    [scheme-course]="sc"
+                    [editMode]="editMode"
+                    (edit)="edit.emit($event)"
+                    (delete)="delete.emit($event)"
+                    (restore)="restore.emit($event)"></tr>
+                <tr [scheme-group]="direction"
+                    (add)="add.emit($event)"
+                    (import)="import.emit($event)"></tr>
+            </ng-container>
+            <tr *ngFor="let sc of property.courses"
+                [scheme-course]="sc"
+                [editMode]="editMode"
+                (edit)="edit.emit($event)"
+                (delete)="delete.emit($event)"
+                (restore)="restore.emit($event)"></tr>
+            <tr [scheme-group]="property"
+                (add)="add.emit($event)"
+                (import)="import.emit($event)"></tr>
+        </ng-container>
+        <tr [scheme-summary]="scheme"></tr>
+    </tbody>
+</table>
