@@ -28,6 +28,9 @@ const routes: Routes = [{
         path: 'place',
         loadChildren: '../place/place.module#PlaceModule',
     }, {
+        path: 'steer',
+        loadChildren: '../steer/steer.module#SteerModule',
+    }, {
         path: '**',
         component: Page404Component,
     }],
