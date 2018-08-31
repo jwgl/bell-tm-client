@@ -7,7 +7,7 @@ import { AuthService } from 'core/auth';
 export class ObserverService extends RestEditService {
     constructor(
         http: Http,
-        @Inject('CARD_REISSUE_FORM_API_URL')
+        @Inject('OBSERVER_API_URL')
         apiUrl: string,
         authService: AuthService,
     ) {

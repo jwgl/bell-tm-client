@@ -4,6 +4,7 @@ import { ListGroupItem, ListOption } from '../common/list-group.model';
 
 @Component({
     selector: 'tm-nav-tabs',
+    styleUrls: ['nav-tabs.component.scss'],
     templateUrl: 'nav-tabs.component.html',
 })
 export class NavTabsComponent {

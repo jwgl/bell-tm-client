@@ -44,7 +44,7 @@
             </tr>
         </thead>
         <tbody>
-            <ng-template ngFor let-item [ngForOf]="list| pager : pagerArgs" let-i="index">
+            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
                     <td><a [routerLink]="['/',item.id]">#{{item.id}}</a></td>
                     <td class="teacher">{{item.teachername}}<span *ngIf="item.teachercode">({{item.teachercode}})</span></td>
@@ -63,7 +63,7 @@
                     <div class="form-group row mt-1">
                         <div class="col-md-2">总共：{{count}}条记录</div>
                         <div class="col-md-2">
-                            <pager [total]="count" [offset]="offset" [max]="max" [length]="listLength" (prev)="loadData($event)" (next)="loadData($event)"></pager>
+                            <tm-pager [total]="count" [max]="max" [length]="listLength" (prev)="loadData($event)" (next)="loadData($event)"></tm-pager>
                         </div>
                     </div>
                 </td>

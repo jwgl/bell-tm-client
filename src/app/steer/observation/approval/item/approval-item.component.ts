@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { EvaluationMap, ObservationForm } from '../../form/shared/form.model';
 import { ApprovalService } from '../approval.service';
@@ -12,7 +13,7 @@ export class ApprovalItemComponent {
     evaluationSystem: EvaluationMap[];
 
     constructor(
-        private router: Router,
+        private location: Location,
         private route: ActivatedRoute,
         private service: ApprovalService,
     ) {
@@ -21,5 +22,9 @@ export class ApprovalItemComponent {
             this.vm = new ObservationForm(dto.form);
             this.evaluationSystem = dto.evaluationSystem;
         });
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 }

@@ -51,7 +51,10 @@ export class ApprovalListComponent {
     }
 
     loadData(_termId: number, mode: string) {
-        this.service.loadList({ termId: this._termId.toString(), status: this.status.toString() }).subscribe((dto: any) => {
+        this.service.loadList({
+            termId: this._termId ? this._termId.toString() : null,
+            status: this.status ? this.status.toString() : null,
+        }).subscribe((dto: any) => {
             this.list = this._list = dto.list;
             if (!this.terms) {
                 this.terms = dto.term;
@@ -89,7 +92,7 @@ export class ApprovalListComponent {
             const list = this.selectors.filter(s => s.checked).map(s => s.data.id);
             if (list) {
                 this.service.update(0, { ids: list }).subscribe(() => {
-                    this.router.navigate(['/list/tobe']);
+                    this.loadData(null, this._mode);
                 });
             }
         });

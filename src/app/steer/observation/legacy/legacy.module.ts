@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
@@ -17,7 +17,7 @@ import { FormViewComponent } from './shared/form-view.component';
 
 @NgModule({
     imports: [
-        BrowserModule,
+        CommonModule,
         FormsModule,
         LegacyRoutingModule,
         CommonDirectivesModule,

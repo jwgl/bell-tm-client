@@ -4,7 +4,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import 'rxjs/add/operator/switchMap';
 
 import {CommonDialog} from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
@@ -22,6 +21,7 @@ import { UnScheduleService } from './unschedule.service';
     styleUrls: ['form.component.scss'],
     templateUrl: 'form.component.html',
 })
+// tslint:disable-next-line:component-class-suffix
 export class ObservationSpecial {
     @ViewChild('evaluationText') input: ElementRef;
     @ViewChild('suggest') suggest: ElementRef;

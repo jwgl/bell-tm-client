@@ -1,39 +1,37 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 
 import { TeacherSelectComponent } from '../common/teacher-select.component';
-import { TypeTextPipe } from '../shared/pipes/observer-type';
-import { TermTextPipe } from '../shared/pipes/term';
+import { PipesModule } from '../shared/pipes/observation-pipes.module';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './observer-settings-routing.module';
 import { ObserverListComponent } from './list/observer-list.component';
 import { ObserverService } from './observer.service';
 
 @NgModule({
     imports: [
-        BrowserModule,
+        CommonModule,
         FormsModule,
         CommonDialogsModule,
         CommonDirectivesModule,
         HttpModule,
         AppRoutingModule,
+        PipesModule,
     ],
     providers: [
         Dialog,
         ObserverService,
-        {provide: 'PUBLIC_API_URL', useValue: '/api/steer/settings'},
+        {provide: 'OBSERVER_API_URL', useValue: '/api/steer/settings'},
     ],
     declarations: [
         ObserverListComponent,
         TeacherSelectComponent,
-        TermTextPipe,
-        TypeTextPipe,
     ],
 })
 export class ObserverSettingsModule { }

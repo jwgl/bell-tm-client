@@ -3,8 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import * as _ from 'lodash';
 
-import 'rxjs/add/operator/switchMap';
-
 import { Schedule, Timetable } from 'core/models';
 import './form-view.model';
 

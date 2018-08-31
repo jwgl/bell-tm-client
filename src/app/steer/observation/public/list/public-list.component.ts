@@ -8,7 +8,6 @@ import { ObservationItem } from '../../form/shared/form-list.model';
 import { PublicService } from '../public.service';
 
 @Component({
-    selector: 'public-list',
     templateUrl: 'public-list.component.html',
 })
 export class PublicListComponent {
@@ -17,7 +16,7 @@ export class PublicListComponent {
     constructor(
         private service: PublicService,
         private dialog: CommonDialog) {
-        service.loadList().subscribe(dto => {
+        service.loadList().subscribe((dto: ObservationItem[]) => {
             this.list = dto;
         });
     }

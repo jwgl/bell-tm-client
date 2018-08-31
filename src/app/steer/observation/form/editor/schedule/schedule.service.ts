@@ -12,6 +12,7 @@ export class ScheduleService extends RestEditService {
     constructor(
         http: Http,
         authService: AuthService,
+        @Inject('OBSERVATION_FORM_API_URL') private apiUrl: string,
         @Inject('TEACHER_TIMESLOT_API_URL') private teacherTimeslotApiUrl: string,
         @Inject('PLACE_TIMESLOT_API_URL') private placeTimeslotApiUrl: string,
         @Inject('SCHEDULE_API_URL') private schedulesApiUrl: string) {
@@ -38,11 +39,11 @@ export class ScheduleService extends RestEditService {
     }
 
     getTerm(): Observable<any> {
-        return this.http.get(`${this.api.list()}/term`);
+        return this.http.get(`${this.apiUrl}/term`);
     }
 
     teacherActiveList(): Observable<any> {
-        return this.http.get(`${this.api.list()}/observationPriority`);
+        return this.http.get(`${this.apiUrl}/observationPriority`);
     }
 
     findTimeslot(teacherId: string, week: number, timeslotId: number): Observable<any[]> {

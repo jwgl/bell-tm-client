@@ -12,6 +12,7 @@ import { ScheduleService } from '../schedule.service';
 @Component({
     templateUrl: 'query-option.dialog.html',
 })
+// tslint:disable-next-line:component-class-suffix
 export class QueryOptionDialog extends BaseDialog implements AfterViewInit {
     term: Term;
     vm: {

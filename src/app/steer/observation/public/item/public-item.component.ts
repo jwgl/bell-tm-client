@@ -7,7 +7,6 @@ import { EvaluationMap, ObservationForm } from '../../form/shared/form.model';
 import { PublicService } from '../public.service';
 
 @Component({
-    selector: 'public-item',
     templateUrl: 'public-item.component.html',
 })
 export class PublicItemComponent {
@@ -21,7 +20,10 @@ export class PublicItemComponent {
         private service: PublicService,
     ) {
         const params = this.route.snapshot.params;
-        this.service.loadItem(params['id']).subscribe(dto => {
+        this.service.loadItem<{
+            form: any,
+            evaluationSystem: any,
+        }>(params['id']).subscribe(dto => {
             this.vm = new ObservationForm(dto.form);
             this.evaluationSystem = dto.evaluationSystem;
         });

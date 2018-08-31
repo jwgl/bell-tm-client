@@ -4,7 +4,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import 'rxjs/add/operator/switchMap';
 
 import {CommonDialog} from 'core/common-dialogs';
 import { EditMode } from 'core/constants';

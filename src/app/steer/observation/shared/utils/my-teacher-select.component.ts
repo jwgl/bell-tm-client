@@ -1,17 +1,16 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component, ElementRef, AfterViewInit, EventEmitter, Output, ViewChild } from '@angular/core';
 
-import 'rxjs/add/operator/switchMap';
+import { switchMap } from 'rxjs/operators';
 
-import { ApiUrl, Rest } from 'core/rest';
+import { Http } from 'core/rest';
 import { typeahead } from 'core/utils/typeahead';
 
 @Component({
-    selector: 'my-teacher-select',
+    selector: 'tm-my-teacher-select',
     styleUrls: ['my-teacher-select.component.scss'],
     templateUrl: 'my-teacher-select.component.html',
 })
-export class TeacherSelectComponent {
+export class TeacherSelectComponent implements AfterViewInit {
     @ViewChild('search') input: ElementRef;
     @ViewChild('dropdown') dropdown: ElementRef;
     @Output() selectTeacher: EventEmitter<any> = new EventEmitter<any>();
@@ -19,7 +18,7 @@ export class TeacherSelectComponent {
     teachers: any[];
     teacher: any;
 
-    constructor(private rest: Rest, api: ApiUrl) { }
+    constructor(private http: Http) { }
 
     teacherSelected(teacher: any) {
         this.selectTeacher.emit(teacher);
@@ -30,9 +29,9 @@ export class TeacherSelectComponent {
         $(this.dropdown.nativeElement).on('shown.bs.dropdown', () => {
             this.input.nativeElement.focus();
         });
-        typeahead(this.input)
-            .switchMap(value => this.rest.get(`/api/steer/teachers?q=${encodeURIComponent(value)}`))
-            .subscribe(value => this.teachers = value);
+        typeahead(this.input).pipe(
+            switchMap(value => this.http.get(`/api/steer/teachers?q=${encodeURIComponent(value)}`))
+        ).subscribe(value => this.teachers = value);
     }
 
     get result(): string {

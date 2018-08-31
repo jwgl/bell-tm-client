@@ -14,7 +14,7 @@ import { ObservationListComponent } from './list/form-list.component';
 import { WeekScheduleMode } from './shared/schedule-mode.model';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/list', pathMatch: 'full' },
+    { path: '', component: ObservationListComponent },
     { path: 'list', component: ObservationListComponent },
     { path: 'teachers', component: WeekScheduleComponent, data: { mode: WeekScheduleMode.Teacher } },
     { path: 'teachers/:teacherId', component: WeekScheduleComponent, data: { mode: WeekScheduleMode.Teacher } },
@@ -38,7 +38,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, { useHash: true }),
+        RouterModule.forChild(routes),
     ],
     exports: [
         RouterModule,

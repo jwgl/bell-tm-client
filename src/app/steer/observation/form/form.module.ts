@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
@@ -12,12 +12,12 @@ import { UnScheduleModule } from './editor/unschedule/unschedule.module';
 import { ObservationRoutingModule } from './form-routing.module';
 import { ObservationFormService } from './form.service';
 import { ObservationItemComponent } from './item/item.component';
-import { ObservationListComponent } from './list/form-list.component';
+import { ObservationFormListModule } from './list/form-list.module';
 import { ObservationFormViewerComponent } from './shared/form-viewer.component';
 
 @NgModule({
     imports: [
-        BrowserModule,
+        CommonModule,
         FormsModule,
         ObservationRoutingModule,
         CommonDirectivesModule,
@@ -25,9 +25,9 @@ import { ObservationFormViewerComponent } from './shared/form-viewer.component';
         ScheduleModule,
         UnScheduleModule,
         PipesModule,
+        ObservationFormListModule,
     ],
     declarations: [
-        ObservationListComponent,
         ObservationItemComponent,
         ObservationFormViewerComponent,
     ],
