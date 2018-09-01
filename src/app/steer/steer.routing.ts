@@ -13,6 +13,15 @@ const routes: Routes = [{
     }, {
         path: 'teachers/:userId/observations',
         loadChildren: './observation/public/public.module#PublicModule',
+    }, {
+        path: 'reports',
+        loadChildren: './observation/reports/report.module#ReportModule',
+    }, {
+        path: 'settings/observers',
+        loadChildren: './observation/settings/observer-settings.module#ObserverSettingsModule',
+    }, {
+        path: 'departments/:departmentId/observers',
+        loadChildren: './observation/settings/department/department-observer-setting.module#DepartmentObserverSettingModule',
 }];
 
 @NgModule({

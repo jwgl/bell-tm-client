@@ -5,15 +5,19 @@ import { CommonModule } from '@angular/common';
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
-import { TypeTextPipe } from '../shared/pipes/observer-type';
-import { PagerPipe } from '../shared/pipes/pager';
-import { TermTextPipe } from '../shared/pipes/term';
+import { PipesModule } from '../shared/pipes/observation-pipes.module';
 
 import { LegacyItemComponent } from './item/legacy-item.component';
 import { LegacyRoutingModule } from './legacy-routing.module';
 import { LegacyService } from './legacy.service';
 import { LegacyListComponent } from './list/legacy-list.component';
 import { FormViewComponent } from './shared/form-view.component';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faSearch);
 
 @NgModule({
     imports: [
@@ -22,14 +26,13 @@ import { FormViewComponent } from './shared/form-view.component';
         LegacyRoutingModule,
         CommonDirectivesModule,
         CommonDialogsModule,
+        PipesModule,
+        FontAwesomeModule,
     ],
     declarations: [
         LegacyListComponent,
         LegacyItemComponent,
         FormViewComponent,
-        TermTextPipe,
-        TypeTextPipe,
-        PagerPipe,
     ],
     providers: [
         LegacyService,

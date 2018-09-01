@@ -2,8 +2,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import * as _ from 'lodash';
 
-import { CommonDialog } from 'core/common-dialogs';
-
 import { LegacyService } from '../legacy.service';
 import { ListFilter } from '../shared/constant';
 
@@ -23,9 +21,7 @@ export class LegacyListComponent {
     max = 10;
     pagerArgs: any;
 
-    constructor(
-        private service: LegacyService,
-        private dialog: CommonDialog) {
+    constructor(private service: LegacyService) {
         service.loadList().subscribe((dto: any) => {
             this._type = 1;
             this.terms = dto.terms;

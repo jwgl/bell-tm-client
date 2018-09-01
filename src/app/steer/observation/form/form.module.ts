@@ -13,7 +13,7 @@ import { ObservationRoutingModule } from './form-routing.module';
 import { ObservationFormService } from './form.service';
 import { ObservationItemComponent } from './item/item.component';
 import { ObservationFormListModule } from './list/form-list.module';
-import { ObservationFormViewerComponent } from './shared/form-viewer.component';
+import { ObservationFormViewerModule } from './shared/form-viewer.module';
 
 @NgModule({
     imports: [
@@ -26,10 +26,10 @@ import { ObservationFormViewerComponent } from './shared/form-viewer.component';
         UnScheduleModule,
         PipesModule,
         ObservationFormListModule,
+        ObservationFormViewerModule,
     ],
     declarations: [
         ObservationItemComponent,
-        ObservationFormViewerComponent,
     ],
     providers: [
         ObservationFormService,

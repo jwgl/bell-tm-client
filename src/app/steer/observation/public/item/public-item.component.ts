@@ -1,7 +1,6 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { CommonDialog } from 'core/common-dialogs';
+import { ActivatedRoute } from '@angular/router';
 
 import { EvaluationMap, ObservationForm } from '../../form/shared/form.model';
 import { PublicService } from '../public.service';
@@ -14,8 +13,7 @@ export class PublicItemComponent {
     evaluationSystem: EvaluationMap[];
 
     constructor(
-        private router: Router,
-        private dialog: CommonDialog,
+        private location: Location,
         private route: ActivatedRoute,
         private service: PublicService,
     ) {
@@ -27,5 +25,9 @@ export class PublicItemComponent {
             this.vm = new ObservationForm(dto.form);
             this.evaluationSystem = dto.evaluationSystem;
         });
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 }

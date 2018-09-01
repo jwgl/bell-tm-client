@@ -1,17 +1,17 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { PublicService } from '../public.service';
 
 @Component({
-    selector: 'legacy-item',
     templateUrl: 'legacy-item.component.html',
 })
 export class LegacyItemComponent {
     vm: any;
 
     constructor(
-        private router: Router,
+        private location: Location,
         private route: ActivatedRoute,
         private service: PublicService,
     ) {
@@ -19,5 +19,9 @@ export class LegacyItemComponent {
         this.service.loadLegacyItem(params['id']).subscribe(dto => {
             this.vm = dto;
         });
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 }

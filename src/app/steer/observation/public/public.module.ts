@@ -5,10 +5,9 @@ import { CommonModule } from '@angular/common';
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
-import { ObservationFormViewerComponent } from '../form/shared/form-viewer.component';
+import { ObservationFormViewerModule } from '../form/shared/form-viewer.module';
 import { FormViewComponent } from '../legacy/shared/form-view.component';
-import { TypeTextPipe } from '../shared/pipes/observer-type';
-import { TermTextPipe } from '../shared/pipes/term';
+import { PipesModule } from '../shared/pipes/observation-pipes.module';
 
 import { LegacyItemComponent } from './item/legacy-item.component';
 import { PublicItemComponent } from './item/public-item.component';
@@ -24,15 +23,14 @@ import { PublicService } from './public.service';
         PublicRoutingModule,
         CommonDirectivesModule,
         CommonDialogsModule,
+        PipesModule,
+        ObservationFormViewerModule,
     ],
     declarations: [
         PublicListComponent,
         PublicItemComponent,
-        TermTextPipe,
-        ObservationFormViewerComponent,
         LegacyItemComponent,
         FormViewComponent,
-        TypeTextPipe,
     ],
     providers: [
         PublicService,

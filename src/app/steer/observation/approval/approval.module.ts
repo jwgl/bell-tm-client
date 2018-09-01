@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
-import { ObservationFormViewerComponent } from '../form/shared/form-viewer.component';
+import { ObservationFormViewerModule } from '../form/shared/form-viewer.module';
 import { PipesModule } from '../shared/pipes/observation-pipes.module';
 
 import { ApprovalRoutingModule } from './approval-routing.module';
@@ -30,10 +30,10 @@ library.add(faSearch);
         CommonDialogsModule,
         PipesModule,
         FontAwesomeModule,
+        ObservationFormViewerModule,
     ],
     declarations: [
         ApprovalListComponent,
-        ObservationFormViewerComponent,
         ApprovalItemComponent,
         NavTabsComponent,
     ],

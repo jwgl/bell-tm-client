@@ -5,8 +5,7 @@ import { LegacyItemComponent } from './item/legacy-item.component';
 import { LegacyListComponent } from './list/legacy-list.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/list', pathMatch: 'full' },
-    { path: 'list', component: LegacyListComponent },
+    { path: '', component: LegacyListComponent },
     { path: ':id', component: LegacyItemComponent },
 ];
 

@@ -4,8 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ObserverListComponent } from './list/observer-list.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/list', pathMatch: 'full' },
-    { path: 'list', component: ObserverListComponent },
+    { path: '', component: ObserverListComponent },
 ];
 
 @NgModule({

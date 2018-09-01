@@ -38,7 +38,7 @@
                         [disabled]="schedule.cantObserver"
                         [class.btn-warning]="schedule.superviseCount === 2"
                         [class.btn-danger]="schedule.superviseCount > 2"
-                        [routerLink]="['/teacher',schedule.teacherId,'week', queryOptions.weekOfTerm, 'timeslot',  schedule.dayOfWeek * 10000 + schedule.startSection * 100]">
+                        [routerLink]="['../teacher',schedule.teacherId,'week', queryOptions.weekOfTerm, 'timeslot',  schedule.dayOfWeek * 10000 + schedule.startSection * 100]">
                     录入
                     </button></td>
                 </tr>

@@ -25,7 +25,7 @@
                 <button class="dropdown-item" type="button" *ngFor="let filterItem of listFilter" (click)="onFilterSelected(filterItem)">{{filterItem.name}}</button>
             </div>
             <input class="form-control" name="filterValue" type="text" [(ngModel)]="filterSelected.value" />
-            <button type="button" class="btn btn-secondary" (click)="doFilter()"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-secondary" (click)="doFilter()"><fa-icon icon="search"></fa-icon></button>
         </div>
     </div>
 </div>
@@ -46,7 +46,7 @@
         <tbody>
             <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
-                    <td><a [routerLink]="['/',item.id]">#{{item.id}}</a></td>
+                    <td><a [routerLink]="[item.id]">#{{item.id}}</a></td>
                     <td class="teacher">{{item.teachername}}<span *ngIf="item.teachercode">({{item.teachercode}})</span></td>
                     <td class="courseName">{{item.coursename}} <br>{{item.courseproperty}} {{item.classpostion}}</td>
                     <td>{{item.collegename}} </td>

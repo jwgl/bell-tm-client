@@ -18,8 +18,8 @@
             <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
                     <td>
-                        <a [routerLink]="['/',item.id]" *ngIf="!item.isLegacy">{{item.teacherName}}({{item.teacherId}})</a>
-                        <a [routerLink]="['/',item.id,'legacy']" *ngIf="item.isLegacy">{{item.teacherName}}({{item.teacherId}})</a>
+                        <a [routerLink]="[item.id]" *ngIf="!item.isLegacy">{{item.teacherName}}({{item.teacherId}})</a>
+                        <a [routerLink]="[item.id,'legacy']" *ngIf="item.isLegacy">{{item.teacherName}}({{item.teacherId}})</a>
                     </td>
                     <td>
                         {{item.course}}<br>{{item.courseOtherInfo}}
