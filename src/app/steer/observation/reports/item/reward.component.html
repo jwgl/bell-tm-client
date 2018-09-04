@@ -8,7 +8,7 @@
         </select>
     </div>
     <label class="col-sm-3 col-form-label"  *ngIf="list && list.length>0">共{{list.length}}条记录未计酬</label>
-    <a class="btn btn-secondary  ml-auto" download href="reports/reward?month={{month}}" *ngIf="list && list.length>0" (click)="done()">导出</a>
+    <a class="btn btn-secondary  ml-auto" download href="/api/steer/reports/reward?month={{month}}" *ngIf="list && list.length>0" (click)="done()">导出</a>
 </div>
 <div class="container" *ngIf="list && list.length>0; else empty">
     <table class="table">

@@ -23,7 +23,7 @@
         <p class="totalLabel"><span *ngIf="list">总共：{{count}}条记录</span><span class="btn btn-sm btn-warning ml-2" *ngIf="unsubmitCount">{{unsubmitCount}}条未提交</span></p>
     </div>
     <div class="btn-group ml-auto">
-        <a class="btn btn-secondary" download href="observations/{{termId}}" *ngIf="isAdmin">导出</a>
+        <a class="btn btn-secondary" download href="{{reportUrl}}/report?termId={{termId}}" *ngIf="isAdmin">导出</a>
         <button class="btn btn-primary" routerLink="./teachers">新建</button>
     </div>
 </div>

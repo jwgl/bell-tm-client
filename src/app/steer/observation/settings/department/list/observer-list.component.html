@@ -5,10 +5,10 @@
                 {{ item | termLabel}}
             </option>
         </select>
-        <a class="btn btn-secondary  ml-1" download href="wages?termId={{termId}}" >导出听课报表</a>
+        <a class="btn btn-secondary  ml-1" download href="/api/steer/reports/departmentWages?termId={{termId}}" >导出听课报表</a>
     </div>
     <div class="btn-group ml-auto">
-        <button routerLink="./report" class="btn btn-secondary">督导听课报表</button>
+        <button routerLink="/report" class="btn btn-secondary">督导听课报表</button>
         <button (click)="create()" class="btn btn-primary">新建</button>
     </div>
 </div>

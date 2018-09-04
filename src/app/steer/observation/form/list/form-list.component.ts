@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as _ from 'lodash';
 
@@ -21,8 +21,7 @@ export class ObservationListComponent {
     max = 10;
     pagerArgs: any;
 
-    constructor(
-        private service: ObservationFormService) {
+    constructor(private service: ObservationFormService) {
         service.loadList({ termId: null }).subscribe((dto: any) => {
             this.isAdmin = dto.isAdmin;
             this.terms = dto.terms;
@@ -53,6 +52,10 @@ export class ObservationListComponent {
 
     get termId(): number {
         return this._termId;
+    }
+
+    get reportUrl(): string {
+        return this.service.api.list();
     }
 
     doFilter() {
