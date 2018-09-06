@@ -16,6 +16,7 @@ interface Csrf {
     styleUrls: ['./login.dialog.scss'],
     templateUrl: './login.dialog.html',
 })
+// tslint:disable-next-line:component-class-suffix
 export class LoginDialog extends BaseDialog {
     username: string;
     password: string;
