@@ -11,7 +11,7 @@ import { LegacyItemComponent } from './item/legacy-item.component';
 import { LegacyRoutingModule } from './legacy-routing.module';
 import { LegacyService } from './legacy.service';
 import { LegacyListComponent } from './list/legacy-list.component';
-import { FormViewComponent } from './shared/form-view.component';
+import { ObservationLegacyViewerModule } from './shared/form-view.module';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -28,11 +28,11 @@ library.add(faSearch);
         CommonDialogsModule,
         PipesModule,
         FontAwesomeModule,
+        ObservationLegacyViewerModule,
     ],
     declarations: [
         LegacyListComponent,
         LegacyItemComponent,
-        FormViewComponent,
     ],
     providers: [
         LegacyService,

@@ -31,6 +31,7 @@
     "lodash": "^4.17.10",
     "markdown-it": "^8.4.2",
     "moment": "^2.22.2",
+    "ngx-uploader": "^4.2.4",
     "popper.js": "^1.14.4",
     "rxjs": "^6.2.2",
     "zone.js": "^0.8.26"

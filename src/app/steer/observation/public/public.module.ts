@@ -6,7 +6,7 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { ObservationFormViewerModule } from '../form/shared/form-viewer.module';
-import { FormViewComponent } from '../legacy/shared/form-view.component';
+import { ObservationLegacyViewerModule } from '../legacy/shared/form-view.module';
 import { PipesModule } from '../shared/pipes/observation-pipes.module';
 
 import { LegacyItemComponent } from './item/legacy-item.component';
@@ -25,12 +25,12 @@ import { PublicService } from './public.service';
         CommonDialogsModule,
         PipesModule,
         ObservationFormViewerModule,
+        ObservationLegacyViewerModule,
     ],
     declarations: [
         PublicListComponent,
         PublicItemComponent,
         LegacyItemComponent,
-        FormViewComponent,
     ],
     providers: [
         PublicService,
