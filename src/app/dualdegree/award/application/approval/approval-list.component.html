@@ -1,0 +1,22 @@
+<tm-workflow-list>
+    <ng-template #theadTpl>
+        <th>申请单号</th>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>班级</th>
+        <th>导师</th>
+        <th>申请日期</th>
+        <th>状态</th>
+    </ng-template>
+    <ng-template #tbodyTpl let-form="form">
+        <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
+        <td>{{form.studentId}}</td>
+        <td>{{form.studentName}}</td>
+        <td>{{form.sex}}</td>
+        <td>{{form.className}}</td>
+        <td>{{form.paperApprover}}</td>
+        <td>{{form.date | date: 'y-MM-dd HH:mm'}}</td>
+        <td><audit-status [status]="form.status"></audit-status></td>
+    </ng-template>
+</tm-workflow-list>
