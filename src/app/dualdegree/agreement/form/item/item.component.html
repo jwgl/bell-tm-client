@@ -1,0 +1,8 @@
+<ng-container *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" routerLink="edit">编辑</button>
+        </div>
+    </div>
+    <tm-agreement-form-viewer [vm]="vm" [items]="items"></tm-agreement-form-viewer>
+</ng-container>

@@ -1,0 +1,42 @@
+<ng-container *ngIf="vm">
+    <tm-form-title>合作协议{{vm.id}}</tm-form-title>
+    <div class="row">
+        <div class="form-group col-md-9">
+            <label class="control-label">协议名称</label>
+            <p>{{vm.agreementName}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">项目类别</label>
+            <p>{{vm.university.region}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">外国大学（中）</label>
+            <p>{{vm.university.nameCn}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">外国大学（英）</label>
+            <p>{{vm.university.nameEn}}</p>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label">备注</label>
+            <p>{{vm.memo}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label class="control-label">适用专业、起止年级以及衔接专业</label>
+            <ul>
+                <li *ngFor="let item of vm.items">
+                    {{item.subjectName}} 适用起止年级：{{item.startedGrade}} —— {{item.endedGrade}}
+                    <ul>
+                        <li *ngFor="let major of item.coMajors">
+                            专业/学位：{{major.nameEn}} {{major.nameCn}}; {{major.bachelor}}
+                         </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</ng-container>

@@ -127,7 +127,7 @@ export class ObservationFormEditorComponent {
             this.editMode = EditMode.Edit;
             // 如果提交，就导航到list
             if (this.form.status) {
-                this.router.navigate(['/']);
+                this.router.navigate(['/'], { relativeTo: this.route });
             }
         }, error => {
             alert(error.json().message);
@@ -138,7 +138,7 @@ export class ObservationFormEditorComponent {
         this.service.update(this.form.id, form).subscribe(id => {
             // 如果提交，就导航到list
             if (this.form.status) {
-                this.router.navigate(['/']);
+                this.router.navigate(['/'], { relativeTo: this.route });
             }
         }, error => {
             alert(error.json().message);

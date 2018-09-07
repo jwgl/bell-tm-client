@@ -1,0 +1,35 @@
+.universityEn {
+    width: 20em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.regionName {
+    width: 8em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.universityCn {
+    width: 15em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+@media (max-width: 1199px) {
+    .universityEn {
+        max-width: 15em;
+    }
+    .universityCn {
+        width: 10em;
+    }
+}
+
+@media (max-width: 991px) {
+    .universityEn {
+        max-width: 10em;
+    }
+    .universityCn {
+        width: 7em;
+    }
+}
