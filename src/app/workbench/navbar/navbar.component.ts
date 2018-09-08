@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { AuthService } from 'core/auth';
 
@@ -15,7 +14,6 @@ export class NavbarComponent {
     menus: { main: Menu[], user: Menu[] };
 
     constructor(
-        private router: Router,
         private service: NavbarService,
         private authService: AuthService,
     ) {
@@ -26,8 +24,11 @@ export class NavbarComponent {
         });
     }
 
-    logout(): void {
-        this.authService.logout().subscribe();
+    logout(event: Event): void {
+        event.preventDefault();
+        this.authService.logout().subscribe(() => {
+            window.location.href = (event.target as HTMLAnchorElement).href;
+        });
     }
 
     private buildMenu(items: (Menu | MenuItem)[]) {

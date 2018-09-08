@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { map, tap, concatMap, switchMap } from 'rxjs/operators';
+import { map, tap, switchMap } from 'rxjs/operators';
 
 interface Csrf {
     headerName: string;
@@ -58,18 +58,27 @@ export class AuthService {
                 sessionStorage.setItem('user', JSON.stringify(this.userInfo));
             }), map(() => {
                 return true;
-            })
+            }),
         );
     }
 
     logout(): Observable<any> {
-        this.userInfo = null;
-        sessionStorage.removeItem('user');
         return this.httpClient.post('/logout', null, {
             headers: JsonHeader,
             responseType: 'text',
             withCredentials: true,
-        });
+        }).pipe(
+            tap(() => {
+                this.userInfo = null;
+                sessionStorage.removeItem('user');
+            }),
+        );
+    }
+
+    invalidateSession(): void {
+        this.httpClient.get('/api/user', { headers: JsonHeader }).subscribe(() => {
+            this.logout().subscribe(() => { });
+        }, error => { });
     }
 
     get isLoggedIn(): boolean {
