@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from 'core/auth';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 @Component({
     templateUrl: './login.component.html',
@@ -16,17 +16,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     @ViewChild('u') usernameRef: ElementRef;
 
     constructor(
+        public router: Router,
         private authService: AuthService,
-        private route: ActivatedRoute,
-        public router: Router
     ) { }
 
     ngOnInit(): void {
-        this.route.params.subscribe(params => {
-            if (params.logout) {
-                this.authService.logout();
-            }
-        });
+        this.authService.invalidateSession();
     }
 
     ngAfterViewInit(): void {
@@ -51,7 +46,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
                         break;
                 }
             }
-
         });
     }
 }
