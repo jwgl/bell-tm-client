@@ -7,13 +7,16 @@ import { RewardListComponent } from './item/reward.component';
 import { TeacherSupervisedComponent } from './item/teacher-supervised.component';
 import { ReportComponent } from './report.component';
 
-const routes: Routes = [
-    { path: '', component: ReportComponent },
-    { path: 'levels/:observer-type/department', component: DepartmentReportComponent},
-    { path: 'levels/:observer-type/observer', component: ObservationReportComponent},
-    { path: 'levels/:observer-type/teacher', component: TeacherSupervisedComponent},
-    { path: 'levels/:observer-type/reward', component: RewardListComponent },
-];
+const routes: Routes = [{
+    path: '',
+    component: ReportComponent,
+    children: [
+        { path: 'levels/:observer-type/department', component: DepartmentReportComponent},
+        { path: 'levels/:observer-type/observer', component: ObservationReportComponent},
+        { path: 'levels/:observer-type/teacher', component: TeacherSupervisedComponent},
+        { path: 'levels/:observer-type/reward', component: RewardListComponent },
+    ]
+}];
 
 @NgModule({
     imports: [
