@@ -10,7 +10,7 @@
         <ul class="nav navbar-nav">
             <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.user"></li>
             <li class="nav-item">
-                <a class="nav-link btn btn-link" href="/" (click)="logout()">退出</a>
+                <a class="nav-link" href="/" (click)="logout($event)">退出</a>
             </li>
         </ul>
     </div>

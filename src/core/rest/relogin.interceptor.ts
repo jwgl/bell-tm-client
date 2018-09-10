@@ -7,7 +7,7 @@ import {
     HttpRequest
 } from '@angular/common/http';
 
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { retryWhen, flatMap } from 'rxjs/operators';
 
 import { LoginService } from '../auth/login.service';
@@ -19,7 +19,6 @@ export class ReloginInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(retryWhen((errors) => {
             return errors.pipe(flatMap(e => {
-                console.log(e);
                 if (e instanceof HttpErrorResponse) {
                     switch (e.status) {
                         case 401:
