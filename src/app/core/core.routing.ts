@@ -5,6 +5,9 @@ const routes: Routes = [{
     path: 'users/:userId/profile',
     loadChildren: './user/profile/user-profile.module#UserProfileModule',
 }, {
+    path: 'users/:userId/password',
+    loadChildren: './user/password/user-password.module#UserPasswordModule',
+}, {
     path: 'students/:userId/schedules',
     loadChildren: './user/student-timetable/student-timetable.module#StudentTimetableModule',
 }, {
