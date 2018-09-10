@@ -46,13 +46,13 @@ export class LoginDialog extends BaseDialog {
     }
 
     login() {
+        this.loginFailed = false;
         const body = new HttpParams({
             fromObject: {
                 username: this.username,
                 password: this.password,
             }
         });
-
         this.httpClient.post('/uaa/login', body.toString(), {
             headers: new HttpHeaders({
                 'Accept': 'application/json',
@@ -66,13 +66,10 @@ export class LoginDialog extends BaseDialog {
             if (error instanceof HttpErrorResponse) {
                 switch (error.status) {
                     case 401:
-                        if (error.url.endsWith('/login?error')) {
-                            this.loginFailed = true;
-                        }
+                        this.loginFailed = true;
                         break;
                 }
             }
-
         });
     }
 
