@@ -25,6 +25,10 @@ export class BookingFormListComponent implements OnInit {
     }
 
     get phoneNumber(): string {
-        return this.service.phoneNumber;
+        return this.service.userInfo.phoneNumber;
+    }
+
+    get userId(): string {
+        return this.service.userInfo.id;
     }
 }
