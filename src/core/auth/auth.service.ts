@@ -4,12 +4,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 
-interface Csrf {
-    headerName: string;
-    token: string;
-}
-
-interface UserInfo {
+export interface UserInfo {
     id: string;
     name: string;
     type: string;
@@ -79,6 +74,11 @@ export class AuthService {
         this.httpClient.get('/api/user', { headers: JsonHeader }).subscribe(() => {
             this.logout().subscribe(() => { });
         }, error => { });
+    }
+
+    updatePhoneNumber(phoneNumber: string): void {
+        this.userInfo.phoneNumber = phoneNumber;
+        sessionStorage.setItem('user', JSON.stringify(this.userInfo));
     }
 
     get isLoggedIn(): boolean {

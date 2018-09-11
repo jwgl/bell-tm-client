@@ -1,12 +1,12 @@
-<ng-container *ngIf="phoneNumber; else phoneNumber">
+<ng-container *ngIf="phoneNumber; else emptyPhone">
     <div class="btn-toolbar">
         <div class="btn-group ml-auto">
             <button class="btn btn-primary" routerLink="notice">新建</button>
         </div>
     </div>
 </ng-container>
-<ng-template #phoneNumber>
-    <div class="alert alert-warning">你的手机号码为空，请补充完整个人信息。</div>
+<ng-template #emptyPhone>
+    <div class="alert alert-warning">你的手机号码为空，请<a [routerLink]="['/core/users/', userId, 'profile', 'edit']">补充完整</a>个人信息。</div>
 </ng-template>
 <ng-container *ngIf="forms">
     <div class="table-responsive" *ngIf="forms.length > 0">
