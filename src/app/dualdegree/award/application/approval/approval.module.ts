@@ -19,7 +19,7 @@ import {MentorSelectDialog} from './mentor/mentor-select.dialog';
         CommonModule,
         FormsModule,
         CommonDirectivesModule,
-        WorkflowModule.forReview('/api/dualdegree/approvers/${userId}/applications', [
+        WorkflowModule.forReview('/api/dualdegree/checkers/${userId}/applications', [
             { type: 'todo', label: '材料待审', dateLabel: '申请时间' },
             { type: 'done', label: '材料已审', dateLabel: '审核时间' },
         ]),
@@ -34,10 +34,10 @@ import {MentorSelectDialog} from './mentor/mentor-select.dialog';
     providers: [
         Dialog,
         ApprovalService,
-        {provide: 'APPROVAL_API_URL', useValue: '/api/dualdegree/approvers/${userId}/applications'},
+        {provide: 'APPROVAL_API_URL', useValue: '/api/dualdegree/checkers/${userId}/applications'},
     ],
     entryComponents: [
         MentorSelectDialog,
     ],
 })
-class ApplicationApprovalModule {}
+export class ApplicationApprovalModule {}

@@ -9,8 +9,8 @@ import {ApplicationApprovalListComponent} from './approval-list.component';
 @NgModule({
     imports: [
         RouterModule.forChild(buildWorkflowRoutings(
-            ApplicationApprovalItemComponent,
             ApplicationApprovalListComponent,
+            ApplicationApprovalItemComponent,
         )),
     ],
     exports: [

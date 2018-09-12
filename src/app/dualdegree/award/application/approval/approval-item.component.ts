@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 import {Dialog} from 'core/dialogs';
+import { NextOptions} from 'core/workflow/workflow.service';
 
 import {AwardForm} from '../../shared/form.model';
 import {ApplicationForm} from '../shared/form.model';
@@ -16,6 +17,10 @@ export class ApplicationApprovalItemComponent {
     fileNames: any;
     settings: AwardForm;
 
+    private wi: string;
+    private prevId: number;
+    private nextId: number;
+
     constructor(route: ActivatedRoute,
         private dialog: Dialog,
         private service: ApprovalService) {
@@ -27,6 +32,23 @@ route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
         this.settings = new AwardForm(dto.settings);
         this.fileNames = dto.fileNames;
 
+        this.wi = dto.workitemId;
+        this.prevId = dto.prevId;
+        this.nextId = dto.nextId;
+
+    }
+
+    get reviewable(): boolean {
+        return this.wi && this.form.status === 'STEP1';
+    }
+
+    get nextOptions(): NextOptions {
+        return {
+            id: this.form.id,
+            wi: this.wi,
+            type: 'next',
+            what: this.form.title,
+        };
     }
 
     get mentorable(): boolean {
