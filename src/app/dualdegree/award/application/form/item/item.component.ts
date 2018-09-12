@@ -27,6 +27,11 @@ export class ApplicationItemComponent {
         private dialog: Dialog,
     ) {
         const params = this.route.snapshot.params;
+        if (!service.xsrfToken) {
+            const cookieAttributes: string[] = document.cookie.split(';');
+            const csrf = cookieAttributes.filter((attr: string) => attr.includes('XSRF-TOKEN=')).toString();
+            service.xsrfToken = csrf.replace('XSRF-TOKEN=', '');
+        }
         this.loadData(params['id']);
     }
 
@@ -91,7 +96,7 @@ export class ApplicationItemComponent {
     get nextOptions(): NextOptions {
         return {
             id: this.vm.id,
-            type: 'process',
+            type: 'next',
             what: this.vm.title,
         };
     }
