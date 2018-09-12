@@ -8,7 +8,6 @@ import {AwardForm} from '../../../shared/form.model';
 import {AwardViewService} from './award.service';
 
 @Component({
-    selector: 'award-item',
     templateUrl: 'award-item.component.html',
 })
 export class AwardItemComponent {

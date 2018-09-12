@@ -14,7 +14,7 @@ export class AwardFormService extends RestEditService {
         authService: AuthService,
         @Inject('AWARD_API_URL') apiUrl: string,
     ) {
-        super(http, apiUrl, { userId: authService.userInfo.id });
+        super(http, apiUrl, { departmentId: authService.userInfo.departmentId });
     }
 
     save(id: number, form: any): Observable<any> {

@@ -18,11 +18,11 @@ export class ApplicationFormViewerComponent {
     }
 
     imgSrc(filename: string): string {
-        return `/web/dualdegree/picture?awardId=${this.vm.awardId}&studentId=${this.vm.studentId}&fileName=${filename ? filename : ''}`;
+        return `/api/dualdegree/picture?awardId=${this.vm.awardId}&studentId=${this.vm.studentId}&fileName=${filename ? filename : ''}`;
     }
 
     url(filename: string): string {
-        return '/web/dualdegree/picture/fileview?awardId=' + this.vm.awardId
+        return '/api/dualdegree/picture/fileview?awardId=' + this.vm.awardId
                 + '&studentId=' + this.vm.studentId + '&fileName=' + (filename ? filename : '');
     }
 
@@ -51,7 +51,7 @@ export class ApplicationFormViewerComponent {
     }
 
     download(filename: string): string {
-        return '/web/dualdegree/picture/download?awardId=' + this.vm.awardId
+        return '/api/dualdegree/picture/download?awardId=' + this.vm.awardId
         + '&studentId=' + this.vm.studentId + '&fileName=' + (filename ? filename : '');
     }
 }

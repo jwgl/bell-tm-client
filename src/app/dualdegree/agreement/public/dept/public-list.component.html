@@ -2,7 +2,7 @@
     <label class="control-label">专业对应可申请的大学以及衔接专业</label>
     <ul>
         <li *ngFor="let subjectName of agreementSubjects | uniqueBy: 'subjectName'" class="list">
-            {{subjectName}}
+            <span class='text-info'>{{subjectName}}</span>
             <ul>
                 <li *ngFor="let item of agreementSubjects | filterBy: filterBySubject(subjectName)" class="item">
                     适用起止年级：{{item.startedGrade}} —— {{item.endedGrade}}，{{item.regionName}}； {{item.nameEn}}

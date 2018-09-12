@@ -1,18 +1,17 @@
-import {Location} from '@angular/common';
-import {Component} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as _ from 'lodash';
 
-import {CommonDialog} from 'core/common-dialogs';
-import {EditMode} from 'core/constants';
-import {Dialog} from 'core/dialogs';
+import { CommonDialog } from 'core/common-dialogs';
+import { EditMode } from 'core/constants';
+import { Dialog } from 'core/dialogs';
 
-import {ApplicationForm} from '../../shared/form.model';
+import { ApplicationForm } from '../../shared/form.model';
 
-import {ApplicationFormService} from '../form.service';
+import { ApplicationFormService } from '../form.service';
 
-import {UploaderDialog} from './uploader.dialog';
+import { MaterialUploaderDialog } from './uploader.dialog';
 
 import './form-editor.model';
 
@@ -33,11 +32,15 @@ export class ApplicationFormEditorComponent {
         private service: ApplicationFormService,
         private route: ActivatedRoute,
         private router: Router,
-        private location: Location,
         private dialogs: CommonDialog,
         private dialog: Dialog,
     ) {
-        this.xsrfToken = this.service.xsrfToken;
+        if (!service.xsrfToken) {
+            const cookieAttributes: string[] = document.cookie.split(';');
+            const csrf = cookieAttributes.filter((attr: string) => attr.includes('XSRF-TOKEN=')).toString();
+            service.xsrfToken = csrf.replace('XSRF-TOKEN=', '');
+        }
+        this.xsrfToken = service.xsrfToken;
         const params = this.route.snapshot.params;
         this.editMode = this.route.snapshot.data['mode'];
         this.awardId = params['awardId'];
@@ -47,7 +50,7 @@ export class ApplicationFormEditorComponent {
     refresh() {
         switch (this.editMode) {
             case EditMode.Create:
-                this.service.loadDataForCreate({awardId: this.awardId})
+                this.service.loadDataForCreate({ awardId: this.awardId })
                     .subscribe(dto => this.onLoadData(dto));
                 break;
             case EditMode.Edit:
@@ -72,8 +75,17 @@ export class ApplicationFormEditorComponent {
         }
     }
 
+    subjects(universityName: any): any[] {
+        if (universityName) {
+            const university = this.universities.find(item => item.universityEn === universityName);
+            return university ? university.subjects : null;
+        } else {
+            return null;
+        }
+    }
+
     imgSrc(filename: string): string {
-        return `/web/dualdegree/picture?awardId=${this.awardId}&studentId=${this.form.studentId}&fileName=${filename ? filename : ''}`;
+        return `/api/dualdegree/picture?awardId=${this.awardId}&studentId=${this.form.studentId}&fileName=${filename ? filename : ''}`;
     }
 
     isEmpty(option: any): boolean {
@@ -84,10 +96,16 @@ export class ApplicationFormEditorComponent {
         const validate: string[] = [];
         if (this.isEmpty(this.form.universityCooperative) ||
             this.isEmpty(this.form.majorCooperative) ||
+            this.isEmpty(this.form.bachelorYear) ||
             this.isEmpty(this.form.email) ||
             this.isEmpty(this.form.linkman) ||
             this.isEmpty(this.form.phone)) {
-                validate.push('请检查合作大学、国外专业、Email、联系人、联系人电话等是否为空');
+            validate.push('请检查合作大学、国外专业、获得学位年份、Email、联系人、联系人电话等是否为空');
+        } else {
+            const day = new Date();
+            if (this.form.bachelorYear < 2000 || (this.form.bachelorYear > day.getFullYear())) {
+                validate.push('获得学位年份无效！');
+            }
         }
         return validate;
     }
@@ -107,18 +125,18 @@ export class ApplicationFormEditorComponent {
 
     create() {
         this.service.create(this.form.toServerDto()).subscribe(id => {
-            this.router.navigate(['/', id]);
+            this.router.navigate(['../', id], { relativeTo: this.route });
         });
     }
 
     update() {
         this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
-            this.router.navigate(['/', id]);
+            this.router.navigate(['../../', id], { relativeTo: this.route });
         });
     }
 
     url(filename: string): string {
-        return `/web/dualdegree/picture/fileview?awardId=${this.awardId}&fileName=${filename ? filename : ''}`;
+        return `/api/dualdegree/picture/fileview?awardId=${this.awardId}&fileName=${filename ? filename : ''}`;
     }
 
     open(filename: string) {
@@ -126,20 +144,20 @@ export class ApplicationFormEditorComponent {
             return;
         }
         window.open(this.url(filename), '文件浏览',
-        'fullscreen=1, toolbar=0, menubar=0, location=0, status=0, scrollbars=1, resizable=0');
+            'fullscreen=1, toolbar=0, menubar=0, location=0, status=0, scrollbars=1, resizable=0');
     }
 
     get uploadUrl(): string {
-        return this.service.getUploadUrl({awardId: this.awardId});
+        return this.service.getUploadUrl({ awardId: this.awardId });
     }
 
     upload(prefix: string) {
         this.fileNames[prefix] = undefined;
         const uploadUrl = this.uploadUrl;
         const xsrfToken = this.service.xsrfToken;
-        this.dialog.open(UploaderDialog, {prefix, uploadUrl, xsrfToken})
-        .then(() => {
-            this.refresh();
-        });
+        this.dialog.open(MaterialUploaderDialog, { prefix, uploadUrl, xsrfToken })
+            .then(() => {
+                this.refresh();
+            });
     }
 }

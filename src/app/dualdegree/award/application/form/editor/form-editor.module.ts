@@ -1,14 +1,13 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
-import {CommonDirectivesModule} from 'core/common-directives';
-import {CommonDialogsModule} from 'core/common-dialogs';
-import {Dialog} from 'core/dialogs';
+import { CommonDirectivesModule } from 'core/common-directives';
+import { CommonDialogsModule } from 'core/common-dialogs';
+import { Dialog } from 'core/dialogs';
 
-import {ApplicationFormEditorComponent} from './form-editor.component';
-import {UploaderDialog} from './uploader.dialog';
+import { ApplicationFormEditorComponent } from './form-editor.component';
 
 @NgModule({
     imports: [
@@ -20,16 +19,12 @@ import {UploaderDialog} from './uploader.dialog';
     ],
     declarations: [
         ApplicationFormEditorComponent,
-        UploaderDialog,
     ],
     providers: [
         Dialog,
-    ],
-    entryComponents: [
-        UploaderDialog,
     ],
     exports: [
         ApplicationFormEditorComponent,
     ],
 })
-export class AwardFormEditorModule { }
+export class ApplicationFormEditorModule { }

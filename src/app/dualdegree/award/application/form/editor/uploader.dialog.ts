@@ -10,7 +10,7 @@ import {FileTypes} from '../../shared/form.model';
     template: `
     <modal-dialog [title]="title">
         <modal-body>
-            <uploader-panel [uploadUrl]="uploadUrl" [xsrfToken]="xsrfToken" [fileType]="fileType"></uploader-panel>
+            <tm-uploader-panel [uploadUrl]="uploadUrl" [xsrfToken]="xsrfToken" [fileType]="fileType"></tm-uploader-panel>
         </modal-body>
         <modal-footer>
             <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
@@ -19,7 +19,7 @@ import {FileTypes} from '../../shared/form.model';
     `,
 })
 // tslint:disable-next-line:component-class-suffix
-export class UploaderDialog extends BaseDialog {
+export class MaterialUploaderDialog extends BaseDialog {
     prefix: 'photo' | 'certi' | 'trans1' | 'trans2' | 'trans3';
     uploadUrl: string;
     fileType: any;

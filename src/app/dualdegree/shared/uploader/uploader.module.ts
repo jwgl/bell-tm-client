@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {NgUploaderModule} from 'ngx-uploader';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgUploaderModule } from 'ngx-uploader';
 
-import {UploaderPanelComponent} from './uploader.component';
+import { UploaderPanelComponent } from './uploader.component';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    CommonModule,
     NgUploaderModule,
   ],
   declarations: [UploaderPanelComponent],

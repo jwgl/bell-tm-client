@@ -97,13 +97,13 @@ export class AwardFormEditorComponent {
 
     create() {
         this.service.create(this.form.toServerDto()).subscribe(id => {
-            this.router.navigate(['/']);
+            this.router.navigate(['../', id], { relativeTo: this.route });
         });
     }
 
     update() {
         this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
-            this.router.navigate(['/']);
+            this.router.navigate(['../'], { relativeTo: this.route });
         });
     }
 }

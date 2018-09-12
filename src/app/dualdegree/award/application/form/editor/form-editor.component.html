@@ -7,7 +7,7 @@
             <button class='btn btn-secondary' routerLink="/">返回</button>
         </div>
     </div>
-    <form-title>学位申请单{{form.id}}</form-title>
+    <tm-form-title>学位申请单{{form.id}}</tm-form-title>
     <form role="form">
         <div class="row">
             <div class="col-9">
@@ -19,12 +19,30 @@
                             {{ item.universityCn }}<span *ngIf="item.universityCn">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>{{ item.universityEn }}
                         </option>
                     </select>
+                </div>
+                <div class="form-group">
                     <label class="control-label">主修专业</label>
-                    <input class="form-control" name="majorCooperative" type="text" [(ngModel)]="form.majorCooperative" placeholder="在国外大学主修专业名称（英文）" />
-                    <label class="control-label">Email</label>
-                    <input class="form-control" name="email" type="email" [(ngModel)]="form.email" placeholder="常用有效Email地址" />
+                    <select name="majorCooperative" class="form-control" [(ngModel)]="form.majorCooperative">
+                        <option value="" disabled>请选择修读专业名称</option>
+                        <option *ngFor="let item of subjects(form.universityCooperative)" [ngValue]="item.majorEn">
+                            {{ item.majorCn }} | {{ item.majorEn }} ({{item.bachelor}})
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="form-group col-9">
+                            <label class="control-label">Email</label>
+                            <input class="form-control" name="email" type="email" [(ngModel)]="form.email" placeholder="常用有效Email地址" />
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="control-label">获得学位年份(YYYY)</label>
+                            <input class="form-control" name="bachelorYear" type="number" [(ngModel)]="form.bachelorYear" placeholder="在国外获得学位的年份" />
+                        </div>
+                    </div>
                     <hr>
-                    <label class="control-label mb-2">国内紧急联系人信息：</label>
+                </div>
+                <div class="form-group">
                     <div class="row">
                         <div class="form-group col-6">
                             <label class="control-label">联系人</label>

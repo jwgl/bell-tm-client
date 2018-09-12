@@ -13,6 +13,12 @@ const routes: Routes = [{
 }, {
     path: 'users/:userId/universities',
     loadChildren: './agreement/university/form.module#UniversityModule',
+}, {
+    path: 'departments/:departmentId/awards',
+    loadChildren: './award/form/award.module#AwardFormModule',
+}, {
+    path: 'students/:userId/applications',
+    loadChildren: './award/application/form/form.module#ApplicationFormModule',
 }];
 
 @NgModule({

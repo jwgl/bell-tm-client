@@ -4,7 +4,7 @@ import {humanizeBytes, UploaderOptions, UploadFile, UploadInput, UploadOutput } 
 import {FileType} from './uploader.model';
 
 @Component({
-    selector: 'uploader-panel',
+    selector: 'tm-uploader-panel',
     styleUrls: ['uploader.component.scss'],
     templateUrl: 'uploader.component.html',
 })
@@ -18,7 +18,7 @@ export class UploaderPanelComponent {
     uploadInput: EventEmitter<UploadInput>;
     humanizeBytes: (bytes: number) => string;
     dragOver: boolean;
-    uploadAble: boolean = true;
+    uploadAble = true;
 
     constructor() {
         this.files = []; // local uploading files array

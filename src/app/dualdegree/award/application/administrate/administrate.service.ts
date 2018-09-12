@@ -14,7 +14,7 @@ export class ApplicationsAdministrateService extends RestShowService {
         authService: AuthService,
         @Inject('AWARD_API_URL') apiUrl: string,
     ) {
-        super(http, apiUrl, { userId: authService.userInfo.id });
+        super(http, apiUrl, { departmentId: authService.userInfo.departmentId });
     }
 
     loadApplicationItem(id: any, options: {[key: string]: any} = {}): Observable<any> {

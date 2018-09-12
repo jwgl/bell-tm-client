@@ -14,5 +14,6 @@ ApplicationForm.prototype.toServerDto = function(this: ApplicationForm): any {
         email: this.email,
         linkman: this.linkman,
         phone: this.phone,
+        bachelorYear: this.bachelorYear,
     };
 };

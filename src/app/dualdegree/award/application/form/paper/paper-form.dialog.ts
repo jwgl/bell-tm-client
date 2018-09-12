@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 import * as _ from 'lodash';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 import {BaseDialog} from 'core/dialogs';
 
@@ -9,9 +9,9 @@ import {paperTypeLabels} from '../../shared/constant';
 import {PaperForm} from './paper.model';
 
 @Component({
-    selector: 'paper-dialog',
     templateUrl: 'paper-form.dialog.html',
 })
+// tslint:disable-next-line:component-class-suffix
 export class PaperFormDialog extends BaseDialog {
     form: PaperForm;
     uploadUrl: string;

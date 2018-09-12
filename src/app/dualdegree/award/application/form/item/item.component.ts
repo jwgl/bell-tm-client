@@ -9,7 +9,6 @@ import {NextOptions, SubmitOptions} from 'core/workflow';
 import {AwardForm} from '../../../shared/form.model';
 import {ApplicationForm, FileTypes} from '../../shared/form.model';
 import {ApplicationFormService} from '../form.service';
-import {PaperFormService} from '../paper-form.service';
 import {PaperFormDialog} from '../paper/paper-form.dialog';
 
 @Component({
@@ -25,7 +24,6 @@ export class ApplicationItemComponent {
     constructor(
         private route: ActivatedRoute,
         private service: ApplicationFormService,
-        private paperFormService: PaperFormService,
         private dialog: Dialog,
     ) {
         const params = this.route.snapshot.params;
@@ -49,7 +47,7 @@ export class ApplicationItemComponent {
     get submitOptions(): SubmitOptions {
         return {
             id: this.vm.id,
-            type: 'approve',
+            type: 'check',
             what: this.vm.title,
         };
     }
@@ -74,11 +72,11 @@ export class ApplicationItemComponent {
         const uploadUrl = this.uploadUrl;
         const xsrfToken = this.service.xsrfToken;
         const fileType = FileTypes.filter(file => file.prefix === 'paper')[0];
-        this.paperFormService.loadPaperForm(this.vm.id).subscribe(data => {
+        this.service.loadPaperForm(this.vm.id).subscribe(data => {
             const paper = data.form ? data.form : [];
             this.dialog.open(PaperFormDialog, {paper, uploadUrl, xsrfToken, fileType})
             .then(result => {
-                this.paperFormService.createPaperForm(this.vm.id, result).subscribe(() => {
+                this.service.createPaperForm(this.vm.id, result).subscribe(() => {
                     this.loadData(this.vm.id);
                     this.pending = true;
                 });

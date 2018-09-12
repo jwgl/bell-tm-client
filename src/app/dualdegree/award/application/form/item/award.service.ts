@@ -1,21 +1,17 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-
-import { ApiUrl, EditService, Rest } from 'core/rest';
+import { Http, RestEditService } from 'core/rest';
+import { AuthService } from 'core/auth';
 
 @Injectable()
-export class AwardViewService extends EditService {
+export class AwardViewService extends RestEditService {
     list: any[];
 
     constructor(
-        rest: Rest,
-        api: ApiUrl,
-        @Inject('AWARD_API_URL') private awardApiUrl: string) {
-        super(rest, api);
-    }
-
-    loadItem(id: any): Observable<any> {
-        return this.rest.get(`${this.awardApiUrl}/${id}`);
+        http: Http,
+        authService: AuthService,
+        @Inject('AWARD_API_URL') apiUrl: string,
+    ) {
+        super(http, apiUrl, { departmentId: authService.userInfo.departmentId });
     }
 }

@@ -1,6 +1,6 @@
 <div class="btn-toolbar">
     <div class="btn-group ml-auto">
-        <button class="btn btn-secondary" routerLink="/editor">新建</button>
+        <button class="btn btn-secondary" routerLink="editor">新建</button>
     </div>
 </div>
 <table class="table">
@@ -19,7 +19,7 @@
         <ng-template ngFor let-award [ngForOf]="awardes" let-i="index">
             <tr>
                 <td>{{i + 1}}</td>
-                <td class="awardTitle"><a [routerLink]="['/',award.id]">{{award.title}}</a></td>
+                <td class="awardTitle"><a [routerLink]="[award.id]">{{award.title}}</a></td>
                 <td>{{award.departmentName}}</td>
                 <td>{{award.requestBegin}}</td>
                 <td>{{award.requestEnd}}</td>

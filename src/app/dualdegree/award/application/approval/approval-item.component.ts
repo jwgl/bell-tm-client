@@ -17,15 +17,16 @@ export class ApplicationApprovalItemComponent {
     settings: AwardForm;
 
     constructor(route: ActivatedRoute,
-                private dialog: Dialog,
-                private service: ApprovalService) {
-        route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
-    }
+        private dialog: Dialog,
+        private service: ApprovalService) {
+route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
+}
 
     onItemLoaded(dto: any) {
         this.form = new ApplicationForm(dto.form);
         this.settings = new AwardForm(dto.settings);
         this.fileNames = dto.fileNames;
+
     }
 
     get mentorable(): boolean {

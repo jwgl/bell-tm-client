@@ -18,6 +18,7 @@ export class ApplicationForm {
     linkman: string;
     phone: string;
     editable: boolean;
+    bachelorYear: number;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -39,6 +40,7 @@ export class ApplicationForm {
         this.paperApproverEmail = dto.mentorEmail;
         this.dateApproved = dto.dateApproved;
         this.editable = dto.editable;
+        this.bachelorYear = dto.bachelorYear;
     }
 
     get title(): string {

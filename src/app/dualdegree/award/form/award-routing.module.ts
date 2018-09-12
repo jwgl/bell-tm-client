@@ -10,9 +10,8 @@ import {AwardItemComponent} from './item/item.component';
 import {AwardListComponent} from './list/form-list.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: '/list', pathMatch: 'full'},
+    {path: '', component: AwardListComponent},
     {path: 'editor', component: AwardFormEditorComponent, data: { mode: EditMode.Create }},
-    {path: 'list', component: AwardListComponent},
     {path: ':id/edit', component: AwardFormEditorComponent, data: { mode: EditMode.Edit }},
     {path: ':id/applications', component: ApplicationListComponent},
     {path: ':id/applications/:applicationId', component: ApplicationsAdministrateItemComponent},
@@ -21,7 +20,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, {useHash: true}),
+        RouterModule.forChild(routes),
     ],
     exports: [
         RouterModule,
