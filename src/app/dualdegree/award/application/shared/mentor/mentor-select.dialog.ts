@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseDialog } from 'core/dialogs';
-import { Http } from 'core/rest';
-
-import {ApprovalService } from '../approval.service';
 
 @Component({
     templateUrl: 'mentor-select.dialog.html',
@@ -14,12 +11,8 @@ export class MentorSelectDialog extends BaseDialog {
     mentors: any;
     teacherId: string;
 
-    constructor(private http: Http, private service: ApprovalService) {
-        super();
-    }
-
     protected onOpening(): Observable<any> {
-        this.http.get(`${this.service.api.list()}/mentors`).subscribe(dto => this.mentors = dto);
+        this.mentors = this.options.mentors;
         return null;
     }
 
@@ -27,4 +20,3 @@ export class MentorSelectDialog extends BaseDialog {
         return this.teacherId;
     }
 }
-

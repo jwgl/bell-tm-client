@@ -22,6 +22,9 @@ const routes: Routes = [{
 }, {
     path: 'checkers/:userId/applications',
     loadChildren: './award/application/approval/approval.module#ApplicationApprovalModule',
+}, {
+    path: 'checkers/:userId/papers',
+    loadChildren: './award/application/paper-mentor/paper-mentor.module#PaperMentorModule',
 }];
 
 @NgModule({

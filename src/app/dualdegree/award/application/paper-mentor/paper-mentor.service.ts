@@ -6,9 +6,7 @@ import { Http, RestShowService } from 'core/rest';
 import { AuthService } from 'core/auth';
 
 @Injectable()
-export class ApprovalService extends RestShowService {
-    list: any[];
-
+export class PaperMentorService extends RestShowService {
     constructor(
         http: Http,
         authService: AuthService,
@@ -17,11 +15,15 @@ export class ApprovalService extends RestShowService {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
 
-    setMentor(id: number, value: any): Observable<any> {
-        return this.http.put(`${this.api.item(id)}`, value);
+    finish(id: any, comment: string): Observable<any> {
+        return this.http.patch(`${this.api.item(id)}?op=FINISH`, {comment});
+    }
+
+    setMentor(value: any): Observable<any> {
+        return this.http.post(this.api.list(), value);
     }
 
     getMentors(): Observable<any> {
-        return  this.http.get(`${this.api.list()}/mentors`);
+        return  this.http.get(`${this.api.item(0)}/tousers`);
     }
 }

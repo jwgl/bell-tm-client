@@ -125,7 +125,7 @@ export class ApplicationFormEditorComponent {
 
     create() {
         this.service.create(this.form.toServerDto()).subscribe(id => {
-            this.router.navigate(['../', id], { relativeTo: this.route });
+            this.router.navigate(['../../', id], { relativeTo: this.route });
         });
     }
 
@@ -158,6 +158,7 @@ export class ApplicationFormEditorComponent {
         this.dialog.open(MaterialUploaderDialog, { prefix, uploadUrl, xsrfToken })
             .then(() => {
                 this.refresh();
+                this.form.majorCooperative = '';
             });
     }
 }

@@ -1,18 +1,17 @@
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import {CommonDirectivesModule} from 'core/common-directives';
-import {Dialog} from 'core/dialogs';
-import {WorkflowModule} from 'core/workflow';
+import { CommonDirectivesModule } from 'core/common-directives';
+import { Dialog } from 'core/dialogs';
+import { WorkflowModule } from 'core/workflow';
 
-import {ApplicationSharedModule} from '../shared/application-shared.module';
-import {ApplicationApprovalRoutingModule} from './approval.routing';
+import { ApplicationSharedModule } from '../shared/application-shared.module';
+import { ApplicationApprovalRoutingModule } from './approval.routing';
 
-import {ApplicationApprovalItemComponent} from './approval-item.component';
-import {ApplicationApprovalListComponent} from './approval-list.component';
-import {ApprovalService} from './approval.service';
-import {MentorSelectDialog} from './mentor/mentor-select.dialog';
+import { ApplicationApprovalItemComponent } from './approval-item.component';
+import { ApplicationApprovalListComponent } from './approval-list.component';
+import { ApprovalService } from './approval.service';
 
 @NgModule({
     imports: [
@@ -29,15 +28,11 @@ import {MentorSelectDialog} from './mentor/mentor-select.dialog';
     declarations: [
         ApplicationApprovalListComponent,
         ApplicationApprovalItemComponent,
-        MentorSelectDialog,
     ],
     providers: [
         Dialog,
         ApprovalService,
         {provide: 'APPROVAL_API_URL', useValue: '/api/dualdegree/checkers/${userId}/applications'},
-    ],
-    entryComponents: [
-        MentorSelectDialog,
     ],
 })
 export class ApplicationApprovalModule {}

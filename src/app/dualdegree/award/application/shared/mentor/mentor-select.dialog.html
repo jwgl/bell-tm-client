@@ -4,8 +4,8 @@
             <form-field label="老师">
                 <select name="teacherId" class="form-control" [(ngModel)]="teacherId">
                     <option value="" disabled>选择导师</option>
-                    <option *ngFor="let mentor of mentors" [ngValue]="mentor.teacherId">
-                        {{mentor.teacherName}} : {{mentor.teacherId}}
+                    <option *ngFor="let mentor of mentors" [ngValue]="mentor.id">
+                        {{mentor.name}} : {{mentor.id}}
                     </option>
                 </select>
             </form-field>
