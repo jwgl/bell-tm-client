@@ -31,6 +31,12 @@ const routes: Routes = [{
 }, {
     path: 'departments/:departmentId/students',
     loadChildren: './students/form/form.module#StudentAbroadFormModule',
+}, {
+    path: 'settings/users',
+    loadChildren: './settings/department/form/form.module#DeptAdminFormModule',
+}, {
+    path: 'departments/:departmentId/mentors',
+    loadChildren: './settings/mentor/form/form.module#MentorFormModule',
 }];
 
 @NgModule({
