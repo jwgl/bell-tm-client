@@ -37,6 +37,9 @@ const routes: Routes = [{
 }, {
     path: 'departments/:departmentId/mentors',
     loadChildren: './settings/mentor/form/form.module#MentorFormModule',
+}, {
+    path: 'admin/applications',
+    loadChildren: './award/application/finder/finder.module#FinderModule',
 }];
 
 @NgModule({
