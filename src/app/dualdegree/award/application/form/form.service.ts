@@ -9,7 +9,6 @@ import { AuthService } from 'core/auth';
 @Injectable()
 export class ApplicationFormService extends RestEditService {
     list: any[];
-    xsrfToken: string;
 
     constructor(
         http: Http,

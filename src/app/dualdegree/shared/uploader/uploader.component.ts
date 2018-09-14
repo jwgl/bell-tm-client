@@ -10,7 +10,7 @@ import {FileType} from './uploader.model';
 })
 export class UploaderPanelComponent {
     @Input() uploadUrl: string;
-    @Input() xsrfToken: string;
+    _xsrfToken: string;
     @Input() fileType: FileType;
     options: UploaderOptions;
     formData: FormData;
@@ -24,6 +24,10 @@ export class UploaderPanelComponent {
         this.files = []; // local uploading files array
         this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
         this.humanizeBytes = humanizeBytes;
+        // 从cookie中截取XSRF-TOKEN
+        const cookieAttributes: string[] = document.cookie.split(';');
+            const csrf = cookieAttributes.filter((attr: string) => attr.includes('XSRF-TOKEN=')).toString();
+            this._xsrfToken = csrf.replace('XSRF-TOKEN=', '');
     }
 
     // 选择文件后触发的顺序是addedToQueue > allAddedToQueue > uploading
@@ -36,7 +40,7 @@ export class UploaderPanelComponent {
                     url: this.uploadUrl,
                     method: 'POST',
                     data: { prefix: this.fileType.prefix },
-                    headers: { 'X-XSRF-TOKEN': this.xsrfToken },
+                    headers: { 'X-XSRF-TOKEN': this._xsrfToken },
                 };
                 this.uploadInput.emit(event);
             }
@@ -74,7 +78,7 @@ export class UploaderPanelComponent {
             url: this.uploadUrl,
             method: 'POST',
             data: { prefix: this.fileType.prefix },
-            headers: { 'X-XSRF-TOKEN': this.xsrfToken },
+            headers: { 'X-XSRF-TOKEN': this._xsrfToken },
         };
 
         this.uploadInput.emit(event);

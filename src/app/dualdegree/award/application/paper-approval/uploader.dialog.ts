@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
-import {BaseDialog} from 'core/dialogs';
+import { BaseDialog } from 'core/dialogs';
 
-import {FileTypes} from '../../shared/form.model';
+import { FileTypes } from '../shared/form.model';
 
 @Component({
     template: `
@@ -19,8 +19,7 @@ import {FileTypes} from '../../shared/form.model';
     `,
 })
 // tslint:disable-next-line:component-class-suffix
-export class MaterialUploaderDialog extends BaseDialog {
-    prefix: 'photo' | 'certi' | 'trans1' | 'trans2' | 'trans3';
+export class UploaderDialog extends BaseDialog {
     uploadUrl: string;
     fileType: any;
 
@@ -29,9 +28,8 @@ export class MaterialUploaderDialog extends BaseDialog {
     }
 
     protected onOpening(): Observable<any> {
-        this.prefix = this.options.prefix;
         this.uploadUrl = this.options.uploadUrl;
-        this.fileType = FileTypes.filter(file => file.prefix === this.prefix)[0];
+        this.fileType = FileTypes.filter(file => file.prefix === 'review')[0];
         return null;
     }
 

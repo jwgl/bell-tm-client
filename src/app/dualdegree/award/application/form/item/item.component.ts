@@ -27,11 +27,6 @@ export class ApplicationItemComponent {
         private dialog: Dialog,
     ) {
         const params = this.route.snapshot.params;
-        if (!service.xsrfToken) {
-            const cookieAttributes: string[] = document.cookie.split(';');
-            const csrf = cookieAttributes.filter((attr: string) => attr.includes('XSRF-TOKEN=')).toString();
-            service.xsrfToken = csrf.replace('XSRF-TOKEN=', '');
-        }
         this.loadData(params['id']);
     }
 
@@ -75,11 +70,10 @@ export class ApplicationItemComponent {
 
     uploadPaper() {
         const uploadUrl = this.uploadUrl;
-        const xsrfToken = this.service.xsrfToken;
         const fileType = FileTypes.filter(file => file.prefix === 'paper')[0];
         this.service.loadPaperForm(this.vm.id).subscribe(data => {
             const paper = data.form ? data.form : [];
-            this.dialog.open(PaperFormDialog, {paper, uploadUrl, xsrfToken, fileType})
+            this.dialog.open(PaperFormDialog, {paper, uploadUrl, fileType})
             .then(result => {
                 this.service.createPaperForm(this.vm.id, result).subscribe(() => {
                     this.loadData(this.vm.id);

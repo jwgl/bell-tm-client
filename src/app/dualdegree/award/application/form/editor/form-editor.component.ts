@@ -25,7 +25,6 @@ export class ApplicationFormEditorComponent {
     universities: any[];
     fileNames: any;
     awardId: number;
-    xsrfToken: string;
     formId: number;
 
     constructor(
@@ -35,12 +34,6 @@ export class ApplicationFormEditorComponent {
         private dialogs: CommonDialog,
         private dialog: Dialog,
     ) {
-        if (!service.xsrfToken) {
-            const cookieAttributes: string[] = document.cookie.split(';');
-            const csrf = cookieAttributes.filter((attr: string) => attr.includes('XSRF-TOKEN=')).toString();
-            service.xsrfToken = csrf.replace('XSRF-TOKEN=', '');
-        }
-        this.xsrfToken = service.xsrfToken;
         const params = this.route.snapshot.params;
         this.editMode = this.route.snapshot.data['mode'];
         this.awardId = params['awardId'];
@@ -154,8 +147,7 @@ export class ApplicationFormEditorComponent {
     upload(prefix: string) {
         this.fileNames[prefix] = undefined;
         const uploadUrl = this.uploadUrl;
-        const xsrfToken = this.service.xsrfToken;
-        this.dialog.open(MaterialUploaderDialog, { prefix, uploadUrl, xsrfToken })
+        this.dialog.open(MaterialUploaderDialog, { prefix, uploadUrl })
             .then(() => {
                 this.refresh();
                 this.form.majorCooperative = '';

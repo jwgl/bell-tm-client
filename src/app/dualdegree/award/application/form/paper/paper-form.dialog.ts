@@ -15,7 +15,6 @@ import {PaperForm} from './paper.model';
 export class PaperFormDialog extends BaseDialog {
     form: PaperForm;
     uploadUrl: string;
-    xsrfToken: string;
     fileType: any;
     types = paperTypeLabels;
 
@@ -33,7 +32,6 @@ export class PaperFormDialog extends BaseDialog {
 
     protected onOpening(): Observable<any> {
         this.uploadUrl = this.options.uploadUrl;
-        this.xsrfToken = this.options.xsrfToken;
         this.fileType = this.options.fileType;
         this.form = new PaperForm(this.options.paper);
         if (!this.form.type) {
