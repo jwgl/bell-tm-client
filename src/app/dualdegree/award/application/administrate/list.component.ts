@@ -1,9 +1,7 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import {ApiUrl} from 'core/rest';
-
-import {ApplicationsAdministrateService} from './administrate.service';
+import { ApplicationsAdministrateService } from './administrate.service';
 
 @Component({
     templateUrl: 'list.component.html',
@@ -13,7 +11,6 @@ export class ApplicationListComponent {
     awardId: number;
 
     constructor(
-        private api: ApiUrl,
         private route: ActivatedRoute,
         private service: ApplicationsAdministrateService,
     ) {
@@ -24,6 +21,6 @@ export class ApplicationListComponent {
     }
 
     downloadUrl(pre: string): string {
-        return `${this.api.item(this.awardId)}/attachments?status=ALL&pre=${pre}`;
+        return `${this.service.api.item(this.awardId)}/attachments?status=ALL&pre=${pre}`;
     }
 }

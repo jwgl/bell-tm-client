@@ -28,6 +28,9 @@ const routes: Routes = [{
 }, {
     path: 'mentors/:userId/papers',
     loadChildren: './award/application/paper-approval/approval.module#PaperApprovalModule',
+}, {
+    path: 'departments/:departmentId/students',
+    loadChildren: './students/form/form.module#StudentAbroadFormModule',
 }];
 
 @NgModule({
