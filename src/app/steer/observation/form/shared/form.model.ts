@@ -1,8 +1,6 @@
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
-import { Schedule, Timeslot, TimeslotItem } from 'core/components/schedule-timetable/schedule-timetable.model';
-import { dayOfWeekText, weekRangeText } from 'core/utils';
+import { Schedule } from 'core/components/schedule-timetable/schedule-timetable.model';
 
 declare module 'core/components/schedule-timetable/schedule-timetable.model' {
     interface Schedule {
@@ -182,7 +180,7 @@ export interface Term {
     startWeek: number;
     maxWeek: number;
     currentWeek: number;
-    startDate: moment.Moment;
-    swapDates: moment.Moment[];
+    startDate: string;
+    swapDates: string[];
     endWeek: number;
 }

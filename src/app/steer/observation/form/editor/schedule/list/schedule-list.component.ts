@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
 import { Dialog } from 'core/dialogs';
 import { Schedule } from 'core/models';
 
 import { ScheduleService } from '../schedule.service';
-
 import { QueryOptionDialog } from './query-option.dialog';
 import './schedule.model';
 

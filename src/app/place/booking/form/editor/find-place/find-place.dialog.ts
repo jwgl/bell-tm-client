@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
-import * as _ from 'lodash';
-import * as moment from 'moment';
+
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
+import * as dayjs from 'dayjs';
+import { Dayjs } from 'dayjs';
+import 'dayjs/locale/zh-cn';
 
 import { BaseDialog } from 'core/dialogs';
 import { weekRangeConflict } from 'core/utils';
 
-import { NumberStringOption, OddEvenOptions } from 'core/options';
+import { NumberStringOption, OddEvenOptions, DayOfWeekOptions } from 'core/options';
 import { BookingForm, BookingSection } from '../../../shared/booking-form.model';
 import { BookingFormService } from '../../booking-form.service';
 
-interface BookingDayOption {
+interface BookingDay {
     week: number;
     dayOfWeek: number;
-    date: moment.Moment;
+    date: Dayjs;
 }
 
 interface QueryOptions {
@@ -35,11 +38,11 @@ export class FindPlaceDialog extends BaseDialog {
         startWeek: number,
         maxWeek: number,
         currentWeek: number,
-        startDate: moment.Moment,
-        swapToDates: moment.Moment[],
+        startDate: Dayjs,
+        swapToDates: Dayjs[],
     };
 
-    today: moment.Moment;
+    today: Dayjs;
 
     vm: {
         simpleOption: boolean;
@@ -47,26 +50,26 @@ export class FindPlaceDialog extends BaseDialog {
         endWeeks?: number[];
         oddEvens?: NumberStringOption[];
         dayOfWeeks?: NumberStringOption[];
-        days?: BookingDayOption[];
+        days?: BookingDay[];
     };
 
     queryOptions: QueryOptions;
 
-    _bookingDay: BookingDayOption;
+    _bookingDay: BookingDay;
 
     places: any[] = [];
     finding = false;
 
     constructor(private service: BookingFormService) {
         super();
-        moment.locale('zh-cn');
+        dayjs.locale('zh-cn');
     }
 
-    get bookingDay(): BookingDayOption {
+    get bookingDay(): BookingDay {
         return this._bookingDay;
     }
 
-    set bookingDay(value: BookingDayOption) {
+    set bookingDay(value: BookingDay) {
         this._bookingDay = value;
         this.queryOptions.startWeek = value.week;
         this.queryOptions.endWeek = value.week;
@@ -130,11 +133,11 @@ export class FindPlaceDialog extends BaseDialog {
 
     get containsSwapToDate(): boolean {
         for (let week = this.queryOptions.startWeek; week <= this.queryOptions.endWeek; week++) {
-            const day = moment(this.term.startDate)
-                .add(week - this.term.startWeek, 'weeks')
-                .add(this.queryOptions.dayOfWeek - 1, 'days');
+            const bookingDay = this.term.startDate
+                .add(week - this.term.startWeek, 'week')
+                .add(this.queryOptions.dayOfWeek - 1, 'day');
             for (const date of this.term.swapToDates) {
-                if (date.isSame(day)) {
+                if (date.isSame(bookingDay)) {
                     return true;
                 }
             }
@@ -143,10 +146,10 @@ export class FindPlaceDialog extends BaseDialog {
     }
 
     get startDate(): string {
-        const day = moment(this.term.startDate);
-        day.add(this.queryOptions.startWeek - this.term.startWeek, 'weeks');
-        day.add(this.queryOptions.dayOfWeek - 1, 'days');
-        return day.format('YYYY-MM-DD');
+        return this.term.startDate
+            .add(this.queryOptions.startWeek - this.term.startWeek, 'week')
+            .add(this.queryOptions.dayOfWeek - 1, 'day')
+            .format('YYYY-MM-DD');
     }
 
     protected onOpening(): Observable<any> {
@@ -154,11 +157,11 @@ export class FindPlaceDialog extends BaseDialog {
             startWeek: this.options.term.startWeek,
             maxWeek: this.options.term.maxWeek,
             currentWeek: this.options.term.currentWeek,
-            startDate: moment(this.options.term.startDate),
-            swapToDates: this.options.term.swapDates.map((it: { from: string, to: string }) => moment(it.to)),
+            startDate: dayjs(this.options.term.startDate),
+            swapToDates: this.options.term.swapDates.map((it: { from: string, to: string }) => dayjs(it.to)),
         };
 
-        this.today = moment(this.options.today);
+        this.today = dayjs(this.options.today);
 
         this.queryOptions = {
             section: this.options.sections[0],
@@ -176,36 +179,25 @@ export class FindPlaceDialog extends BaseDialog {
         if (this.vm.simpleOption) {
             this.vm.days = [];
 
-            let day = moment(this.today);
-            let today = moment(this.today);
+            const startDay = this.today.isBefore(this.term.startDate)
+                ? this.term.startDate
+                : this.today.add(2, 'day');
+            const lastDay = this.term.startDate.add(this.term.maxWeek, 'week');
 
-            if (today.isBefore(this.term.startDate)) {
-                day = moment(this.term.startDate);
-                today = moment(this.term.startDate);
-            } else {
-                day.add(2, 'day');
-            }
-
-            if (day.isAfter(moment(this.term.startDate).add(this.term.maxWeek, 'weeks'))) {
-                return;
-            }
-
+            const dayOfToday = (this.today.day() + 6) % 7; // mon-0;....;sun:6
             for (let i = 0; i < this.options.bookingDays; i++) {
-                let week = this.term.currentWeek + day.isoWeek() - today.isoWeek();
-                if (week < this.term.currentWeek) { // cross year
-                    week += today.isoWeeksInYear();
-                }
-                if (week > this.term.maxWeek) {
-                    break;
+                const bookingDay = startDay.add(i, 'day');
+
+                if (!bookingDay.isBefore(lastDay)) {
+                    return;
                 }
 
+                const dayOfWeek = dayOfToday + bookingDay.diff(this.today, 'day');
                 this.vm.days.push({
-                    week,
-                    dayOfWeek: day.isoWeekday(),
-                    date: moment(day),
+                    week: this.term.currentWeek + Math.floor(dayOfWeek / 7),
+                    dayOfWeek: (dayOfWeek) % 7 + 1,
+                    date: bookingDay,
                 });
-
-                day.add(1, 'day');
             }
 
             if (this.vm.days.length > 0) {
@@ -216,19 +208,13 @@ export class FindPlaceDialog extends BaseDialog {
             this.vm.endWeeks = [];
             this.vm.oddEvens = OddEvenOptions;
             this.vm.dayOfWeeks = [];
+            this.vm.dayOfWeeks = DayOfWeekOptions;
 
             for (let i = this.term.currentWeek; i <= this.term.maxWeek; i++) {
                 if (this.options.bookingDays === -1 || this.options.bookingDays === 0 && i <= this.term.currentWeek + 2) {
                     this.vm.startWeeks.push(i);
                 }
                 this.vm.endWeeks.push(i);
-            }
-
-            for (let i = 1; i <= 7; i++) {
-                this.vm.dayOfWeeks.push({
-                    value: i,
-                    label: moment.weekdays(i),
-                });
             }
 
             this.queryOptions.startWeek = this.vm.startWeeks[0];
