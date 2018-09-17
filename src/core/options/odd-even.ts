@@ -1,4 +1,4 @@
-import { NumberStringOption } from './option-types';
+import { NumberStringOption } from './number-string-option';
 
 export const OddEvenOptions: NumberStringOption[] = [
     { value: 0, label: '全部' },

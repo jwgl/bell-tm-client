@@ -1,10 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core';
 
-import * as moment from 'moment';
 import { Observable } from 'rxjs';
 
 import { BaseDialog } from 'core/dialogs';
-import { NumberStringOption, OddEvenOptions } from 'core/options';
+import { NumberStringOption, DayOfWeekOptions } from 'core/options';
 
 import { ScheduleSection, scheduleSectionMap, Term } from '../../../shared/form.model';
 import { ScheduleService } from '../schedule.service';
@@ -42,12 +41,7 @@ export class QueryOptionDialog extends BaseDialog implements AfterViewInit {
 
     ngAfterViewInit() {
         this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
-        for (let i = 1; i <= 7; i++) {
-            this.vm.dayOfWeeks.push({
-                value: i,
-                label: moment.weekdays(i),
-            });
-        }
+        this.vm.dayOfWeeks = DayOfWeekOptions;
     }
 
     onTeacherSelected(teacher: any): void {

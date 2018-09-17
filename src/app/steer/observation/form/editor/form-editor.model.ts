@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 import { EvaluationMap, ObservationForm, Term } from '../shared/form.model';
 
@@ -9,18 +9,18 @@ declare module '../shared/form.model' {
     }
 }
 
-ObservationForm.prototype.getObservationDate = function(this: ObservationForm, term: Term): string {
+ObservationForm.prototype.getObservationDate = function (this: ObservationForm, term: Term): string {
     if (!term) {
         return null;
     } else {
-        const day = moment(term.startDate);
-        day.add(this.observationWeek - term.startWeek, 'weeks');
-        day.add(this.schedule.dayOfWeek - 1, 'days');
-        return day.format('YYYY-MM-DD');
+        return dayjs(term.startDate)
+            .add(this.observationWeek - term.startWeek, 'week')
+            .add(this.schedule.dayOfWeek - 1, 'day')
+            .format('YYYY-MM-DD');
     }
 };
 
-ObservationForm.prototype.toServerDto = function(this: ObservationForm, evaluationSystem: EvaluationMap[], term: Term): any {
+ObservationForm.prototype.toServerDto = function (this: ObservationForm, evaluationSystem: EvaluationMap[], term: Term): any {
     const evList: any[] = [];
     evaluationSystem.forEach(item => {
         item.value.forEach(data => {
