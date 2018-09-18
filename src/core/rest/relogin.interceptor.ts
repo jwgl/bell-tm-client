@@ -22,9 +22,10 @@ export class ReloginInterceptor implements HttpInterceptor {
                 if (e instanceof HttpErrorResponse) {
                     switch (e.status) {
                         case 401:
-                            if (e.url.endsWith('/login?error') || e.url.endsWith('/api/user')) {
-                                return throwError(e);
-                            } else if (!e.url.endsWith('/login?logout')) {
+                            if (!req.url.endsWith("/uaa/login") &&
+                                !e.url.endsWith('/login?error') &&
+                                !e.url.endsWith('/login?logout') &&
+                                !e.url.endsWith('/api/user')) {
                                 return this.loginService.openDialog();
                             }
                             break;

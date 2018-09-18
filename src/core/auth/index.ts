@@ -6,12 +6,13 @@ import { CommonDirectivesModule } from '../common-directives';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { AuthService } from './auth.service';
+import { AuthService, UserInfo } from './auth.service';
 import { LoginService } from './login.service';
 import { LoginDialog } from './login.dialog';
 
 export {
     AuthService,
+    UserInfo,
 };
 
 @NgModule({

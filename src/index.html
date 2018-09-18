@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>教学管理系统</title>
     <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
     <tm-app-root></tm-app-root>
+    <!--[if lte IE 9]>
+        <p>不支持此版本的浏览器，请升级到IE10以上。为提高性能和安全性，推荐使用Google Chrome、Mozilla Firefox或Microsoft Edge。</p>
+        <style>
+            tm-app-root { display: none;}
+        </style>
+    <![endif]-->
 </body>
 </html>

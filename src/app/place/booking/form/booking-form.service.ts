@@ -4,11 +4,12 @@ import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
 import { Http, RestEditService } from 'core/rest';
-import { AuthService } from 'core/auth';
+import { AuthService, UserInfo } from 'core/auth';
 
 @Injectable()
 export class BookingFormService extends RestEditService {
-    phoneNumber: string;
+    userInfo: UserInfo;
+
     notice: string;
 
     constructor(
@@ -19,7 +20,7 @@ export class BookingFormService extends RestEditService {
         private departmentBookingTypesApiUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
-        this.phoneNumber = authService.userInfo.phoneNumber;
+        this.userInfo = authService.userInfo;
     }
 
     getDepartmentBookingType(departmentId: string): Observable<any> {

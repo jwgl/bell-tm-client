@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserProfileService } from './user-profile.service';
+import { AuthService } from 'core/auth';
 
 @Component({
     styleUrls: ['profile-view.component.scss'],
@@ -15,6 +16,7 @@ export class UserProfileEditComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private service: UserProfileService,
+        private authSevice: AuthService,
     ) { }
 
     ngOnInit() {
@@ -31,6 +33,7 @@ export class UserProfileEditComponent implements OnInit {
             longPhone: this.user.longPhone,
             shortPhone: this.user.shortPhone,
         }).subscribe(() => {
+            this.authSevice.updatePhoneNumber(this.user.longPhone);
             this.router.navigate(['../'], { relativeTo: this.route });
         }, error => {
             this.saving = false;

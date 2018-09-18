@@ -1,11 +1,11 @@
 import { Location } from '@angular/common';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as _ from 'lodash';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
-import {CommonDialog} from 'core/common-dialogs';
+import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 import { typeahead } from 'core/utils/typeahead';
 
@@ -64,7 +64,7 @@ export class ObservationFormEditorComponent {
 
     onLoadData(dto: any, week: string) {
         if (!dto.form && dto.timeslot) {
-            this.form = new ObservationForm({timeslot: dto.timeslot, observerType: dto.types[0]});
+            this.form = new ObservationForm({ timeslot: dto.timeslot, observerType: dto.types[0] });
             this.form.observationWeek = _.toNumber(week);
             // 默认最少听课1节
             this.form.totalSection = 1;
@@ -82,7 +82,7 @@ export class ObservationFormEditorComponent {
         this.isAdmin = dto.isAdmin;
         this.observers = dto.observers;
         setTimeout(() => {
-            typeahead(this.input, 2, 10000).subscribe(value =>  this.save());
+            typeahead(this.input, 2, 10000).subscribe(value => this.save());
         }, 1);
         setTimeout(() => {
             typeahead(this.suggest, 2, 10000).subscribe(value => this.save());
@@ -90,13 +90,12 @@ export class ObservationFormEditorComponent {
     }
 
     get startDate(): string {
-        if (!this.term) {
-            return null;
-        }
-        const day = moment(this.term.startDate);
-        day.add(this.form.observationWeek - this.term.startWeek, 'weeks');
-        day.add(this.form.schedule.dayOfWeek - 1, 'days');
-        return day.format('YYYY-MM-DD');
+        return this.term
+            ? dayjs(this.term.startDate)
+                .add(this.form.observationWeek - this.term.startWeek, 'week')
+                .add(this.form.schedule.dayOfWeek - 1, 'day')
+                .format('YYYY-MM-DD')
+            : null;
     }
 
     get evaluateList(): any[] {
