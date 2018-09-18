@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import {paperTypeLabels} from '../constant';
+import { paperTypeLabels } from '../constant';
 
 @Pipe({ name: 'typeLabel' })
 export class TypeTextPipe implements PipeTransform {

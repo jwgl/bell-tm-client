@@ -1,9 +1,9 @@
-import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import {CommonDirectivesModule} from 'core/common-directives';
+import { CommonDirectivesModule } from 'core/common-directives';
 
-import {AwardFormViewerComponent} from './form-viewer.component';
+import { AwardFormViewerComponent } from './form-viewer.component';
 
 @NgModule({
     imports: [

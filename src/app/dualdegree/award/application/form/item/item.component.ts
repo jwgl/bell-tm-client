@@ -1,15 +1,15 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import * as _ from 'lodash';
 
-import {Dialog} from 'core/dialogs';
-import {NextOptions, SubmitOptions} from 'core/workflow';
+import { Dialog } from 'core/dialogs';
+import { NextOptions, SubmitOptions } from 'core/workflow';
 
-import {AwardForm} from '../../../shared/form.model';
-import {ApplicationForm, FileTypes} from '../../shared/form.model';
-import {ApplicationFormService} from '../form.service';
-import {PaperFormDialog} from '../paper/paper-form.dialog';
+import { AwardForm } from '../../../shared/form.model';
+import { ApplicationForm, FileTypes } from '../../shared/form.model';
+import { ApplicationFormService } from '../form.service';
+import { PaperFormDialog } from '../paper/paper-form.dialog';
 
 @Component({
     templateUrl: 'item.component.html',

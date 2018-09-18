@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
-import {BaseDialog} from 'core/dialogs';
+import { BaseDialog } from 'core/dialogs';
 
-import {FileTypes} from '../../shared/form.model';
+import { FileTypes } from '../../shared/form.model';
 
 @Component({
     template: `

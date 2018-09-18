@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import {Dialog} from 'core/dialogs';
+import { Dialog } from 'core/dialogs';
 
-import {AwardForm} from '../../shared/form.model';
-import {WorkflowFinishDialog} from '../shared/finish-dialog/finish.dialog';
-import {ApplicationForm} from '../shared/form.model';
+import { AwardForm } from '../../shared/form.model';
+import { WorkflowFinishDialog } from '../shared/finish-dialog/finish.dialog';
+import { ApplicationForm } from '../shared/form.model';
 
-import {PaperMentorService} from './paper-mentor.service';
+import { PaperMentorService } from './paper-mentor.service';
 
 @Component({
     templateUrl: 'item.component.html',

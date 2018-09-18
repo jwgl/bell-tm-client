@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-import {CommonDirectivesModule} from 'core/common-directives';
+import { CommonDirectivesModule } from 'core/common-directives';
 
-import {AwardListComponent} from './form-list.component';
+import { AwardListComponent } from './form-list.component';
 
 @NgModule({
     imports: [

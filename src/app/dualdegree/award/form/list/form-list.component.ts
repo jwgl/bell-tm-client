@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {AwardForm} from '../../shared/form.model';
-import {AwardFormService} from '../form.service';
+import { AwardForm } from '../../shared/form.model';
+import { AwardFormService } from '../form.service';
 
 @Component({
     styleUrls: ['form-list.component.scss'],

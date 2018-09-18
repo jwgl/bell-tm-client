@@ -1,4 +1,4 @@
-import {ApplicationForm} from '../../shared/form.model';
+import { ApplicationForm } from '../../shared/form.model';
 
 declare module '../../shared/form.model' {
     interface ApplicationForm {

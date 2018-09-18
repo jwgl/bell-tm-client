@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {FinderItemComponent} from './item.component';
-import {FinderListComponent} from './list.component';
+import { FinderItemComponent } from './item.component';
+import { FinderListComponent } from './list.component';
 
 const routes: Routes = [
     {path: '', component: FinderListComponent},

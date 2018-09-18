@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input} from '@angular/core';
-import {humanizeBytes, UploaderOptions, UploadFile, UploadInput, UploadOutput } from 'ngx-uploader';
+import { Component, EventEmitter, Input } from '@angular/core';
+import { humanizeBytes, UploaderOptions, UploadFile, UploadInput, UploadOutput } from 'ngx-uploader';
 
-import {FileType} from './uploader.model';
+import { FileType } from './uploader.model';
 
 @Component({
     selector: 'tm-uploader-panel',

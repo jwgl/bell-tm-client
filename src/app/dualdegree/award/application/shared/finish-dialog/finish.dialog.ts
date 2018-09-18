@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import {BaseDialog} from 'core/dialogs';
+import { BaseDialog } from 'core/dialogs';
 
 @Component({
     templateUrl: 'finish.dialog.html',

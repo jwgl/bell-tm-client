@@ -1,16 +1,16 @@
-import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
-import {CommonDirectivesModule} from 'core/common-directives';
+import { CommonDirectivesModule } from 'core/common-directives';
 
-import {ApplicationSharedModule} from '../shared/application-shared.module';
-import {PipesModule} from '../shared/common-pipes';
+import { ApplicationSharedModule } from '../shared/application-shared.module';
+import { PipesModule } from '../shared/common-pipes';
 
-import {ApplicationsAdministrateService} from './administrate.service';
-import {ApplicationsAdministrateItemComponent} from './item.component';
-import {ApplicationListComponent} from './list.component';
+import { ApplicationsAdministrateService } from './administrate.service';
+import { ApplicationsAdministrateItemComponent } from './item.component';
+import { ApplicationListComponent } from './list.component';
 
 @NgModule({
     imports: [

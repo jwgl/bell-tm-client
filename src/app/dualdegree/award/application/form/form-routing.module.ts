@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {EditMode} from 'core/constants';
+import { EditMode } from 'core/constants';
 
-import {ApplicationFormEditorComponent} from './editor/form-editor.component';
-import {AwardItemComponent} from './item/award-item.component';
-import {ApplicationItemComponent} from './item/item.component';
-import {AwardListComponent} from './list/form-list.component';
+import { ApplicationFormEditorComponent } from './editor/form-editor.component';
+import { AwardItemComponent } from './item/award-item.component';
+import { ApplicationItemComponent } from './item/item.component';
+import { AwardListComponent } from './list/form-list.component';
 
 const routes: Routes = [
     { path: '', component: AwardListComponent },

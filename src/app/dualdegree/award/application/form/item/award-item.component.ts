@@ -1,11 +1,10 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
-import {AwardForm} from '../../../shared/form.model';
-import {AwardViewService} from './award.service';
+import { AwardForm } from '../../../shared/form.model';
+import { AwardViewService } from './award.service';
 
 @Component({
     templateUrl: 'award-item.component.html',

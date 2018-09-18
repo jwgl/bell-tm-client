@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as _ from 'lodash';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
-import {BaseDialog} from 'core/dialogs';
+import { BaseDialog } from 'core/dialogs';
 
-import {paperTypeLabels} from '../../shared/constant';
-import {PaperForm} from './paper.model';
+import { paperTypeLabels } from '../../shared/constant';
+import { PaperForm } from './paper.model';
 
 @Component({
     templateUrl: 'paper-form.dialog.html',

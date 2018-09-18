@@ -1,12 +1,12 @@
-import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-import {CommonDialogsModule} from 'core/common-dialogs';
-import {CommonDirectivesModule} from 'core/common-directives';
+import { CommonDialogsModule } from 'core/common-dialogs';
+import { CommonDirectivesModule } from 'core/common-directives';
 
-import {UploaderModule} from '../../../../shared/uploader/uploader.module';
-import {PaperFormDialog} from './paper-form.dialog';
+import { UploaderModule } from '../../../../shared/uploader/uploader.module';
+import { PaperFormDialog } from './paper-form.dialog';
 
 @NgModule({
     imports: [

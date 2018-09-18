@@ -1,15 +1,15 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import {Dialog} from 'core/dialogs';
-import {ReviewOptions} from 'core/workflow';
+import { Dialog } from 'core/dialogs';
+import { ReviewOptions } from 'core/workflow';
 
-import {AwardForm} from '../../shared/form.model';
-import {WorkflowFinishDialog} from '../shared/finish-dialog/finish.dialog';
-import {ApplicationForm} from '../shared/form.model';
+import { AwardForm } from '../../shared/form.model';
+import { WorkflowFinishDialog } from '../shared/finish-dialog/finish.dialog';
+import { ApplicationForm } from '../shared/form.model';
 
-import {PaperApprovalService} from './approval.service';
-import {UploaderDialog} from './uploader.dialog';
+import { PaperApprovalService } from './approval.service';
+import { UploaderDialog } from './uploader.dialog';
 
 @Component({
     templateUrl: 'approval-item.component.html',

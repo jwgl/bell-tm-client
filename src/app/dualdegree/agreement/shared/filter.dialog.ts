@@ -9,6 +9,7 @@ import { AgreementFormService } from '../form/form.service';
 @Component({
     templateUrl: 'filter.dialog.html',
 })
+// tslint:disable-next-line:component-class-suffix
 export class AgreementFilterDialog extends BaseDialog {
     filters: any = {};
     majors: any[];

@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {CommonDialog} from 'core/common-dialogs';
-import {Dialog} from 'core/dialogs';
+import { CommonDialog } from 'core/common-dialogs';
+import { Dialog } from 'core/dialogs';
 
-import {DeptAdminForm} from '../../shared/form.model';
+import { DeptAdminForm } from '../../shared/form.model';
 
-import {DeptAdminDialog} from '../editor/form-editor.component';
-import {DeptAdminFormService} from '../form.service';
+import { DeptAdminDialog } from '../editor/form-editor.component';
+import { DeptAdminFormService } from '../form.service';
 
 @Component({
     templateUrl: 'form-list.component.html',

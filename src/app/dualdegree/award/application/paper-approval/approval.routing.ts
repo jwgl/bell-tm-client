@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import {buildWorkflowRoutings} from 'core/workflow';
+import { buildWorkflowRoutings } from 'core/workflow';
 
-import {PaperApprovalItemComponent} from './approval-item.component';
-import {PaperApprovalListComponent} from './approval-list.component';
+import { PaperApprovalItemComponent } from './approval-item.component';
+import { PaperApprovalListComponent } from './approval-list.component';
 
 @NgModule({
     imports: [

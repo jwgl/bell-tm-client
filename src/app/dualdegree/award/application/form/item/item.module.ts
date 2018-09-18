@@ -1,13 +1,13 @@
-import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import {Dialog} from 'core/dialogs';
-import {WorkflowModule} from 'core/workflow';
+import { Dialog } from 'core/dialogs';
+import { WorkflowModule } from 'core/workflow';
 
-import {ApplicationSharedModule} from '../../shared/application-shared.module';
-import {PaperFormModule} from '../paper/paper.module';
-import {ApplicationItemComponent} from './item.component';
+import { ApplicationSharedModule } from '../../shared/application-shared.module';
+import { PaperFormModule } from '../paper/paper.module';
+import { ApplicationItemComponent } from './item.component';
 
 @NgModule({
     imports: [

@@ -1,4 +1,4 @@
-import {MentorForm} from '../../shared/form.model';
+import { MentorForm } from '../../shared/form.model';
 
 declare module '../../shared/form.model' {
     interface MentorForm {

@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as _ from 'lodash';
 
-import {AwardForm} from '../../../shared/form.model';
+import { AwardForm } from '../../../shared/form.model';
 
-import {ApplicationFormService} from '../form.service';
+import { ApplicationFormService } from '../form.service';
 
 import './form-list.model';
 

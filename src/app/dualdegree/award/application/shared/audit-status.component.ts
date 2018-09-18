@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import {DualdegreeAuditStatus, statusLabels} from './constant';
+import { DualdegreeAuditStatus, statusLabels } from './constant';
 
 @Component({
     selector: 'tm-dualdegree-audit-status',

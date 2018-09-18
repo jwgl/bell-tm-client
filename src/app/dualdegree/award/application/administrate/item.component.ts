@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import {ApplicationForm} from '../shared/form.model';
+import { ApplicationForm } from '../shared/form.model';
 
-import {ApplicationsAdministrateService} from './administrate.service';
+import { ApplicationsAdministrateService } from './administrate.service';
 
 @Component({
     templateUrl: 'item.component.html',

@@ -1,4 +1,4 @@
-import {DeptAdminForm} from '../../shared/form.model';
+import { DeptAdminForm } from '../../shared/form.model';
 
 declare module '../../shared/form.model' {
     interface DeptAdminForm {

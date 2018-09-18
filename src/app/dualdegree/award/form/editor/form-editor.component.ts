@@ -1,15 +1,15 @@
-import {Location} from '@angular/common';
-import {Component} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
-import {CommonDialog} from 'core/common-dialogs';
-import {EditMode} from 'core/constants';
+import { CommonDialog } from 'core/common-dialogs';
+import { EditMode } from 'core/constants';
 
-import {AwardForm} from '../../shared/form.model';
-import {AwardFormService} from '../form.service';
+import { AwardForm } from '../../shared/form.model';
+import { AwardFormService } from '../form.service';
 import './form-editor.model';
 
 @Component({

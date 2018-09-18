@@ -1,4 +1,4 @@
-import {AwardForm} from '../../../shared/form.model';
+import { AwardForm } from '../../../shared/form.model';
 
 declare module '../../../shared/form.model' {
     interface AwardForm {

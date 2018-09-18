@@ -16,6 +16,7 @@ interface AgreementMajor {
     styleUrls: ['major.dialog.scss'],
     templateUrl: 'major.dialog.html',
 })
+// tslint:disable-next-line:component-class-suffix
 export class MajorDialog extends BaseDialog {
     majors: any[];
     coMajors: any[];
