@@ -28,7 +28,7 @@ export class LeaveForm {
     status: string;
     workflowInstanceId: string;
     items: LeaveItem[];
-
+    removedItems: LeaveItem[];
     scheduleMap: { [key: string]: Schedule } = {};
 
     constructor(dto: any, schedules: Schedule[]) {
@@ -46,16 +46,15 @@ export class LeaveForm {
             this.scheduleMap[schedule.id] = schedule;
         });
 
-        this.items = dto.items.map((itemDto: any) => this.createItem(itemDto)).filter(it => it != null);
+        const leaveItems = dto.items.map((itemDto: any) => this.createItem(itemDto));
+        this.items = leaveItems.filter(it => !!it.schedule);
+        this.removedItems = leaveItems.filter(it => !it.schedule); // 存在已退选课程
     }
 
     createItem(itemDto: any) {
         const leaveItem = new LeaveItem(this, itemDto);
         if (itemDto.taskScheduleId) {
             leaveItem.schedule = this.scheduleMap[itemDto.taskScheduleId];
-            if (!leaveItem.schedule) {
-                return null; // 存在退选的安排
-            }
         }
         return leaveItem;
     }
