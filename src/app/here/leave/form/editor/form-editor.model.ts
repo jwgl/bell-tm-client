@@ -6,7 +6,6 @@ import { LeaveForm, LeaveItem } from '../../shared/leave-form.model';
 
 declare module '../../shared/leave-form.model' {
     interface LeaveForm {
-        removedItems: LeaveItem[];
         existedItems: LeaveItem[];
 
         toggleWeek(week: number): void;
@@ -87,7 +86,7 @@ LeaveForm.prototype.addItem = function (this: LeaveForm, item: LeaveItem): void 
         return;
     }
 
-    const removedItem = this.removedItems.find(i => i.equalsTo(item));
+    const removedItem = this.removedItems.find(it => it.equalsTo(item));
     if (removedItem) {
         this.removedItems.splice(this.removedItems.indexOf(removedItem), 1);
         this.items.push(removedItem);
