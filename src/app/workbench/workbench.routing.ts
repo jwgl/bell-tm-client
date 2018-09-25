@@ -31,8 +31,8 @@ const routes: Routes = [{
         path: 'steer',
         loadChildren: '../steer/steer.module#SteerModule',
     }, {
-        path: 'dualdegree',
-        loadChildren: '../dualdegree/dualdegree.module#DualdegreeModule',
+        path: 'dual',
+        loadChildren: '../dual/dual.module#DualModule',
     }, {
         path: '**',
         component: Page404Component,
