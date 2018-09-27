@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label class="control-label">主修专业</label>
                     <select name="majorCooperative" class="form-control" [(ngModel)]="form.majorCooperative">
-                        <option value="" disabled>请选择修读专业名称</option>
+                        <option value="">请选择修读专业名称</option>
                         <option *ngFor="let item of subjects(form.universityCooperative)" [ngValue]="item.majorEn">
                             {{ item.majorCn }} | {{ item.majorEn }} ({{item.bachelor}})
                         </option>

@@ -24,10 +24,10 @@
                 </select>
             </form-field>
             <form-field label="适用专业">
-                <select name="departmentId" class="form-control" [(ngModel)]="filters.subjectName">
+                <select name="departmentId" class="form-control" [(ngModel)]="filters.subjectId">
                     <option value="">选择专业</option>
-                    <option *ngFor="let item of majors | filterBy: filterByDepartment(filters.department) | uniqueBy: 'subjectName'" [ngValue]="item">
-                        {{item}}
+                    <option *ngFor="let item of majors | filterBy: filterByDepartment(filters.department)" [ngValue]="item.id">
+                        {{item.subjectName}}
                     </option>
                 </select>
             </form-field>
