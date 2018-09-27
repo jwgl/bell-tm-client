@@ -1,0 +1,37 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-primary" routerLink="editor">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>大学英文名</th>
+            <th>大学缩写</th>
+            <th>大学中文名</th>
+            <th>项目</th>
+            <th>专业英文名</th>
+            <th>专业缩写</th>
+            <th>专业中文名</th>
+            <th>学位</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-university [ngForOf]="universities" let-i="index">
+            <ng-container *ngFor="let major of university.majors; let j = index">
+                <tr>
+                    <td *ngIf="j == 0" [rowSpan]="university.majors.length">{{i + 1}}</td>
+                    <td *ngIf="j == 0" [rowSpan]="university.majors.length" class="universityEn"><a [routerLink]="[university.cuId]">{{university.universityEn}}</a></td>
+                    <td *ngIf="j == 0" [rowSpan]="university.majors.length">{{university.shortName}}</td>
+                    <td *ngIf="j == 0" [rowSpan]="university.majors.length" class="universityCn">{{university.universityCn}}</td>
+                    <td *ngIf="j == 0" [rowSpan]="university.majors.length" class="regionName">{{university.region}}</td>
+                    <td>{{major.majorEn}}</td>
+                    <td>{{major.majorShortName}}</td>
+                    <td>{{major.majorCn}}</td>
+                    <td>{{major.bachelor}}</td>
+                </tr>
+            </ng-container>
+        </ng-template>
+    </tbody>
+</table>

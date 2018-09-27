@@ -1,0 +1,49 @@
+<modal-dialog title="选择适用专业">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="学院">
+                <select name="department" class="form-control" [(ngModel)]="form.departmentName">
+                    <option value="" disabled>选择学院</option>
+                    <option *ngFor="let item of majors | uniqueBy: 'departmentName'" [ngValue]="item">
+                        {{item}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="专业">
+                <select name="subjectName" class="form-control" [(ngModel)]="form.subjectName">
+                    <option value="" disabled>选择专业</option>
+                    <option *ngFor="let item of majors | filterBy: filterByDepartment(form.departmentName) | uniqueBy: 'subjectName'" [ngValue]="item">
+                        {{item}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="起始年级">
+                <input class="form-control" name="startedGrade" type="number" [(ngModel)]="form.startedGrade" placeholder="开始适用年级" />
+            </form-field>
+            <form-field label="结束年级">
+                <input class="form-control" name="endedGrade" type="number" [(ngModel)]="form.endedGrade" placeholder="有效期内最后一个适用年级" />
+            </form-field>
+            <div class="form-group">
+                <label class="control-label">可衔接专业</label>
+                <div class="px-2 pt-2" style="overflow-y: scroll; border: solid 1px #ddd; height: 204px">
+                    <table class="table" id="coMajor">
+                        <tbody>
+                            <ng-template ngFor let-item [ngForOf]="coMajors" let-i="index">
+                                <tr (click)="check(item)">
+                                    <td><input type="checkbox" name="checkbox{{i}}" [(ngModel)]="item.checked"></td>
+                                    <td style="width: 5rem;">{{item.nameEn}}</td>
+                                    <td style="width: 5rem;">{{item.nameCn}}</td>
+                                    <td style="width: 15rem;">{{item.bachelor}}</td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()" [disabled]="!majorSelected">确定</button>
+    </modal-footer>
+</modal-dialog>

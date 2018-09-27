@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,7 +10,6 @@ export class LegacyItemComponent {
     vm: any;
 
     constructor(
-        private location: Location,
         private route: ActivatedRoute,
         private service: LegacyService,
     ) {
@@ -21,7 +19,4 @@ export class LegacyItemComponent {
         });
     }
 
-    goBack(): void {
-        this.location.back();
-    }
 }

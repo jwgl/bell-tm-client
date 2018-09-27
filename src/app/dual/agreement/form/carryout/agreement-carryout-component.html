@@ -1,0 +1,16 @@
+<div class="form-group col-md-12">
+    <label class="control-label">各专业执行协议情况</label>
+    <ul>
+        <li *ngFor="let subjectName of carryoutList | uniqueBy: 'subjectName'">
+            {{subjectName}}
+            <ul>
+                <li *ngFor="let item of carryoutList | filterBy: filterBySubject(subjectName)">
+                    {{item.grade}} {{item.regionName}}： {{item.majorId ? '已执行' : '未执行'}}
+                    <span class="ml-2">
+                        <button class='btn btn-warning btn-sm' (click)="carryoutItem(item)" *ngIf="!item.majorId">执行</button>
+                    </span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

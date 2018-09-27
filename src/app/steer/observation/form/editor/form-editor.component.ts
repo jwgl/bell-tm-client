@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -39,7 +38,6 @@ export class ObservationFormEditorComponent {
         private scheduleService: ScheduleService,
         private service: ObservationFormService,
         private route: ActivatedRoute,
-        private location: Location,
         private dialogs: CommonDialog,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
@@ -56,10 +54,6 @@ export class ObservationFormEditorComponent {
                 this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto, null));
                 break;
         }
-    }
-
-    goBack(): void {
-        this.location.back();
     }
 
     onLoadData(dto: any, week: string) {
@@ -126,7 +120,7 @@ export class ObservationFormEditorComponent {
             this.editMode = EditMode.Edit;
             // 如果提交，就导航到list
             if (this.form.status) {
-                this.router.navigate(['/']);
+                this.router.navigate(['/'], { relativeTo: this.route });
             }
         }, error => {
             alert(error.json().message);
@@ -137,7 +131,7 @@ export class ObservationFormEditorComponent {
         this.service.update(this.form.id, form).subscribe(id => {
             // 如果提交，就导航到list
             if (this.form.status) {
-                this.router.navigate(['/']);
+                this.router.navigate(['/'], { relativeTo: this.route });
             }
         }, error => {
             alert(error.json().message);
