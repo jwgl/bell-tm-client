@@ -1,7 +1,9 @@
-:host {
-    min-height: 3rem;
-    padding-top: 0;
-    padding-bottom: 0;
+// https://github.com/twbs/bootstrap/issues/24726
+:host-context(.navbar-expand-md) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }
 
 button.nav-link {

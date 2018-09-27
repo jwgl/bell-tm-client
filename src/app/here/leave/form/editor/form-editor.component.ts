@@ -36,16 +36,14 @@ export class LeaveFormEditorComponent {
                 case EditMode.Edit:
                     this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
                     break;
-            }    
+            }
         });
     }
 
     onLoadData(dto: any) {
         const schedules = dto.schedules.map((scheduleDto: ScheduleDto) => new Schedule(scheduleDto));
         this.form = new LeaveForm(dto.form, schedules);
-        const items = dto.existedItems.map((itemDto: any) => this.form.createItem(itemDto));
-        this.form.existedItems = items.filter(it => it !== null);
-        this.form.removedItems = items.filter(it => it === null); // 可能存在已退选的课程
+        this.form.existedItems = dto.existedItems.map((itemDto: any) => this.form.createItem(itemDto)).filter(it => !!it.schedule);
         this.term = dto.term;
         this.timetable = new Timetable(schedules, true);
     }
