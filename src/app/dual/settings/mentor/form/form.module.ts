@@ -16,4 +16,4 @@ import { MentorFormListModule } from './list/form-list.module';
         { provide: 'MENTOR_API_URL', useValue: '/api/dual/departments/${departmentId}/mentors' },
     ],
 })
-export class MentorFormModule {}
+export class MentorFormModule { }

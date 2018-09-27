@@ -17,7 +17,7 @@ export class PaperApprovalService extends RestEditService {
     }
 
     finish(id: any, comment: string): Observable<any> {
-        return this.http.patch(`${this.api.item(id)}?op=FINISH`, {comment});
+        return this.http.patch(`${this.api.item(id)}?op=FINISH`, { comment });
     }
 
     getUploadUrl(id: any): string {

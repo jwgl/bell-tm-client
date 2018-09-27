@@ -39,10 +39,10 @@ import { UploaderDialog } from './uploader.dialog';
     providers: [
         Dialog,
         PaperApprovalService,
-        {provide: 'APPROVAL_API_URL', useValue: '/api/dual/mentors/${userId}/papers'},
+        { provide: 'APPROVAL_API_URL', useValue: '/api/dual/mentors/${userId}/papers' },
     ],
     entryComponents: [
         UploaderDialog,
     ],
 })
-export class PaperApprovalModule {}
+export class PaperApprovalModule { }

@@ -17,4 +17,4 @@ import { AwardFormViewerComponent } from './form-viewer.component';
         AwardFormViewerComponent,
     ],
 })
-export class AwardFormViewerModule {}
+export class AwardFormViewerModule { }

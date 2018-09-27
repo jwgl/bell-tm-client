@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {FinderService} from './finder.service';
+import { FinderService } from './finder.service';
 
 @Component({
     templateUrl: 'list.component.html',
@@ -12,6 +12,6 @@ export class FinderListComponent {
     constructor(private service: FinderService) { }
 
     find() {
-        this.service.loadList({q: this.query}).subscribe(dto => this.list = dto);
+        this.service.loadList({ q: this.query }).subscribe(dto => this.list = dto);
     }
 }

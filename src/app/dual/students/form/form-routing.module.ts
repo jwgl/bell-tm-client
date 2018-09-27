@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudentAdminListComponent } from './list/form-list.component';
 
 const routes: Routes = [
-    {path: '', component: StudentAdminListComponent},
+    { path: '', component: StudentAdminListComponent },
 ];
 
 @NgModule({
@@ -15,4 +15,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class StudentAdminRoutingModule {}
+export class StudentAdminRoutingModule { }

@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,7 +6,6 @@ import * as dayjs from 'dayjs';
 
 import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
-import { Dialog } from 'core/dialogs';
 import { NumberStringOption, DayOfWeekOptions } from 'core/options';
 import { typeahead } from 'core/utils/typeahead';
 
@@ -46,9 +44,7 @@ export class ObservationSpecial {
         private unscheduleService: UnScheduleService,
         private service: ObservationFormService,
         private route: ActivatedRoute,
-        private location: Location,
         private dialogs: CommonDialog,
-        private dialog: Dialog,
     ) {
         this.valueFn = (item: any) => item.value;
         this.labelFn = (item: any) => item.label;
@@ -57,10 +53,6 @@ export class ObservationSpecial {
         unscheduleService.loadDtoForCreate(params['taskId'], params['teacherId']).subscribe(dto => {
             this.onLoadData(dto, params['teacherId']);
         });
-    }
-
-    goBack(): void {
-        this.location.back();
     }
 
     onLoadData(dto: any, teacherId: string) {

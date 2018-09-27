@@ -6,7 +6,7 @@ declare module '../../shared/form.model' {
     }
 }
 
-MentorForm.prototype.toServerDto = function(this: MentorForm): any {
+MentorForm.prototype.toServerDto = function (this: MentorForm): any {
     return {
         teacherId: this.teacherId,
         email: this.email,

@@ -10,12 +10,12 @@ import { AwardItemComponent } from './item/item.component';
 import { AwardListComponent } from './list/form-list.component';
 
 const routes: Routes = [
-    {path: '', component: AwardListComponent},
-    {path: 'editor', component: AwardFormEditorComponent, data: { mode: EditMode.Create }},
-    {path: ':id/edit', component: AwardFormEditorComponent, data: { mode: EditMode.Edit }},
-    {path: ':id/applications', component: ApplicationListComponent},
-    {path: ':id/applications/:applicationId', component: ApplicationsAdministrateItemComponent},
-    {path: ':id', component: AwardItemComponent },
+    { path: '', component: AwardListComponent },
+    { path: 'editor', component: AwardFormEditorComponent, data: { mode: EditMode.Create } },
+    { path: ':id/edit', component: AwardFormEditorComponent, data: { mode: EditMode.Edit } },
+    { path: ':id/applications', component: ApplicationListComponent },
+    { path: ':id/applications/:applicationId', component: ApplicationsAdministrateItemComponent },
+    { path: ':id', component: AwardItemComponent },
 ];
 
 @NgModule({
@@ -26,4 +26,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class BatchRoutingModule {}
+export class BatchRoutingModule { }

@@ -19,4 +19,4 @@ import { WorkflowFinishDialog } from './finish.dialog';
         WorkflowFinishDialog,
     ],
 })
-export class WorkFlowFinishModule {}
+export class WorkFlowFinishModule { }

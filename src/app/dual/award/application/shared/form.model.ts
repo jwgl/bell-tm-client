@@ -49,11 +49,11 @@ export class ApplicationForm {
 }
 
 export const FileTypes = [
-    {prefix: 'photo', label: '上传照片', types: ['jpg', 'jpeg']},
-    {prefix: 'certi', label: '上传证书', types: ['jpg', 'jpeg', 'pdf']},
-    {prefix: 'trans1', label: '上传国外本科成绩', types: ['jpg', 'jpeg', 'pdf']},
-    {prefix: 'trans2', label: '上传国外硕士成绩', types: ['jpg', 'jpeg', 'pdf']},
-    {prefix: 'trans3', label: '上传其他成绩', types: ['jpg', 'jpeg', 'pdf']},
-    {prefix: 'paper', label: '上传论文', types: ['pdf', 'doc', 'docx']},
-    {prefix: 'review', label: '上传论文', types: ['pdf', 'doc', 'docx']},
+    { prefix: 'photo', label: '上传照片', types: ['jpg', 'jpeg'] },
+    { prefix: 'certi', label: '上传证书', types: ['jpg', 'jpeg', 'pdf'] },
+    { prefix: 'trans1', label: '上传国外本科成绩', types: ['jpg', 'jpeg', 'pdf'] },
+    { prefix: 'trans2', label: '上传国外硕士成绩', types: ['jpg', 'jpeg', 'pdf'] },
+    { prefix: 'trans3', label: '上传其他成绩', types: ['jpg', 'jpeg', 'pdf'] },
+    { prefix: 'paper', label: '上传论文', types: ['pdf', 'doc', 'docx'] },
+    { prefix: 'review', label: '上传论文', types: ['pdf', 'doc', 'docx'] },
 ];

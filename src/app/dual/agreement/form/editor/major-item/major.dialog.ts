@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as _ from 'lodash';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
-import {BaseDialog} from 'core/dialogs';
+import { BaseDialog } from 'core/dialogs';
 
 interface AgreementMajor {
     departmentName: string;

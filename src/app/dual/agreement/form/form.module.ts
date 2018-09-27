@@ -19,8 +19,8 @@ import { AgreementFormListModule } from './list/form-list.module';
     ],
     providers: [
         AgreementFormService,
-        {provide: 'AGREEMENT_FORM_API_URL', useValue: '/api/dual/users/${userId}/agreements' },
-        {provide: 'AGREEMENT_CARRYOUT_API_URL', useValue: '/api/dual/users/${userId}/carryout' },
+        { provide: 'AGREEMENT_FORM_API_URL', useValue: '/api/dual/users/${userId}/agreements' },
+        { provide: 'AGREEMENT_CARRYOUT_API_URL', useValue: '/api/dual/users/${userId}/carryout' },
     ],
 })
 export class AgreementFormModule { }

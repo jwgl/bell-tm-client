@@ -65,7 +65,7 @@ export class ApplicationItemComponent {
     }
 
     get uploadUrl(): string {
-        return this.service.getUploadUrl({awardId: this.vm.awardId});
+        return this.service.getUploadUrl({ awardId: this.vm.awardId });
     }
 
     uploadPaper() {
@@ -73,13 +73,13 @@ export class ApplicationItemComponent {
         const fileType = FileTypes.filter(file => file.prefix === 'paper')[0];
         this.service.loadPaperForm(this.vm.id).subscribe(data => {
             const paper = data.form ? data.form : [];
-            this.dialog.open(PaperFormDialog, {paper, uploadUrl, fileType})
-            .then(result => {
-                this.service.createPaperForm(this.vm.id, result).subscribe(() => {
-                    this.loadData(this.vm.id);
-                    this.pending = true;
+            this.dialog.open(PaperFormDialog, { paper, uploadUrl, fileType })
+                .then(result => {
+                    this.service.createPaperForm(this.vm.id, result).subscribe(() => {
+                        this.loadData(this.vm.id);
+                        this.pending = true;
+                    });
                 });
-            });
         });
     }
 

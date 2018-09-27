@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { UniversityForm } from '../form.model';
-import {UniversityFormService} from '../form.service';
+import { UniversityFormService } from '../form.service';
 
 @Component({
     templateUrl: 'item.component.html',

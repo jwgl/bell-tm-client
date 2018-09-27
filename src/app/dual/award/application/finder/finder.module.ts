@@ -27,4 +27,4 @@ import { FinderListComponent } from './list.component';
         { provide: 'FINDER_API_URL', useValue: '/api/dual/admin/applications' },
     ],
 })
-export class FinderModule {}
+export class FinderModule { }

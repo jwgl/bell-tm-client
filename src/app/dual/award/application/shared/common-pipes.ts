@@ -17,4 +17,4 @@ import { TypeTextPipe } from './pipes/paper-type';
         TypeTextPipe,
     ],
 })
-export class PipesModule {}
+export class PipesModule { }

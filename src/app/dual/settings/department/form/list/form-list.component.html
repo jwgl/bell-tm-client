@@ -18,7 +18,9 @@
                 <td>{{i + 1}}</td>
                 <td>{{deptAdmin.teacherName}}({{deptAdmin.teacherId}})</td>
                 <td>{{deptAdmin.departmentName}}</td>
-                <td><tm-remove-item (click)="remove(deptAdmin)"></tm-remove-item></td>
+                <td>
+                    <tm-remove-item (click)="remove(deptAdmin)"></tm-remove-item>
+                </td>
             </tr>
         </ng-template>
     </tbody>

@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,7 +12,6 @@ export class PublicItemComponent {
     evaluationSystem: EvaluationMap[];
 
     constructor(
-        private location: Location,
         private route: ActivatedRoute,
         private service: PublicService,
     ) {
@@ -27,7 +25,4 @@ export class PublicItemComponent {
         });
     }
 
-    goBack(): void {
-        this.location.back();
-    }
 }

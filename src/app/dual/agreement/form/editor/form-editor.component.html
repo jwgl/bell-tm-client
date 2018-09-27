@@ -3,16 +3,14 @@
         <div class="btn-group ml-auto">
             <button class='btn btn-primary' (click)="save()">保存</button>
         </div>
-        <div class="btn-group ml-2">
-            <button class='btn btn-secondary' (click)="goBack()">返回</button>
-        </div>
     </div>
     <tm-form-title>中外合作协议{{form.id}}</tm-form-title>
     <form role="form">
         <div class="row">
             <div class="form-group col-md-9">
                 <label class="control-label">协议名称</label>
-                <input class="form-control" name="agreementName" type="text" [(ngModel)]="form.agreementName" placeholder="协议名称" />
+                <input class="form-control" name="agreementName" type="text" [(ngModel)]="form.agreementName"
+                    placeholder="协议名称" />
             </div>
             <div class="form-group col-md-3" *ngIf="form.university">
                 <label class="control-label">项目类别</label>
@@ -45,7 +43,7 @@
                         <ul>
                             <li *ngFor="let major of item.coMajors">
                                 {{major.nameEn}}：{{major.nameCn}} {{major.bachelor}}
-                             </li>
+                            </li>
                         </ul>
                     </li>
                 </ul>

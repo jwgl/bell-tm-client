@@ -3,9 +3,6 @@
         <div class="btn-group ml-auto">
             <button class='btn btn-primary' (click)="save()">保存</button>
         </div>
-        <div class="btn-group ml-2">
-            <button class='btn btn-secondary' routerLink="/">返回</button>
-        </div>
     </div>
     <tm-form-title>学位申请单{{form.id}}</tm-form-title>
     <form role="form">
@@ -16,7 +13,9 @@
                     <select name="university" class="form-control" [(ngModel)]="form.universityCooperative">
                         <option value="" disabled>请选择国外大学名称</option>
                         <option *ngFor="let item of universities" [ngValue]="item.universityEn">
-                            {{ item.universityCn }}<span *ngIf="item.universityCn">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>{{ item.universityEn }}
+                            {{ item.universityCn }}
+                            <span *ngIf="item.universityCn">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            {{ item.universityEn }}
                         </option>
                     </select>
                 </div>
@@ -37,7 +36,8 @@
                         </div>
                         <div class="form-group col-3">
                             <label class="control-label">获得学位年份(YYYY)</label>
-                            <input class="form-control" name="bachelorYear" type="number" [(ngModel)]="form.bachelorYear" placeholder="在国外获得学位的年份" />
+                            <input class="form-control" name="bachelorYear" type="number" [(ngModel)]="form.bachelorYear"
+                                placeholder="在国外获得学位的年份" />
                         </div>
                     </div>
                     <hr>
@@ -46,7 +46,8 @@
                     <div class="row">
                         <div class="form-group col-6">
                             <label class="control-label">联系人</label>
-                            <input class="form-control" name="linkman" type="text" [(ngModel)]="form.linkman" placeholder="紧急联系人姓名，如本人在国内可填自己姓名" />
+                            <input class="form-control" name="linkman" type="text" [(ngModel)]="form.linkman"
+                                placeholder="紧急联系人姓名，如本人在国内可填自己姓名" />
                         </div>
                         <div class="form-group col-6">
                             <label class="control-label">联系电话</label>
@@ -72,13 +73,15 @@
             </div>
             <div class="col-3 text-center">
                 <div class="card bg-light mb-3">
-                    <img alt="国外本科成绩" [src]="imgSrc(fileNames.trans1)" width="auto" height="192" class="picture" (click)="open(fileNames.trans1)">
+                    <img alt="国外本科成绩" [src]="imgSrc(fileNames.trans1)" width="auto" height="192" class="picture"
+                        (click)="open(fileNames.trans1)">
                 </div>
                 <div><button class="btn-xs btn-info" (click)="upload('trans1')">国外本科成绩</button></div>
             </div>
             <div class="col-3 text-center">
                 <div class="card bg-light mb-3">
-                    <img alt="国外硕士成绩" [src]="imgSrc(fileNames.trans2)" width="auto" height="192" class="picture" (click)="open(fileNames.trans2)">
+                    <img alt="国外硕士成绩" [src]="imgSrc(fileNames.trans2)" width="auto" height="192" class="picture"
+                        (click)="open(fileNames.trans2)">
                 </div>
                 <div><button class="btn-xs btn-info" (click)="upload('trans2')">国外硕士成绩</button></div>
             </div>

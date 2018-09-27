@@ -27,7 +27,9 @@
                 <td>{{student.subjectName}}</td>
                 <td>{{student.adminClassName}}</td>
                 <td>{{student.regionName}}</td>
-                <td><tm-remove-item (click)="remove(student)"></tm-remove-item></td>
+                <td>
+                    <tm-remove-item (click)="remove(student)"></tm-remove-item>
+                </td>
             </tr>
         </ng-template>
     </tbody>

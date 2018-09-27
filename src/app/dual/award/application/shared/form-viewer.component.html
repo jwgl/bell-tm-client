@@ -79,7 +79,7 @@
     </div>
     <div *ngIf="fileNames.paper">
         <label>论文原文</label>
-        <div  class="row">
+        <div class="row">
             <div class="col-2"><a download [href]="download(fileNames.paper)">待审论文</a></div>
             <ng-container *ngIf="fileNames.bak_paper">
                 <div class="col-2" *ngFor="let item of sortedBakPaper">
@@ -90,7 +90,7 @@
     </div>
     <div *ngIf="fileNames.review">
         <label>导师批阅</label>
-        <div  class="row">
+        <div class="row">
             <div class="col-2"><a download [href]="download(fileNames.review)">最新批阅</a></div>
             <ng-container *ngIf="fileNames.bak_review">
                 <div class="col-2" *ngFor="let item of sortedBakReview">

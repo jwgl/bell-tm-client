@@ -35,7 +35,7 @@ import { PaperMentorService } from './paper-mentor.service';
     providers: [
         Dialog,
         PaperMentorService,
-        {provide: 'APPROVAL_API_URL', useValue: '/api/dual/checkers/${userId}/papermentors'},
+        { provide: 'APPROVAL_API_URL', useValue: '/api/dual/checkers/${userId}/papermentors' },
     ],
 })
-export class PaperMentorModule {}
+export class PaperMentorModule { }

@@ -1,7 +1,7 @@
 <div class="container" *ngIf="list">
-        <div class="btn-group mt-2" *ngIf="mentorAble">
-            <button class="btn btn-primary" (click)="open()">设置导师</button>
-        </div>
+    <div class="btn-group mt-2" *ngIf="mentorAble">
+        <button class="btn btn-primary" (click)="open()">设置导师</button>
+    </div>
     <table class="table" *ngIf="list.items.length > 0; else empty">
         <thead>
             <tr>
@@ -28,7 +28,9 @@
                 <td>{{form.className}}</td>
                 <td>{{form.paperApprover}}</td>
                 <td>{{form.date | date: 'y-MM-dd HH:mm'}}</td>
-                <td><tm-dual-audit-status [status]="form.status"></tm-dual-audit-status></td>
+                <td>
+                    <tm-dual-audit-status [status]="form.status"></tm-dual-audit-status>
+                </td>
             </tr>
         </tbody>
         <tfoot>
@@ -39,5 +41,7 @@
             </tr>
         </tfoot>
     </table>
-    <ng-template #empty><div class="alert alert-info">暂无数据</div></ng-template>
+    <ng-template #empty>
+        <div class="alert alert-info">暂无数据</div>
+    </ng-template>
 </div>

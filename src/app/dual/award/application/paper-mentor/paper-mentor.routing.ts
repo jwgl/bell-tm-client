@@ -17,4 +17,4 @@ import { PaperMentorListComponent } from './list.component';
         RouterModule,
     ],
 })
-export class ApplicationApprovalRoutingModule {}
+export class ApplicationApprovalRoutingModule { }

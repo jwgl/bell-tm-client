@@ -10,9 +10,9 @@ import { AgreementListComponent } from './list/form-list.component';
 
 const routes: Routes = [
     { path: '', component: AgreementListComponent },
-    { path: 'editor', component: AgreementFormEditorComponent, data: { mode: EditMode.Create }},
+    { path: 'editor', component: AgreementFormEditorComponent, data: { mode: EditMode.Create } },
     { path: 'carryout', component: AgreementCarryoutComponent },
-    { path: ':id/edit', component: AgreementFormEditorComponent, data: { mode: EditMode.Edit }},
+    { path: ':id/edit', component: AgreementFormEditorComponent, data: { mode: EditMode.Edit } },
     { path: ':id', component: AgreementItemComponent },
 ];
 

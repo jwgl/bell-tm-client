@@ -34,7 +34,7 @@
         <tbody>
             <ng-container *ngFor="let item of list | pager : pagerArgs">
                 <tr>
-                    <td><a [routerLink]="['/teachers',item.teacherId]">{{item.teacherName}}（{{item.teacherId}}）</a></td>
+                    <td><a [routerLink]="['../teachers',item.teacherId]">{{item.teacherName}}（{{item.teacherId}}）</a></td>
                     <td>{{item.academicTitle}}</td>
                     <td>{{item.departmentName}}</td>
                     <td>{{item.isnew ? '是' : '否'}}</td>

@@ -12,4 +12,4 @@ import { UploaderPanelComponent } from './uploader.component';
   declarations: [UploaderPanelComponent],
   exports: [UploaderPanelComponent],
 })
-export class UploaderModule {}
+export class UploaderModule { }

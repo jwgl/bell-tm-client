@@ -32,7 +32,7 @@ import { ApprovalService } from './approval.service';
     providers: [
         Dialog,
         ApprovalService,
-        {provide: 'APPROVAL_API_URL', useValue: '/api/dual/checkers/${userId}/applications'},
+        { provide: 'APPROVAL_API_URL', useValue: '/api/dual/checkers/${userId}/applications' },
     ],
 })
-export class ApplicationApprovalModule {}
+export class ApplicationApprovalModule { }

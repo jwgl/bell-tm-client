@@ -23,4 +23,4 @@ import { AwardFormService } from './form.service';
         { provide: 'AWARD_API_URL', useValue: '/api/dual/departments/${departmentId}/awards' },
     ],
 })
-export class AwardFormModule {}
+export class AwardFormModule { }

@@ -11,7 +11,7 @@ declare module '../../shared/form.model' {
     }
 }
 
-AgreementForm.prototype.addItem = function(this: AgreementForm, item: AgreementItem): void {
+AgreementForm.prototype.addItem = function (this: AgreementForm, item: AgreementItem): void {
     if (this.items.find(it => it.equalsTo(item))) {
         return;
     }
@@ -23,7 +23,7 @@ AgreementForm.prototype.addItem = function(this: AgreementForm, item: AgreementI
     this.items.push(item);
 };
 
-AgreementForm.prototype.removeItem = function(this: AgreementForm, item: AgreementItem): void {
+AgreementForm.prototype.removeItem = function (this: AgreementForm, item: AgreementItem): void {
     const agreementItem = this.items.find(it => it.equalsTo(item));
 
     if (agreementItem) {
@@ -34,7 +34,7 @@ AgreementForm.prototype.removeItem = function(this: AgreementForm, item: Agreeme
     }
 };
 
-AgreementForm.prototype.toServerDto = function(this: AgreementForm): any {
+AgreementForm.prototype.toServerDto = function (this: AgreementForm): any {
     return {
         agreementName: this.agreementName,
         universityId: this.university.id,
@@ -44,7 +44,7 @@ AgreementForm.prototype.toServerDto = function(this: AgreementForm): any {
     };
 };
 
-AgreementForm.prototype.getAddedItems = function(this: AgreementForm): any[] {
+AgreementForm.prototype.getAddedItems = function (this: AgreementForm): any[] {
     return this.items.map(it => ({
         id: it.id,
         startedGrade: it.startedGrade,

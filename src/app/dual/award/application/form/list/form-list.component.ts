@@ -29,7 +29,7 @@ export class AwardListComponent {
     }
 
     get graduated(): boolean {
-        return _.some(this.awardes, {status: 'APPROVED'});
+        return _.some(this.awardes, { status: 'APPROVED' });
     }
 
     expireClass(value: boolean): string {

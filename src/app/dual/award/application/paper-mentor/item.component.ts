@@ -23,9 +23,9 @@ export class PaperMentorItemComponent {
     private nextId: number;
 
     constructor(route: ActivatedRoute,
-                private service: PaperMentorService,
-                private dialog: Dialog) {
-        route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
+        private service: PaperMentorService,
+        private dialog: Dialog) {
+        route.data.subscribe((data: { item: any }) => this.onItemLoaded(data.item));
     }
 
     onItemLoaded(dto: any) {
@@ -58,7 +58,7 @@ export class PaperMentorItemComponent {
 
     finish() {
         this.dialog.open(WorkflowFinishDialog).then((result: string) => {
-            this.service.finish(this.form.id,  result).subscribe(dto => {
+            this.service.finish(this.form.id, result).subscribe(dto => {
                 this.form = new ApplicationForm(dto.form);
             }, (error) => {
                 alert(error.json().message);

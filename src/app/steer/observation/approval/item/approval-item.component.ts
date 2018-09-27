@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,7 +12,6 @@ export class ApprovalItemComponent {
     evaluationSystem: EvaluationMap[];
 
     constructor(
-        private location: Location,
         private route: ActivatedRoute,
         private service: ApprovalService,
     ) {
@@ -22,9 +20,5 @@ export class ApprovalItemComponent {
             this.vm = new ObservationForm(dto.form);
             this.evaluationSystem = dto.evaluationSystem;
         });
-    }
-
-    goBack(): void {
-        this.location.back();
     }
 }

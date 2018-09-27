@@ -32,7 +32,7 @@ export class AgreementListComponent {
     }
 
     open() {
-        this.dialog.open(AgreementFilterDialog, {majors: this.majors, regions: this.regions}).then(result => {
+        this.dialog.open(AgreementFilterDialog, { majors: this.majors, regions: this.regions }).then(result => {
             this.service.loadList(result).subscribe(dto => this.loadData(dto));
         });
     }

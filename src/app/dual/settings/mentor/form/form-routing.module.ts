@@ -4,15 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { MentorListComponent } from './list/form-list.component';
 
 const routes: Routes = [
-    {path: '', component: MentorListComponent},
+    { path: '', component: MentorListComponent },
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes ),
+        RouterModule.forChild(routes),
     ],
     exports: [
         RouterModule,
     ],
 })
-export class MentorRoutingModule {}
+export class MentorRoutingModule { }

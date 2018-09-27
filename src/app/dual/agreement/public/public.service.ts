@@ -12,7 +12,7 @@ export class AgreementPublicService extends RestShowService {
         authService: AuthService,
         @Inject('PUBLIC_API_URL')
         apiUrl: string,
-     ) {
+    ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
 }

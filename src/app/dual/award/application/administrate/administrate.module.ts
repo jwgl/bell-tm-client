@@ -33,4 +33,4 @@ import { ApplicationListComponent } from './list.component';
         ApplicationsAdministrateItemComponent,
     ],
 })
-export class ApplicationsAdministrateModule {}
+export class ApplicationsAdministrateModule { }

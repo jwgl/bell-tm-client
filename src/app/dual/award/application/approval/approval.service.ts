@@ -22,6 +22,6 @@ export class ApprovalService extends RestShowService {
     }
 
     getMentors(): Observable<any> {
-        return  this.http.get(`${this.api.list()}/mentors`);
+        return this.http.get(`${this.api.list()}/mentors`);
     }
 }

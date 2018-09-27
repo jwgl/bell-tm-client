@@ -9,8 +9,8 @@ import { UniversityListComponent } from './list/form-list.component';
 
 const routes: Routes = [
     { path: '', component: UniversityListComponent },
-    { path: 'editor', component: UniversityFormEditorComponent, data: { mode: EditMode.Create }},
-    { path: ':id/edit', component: UniversityFormEditorComponent, data: { mode: EditMode.Edit }},
+    { path: 'editor', component: UniversityFormEditorComponent, data: { mode: EditMode.Create } },
+    { path: ':id/edit', component: UniversityFormEditorComponent, data: { mode: EditMode.Edit } },
     { path: ':id', component: UniversityItemComponent },
 ];
 

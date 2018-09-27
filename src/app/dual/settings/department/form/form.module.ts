@@ -16,4 +16,4 @@ import { DeptAdminListModule } from './list/from-list.module';
         { provide: 'DEPARTMENT_API_URL', useValue: '/api/dual/settings/users' },
     ],
 })
-export class DeptAdminFormModule {}
+export class DeptAdminFormModule { }

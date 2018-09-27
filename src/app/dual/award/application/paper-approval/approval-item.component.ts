@@ -27,9 +27,9 @@ export class PaperApprovalItemComponent {
     private nextId: number;
 
     constructor(route: ActivatedRoute,
-                private service: PaperApprovalService,
-                private dialog: Dialog) {
-        route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
+        private service: PaperApprovalService,
+        private dialog: Dialog) {
+        route.data.subscribe((data: { item: any }) => this.onItemLoaded(data.item));
     }
 
     onItemLoaded(dto: any) {
@@ -69,11 +69,11 @@ export class PaperApprovalItemComponent {
 
     uploadReview() {
         const uploadUrl = this.service.getUploadUrl(this.form.id);
-        this.dialog.open(UploaderDialog, {uploadUrl})
-        .then(() => {
-            this.service.loadFileNames(this.form.id, undefined).subscribe(dto => {
-                this.fileNames = dto.fileNames;
+        this.dialog.open(UploaderDialog, { uploadUrl })
+            .then(() => {
+                this.service.loadFileNames(this.form.id, undefined).subscribe(dto => {
+                    this.fileNames = dto.fileNames;
+                });
             });
-        });
     }
 }

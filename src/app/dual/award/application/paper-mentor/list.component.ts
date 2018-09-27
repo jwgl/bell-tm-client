@@ -20,9 +20,9 @@ export class PaperMentorListComponent {
     userId: string;
 
     constructor(private route: ActivatedRoute,
-                private router: Router,
-                private service: PaperMentorService,
-                private dialog: Dialog) {
+        private router: Router,
+        private service: PaperMentorService,
+        private dialog: Dialog) {
         this.userId = this.route.snapshot.params['userId'];
 
         route.data.subscribe((data: { list: ReviewList }) => {
@@ -36,18 +36,15 @@ export class PaperMentorListComponent {
 
     open() {
         this.service.getMentors().subscribe(mentors =>
-        this.dialog.open(MentorSelectDialog, {mentors}).then(result => {
-            const idList = this.selectors.filter(s => s.checked).map(s => s.data.id);
-            this.service.setMentor({ids: idList, teacherId: result})
-            .subscribe(() => {
-                this.router.navigate([
-                    '/dual/checkers',
-                    this.userId,
-                    'papers',
-                    'done'],
-                );
-            });
-        }));
+            this.dialog.open(MentorSelectDialog, { mentors }).then(result => {
+                const idList = this.selectors.filter(s => s.checked).map(s => s.data.id);
+                this.service.setMentor({ ids: idList, teacherId: result })
+                    .subscribe(() => {
+                        _.remove(this.list.items, form => {
+                            return idList.some(id => id === form.id);
+                        });
+                    });
+            }));
     }
 
     get mentorAble(): boolean {

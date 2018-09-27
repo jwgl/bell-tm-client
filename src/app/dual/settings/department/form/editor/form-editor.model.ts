@@ -6,7 +6,7 @@ declare module '../../shared/form.model' {
     }
 }
 
-DeptAdminForm.prototype.toServerDto = function(this: DeptAdminForm): any {
+DeptAdminForm.prototype.toServerDto = function (this: DeptAdminForm): any {
     return {
         departmentId: this.departmentId,
         teacherId: this.teacherId,

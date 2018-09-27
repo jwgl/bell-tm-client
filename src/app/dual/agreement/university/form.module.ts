@@ -17,7 +17,7 @@ import { UniversityFormListModule } from './list/form-list.module';
     ],
     providers: [
         UniversityFormService,
-        {provide: 'UNIVERSITY_FORM_API_URL', useValue: '/api/dual/users/${userId}/universities' },
+        { provide: 'UNIVERSITY_FORM_API_URL', useValue: '/api/dual/users/${userId}/universities' },
     ],
 })
 export class UniversityModule { }

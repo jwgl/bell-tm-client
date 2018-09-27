@@ -27,4 +27,4 @@ import { ApplicationItemComponent } from './item.component';
         Dialog,
     ],
 })
-export class ApplicationFormItemModule {}
+export class ApplicationFormItemModule { }

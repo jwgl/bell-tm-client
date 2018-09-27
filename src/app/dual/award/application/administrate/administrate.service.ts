@@ -17,11 +17,11 @@ export class ApplicationsAdministrateService extends RestShowService {
         super(http, apiUrl, { departmentId: authService.userInfo.departmentId });
     }
 
-    loadApplicationItem(id: any, options: {[key: string]: any} = {}): Observable<any> {
+    loadApplicationItem(id: any, options: { [key: string]: any } = {}): Observable<any> {
         return this.http.get(`${this.api.list()}/${options.awardId}/applications/${id}`);
     }
 
-    loadApplicationList(options: {[key: string]: any} = {}): Observable<any> {
+    loadApplicationList(options: { [key: string]: any } = {}): Observable<any> {
         return this.http.get(`${this.api.list()}/${options.awardId}/applications`);
     }
 }

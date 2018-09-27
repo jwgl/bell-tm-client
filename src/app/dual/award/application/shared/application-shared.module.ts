@@ -30,4 +30,4 @@ import { MentorSelectDialog } from './mentor/mentor-select.dialog';
         MentorSelectDialog,
     ],
 })
-export class ApplicationSharedModule {}
+export class ApplicationSharedModule { }

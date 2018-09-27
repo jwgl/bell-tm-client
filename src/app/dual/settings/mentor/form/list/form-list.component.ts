@@ -43,7 +43,7 @@ export class MentorListComponent {
     }
 
     edit(item: MentorForm) {
-        this.dialog.open(MentorFormDialog, {email: item.email, editMode: true}).then(form => {
+        this.dialog.open(MentorFormDialog, { email: item.email, editMode: true }).then(form => {
             this.service.save(item.id, form).subscribe(() => {
                 this.loadData();
             });

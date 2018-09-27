@@ -12,7 +12,7 @@ export class PublicDepartmentService extends RestShowService {
         authService: AuthService,
         @Inject('PUBLIC_DEPARTMENT_API_URL')
         apiUrl: string,
-     ) {
+    ) {
         super(http, apiUrl, { departmentId: authService.userInfo.departmentId });
     }
 }

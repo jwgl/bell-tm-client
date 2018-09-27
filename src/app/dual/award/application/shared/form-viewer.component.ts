@@ -27,7 +27,7 @@ export class ApplicationFormViewerComponent {
 
     url(filename: string): string {
         return '/api/dual/picture/fileview?awardId=' + this.vm.awardId
-                + '&studentId=' + this.vm.studentId + '&fileName=' + (filename ? filename : '');
+            + '&studentId=' + this.vm.studentId + '&fileName=' + (filename ? filename : '');
     }
 
     open(filename: string) {
@@ -35,7 +35,7 @@ export class ApplicationFormViewerComponent {
             return;
         }
         window.open(this.url(filename), '文件浏览',
-        'fullscreen=1, toolbar=0, menubar=0, location=0, status=0, scrollbars=1, resizable=0');
+            'fullscreen=1, toolbar=0, menubar=0, location=0, status=0, scrollbars=1, resizable=0');
     }
 
     get sortedBakPaper(): string[] {
@@ -56,6 +56,6 @@ export class ApplicationFormViewerComponent {
 
     download(filename: string): string {
         return '/api/dual/picture/download?awardId=' + this.vm.awardId
-        + '&studentId=' + this.vm.studentId + '&fileName=' + (filename ? filename : '');
+            + '&studentId=' + this.vm.studentId + '&fileName=' + (filename ? filename : '');
     }
 }

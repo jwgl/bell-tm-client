@@ -14,7 +14,7 @@ export class UniversityFormService extends RestEditService {
         authService: AuthService,
         @Inject('UNIVERSITY_FORM_API_URL')
         apiUrl: string,
-     ) {
+    ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
 

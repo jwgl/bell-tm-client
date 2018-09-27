@@ -16,4 +16,4 @@ import { StudentAdminFormService } from './form.service';
         { provide: 'STUDENT_API_URL', useValue: '/api/dual/departments/${departmentId}/students' },
     ],
 })
-export class StudentAbroadFormModule {}
+export class StudentAbroadFormModule { }

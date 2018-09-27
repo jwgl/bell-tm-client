@@ -19,12 +19,14 @@
         <ng-template ngFor let-mentor [ngForOf]="mentors" let-i="index">
             <tr>
                 <td>{{i + 1}}</td>
-                <td><a href="#" (click)="edit(mentor)" >{{mentor.teacherName}}({{mentor.teacherId}})</a></td>
+                <td><a href="#" (click)="edit(mentor)">{{mentor.teacherName}}({{mentor.teacherId}})</a></td>
                 <td>{{mentor.email}}</td>
                 <td>{{mentor.sex}}</td>
                 <td>{{mentor.academicTitle}}</td>
                 <td>{{mentor.academicDegree}}</td>
-                <td><tm-remove-item (click)="remove(mentor)"></tm-remove-item></td>
+                <td>
+                    <tm-remove-item (click)="remove(mentor)"></tm-remove-item>
+                </td>
             </tr>
         </ng-template>
     </tbody>

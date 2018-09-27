@@ -16,8 +16,8 @@ export class ApplicationListComponent {
     ) {
         const params = this.route.snapshot.params;
         this.awardId = params['id'];
-        this.service.loadApplicationList({awardId: this.awardId})
-            .subscribe(dto => {this.list = dto; });
+        this.service.loadApplicationList({ awardId: this.awardId })
+            .subscribe(dto => { this.list = dto; });
     }
 
     downloadUrl(pre: string): string {

@@ -24,8 +24,8 @@ export class ApplicationApprovalItemComponent {
     constructor(route: ActivatedRoute,
         private dialog: Dialog,
         private service: ApprovalService) {
-route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
-}
+        route.data.subscribe((data: { item: any }) => this.onItemLoaded(data.item));
+    }
 
     onItemLoaded(dto: any) {
         this.form = new ApplicationForm(dto.form);
@@ -57,8 +57,8 @@ route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
 
     setMentor() {
         this.service.getMentors().subscribe(mentors =>
-            this.dialog.open(MentorSelectDialog, {mentors}).then(result => {
-                this.service.setMentor(this.form.id, {teacherId: result})
+            this.dialog.open(MentorSelectDialog, { mentors }).then(result => {
+                this.service.setMentor(this.form.id, { teacherId: result })
                     .subscribe(() => this.form.paperApprover = result);
             })
         );

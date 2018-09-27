@@ -17,4 +17,4 @@ import { PaperApprovalListComponent } from './approval-list.component';
         RouterModule,
     ],
 })
-export class ApplicationApprovalRoutingModule {}
+export class ApplicationApprovalRoutingModule { }

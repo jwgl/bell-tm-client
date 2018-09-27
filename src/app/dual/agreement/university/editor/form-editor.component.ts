@@ -1,17 +1,16 @@
-import {Location} from '@angular/common';
-import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as _ from 'lodash';
 
-import {CommonDialog} from 'core/common-dialogs';
-import {EditMode} from 'core/constants';
-import {Dialog} from 'core/dialogs';
+import { CommonDialog } from 'core/common-dialogs';
+import { EditMode } from 'core/constants';
+import { Dialog } from 'core/dialogs';
 
-import {Major, UniversityForm } from '../form.model';
-import {UniversityFormService} from '../form.service';
+import { Major, UniversityForm } from '../form.model';
+import { UniversityFormService } from '../form.service';
 import './form-editor.model';
-import {MajorDialog} from './major-item/major.dialog';
+import { MajorDialog } from './major-item/major.dialog';
 
 @Component({
     templateUrl: 'form-editor.component.html',
@@ -26,7 +25,6 @@ export class UniversityFormEditorComponent {
         private service: UniversityFormService,
         private route: ActivatedRoute,
         private router: Router,
-        private location: Location,
         private dialogs: CommonDialog,
         private dialog: Dialog,
     ) {
@@ -44,10 +42,6 @@ export class UniversityFormEditorComponent {
         this.regions = dto.regions;
     }
 
-    goBack(): void {
-        this.location.back();
-    }
-
     isEmpty(option: any): boolean {
         return _.isUndefined(option) || _.isNull(option);
     }
@@ -58,7 +52,7 @@ export class UniversityFormEditorComponent {
             this.isEmpty(this.form.nameEn) ||
             this.isEmpty(this.form.regionId) ||
             this.isEmpty(this.form.shortName)) {
-                validate.push('请检国外大学中文名、英文名、英文名缩写、项目等是否为空');
+            validate.push('请检国外大学中文名、英文名、英文名缩写、项目等是否为空');
         }
         if (this.form.shortName && this.form.shortName.length > 10) {
             validate.push('大学英文名缩写长度不能超过10');

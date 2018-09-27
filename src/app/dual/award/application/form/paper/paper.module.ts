@@ -26,4 +26,4 @@ import { PaperFormDialog } from './paper-form.dialog';
         PaperFormDialog,
     ],
 })
-export class PaperFormModule {}
+export class PaperFormModule { }

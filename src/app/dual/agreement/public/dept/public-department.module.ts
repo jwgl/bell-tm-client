@@ -19,7 +19,7 @@ import { PublicDepartmentRoutingModule } from './public-department-routing.modul
     ],
     providers: [
         PublicDepartmentService,
-        {provide: 'PUBLIC_DEPARTMENT_API_URL', useValue: '/api/dual/departments/${departmentId}/agreements' },
+        { provide: 'PUBLIC_DEPARTMENT_API_URL', useValue: '/api/dual/departments/${departmentId}/agreements' },
     ],
 })
-export class PubliDepartmentcModule {}
+export class PubliDepartmentcModule { }

@@ -5,8 +5,8 @@ import { FinderItemComponent } from './item.component';
 import { FinderListComponent } from './list.component';
 
 const routes: Routes = [
-    {path: '', component: FinderListComponent},
-    {path: ':id', component: FinderItemComponent},
+    { path: '', component: FinderListComponent },
+    { path: ':id', component: FinderItemComponent },
 ];
 
 @NgModule({
@@ -17,4 +17,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class BatchRoutingModule {}
+export class BatchRoutingModule { }

@@ -21,7 +21,7 @@ import { AgreementPublicService } from './public.service';
     ],
     providers: [
         AgreementPublicService,
-        {provide: 'PUBLIC_API_URL', useValue: '/api/dual/agreements'},
+        { provide: 'PUBLIC_API_URL', useValue: '/api/dual/agreements' },
     ],
 })
-export class PublicModule {}
+export class PublicModule { }

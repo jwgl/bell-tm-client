@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -24,7 +23,6 @@ export class AwardFormEditorComponent {
         private service: AwardFormService,
         private route: ActivatedRoute,
         private router: Router,
-        private location: Location,
         private dialogs: CommonDialog,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
@@ -43,10 +41,6 @@ export class AwardFormEditorComponent {
         }
     }
 
-    goBack(): void {
-        this.location.back();
-    }
-
     isEmpty(option: any): boolean {
         return _.isUndefined(option) || _.isNull(option);
     }
@@ -62,7 +56,7 @@ export class AwardFormEditorComponent {
 
     checkDate(value: any, name: string): string {
         if (this.isEmpty(value)) {
-            return  `${name} 不能为空！`;
+            return `${name} 不能为空！`;
         } else if (!this.isDate(value)) {
             return `${name} 日期格式不正确！`;
         }
@@ -72,7 +66,7 @@ export class AwardFormEditorComponent {
         const validation: string[] = [];
         if (this.isEmpty(this.form.title) ||
             this.isEmpty(this.form.content)) {
-                validation.push('请检查标题、内容等是否为空！');
+            validation.push('请检查标题、内容等是否为空！');
         }
         console.log(dayjs(this.form.requestBegin));
         if (!this.isDate(this.form.requestBegin)) {

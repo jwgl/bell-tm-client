@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {AgreementFormService} from '../form.service';
+import { AgreementFormService } from '../form.service';
 @Component({
     styleUrls: ['agreement-carryout-component.scss'],
     templateUrl: 'agreement-carryout-component.html',
@@ -21,6 +21,9 @@ export class AgreementCarryoutComponent {
     }
 
     carryoutItem(item: any) {
-        this.service.doCarryout({majorId: `${item.grade}${item.subjectId}`, regionName: item.regionName}).subscribe(() => this.loadData());
+        this.service.doCarryout({
+            majorId: `${item.grade}${item.subjectId}`,
+            regionName: item.regionName
+        }).subscribe(() => this.loadData());
     }
 }

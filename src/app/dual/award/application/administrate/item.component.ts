@@ -19,7 +19,7 @@ export class ApplicationsAdministrateItemComponent {
         private service: ApplicationsAdministrateService) {
         const params = this.route.snapshot.params;
         this.awardId = params['id'];
-        this.service.loadApplicationItem(params['applicationId'], {awardId: this.awardId})
+        this.service.loadApplicationItem(params['applicationId'], { awardId: this.awardId })
             .subscribe(dto => this.loadData(dto));
     }
 

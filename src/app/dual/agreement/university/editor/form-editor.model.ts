@@ -11,7 +11,7 @@ declare module '../form.model' {
     }
 }
 
-UniversityForm.prototype.addItem = function(this: UniversityForm, item: Major): void {
+UniversityForm.prototype.addItem = function (this: UniversityForm, item: Major): void {
     if (this.items.find(it => it.equalsTo(item))) {
         return;
     }
@@ -25,18 +25,18 @@ UniversityForm.prototype.addItem = function(this: UniversityForm, item: Major): 
     }
 };
 
-UniversityForm.prototype.removeItem = function(this: UniversityForm, item: Major): void {
-    const Major = this.items.find(it => it.equalsTo(item));
+UniversityForm.prototype.removeItem = function (this: UniversityForm, item: Major): void {
+    const major = this.items.find(it => it.equalsTo(item));
 
-    if (Major) {
-        this.items.splice(this.items.indexOf(Major), 1);
-        if (Major.id) {
-            this.removedItems.push(Major);
+    if (major) {
+        this.items.splice(this.items.indexOf(major), 1);
+        if (major.id) {
+            this.removedItems.push(major);
         }
     }
 };
 
-UniversityForm.prototype.toServerDto = function(this: UniversityForm): any {
+UniversityForm.prototype.toServerDto = function (this: UniversityForm): any {
     return {
         shortName: this.shortName.toUpperCase(),
         nameCn: this.nameCn,
@@ -47,7 +47,7 @@ UniversityForm.prototype.toServerDto = function(this: UniversityForm): any {
     };
 };
 
-UniversityForm.prototype.getAddedItems = function(this: UniversityForm): any[] {
+UniversityForm.prototype.getAddedItems = function (this: UniversityForm): any[] {
     return this.items.map(it => ({
         id: it.id,
         nameCn: it.nameCn,

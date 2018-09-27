@@ -18,15 +18,15 @@ export class ApplicationFormService extends RestEditService {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
 
-    loadDataForCreate(options: {[key: string]: any} = {}): Observable<any> {
+    loadDataForCreate(options: { [key: string]: any } = {}): Observable<any> {
         return this.http.get(`${this.api.list()}/create?awardId=${options.awardId}`);
     }
 
-    loadApplicationForm(id: any, options: {[key: string]: any} = {}): Observable<any> {
+    loadApplicationForm(id: any, options: { [key: string]: any } = {}): Observable<any> {
         return this.http.get(`${this.api.list()}/${options.awardId}/applications/${id}`);
     }
 
-    getUploadUrl(options: {[key: string]: any} = {}): string {
+    getUploadUrl(options: { [key: string]: any } = {}): string {
         return `/zuul${this.api.list()}/upload?awardId=${options.awardId}`;
     }
 

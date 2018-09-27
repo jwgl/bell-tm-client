@@ -10,9 +10,9 @@ import { AwardListComponent } from './list/form-list.component';
 
 const routes: Routes = [
     { path: '', component: AwardListComponent },
-    { path: 'create/:awardId', component: ApplicationFormEditorComponent, data: { mode: EditMode.Create }},
+    { path: 'create/:awardId', component: ApplicationFormEditorComponent, data: { mode: EditMode.Create } },
     { path: 'awards/:id', component: AwardItemComponent },
-    { path: ':id/edit', component: ApplicationFormEditorComponent, data: { mode: EditMode.Edit }},
+    { path: ':id/edit', component: ApplicationFormEditorComponent, data: { mode: EditMode.Edit } },
     { path: ':id', component: ApplicationItemComponent },
 ];
 

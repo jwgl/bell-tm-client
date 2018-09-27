@@ -40,8 +40,8 @@ import { AwardListModule } from './list/form-list.module';
         Dialog,
         ApplicationFormService,
         AwardViewService,
-        {provide: 'APPLICATION_API_URL', useValue: '/api/dual/students/${userId}/applications'},
-        {provide: 'AWARD_API_URL', useValue: '/api/dual/awards'},
+        { provide: 'APPLICATION_API_URL', useValue: '/api/dual/students/${userId}/applications' },
+        { provide: 'AWARD_API_URL', useValue: '/api/dual/awards' },
     ],
     entryComponents: [
         MaterialUploaderDialog,

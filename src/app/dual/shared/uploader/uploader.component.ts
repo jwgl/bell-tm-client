@@ -26,8 +26,8 @@ export class UploaderPanelComponent {
         this.humanizeBytes = humanizeBytes;
         // 从cookie中截取XSRF-TOKEN
         const cookieAttributes: string[] = document.cookie.split(';');
-            const csrf = cookieAttributes.filter((attr: string) => attr.includes('XSRF-TOKEN=')).toString();
-            this._xsrfToken = csrf.replace('XSRF-TOKEN=', '');
+        const csrf = cookieAttributes.filter((attr: string) => attr.includes('XSRF-TOKEN=')).toString();
+        this._xsrfToken = csrf.replace('XSRF-TOKEN=', '');
     }
 
     // 选择文件后触发的顺序是addedToQueue > allAddedToQueue > uploading
@@ -44,14 +44,14 @@ export class UploaderPanelComponent {
                 };
                 this.uploadInput.emit(event);
             }
-        } else if (output.type === 'addedToQueue'  && typeof output.file !== 'undefined') {
+        } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
             // 规定上传文件的格式
             const type = output.file.name.slice(output.file.name.lastIndexOf('.') + 1).toLocaleLowerCase();
             if (!this.fileType.types.some(item => item === type)) {
-                alert (`请上传指定类型文件： ${this.fileType.types.join(' | ')}`);
+                alert(`请上传指定类型文件： ${this.fileType.types.join(' | ')}`);
                 this.uploadAble = false;
             } else if (output.file.size > 5 * 1024 * 1024) {
-                alert (`文件不应大于5MB`);
+                alert(`文件不应大于5MB`);
                 this.uploadAble = false;
             } else {
                 this.files.push(output.file);
@@ -85,15 +85,15 @@ export class UploaderPanelComponent {
     }
 
     cancelUpload(itemid: string): void {
-    this.uploadInput.emit({ type: 'cancel', id: itemid });
+        this.uploadInput.emit({ type: 'cancel', id: itemid });
     }
 
     removeFile(itemid: string): void {
-    this.uploadInput.emit({ type: 'remove', id: itemid });
+        this.uploadInput.emit({ type: 'remove', id: itemid });
     }
 
     removeAllFilesFiles(): void {
-    this.uploadInput.emit({ type: 'removeAll' });
+        this.uploadInput.emit({ type: 'removeAll' });
     }
 
     getFileNames(): string {

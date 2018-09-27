@@ -4,9 +4,6 @@
             <button class='btn btn-secondary' (click)="commit()" [disabled]="isAdmin && !form.observerId">提交</button>
             <button class='btn btn-primary' (click)="save()" [disabled]="isAdmin && !form.observerId">保存</button>
         </div>
-        <div class="btn-group ml-2">
-            <button class='btn btn-secondary' (click)="goBack()">返回</button>
-        </div>
     </div>
     <tm-form-title>听课记录{{form.id}}</tm-form-title>
     <form role="form">

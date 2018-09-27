@@ -16,7 +16,7 @@ export class AgreementItemComponent {
         private service: AgreementPublicService,
     ) {
         const params = this.route.snapshot.params;
-        this.service.loadItem<{items: any}>(params['id']).subscribe(dto => {
+        this.service.loadItem<{ items: any }>(params['id']).subscribe(dto => {
             this.vm = new AgreementForm(dto);
             this.items = dto.items;
         });

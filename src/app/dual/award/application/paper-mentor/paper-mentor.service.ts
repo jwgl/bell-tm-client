@@ -16,7 +16,7 @@ export class PaperMentorService extends RestShowService {
     }
 
     finish(id: any, comment: string): Observable<any> {
-        return this.http.patch(`${this.api.item(id)}?op=FINISH`, {comment});
+        return this.http.patch(`${this.api.item(id)}?op=FINISH`, { comment });
     }
 
     setMentor(value: any): Observable<any> {
@@ -24,6 +24,6 @@ export class PaperMentorService extends RestShowService {
     }
 
     getMentors(): Observable<any> {
-        return  this.http.get(`${this.api.item(0)}/tousers`);
+        return this.http.get(`${this.api.item(0)}/tousers`);
     }
 }

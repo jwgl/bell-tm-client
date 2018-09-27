@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DeptAdminListComponent } from './list/form-list.component';
 
 const routes: Routes = [
-    {path: '', component: DeptAdminListComponent},
+    { path: '', component: DeptAdminListComponent },
 ];
 
 @NgModule({
@@ -15,4 +15,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class DeptAdminRoutingModule {}
+export class DeptAdminRoutingModule { }

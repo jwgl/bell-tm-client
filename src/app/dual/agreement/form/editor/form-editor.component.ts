@@ -1,18 +1,17 @@
-import {Location} from '@angular/common';
-import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as _ from 'lodash';
 
-import {CommonDialog} from 'core/common-dialogs';
-import {EditMode} from 'core/constants';
-import {Dialog} from 'core/dialogs';
+import { CommonDialog } from 'core/common-dialogs';
+import { EditMode } from 'core/constants';
+import { Dialog } from 'core/dialogs';
 
-import {AgreementForm, AgreementItem} from '../../shared/form.model';
-import {UniversityForm} from '../../university/form.model';
-import {AgreementFormService} from '../form.service';
+import { AgreementForm, AgreementItem } from '../../shared/form.model';
+import { UniversityForm } from '../../university/form.model';
+import { AgreementFormService } from '../form.service';
 import './form-editor.model';
-import {MajorDialog} from './major-item/major.dialog';
+import { MajorDialog } from './major-item/major.dialog';
 
 @Component({
     templateUrl: 'form-editor.component.html',
@@ -28,7 +27,6 @@ export class AgreementFormEditorComponent {
         private service: AgreementFormService,
         private route: ActivatedRoute,
         private router: Router,
-        private location: Location,
         private dialogs: CommonDialog,
         private dialog: Dialog,
     ) {
@@ -47,10 +45,6 @@ export class AgreementFormEditorComponent {
         this.universities = dto.universities;
     }
 
-    goBack(): void {
-        this.location.back();
-    }
-
     isEmpty(option: any): boolean {
         return _.isUndefined(option) || _.isNull(option);
     }
@@ -59,7 +53,7 @@ export class AgreementFormEditorComponent {
         const validate: string[] = [];
         if (this.isEmpty(this.form.agreementName) ||
             this.isEmpty(this.form.university)) {
-                validate.push('请检查协议名称、合作大学等是否为空');
+            validate.push('请检查协议名称、合作大学等是否为空');
         }
         return validate;
     }
@@ -94,7 +88,7 @@ export class AgreementFormEditorComponent {
             const agreementMajor = {};
             this.coMajors = dto;
             const its = this.form.items.map(item => item.id);
-            this.dialog.open(MajorDialog, {majors: this.majors, items: its, coMajors: dto, agreementMajor}).then(result => {
+            this.dialog.open(MajorDialog, { majors: this.majors, items: its, coMajors: dto, agreementMajor }).then(result => {
                 const item = new AgreementItem(result);
                 this.form.addItem(item);
             });
@@ -107,7 +101,7 @@ export class AgreementFormEditorComponent {
             this.coMajors = dto;
             const its = this.form.items.map(item => item.id);
             this.dialog.open(MajorDialog,
-                {majors: this.majors, items: its, coMajors: this.coMajors, agreementMajor: itemForEdit},
+                { majors: this.majors, items: its, coMajors: this.coMajors, agreementMajor: itemForEdit },
             ).then(result => {
                 const item = new AgreementItem(result);
                 this.form.addItem(item);
