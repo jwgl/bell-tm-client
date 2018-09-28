@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgUploaderModule } from 'ngx-uploader';
+import { NgxUploaderModule } from 'ngx-uploader';
 
 import { UploaderPanelComponent } from './uploader.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    NgUploaderModule,
+    NgxUploaderModule,
   ],
   declarations: [UploaderPanelComponent],
   exports: [UploaderPanelComponent],
