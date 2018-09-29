@@ -57,7 +57,8 @@ export class ApplicationItemComponent {
     }
 
     get paperAble(): boolean {
-        return this.vm.status === 'STEP2' || this.vm.status === 'STEP5';
+        return (this.vm.status === 'STEP2' && !_.isNull(this.award.paperEnd))
+            || (this.vm.status === 'STEP5' && this.award.isCheckDateValid);
     }
 
     get nextAble(): boolean {
