@@ -5,12 +5,19 @@
             <span class='text-info'>{{subjectName}}</span>
             <ul>
                 <li *ngFor="let item of agreementSubjects | filterBy: filterBySubject(subjectName)" class="item">
-                    适用起止年级：{{item.startedGrade}} —— {{item.endedGrade}}，{{item.regionName}}； {{item.nameEn}}
-                    <ul>
-                        <li *ngFor="let major of item.coMajors">
-                            衔接专业/学位：{{major.nameEn}} {{major.nameCn}}；{{major.bachelor}}
-                        </li>
-                    </ul>
+                    <span class="text-success">适用起止年级：{{item.startedGrade}} - {{item.endedGrade}} {{item.regionName}}； {{item.nameEn}}</span>
+                    <table  style="width: 100%">
+                        <thead>
+                            <th rowspan="3">衔接专业/学位</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let major of item.coMajors">
+                                <td style="width: 40%">{{major.nameEn}}</td>
+                                <td style="width: 40%">{{major.nameCn}}</td>
+                                <td style="width: 20%">{{major.bachelor}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </li>
             </ul>
         </li>
