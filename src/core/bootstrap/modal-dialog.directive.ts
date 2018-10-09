@@ -1,4 +1,4 @@
-import { Attribute, Component, Directive, Input } from '@angular/core';
+import { Component, Directive, Input } from '@angular/core';
 
 @Component({
     selector: 'modal-dialog',
@@ -17,7 +17,7 @@ import { Attribute, Component, Directive, Input } from '@angular/core';
     </div>
     `,
 })
-export class ModalDialogDirective {
+export class ModalDialogComponent {
     @Input('modalTitle')
     title: string;
 

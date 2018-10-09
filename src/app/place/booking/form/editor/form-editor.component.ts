@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 
 import { BookingForm, BookingSection, bookingSectionMap } from '../../shared/booking-form.model';

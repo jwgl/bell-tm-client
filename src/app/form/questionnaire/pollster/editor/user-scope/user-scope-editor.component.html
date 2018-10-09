@@ -1,0 +1,13 @@
+<div class="input-group">
+    <div class="form-control">
+        <span *ngFor="let userScope of userScopes" class="badge badge-pill badge-secondary">
+            {{userScope | userScopeText: userType}}
+            <button class="close" type="button" (click)="remove(userScope)">&times;</button>
+        </span>
+    </div>
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="create()">
+            <fa-icon icon="plus" fixedWidth="true"></fa-icon>
+        </button>
+    </div>
+</div>

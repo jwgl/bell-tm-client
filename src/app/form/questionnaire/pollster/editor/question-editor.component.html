@@ -1,0 +1,87 @@
+<form id="question-editor" class="card w-100" autocomplete="off" #questionForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="card-header d-flex bg-dark text-white">
+        <h5>{{question.ordinal + 1}}. {{question.title}} <span *ngIf="question.mandatory">*</span></h5>
+        <div class="btn-group ml-auto">
+            <button class="btn btn-sm btn-outline-light" type="submit" [disabled]="!questionForm.form.valid">确定</button>
+            <button class="btn btn-sm btn-outline-light" (click)="onCancel()">取消</button>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="form-group">
+            <label for="title">问题标题*</label>
+            <input class="form-control" id="title" name="title" [(ngModel)]="question.title" required maxlength="100"
+                placeholder="问题标题，最多100个字符（用于统计，对用户不可见）" #titleElement>
+        </div>
+        <div class="form-group">
+            <div class="d-flex">
+                <label for="content">问题内容*</label>
+                <div class="form-check ml-auto">
+                    <input class="form-check-input" type="checkbox" id="mandatory" name="mandatory" [(ngModel)]="question.mandatory">
+                    <label class="form-check-label" for="mandatory">是否为必选问题</label>
+                </div>
+            </div>
+            <textarea class="form-control" id="content" name="content" rows="4" [(ngModel)]="question.content" required
+                maxlength="500" placeholder="问题内容，最多500个字符"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="type">问题类型</label>
+                <select #typeElement class="form-control" id="type" name="type" [ngModel]="question.type"
+                    (ngModelChange)="onTypeChanged(typeElement, $event)">
+                    <option *ngFor="let type of questionTypes" [ngValue]="type.value">{{type.label}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-8" *ngIf="question.type == 1 || question.type == 2">
+                <label for="content">开放选项</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" name="openEnded" [(ngModel)]="question.openEnded">
+                        </div>
+                    </div>
+                    <input class="form-control" id="openLabel" name="openLabel" [(ngModel)]="question.openLabel"
+                        placeholder="选项提示语，默认为其他" [disabled]="!question.openEnded">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="minValue">{{question.typeOptions.min.label}}<span *ngIf="question.typeOptions.min.default != null">*</span></label>
+                <input class="form-control" type="number" id="minValue" name="minValue" [(ngModel)]="question.minValue"
+                    [min]="question.typeOptions.min.min"
+                    [max]="question.typeOptions.min.max"
+                    [required]="question.typeOptions.min.default != null"
+                    [disabled]="question.type == 1 && !question.openEnded">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="maxValue">{{question.typeOptions.max.label}}<span *ngIf="question.typeOptions.max.default != null">*</span></label>
+                <input class="form-control" type="number" id="maxValue" name="maxValue" [(ngModel)]="question.maxValue"
+                    [min]="question.typeOptions.max.min"
+                    [max]="question.typeOptions.max.max"
+                    [required]="question.typeOptions.max.default != null"
+                    [disabled]="question.type == 1 && !question.openEnded">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="stepValue">{{question.typeOptions.step.label}}*</label>
+                <input class="form-control" type="number" id="stepValue" name="stepValue" [(ngModel)]="question.stepValue"
+                    [min]="question.typeOptions.step.min"
+                    [max]="question.typeOptions.step.max">
+            </div>
+        </div>
+        <div class="form-group" *ngIf="question.type == 1 || question.type == 2">
+            <label>问题选项</label>
+            <ul class="list-unstyled mb-0">
+                <li class="mb-1" *ngFor="let option of question.options">
+                    <tm-question-option-editor [question]="question" [option]="option" [showLabel]="showLabel"
+                        [showValue]="showValue" (moveup)="onMoveupOption(option)" (movedown)="onMovedownOption(option)"
+                        (remove)="onRemoveOption(option)">
+                    </tm-question-option-editor>
+                </li>
+                <tm-question-option-creater #optionCreater [question]="question" [option]="newOption" [showLabel]="showLabel"
+                    [showValue]="showValue" (create)="onCreateOption($event)" (labelChange)="showLabel = !showLabel"
+                    (valueChange)="showValue = !showValue">
+                </tm-question-option-creater>
+            </ul>
+        </div>
+    </div>
+</form>

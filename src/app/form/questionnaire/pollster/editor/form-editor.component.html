@@ -1,0 +1,98 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-secondary' routerLink="../">取消</button>
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving || !form.isValid()">保存</button>
+        </div>
+    </div>
+    <tm-form-title>{{form.formTitle}}</tm-form-title>
+    <form autocomplete="off">
+        <div class="form-group">
+            <label for="title">问卷标题*</label>
+            <input class="form-control" id="title" name="title" [(ngModel)]="form.title"
+                required maxlength="100" placeholder="问卷标题，最多100个字符">
+        </div>
+        <div class="form-group">
+            <label for="prologue">欢迎词</label>
+            <textarea class="form-control" id="prologue" rows="4" name="prologue" [(ngModel)]="form.prologue"
+                maxlength="500" placeholder="显示在问卷开头，最多500个字符"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="prologue">结束语</label>
+            <textarea class="form-control" id="epilogue" rows="2" name="epilogue" [(ngModel)]="form.epilogue"
+                maxlength="250" placeholder="显示在问卷结尾，最多250个字符"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="dateExpired">截止日期*</label>
+                <input class="form-control" type="date" id="dateExpired" name="dateExpired" [(ngModel)]="form.dateExpired">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="anonymous">是否匿名</label>
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" id="anonymous" name="anonymous" [(ngModel)]="form.anonymous">
+                    <label class="form-check-label" for="anonymous">是否为匿名调查问卷</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="surveyScope">调查范围</label>
+                <select class="form-control" id="surveyScope" name="surveyScope" [(ngModel)]="form.surveyScope"
+                    (change)="form.oriented.length = 0; form.restricted.length = 0;">
+                    <option *ngFor="let scope of surveyScopes" [ngValue]="scope.value">{{scope.label}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="respondentType">调查对象</label>
+                <select class="form-control" id="respondentType" name="respondentType" [(ngModel)]="form.respondentType"
+                    (change)="form.oriented.length = 0; form.restricted.length = 0;">
+                    <option *ngFor="let type of respondentTypes" [ngValue]="type.value">{{type.label}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="oriented">面向对象</label>
+            <tm-user-scope-editor
+                dialogTitle="面向对象"
+                [surveyScope]="form.surveyScope"
+                [userType]="form.respondentType"
+                [userScopes]="form.oriented">
+            </tm-user-scope-editor>
+        </div>
+        <div class="form-group">
+            <label for="restricted">限制对象</label>
+            <tm-user-scope-editor
+                dialogTitle="限制对象"
+                [surveyScope]="form.surveyScope"
+                [userType]="form.respondentType"
+                [userScopes]="form.restricted">
+            </tm-user-scope-editor>
+        </div>
+
+        <ng-container *ngFor="let question of form.questions">
+            <ng-container [ngSwitch]="question.ordinal">
+                <tm-question-editor *ngSwitchCase="selectedQuestion?.ordinal"
+                    mode="edit"
+                    [question]="selectedQuestion"
+                    (confirm)="onQuestionUpdated($event)"
+                    (cancel)="onQuestionCanceled($event)">
+                </tm-question-editor>
+                <tm-question-viewer *ngSwitchDefault
+                    [question]="question"
+                    (edit)="onEditQuestion(question)"
+                    (remove)="form.removeItem(item)">
+                </tm-question-viewer>
+            </ng-container>
+        </ng-container>
+        <div class="btn-toolbar" *ngIf="!selectedQuestion">
+            <button class="btn btn-success ml-auto" type="button" (click)="onCreateQuestion()">新建问题</button>
+        </div>
+        <tm-question-editor *ngIf="selectedQuestion?.ordinal == this.form.questions.length"
+            mode="create"
+            [question]="selectedQuestion"
+            (confirm)="onQuestionCreated($event)"
+            (cancel)="onQuestionCanceled($event)">
+        </tm-question-editor>
+    </form>
+</ng-container>
