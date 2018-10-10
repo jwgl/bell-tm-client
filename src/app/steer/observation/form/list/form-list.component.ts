@@ -29,7 +29,7 @@ export class ObservationListComponent {
             service.list = dto.list;
             this.doFilter();
         });
-        this.filterSelected.name = '筛选';
+        this.filterSelected = service.filterSelected;
     }
 
     loadData(offset: number) {
@@ -40,12 +40,14 @@ export class ObservationListComponent {
         this.clearFilter();
         this.filterSelected.key = filterItem.key;
         this.filterSelected.name = filterItem.name;
+        this.service.filterSelected = this.filterSelected;
     }
 
     set termId(value: number) {
         this._termId = value;
         this.service.loadList({ termId: value.toString() }).subscribe((dto: any) => {
             this.service.list = dto.list;
+            this.service.offset = 0;
             this.doFilter();
         });
     }
@@ -62,7 +64,7 @@ export class ObservationListComponent {
         this.list = this.filterSelected.key
                   ? this.service.list.filter((item: any) => this.match(item))
                   : this.service.list;
-        this.loadData(0);
+        this.loadData(this.service.offset);
         this.count = this.list.length;
     }
 
@@ -76,6 +78,7 @@ export class ObservationListComponent {
     }
 
     clearFilter() {
+        this.service.offset = 0;
         this.filterSelected = {};
         this.doFilter();
     }
@@ -97,6 +100,9 @@ export class ObservationListComponent {
     }
 
     get offset(): number {
-        return this.pagerArgs.offs;
+        if (this.pagerArgs.offs) {
+            this.service.offset = this.pagerArgs.offs;
+        }
+        return this.service.offset;
     }
 }

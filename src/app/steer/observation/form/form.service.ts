@@ -8,6 +8,8 @@ import { AuthService } from 'core/auth';
 @Injectable()
 export class ObservationFormService extends RestEditService {
     list: any[];
+    filterSelected: any = {name: '筛选'};
+    offset = 0;
 
     constructor(
         http: Http,
