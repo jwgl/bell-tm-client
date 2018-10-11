@@ -46,15 +46,18 @@ export class LeaveForm {
             this.scheduleMap[schedule.id] = schedule;
         });
 
-        const leaveItems = dto.items.map((itemDto: any) => this.createItem(itemDto));
-        this.items = leaveItems.filter(it => !!it.schedule);
-        this.removedItems = leaveItems.filter(it => !it.schedule); // 存在已退选课程
+        this.removedItems = [];
+        this.items = dto.items.map((itemDto: any) => this.createItem(itemDto)).filter(it => it !== null);
     }
 
     createItem(itemDto: any) {
         const leaveItem = new LeaveItem(this, itemDto);
         if (itemDto.taskScheduleId) {
             leaveItem.schedule = this.scheduleMap[itemDto.taskScheduleId];
+            if (!leaveItem.schedule) {
+                this.removedItems.push(leaveItem)
+                return null;
+            }
         }
         return leaveItem;
     }
