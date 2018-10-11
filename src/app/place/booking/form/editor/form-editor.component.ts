@@ -85,7 +85,7 @@ export class BookingFormEditorComponent {
             this.router.navigate(['../', id], { relativeTo: this.route });
         }, error => {
             this.saving = false;
-            alert(error);
+            alert(error.message);
         });
     }
 
@@ -95,7 +95,7 @@ export class BookingFormEditorComponent {
             this.router.navigate(['../'], { relativeTo: this.route });
         }, error => {
             this.saving = false;
-            alert(error);
+            alert(error.message);
         });
     }
 }

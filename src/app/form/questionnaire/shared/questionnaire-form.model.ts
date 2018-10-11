@@ -44,6 +44,8 @@ export class Questionnaire {
     removedQuestions: Question[];
 
     constructor(dto: any) {
+        console.log(dto);
+
         if (dto.id) {
             this.id = dto.id;
             this.pollsterId = dto.pollsterId;
@@ -59,7 +61,6 @@ export class Questionnaire {
             this.workflowInstanceId = dto.workflowInstanceId;
             this.questions = dto.questions.map((question: any) => new Question(question));
         } else {
-            this.pollsterId = dto.pollsterId;
             this.surveyScope = 1;
             this.respondentType = 2;
             this.anonymous = true;

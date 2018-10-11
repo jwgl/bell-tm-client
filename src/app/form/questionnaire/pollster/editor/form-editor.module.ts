@@ -10,7 +10,6 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
 import { QuestionnaireEditorComponent } from './form-editor.component';
-import { QuestionViewerComponent } from './question-viewer.component';
 import { QuestionEditorComponent } from './question-editor.component';
 import { QuestionOptionEditorComponent } from './question-option-editor.component';
 import { QuestionOptionCreatorComponent } from './question-option-creater.component';
@@ -30,7 +29,6 @@ import { QuestionnaireUserScopeModule } from './user-scope/user-scope.module';
     declarations: [
         QuestionnaireEditorComponent,
         QuestionEditorComponent,
-        QuestionViewerComponent,
         QuestionOptionEditorComponent,
         QuestionOptionCreatorComponent,
     ],

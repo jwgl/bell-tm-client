@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Question } from '../../shared/questionnaire-form.model';
+import { Question } from './questionnaire-form.model';
 
 @Component({
     selector: 'tm-question-viewer',

@@ -1,50 +1,45 @@
-<tm-form-title>{{form.title}}</tm-form-title>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label>借用单位</label>
-            <p class="form-control-plaintext">{{form.departmentName}}</p>
-        </div>
-        <div class="form-group col-md-6">
-            <label>借用类别</label>
-            <p class="form-control-plaintext">{{form.bookingTypeName}}</p>
-        </div>
+<tm-form-title>{{form.formTitle}}</tm-form-title>
+<div class="form-group">
+    <label>问卷标题*</label>
+    <p class="form-control-plaintext">{{form.title}}</p>
+</div>
+<div class="form-group">
+    <label>欢迎词</label>
+    <p class="form-control-plaintext">{{form.prologue}}</p>
+</div>
+<div class="form-group">
+    <label>结束语</label>
+    <p class="form-control-plaintext">{{form.epilogue}}</p>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="dateExpired">截止日期*</label>
+        <p class="form-control-plaintext">{{form.dateExpired}}</p>
     </div>
-    <div class="form-group">
-        <label>借用事由</label>
-        <p class="form-control-plaintext">{{form.reason}}</p>
+    <div class="form-group col-md-6">
+        <label for="anonymous">是否匿名</label>
+        <p class="form-control-plaintext">{{form.anonymous ? '实' : '匿'}}名调查问卷</p>
     </div>
-    <div class="form-group">
-        <label>借用人</label>
-        <p class="form-control-plaintext d-flex" label="借用人">
-            <ng-container *ngIf="form.extraInfo">{{form.extraInfo.join(' ')}} </ng-container>
-            {{form.userName}} {{form.phoneNumber}}
-            <span class="ml-auto">{{form.dateSubmitted | date: 'y-MM-dd HH:mm'}}</span>
-        </p>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="surveyScope">调查范围</label>
+        <p class="form-control-plaintext">{{form.surveyScope}}</p>
     </div>
-    <div class="row">
-        <div class="form-group col-md-6" *ngIf="form.checker">
-            <label>审核人</label>
-            <p class="form-control-plaintext d-flex">
-                {{form.checker}}<span class="ml-auto">{{form.dateChecked | date: 'y-MM-dd HH:mm'}}</span>
-            </p>
-        </div>
-        <div class="form-group col-md-6" *ngIf="form.approver">
-            <label>审批人</label>
-            <p class="form-control-plaintext d-flex">
-                {{form.approver}}<span class="ml-auto">{{form.dateApproved | date: 'y-MM-dd HH:mm'}}</span>
-            </p>
-        </div>
-        <div class="form-group col-md-6">
-            <label>表单状态</label>
-            <p class="form-control-plaintext">{{form.status | statusText}}</p>
-        </div>
+    <div class="form-group col-md-6">
+        <label for="respondentType">调查对象</label>
+        <p class="form-control-plaintext">{{form.respondentType}}</p>
     </div>
-    <div class="form-group">
-        <label>借用明细</label>
-        <ul>
-            <li *ngFor="let item of form.items">
-                {{item}}
-                <span *ngIf="item.occupied" class="badge badge-danger">已占用</span>
-            </li>
-        </ul>
-    </div>
+</div>
+<div class="form-group">
+    <label for="oriented">面向对象</label>
+    <p class="form-control-plaintext">{{form.oriented | json}}</p>
+</div>
+<div class="form-group">
+    <label for="restricted">限制对象</label>
+    <p class="form-control-plaintext">{{form.restricted | json}}</p>
+</div>
+<ng-container *ngFor="let question of form.questions">
+    <tm-question-viewer [question]="question"></tm-question-viewer>
+</ng-container>
+{{form | json}}

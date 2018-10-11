@@ -6,6 +6,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireFormViewerComponent } from './questionnaire-form-viewer.component';
 import { UserScopeTextPipe } from './user-scope.pipe';
+import { QuestionViewerComponent } from './question-viewer.component';
 
 @NgModule({
     imports: [
@@ -15,10 +16,12 @@ import { UserScopeTextPipe } from './user-scope.pipe';
     ],
     declarations: [
         QuestionnaireFormViewerComponent,
+        QuestionViewerComponent,
         UserScopeTextPipe,
     ],
     exports: [
         QuestionnaireFormViewerComponent,
+        QuestionViewerComponent,
         UserScopeTextPipe,
     ],
 })

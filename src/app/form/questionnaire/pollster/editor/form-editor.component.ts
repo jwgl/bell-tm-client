@@ -18,6 +18,7 @@ export class QuestionnaireEditorComponent {
     respondentTypes: NumberStringOption[];
     today: Date;
     selectedQuestion: Question;
+    saving = false;
 
     private editMode: EditMode;
 
@@ -71,7 +72,34 @@ export class QuestionnaireEditorComponent {
     }
 
     save() {
-        console.log(this.form.toServerDto());
+        switch (this.editMode) {
+            case EditMode.Create:
+                this.create();
+                break;
+            case EditMode.Edit:
+                this.update();
+                break;
+        }
+    }
+
+    create() {
+        this.saving = true;
+        this.service.create(this.form.toServerDto()).subscribe(id => {
+            this.router.navigate(['../', id], { relativeTo: this.route });
+        }, error => {
+            this.saving = false;
+            alert(error.message);
+        });
+    }
+
+    update() {
+        this.saving = true;
+        this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
+            this.router.navigate(['../'], { relativeTo: this.route });
+        }, error => {
+            this.saving = false;
+            alert(error.message);
+        });
     }
 
     private scrollToView(): void {
