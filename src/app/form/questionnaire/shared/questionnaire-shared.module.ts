@@ -5,8 +5,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireFormViewerComponent } from './questionnaire-form-viewer.component';
+import { QuestionViewerComponent } from './question-form-viewer.component';
 import { UserScopeTextPipe } from './user-scope.pipe';
-import { QuestionViewerComponent } from './question-viewer.component';
+import { SurveyScopeTextPipe } from './survey-scope.pipe';
+import { RespondentTypeTextPipe } from './respondent-type.pipe';
 
 @NgModule({
     imports: [
@@ -18,10 +20,11 @@ import { QuestionViewerComponent } from './question-viewer.component';
         QuestionnaireFormViewerComponent,
         QuestionViewerComponent,
         UserScopeTextPipe,
+        SurveyScopeTextPipe,
+        RespondentTypeTextPipe,
     ],
     exports: [
         QuestionnaireFormViewerComponent,
-        QuestionViewerComponent,
         UserScopeTextPipe,
     ],
 })

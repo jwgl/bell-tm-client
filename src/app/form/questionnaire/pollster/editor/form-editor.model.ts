@@ -7,6 +7,8 @@ declare module '../../shared/questionnaire-form.model' {
         addItem(item: Question): void;
         updateItem(item: Question): void;
         removeItem(item: Question): void;
+        moveupItem(item: Question): void;
+        movedownItem(item: Question): void;
         isValid(): boolean;
         toServerDto(): any;
     }
@@ -40,11 +42,36 @@ Questionnaire.prototype.updateItem = function (this: Questionnaire, item: Questi
 };
 
 Questionnaire.prototype.removeItem = function (this: Questionnaire, item: Question): void {
-    const index = this.questions.indexOf(item);
-    this.questions.splice(index, 1);
+    this.questions.splice(item.ordinal, 1);
     if (item.id) {
         this.removedQuestions.push(item);
+        this.questions.forEach((it, index) => {
+            if (it.ordinal !== index) {
+                it.ordinal = index;
+                it.markUpdated();
+            };
+        });
     }
+};
+
+Questionnaire.prototype.moveupItem = function (this: Questionnaire, item: Question): void {
+    const index = item.ordinal;
+    this.questions[index] = this.questions[index - 1];
+    this.questions[index].ordinal = index;
+    this.questions[index].markUpdated();
+    this.questions[index - 1] = item;
+    this.questions[index - 1].ordinal = index - 1;
+    this.questions[index - 1].markUpdated();
+};
+
+Questionnaire.prototype.movedownItem = function (this: Questionnaire, item: Question): void {
+    const index = item.ordinal;
+    this.questions[index] = this.questions[index + 1];
+    this.questions[index].ordinal = index;
+    this.questions[index].markUpdated();
+    this.questions[index + 1] = item;
+    this.questions[index + 1].ordinal = index + 1;
+    this.questions[index + 1].markUpdated();
 };
 
 Questionnaire.prototype.isValid = function (this: Questionnaire): boolean {
@@ -88,10 +115,16 @@ Question.prototype.markUpdated = function (this: Question): void {
 
 Question.prototype.removeItem = function (this: Question, item: QuestionOption): void {
     this.options.splice(item.ordinal, 1);
-    this.options.forEach((it, index) => it.ordinal = index);
     if (item.id) {
         this.removedOptions.push(item);
+        this.options.forEach((it, index) => {
+            if (it.ordinal !== index) {
+                it.ordinal = index;
+                it.markUpdated();
+            };
+        });
     }
+    this.markUpdated();
 };
 
 Question.prototype.moveupItem = function (this: Question, item: QuestionOption): void {
@@ -102,6 +135,7 @@ Question.prototype.moveupItem = function (this: Question, item: QuestionOption):
     this.options[index - 1] = item;
     this.options[index - 1].ordinal = index - 1;
     this.options[index - 1].markUpdated();
+    this.markUpdated();
 };
 
 Question.prototype.movedownItem = function (this: Question, item: QuestionOption): void {
@@ -112,6 +146,7 @@ Question.prototype.movedownItem = function (this: Question, item: QuestionOption
     this.options[index + 1] = item;
     this.options[index + 1].ordinal = index + 1;
     this.options[index + 1].markUpdated();
+    this.markUpdated();
 };
 
 Question.prototype.isValid = function (this: Question): boolean {
@@ -121,13 +156,13 @@ Question.prototype.isValid = function (this: Question): boolean {
 };
 
 Question.prototype.toServerDto = function (this: Question): any {
-    const { id, options, removedOptions, ...others } = this;
+    const { id, __updated, options, removedOptions, ...others } = this;
     return id ?
         {
             id,
             ...others,
             addedOptions: options.filter(it => !it.id).map(it => it.toServerDto()),
-            updatedOption: options.filter(it => it.__updated).map(it => it.toServerDto()),
+            updatedOptions: options.filter(it => it.__updated).map(it => it.toServerDto()),
             removedOptions: removedOptions.map(it => it.id),
         } : {
             ...others,
@@ -136,12 +171,14 @@ Question.prototype.toServerDto = function (this: Question): any {
 };
 
 QuestionOption.prototype.toServerDto = function (this: QuestionOption): any {
-    if (this.id) {
-        return this;
-    } else {
-        const { id, ...dto } = this;
-        return dto;
-    }
+    const { id, __updated, ...others } = this;
+    return id ?
+        {
+            id,
+            ...others,
+        } : {
+            ...others,
+        };
 };
 
 QuestionOption.prototype.markUpdated = function (this: QuestionOption): void {

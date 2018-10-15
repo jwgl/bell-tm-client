@@ -14,6 +14,7 @@ import { QuestionEditorComponent } from './question-editor.component';
 import { QuestionOptionEditorComponent } from './question-option-editor.component';
 import { QuestionOptionCreatorComponent } from './question-option-creater.component';
 import { QuestionnaireUserScopeModule } from './user-scope/user-scope.module';
+import { QuestionViewerComponent } from './question-viewer.component';
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ import { QuestionnaireUserScopeModule } from './user-scope/user-scope.module';
         QuestionEditorComponent,
         QuestionOptionEditorComponent,
         QuestionOptionCreatorComponent,
+        QuestionViewerComponent,
     ],
     exports: [
         QuestionnaireEditorComponent,

@@ -1,10 +1,6 @@
 <div class="card w-100">
     <div class="card-header d-flex">
         <h5>{{question.ordinal + 1}}. {{question.title}} <span *ngIf="question.mandatory">*</span></h5>
-        <div class="btn-group ml-auto">
-            <button class="btn btn-sm btn-outline-dark" (click)="onEdit()">编辑</button>
-            <button class="btn btn-sm btn-outline-dark" (click)="onRemove()">删除</button>
-        </div>
     </div>
     <div class="card-body">
         <p class="card-text">{{question.content}}</p>

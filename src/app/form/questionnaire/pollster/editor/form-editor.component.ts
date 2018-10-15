@@ -7,6 +7,7 @@ import { NumberStringOption } from 'core/options';
 import { QuestionnaireFormService } from '../questionnaire-form.service';
 import { Questionnaire, Question } from '../../shared/questionnaire-form.model';
 import './form-editor.model';
+import { SURVEY_SCOPES } from '../../shared/survey-scope.model';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
@@ -42,8 +43,8 @@ export class QuestionnaireEditorComponent {
 
     onLoadData(dto: any) {
         this.form = new Questionnaire(dto.form);
-        this.surveyScopes = dto.surveyScopes;
-        this.respondentTypes = dto.respondentTypes;
+        this.surveyScopes = SURVEY_SCOPES.filter(it => dto.surveyScopes.includes(it.value)) ;
+        this.respondentTypes = SURVEY_SCOPES.filter(it => dto.respondentTypes.includes(it.value));
         this.today = new Date(dto.today);
     }
 

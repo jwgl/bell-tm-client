@@ -102,7 +102,7 @@ export class UserScopeSelectDialog extends BaseDialog {
         if (this.selectedSex) {
             result['性别'] = this.selectedSex;
         }
-        console.log(result);
+
         return result;
     }
 

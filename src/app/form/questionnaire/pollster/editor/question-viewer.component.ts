@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Question } from './questionnaire-form.model';
+import { Question } from '../../shared/questionnaire-form.model';
 
 @Component({
     selector: 'tm-question-viewer',
@@ -9,6 +9,12 @@ import { Question } from './questionnaire-form.model';
 export class QuestionViewerComponent {
     @Input()
     question: Question;
+
+    @Input()
+    first: boolean;
+
+    @Input()
+    last: boolean;
 
     @Output()
     edit = new EventEmitter();

@@ -1,5 +1,5 @@
 import { NumberStringOption } from 'core/options';
-import { UserScope } from './user-scope.model';
+import { UserScope, userScopeToString } from './user-scope.model';
 import * as dayjs from 'dayjs';
 
 export const QUESTION_TYPES: NumberStringOption[] = [
@@ -44,8 +44,6 @@ export class Questionnaire {
     removedQuestions: Question[];
 
     constructor(dto: any) {
-        console.log(dto);
-
         if (dto.id) {
             this.id = dto.id;
             this.pollsterId = dto.pollsterId;
@@ -61,6 +59,7 @@ export class Questionnaire {
             this.workflowInstanceId = dto.workflowInstanceId;
             this.questions = dto.questions.map((question: any) => new Question(question));
         } else {
+            this.pollsterId = dto.pollsterId;
             this.surveyScope = 1;
             this.respondentType = 2;
             this.anonymous = true;
@@ -78,6 +77,20 @@ export class Questionnaire {
 
     get workflowTitle() {
         return `#${this.id}-${this.title}`;
+    }
+
+    get orientedText() {
+        return this.userScopesText(this.oriented);
+    }
+
+    get restrictedText() {
+        return this.userScopesText(this.restricted);
+    }
+
+    private userScopesText(userScopes: UserScope[]) {
+        return userScopes ? userScopes
+            .map(userScope => userScopeToString(userScope, this.respondentType))
+            .join(', ') : '<未设置>';
     }
 }
 
@@ -108,6 +121,7 @@ export class Question {
             ordinal: ordinal,
             type: 1,
             mandatory: true,
+            openEnded: false,
         });
         question.minValue = question.typeOptions.min.default;
         question.maxValue = question.typeOptions.max.default;

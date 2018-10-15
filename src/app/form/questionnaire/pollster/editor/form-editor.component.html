@@ -69,8 +69,7 @@
                 [userScopes]="form.restricted">
             </tm-user-scope-editor>
         </div>
-
-        <ng-container *ngFor="let question of form.questions">
+        <ng-container *ngFor="let question of form.questions; first as first; last as last;">
             <ng-container [ngSwitch]="question.ordinal">
                 <tm-question-editor *ngSwitchCase="selectedQuestion?.ordinal"
                     mode="edit"
@@ -81,7 +80,9 @@
                 <tm-question-viewer *ngSwitchDefault
                     [question]="question"
                     (edit)="onEditQuestion(question)"
-                    (remove)="form.removeItem(item)">
+                    (remove)="form.removeItem(question)">
+                    <button class="btn btn-sm btn-outline-dark" (click)="form.moveupItem(question)" [disabled]="first">上移</button>
+                    <button class="btn btn-sm btn-outline-dark" (click)="form.movedownItem(question)" [disabled]="last">下移</button>
                 </tm-question-viewer>
             </ng-container>
         </ng-container>

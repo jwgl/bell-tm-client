@@ -39,6 +39,7 @@ export class QuestionOptionCreatorComponent {
     constructor() {
         this.resetFields();
     }
+
     onCreate() {
         this.create.emit(new QuestionOption({
             ordinal: this.question.options.length,
