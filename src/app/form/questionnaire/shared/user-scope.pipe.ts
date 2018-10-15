@@ -3,7 +3,7 @@ import { userScopeToString, UserScope } from './user-scope.model';
 
 @Pipe({ name: 'userScopeText' })
 export class UserScopeTextPipe {
-    transform(userScope: UserScope, userType: number) {
+    transform(userScope: UserScope, userType: string) {
         return userScopeToString(userScope, userType);
     }
 }

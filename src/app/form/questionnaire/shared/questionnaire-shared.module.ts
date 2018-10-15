@@ -26,6 +26,8 @@ import { RespondentTypeTextPipe } from './respondent-type.pipe';
     exports: [
         QuestionnaireFormViewerComponent,
         UserScopeTextPipe,
+        SurveyScopeTextPipe,
+        RespondentTypeTextPipe,
     ],
 })
 export class QuestionnaireSharedModule { }

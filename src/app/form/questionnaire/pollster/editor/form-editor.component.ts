@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { EditMode } from 'core/constants';
-import { NumberStringOption } from 'core/options';
+import { StringStringOption } from 'core/options';
 
 import { QuestionnaireFormService } from '../questionnaire-form.service';
 import { Questionnaire, Question } from '../../shared/questionnaire-form.model';
 import './form-editor.model';
 import { SURVEY_SCOPES } from '../../shared/survey-scope.model';
+import { RESPONDENT_TYPES } from '../../shared/respondent-type.model';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
@@ -15,8 +16,8 @@ import { SURVEY_SCOPES } from '../../shared/survey-scope.model';
 })
 export class QuestionnaireEditorComponent {
     form: Questionnaire;
-    surveyScopes: NumberStringOption[];
-    respondentTypes: NumberStringOption[];
+    surveyScopes: StringStringOption[];
+    respondentTypes: StringStringOption[];
     today: Date;
     selectedQuestion: Question;
     saving = false;
@@ -44,7 +45,7 @@ export class QuestionnaireEditorComponent {
     onLoadData(dto: any) {
         this.form = new Questionnaire(dto.form);
         this.surveyScopes = SURVEY_SCOPES.filter(it => dto.surveyScopes.includes(it.value)) ;
-        this.respondentTypes = SURVEY_SCOPES.filter(it => dto.respondentTypes.includes(it.value));
+        this.respondentTypes = RESPONDENT_TYPES.filter(it => dto.respondentTypes.includes(it.value));
         this.today = new Date(dto.today);
     }
 

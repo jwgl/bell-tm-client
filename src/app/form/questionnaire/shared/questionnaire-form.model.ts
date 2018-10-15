@@ -33,8 +33,8 @@ export class Questionnaire {
     title: string;
     prologue: string;
     epilogue: string;
-    surveyScope: number;
-    respondentType: number;
+    surveyScope: string;
+    respondentType: string;
     oriented: UserScope[];
     restricted: UserScope[];
     anonymous: boolean;
@@ -60,8 +60,8 @@ export class Questionnaire {
             this.questions = dto.questions.map((question: any) => new Question(question));
         } else {
             this.pollsterId = dto.pollsterId;
-            this.surveyScope = 1;
-            this.respondentType = 2;
+            this.surveyScope = 'DEPARTMENT';
+            this.respondentType = 'STUDENT';
             this.anonymous = true;
             this.dateExpired = dayjs().add(1, 'month').format('YYYY-MM-DD');
             this.questions = [];

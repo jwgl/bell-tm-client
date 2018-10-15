@@ -1,12 +1,12 @@
-import { NumberStringOption } from 'core/options';
+import { StringStringOption } from 'core/options';
 
-export const SURVEY_SCOPES: NumberStringOption[] = [
-    { value: 0, label: '校级' },
-    { value: 1, label: '院级' },
-    { value: 2, label: '班级' },
+export const SURVEY_SCOPES: StringStringOption[] = [
+    { value: 'SCHOOL', label: '校级' },
+    { value: 'DEPARTMENT', label: '院级' },
+    { value: 'ADMIN_CLASS', label: '班级' },
 ];
 
-export const SURVEY_SCOPE_MAP: { [key: number]: string } = SURVEY_SCOPES.reduce((result, item) => {
+export const SURVEY_SCOPE_MAP: { [key: string]: string } = SURVEY_SCOPES.reduce((result, item) => {
     result[item.value] = item.label;
     return result;
 }, {});

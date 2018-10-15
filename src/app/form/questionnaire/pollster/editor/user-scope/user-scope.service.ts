@@ -10,7 +10,7 @@ export class UserScopeService {
         this.departmentApi = new ApiUrl('/api/form/departments')
     }
 
-    getDepartments(userType: number): Observable<any> {
+    getDepartments(userType: string): Observable<any> {
         return this.http.get(this.departmentApi.list({userType}));
     }
 

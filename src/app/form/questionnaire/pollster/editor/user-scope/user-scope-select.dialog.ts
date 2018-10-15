@@ -15,8 +15,8 @@ import { tap } from 'rxjs/operators';
 // tslint:disable-next-line:component-class-suffix
 export class UserScopeSelectDialog extends BaseDialog {
     title: string;
-    surveyScope: number;
-    userType: number;
+    surveyScope: string;
+    userType: string;
     visibles: { [key in UserProperty]: boolean };
     departments: { id: string, name: string }[];
     _adminClasses: { id: number, name: string, grade: number, subject: string }[];
@@ -64,10 +64,10 @@ export class UserScopeSelectDialog extends BaseDialog {
         this.surveyScope = this.options.surveyScope;
         this.userType = this.options.userType;
         this.visibles = {
-            '学院': this.surveyScope === 0, // 校级
-            '年级': this.surveyScope <= 1 && this.userType === 2, // 校/院级学生
-            '专业': this.surveyScope <= 1 && this.userType === 2, // 校/院级学生
-            '班级': this.surveyScope <= 1 && this.userType === 2, // 校/院级学生
+            '学院': this.surveyScope === 'SCHOOL',
+            '年级': this.userType === 'STUDENT' && (this.surveyScope === 'SCHOOL' || this.surveyScope === 'DEPARTMENT'),
+            '专业': this.userType === 'STUDENT' && (this.surveyScope === 'SCHOOL' || this.surveyScope === 'DEPARTMENT'),
+            '班级': this.userType === 'STUDENT' && (this.surveyScope === 'SCHOOL' || this.surveyScope === 'DEPARTMENT'),
             '性别': true,
         };
 

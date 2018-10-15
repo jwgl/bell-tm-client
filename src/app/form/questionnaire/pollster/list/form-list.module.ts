@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireFormListComponent } from './form-list.component';
+import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
         CommonDirectivesModule,
+        QuestionnaireSharedModule,
     ],
     declarations: [
         QuestionnaireFormListComponent,
