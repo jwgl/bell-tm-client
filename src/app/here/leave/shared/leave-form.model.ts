@@ -55,7 +55,7 @@ export class LeaveForm {
         if (itemDto.taskScheduleId) {
             leaveItem.schedule = this.scheduleMap[itemDto.taskScheduleId];
             if (!leaveItem.schedule) {
-                this.removedItems.push(leaveItem)
+                this.removedItems.push(leaveItem);
                 return null;
             }
         }
