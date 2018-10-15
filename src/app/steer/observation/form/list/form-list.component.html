@@ -60,7 +60,7 @@
         <tfoot>
             <tr>
                 <td colspan="8">
-                    <tm-pager [total]="count" [max]="max" [length]="listLength" (prev)="loadData($event)" (next)="loadData($event)"></tm-pager>
+                    <tm-pager [total]="count" [max]="max" [offset]="offset" [length]="listLength" (prev)="loadData($event)" (next)="loadData($event)"></tm-pager>
                 </td>
             </tr>
         </tfoot>
