@@ -43,7 +43,7 @@ export class LeaveFormEditorComponent {
     onLoadData(dto: any) {
         const schedules = dto.schedules.map((scheduleDto: ScheduleDto) => new Schedule(scheduleDto));
         this.form = new LeaveForm(dto.form, schedules);
-        this.form.existedItems = dto.existedItems.map((itemDto: any) => this.form.createItem(itemDto)).filter(it => !!it.schedule);
+        this.form.existedItems = dto.existedItems.map((itemDto: any) => this.form.createItem(itemDto)).filter(it => it !== null);
         this.term = dto.term;
         this.timetable = new Timetable(schedules, true);
     }
