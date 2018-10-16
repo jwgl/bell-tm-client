@@ -1,7 +1,7 @@
 <ng-container *ngIf="form">
     <div class="btn-toolbar">
         <div class="btn-group ml-auto">
-            <button class='btn btn-primary' (click)="save()">保存</button>
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving">保存</button>
         </div>
     </div>
     <tm-form-title>学位申请单{{form.id}}</tm-form-title>
@@ -21,9 +21,9 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">主修专业</label>
-                    <select name="majorCooperative" class="form-control" [(ngModel)]="form.majorCooperative">
+                    <select name="majorCooperative" class="form-control" [(ngModel)]="cooperativeMajor">
                         <option value="">请选择修读专业名称</option>
-                        <option *ngFor="let item of subjects(form.universityCooperative)" [ngValue]="item.majorEn">
+                        <option *ngFor="let item of subjects(form.universityCooperative)" [ngValue]="item">
                             {{ item.majorCn }} | {{ item.majorEn }} ({{item.bachelor}})
                         </option>
                     </select>
