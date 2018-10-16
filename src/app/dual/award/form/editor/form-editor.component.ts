@@ -68,7 +68,6 @@ export class AwardFormEditorComponent {
             this.isEmpty(this.form.content)) {
             validation.push('请检查标题、内容等是否为空！');
         }
-        console.log(dayjs(this.form.requestBegin));
         if (!this.isDate(this.form.requestBegin)) {
             validation.push('申请起始日期输入不正确！');
         }
