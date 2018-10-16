@@ -1,8 +1,8 @@
 <ng-container *ngIf="form !=undefined && form.schedule && types.length">
     <div class="btn-toolbar">
         <div class="btn-group ml-auto">
-            <button class='btn btn-secondary' (click)="commit()" [disabled]="isAdmin && !form.observerId">提交</button>
-            <button class='btn btn-primary' (click)="save()" [disabled]="isAdmin && !form.observerId">保存</button>
+            <button class='btn btn-secondary' (click)="commit()" [disabled]="saving || (isAdmin && !form.observerId)">提交</button>
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving || (isAdmin && !form.observerId)">保存</button>
         </div>
     </div>
     <tm-form-title>听课记录{{form.id}}</tm-form-title>

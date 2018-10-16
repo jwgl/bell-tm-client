@@ -26,6 +26,7 @@ export class ApplicationFormEditorComponent {
     fileNames: any;
     awardId: number;
     formId: number;
+    saving = false;
 
     constructor(
         private service: ApplicationFormService,
@@ -117,12 +118,14 @@ export class ApplicationFormEditorComponent {
     }
 
     create() {
+        this.saving = true;
         this.service.create(this.form.toServerDto()).subscribe(id => {
             this.router.navigate(['../../', id], { relativeTo: this.route });
         });
     }
 
     update() {
+        this.saving = true;
         this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
             this.router.navigate(['../../', id], { relativeTo: this.route });
         });
@@ -138,6 +141,22 @@ export class ApplicationFormEditorComponent {
         }
         window.open(this.url(filename), '文件浏览',
             'fullscreen=1, toolbar=0, menubar=0, location=0, status=0, scrollbars=1, resizable=0');
+    }
+
+    get cooperativeMajor(): any {
+        const university = this.universities.find(item => item.universityEn === this.form.universityCooperative);
+        if (university) {
+            return university.subjects.find(subject =>
+                subject.majorEn === this.form.majorCooperative
+                && subject.bachelor === this.form.bachelor);
+        } else {
+            return null;
+        }
+    }
+
+    set cooperativeMajor(item: any) {
+        this.form.majorCooperative = item.majorEn;
+        this.form.bachelor = item.bachelor;
     }
 
     get uploadUrl(): string {

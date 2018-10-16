@@ -11,6 +11,7 @@ ApplicationForm.prototype.toServerDto = function (this: ApplicationForm): any {
         awardId: this.awardId,
         universityCooperative: this.universityCooperative,
         majorCooperative: this.majorCooperative,
+        bachelor: this.bachelor,
         email: this.email,
         linkman: this.linkman,
         phone: this.phone,
