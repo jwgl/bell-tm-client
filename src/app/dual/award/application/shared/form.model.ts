@@ -14,6 +14,7 @@ export class ApplicationForm {
     dateApproved: string;
     universityCooperative: string;
     majorCooperative: string;
+    bachelor: string;
     email: string;
     linkman: string;
     phone: string;
@@ -24,6 +25,7 @@ export class ApplicationForm {
         this.id = dto.id;
         this.universityCooperative = dto.universityCooperative;
         this.majorCooperative = dto.majorCooperative;
+        this.bachelor = dto.bachelor;
         this.email = dto.email;
         this.linkman = dto.linkman;
         this.phone = dto.phone;

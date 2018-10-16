@@ -15,7 +15,7 @@ export function typeahead(element: ElementRef, minLength = 1, debounce = 250): O
         filter(array => !array[0]),
         map(array => array[1]),
         map((event: KeyboardEvent) => (event.target as HTMLInputElement).value),
-        debounceTime(250),
+        debounceTime(debounce),
         distinctUntilChanged(),
         filter(value => value.length >= minLength)
     );

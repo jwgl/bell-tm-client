@@ -32,6 +32,7 @@ export class ObservationFormEditorComponent {
     observers: Observers[];
     isAdmin: boolean;
     mydto: any;
+    saving = false;
 
     constructor(
         private router: Router,
@@ -115,25 +116,31 @@ export class ObservationFormEditorComponent {
     }
 
     create(form: any) {
+        this.saving = true;
         this.service.create(form).subscribe(id => {
             this.form.id = id;
             this.editMode = EditMode.Edit;
+            this.saving = false;
             // 如果提交，就导航到list
             if (this.form.status) {
                 this.router.navigate(['/'], { relativeTo: this.route });
             }
         }, error => {
+            this.saving = false;
             alert(error.json().message);
         });
     }
 
     update(form: any) {
+        this.saving = true;
         this.service.update(this.form.id, form).subscribe(id => {
+            this.saving = false;
             // 如果提交，就导航到list
             if (this.form.status) {
                 this.router.navigate(['/'], { relativeTo: this.route });
             }
         }, error => {
+            this.saving = false;
             alert(error.json().message);
         });
     }
