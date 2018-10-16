@@ -40,24 +40,15 @@ export class Questionnaire {
     anonymous: boolean;
     dateExpired: string;
     workflowInstanceId: string;
+    status: string;
     questions: Question[];
     removedQuestions: Question[];
 
     constructor(dto: any) {
         if (dto.id) {
-            this.id = dto.id;
-            this.pollsterId = dto.pollsterId;
-            this.title = dto.title;
-            this.prologue = dto.prologue;
-            this.epilogue = dto.epilogue;
-            this.surveyScope = dto.surveyScope;
-            this.respondentType = dto.respondentType;
-            this.oriented = dto.oriented;
-            this.restricted = dto.restricted;
-            this.anonymous = dto.anonymous;
-            this.dateExpired = dto.dateExpired;
-            this.workflowInstanceId = dto.workflowInstanceId;
-            this.questions = dto.questions.map((question: any) => new Question(question));
+            var { questions, ...others } = dto;
+            Object.assign(this, others);
+            this.questions = questions.map((question: any) => new Question(question));
         } else {
             this.pollsterId = dto.pollsterId;
             this.surveyScope = 'DEPARTMENT';
@@ -72,7 +63,7 @@ export class Questionnaire {
     }
 
     get formTitle(): string {
-        return this.id ? `#${this.id}-${this.title}` : '调查问卷申请';
+        return this.id ? `调查问卷申请#${this.id}` : '调查问卷申请';
     }
 
     get workflowTitle() {
@@ -88,7 +79,7 @@ export class Questionnaire {
     }
 
     private userScopesText(userScopes: UserScope[]) {
-        return userScopes ? userScopes
+        return userScopes && userScopes.length > 0 ? userScopes
             .map(userScope => userScopeToString(userScope, this.respondentType))
             .join(', ') : '<未设置>';
     }

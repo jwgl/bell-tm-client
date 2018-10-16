@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [{
     path: 'pollsters/:userId/questionnaires',
     loadChildren: './questionnaire/pollster/questionnaire-form.module#QuestionnaireFormModule',
+}, {
+    path: 'checkers/:userId/questionnaires',
+    loadChildren: './questionnaire/check/questionnaire-check.module#QuestionnaireCheckModule',
 // }, {
 //     path: 'adminClasses/:adminClassId/questionnaires',
 //     loadChildren: './questionnaire/adminClass/admin-class-questionnaire.module#AdminClassQuestionnaireModule',
