@@ -58,7 +58,6 @@ export class PaperApprovalItemComponent {
 
     finish() {
         this.dialog.open(WorkflowFinishDialog).then((result: string) => {
-            console.log(result);
             this.service.finish(this.form.id, result).subscribe(dto => {
                 this.form = new ApplicationForm(dto.form);
             }, (error) => {

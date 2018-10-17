@@ -14,4 +14,8 @@ export class FinderListComponent {
     find() {
         this.service.loadList({ q: this.query }).subscribe(dto => this.list = dto);
     }
+
+    get url(): string {
+        return `${this.service.api.item(0)}/report?q=${encodeURIComponent(this.query)}&type=applications-admin`;
+    }
 }
