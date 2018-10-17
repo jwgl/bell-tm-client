@@ -1,5 +1,13 @@
 <tm-workflow-form-item reviewType="check" [convert]="convert">
+    <ng-template #toolbarTpl>
+        <div class="btn-group ml-2">
+            <button class="btn btn-secondary" (click)="preview = !preview">{{preview ? '取消' : '预览'}}</button>
+        </div>
+    </ng-template>
     <ng-template #viewerTpl let-form="form">
-        <tm-questionnaire-form-viewer [form]="form"></tm-questionnaire-form-viewer>
+        <tm-questionnaire-form-viewer [form]="form" *ngIf="!preview; else previewTpl"></tm-questionnaire-form-viewer>
+        <ng-template #previewTpl>
+            <tm-questionnaire-preview [form]="form"></tm-questionnaire-preview>
+        </ng-template>
     </ng-template>
 </tm-workflow-form-item>

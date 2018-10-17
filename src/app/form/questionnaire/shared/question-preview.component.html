@@ -1,0 +1,46 @@
+<div class="question">
+    <p class="content">{{question.ordinal + 1}}、{{question.content}} <span *ngIf="question.mandatory">*</span></p>
+    <form [ngSwitch]="question.type">
+        <ng-container *ngSwitchCase="0">
+            <textarea *ngIf="question.stepValue != 1; else singleLine" class="form-control" [rows]="question.stepValue" style="resize: none"></textarea>
+            <ng-template #singleLine>
+                <input type="text" class="form-control">
+            </ng-template>
+            <small class="form-text text-muted">限制输入{{question.minValue}}-{{question.maxValue}}个字符。</small>
+        </ng-container>
+        <div class="option-pane" *ngSwitchCase="1">
+            <div class="form-check col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options; index as i">
+                <input class="form-check-input" type="radio" id="q-{{question.ordinal}}-{{option.ordinal}}" name="q-{{question.ordinal}}">
+                <label class="form-check-label" for="q-{{question.ordinal}}-{{option.ordinal}}">{{option.content}}</label>
+            </div>
+            <div class="form-check col-md-12" *ngIf="question.openEnded">
+                <input class="form-check-input" type="radio" id="q-{{question.ordinal}}-open" name="q-{{question.ordinal}}" #openRadio>
+                <label class="form-check-label" for="q-{{question.ordinal}}-open">{{question.openLabel ? question.openLabel : '其他'}}</label>
+                <input class="form-control" type="text" (keyup)="openRadio.checked = !!$event.target.value">
+            </div>
+        </div>
+        <div class="option-pane" *ngSwitchCase="2">
+            <div class="form-check col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
+                <input class="form-check-input" type="checkbox" id="q-{{question.ordinal}}-{{option.ordinal}}">
+                <label class="form-check-label" for="q-{{question.ordinal}}-{{option.ordinal}}">{{option.content}}</label>
+            </div>
+            <div class="form-check col-md-12" *ngIf="question.openEnded">
+                <input class="form-check-input" type="checkbox" id="q-{{question.ordinal}}-open" #openCheckbox>
+                <label class="form-check-label" for="q-{{question.ordinal}}-open">{{question.openLabel ? question.openLabel : '其他'}}</label>
+                <input class="form-control" type="text" (keyup)="openCheckbox.checked = !!$event.target.value">
+            </div>
+        </div>
+        <ng-container *ngSwitchCase="3">
+            <input type="range" class="form-control-range" id="q-{{question.ordinal}}"
+                [attr.list]="'d-' + question.ordinal"
+                [min]="question.scaleMin"
+                [max]="question.scaleMax"
+                [step]="question.scaleStep"
+                #range>
+            <datalist id="d-{{question.ordinal}}" class="d-flex">
+                <option *ngFor="let v of question.scaleValues; first as f; last as l" [value]="v"
+                    [style.width]="(100 / (question.scaleCount - 1) / (f || l  ? 2 : 1)) + '%'">{{v}}</option>
+            </datalist>
+        </ng-container>
+    </form>
+</div>

@@ -1,0 +1,24 @@
+.question {
+    margin-bottom: 1rem;
+    .content {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.option-pane {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+datalist {
+    option {
+        text-align: center;
+        &:first-child {
+            text-align: left;
+        }
+        &:last-child {
+            text-align: right;
+        }
+    }
+}

@@ -9,6 +9,8 @@ import { Questionnaire } from '../../shared/questionnaire-form.model';
     templateUrl: 'form-item.component.html',
 })
 export class QuestionnaireFormItemComponent {
+    preview = false;
+
     convert(dto: any): WorkflowForm {
         return new (Editable(Questionnaire))(dto);
     }

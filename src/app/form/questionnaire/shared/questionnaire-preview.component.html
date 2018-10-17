@@ -1,0 +1,5 @@
+<h3 class="title">{{form.title}}</h3>
+<pre *ngIf="form.prologue">{{form.prologue}}</pre>
+<tm-question-preview *ngFor="let question of form.questions" [question]="question"></tm-question-preview>
+<pre *ngIf="form.epilogue">{{form.epilogue}}</pre>
+<small class="d-block text-mute">注：本问卷为{{form.anonymous ? '实' : '匿'}}名调查。</small>
