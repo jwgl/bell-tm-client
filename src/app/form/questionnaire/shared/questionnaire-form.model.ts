@@ -1,6 +1,8 @@
+import * as dayjs from 'dayjs';
+
 import { NumberStringOption } from 'core/options';
 import { UserScope, userScopeToString } from './user-scope.model';
-import * as dayjs from 'dayjs';
+import { QUESTIONNAIRE_TYPE_MAP } from './questionnaire-type.model';
 
 export const QUESTION_TYPES: NumberStringOption[] = [
     { label: '开放', value: 0 },
@@ -29,7 +31,9 @@ export const QUESTION_TYPE_OPTIONS = [{
 
 export class Questionnaire {
     id: number;
-    pollsterId: string;
+    pollster: { id: string, name: string };
+    department: { id: string, name: string };
+    type: string;
     title: string;
     prologue: string;
     epilogue: string;
@@ -45,16 +49,17 @@ export class Questionnaire {
     removedQuestions: Question[];
 
     constructor(dto: any) {
-        if (dto.id) {
+        if (dto && dto.id) {
             var { questions, ...others } = dto;
             Object.assign(this, others);
             this.questions = questions.map((question: any) => new Question(question));
         } else {
-            this.pollsterId = dto.pollsterId;
+            Object.assign(this, ...dto);
+            this.type = 'QUESTIONNAIRE';
             this.surveyScope = 'DEPARTMENT';
             this.respondentType = 'STUDENT';
             this.anonymous = true;
-            this.dateExpired = dayjs().add(1, 'month').format('YYYY-MM-DD');
+            this.dateExpired = dayjs().add(1, 'month').format('YYYY-MM-DDTHH:mm');
             this.questions = [];
             this.oriented = [];
             this.restricted = [];
@@ -63,11 +68,13 @@ export class Questionnaire {
     }
 
     get formTitle(): string {
-        return this.id ? `调查问卷申请#${this.id}` : '调查问卷申请';
+        const type = QUESTIONNAIRE_TYPE_MAP[this.type];
+        return this.id ? `${type}申请#${this.id}` : `新建${type}申请`;
     }
 
     get workflowTitle() {
-        return `#${this.id}-${this.title}`;
+        const type = QUESTIONNAIRE_TYPE_MAP[this.type];
+        return `[${type}申请]#${this.id}-${this.title}`;
     }
 
     get orientedText() {

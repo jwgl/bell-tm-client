@@ -1,4 +1,5 @@
 import { Pipe } from '@angular/core';
+
 import { SURVEY_SCOPE_MAP } from './survey-scope.model';
 
 @Pipe({ name: 'surveyScopeText' })

@@ -1,7 +1,45 @@
 <tm-form-title>{{form.formTitle}}</tm-form-title>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label>发起人</label>
+        <p class="form-control-plaintext">{{form.department.name}} {{form.pollster.name}}</p>
+    </div>
+    <div class="form-group col-md-6">
+        <label>是否匿名</label>
+        <p class="form-control-plaintext">{{form.anonymous ? '实' : '匿'}}名调查问卷</p>
+    </div>
+</div>
 <div class="form-group">
-    <label>问卷标题</label>
+    <label>标题</label>
     <p class="form-control-plaintext">{{form.title}}</p>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label>类型</label>
+        <p class="form-control-plaintext">{{form.type | questionnaireTypeText}}</p>
+    </div>
+    <div class="form-group col-md-6">
+        <label>截止时间</label>
+        <p class="form-control-plaintext">{{form.dateExpired | date: 'y-MM-dd HH:mm'}}</p>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label>调查范围</label>
+        <p class="form-control-plaintext">{{form.surveyScope | surveyScopeText}}</p>
+    </div>
+    <div class="form-group col-md-6">
+        <label>调查对象</label>
+        <p class="form-control-plaintext">{{form.respondentType | respondentTypeText}}</p>
+    </div>
+</div>
+<div class="form-group">
+    <label>面向对象</label>
+    <p class="form-control-plaintext">{{form.orientedText}}</p>
+</div>
+<div class="form-group">
+    <label>限制对象</label>
+    <p class="form-control-plaintext">{{form.restrictedText}}</p>
 </div>
 <div class="form-group">
     <label>欢迎词</label>
@@ -10,34 +48,6 @@
 <div class="form-group">
     <label>结束语</label>
     <pre class="form-control-plaintext">{{form.epilogue ? form.epilogue : '<未设置>'}}</pre>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="dateExpired">截止日期</label>
-        <p class="form-control-plaintext">{{form.dateExpired | date: 'y-MM-dd'}}</p>
-    </div>
-    <div class="form-group col-md-6">
-        <label for="anonymous">是否匿名</label>
-        <p class="form-control-plaintext">{{form.anonymous ? '实' : '匿'}}名调查问卷</p>
-    </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="surveyScope">调查范围</label>
-        <p class="form-control-plaintext">{{form.surveyScope | surveyScopeText}}</p>
-    </div>
-    <div class="form-group col-md-6">
-        <label for="respondentType">调查对象</label>
-        <p class="form-control-plaintext">{{form.respondentType | respondentTypeText}}</p>
-    </div>
-</div>
-<div class="form-group">
-    <label for="oriented">面向对象</label>
-    <p class="form-control-plaintext">{{form.orientedText}}</p>
-</div>
-<div class="form-group">
-    <label for="restricted">限制对象</label>
-    <p class="form-control-plaintext">{{form.restrictedText}}</p>
 </div>
 <ng-container *ngFor="let question of form.questions">
     <tm-question-form-viewer [question]="question"></tm-question-form-viewer>

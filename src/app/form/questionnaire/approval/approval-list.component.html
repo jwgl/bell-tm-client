@@ -1,5 +1,6 @@
 <tm-workflow-list expend="true">
     <ng-template #theadTpl>
+        <th>申请单位</th>
         <th>申请人</th>
         <th>调查范围</th>
         <th>调查对象</th>
@@ -7,6 +8,7 @@
         <th>标题</th>
     </ng-template>
     <ng-template #tbodyTpl let-form="form">
+        <td>{{form.department}}</td>
         <td>{{form.pollster}}</td>
         <td>{{form.surveyScope | surveyScopeText}}</td>
         <td>{{form.respondentType | respondentTypeText}}</td>

@@ -9,6 +9,7 @@ import { Questionnaire, Question } from '../../shared/questionnaire-form.model';
 import './form-editor.model';
 import { SURVEY_SCOPES } from '../../shared/survey-scope.model';
 import { RESPONDENT_TYPES } from '../../shared/respondent-type.model';
+import { QUESTIONNAIRE_TYPES } from '../../shared/questionnaire-type.model';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
@@ -16,6 +17,7 @@ import { RESPONDENT_TYPES } from '../../shared/respondent-type.model';
 })
 export class QuestionnaireEditorComponent {
     form: Questionnaire;
+    questionnaireTypes: StringStringOption[];
     surveyScopes: StringStringOption[];
     respondentTypes: StringStringOption[];
     today: Date;
@@ -44,6 +46,7 @@ export class QuestionnaireEditorComponent {
 
     onLoadData(dto: any) {
         this.form = new Questionnaire(dto.form);
+        this.questionnaireTypes = QUESTIONNAIRE_TYPES;
         this.surveyScopes = SURVEY_SCOPES.filter(it => dto.surveyScopes.includes(it.value)) ;
         this.respondentTypes = RESPONDENT_TYPES.filter(it => dto.respondentTypes.includes(it.value));
         this.today = new Date(dto.today);

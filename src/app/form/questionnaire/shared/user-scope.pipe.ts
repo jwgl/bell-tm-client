@@ -1,4 +1,5 @@
 import { Pipe } from '@angular/core';
+
 import { userScopeToString, UserScope } from './user-scope.model';
 
 @Pipe({ name: 'userScopeText' })
