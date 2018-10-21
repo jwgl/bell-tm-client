@@ -1,6 +1,6 @@
 <div class="input-group">
     <div class="form-control">
-        <span *ngFor="let userScope of userScopes" class="badge badge-pill badge-secondary">
+        <span *ngFor="let userScope of userScopes" class="badge badge-pill badge-{{scopeClass}}">
             {{userScope | userScopeText: userType}}
             <button class="close" type="button" (click)="remove(userScope)">&times;</button>
         </span>

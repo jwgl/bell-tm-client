@@ -1,0 +1,18 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-secondary" routerLink="create">我参与的问卷</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6" *ngFor="let q of questionnaires">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">{{q.title}}</h5>
+            </div>
+            <div class="card-body">
+                <p>{{q.department}} {{q.pollster}}</p>
+                <a class="btn btn-success" [routerLink]="['/form/q', q.hashId]">{{q.formId?'继续':'参与'}}</a>
+            </div>
+        </div>
+    </div>
+</div>

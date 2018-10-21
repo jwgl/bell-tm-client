@@ -1,0 +1,27 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-secondary' routerLink="../../../../">取消</button>
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving || !form.isValid()">保存</button>
+        </div>
+    </div>
+    <h3 class="title">{{form.questionnaire.title}}</h3>
+    <p *ngIf="form.questionnaire.prologue">亲爱的{{form.questionnaire.respondentType | respondentTypeText:true}}们：</p>
+    <tm-multiple-line *ngIf="form.questionnaire.prologue" [text]="form.questionnaire.prologue"></tm-multiple-line>
+    <ol class="questions">
+        <li class="question" *ngFor="let item of form.items">
+            <tm-response-item-editor [responseItem]="item"></tm-response-item-editor>
+        </li>
+    </ol>
+    <tm-multiple-line *ngIf="form.questionnaire.epilogue" [text]="form.questionnaire.epilogue"></tm-multiple-line>
+    <small class="d-block text-mute">注：本问卷为{{form.questionnaire.anonymous ? '实' : '匿'}}名调查。</small>
+    <ul class="footer">
+        <li><label>发起人</label>{{form.questionnaire.department.name}} {{form.questionnaire.pollster.name}}</li>
+        <li><label>截止时间</label>{{form.questionnaire.dateExpired | date: 'y-MM-dd HH:mm'}}</li>
+    </ul>
+    <div class="btn-toolbar" #bottomToolbar>
+        <div class="btn-group ml-auto">
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving || !form.isValid()">保存</button>
+        </div>
+    </div>
+</ng-container>

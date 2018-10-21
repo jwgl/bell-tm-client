@@ -171,7 +171,7 @@ Question.prototype.toServerDto = function (this: Question): any {
 };
 
 QuestionOption.prototype.toServerDto = function (this: QuestionOption): any {
-    const { id, __updated, ...others } = this;
+    const { id, __updated, question, ...others } = this;
     return id ?
         {
             id,

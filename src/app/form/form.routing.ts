@@ -10,15 +10,18 @@ const routes: Routes = [{
 }, {
     path: 'approvers/:userId/questionnaires',
     loadChildren: './questionnaire/approval/questionnaire-approval.module#QuestionnaireApprovalModule',
+}, {
+    path: 'respondents/:userId/questionnaires',
+    loadChildren: './questionnaire/respondent/respondent-questionnaire.module#RespondentQuestionnaireModule',
+}, {
+    path: 'q/:hashId',
+    loadChildren: './questionnaire/response/response-form.module#ResponseFormModule',
 // }, {
 //     path: 'adminClasses/:adminClassId/questionnaires',
 //     loadChildren: './questionnaire/adminClass/admin-class-questionnaire.module#AdminClassQuestionnaireModule',
 // }, {
 //     path: 'departments/:departmentId/questionnaires',
 //     loadChildren: './questionnaire/department/department-questionnaire.module#DepartmentQuestionnaireModule',
-// }, {
-//     path: 'respondents/:userId/questionnaires',
-//     loadChildren: './questionnaire/respondent/questionnaire-approval.module#RespondentQuestionnaireModule',
 // }, {
 //     path: 'questionnaires',
 //     loadChildren: './questionnaire/public/questionnaires.module#QuestionnaireModule',

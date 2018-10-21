@@ -41,7 +41,7 @@ export class QuestionOptionCreatorComponent {
     }
 
     onCreate() {
-        this.create.emit(new QuestionOption({
+        this.create.emit(new QuestionOption(this.question, {
             ordinal: this.question.options.length,
             content: this.content,
             label: this.label,

@@ -3,8 +3,30 @@
     text-align: center;
 }
 
-pre {
-    white-space: pre-wrap;
-    font-size: 100%;
-    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New";
+tm-multiple-line ::ng-deep {
+    p {
+        text-indent: 2rem;
+    }
+}
+
+ol.questions {
+    padding-inline-start: 2rem;
+    li.question {
+    }
+}
+
+ul.footer {
+    margin-top: 1rem;
+    margin-left: auto;
+    list-style: none;
+    display: table;
+    li {
+        display: table-row;
+        label {
+            display: table-cell;
+            text-align: right;
+            padding-right: 1rem;
+            font-weight: inherit;
+        }
+    }
 }

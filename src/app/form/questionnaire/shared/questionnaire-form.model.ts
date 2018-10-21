@@ -2,7 +2,7 @@ import * as dayjs from 'dayjs';
 
 import { NumberStringOption } from 'core/options';
 import { UserScope, userScopeToString } from './user-scope.model';
-import { QUESTIONNAIRE_TYPE_MAP } from './questionnaire-type.model';
+import { SURVEY_TYPE_MAP } from './survey-type.model';
 
 export const QUESTION_TYPES: NumberStringOption[] = [
     { label: '开放', value: 0 },
@@ -33,16 +33,17 @@ export class Questionnaire {
     id: number;
     pollster: { id: string, name: string };
     department: { id: string, name: string };
-    type: string;
     title: string;
     prologue: string;
     epilogue: string;
+    surveyType: string;
     surveyScope: string;
     respondentType: string;
     oriented: UserScope[];
     restricted: UserScope[];
     anonymous: boolean;
     dateExpired: string;
+    published: boolean;
     workflowInstanceId: string;
     status: string;
     questions: Question[];
@@ -55,11 +56,12 @@ export class Questionnaire {
             this.questions = questions.map((question: any) => new Question(question));
         } else {
             Object.assign(this, ...dto);
-            this.type = 'QUESTIONNAIRE';
+            this.surveyType = 'QUESTIONNAIRE';
             this.surveyScope = 'DEPARTMENT';
             this.respondentType = 'STUDENT';
             this.anonymous = true;
             this.dateExpired = dayjs().add(1, 'month').format('YYYY-MM-DDTHH:mm');
+            this.published = false;
             this.questions = [];
             this.oriented = [];
             this.restricted = [];
@@ -68,13 +70,12 @@ export class Questionnaire {
     }
 
     get formTitle(): string {
-        const type = QUESTIONNAIRE_TYPE_MAP[this.type];
-        return this.id ? `${type}申请#${this.id}` : `新建${type}申请`;
+        const type = SURVEY_TYPE_MAP[this.surveyType];
+        return this.id ? `${type}#${this.id}` : `新建${type}`;
     }
 
     get workflowTitle() {
-        const type = QUESTIONNAIRE_TYPE_MAP[this.type];
-        return `[${type}申请]#${this.id}-${this.title}`;
+        return `${this.formTitle}-${this.title}`;
     }
 
     get orientedText() {
@@ -110,8 +111,8 @@ export class Question {
     constructor(dto: any) {
         var { options, removedOptions, ...others } = dto;
         Object.assign(this, others);
-        this.options = options ? options.map(option => new QuestionOption(option)) : [];
-        this.removedOptions = removedOptions ? removedOptions.map(option => new QuestionOption(option)) : [];
+        this.options = options ? options.map(option => new QuestionOption(this, option)) : [];
+        this.removedOptions = removedOptions ? removedOptions.map(option => new QuestionOption(this, option)) : [];
     }
 
     static newInstance(ordinal: number) {
@@ -154,6 +155,30 @@ export class Question {
     get typeOptions() {
         return QUESTION_TYPE_OPTIONS[this.type];
     }
+
+    get controlId() {
+        return `q-${this.ordinal}`;
+    }
+
+    get controlName() {
+        return this.controlId;
+    }
+
+    get openControlId() {
+        return `q-${this.ordinal}-o`;
+    }
+
+    get openControlName() {
+        if (this.type === 1) {
+            return this.controlName;
+        } else {
+            return this.openControlId;
+        }
+    }
+
+    get textValueName() {
+        return `q-${this.ordinal}-t`
+    }
 }
 
 export class QuestionOption {
@@ -162,8 +187,22 @@ export class QuestionOption {
     content: string;
     label: string;
     value: number;
-
-    constructor(dto: any) {
+    question: Question;
+    constructor(question: Question, dto: any) {
+        this.question = question;
         Object.assign(this, dto);
+    }
+
+    get controlId(): string {
+        return `q-${this.question.ordinal}-${this.ordinal}`;
+    }
+
+    get controlName(): string {
+        switch (this.question.type) {
+            case 1:
+                return this.question.controlName;
+            case 2:
+                return this.controlId;
+        }
     }
 }

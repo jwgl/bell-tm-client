@@ -8,9 +8,9 @@ import { QuestionnaireFormViewerComponent } from './questionnaire-form-viewer.co
 import { QuestionFormViewerComponent } from './question-form-viewer.component';
 import { QuestionnairePreviewComponent } from './questionnaire-preview.component';
 import { QuestionPreviewComponent } from './question-preview.component';
-import { QuestionnaireTypeTextPipe } from './questionnaire-type.pipe';
-import { UserScopeTextPipe } from './user-scope.pipe';
+import { SurveyTypeTextPipe } from './survey-type.pipe';
 import { SurveyScopeTextPipe } from './survey-scope.pipe';
+import { UserScopeTextPipe } from './user-scope.pipe';
 import { RespondentTypeTextPipe } from './respondent-type.pipe';
 
 @NgModule({
@@ -24,18 +24,18 @@ import { RespondentTypeTextPipe } from './respondent-type.pipe';
         QuestionFormViewerComponent,
         QuestionnairePreviewComponent,
         QuestionPreviewComponent,
-        QuestionnaireTypeTextPipe,
-        UserScopeTextPipe,
+        SurveyTypeTextPipe,
         SurveyScopeTextPipe,
         RespondentTypeTextPipe,
+        UserScopeTextPipe,
     ],
     exports: [
         QuestionnaireFormViewerComponent,
         QuestionnairePreviewComponent,
-        QuestionnaireTypeTextPipe,
-        UserScopeTextPipe,
         SurveyScopeTextPipe,
+        SurveyTypeTextPipe,
         RespondentTypeTextPipe,
+        UserScopeTextPipe,
     ],
 })
 export class QuestionnaireSharedModule { }

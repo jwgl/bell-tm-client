@@ -9,9 +9,9 @@
             <thead>
                 <tr>
                     <th>申请单号</th>
+                    <th>调查类型</th>
                     <th>调查范围</th>
                     <th>调查对象</th>
-                    <th>类别</th>
                     <th>标题</th>
                     <th>修改时间</th>
                     <th>状态</th>
@@ -20,9 +20,9 @@
             <tbody>
                 <tr *ngFor="let form of forms">
                     <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
+                    <td>{{form.surveyType | surveyTypeText}}</td>
                     <td>{{form.surveyScope | surveyScopeText}}</td>
                     <td>{{form.respondentType | respondentTypeText}}</td>
-                    <td>{{form.type | questionnaireTypeText}}</td>
                     <td class="expand">{{form.title}}</td>
                     <td>{{form.dateModified | date: 'y-MM-dd HH:mm'}}</td>
                     <td><audit-status [status]="form.status"></audit-status></td>

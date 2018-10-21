@@ -21,6 +21,9 @@ export class UserScopeEditorComponent {
     @Input()
     userType: number;
 
+    @Input()
+    scopeClass: string;
+
     constructor(private selectService: UserScopeSelectDialogService) {
     }
 

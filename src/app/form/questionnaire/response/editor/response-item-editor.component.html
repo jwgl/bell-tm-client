@@ -1,0 +1,80 @@
+<div class="question">
+    <p class="content">{{question.content}} <span *ngIf="question.mandatory">*</span></p>
+    <form [ngSwitch]="question.type">
+        <ng-container *ngSwitchCase="0">
+            <textarea *ngIf="question.stepValue != 1; else singleLine" class="form-control" style="resize: none"
+                [name]="question.controlName"
+                [rows]="question.stepValue"
+                [(ngModel)]="responseItem.textValue"></textarea>
+            <ng-template #singleLine>
+                <input type="text" class="form-control"
+                [name]="question.controlName"
+                [(ngModel)]="responseItem.textValue">
+            </ng-template>
+            <small class="form-text text-muted">限制输入{{question.minValue}}-{{question.maxValue}}个字符。</small>
+        </ng-container>
+        <div class="option-pane" *ngSwitchCase="1">
+            <div class="form-check col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
+                <input class="form-check-input" type="radio"
+                    [id]="option.controlId"
+                    [name]="option.controlName"
+                    [value]="option"
+                    [(ngModel)]="responseItem.choice"
+                    (ngModelChange)="responseItem.textValue = null"
+                    (click)="onRadioToggle(option)">
+                <label class="form-check-label" [attr.for]="option.controlId">{{option.content}}</label>
+            </div>
+            <div class="form-check col-md-12" *ngIf="question.openEnded">
+                <input class="form-check-input" type="radio" disabled
+                    [name]="question.openControlName"
+                    [checked]="!!responseItem.textValue">
+                <label class="form-check-label" [attr.for]="question.openControlId">
+                    {{question.openLabel ? question.openLabel : '其他'}}
+                </label>
+                <input class="form-control" type="text"
+                    [id]="question.openControlId"
+                    [name]="question.textValueName"
+                    [(ngModel)]="responseItem.textValue"
+                    (ngModelChange)="responseItem.choice = null">
+            </div>
+        </div>
+        <div class="option-pane" *ngSwitchCase="2">
+            <div class="form-check col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
+                <input class="form-check-input" type="checkbox"
+                    [id]="option.controlId"
+                    [name]="option.controlName"
+                    [(ngModel)]="option.selected">
+                <label class="form-check-label" [attr.for]="option.controlId">{{option.content}}</label>
+            </div>
+            <div class="form-check col-md-12" *ngIf="question.openEnded">
+                <input class="form-check-input" type="checkbox" disabled
+                    [name]="question.openControlName"
+                    [checked]="!!responseItem.textValue"
+                    (change)="onOpenCheckChanged($event.checked)">
+                <label class="form-check-label" [attr.for]="question.openControlId">
+                    {{question.openLabel ? question.openLabel : '其他'}}
+                </label>
+                <input class="form-control" type="text"
+                    [id]="question.openControlId"
+                    [name]="question.textValueName"
+                    [(ngModel)]="responseItem.textValue">
+                <small class="text-muted">使用分号分隔多个选项</small>
+            </div>
+        </div>
+        <ng-container *ngSwitchCase="3">
+            <input type="range" class="form-control-range" id="q-{{question.ordinal}}"
+                [attr.list]="'d-' + question.ordinal"
+                [min]="question.scaleMin"
+                [max]="question.scaleMax"
+                [step]="question.scaleStep"
+                [name]="question.controlName"
+                [(ngModel)]="responseItem.intValue"
+                #range>
+            <datalist id="d-{{question.ordinal}}" class="d-flex">
+                <option *ngFor="let v of question.scaleValues; first as f; last as l" [value]="v"
+                    [style.width]="(100 / (question.scaleCount - 1) / (f || l  ? 2 : 1)) + '%'">{{v}}</option>
+            </datalist>
+        </ng-container>
+    </form>
+</div>
+

@@ -1,5 +1,5 @@
 <div class="question">
-    <p class="content">{{question.ordinal + 1}}、{{question.content}} <span *ngIf="question.mandatory">*</span></p>
+    <p class="content">{{question.content}} <span *ngIf="question.mandatory">*</span></p>
     <form [ngSwitch]="question.type">
         <ng-container *ngSwitchCase="0">
             <textarea *ngIf="question.stepValue != 1; else singleLine" class="form-control" [rows]="question.stepValue" style="resize: none"></textarea>

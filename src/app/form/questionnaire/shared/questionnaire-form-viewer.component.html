@@ -1,34 +1,18 @@
 <tm-form-title>{{form.formTitle}}</tm-form-title>
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label>发起人</label>
-        <p class="form-control-plaintext">{{form.department.name}} {{form.pollster.name}}</p>
-    </div>
-    <div class="form-group col-md-6">
-        <label>是否匿名</label>
-        <p class="form-control-plaintext">{{form.anonymous ? '实' : '匿'}}名调查问卷</p>
-    </div>
-</div>
 <div class="form-group">
     <label>标题</label>
     <p class="form-control-plaintext">{{form.title}}</p>
 </div>
 <div class="form-row">
-    <div class="form-group col-md-6">
-        <label>类型</label>
-        <p class="form-control-plaintext">{{form.type | questionnaireTypeText}}</p>
+    <div class="form-group col-md-4">
+        <label>调查类型</label>
+        <p class="form-control-plaintext">{{form.surveyType | surveyTypeText}}</p>
     </div>
-    <div class="form-group col-md-6">
-        <label>截止时间</label>
-        <p class="form-control-plaintext">{{form.dateExpired | date: 'y-MM-dd HH:mm'}}</p>
-    </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
         <label>调查范围</label>
         <p class="form-control-plaintext">{{form.surveyScope | surveyScopeText}}</p>
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
         <label>调查对象</label>
         <p class="form-control-plaintext">{{form.respondentType | respondentTypeText}}</p>
     </div>
@@ -41,14 +25,35 @@
     <label>限制对象</label>
     <p class="form-control-plaintext">{{form.restrictedText}}</p>
 </div>
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <label>发起人</label>
+        <p class="form-control-plaintext">{{form.department.name}} {{form.pollster.name}}</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>是否匿名</label>
+        <p class="form-control-plaintext">{{form.anonymous ? '实' : '匿'}}名调查问卷</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>截止时间</label>
+        <p class="form-control-plaintext">{{form.dateExpired | date: 'y-MM-dd HH:mm'}}</p>
+    </div>
+</div>
 <div class="form-group">
     <label>欢迎词</label>
-    <pre class="form-control-plaintext">{{form.prologue ? form.prologue : '<未设置>'}}</pre>
+    <div class="form-control-plaintext">
+        <tm-multiple-line *ngIf="form.prologue; else emptyFieldTpl" [text]="form.prologue"></tm-multiple-line>
+    </div>
 </div>
 <div class="form-group">
     <label>结束语</label>
-    <pre class="form-control-plaintext">{{form.epilogue ? form.epilogue : '<未设置>'}}</pre>
+    <div class="form-control-plaintext">
+        <tm-multiple-line *ngIf="form.epilogue; else emptyFieldTpl" [text]="form.epilogue"></tm-multiple-line>
+    </div>
 </div>
 <ng-container *ngFor="let question of form.questions">
     <tm-question-form-viewer [question]="question"></tm-question-form-viewer>
 </ng-container>
+<ng-template #emptyFieldTpl>
+    <未设置>
+</ng-template>

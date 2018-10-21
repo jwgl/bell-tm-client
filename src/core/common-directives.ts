@@ -49,6 +49,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faMinusSquare, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { ProvideParentForm } from './directives/provide-parent-form';
+import { MultipleLineComponent } from './components/multiple-line.component';
 
 library.add(
     faSpinner, faTimes, faPlus, faTrashAlt, faEdit,
@@ -72,6 +73,7 @@ const CORE_DIRECTIVES: any[] = [
     RemoveItemComponent,
     ScheduleTimetableComponent,
     ScheduleWeektabComponent,
+    MultipleLineComponent,
     // bootstrap form directives
     FormDirective,
     FormControlDirective,
