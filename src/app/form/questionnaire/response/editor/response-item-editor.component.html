@@ -1,5 +1,6 @@
 <div class="question">
     <p class="content">{{question.content}} <span *ngIf="question.mandatory">*</span></p>
+    {{responseItem.toServerDto() | json}}
     <form [ngSwitch]="question.type">
         <ng-container *ngSwitchCase="0">
             <textarea *ngIf="question.stepValue != 1; else singleLine" class="form-control" style="resize: none"
@@ -68,8 +69,7 @@
                 [max]="question.scaleMax"
                 [step]="question.scaleStep"
                 [name]="question.controlName"
-                [(ngModel)]="responseItem.intValue"
-                #range>
+                [(ngModel)]="responseItem.intValue">
             <datalist id="d-{{question.ordinal}}" class="d-flex">
                 <option *ngFor="let v of question.scaleValues; first as f; last as l" [value]="v"
                     [style.width]="(100 / (question.scaleCount - 1) / (f || l  ? 2 : 1)) + '%'">{{v}}</option>

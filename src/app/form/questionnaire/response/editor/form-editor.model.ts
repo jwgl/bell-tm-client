@@ -1,14 +1,13 @@
 import * as _ from 'lodash';
 
 import { Questionnaire, Question, QuestionOption } from '../../shared/questionnaire-form.model';
-import { ResponseForm, ResponseItem, ResponsePick, ResponseItemDto } from '../../shared/response-form.model';
+import { ResponseForm, ResponseItem, ResponseItemDto } from '../../shared/response-form.model';
 
 declare module '../../shared/questionnaire-form.model' {
     interface QuestionOption {
         selected: boolean;
     }
 }
-
 
 declare module '../../shared/response-form.model' {
     interface ResponseForm {
@@ -19,14 +18,6 @@ declare module '../../shared/response-form.model' {
     interface ResponseItem {
         isValid(): boolean;
         toServerDto(): any;
-        markUpdated(): void;
-        __updated: boolean;
-    }
-
-    interface ResponsePick {
-        toServerDto(): any;
-        markUpdated(): void;
-        __updated: boolean;
     }
 }
 
