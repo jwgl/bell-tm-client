@@ -65,11 +65,11 @@
         <ng-container *ngSwitchCase="3">
             <input type="range" class="form-control-range" id="q-{{question.ordinal}}"
                 [attr.list]="'d-' + question.ordinal"
+                [step]="question.scaleStep"
                 [min]="question.scaleMin"
                 [max]="question.scaleMax"
-                [step]="question.scaleStep"
                 [name]="question.controlName"
-                [(ngModel)]="responseItem.intValue">
+                [(ngModel)]="responseItem.intValue" #rangeElement>
             <datalist id="d-{{question.ordinal}}" class="d-flex">
                 <option *ngFor="let v of question.scaleValues; first as f; last as l" [value]="v"
                     [style.width]="(100 / (question.scaleCount - 1) / (f || l  ? 2 : 1)) + '%'">{{v}}</option>

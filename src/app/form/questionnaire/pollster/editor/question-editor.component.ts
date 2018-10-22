@@ -3,6 +3,7 @@ import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, 
 import { NumberStringOption } from 'core/options';
 
 import { Question, QuestionOption, QUESTION_TYPES } from '../../shared/questionnaire-form.model';
+import { QuestionType } from '../../shared/question-type.model';
 
 @Component({
     selector: 'tm-question-editor',
@@ -44,7 +45,7 @@ export class QuestionEditorComponent implements OnInit, AfterViewInit {
         this.question.minValue = this.question.typeOptions.min.default;
         this.question.maxValue = this.question.typeOptions.max.default;
         this.question.stepValue = this.question.typeOptions.step.default;
-        if (this.question.type === 0 || this.question.type === 3) {
+        if (this.question.type === QuestionType.TEXT || this.question.type === QuestionType.SCALE) {
             this.question.openEnded = false;
         }
     }
@@ -62,8 +63,8 @@ export class QuestionEditorComponent implements OnInit, AfterViewInit {
     }
 
     onTypeChanged(select: HTMLSelectElement, type: number): void {
-        if ((this.question.type === 1 || this.question.type === 2)
-            && (type === 0 || type === 3)
+        if ((this.question.type === QuestionType.SINGLE || this.question.type === QuestionType.MUTIPLE)
+            && (type === QuestionType.TEXT || type === QuestionType.SCALE)
             && this.question.options.length > 0) {
             if (window.confirm('修改问题类型将删除所有选项，确定要继续吗？')) {
                 this.question.options = [];

@@ -3,6 +3,7 @@ import * as dayjs from 'dayjs';
 import { NumberStringOption } from 'core/options';
 import { UserScope, userScopeToString } from './user-scope.model';
 import { SURVEY_TYPE_MAP } from './survey-type.model';
+import { QuestionType } from './question-type.model';
 
 export const QUESTION_TYPES: NumberStringOption[] = [
     { label: '开放', value: 0 },
@@ -43,7 +44,7 @@ export class Questionnaire {
     restricted: UserScope[];
     anonymous: boolean;
     dateExpired: string;
-    published: boolean;
+    hashId: string;
     workflowInstanceId: string;
     status: string;
     questions: Question[];
@@ -61,7 +62,6 @@ export class Questionnaire {
             this.respondentType = 'STUDENT';
             this.anonymous = true;
             this.dateExpired = dayjs().add(1, 'month').format('YYYY-MM-DDTHH:mm');
-            this.published = false;
             this.questions = [];
             this.oriented = [];
             this.restricted = [];
@@ -169,7 +169,7 @@ export class Question {
     }
 
     get openControlName() {
-        if (this.type === 1) {
+        if (this.type === QuestionType.SINGLE) {
             return this.controlName;
         } else {
             return this.openControlId;
@@ -199,9 +199,9 @@ export class QuestionOption {
 
     get controlName(): string {
         switch (this.question.type) {
-            case 1:
+            case QuestionType.SINGLE:
                 return this.question.controlName;
-            case 2:
+            case QuestionType.MUTIPLE:
                 return this.controlId;
         }
     }

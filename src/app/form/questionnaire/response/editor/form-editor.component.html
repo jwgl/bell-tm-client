@@ -1,8 +1,8 @@
-<ng-container *ngIf="form">
-    <div class="btn-toolbar">
+<ng-container *ngIf="form; else emptyTpl">
+    <div class="btn-toolbar" *ngIf="!form.dateSubmitted">
         <div class="btn-group ml-auto">
-            <button class='btn btn-secondary' routerLink="../../../../">取消</button>
-            <button class='btn btn-primary' (click)="save()" [disabled]="saving || !form.isValid()">保存</button>
+            <button class='btn btn-secondary' (click)="onSave()" [disabled]="saving">保存</button>
+            <button class='btn btn-primary' (click)="onSubmit()" [disabled]="saving || !form.isValid()">提交</button>
         </div>
     </div>
     <h3 class="title">{{form.questionnaire.title}}</h3>
@@ -19,9 +19,16 @@
         <li><label>发起人</label>{{form.questionnaire.department.name}} {{form.questionnaire.pollster.name}}</li>
         <li><label>截止时间</label>{{form.questionnaire.dateExpired | date: 'y-MM-dd HH:mm'}}</li>
     </ul>
-    <div class="btn-toolbar" #bottomToolbar>
+    <div class="btn-toolbar" *ngIf="!form.dateSubmitted" #bottomToolbar>
         <div class="btn-group ml-auto">
-            <button class='btn btn-primary' (click)="save()" [disabled]="saving || !form.isValid()">保存</button>
+            <button class='btn btn-secondary' (click)="save()" [disabled]="saving">保存</button>
+            <button class='btn btn-primary' (click)="submit()" [disabled]="saving || !form.isValid()">提交</button>
         </div>
     </div>
 </ng-container>
+<ng-template #emptyTpl>
+    <p *ngIf="loading; else errorTpl">正在加载...</p>
+</ng-template>
+<ng-template #errorTpl>
+    <div class="alert alert-warning">感谢您的参与，问卷不存在或尚未发布。</div>
+</ng-template>

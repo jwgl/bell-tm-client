@@ -35,8 +35,7 @@
                 [attr.list]="'d-' + question.ordinal"
                 [min]="question.scaleMin"
                 [max]="question.scaleMax"
-                [step]="question.scaleStep"
-                #range>
+                [step]="question.scaleStep">
             <datalist id="d-{{question.ordinal}}" class="d-flex">
                 <option *ngFor="let v of question.scaleValues; first as f; last as l" [value]="v"
                     [style.width]="(100 / (question.scaleCount - 1) / (f || l  ? 2 : 1)) + '%'">{{v}}</option>

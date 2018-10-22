@@ -2,12 +2,15 @@ import { Questionnaire, Question, QuestionOption } from './questionnaire-form.mo
 
 export class ResponseForm {
     id: number;
+    dateSubmitted: string;
     items: ResponseItem[];
     questionnaire: Questionnaire;
+
     constructor(dto: { form: any, questionnaire: any }) {
         this.questionnaire = new Questionnaire(dto.questionnaire);
         if (dto.form.id) {
             this.id = dto.form.id;
+            this.dateSubmitted = dto.form.dateSubmitted;
             this.items = this.questionnaire.questions.map(question => new ResponseItem(dto.form.items.find(item => item.question == question.id), question));
         } else {
             this.items = this.questionnaire.questions.map(question => new ResponseItem(null, question));

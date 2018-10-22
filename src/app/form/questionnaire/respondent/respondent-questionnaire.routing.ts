@@ -6,7 +6,16 @@ import { QuestionnaireItemComponent } from './item/questionnaire-item.component'
 
 const routes: Routes = [{
     path: '',
+    redirectTo: 'open',
+    pathMatch: 'full',
+}, {
+    path: 'open',
     component: QuestionnaireListComponent,
+    data: { category: 'open' },
+}, {
+    path: 'submitted',
+    component: QuestionnaireListComponent,
+    data: { category: 'submitted' },
 }, {
     path: ':id',
     component: QuestionnaireItemComponent,

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResponseFormService } from '../response-form.service';
 import { ResponseForm } from '../../shared/response-form.model';
 import './form-editor.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
@@ -14,6 +15,8 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
 
     form: ResponseForm;
     saving = false;
+    loading = false;
+    toolbarInit = false;
 
     constructor(
         private router: Router,
@@ -21,21 +24,46 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
         private service: ResponseFormService,
     ) {
         this.route.params.subscribe(params => {
-            this.service.loadData(params['hashId']).subscribe(dto => this.form = new ResponseForm(dto));
+            this.loading = true;
+            this.service.loadData(params['hashId']).pipe().subscribe(dto => {
+                this.form = new ResponseForm(dto);
+                this.loading = false;
+            }, error => {
+                this.loading = false;
+            });
         });
     }
 
-    save() {
-        if (this.form.id) {
-            this.update();
-        } else {
-            this.create();
+    ngAfterViewChecked(): void {
+        if (!this.toolbarInit && this.form && this.bottomToolbar) {
+            this.toolbarInit = true;
+            const toolbar = this.bottomToolbar.nativeElement as HTMLElement;
+            const rect = toolbar.getBoundingClientRect();
+            if (rect.top <= (window.innerHeight || document.documentElement.clientHeight)) {
+                toolbar.style.display = 'none';
+            }
         }
     }
 
-    create() {
+    onSave() {
+        if (this.form.id) {
+            this.update();
+        } else {
+            this.create(false);
+        }
+    }
+
+    onSubmit() {
+        if (this.form.id) {
+            this.submit();
+        } else {
+            this.create(true);
+        }
+    }
+
+    private create(submit: boolean) {
         this.saving = true;
-        this.service.create(this.form.questionnaire.id, this.form.toServerDto()).subscribe(dto => {
+        this.service.create(this.form.questionnaire.id, this.form.toServerDto(), submit).subscribe(dto => {
             this.form = new ResponseForm(dto);
             this.saving = false;
         }, error => {
@@ -44,7 +72,7 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
         });
     }
 
-    update() {
+    private update() {
         this.saving = true;
         this.service.update(this.form.questionnaire.id, this.form.toServerDto()).subscribe(dto => {
             this.form = new ResponseForm(dto)
@@ -55,13 +83,14 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
         });
     }
 
-    ngAfterViewChecked(): void {
-        if (this.form) {
-            const toolbar = this.bottomToolbar.nativeElement as HTMLElement;
-            const rect = toolbar.getBoundingClientRect();
-            if (rect.top <= (window.innerHeight || document.documentElement.clientHeight)) {
-                toolbar.style.display = 'none';
-            }
-        }
+    private submit() {
+        this.saving = true;
+        this.service.submit(this.form.questionnaire.id).subscribe(dto => {
+            this.form = new ResponseForm(dto)
+            this.saving = false;
+        }, error => {
+            this.saving = false;
+            alert(error.message);
+        });
     }
 }

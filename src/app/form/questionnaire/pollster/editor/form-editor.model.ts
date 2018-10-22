@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 
 import { Questionnaire, Question, QuestionOption } from '../../shared/questionnaire-form.model';
+import { QuestionType } from '../../shared/question-type.model';
 
 declare module '../../shared/questionnaire-form.model' {
     interface Questionnaire {
@@ -152,7 +153,9 @@ Question.prototype.movedownItem = function (this: Question, item: QuestionOption
 Question.prototype.isValid = function (this: Question): boolean {
     return this.title && this.title.length <= 100
         && this.content && this.content.length <= 500
-        && (this.type === 0 || this.type === 3 || this.options.length > 1);
+        && (this.type === QuestionType.TEXT ||
+            this.type === QuestionType.SCALE ||
+            this.options.length > 1);
 };
 
 Question.prototype.toServerDto = function (this: Question): any {

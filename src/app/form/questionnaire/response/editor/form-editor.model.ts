@@ -87,7 +87,6 @@ ResponseItem.prototype.toServerDto = function (this: ResponseItem): ResponseItem
             }
             break;
     }
-
     return response ? {
         id: this.id,
         question: this.question.id,
