@@ -1,7 +1,13 @@
 <tm-form-title>{{form.formTitle}}</tm-form-title>
-<div class="form-group">
-    <label>标题</label>
-    <p class="form-control-plaintext">{{form.title}}</p>
+<div class="form-row">
+    <div class="form-group col-md-8">
+        <label>标题</label>
+        <p class="form-control-plaintext">{{form.title}}</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>截止时间</label>
+        <p class="form-control-plaintext">{{form.dateExpired | date: 'y-MM-dd HH:mm'}}</p>
+    </div>
 </div>
 <div class="form-row">
     <div class="form-group col-md-4">
@@ -32,11 +38,11 @@
     </div>
     <div class="form-group col-md-4">
         <label>是否匿名</label>
-        <p class="form-control-plaintext">{{form.anonymous ? '实' : '匿'}}名调查问卷</p>
+        <p class="form-control-plaintext">{{form.anonymous ? '匿' : '实'}}名调查问卷</p>
     </div>
     <div class="form-group col-md-4">
-        <label>截止时间</label>
-        <p class="form-control-plaintext">{{form.dateExpired | date: 'y-MM-dd HH:mm'}}</p>
+        <label>响应可见性</label>
+        <p class="form-control-plaintext">{{form.responseVisibility | responseVisibilityText }}</p>
     </div>
 </div>
 <div class="form-group">

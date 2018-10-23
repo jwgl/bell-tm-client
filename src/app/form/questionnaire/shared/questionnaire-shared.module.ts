@@ -12,6 +12,7 @@ import { SurveyTypeTextPipe } from './survey-type.pipe';
 import { SurveyScopeTextPipe } from './survey-scope.pipe';
 import { UserScopeTextPipe } from './user-scope.pipe';
 import { RespondentTypeTextPipe } from './respondent-type.pipe';
+import { ResponseVisibilityTextPipe } from './response-visibility.pipe';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import { RespondentTypeTextPipe } from './respondent-type.pipe';
         SurveyScopeTextPipe,
         RespondentTypeTextPipe,
         UserScopeTextPipe,
+        ResponseVisibilityTextPipe,
     ],
     exports: [
         QuestionnaireFormViewerComponent,
@@ -36,6 +38,7 @@ import { RespondentTypeTextPipe } from './respondent-type.pipe';
         SurveyTypeTextPipe,
         RespondentTypeTextPipe,
         UserScopeTextPipe,
+        ResponseVisibilityTextPipe,
     ],
 })
 export class QuestionnaireSharedModule { }

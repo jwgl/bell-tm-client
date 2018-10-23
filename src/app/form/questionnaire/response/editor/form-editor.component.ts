@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResponseFormService } from '../response-form.service';
 import { ResponseForm } from '../../shared/response-form.model';
 import './form-editor.model';
-import { finalize } from 'rxjs/operators';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
@@ -19,7 +18,6 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
     toolbarInit = false;
 
     constructor(
-        private router: Router,
         private route: ActivatedRoute,
         private service: ResponseFormService,
     ) {
@@ -30,6 +28,7 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
                 this.loading = false;
             }, error => {
                 this.loading = false;
+                alert(error);
             });
         });
     }

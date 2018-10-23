@@ -43,6 +43,7 @@ export class Questionnaire {
     oriented: UserScope[];
     restricted: UserScope[];
     anonymous: boolean;
+    responseVisibility: string;
     dateExpired: string;
     hashId: string;
     workflowInstanceId: string;
@@ -60,6 +61,7 @@ export class Questionnaire {
             this.surveyType = 'QUESTIONNAIRE';
             this.surveyScope = 'DEPARTMENT';
             this.respondentType = 'STUDENT';
+            this.responseVisibility = 'INVISIBLE';
             this.anonymous = true;
             this.dateExpired = dayjs().add(1, 'month').format('YYYY-MM-DDTHH:mm');
             this.questions = [];

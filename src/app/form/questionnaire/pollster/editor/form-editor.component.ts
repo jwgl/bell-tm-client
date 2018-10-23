@@ -10,6 +10,7 @@ import './form-editor.model';
 import { SURVEY_TYPES } from '../../shared/survey-type.model';
 import { SURVEY_SCOPES } from '../../shared/survey-scope.model';
 import { RESPONDENT_TYPES } from '../../shared/respondent-type.model';
+import { RESPONSE_VISIBILITIES } from '../../shared/response-visibility.model';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
@@ -20,7 +21,8 @@ export class QuestionnaireEditorComponent {
     surveyTypes: StringStringOption[];
     surveyScopes: StringStringOption[];
     respondentTypes: StringStringOption[];
-    today: Date;
+    responseVisibilities: StringStringOption[];
+
     selectedQuestion: Question;
     saving = false;
 
@@ -49,7 +51,7 @@ export class QuestionnaireEditorComponent {
         this.surveyTypes = SURVEY_TYPES;
         this.surveyScopes = SURVEY_SCOPES.filter(it => dto.surveyScopes.includes(it.value)) ;
         this.respondentTypes = RESPONDENT_TYPES.filter(it => dto.respondentTypes.includes(it.value));
-        this.today = new Date(dto.today);
+        this.responseVisibilities = RESPONSE_VISIBILITIES;
     }
 
     onCreateQuestion() {

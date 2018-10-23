@@ -14,7 +14,7 @@
         </li>
     </ol>
     <tm-multiple-line *ngIf="form.questionnaire.epilogue" [text]="form.questionnaire.epilogue"></tm-multiple-line>
-    <small class="d-block text-mute">注：本问卷为{{form.questionnaire.anonymous ? '实' : '匿'}}名调查。</small>
+    <small class="d-block text-mute">注：本问卷为{{form.questionnaire.anonymous ? '匿' : '实'}}名调查。</small>
     <ul class="footer">
         <li><label>发起人</label>{{form.questionnaire.department.name}} {{form.questionnaire.pollster.name}}</li>
         <li><label>截止时间</label>{{form.questionnaire.dateExpired | date: 'y-MM-dd HH:mm'}}</li>
