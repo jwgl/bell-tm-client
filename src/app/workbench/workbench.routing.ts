@@ -34,6 +34,9 @@ const routes: Routes = [{
         path: 'dual',
         loadChildren: '../dual/dual.module#DualModule',
     }, {
+        path: 'hunt',
+        loadChildren: '../hunt/hunt.module#HuntModule',
+    }, {
         path: '**',
         component: Page404Component,
     }],

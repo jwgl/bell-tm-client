@@ -7,7 +7,6 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 
-import { ObservationCommonModule } from '../common/observation-common.module';
 import { PipesModule } from '../shared/pipes/observation-pipes.module';
 
 import { AppRoutingModule } from './observer-settings-routing.module';
@@ -29,7 +28,6 @@ library.add(faTimes);
         HttpModule,
         AppRoutingModule,
         PipesModule,
-        ObservationCommonModule,
         FontAwesomeModule,
     ],
     providers: [

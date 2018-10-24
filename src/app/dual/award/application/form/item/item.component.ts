@@ -53,7 +53,7 @@ export class ApplicationItemComponent {
     }
 
     get editAble(): boolean {
-        return this.vm.status === 'CREATED' || this.vm.status === 'REJECTED';
+        return (this.vm.status === 'CREATED' && this.award.isApplyDateValid) || this.vm.status === 'REJECTED';
     }
 
     get paperAble(): boolean {

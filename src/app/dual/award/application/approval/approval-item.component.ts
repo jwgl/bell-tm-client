@@ -28,6 +28,7 @@ export class ApplicationApprovalItemComponent {
     }
 
     onItemLoaded(dto: any) {
+        console.log(dto);
         this.form = new ApplicationForm(dto.form);
         this.settings = new AwardForm(dto.settings);
         this.fileNames = dto.fileNames;

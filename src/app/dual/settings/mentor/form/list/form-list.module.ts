@@ -7,8 +7,6 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 
-import { ObservationCommonModule } from '../../../../../steer/observation/common/observation-common.module';
-
 import { MentorFormDialog } from '../editor/form-editor.component';
 import { MentorListComponent } from './form-list.component';
 
@@ -19,7 +17,6 @@ import { MentorListComponent } from './form-list.component';
         RouterModule,
         CommonDialogsModule,
         CommonDirectivesModule,
-        ObservationCommonModule,
     ],
     declarations: [
         MentorListComponent,

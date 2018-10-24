@@ -1,0 +1,38 @@
+<ng-container *ngIf="vm">
+    <tm-form-title>通知{{vm.id}}</tm-form-title>
+    <div class="row">
+        <div class="form-group col-12">
+            <label class="control-label">标题</label>
+            <div>{{vm.title}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-3">
+            <label class="control-label">开始日期</label>
+            <div>{{vm.startDate}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">截止日期</label>
+            <div><span class={{expireClass(vm.endDate)}}>{{vm.endDate}}</span></div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">审核类型</label>
+            <div>{{vm.type |reviewType: 'text'}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">限制条件</label>
+            <div><span *ngIf="vm.ban">{{vm.ban |level: 'text'}}在研</span></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-12">
+            <label class="control-label">通知内容</label>
+            <div [markdown]="vm.content"></div>
+        </div>
+        <div class="form-group col-12">
+            <label class="control-label">专家注意事项</label>
+            <div [markdown]="vm.remind"></div>
+        </div>
+    </div>
+    <div>图例：<span class="btn btn-danger"></span>表示已过截止日期，禁止相应操作。</div>
+</ng-container>

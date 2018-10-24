@@ -1,0 +1,72 @@
+<modal-dialog modalTitle="添加项目类别">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="类别名称">
+                <input type="text" name="name" class="form-control" [(ngModel)]="form.name" placeholder="输入类别名称" />
+            </form-field>
+            <form-field label="周期（年）">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">校级</span>
+                                <input class="form-control" type="number" name="periodOfUniversity" [(ngModel)]="form.periodOfUniversity" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">市级</span>
+                                <input class="form-control" type="number" name="periodOfCity" [(ngModel)]="form.periodOfCity" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">省级</span>
+                                <input class="form-control" type="number" name="periodOfProvince" [(ngModel)]="form.periodOfProvince" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">国家级</span>
+                                <input class="form-control" type="number" name="periodOfNation" [(ngModel)]="form.periodOfNation" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form-field>
+            <form-field label="是否在用">
+                <input type="checkbox" name="enabled" style="margin-top: .75rem;" [(ngModel)]="form.enabled"/>
+            </form-field>
+            <form-field label="主类">
+                <div #dropdown class="dropdown input-group">
+                    <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" readonly [value]="form.parentName" placeholder="点击选择" *ngIf="pending">
+                    <input type="text" class="form-control" name="parentName" [(ngModel)]="form.parentName" placeholder="主类名称" *ngIf="!pending"/>
+                    <div class="dropdown-menu" style="width: 100%;; padding: 5px;" *ngIf="pending">
+                        <div class="table-wrapper">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr *ngFor="let item of parentTypes" (click)="parentTypeSelected(item)" tabindex="1" class="options">
+                                        <td>{{item.name}}</td>
+                                    </tr>
+                                    <tr (click)="parentTypeCreate()">
+                                        <td class="newOne">新增</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>关闭</button>
+        <button type="button" class="btn btn-primary" (click)="ok()" [disabled]="validate">确定</button>
+    </modal-footer>
+</modal-dialog>

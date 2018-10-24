@@ -1,0 +1,8 @@
+<ng-container *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="ml-auto">
+            <button class="btn btn-secondary ml-2" routerLink="edit">编辑</button>
+        </div>
+    </div>
+    <task-form-viewer [vm]="vm"></task-form-viewer>
+</ng-container>
