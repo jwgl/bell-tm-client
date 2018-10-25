@@ -1,0 +1,142 @@
+<ng-container *ngIf="form !=undefined">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-secondary' (click)="commit()">提交</button>
+            <button class='btn btn-primary' (click)="save()">保存</button>
+        </div>
+    </div>
+    <tm-form-title>项目申报{{form.id}}</tm-form-title>
+    <form role="form">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="control-label">项目名称</label>
+                <input class="form-control" name="name" type="text" [(ngModel)]="form.name" placeholder="申报的项目名称"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">项目类别</label>
+                <select name="subtype" class="form-control" [(ngModel)]="form.subtypeId">
+                    <option value="" disabled>请选择</option>
+                    <option *ngFor="let item of subtypes" [ngValue]="item.id">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">项目等级</label>
+                <select name="level" class="form-control" [(ngModel)]="form.level">
+                    <option *ngFor="let item of levels" [ngValue]="item.value">
+                        {{ item.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">Email</label>
+                <input class="form-control" name="email" type="text" [(ngModel)]="form.email" placeholder="常用电子邮箱"/>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">电话</label>
+                <input class="form-control" name="phone" type="text" [(ngModel)]="form.phone" placeholder="常用手机"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">职称</label>
+                <select name="title" class="form-control" [(ngModel)]="form.title">
+                    <option *ngFor="let item of titles" [ngValue]="item">
+                        {{ item }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">学位</label>
+                <select name="degree" class="form-control" [(ngModel)]="form.degree">
+                    <option *ngFor="let item of degrees" [ngValue]="item">
+                        {{ item }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">职务</label>
+                <select name="office" class="form-control" [(ngModel)]="form.office">
+                    <option *ngFor="let item of offices" [ngValue]="item">
+                        {{ item }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">单位</label>
+                <select name="department" class="form-control" [(ngModel)]="form.departmentId">
+                    <option *ngFor="let item of departments" [ngValue]="item.id">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">学科</label>
+                <select name="discipline" class="form-control" [(ngModel)]="form.discipline">
+                    <option *ngFor="let item of disciplines | uniqueBy: 'title'" [ngValue]="item">
+                        {{ item }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">一级专业</label>
+                <select name="major" class="form-control" [(ngModel)]="form.major">
+                    <option *ngFor="let item of majors" [ngValue]="item">
+                        {{ item }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">方向</label>
+                <input class="form-control" name="direction" type="text" [(ngModel)]="form.direction" placeholder="研究方向"/>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">来源</label>
+                <select name="origin" class="form-control" [(ngModel)]="form.originId">
+                    <option *ngFor="let item of origins" [ngValue]="item.id">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="control-label">参与人</label>
+                <div class="row">
+                    <div class="col-2" *ngFor="let item of form.memberList; let i = index">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{i+1}}:</span>
+                                <input class="form-control" type="text" name="member{{i}}" [(ngModel)]="item.value">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">主要内容</label>
+                    <textarea class="form-control" name="content" rows="10" [(ngModel)]="form.content" placeholder="请简要说明该项目的主要内容。" #suggest></textarea>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">相关网址</label>
+                    <textarea class="form-control" name="urls" rows="3" [(ngModel)]="form.urls" placeholder="列举支撑本项目的相关网址，每网站占一行。" #suggest></textarea>
+                </div>
+                <div class="form-group mt-4">
+                    <label class="control-label">预期成果</label>
+                    <textarea class="form-control" name="urls" rows="4" [(ngModel)]="form.achievements" placeholder="简略列举预期成果。" #suggest></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>

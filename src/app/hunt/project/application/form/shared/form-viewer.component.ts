@@ -1,16 +1,10 @@
 import { Component, Input } from '@angular/core';
 
-import * as moment from 'moment';
-
 @Component({
-    selector: 'tm-task-form-viewer',
+    selector: 'project-form-viewer',
     styleUrls: ['form-viewer.component.scss'],
     templateUrl: 'form-viewer.component.html',
 })
 export class FormViewerComponent {
     @Input() vm: any;
-
-    expireClass(date: string): string {
-        return moment().isAfter(date) ? 'badge badge-danger' : 'badge';
-    }
 }

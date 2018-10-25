@@ -6,7 +6,7 @@ import { ReviewType, typeLabels } from '../constants';
 export class ReviewTypePipe implements PipeTransform {
     transform(value: ReviewType, arg: string) {
         if (arg === 'text') {
-            return typeLabels[ReviewType[value]].value;
+            return typeLabels[ReviewType[value]].text;
         } else if (arg === 'class') {
             return typeLabels[ReviewType[value]].class;
         }

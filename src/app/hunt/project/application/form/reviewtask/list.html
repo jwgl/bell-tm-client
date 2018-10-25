@@ -1,0 +1,37 @@
+<ng-container>
+    <div class="btn-toolbar">
+        <div class="ml-auto">
+            <button class="btn btn-secondary ml-auto" routerLink="list">我的项目</button>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>任务名称</th>
+                <th>项目周期</th>
+                <th>申请截止</th>
+                <th>限制对象</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td class="taskTitle"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
+                    <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
+                    <td>{{task.endDate}}</td>
+                    <td><span *ngIf="task.ban">{{task.ban | level: 'text'}}在研</span></td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-sm" *ngIf="task.isApplyDateValid"
+                            [routerLink]="['./create', task.id]">我要申请</button>
+                        <button class="btn btn-secondary" *ngIf="task.status"
+                            [routerLink]="[task.applicationId]">我的申请</button>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</ng-container>
+<tm-task-form-overlay #overlay></tm-task-form-overlay>

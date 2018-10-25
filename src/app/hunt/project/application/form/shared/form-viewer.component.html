@@ -1,0 +1,56 @@
+<ng-container *ngIf="vm">
+    <tm-form-title>项目申报{{vm.id}}</tm-form-title>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="control-label">项目名称</label>
+            <div>{{vm.name}}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label">负责人</label>
+            <div>{{vm.principalName}} {{vm.office}}，{{vm.title}}，{{vm.degree}}学位</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="control-label">项目类别</label>
+            <div>{{vm.subtype}} <span class="badge badge-info">{{vm.level | level: 'text'}}</span></div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">Email</label>
+            <div>{{vm.email}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">电话</label>
+            <div>{{vm.phone}}</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="control-label">专业</label>
+            <div>{{vm.discipline}} {{vm.discipline}} <span *ngIf="vm.direction">{{vm.direction}}方向</span></div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">单位</label>
+            <div>{{vm.departmentName}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">来源</label>
+            <div>{{vm.origin}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-12" *ngIf="vm.content">
+            <label class="control-label">主要内容</label>
+            <div [markdown]="vm.content"></div>
+        </div>
+        <div class="form-group col-12" *ngIf="vm.achievements">
+            <label class="control-label">预期成果</label>
+            <div [markdown]="vm.achievements"></div>
+        </div>
+        <div class="form-group col-12" *ngIf="vm.urls">
+            <label class="control-label">相关网址</label>
+            <div [markdown]="vm.urls"></div>
+        </div>
+    </div>
+</ng-container>

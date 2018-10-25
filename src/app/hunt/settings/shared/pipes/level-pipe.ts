@@ -6,7 +6,7 @@ import { Level, levelLabels } from '../constants';
 export class LevelPipe implements PipeTransform {
     transform(value: Level, arg: string) {
         if (arg === 'text') {
-            return levelLabels[Level[value]].value;
+            return levelLabels[Level[value]].text;
         } else if (arg === 'class') {
             return levelLabels[Level[value]].class;
         }
