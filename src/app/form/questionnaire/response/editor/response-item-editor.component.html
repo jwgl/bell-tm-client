@@ -6,6 +6,8 @@
             <textarea *ngIf="question.stepValue != 1; else singleLine" class="form-control" style="resize: none"
                 [name]="question.controlName"
                 [rows]="question.stepValue"
+                [minLength]="question.minValue"
+                [maxLength]="question.maxValue"
                 [(ngModel)]="responseItem.textValue"></textarea>
             <ng-template #singleLine>
                 <input type="text" class="form-control"

@@ -8,6 +8,7 @@ import { QuestionnaireFormService } from './questionnaire-form.service';
 import { QuestionnaireFormListModule } from './list/form-list.module';
 import { QuestionnaireFormItemModule } from './item/form-item.module';
 import { QuestionnaireFormEditorModule } from './editor/form-editor.module';
+import { QuestionnaireResponseModule } from './response/questionnaire-response.module';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { QuestionnaireFormEditorModule } from './editor/form-editor.module';
         QuestionnaireFormListModule,
         QuestionnaireFormItemModule,
         QuestionnaireFormEditorModule,
+        QuestionnaireResponseModule,
     ],
     providers: [
         QuestionnaireFormService,

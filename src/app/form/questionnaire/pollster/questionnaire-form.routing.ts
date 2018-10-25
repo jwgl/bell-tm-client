@@ -6,6 +6,7 @@ import { EditMode } from 'core/constants';
 import { QuestionnaireEditorComponent } from './editor/form-editor.component';
 import { QuestionnaireFormItemComponent } from './item/form-item.component';
 import { QuestionnaireFormListComponent } from './list/form-list.component';
+import { QuestionnaireResponseComponent } from './response/questionnaire-response.component';
 
 const routes: Routes = [{
     path: '',
@@ -21,6 +22,9 @@ const routes: Routes = [{
 }, {
     path: ':id',
     component: QuestionnaireFormItemComponent,
+}, {
+    path: ':id/responses',
+    component: QuestionnaireResponseComponent,
 }];
 
 @NgModule({

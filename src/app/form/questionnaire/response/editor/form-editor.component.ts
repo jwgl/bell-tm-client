@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { CommonDialog } from 'core/common-dialogs';
+
 import { ResponseFormService } from '../response-form.service';
 import { ResponseForm } from '../../shared/response-form.model';
 import './form-editor.model';
@@ -18,7 +20,9 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
     toolbarInit = false;
 
     constructor(
+        private router: Router,
         private route: ActivatedRoute,
+        private dialog: CommonDialog,
         private service: ResponseFormService,
     ) {
         this.route.params.subscribe(params => {
@@ -53,17 +57,26 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
     }
 
     onSubmit() {
-        if (this.form.id) {
-            this.submit();
+        const errors = this.form.validate();
+        if (errors.length) {
+            this.dialog.error(errors);
         } else {
-            this.create(true);
+            if (this.form.id) {
+                this.submit();
+            } else {
+                this.create(true);
+            }
         }
     }
 
     private create(submit: boolean) {
         this.saving = true;
         this.service.create(this.form.questionnaire.id, this.form.toServerDto(), submit).subscribe(dto => {
-            this.form = new ResponseForm(dto);
+            if (submit) {
+                this.router.navigate(['finish'], { relativeTo: this.route });
+            } else {
+                this.form = new ResponseForm(dto);
+            }
             this.saving = false;
         }, error => {
             this.saving = false;
@@ -85,7 +98,7 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
     private submit() {
         this.saving = true;
         this.service.submit(this.form.questionnaire.id).subscribe(dto => {
-            this.form = new ResponseForm(dto)
+            this.router.navigate(['finish'], { relativeTo: this.route });
             this.saving = false;
         }, error => {
             this.saving = false;

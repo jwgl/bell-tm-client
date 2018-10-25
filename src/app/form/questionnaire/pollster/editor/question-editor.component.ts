@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, 
 
 import { NumberStringOption } from 'core/options';
 
-import { Question, QuestionOption, QUESTION_TYPES } from '../../shared/questionnaire-form.model';
-import { QuestionType } from '../../shared/question-type.model';
+import { Question, QuestionOption } from '../../shared/questionnaire-form.model';
+import { QuestionType, QUESTION_TYPES } from '../../shared/question-type.model';
 
 @Component({
     selector: 'tm-question-editor',

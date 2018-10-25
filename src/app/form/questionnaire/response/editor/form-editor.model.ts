@@ -11,18 +11,18 @@ declare module '../../shared/questionnaire-form.model' {
 
 declare module '../../shared/response-form.model' {
     interface ResponseForm {
-        isValid(): boolean;
+        validate(): string[];
         toServerDto(): any;
     }
 
     interface ResponseItem {
-        isValid(): boolean;
+        validate(): string;
         toServerDto(): any;
     }
 }
 
-ResponseForm.prototype.isValid = function (this: ResponseForm): boolean {
-    return true;
+ResponseForm.prototype.validate = function (this: ResponseForm): string[] {
+    return this.items.map(it => it.validate()).filter(it => !!it);
 };
 
 ResponseForm.prototype.toServerDto = function (this: ResponseForm): any {
@@ -45,8 +45,12 @@ ResponseForm.prototype.toServerDto = function (this: ResponseForm): any {
     }
 };
 
-ResponseItem.prototype.isValid = function (this: ResponseItem): boolean {
-    return true;
+ResponseItem.prototype.validate = function (this: ResponseItem): string {
+    if (this.question.mandatory && !this.toServerDto()) {
+        return `第${this.question.ordinal + 1}题为必选题目`;
+    } else {
+        return null;
+    }
 };
 
 ResponseItem.prototype.toServerDto = function (this: ResponseItem): ResponseItemDto {

@@ -1,0 +1,55 @@
+@import '../../shared/question-preview.component.scss';
+.question {
+    .table {
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        th,
+        td {
+            &:nth-child(1) {
+                width: 2rem;
+                text-align: center;
+            }
+            &:nth-child(3) {
+                width: 3rem;
+                text-align: right;
+            }
+            &:nth-child(4) {
+                width: 4rem;
+                text-align: right;
+            }
+            .btn-link {
+                font-size: 0.875rem;
+            }
+        }
+    }
+    .title {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+    .content {
+        font-weight: initial;
+    }
+    .btn-toolbar {
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+    .btn-link {
+        vertical-align: initial;
+        padding: 0;
+    }
+    .openResonsePane {
+        transition: max-height 1s ease;
+        max-height: 500px;
+        overflow-y: auto;
+        margin-bottom: 1rem;
+        & .hide {
+            max-height: 0;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+    }
+    p {
+        margin-bottom: 0.5rem;
+    }
+}

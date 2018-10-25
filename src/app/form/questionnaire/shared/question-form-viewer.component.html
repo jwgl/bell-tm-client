@@ -13,7 +13,7 @@
                 <small class="form-text text-muted">限制输入{{question.minValue}}-{{question.maxValue}}个字符。</small>
             </ng-container>
             <div class="option-pane" *ngSwitchCase="1">
-                <div class="form-check col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options; index as i">
+                <div class="form-check col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
                     <input class="form-check-input" type="radio" id="q-{{question.ordinal}}-{{option.ordinal}}" name="q-{{question.ordinal}}">
                     <label class="form-check-label" for="q-{{question.ordinal}}-{{option.ordinal}}">{{option.content}}</label>
                 </div>
