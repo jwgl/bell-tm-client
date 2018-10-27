@@ -63,14 +63,14 @@ export class QuestionEditorComponent implements OnInit, AfterViewInit {
     }
 
     onTypeChanged(select: HTMLSelectElement, type: number): void {
-        if ((this.question.type === QuestionType.SINGLE || this.question.type === QuestionType.MUTIPLE)
-            && (type === QuestionType.TEXT || type === QuestionType.SCALE)
-            && this.question.options.length > 0) {
-            if (window.confirm('修改问题类型将删除所有选项，确定要继续吗？')) {
-                this.question.options = [];
-            } else {
-                select.selectedIndex = QUESTION_TYPES.findIndex(it => it.value === this.question.type);
-                return;
+        if ((this.question.type === QuestionType.SINGLE || this.question.type === QuestionType.MUTIPLE) && (type === QuestionType.TEXT || type === QuestionType.SCALE)) {
+            if (this.question.options.length > 0) {
+                if (window.confirm('修改问题类型将删除所有选项，确定要继续吗？')) {
+                    this.question.options.length = 0;
+                } else {
+                    select.selectedIndex = QUESTION_TYPES.findIndex(it => it.value === this.question.type);
+                    return;
+                }
             }
         }
         this.question.type = type;

@@ -7,7 +7,7 @@ import { StringStringOption } from 'core/options';
 import { QuestionnaireFormService } from '../questionnaire-form.service';
 import { Questionnaire, Question } from '../../shared/questionnaire-form.model';
 import './form-editor.model';
-import { SURVEY_TYPES } from '../../shared/survey-type.model';
+import { SURVEY_TYPES, SurveyType } from '../../shared/survey-type.model';
 import { SURVEY_SCOPES } from '../../shared/survey-scope.model';
 import { RESPONDENT_TYPES } from '../../shared/respondent-type.model';
 import { RESPONSE_VISIBILITIES } from '../../shared/response-visibility.model';
@@ -18,9 +18,6 @@ import { RESPONSE_VISIBILITIES } from '../../shared/response-visibility.model';
 })
 export class QuestionnaireEditorComponent {
     form: Questionnaire;
-    surveyTypes: StringStringOption[];
-    surveyScopes: StringStringOption[];
-    respondentTypes: StringStringOption[];
     responseVisibilities: StringStringOption[];
 
     selectedQuestion: Question;
@@ -37,7 +34,13 @@ export class QuestionnaireEditorComponent {
             this.editMode = this.route.snapshot.data['mode'];
             switch (this.editMode) {
                 case EditMode.Create:
-                    this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
+                    this.service.loadDataForCreate().subscribe((dto: any) => {
+                        const { surveyType, surveyScope, respondentType } = params;
+                        dto.form.surveyType = surveyType;
+                        dto.form.surveyScope = surveyScope;
+                        dto.form.respondentType = respondentType;
+                        this.onLoadData(dto);
+                    });
                     break;
                 case EditMode.Edit:
                     this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
@@ -48,9 +51,6 @@ export class QuestionnaireEditorComponent {
 
     onLoadData(dto: any) {
         this.form = new Questionnaire(dto.form);
-        this.surveyTypes = SURVEY_TYPES;
-        this.surveyScopes = SURVEY_SCOPES.filter(it => dto.surveyScopes.includes(it.value)) ;
-        this.respondentTypes = RESPONDENT_TYPES.filter(it => dto.respondentTypes.includes(it.value));
         this.responseVisibilities = RESPONSE_VISIBILITIES;
     }
 

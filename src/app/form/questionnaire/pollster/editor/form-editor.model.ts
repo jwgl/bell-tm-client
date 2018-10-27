@@ -10,23 +10,23 @@ declare module '../../shared/questionnaire-form.model' {
         removeItem(item: Question): void;
         moveupItem(item: Question): void;
         movedownItem(item: Question): void;
-        isValid(): boolean;
         toServerDto(): any;
     }
 
     interface Question {
         clone(): Question;
         addItem(item: QuestionOption): void;
+        updateItem(item: QuestionOption): void;
         removeItem(item: QuestionOption): void;
         moveupItem(item: QuestionOption): void;
         movedownItem(item: QuestionOption): void;
-        isValid(): boolean;
         toServerDto(): any;
         markUpdated(): void;
         __updated: boolean;
     }
 
     interface QuestionOption {
+        clone(): QuestionOption;
         toServerDto(): any;
         markUpdated(): void;
         __updated: boolean;
@@ -75,15 +75,6 @@ Questionnaire.prototype.movedownItem = function (this: Questionnaire, item: Ques
     this.questions[index + 1].markUpdated();
 };
 
-Questionnaire.prototype.isValid = function (this: Questionnaire): boolean {
-    return this.title
-        && this.title.length <= 100
-        && (!this.prologue || this.prologue.length <= 500)
-        && (!this.epilogue || this.epilogue.length <= 250)
-        && this.dateExpired
-        && this.questions.every(question => question.isValid());
-};
-
 Questionnaire.prototype.toServerDto = function (this: Questionnaire): any {
     const { id, questions, removedQuestions, ...others } = this;
 
@@ -104,14 +95,19 @@ Question.prototype.clone = function (this: Question): Question {
     return new Question(_.cloneDeep(this));
 };
 
-Question.prototype.addItem = function (this: Question, item: QuestionOption): void {
-    this.options.push(item);
-};
-
 Question.prototype.markUpdated = function (this: Question): void {
     if (this.id) {
         this.__updated = true;
     }
+};
+
+Question.prototype.addItem = function (this: Question, item: QuestionOption): void {
+    this.options.push(item);
+};
+
+Question.prototype.updateItem = function (this: Question, item: QuestionOption): void {
+    this.options = [...this.options.slice(0, item.ordinal), item, ...this.options.slice(item.ordinal + 1)];
+    item.markUpdated();
 };
 
 Question.prototype.removeItem = function (this: Question, item: QuestionOption): void {
@@ -150,14 +146,6 @@ Question.prototype.movedownItem = function (this: Question, item: QuestionOption
     this.markUpdated();
 };
 
-Question.prototype.isValid = function (this: Question): boolean {
-    return this.title && this.title.length <= 100
-        && this.content && this.content.length <= 500
-        && (this.type === QuestionType.TEXT ||
-            this.type === QuestionType.SCALE ||
-            this.options.length > 1);
-};
-
 Question.prototype.toServerDto = function (this: Question): any {
     const { id, __updated, options, removedOptions, ...others } = this;
     return id ?
@@ -171,6 +159,11 @@ Question.prototype.toServerDto = function (this: Question): any {
             ...others,
             addedOptions: options.map(it => it.toServerDto()),
         };
+};
+
+QuestionOption.prototype.clone = function (this: QuestionOption): QuestionOption {
+    const { question, ...others } = this;
+    return new QuestionOption(this.question, others);
 };
 
 QuestionOption.prototype.toServerDto = function (this: QuestionOption): any {

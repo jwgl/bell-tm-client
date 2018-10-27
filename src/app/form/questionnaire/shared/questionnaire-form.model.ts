@@ -1,7 +1,5 @@
-import * as dayjs from 'dayjs';
-
 import { UserScope, userScopeToString } from './user-scope.model';
-import { SURVEY_TYPE_MAP } from './survey-type.model';
+import { SURVEY_TYPE_MAP, SURVEY_TYPE_OPTIONS, SurveyType } from './survey-type.model';
 import { QuestionType, QUESTION_TYPE_OPTIONS } from './question-type.model';
 
 export class Questionnaire {
@@ -26,21 +24,27 @@ export class Questionnaire {
     removedQuestions: Question[];
 
     constructor(dto: any) {
+        console.log(dto);
         if (dto && dto.id) {
             var { questions, ...others } = dto;
             Object.assign(this, others);
             this.questions = questions.map((question: any) => new Question(question));
         } else {
             Object.assign(this, ...dto);
-            this.surveyType = 'QUESTIONNAIRE';
-            this.surveyScope = 'DEPARTMENT';
-            this.respondentType = 'STUDENT';
+            this.anonymous = this.surveyTypeOptions.anonymous.default;
+            console.log(this.anonymous);
             this.responseVisibility = 'INVISIBLE';
-            this.anonymous = true;
-            this.dateExpired = dayjs().add(1, 'month').format('YYYY-MM-DDTHH:mm');
             this.questions = [];
             this.oriented = [];
             this.restricted = [];
+
+            if (this.surveyType === SurveyType.BALLOT_SHEET) {
+                const question = Question.newInstance(0)
+                question.title = 'ballot';
+                question.content = 'ballot';
+                question.stepValue = 3;
+                this.questions.push(question);
+            }
         }
         this.removedQuestions = [];
     }
@@ -60,6 +64,10 @@ export class Questionnaire {
 
     get restrictedText() {
         return this.userScopesText(this.restricted);
+    }
+
+    get surveyTypeOptions() {
+        return SURVEY_TYPE_OPTIONS[this.surveyType];
     }
 
     private userScopesText(userScopes: UserScope[]) {
@@ -164,9 +172,16 @@ export class QuestionOption {
     label: string;
     value: number;
     question: Question;
+
     constructor(question: Question, dto: any) {
         this.question = question;
         Object.assign(this, dto);
+    }
+
+    static newInstance(question: Question) {
+        return new QuestionOption(question, {
+            ordinal: question.options.length,
+        });
     }
 
     get controlId(): string {

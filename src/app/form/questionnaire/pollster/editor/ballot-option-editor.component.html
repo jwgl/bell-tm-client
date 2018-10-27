@@ -1,0 +1,21 @@
+<form id="ballot-option-editor" class="card" autocomplete="off" #ballotOptionForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="card-header d-flex bg-dark text-white">
+        <h5>{{option.ordinal + 1}}、{{option.label ? option.label : '新建选项标签'}}</h5>
+        <div class="btn-group ml-auto">
+            <button class="btn btn-sm btn-outline-light" type="submit" [disabled]="!ballotOptionForm.form.valid">确定</button>
+            <button class="btn btn-sm btn-outline-light" (click)="onCancel()">取消</button>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="form-group">
+            <label for="label">选项标签*</label>
+            <input class="form-control" id="label" name="label" [(ngModel)]="option.label" required maxlength="50"
+                placeholder="选项标签，最多50个字符">
+        </div>
+        <div class="form-group">
+            <label for="content">选项描述*</label>
+            <textarea class="form-control" id="content" name="content" [(ngModel)]="option.content" required maxlength="500"
+                placeholder="选项选项，最多500个字符"></textarea>
+        </div>
+    </div>
+</form>

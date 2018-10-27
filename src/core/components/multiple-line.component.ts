@@ -2,7 +2,10 @@ import { ChangeDetectionStrategy, Component, Input, HostBinding } from '@angular
 
 @Component({
     selector: 'tm-multiple-line',
-    template: '<p *ngFor="let line of lines">{{line}}</p>',
+    template: `
+        <p *ngFor="let line of lines">{{line}}</p>
+        <ng-container *ngIf="empty && (!lines || !lines.length)">&lt;{{empty}}&gt;</ng-container>
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultipleLineComponent {
@@ -10,6 +13,11 @@ export class MultipleLineComponent {
 
     @Input()
     set text(value: string) {
-        this.lines = value.split(/[\r\n]+/gm).map(line => line.trim())
+        if (value) {
+            this.lines = value.split(/[\r\n]+/gm).map(line => line.trim())
+        }
     };
+
+    @Input()
+    empty: string;
 }

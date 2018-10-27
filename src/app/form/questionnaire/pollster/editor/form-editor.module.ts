@@ -9,12 +9,15 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
+import { QuestionnaireUserScopeModule } from './user-scope/user-scope.module';
 import { QuestionnaireEditorComponent } from './form-editor.component';
 import { QuestionEditorComponent } from './question-editor.component';
+import { QuestionViewerComponent } from './question-viewer.component';
 import { QuestionOptionEditorComponent } from './question-option-editor.component';
 import { QuestionOptionCreatorComponent } from './question-option-creater.component';
-import { QuestionnaireUserScopeModule } from './user-scope/user-scope.module';
-import { QuestionViewerComponent } from './question-viewer.component';
+import { BallotQuestionEditorComponent } from './ballot-question-editor.component';
+import { BallotOptionEditorComponent } from './ballot-option-editor.component';
+import { BallotOptionViewerComponent } from './ballot-option-viewer.component';
 
 @NgModule({
     imports: [
@@ -32,6 +35,9 @@ import { QuestionViewerComponent } from './question-viewer.component';
         QuestionEditorComponent,
         QuestionOptionEditorComponent,
         QuestionOptionCreatorComponent,
+        BallotQuestionEditorComponent,
+        BallotOptionEditorComponent,
+        BallotOptionViewerComponent,
         QuestionViewerComponent,
     ],
     exports: [

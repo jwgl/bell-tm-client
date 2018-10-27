@@ -17,6 +17,10 @@ export class QuestionnaireFormService extends RestEditService {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
 
+    loadCreateOptions(): Observable<any> {
+        return this.http.get(`${this.api.list()}/createOptions`);
+    }
+
     togglePublished(id: number, publish: boolean): Observable<string> {
         return this.http.patch<{ hashId: string }>(`${this.api.item(id)}?op=${publish ? 'OPEN' : 'CLOSE'}`, null).pipe(map(data => data.hashId));
     }

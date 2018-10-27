@@ -6,6 +6,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireFormListComponent } from './form-list.component';
 import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
+import { CreateOptionModule } from './create-option/create-option.module';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.mod
         RouterModule,
         CommonDirectivesModule,
         QuestionnaireSharedModule,
+        CreateOptionModule,
     ],
     declarations: [
         QuestionnaireFormListComponent,

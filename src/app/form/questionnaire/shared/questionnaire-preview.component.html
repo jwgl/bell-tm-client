@@ -1,14 +1,14 @@
 <h3 class="title">{{form.title}}</h3>
-<p *ngIf="form.prologue">亲爱的{{form.respondentType | respondentTypeText:true}}们：</p>
-<tm-multiple-line *ngIf="form.prologue" [text]="form.prologue"></tm-multiple-line>
-<ol class="questions">
+<tm-questionnaire-respondents [questionnaire]="form"></tm-questionnaire-respondents>
+<tm-multiple-line [text]="form.prologue"></tm-multiple-line>
+<ol class="questions" *ngIf="form.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
     <li class="question" *ngFor="let question of form.questions">
         <tm-question-preview [question]="question"></tm-question-preview>
     </li>
 </ol>
-<tm-multiple-line *ngIf="form.epilogue" [text]="form.epilogue"></tm-multiple-line>
-<small class="d-block text-mute">注：本问卷为{{form.anonymous ? '匿' : '实'}}名调查。</small>
-<ul class="footer">
-    <li><label>发起人</label>{{form.department.name}} {{form.pollster.name}}</li>
-    <li><label>截止时间</label>{{form.dateExpired | date: 'y-MM-dd HH:mm'}}</li>
-</ul>
+<ng-template #ballotSheetTpl>
+    <tm-ballot-question-preview [question]="form.questions[0]"></tm-ballot-question-preview>
+</ng-template>
+<tm-multiple-line [text]="form.epilogue"></tm-multiple-line>
+<tm-questionnaire-anonymous [questionnaire]="form"></tm-questionnaire-anonymous>
+<tm-questionnaire-footer [questionnaire]="form"></tm-questionnaire-footer>

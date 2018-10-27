@@ -5,8 +5,8 @@
 </div>
 <ng-container *ngIf="questionnaire">
     <h3 class="title">{{questionnaire.title}}</h3>
-    <p *ngIf="questionnaire.prologue">亲爱的{{questionnaire.respondentType | respondentTypeText:true}}们：</p>
-    <tm-multiple-line *ngIf="questionnaire.prologue" [text]="questionnaire.prologue"></tm-multiple-line>
+    <tm-questionnaire-respondents [questionnaire]="questionnaire"></tm-questionnaire-respondents>
+    <tm-multiple-line [text]="questionnaire.prologue"></tm-multiple-line>
     <p class="summary">共<b>{{questionnaire.responseCount}}</b>人填写此{{questionnaire.surveyType | surveyTypeText}}。</p>
     <ol class="questions">
         <li class="question" *ngFor="let question of questionnaire.questions">
@@ -17,6 +17,6 @@
             </tm-question-response>
         </li>
     </ol>
-    <tm-multiple-line *ngIf="questionnaire.epilogue" [text]="questionnaire.epilogue"></tm-multiple-line>
+    <tm-multiple-line [text]="questionnaire.epilogue"></tm-multiple-line>
     <small class="d-block text-mute">注：本问卷为{{questionnaire.anonymous ? '匿' : '实'}}名调查。</small>
 </ng-container>

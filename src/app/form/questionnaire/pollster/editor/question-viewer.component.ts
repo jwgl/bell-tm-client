@@ -10,12 +10,6 @@ export class QuestionViewerComponent {
     @Input()
     question: Question;
 
-    @Input()
-    first: boolean;
-
-    @Input()
-    last: boolean;
-
     @Output()
     edit = new EventEmitter();
 

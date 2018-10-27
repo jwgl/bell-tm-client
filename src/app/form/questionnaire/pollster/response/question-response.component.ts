@@ -44,7 +44,6 @@ export class QuestionresponseComponent {
     }
 
     copyTable(table: HTMLTableElement) {
-        console.log(table)
         const selection = window.getSelection();
         selection.removeAllRanges();
         const range = document.createRange();

@@ -1,0 +1,17 @@
+<ng-container [ngSwitch]="question.type">
+    <p *ngSwitchCase="1">本次投票为单选，每次只能选择1项。</p>
+    <p *ngSwitchCase="2">本次投票为多选，最少选择{{question.minValue}}项，最多选择{{question.maxValue}}项。</p>
+</ng-container>
+<p></p>
+<div class="form-row">
+    <div class="form-check col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
+        <div class="card">
+            <div class="card-header">
+                <h5>{{option.ordinal + 1}}、{{option.label}}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{option.content}}</p>
+            </div>
+        </div>
+    </div>
+</div>

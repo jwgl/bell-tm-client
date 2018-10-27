@@ -25,7 +25,6 @@ export class QuestionnaireResponseComponent {
 
     onLoadData(dto: any) {
         this.questionnaire = new Questionnaire(dto.questionnaire);
-        console.log(this.questionnaire);
         this.questionnaire.initStats(dto.stats);
     }
 

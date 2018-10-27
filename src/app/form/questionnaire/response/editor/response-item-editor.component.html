@@ -1,6 +1,5 @@
 <div class="question">
     <p class="content">{{question.content}} <span *ngIf="question.mandatory">*</span></p>
-    client:{{responseItem.clientDto | json}} server:{{responseItem.toServerDto() | json}}
     <form [ngSwitch]="question.type">
         <ng-container *ngSwitchCase="0">
             <textarea *ngIf="question.stepValue != 1; else singleLine" class="form-control" style="resize: none"

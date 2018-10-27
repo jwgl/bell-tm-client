@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 
+import { CommonDialog } from 'core/common-dialogs';
+import { ClipboardService } from 'ngx-clipboard';
+
 import { Editable } from 'core/form';
 import { WorkflowForm } from 'core/workflow/form-item.model';
 
-import { Questionnaire } from '../../shared/questionnaire-form.model';
 import { QuestionnaireFormService } from '../questionnaire-form.service';
-import { CommonDialog } from 'core/common-dialogs';
-import { ClipboardService } from 'ngx-clipboard';
+import { Questionnaire } from '../../shared/questionnaire-form.model';
+import './form-item.model';
 
 @Component({
     templateUrl: 'form-item.component.html',

@@ -14,13 +14,15 @@ export const QUESTION_TYPES: NumberStringOption[] = [
     { label: '量表', value: 3 },
 ];
 
+export const QUESTION_TYPE_MAP: { [key: string]: string } = toNumberMap(QUESTION_TYPES);
+
 export const QUESTION_TYPE_OPTIONS = [{
-    min: { default: 0, min: 0, max: 100, label: '输入文字最小长度' },
+    min: { default: 1, min: 0, max: 100, label: '输入文字最小长度' },
     max: { default: 100, min: 0, max: 250, label: '输入文字最大长度' },
     step: { default: 3, min: 1, max: 10, label: '输入框行数(1-10)' },
 }, {
-    min: { default: 0, min: 0, max: 100, label: '输入文字最小长度' },
-    max: { default: 50, min: 0, max: 100, label: '输入文字最大长度' },
+    min: { default: null, min: null, max: null, label: '' },
+    max: { default: null, min: null, max: null, label: '' },
     step: { default: 1, min: 1, max: 4, label: '显示列数(1-4)' },
 }, {
     min: { default: 1, min: 1, max: 10, label: '最少选几项' },
@@ -31,5 +33,3 @@ export const QUESTION_TYPE_OPTIONS = [{
     max: { default: 5, min: 2, max: 100, label: '最大值' },
     step: { default: 1, min: 1, max: 10, label: '量表间隔(1-10)' },
 }];
-
-export const QUESTION_TYPE_MAP: { [key: string]: string } = toNumberMap(QUESTION_TYPES);
