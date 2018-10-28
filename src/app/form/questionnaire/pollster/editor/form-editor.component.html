@@ -68,7 +68,6 @@
         </div>
     </div>
     <ng-container *ngIf="form.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
-        <hr>
         <div class="form-group">
             <label>{{form.surveyType | surveyTypeText}}问题（共{{form.questions.length}}题）</label>
             <ng-container *ngFor="let question of form.questions; first as first; last as last;">
@@ -86,8 +85,8 @@
             <div class="btn-toolbar" *ngIf="!selectedQuestion">
                 <button class="btn btn-success ml-auto" type="button" (click)="onCreateQuestion()">新建问题</button>
             </div>
-            <tm-question-editor *ngIf="selectedQuestion?.ordinal == form.questions.length" mode="create"
-                [question]="selectedQuestion" (confirm)="onQuestionCreated($event)" (cancel)="onQuestionCanceled($event)">
+            <tm-question-editor *ngIf="selectedQuestion?.ordinal == form.questions.length" mode="create" [question]="selectedQuestion"
+                (confirm)="onQuestionCreated($event)" (cancel)="onQuestionCanceled($event)">
             </tm-question-editor>
         </div>
     </ng-container>

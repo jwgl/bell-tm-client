@@ -47,7 +47,10 @@ import {
     faArrowUp, faArrowDown, faAngleUp, faAngleDown,
     faTag, faHashtag,
 } from '@fortawesome/free-solid-svg-icons';
-import { faMinusSquare, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import {
+    faMinusSquare, faPlusSquare,
+    faThumbsUp, faThumbsDown,
+} from '@fortawesome/free-regular-svg-icons';
 import { ProvideParentForm } from './directives/provide-parent-form';
 import { MultipleLineComponent } from './components/multiple-line.component';
 
@@ -55,6 +58,7 @@ library.add(
     faSpinner, faTimes, faPlus, faTrashAlt, faEdit,
     faArrowUp, faArrowDown, faAngleUp, faAngleDown,
     faTag, faHashtag,
+    faThumbsUp, faThumbsDown,
     faMinusSquare, faPlusSquare,
 );
 

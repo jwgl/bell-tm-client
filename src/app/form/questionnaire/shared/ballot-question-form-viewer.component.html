@@ -18,16 +18,18 @@
         <p class="form-control-plaintext">{{question.maxValue}}</p>
     </div>
 </div>
-<div class="form-row">
-    <div class="form-check col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
-        <div class="card">
-            <div class="card-header">
-                <h5>{{option.ordinal + 1}}、{{option.label}}</h5>
+<div class="form-group">
+    <label>投票选项（共{{question.options.length}}项）</label>
+    <div class="form-row">
+        <div class="card-wrapper col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5>{{option.ordinal + 1}}、{{option.label}}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{option.content}}</p>
+                </div>
             </div>
-            <div class="card-body">
-                <p class="card-text">{{option.content}}</p>
-            </div>
-
         </div>
     </div>
 </div>

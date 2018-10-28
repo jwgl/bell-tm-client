@@ -8,15 +8,16 @@
     <tm-questionnaire-respondents [questionnaire]="questionnaire"></tm-questionnaire-respondents>
     <tm-multiple-line [text]="questionnaire.prologue"></tm-multiple-line>
     <p class="summary">共<b>{{questionnaire.responseCount}}</b>人填写此{{questionnaire.surveyType | surveyTypeText}}。</p>
-    <ol class="questions">
+    <ol class="questions" *ngIf="questionnaire.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
         <li class="question" *ngFor="let question of questionnaire.questions">
-            <tm-question-response
-                [question]="question"
-                (viewOpenResponses)="onViewOpenResponses($event, questionResponse)"
+            <tm-question-response [question]="question" (viewOpenResponses)="onViewOpenResponses($event, questionResponse)"
                 #questionResponse>
             </tm-question-response>
         </li>
     </ol>
+    <ng-template #ballotSheetTpl>
+        <tm-ballot-question-response [question]="questionnaire.questions[0]"></tm-ballot-question-response>
+    </ng-template>
     <tm-multiple-line [text]="questionnaire.epilogue"></tm-multiple-line>
-    <small class="d-block text-mute">注：本问卷为{{questionnaire.anonymous ? '匿' : '实'}}名调查。</small>
+    <tm-questionnaire-footer [questionnaire]="questionnaire"></tm-questionnaire-footer>
 </ng-container>

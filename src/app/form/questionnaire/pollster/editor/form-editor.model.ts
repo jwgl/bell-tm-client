@@ -103,11 +103,13 @@ Question.prototype.markUpdated = function (this: Question): void {
 
 Question.prototype.addItem = function (this: Question, item: QuestionOption): void {
     this.options.push(item);
+    this.markUpdated();
 };
 
 Question.prototype.updateItem = function (this: Question, item: QuestionOption): void {
     this.options = [...this.options.slice(0, item.ordinal), item, ...this.options.slice(item.ordinal + 1)];
     item.markUpdated();
+    this.markUpdated();
 };
 
 Question.prototype.removeItem = function (this: Question, item: QuestionOption): void {

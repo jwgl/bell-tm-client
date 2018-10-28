@@ -1,0 +1,25 @@
+<div class="question">
+    <div class="btn-toolbar">
+        {{question.type | questionTypeText}}投票
+        <button class="btn btn-outline-dark btn-sm ml-auto" (click)="copyTable(table)" *ngIf="supportCopy">复制数据</button>
+    </div>
+    <table class="table table-sm table-light table-striped" #table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>选项</th>
+                <th>计数</th>
+                <th>百分比</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let option of question.options">
+                <th>{{option.ordinal + 1}}</th>
+                <td>{{option.label}}</td>
+                <td>{{option.responseCount}}</td>
+                <td>{{option.responseCount / question.responseCount | percent:'1.2'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

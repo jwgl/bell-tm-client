@@ -10,7 +10,7 @@ import './questionnaire-response.model';
     templateUrl: 'question-response.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuestionresponseComponent {
+export class QuestionResponseComponent {
     @Input()
     question: Question;
 

@@ -11,7 +11,8 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
 import { QuestionnaireResponseComponent } from './questionnaire-response.component';
-import { QuestionresponseComponent } from './question-response.component';
+import { QuestionResponseComponent } from './question-response.component';
+import { BallotQuestionResponseComponent } from './ballot-question-response.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { QuestionresponseComponent } from './question-response.component';
     ],
     declarations: [
         QuestionnaireResponseComponent,
-        QuestionresponseComponent,
+        QuestionResponseComponent,
+        BallotQuestionResponseComponent,
     ],
     exports: [
         QuestionnaireResponseComponent,

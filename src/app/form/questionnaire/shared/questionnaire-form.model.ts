@@ -24,7 +24,6 @@ export class Questionnaire {
     removedQuestions: Question[];
 
     constructor(dto: any) {
-        console.log(dto);
         if (dto && dto.id) {
             var { questions, ...others } = dto;
             Object.assign(this, others);
@@ -32,7 +31,6 @@ export class Questionnaire {
         } else {
             Object.assign(this, ...dto);
             this.anonymous = this.surveyTypeOptions.anonymous.default;
-            console.log(this.anonymous);
             this.responseVisibility = 'INVISIBLE';
             this.questions = [];
             this.oriented = [];

@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionnaireFormService } from '../questionnaire-form.service';
 import { Questionnaire, Question } from '../../shared/questionnaire-form.model';
 import './questionnaire-response.model';
-import { QuestionresponseComponent } from './question-response.component';
+import { QuestionResponseComponent } from './question-response.component';
 
 @Component({
     styleUrls: ['questionnaire-response.component.scss'],
@@ -28,7 +28,7 @@ export class QuestionnaireResponseComponent {
         this.questionnaire.initStats(dto.stats);
     }
 
-    onViewOpenResponses(question: Question, questionResponse: QuestionresponseComponent) {
+    onViewOpenResponses(question: Question, questionResponse: QuestionResponseComponent) {
         this.service.loadOpenResponses(this.questionnaire.id, question.id).subscribe(result => {
             question.openResponses = result;
             questionResponse.update();

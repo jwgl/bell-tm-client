@@ -10,19 +10,19 @@
         <div class="form-group col-md-4">
             <label for="stepValue">{{question.typeOptions.step.label}}*</label>
             <input class="form-control" type="number" id="stepValue" name="stepValue" [(ngModel)]="question.stepValue"
-                [min]="question.typeOptions.step.min" [max]="question.typeOptions.step.max">
+                (ngModelChange)="onQuestionChanged()" [min]="question.typeOptions.step.min" [max]="question.typeOptions.step.max">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4" *ngIf="question.typeOptions.min.default != null">
             <label for="minValue">{{question.typeOptions.min.label}}*</label>
             <input class="form-control" type="number" id="minValue" name="minValue" required [(ngModel)]="question.minValue"
-                [min]="question.typeOptions.min.min" [max]="question.typeOptions.min.max">
+                (ngModelChange)="onQuestionChanged()" [min]="question.typeOptions.min.min" [max]="question.typeOptions.min.max">
         </div>
         <div class="form-group col-md-4" *ngIf="question.typeOptions.max.default != null">
             <label for="maxValue">{{question.typeOptions.max.label}}*</label>
             <input class="form-control" type="number" id="maxValue" name="maxValue" required [(ngModel)]="question.maxValue"
-                [min]="question.typeOptions.max.min" [max]="question.typeOptions.max.max">
+                (ngModelChange)="onQuestionChanged()" [min]="question.typeOptions.max.min" [max]="question.typeOptions.max.max">
         </div>
     </div>
     <div class="form-group">

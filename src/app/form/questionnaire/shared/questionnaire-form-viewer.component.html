@@ -53,9 +53,12 @@
     </div>
 </div>
 <ng-container *ngIf="form.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
-    <ng-container *ngFor="let question of form.questions">
-        <tm-question-form-viewer [question]="question"></tm-question-form-viewer>
-    </ng-container>
+    <div class="form-group">
+        <label>{{form.surveyType | surveyTypeText}}问题（共{{form.questions.length}}题）</label>
+        <ng-container *ngFor="let question of form.questions">
+            <tm-question-form-viewer [question]="question"></tm-question-form-viewer>
+        </ng-container>
+    </div>
 </ng-container>
 <ng-template #ballotSheetTpl>
     <tm-ballot-question-form-viewer [question]="form.questions[0]"></tm-ballot-question-form-viewer>

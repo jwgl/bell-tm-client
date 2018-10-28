@@ -29,6 +29,8 @@ Questionnaire.prototype.initStats = function (this: Questionnaire, stats: Questi
         const questionStats = stats.questionStats[question.id];
         if (questionStats) {
             question.initStats(questionStats);
+        } else {
+            question.responseCount = 0;
         }
     });
 };

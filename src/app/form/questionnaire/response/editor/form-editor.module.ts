@@ -11,6 +11,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
 import { ResponseFormEditorComponent } from './form-editor.component';
 import { ResponseItemEditorComponent } from './response-item-editor.component';
+import { BallotResponseItemEditorComponent } from './ballot-response-item-editor.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { ResponseItemEditorComponent } from './response-item-editor.component';
     ],
     declarations: [
         ResponseFormEditorComponent,
-        ResponseItemEditorComponent
+        ResponseItemEditorComponent,
+        BallotResponseItemEditorComponent,
     ],
     exports: [
         ResponseFormEditorComponent,

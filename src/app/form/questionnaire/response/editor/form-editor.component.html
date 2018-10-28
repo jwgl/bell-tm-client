@@ -8,11 +8,14 @@
     <h3 class="title">{{form.questionnaire.title}}</h3>
     <tm-questionnaire-respondents [questionnaire]="form.questionnaire"></tm-questionnaire-respondents>
     <tm-multiple-line [text]="form.questionnaire.prologue"></tm-multiple-line>
-    <ol class="questions">
+    <ol class="questions" *ngIf="form.questionnaire.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
         <li class="question" *ngFor="let item of form.items">
             <tm-response-item-editor [responseItem]="item"></tm-response-item-editor>
         </li>
     </ol>
+    <ng-template #ballotSheetTpl>
+        <tm-ballot-response-item-editor [responseItem]="form.items[0]"></tm-ballot-response-item-editor>
+    </ng-template>
     <tm-multiple-line [text]="form.questionnaire.epilogue"></tm-multiple-line>
     <tm-questionnaire-anonymous [questionnaire]="form.questionnaire"></tm-questionnaire-anonymous>
     <tm-questionnaire-footer [questionnaire]="form.questionnaire"></tm-questionnaire-footer>

@@ -25,7 +25,11 @@ export class BallotQuestionEditorComponent implements OnInit {
     updateTypeOption() {
         this.question.minValue = this.question.typeOptions.min.default;
         this.question.maxValue = this.question.typeOptions.max.default;
-        this.question.stepValue = this.question.typeOptions.step.default;
+        this.onQuestionChanged();
+    }
+
+    onQuestionChanged() {
+        this.question.__updated = true;
     }
 
     onTypeChanged(): void {
