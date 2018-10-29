@@ -1,33 +1,36 @@
 <tm-form-title>{{form.formTitle}}</tm-form-title>
 <div class="form-group">
+    <label>发起人</label>
+    <p class="form-control-plaintext">{{form.department.name}} {{form.adminClass?.name}} {{form.pollster.name}}</p>
+</div>
+<div class="form-group">
     <label>标题</label>
     <p class="form-control-plaintext">{{form.title}}</p>
 </div>
 <div class="form-group">
     <label>欢迎词</label>
     <div class="form-control-plaintext">
-        <tm-multiple-line [text]="form.prologue" empty="未设置"></tm-multiple-line>
+        <tm-multiple-line [text]="form.prologue" empty="<未设置>"></tm-multiple-line>
     </div>
 </div>
 <div class="form-group">
     <label>结束语</label>
     <div class="form-control-plaintext">
-        <tm-multiple-line [text]="form.epilogue" empty="未设置"></tm-multiple-line>
+        <tm-multiple-line [text]="form.epilogue" empty="<未设置>"></tm-multiple-line>
     </div>
 </div>
 <div class="form-row">
-    <div class="form-group col-md-4">
-        <label>发起人</label>
-        <p class="form-control-plaintext">{{form.department.name}} {{form.pollster.name}}</p>
-    </div>
     <div class="form-group col-md-4">
         <label>调查类型</label>
         <p class="form-control-plaintext">{{form.surveyType | surveyTypeText}}</p>
     </div>
     <div class="form-group col-md-4">
         <label>调查范围</label>
-        <p class="form-control-plaintext">{{form.surveyScope | surveyScopeText}} {{form.respondentType |
-            respondentTypeText}}</p>
+        <p class="form-control-plaintext">{{form.surveyScope | surveyScopeText}}</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>调查对象</label>
+        <p class="form-control-plaintext">{{form.respondentType | respondentTypeText}}</p>
     </div>
 </div>
 <div class="form-group">

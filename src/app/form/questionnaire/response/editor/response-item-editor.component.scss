@@ -1,1 +1,4 @@
 @import '../../shared/question-preview.component.scss';
+.form-check-input:disabled~.form-check-label {
+    color: #212529;
+}

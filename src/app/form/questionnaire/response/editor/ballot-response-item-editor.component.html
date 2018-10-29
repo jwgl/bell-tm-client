@@ -17,7 +17,7 @@
                 <span class="text-success" style="font-size: 1.25rem" *ngIf="option.selected">
                     <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon>
                 </span>
-                <button class="btn btn-sm ml-auto" (click)="toggleOption(option)">
+                <button class="btn btn-sm ml-auto" *ngIf="!disabled" (click)="toggleOption(option)">
                     <fa-icon icon="plus" fixedWidth="true"></fa-icon>
                 </button>
             </div>

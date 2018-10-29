@@ -16,7 +16,7 @@ declare module '../../shared/questionnaire-form.model' {
 
 Questionnaire.prototype.validate = function (this: Questionnaire): string[] {
     if (this.surveyType !== SurveyType.ENTRY_FORM && this.questions.length === 0) {
-        return [`${SURVEY_TYPE_MAP[this.surveyType]}未包含问题问题。`]
+        return [`${SURVEY_TYPE_MAP[this.surveyType]}未包含任何问题。`]
     } else {
         return this.questions.map(question => question.validate()).filter(it => !!it);
     }

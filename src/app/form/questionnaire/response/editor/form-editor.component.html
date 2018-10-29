@@ -10,14 +10,13 @@
     <tm-multiple-line [text]="form.questionnaire.prologue"></tm-multiple-line>
     <ol class="questions" *ngIf="form.questionnaire.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
         <li class="question" *ngFor="let item of form.items">
-            <tm-response-item-editor [responseItem]="item"></tm-response-item-editor>
+            <tm-response-item-editor [responseItem]="item" [disabled]="!!form.dateSubmitted"></tm-response-item-editor>
         </li>
     </ol>
     <ng-template #ballotSheetTpl>
-        <tm-ballot-response-item-editor [responseItem]="form.items[0]"></tm-ballot-response-item-editor>
+        <tm-ballot-response-item-editor [responseItem]="form.items[0]" [disabled]="!!form.dateSubmitted"></tm-ballot-response-item-editor>
     </ng-template>
     <tm-multiple-line [text]="form.questionnaire.epilogue"></tm-multiple-line>
-    <tm-questionnaire-anonymous [questionnaire]="form.questionnaire"></tm-questionnaire-anonymous>
     <tm-questionnaire-footer [questionnaire]="form.questionnaire"></tm-questionnaire-footer>
     <div class="btn-toolbar" *ngIf="!form.dateSubmitted" #bottomToolbar>
         <div class="btn-group ml-auto">

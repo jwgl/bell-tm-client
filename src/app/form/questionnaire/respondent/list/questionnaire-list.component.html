@@ -1,19 +1,18 @@
-<ul class="nav nav-tabs mb-3">
+<ul class="nav nav-tabs mb-p10">
     <li *ngFor="let item of categories" class="nav-item mr-1">
         <a class="nav-link" [routerLink]="['../', item.category]" routerLinkActive="active">{{item.label}}</a>
     </li>
 </ul>
-<div class="row" *ngIf="questionnaires && questionnaires.length; else emptyTpl">
-    <div class="col-md-6" *ngFor="let q of questionnaires">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">
+<div class="form-row" *ngIf="questionnaires && questionnaires.length; else emptyTpl">
+    <div class="col-md-6 col-lg-4 mb-p10" *ngFor="let q of questionnaires">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <span>{{q.surveyType | surveyTypeText: true}}：</span>
                     <a class="mr-1" [routerLink]="['/form/q', q.hashId]">{{q.title}}</a>
                     <span class="badge badge-warning" *ngIf="q.formId && !q.dateSubmitted">未提交</span>
                 </h5>
-            </div>
-            <div class="card-body">
-                <p>{{q.department}} {{q.pollster}}</p>
+                <tm-multiple-line [text]="q.prologue" empty=" ¯\_(ツ)_/¯ 这家伙很懒，什么都没有写..."></tm-multiple-line>
             </div>
         </div>
     </div>

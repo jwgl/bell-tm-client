@@ -14,6 +14,9 @@ export class ResponseItemEditorComponent implements AfterViewInit {
     @Input()
     responseItem: ResponseItem;
 
+    @Input()
+    disabled: boolean;
+
     @ViewChild('rangeElement')
     rangeElement: ElementRef
 

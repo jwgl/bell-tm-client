@@ -8,7 +8,6 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { QuestionnaireFormViewerComponent } from './questionnaire-form-viewer.component';
 import { QuestionnairePreviewComponent } from './questionnaire-preview.component';
 import { QuestionnaireRespondentsComponent } from './questionnaire-respondents.component';
-import { QuestionnaireAnonymouseComponent } from './questionnaire-anonymous.component';
 import { QuestionnaireFooterComponent } from './questionnaire-footer.component';
 import { QuestionFormViewerComponent } from './question-form-viewer.component';
 import { BallotQuestionFormViewerComponent } from './ballot-question-form-viewer.component';
@@ -31,7 +30,6 @@ import { QuestionTypeTextPipe } from './question-type.pipe';
     declarations: [
         QuestionnaireFormViewerComponent,
         QuestionnaireRespondentsComponent,
-        QuestionnaireAnonymouseComponent,
         QuestionnaireFooterComponent,
         QuestionFormViewerComponent,
         BallotQuestionFormViewerComponent,
@@ -49,7 +47,6 @@ import { QuestionTypeTextPipe } from './question-type.pipe';
         QuestionnaireFormViewerComponent,
         QuestionnairePreviewComponent,
         QuestionnaireRespondentsComponent,
-        QuestionnaireAnonymouseComponent,
         QuestionnaireFooterComponent,
         SurveyScopeTextPipe,
         SurveyTypeTextPipe,

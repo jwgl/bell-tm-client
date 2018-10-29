@@ -14,6 +14,9 @@ export class BallotResponseItemEditorComponent {
     @Input()
     responseItem: ResponseItem;
 
+    @Input()
+    disabled: boolean;
+
     constructor() { }
 
     get question(): Question {

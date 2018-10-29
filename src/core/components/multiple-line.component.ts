@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Input, HostBinding } from '@angular
     selector: 'tm-multiple-line',
     template: `
         <p *ngFor="let line of lines">{{line}}</p>
-        <ng-container *ngIf="empty && (!lines || !lines.length)">&lt;{{empty}}&gt;</ng-container>
+        <p class="empty" *ngIf="empty && (!lines || !lines.length)">{{empty}}</p>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })

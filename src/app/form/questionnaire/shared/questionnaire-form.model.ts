@@ -6,6 +6,7 @@ export class Questionnaire {
     id: number;
     pollster: { id: string, name: string };
     department: { id: string, name: string };
+    adminClass?: { id: string, name: string };
     title: string;
     prologue: string;
     epilogue: string;
