@@ -7,18 +7,10 @@
     </p>
     <p class="content" *ngIf="showTitle">{{question.content}}</p>
     <ng-container [ngSwitch]="question.type">
-        <ng-container *ngSwitchCase="0">
-            <ng-template [ngTemplateOutlet]="openQuestionResultTpl"></ng-template>
-        </ng-container>
-        <ng-container *ngSwitchCase="1">
-            <ng-template [ngTemplateOutlet]="tableResultTpl" [ngTemplateOutletContext]="{optionTemplate: optionResultTpl}"></ng-template>
-        </ng-container>
-        <ng-container *ngSwitchCase="2">
-            <ng-template [ngTemplateOutlet]="tableResultTpl" [ngTemplateOutletContext]="{optionTemplate: optionResultTpl}"></ng-template>
-        </ng-container>
-        <ng-container *ngSwitchCase="3">
-            <ng-template [ngTemplateOutlet]="tableResultTpl" [ngTemplateOutletContext]="{optionTemplate: scaleResultTpl}"></ng-template>
-        </ng-container>
+        <ng-template *ngSwitchCase="0" [ngTemplateOutlet]="openQuestionResultTpl"></ng-template>
+        <ng-template *ngSwitchCase="1" [ngTemplateOutlet]="tableResultTpl" [ngTemplateOutletContext]="{optionTemplate: optionResultTpl}"></ng-template>
+        <ng-template *ngSwitchCase="2" [ngTemplateOutlet]="tableResultTpl" [ngTemplateOutletContext]="{optionTemplate: optionResultTpl}"></ng-template>
+        <ng-template *ngSwitchCase="3" [ngTemplateOutlet]="tableResultTpl" [ngTemplateOutletContext]="{optionTemplate: scaleResultTpl}"></ng-template>
     </ng-container>
 </div>
 <ng-template #questinSummaryTpl>
@@ -34,7 +26,7 @@
 <ng-template #tableResultTpl let-ot="optionTemplate">
     <div class="btn-toolbar">
         <ng-template [ngTemplateOutlet]="questinSummaryTpl"></ng-template>
-        <button class="btn btn-outline-dark btn-sm ml-auto" (click)="copyTable(table)" *ngIf="supportCopy">复制数据</button>
+        <button class="btn btn-sm btn-outline-dark ml-auto" (click)="copyTable(table)" *ngIf="supportCopy">复制数据</button>
     </div>
     <table class="table table-sm table-light table-striped" #table>
         <thead>
@@ -80,7 +72,7 @@
     <div *ngIf="showOpenResponses">
         <div class="btn-toolbar">
             <span>共<b>{{question.openResponseTotalCount}}</b>个用户输入</span>
-            <button class="btn btn-dark btn-sm ml-auto" (click)="copyTable(openResponseTable)" *ngIf="supportCopy">复制数据</button>
+            <button class="btn btn-sm btn-dark ml-auto" (click)="copyTable(openResponseTable)" *ngIf="supportCopy">复制数据</button>
         </div>
         <div class="openResonsePane">
             <table class="table table-sm table table-dark table-striped" #openResponseTable>

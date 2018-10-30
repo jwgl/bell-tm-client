@@ -1,5 +1,5 @@
 <h3 class="title">{{form.title}}</h3>
-<tm-questionnaire-respondents [questionnaire]="form"></tm-questionnaire-respondents>
+<tm-respondent-address [questionnaire]="form"></tm-respondent-address>
 <tm-multiple-line [text]="form.prologue"></tm-multiple-line>
 <ol class="questions" *ngIf="form.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
     <li class="question" *ngFor="let question of form.questions">

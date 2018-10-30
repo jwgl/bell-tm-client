@@ -11,15 +11,15 @@
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">{{option.label}}</h5>
-                <p class="card-text">{{option.content}}</p>
-            </div>
-            <div class="card-footer">
-                <span class="text-success" style="font-size: 1.25rem" *ngIf="option.selected">
-                    <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon>
-                </span>
-                <button class="btn btn-sm ml-auto" *ngIf="!disabled" (click)="toggleOption(option)">
-                    <fa-icon icon="plus" fixedWidth="true"></fa-icon>
-                </button>
+                <tm-multiple-line class="card-text" [text]="option.content"></tm-multiple-line>
+                <div class="btn-toolbar">
+                    <span [class]="option.selected ? 'text-success' : 'text-muted'" style="font-size: 1.25rem">
+                        <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon>
+                    </span>
+                    <button class="btn btn-sm ml-auto" *ngIf="!disabled" (click)="toggleOption(option)">
+                        <fa-icon icon="plus" fixedWidth="true"></fa-icon>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

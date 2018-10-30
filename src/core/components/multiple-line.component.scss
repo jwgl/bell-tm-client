@@ -1,0 +1,22 @@
+p {
+    text-indent: 2rem
+}
+
+:host-context(.form-control-plaintext) {
+    p {
+        text-indent: initial;
+        margin-bottom: 0.5rem;
+    }
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+:host-context(.card-text) {
+    p {
+        margin-bottom: 0.5rem;
+    }
+    p:last-child {
+        margin-bottom: 0;
+    }
+}

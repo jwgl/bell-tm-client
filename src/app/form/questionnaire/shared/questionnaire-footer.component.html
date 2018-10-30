@@ -10,7 +10,7 @@
     </li>
     <li>
         <label>{{questionnaire.surveyType | surveyTypeText: true}}范围</label>
-        {{questionnaire.surveyScope | surveyScopeText}} {{questionnaire.respondentType | respondentTypeText}}
+        {{questionnaire.surveyScope | surveyScopeText}}{{questionnaire.respondentType | respondentTypeText}}
     </li>
     <li *ngIf="questionnaire.surveyTypeOptions.anonymous.visible">
         <label>{{questionnaire.surveyType | surveyTypeText: true}}形式</label>

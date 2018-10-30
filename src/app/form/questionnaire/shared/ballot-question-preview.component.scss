@@ -17,3 +17,14 @@ h5 {
     background-color: transparent;
     padding-top: 0;
 }
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    .btn-toolbar {
+        padding-top: 0.5rem;
+        margin-top: auto;
+        margin-bottom: 0;
+        align-items: center;
+    }
+}

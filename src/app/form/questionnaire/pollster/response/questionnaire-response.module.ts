@@ -11,6 +11,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
 import { QuestionnaireResponseComponent } from './questionnaire-response.component';
+import { QuestionnaireRespondentsComponent } from './questionnaire-respondents.component';
 import { QuestionResponseComponent } from './question-response.component';
 import { BallotQuestionResponseComponent } from './ballot-question-response.component';
 
@@ -27,6 +28,7 @@ import { BallotQuestionResponseComponent } from './ballot-question-response.comp
     ],
     declarations: [
         QuestionnaireResponseComponent,
+        QuestionnaireRespondentsComponent,
         QuestionResponseComponent,
         BallotQuestionResponseComponent,
     ],

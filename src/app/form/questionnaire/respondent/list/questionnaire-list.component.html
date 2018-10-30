@@ -12,7 +12,7 @@
                     <a class="mr-1" [routerLink]="['/form/q', q.hashId]">{{q.title}}</a>
                     <span class="badge badge-warning" *ngIf="q.formId && !q.dateSubmitted">未提交</span>
                 </h5>
-                <tm-multiple-line [text]="q.prologue" empty=" ¯\_(ツ)_/¯ 这家伙很懒，什么都没有写..."></tm-multiple-line>
+                <tm-multiple-line class="card-text" [text]="q.prologue" empty=" ¯\_(ツ)_/¯ 这家伙很懒，什么都没有写..."></tm-multiple-line>
             </div>
         </div>
     </div>

@@ -28,6 +28,8 @@ export class QuestionnaireResponseComponent {
         this.questionnaire.initStats(dto.stats);
     }
 
+
+
     onViewOpenResponses(question: Question, questionResponse: QuestionResponseComponent) {
         this.service.loadOpenResponses(this.questionnaire.id, question.id).subscribe(result => {
             question.openResponses = result;

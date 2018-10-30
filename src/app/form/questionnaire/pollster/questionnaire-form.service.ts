@@ -29,6 +29,10 @@ export class QuestionnaireFormService extends RestEditService {
         return this.http.get(`${this.api.item(id)}/responses`);
     }
 
+    loadRespondents(id: number): Observable<any> {
+        return this.http.get(`${this.api.item(id)}/respondents`);
+    }
+
     loadOpenResponses(id: number, questionId: number): Observable<any> {
         return this.http.get(`${this.api.item(id)}/questions/${questionId}/openResponses`);
     }

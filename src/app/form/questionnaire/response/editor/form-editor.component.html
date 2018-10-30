@@ -6,7 +6,7 @@
         </div>
     </div>
     <h3 class="title">{{form.questionnaire.title}}</h3>
-    <tm-questionnaire-respondents [questionnaire]="form.questionnaire"></tm-questionnaire-respondents>
+    <tm-respondent-address [questionnaire]="form.questionnaire"></tm-respondent-address>
     <tm-multiple-line [text]="form.questionnaire.prologue"></tm-multiple-line>
     <ol class="questions" *ngIf="form.questionnaire.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
         <li class="question" *ngFor="let item of form.items">

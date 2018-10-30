@@ -7,7 +7,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireFormViewerComponent } from './questionnaire-form-viewer.component';
 import { QuestionnairePreviewComponent } from './questionnaire-preview.component';
-import { QuestionnaireRespondentsComponent } from './questionnaire-respondents.component';
+import { RespondentAddressComponent } from './respondent-address.component';
 import { QuestionnaireFooterComponent } from './questionnaire-footer.component';
 import { QuestionFormViewerComponent } from './question-form-viewer.component';
 import { BallotQuestionFormViewerComponent } from './ballot-question-form-viewer.component';
@@ -29,7 +29,7 @@ import { QuestionTypeTextPipe } from './question-type.pipe';
     ],
     declarations: [
         QuestionnaireFormViewerComponent,
-        QuestionnaireRespondentsComponent,
+        RespondentAddressComponent,
         QuestionnaireFooterComponent,
         QuestionFormViewerComponent,
         BallotQuestionFormViewerComponent,
@@ -46,7 +46,7 @@ import { QuestionTypeTextPipe } from './question-type.pipe';
     exports: [
         QuestionnaireFormViewerComponent,
         QuestionnairePreviewComponent,
-        QuestionnaireRespondentsComponent,
+        RespondentAddressComponent,
         QuestionnaireFooterComponent,
         SurveyScopeTextPipe,
         SurveyTypeTextPipe,
