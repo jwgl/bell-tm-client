@@ -4,6 +4,7 @@ import { QuestionType, QUESTION_TYPE_OPTIONS } from './question-type.model';
 
 export class Questionnaire {
     id: number;
+    hashId: string;
     pollster: { id: string, name: string };
     department: { id: string, name: string };
     adminClass?: { id: string, name: string };
@@ -18,7 +19,7 @@ export class Questionnaire {
     anonymous: boolean;
     responseVisibility: string;
     dateExpired: string;
-    hashId: string;
+    published: boolean;
     workflowInstanceId: string;
     status: string;
     questions: Question[];

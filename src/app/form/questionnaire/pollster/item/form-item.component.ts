@@ -27,9 +27,9 @@ export class QuestionnaireFormItemComponent {
     }
 
     togglePublished(form: Questionnaire): void {
-        this.dialog.confirm('发布', `确定要${form.hashId ? '取消' : '开始'}发布吗？`).then(() => {
-            this.service.togglePublished(form.id, !form.hashId).subscribe(hashId => {
-                form.hashId = hashId;
+        this.dialog.confirm('发布', `确定要${form.published ? '取消' : '开始'}发布吗？`).then(() => {
+            this.service.togglePublished(form.id, !form.published).subscribe(() => {
+                form.published = !form.published;
             });
         });
     }

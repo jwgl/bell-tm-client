@@ -21,8 +21,8 @@ export class QuestionnaireFormService extends RestEditService {
         return this.http.get(`${this.api.list()}/createOptions`);
     }
 
-    togglePublished(id: number, publish: boolean): Observable<string> {
-        return this.http.patch<{ hashId: string }>(`${this.api.item(id)}?op=${publish ? 'OPEN' : 'CLOSE'}`, null).pipe(map(data => data.hashId));
+    togglePublished(id: number, publish: boolean): Observable<void> {
+        return this.http.patch(`${this.api.item(id)}?op=${publish ? 'OPEN' : 'CLOSE'}`, null);
     }
 
     loadResponses(id: number): Observable<any> {

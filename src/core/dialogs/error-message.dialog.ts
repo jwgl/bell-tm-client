@@ -4,6 +4,7 @@ import { BaseDialog } from './base-dialog';
 
 @Component({
     selector: 'error-message-dialog',
+    styles: ['ul{margin-bottom:0}'],
     templateUrl: 'error-message.dialog.html',
 })
 /**

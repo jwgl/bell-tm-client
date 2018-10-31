@@ -27,7 +27,7 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
     ) {
         this.route.params.subscribe(params => {
             this.loading = true;
-            this.service.loadData(params['hashId']).pipe().subscribe(dto => {
+            this.service.loadData(params['hashId']).subscribe(dto => {
                 this.form = new ResponseForm(dto);
                 this.loading = false;
             }, error => {

@@ -2,8 +2,8 @@
     <div class="card-header d-flex bg-dark text-white">
         <h5>{{option.ordinal + 1}}、{{option.label ? option.label : '新建选项标签'}}</h5>
         <div class="btn-group ml-auto">
-            <button class="btn btn-sm btn-outline-light" type="submit" [disabled]="!ballotOptionForm.form.valid">确定</button>
             <button class="btn btn-sm btn-outline-light" (click)="onCancel()">取消</button>
+            <button class="btn btn-sm btn-outline-light" type="submit" [disabled]="!ballotOptionForm.form.valid">确定</button>
         </div>
     </div>
     <div class="card-body bg-light">

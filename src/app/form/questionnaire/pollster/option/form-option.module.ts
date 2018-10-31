@@ -4,21 +4,25 @@ import { RouterModule } from '@angular/router';
 
 import { CommonDirectivesModule } from 'core/common-directives';
 
-import { QuestionnaireFormListComponent } from './form-list.component';
+import { QuestionnaireFormOptionComponent } from './form-option.component';
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
 
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         RouterModule,
+        FontAwesomeModule,
         CommonDirectivesModule,
         QuestionnaireSharedModule,
     ],
     declarations: [
-        QuestionnaireFormListComponent,
+        QuestionnaireFormOptionComponent,
     ],
     exports: [
-        QuestionnaireFormListComponent,
+        QuestionnaireFormOptionComponent,
     ],
 })
-export class QuestionnaireFormListModule { }
+export class QuestionnaireFormOptionModule { }

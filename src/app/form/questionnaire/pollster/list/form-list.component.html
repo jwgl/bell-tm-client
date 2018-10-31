@@ -1,38 +1,29 @@
 <div class="btn-toolbar">
     <div class="btn-group ml-auto">
-        <button class="btn btn-primary" (click)="onCreate()">新建</button>
+        <button class="btn btn-primary" routerLink="option">新建</button>
     </div>
 </div>
-<ng-container *ngIf="forms">
-    <div class="table-responsive" *ngIf="forms.length > 0">
-        <table class="table table-expand">
-            <thead>
-                <tr>
-                    <th>申请单号</th>
-                    <th>调查类型</th>
-                    <th>调查范围</th>
-                    <th>标题</th>
-                    <th>修改时间</th>
-                    <th>审核状态</th>
-                    <th>发布状态</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let form of forms">
-                    <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
-                    <td>{{form.surveyType | surveyTypeText}}</td>
-                    <td>{{form.surveyScope | surveyScopeText}}{{form.respondentType | respondentTypeText}}</td>
-                    <td class="expand">{{form.title}}</td>
-                    <td>{{form.dateModified | date: 'y-MM-dd HH:mm'}}</td>
-                    <td><audit-status [status]="form.status"></audit-status></td>
-                    <td>
-                        <span *ngIf="form.status == 'APPROVED'" [class]="form.hashId ? 'badge badge-success' : 'badge badge-secondary'">
-                            {{form.hashId ? '已发布' : '未发布'}}
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div class="card-container" *ngIf="forms">
+    <div class="card-columns">
+        <div class="card" *ngFor="let form of forms">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <span>{{form.surveyType | surveyTypeText: true}}：</span>
+                    <a [routerLink]="[form.id]">{{form.title}}</a>
+                    <span class="ml-2">
+                        <span class="badge" *ngIf="form.status == 'APPROVED'; else statusTpl" [class.badge-danger]="!form.published"
+                            [class.badge-success]="form.published">{{form.published ? '已发布' : '未发布'}}</span>
+                    </span>
+                    <ng-template #statusTpl>
+                        <audit-status [status]="form.status"></audit-status>
+                    </ng-template>
+                </h5>
+                <tm-multiple-line class="card-text" [text]="form.prologue" empty="¯\_(ツ)_/¯ 这家伙很懒，什么都没有写..."></tm-multiple-line>
+                <div class="d-flex">
+                    <small class="ml-auto text-muted">{{form.dateModified | date: 'y-MM-dd HH:mm'}}</small>
+                </div>
+            </div>
+        </div>
     </div>
     <tm-pager [total]="totalCount" [max]="max" [length]="forms.length" (prev)="loadList($event)" (next)="loadList($event)"></tm-pager>
-</ng-container>
+</div>

@@ -1,11 +1,15 @@
+:host() {
+    display: block;
+}
+
 p {
-    text-indent: 2rem
+    text-indent: 2em
 }
 
 :host-context(.form-control-plaintext) {
     p {
         text-indent: initial;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.5em;
     }
     p:last-child {
         margin-bottom: 0;
@@ -14,7 +18,7 @@ p {
 
 :host-context(.card-text) {
     p {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.5em;
     }
     p:last-child {
         margin-bottom: 0;

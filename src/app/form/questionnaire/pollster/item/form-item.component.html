@@ -2,9 +2,10 @@
     <ng-template #toolbarTpl let-form="form">
         <div class="btn-group ml-2">
             <button class="btn btn-secondary" (click)="preview = !preview">{{preview ? '取消' : '显示'}}预览</button>
-            <button class="btn btn-secondary" *ngIf="form.hashId" (click)="copyUrl(form)">复制链接</button>
-            <button class="btn btn-{{form.hashId ? 'warning' : 'primary'}}" *ngIf="form.status == 'APPROVED'" (click)="togglePublished(form)">{{form.hashId ? '取消' : '开始'}}发布</button>
-            <button class="btn btn-primary" *ngIf="form.hashId" routerLink="responses">查看统计</button>
+            <button class="btn btn-secondary" *ngIf="form.status=='APPROVED'" routerLink="responses">查看统计</button>
+            <button class="btn btn-secondary" *ngIf="form.published" (click)="copyUrl(form)">复制链接</button>
+            <button class="btn btn-{{form.published ? 'warning' : 'primary'}}" *ngIf="form.status == 'APPROVED'"
+                (click)="togglePublished(form)">{{form.published ? '取消' : '开始'}}发布</button>
         </div>
     </ng-template>
     <ng-template #viewerTpl let-form="form">
