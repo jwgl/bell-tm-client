@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { NumberStringOption } from 'core/options';
 

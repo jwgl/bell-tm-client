@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, AfterViewChecked, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 import { ResponseItem } from '../../shared/response-form.model';
 import { Question } from '../../shared/questionnaire-form.model';

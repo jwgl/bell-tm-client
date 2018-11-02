@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
 
 import { Questionnaire, Question, QuestionOption } from '../../shared/questionnaire-form.model';
-import { QuestionType } from '../../shared/question-type.model';
 
 declare module '../../shared/questionnaire-form.model' {
     interface Questionnaire {

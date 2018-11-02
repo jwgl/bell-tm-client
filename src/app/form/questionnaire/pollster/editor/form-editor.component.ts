@@ -7,9 +7,6 @@ import { StringStringOption } from 'core/options';
 import { QuestionnaireFormService } from '../questionnaire-form.service';
 import { Questionnaire, Question } from '../../shared/questionnaire-form.model';
 import './form-editor.model';
-import { SURVEY_TYPES, SurveyType } from '../../shared/survey-type.model';
-import { SURVEY_SCOPES } from '../../shared/survey-scope.model';
-import { RESPONDENT_TYPES } from '../../shared/respondent-type.model';
 import { RESPONSE_VISIBILITIES } from '../../shared/response-visibility.model';
 
 @Component({

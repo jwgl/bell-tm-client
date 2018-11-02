@@ -5,7 +5,7 @@
 </ul>
 <div class="form-row" *ngIf="questionnaires && questionnaires.length; else emptyTpl">
     <div class="col-md-6 col-lg-4 mb-p10" *ngFor="let q of questionnaires">
-        <div class="card h-100">
+        <div class="card bg-light h-100">
             <div class="card-body">
                 <h5 class="card-title">
                     <span>{{q.surveyType | surveyTypeText: true}}：</span>
@@ -18,8 +18,5 @@
     </div>
 </div>
 <ng-template #emptyTpl>
-    <div class="alert alert-info" *ngIf="loading; else errorTpl">正在加载...</div>
-</ng-template>
-<ng-template #errorTpl>
-    <div class="alert alert-info">暂无数据。</div>
+    <div class="alert alert-info" *ngIf="!loading">暂无数据。</div>
 </ng-template>

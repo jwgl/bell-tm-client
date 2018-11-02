@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { Questionnaire, Question, QuestionOption } from '../../shared/questionnaire-form.model';
+import { Questionnaire, Question } from '../../shared/questionnaire-form.model';
 import { QuestionType } from '../../shared/question-type.model';
 import { SurveyType, SURVEY_TYPE_MAP } from '../../shared/survey-type.model';
 

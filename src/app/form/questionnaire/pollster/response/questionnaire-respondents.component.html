@@ -48,7 +48,8 @@
     <th>姓名</th>
     <th>性别</th>
     <th>班级</th>
-    <th>年级专业</th>
+    <th>年级</th>
+    <th>专业</th>
     <th>学院</th>
 </ng-template>
 <ng-template #studentBodyTpl let-student="respondent">
@@ -56,6 +57,7 @@
     <td>{{student.name}}</td>
     <td>{{student.sex}}</td>
     <td>{{student.adminClass}}班</td>
-    <td class="expand">{{student.grade}}级{{student.subject}}专业</td>
+    <td>{{student.grade}}级</td>
+    <td class="expand">{{student.subject}}专业</td>
     <td>{{student.department}}</td>
 </ng-template>

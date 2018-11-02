@@ -5,14 +5,17 @@
 </div>
 <div class="card-container" *ngIf="forms">
     <div class="card-columns">
-        <div class="card" *ngFor="let form of forms">
+        <div class="card bg-light" *ngFor="let form of forms">
             <div class="card-body">
                 <h5 class="card-title">
                     <span>{{form.surveyType | surveyTypeText: true}}：</span>
                     <a [routerLink]="[form.id]">{{form.title}}</a>
-                    <span class="ml-2">
-                        <span class="badge" *ngIf="form.status == 'APPROVED'; else statusTpl" [class.badge-danger]="!form.published"
-                            [class.badge-success]="form.published">{{form.published ? '已发布' : '未发布'}}</span>
+                    <span class="ml-1">
+                        <span *ngIf="form.status == 'APPROVED'; else statusTpl" class="badge"
+                            [class.badge-danger]="!form.published"
+                            [class.badge-success]="form.published">
+                            {{form.published ? '已发布' : '未发布'}}
+                        </span>
                     </span>
                     <ng-template #statusTpl>
                         <audit-status [status]="form.status"></audit-status>
@@ -20,7 +23,8 @@
                 </h5>
                 <tm-multiple-line class="card-text" [text]="form.prologue" empty="¯\_(ツ)_/¯ 这家伙很懒，什么都没有写..."></tm-multiple-line>
                 <div class="d-flex">
-                    <small class="ml-auto text-muted">{{form.dateModified | date: 'y-MM-dd HH:mm'}}</small>
+                    <small *ngIf="form.responseCount">➥<a class="responseCount" [routerLink]="[form.id, 'responses']">{{form.responseCount}}</a></small>
+                    <small class="ml-auto text-muted"><from-now [date]="form.dateModified"></from-now></small>
                 </div>
             </div>
         </div>

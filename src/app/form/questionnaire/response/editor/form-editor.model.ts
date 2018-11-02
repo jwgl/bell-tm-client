@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
 
-import { Questionnaire, Question, QuestionOption } from '../../shared/questionnaire-form.model';
 import { ResponseForm, ResponseItem, ResponseItemDto } from '../../shared/response-form.model';
 
 declare module '../../shared/questionnaire-form.model' {

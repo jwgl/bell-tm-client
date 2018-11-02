@@ -6,21 +6,31 @@
         本次投票为多选，最少选择<b>{{question.minValue}}</b>项，最多选择<b>{{question.maxValue}}</b>项。
     </p>
 </ng-container>
-<div class="form-row">
-    <div class="col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options" style="padding-bottom: 1rem;">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">{{option.label}}</h5>
-                <tm-multiple-line class="card-text" [text]="option.content"></tm-multiple-line>
-                <div class="btn-toolbar">
-                    <span [class]="option.selected ? 'text-success' : 'text-muted'" style="font-size: 1.25rem">
-                        <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon>
-                    </span>
-                    <button class="btn btn-sm ml-auto" *ngIf="!disabled" (click)="toggleOption(option)">
-                        <fa-icon icon="plus" fixedWidth="true"></fa-icon>
-                    </button>
+<fieldset class="form-group" [disabled]="disabled">
+    <div class="form-row">
+        <div class="col-md-{{12 / question.stepValue}} card-wrapper" *ngFor="let option of question.options">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{option.label}}</h5>
+                    <tm-multiple-line class="card-text" [text]="option.content"></tm-multiple-line>
+                    <div class="btn-toolbar">
+                        <ng-container [ngSwitch]="question.type">
+                            <ng-container *ngSwitchCase="1">
+                                <label *ngIf="!disabled || option == responseItem.choice" class="btn btn-sm text-monospace btn-outline-{{option == responseItem.choice ? 'success' : 'secondary'}}"
+                                    [class.active]="option == responseItem.choice">
+                                    <input type="radio" [name]="option.controlName" [value]="option" [(ngModel)]="responseItem.choice">+1
+                                </label>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="2">
+                                <label *ngIf="!disabled || option.selected" class="btn btn-sm text-monospace btn-outline-{{option.selected ? 'success' : 'secondary'}}"
+                                    [class.active]="option.selected">
+                                    <input type="checkbox" [name]="option.controlName" [(ngModel)]="option.selected">+1
+                                </label>
+                            </ng-container>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</fieldset>

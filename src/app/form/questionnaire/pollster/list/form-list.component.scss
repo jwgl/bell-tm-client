@@ -1,5 +1,38 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+
 .card-container {
     margin-bottom: 1rem;
+}
+
+.card-columns {
+    column-gap: 10px;
+    .card {
+        margin-bottom: 10px;
+    }
+    @include media-breakpoint-only(sm) {
+        column-count: 1;
+    }
+    @include media-breakpoint-only(md) {
+        column-count: 2;
+    }
+    @include media-breakpoint-only(lg) {
+        column-count: 3;
+    }
+    @include media-breakpoint-only(xl) {
+        column-count: 4;
+    }
+}
+
+.responseCount {
+    font-size: 80%;
+    color: $gray-900;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+        color: $red;
+    }
 }
 
 h5 {

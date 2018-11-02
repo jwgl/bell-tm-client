@@ -57,10 +57,10 @@ Question.prototype.initStats = function (this: Question, stats: QuestionResponse
 };
 
 Question.prototype.getScaleCount = function (this: Question, scale: number): number {
-    if (this.type === QuestionType.SCALE) {
+    if (this.responseCount > 0 && this.type === QuestionType.SCALE) {
         const count = this.__scaleCounts[scale];
         return count ? count : 0;
     } else {
-        return 0;
+        return null;
     }
 };

@@ -9,7 +9,7 @@ import { QuestionnaireFormService } from '../questionnaire-form.service';
 export class QuestionnaireFormListComponent implements OnInit {
     forms: any[];
     totalCount: number;
-    max = 10;
+    max = 20;
 
     constructor(private service: QuestionnaireFormService) { }
 

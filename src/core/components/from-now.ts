@@ -1,16 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, HostBinding } from '@angular/core';
-
-import * as dayjs from 'dayjs';
-import 'dayjs/locale/zh-cn';
-dayjs.locale('zh-cn');
-import relativeTime from 'dayjs/plugin/relativeTime'
-dayjs.extend(relativeTime)
-
-declare module 'dayjs' {
-    interface Dayjs {
-        fromNow();
-    }
-}
+import { fromNowLabel, fromNowTitle } from 'core/utils/from-now';
 @Component({
     selector: 'from-now',
     template: '{{date}}',
@@ -18,26 +7,18 @@ declare module 'dayjs' {
 })
 
 export class FromNowComponent {
-    private _date: dayjs.Dayjs;
+    private _date: string;
 
     @Input() set date(value: string) {
-        this._date = dayjs(value);
+        this._date = value;
     }
 
     get date(): string {
-        if (dayjs().diff(this._date, 'day') > 25) {
-            return this._date.format('YYYY-MM-DD HH:mm');
-        } else {
-            return this._date.fromNow();
-        }
+        return fromNowLabel(this._date);
     }
 
     @HostBinding('title')
     get title(): string {
-        if (dayjs().diff(this._date, 'day') > 25) {
-            return '';
-        } else {
-            return this._date.format('YYYY-MM-DD HH:mm');
-        }
+        return fromNowTitle(this._date);
     }
 }

@@ -26,8 +26,5 @@
     </div>
 </ng-container>
 <ng-template #emptyTpl>
-    <p *ngIf="loading; else errorTpl">正在加载...</p>
-</ng-template>
-<ng-template #errorTpl>
-    <div class="alert alert-warning">感谢您的参与，问卷不存在或尚未发布。</div>
+    <div class="alert alert-warning" *ngIf="!loading">感谢您的参与，问卷不存在或尚未发布。</div>
 </ng-template>
