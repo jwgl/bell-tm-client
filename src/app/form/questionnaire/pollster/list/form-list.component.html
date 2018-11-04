@@ -1,0 +1,33 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-primary" routerLink="option">新建</button>
+    </div>
+</div>
+<div class="card-container" *ngIf="forms">
+    <div class="card-columns">
+        <div class="card bg-light" *ngFor="let form of forms">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <span>{{form.surveyType | surveyTypeText: true}}：</span>
+                    <a [routerLink]="[form.id]">{{form.title}}</a>
+                    <span class="ml-1">
+                        <span *ngIf="form.status == 'APPROVED'; else statusTpl" class="badge"
+                            [class.badge-danger]="!form.published"
+                            [class.badge-success]="form.published">
+                            {{form.published ? '已发布' : '未发布'}}
+                        </span>
+                    </span>
+                    <ng-template #statusTpl>
+                        <audit-status [status]="form.status"></audit-status>
+                    </ng-template>
+                </h5>
+                <tm-multiple-line class="card-text" [text]="form.prologue" empty="¯\_(ツ)_/¯ 这家伙很懒，什么都没有写..."></tm-multiple-line>
+                <div class="d-flex">
+                    <small *ngIf="form.responseCount">➥<a class="responseCount" [routerLink]="[form.id, 'responses']">{{form.responseCount}}</a></small>
+                    <small class="ml-auto text-muted"><from-now [date]="form.dateModified"></from-now></small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <tm-pager [total]="totalCount" [max]="max" [length]="forms.length" (prev)="loadList($event)" (next)="loadList($event)"></tm-pager>
+</div>

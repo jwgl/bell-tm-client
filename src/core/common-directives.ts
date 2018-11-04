@@ -12,7 +12,7 @@ import { FormDirective } from './bootstrap/form.directive';
 import {
     ModalBodyDirective,
     ModalCancelButtonDirective,
-    ModalDialogDirective,
+    ModalDialogComponent,
     ModalFooterDirective,
     ModalOkButtonDirective,
 } from './bootstrap/modal-dialog.directive';
@@ -42,10 +42,25 @@ import { ScheduleWeektabComponent } from './components/schedule-timetable/schedu
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { faMinusSquare, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import {
+    faSpinner, faTimes, faPlus, faTrashAlt, faEdit,
+    faArrowUp, faArrowDown, faAngleUp, faAngleDown,
+    faTag, faHashtag,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+    faMinusSquare, faPlusSquare,
+    faThumbsUp, faThumbsDown,
+} from '@fortawesome/free-regular-svg-icons';
+import { ProvideParentForm } from './directives/provide-parent-form';
+import { MultipleLineComponent } from './components/multiple-line.component';
 
-library.add(faSpinner, faTimes, faMinusSquare, faPlusSquare);
+library.add(
+    faSpinner, faTimes, faPlus, faTrashAlt, faEdit,
+    faArrowUp, faArrowDown, faAngleUp, faAngleDown,
+    faTag, faHashtag,
+    faThumbsUp, faThumbsDown,
+    faMinusSquare, faPlusSquare,
+);
 
 export {
     CheckboxSelectorComponent,
@@ -62,6 +77,7 @@ const CORE_DIRECTIVES: any[] = [
     RemoveItemComponent,
     ScheduleTimetableComponent,
     ScheduleWeektabComponent,
+    MultipleLineComponent,
     // bootstrap form directives
     FormDirective,
     FormControlDirective,
@@ -70,7 +86,7 @@ const CORE_DIRECTIVES: any[] = [
     FormFieldLeftDirective,
     FormFieldRightDirective,
     // bootstrap modal directives
-    ModalDialogDirective,
+    ModalDialogComponent,
     ModalCancelButtonDirective,
     ModalOkButtonDirective,
     ModalBodyDirective,
@@ -78,6 +94,7 @@ const CORE_DIRECTIVES: any[] = [
     // other directives
     Markdown,
     Spinning,
+    ProvideParentForm,
     // pipes
     GroupByPipe,
     FilterByPipe,

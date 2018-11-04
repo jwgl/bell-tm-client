@@ -1,0 +1,19 @@
+.question {
+    margin-bottom: 1rem;
+    .content {
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+}
+
+datalist {
+    option {
+        text-align: center;
+        &:first-child {
+            text-align: left;
+        }
+        &:last-child {
+            text-align: right;
+        }
+    }
+}

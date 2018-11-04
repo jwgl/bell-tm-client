@@ -1,0 +1,14 @@
+ul.footer {
+    margin-top: 1rem;
+    margin-left: auto;
+    list-style: none;
+    display: table;
+    li {
+        display: table-row;
+        label {
+            display: table-cell;
+            text-align: right;
+            padding-right: 1rem;
+        }
+    }
+}

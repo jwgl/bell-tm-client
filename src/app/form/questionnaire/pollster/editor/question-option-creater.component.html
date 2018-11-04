@@ -1,0 +1,26 @@
+<form autocomplete="off">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <ng-container [ngSwitch]="question.type">
+                    <input *ngSwitchCase="1" type="radio" disabled>
+                    <input *ngSwitchCase="2" type="checkbox" disabled>
+                </ng-container>
+            </div>
+        </div>
+        <input class="form-control" name="content" [(ngModel)]="content" placeholder="新建选项描述" #contentElement>
+        <div class="input-group-append">
+            <input *ngIf="showLabel" type="text" class="form-control option-label" placeholder="标签" name="label" [(ngModel)]="label">
+            <input *ngIf="showValue" type="number" class="form-control option-value" placeholder="数值" name="value" [(ngModel)]="value">
+            <button class="btn btn-outline-secondary" (click)="onCreate();contentElement.focus();" [disabled]="!contentElement.value">
+                <fa-icon icon="plus" fixedWidth="true"></fa-icon>
+            </button>
+            <button class="btn btn-outline-secondary" [class.active]="showLabel" type="button" (click)="onToggleLabel()">
+                <fa-icon icon="tag" fixedWidth="true"></fa-icon>
+            </button>
+            <button class="btn btn-outline-secondary" [class.active]="showValue" type="button" (click)="onToggleValue()">
+                <fa-icon icon="hashtag" fixedWidth="true"></fa-icon>
+            </button>
+        </div>
+    </div>
+</form>

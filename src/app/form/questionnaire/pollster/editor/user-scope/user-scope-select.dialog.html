@@ -1,0 +1,53 @@
+<modal-dialog [modalTitle]="title">
+    <modal-body>
+        <form>
+            <div class="form-group" *ngIf="visibles['学院']">
+                <label for="department">学院/部门</label>
+                <select class="form-control" id="department" name="department" [(ngModel)]="selectedDepartment"
+                    (ngModelChange)="onDeparmentChanged($event)">
+                    <option [ngValue]="null">选择学院/部门</option>
+                    <option *ngFor="let department of departments" [ngValue]="department">{{department.name}}</option>
+                </select>
+            </div>
+            <div class="form-group" *ngIf="visibles['年级']">
+                <label for="grade">年级</label>
+                <select class="form-control" id="grade" name="grade" [(ngModel)]="selectedGrade"
+                    [disabled]="visibles['学院'] && !selectedDepartment"
+                    (change)="updateOptions()">
+                    <option [ngValue]="0">全部</option>
+                    <option *ngFor="let grade of grades" [ngValue]="grade">{{grade}}级</option>
+                </select>
+            </div>
+            <div class="form-group" *ngIf="visibles['专业']">
+                <label for="subject">专业</label>
+                <select class="form-control" id="subject" name="subject" [(ngModel)]="selectedSubject"
+                    [disabled]="visibles['学院'] && !selectedDepartment"
+                    (change)="updateOptions()">
+                    <option value="">全部</option>
+                    <option *ngFor="let subject of subjects" [ngValue]="subject">{{subject}}专业</option>
+                </select>
+            </div>
+            <div class="form-group" *ngIf="visibles['班级']">
+                <label for="adminClass">班级</label>
+                <select class="form-control" id="adminClass" name="adminClass" [(ngModel)]="selectedAdminClass"
+                    [disabled]="visibles['学院'] && !selectedDepartment"
+                    (change)="updateOptions()">
+                    <option value="">全部</option>
+                    <option *ngFor="let adminClass of adminClasses" [ngValue]="adminClass">{{adminClass}}班</option>
+                </select>
+            </div>
+            <div class="form-group" *ngIf="visibles['性别']">
+                <label for="sex">性别</label>
+                <select class="form-control" id="sex" name="sex" [(ngModel)]="selectedSex">
+                    <option value="">全部</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="!isValid">确定</button>
+    </modal-footer>
+</modal-dialog>

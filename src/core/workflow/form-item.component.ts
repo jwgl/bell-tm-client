@@ -64,6 +64,7 @@ export class WorkflowFormItemComponent implements OnInit {
             id: this.form.id,
             type: this.reviewType,
             what: this.form.workflowTitle,
+            validate: this.form.validate ? this.form.validate.bind(this.form) : null,
         };
     }
 }

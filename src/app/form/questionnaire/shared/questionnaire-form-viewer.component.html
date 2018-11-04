@@ -1,0 +1,67 @@
+<tm-form-title>{{form.formTitle}}</tm-form-title>
+<div class="form-group">
+    <label>发起人</label>
+    <p class="form-control-plaintext">{{form.department.name}} {{form.adminClass?.name}} {{form.pollster.name}}</p>
+</div>
+<div class="form-group">
+    <label>标题</label>
+    <p class="form-control-plaintext">{{form.title}}</p>
+</div>
+<div class="form-group">
+    <label>欢迎词</label>
+    <tm-multiple-line class="form-control-plaintext" [text]="form.prologue" empty="<未设置>"></tm-multiple-line>
+</div>
+<div class="form-group">
+    <label>结束语</label>
+    <tm-multiple-line class="form-control-plaintext" [text]="form.epilogue" empty="<未设置>"></tm-multiple-line>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <label>调查类型</label>
+        <p class="form-control-plaintext">{{form.surveyType | surveyTypeText}}</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>调查范围</label>
+        <p class="form-control-plaintext">{{form.surveyScope | surveyScopeText}}</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>调查对象</label>
+        <p class="form-control-plaintext">{{form.respondentType | respondentTypeText}}</p>
+    </div>
+</div>
+<div class="form-group">
+    <label>面向对象</label>
+    <p class="form-control-plaintext">{{form.orientedText}}</p>
+</div>
+<div class="form-group">
+    <label>限制对象</label>
+    <p class="form-control-plaintext">{{form.restrictedText}}</p>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <label>是否匿名</label>
+        <p class="form-control-plaintext">{{form.anonymous ? '匿名' : '实名'}}</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>响应可见性</label>
+        <p class="form-control-plaintext">{{form.responseVisibility | responseVisibilityText }}</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>截止时间</label>
+        <p class="form-control-plaintext">{{form.dateExpired | date: 'y-MM-dd HH:mm'}}</p>
+    </div>
+</div>
+<ng-container *ngIf="form.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
+    <div class="form-group">
+        <label>{{form.surveyType | surveyTypeText}}问题（共{{form.questions.length}}题）</label>
+        <ng-container *ngFor="let question of form.questions">
+            <tm-question-form-viewer [question]="question"></tm-question-form-viewer>
+        </ng-container>
+    </div>
+</ng-container>
+<ng-template #ballotSheetTpl>
+    <tm-ballot-question-form-viewer [question]="form.questions[0]"></tm-ballot-question-form-viewer>
+</ng-template>
+<ng-template #emptyFieldTpl>
+    <未设置>
+</ng-template>

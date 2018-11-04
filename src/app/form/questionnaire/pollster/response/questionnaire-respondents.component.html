@@ -1,0 +1,63 @@
+<div class="btn-toolbar">
+    共<b>{{questionnaire.responseCount}}</b>人填写此{{questionnaire.surveyType | surveyTypeText}}。
+    <button class="btn btn-link" *ngIf="!questionnaire.anonymous" (click)="onViewRespondents()">
+        {{showRespondents ? '隐藏' : '查看'}}用户名单
+    </button>
+    <button class="btn btn-sm btn-dark ml-auto" (click)="copyTable(table)" *ngIf="showRespondents &&respondents && supportCopy">复制数据</button>
+</div>
+<div class="wrapper" *ngIf="showRespondents && respondents">
+    <ng-container [ngSwitch]="questionnaire.respondentType">
+        <ng-container *ngSwitchCase="'TEACHER'">
+            <ng-template [ngTemplateOutlet]="respondentsTpl" [ngTemplateOutletContext]="{headerTemplate: teacherHeaderTpl, bodyTemplate: teacherBodyTpl}"></ng-template>
+        </ng-container>
+        <ng-container *ngSwitchCase="'STUDENT'">
+            <ng-template [ngTemplateOutlet]="respondentsTpl" [ngTemplateOutletContext]="{headerTemplate: studentHeaderTpl, bodyTemplate: studentBodyTpl}"></ng-template>
+        </ng-container>
+    </ng-container>
+</div>
+<ng-template #respondentsTpl let-header="headerTemplate" let-body="bodyTemplate">
+    <div class="table-responsive">
+        <table class="table table-sm table-dark table-striped table-expand" #table>
+            <thead>
+                <tr>
+                    <ng-template [ngTemplateOutlet]="header"></ng-template>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let respondent of respondents">
+                    <ng-template [ngTemplateOutlet]="body" [ngTemplateOutletContext]="{respondent: respondent}"></ng-template>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-template>
+<ng-template #teacherHeaderTpl>
+    <th>工号</th>
+    <th>姓名</th>
+    <th>性别</th>
+    <th>部门</th>
+</ng-template>
+<ng-template #teacherBodyTpl let-teacher="respondent">
+    <td>{{teacher.id}}</td>
+    <td>{{teacher.name}}</td>
+    <td class="expand">{{teacher.sex}}</td>
+    <td>{{teacher.department}}</td>
+</ng-template>
+<ng-template #studentHeaderTpl>
+    <th>学号</th>
+    <th>姓名</th>
+    <th>性别</th>
+    <th>班级</th>
+    <th>年级</th>
+    <th>专业</th>
+    <th>学院</th>
+</ng-template>
+<ng-template #studentBodyTpl let-student="respondent">
+    <td>{{student.id}}</td>
+    <td>{{student.name}}</td>
+    <td>{{student.sex}}</td>
+    <td>{{student.adminClass}}班</td>
+    <td>{{student.grade}}级</td>
+    <td class="expand">{{student.subject}}专业</td>
+    <td>{{student.department}}</td>
+</ng-template>

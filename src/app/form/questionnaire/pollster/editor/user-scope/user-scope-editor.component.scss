@@ -1,0 +1,22 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+
+.form-control {
+    height: inherit;
+    min-height: calc(2.25rem + 2px);
+}
+
+.badge {
+    font-size: 100%;
+    font-weight: initial;
+    margin-right: 0.25rem;
+    .close {
+        padding-right: $badge-padding-x;
+        padding-left: $badge-padding-x;
+        margin-right: -$badge-padding-x;
+        font-size: inherit;
+        color: inherit;
+        text-shadow: none;
+    }
+}

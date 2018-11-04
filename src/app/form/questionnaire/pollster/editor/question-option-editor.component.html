@@ -1,0 +1,27 @@
+<div class="input-group" provide-parent-form>
+    <div class="input-group-prepend">
+        <div class="input-group-text">
+            <ng-container [ngSwitch]="question.type">
+                <input *ngSwitchCase="1" type="radio" disabled>
+                <input *ngSwitchCase="2" type="checkbox" disabled>
+            </ng-container>
+        </div>
+    </div>
+    <input class="form-control" name="option-content-{{option.ordinal}}" [(ngModel)]="option.content"
+        (change)="option.markUpdated()" required placeholder="内容">
+    <div class="input-group-append">
+        <input *ngIf="showLabel" type="text" class="form-control option-label" name="label" [(ngModel)]="option.label"
+            (change)="option.markUpdated()" placeholder="标签">
+        <input *ngIf="showValue" type="number" class="form-control option-value" name="value" [(ngModel)]="option.value"
+            (change)="option.markUpdated()" placeholder="数值">
+        <button class="btn btn-outline-secondary" type="button" (click)="onRemove()">
+            <fa-icon icon="trash-alt" fixedWidth="true"></fa-icon>
+        </button>
+        <button class="btn btn-outline-secondary" type="button" (click)="onMoveup()" [disabled]="first">
+            <fa-icon icon="arrow-up" fixedWidth="true"></fa-icon>
+        </button>
+        <button class="btn btn-outline-secondary" type="button" (click)="onMovedown()" [disabled]="last">
+            <fa-icon icon="arrow-down" fixedWidth="true"></fa-icon>
+        </button>
+    </div>
+</div>

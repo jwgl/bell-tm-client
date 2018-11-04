@@ -1,0 +1,98 @@
+<div class="question">
+    <p class="title">
+        {{question.title}} <span *ngIf="question.mandatory">*</span>
+        <button class="btn btn-link ml-1" type="button" (click)="toggleTitle()" [title]="showTitle ? '隐藏问题内容' : '显示问题内容'">
+            <fa-icon [icon]="showTitle ? 'angle-up' : 'angle-down'" fixedWidth="true"></fa-icon>
+        </button>
+    </p>
+    <p class="content" *ngIf="showTitle">{{question.content}}</p>
+    <ng-container [ngSwitch]="question.type">
+        <ng-template *ngSwitchCase="0" [ngTemplateOutlet]="openQuestionResultTpl"></ng-template>
+        <ng-template *ngSwitchCase="1" [ngTemplateOutlet]="tableResultTpl" [ngTemplateOutletContext]="{optionTemplate: optionResultTpl}"></ng-template>
+        <ng-template *ngSwitchCase="2" [ngTemplateOutlet]="tableResultTpl" [ngTemplateOutletContext]="{optionTemplate: optionResultTpl}"></ng-template>
+        <ng-template *ngSwitchCase="3" [ngTemplateOutlet]="tableResultTpl" [ngTemplateOutletContext]="{optionTemplate: scaleResultTpl}"></ng-template>
+    </ng-container>
+</div>
+<ng-template #questinSummaryTpl>
+    {{question.type | questionTypeText}}题，共<b>{{question.responseCount}}</b>人回答
+</ng-template>
+<ng-template #openQuestionResultTpl>
+    <p>
+        <ng-template [ngTemplateOutlet]="questinSummaryTpl"></ng-template>
+        <button class="btn btn-link ml-2" (click)="onViewOpenResponses()">{{showOpenResponses ? '隐藏' : '查看'}}用户输入</button>
+    </p>
+    <ng-template [ngTemplateOutlet]="openResponseTableTpl"></ng-template>
+</ng-template>
+<ng-template #tableResultTpl let-ot="optionTemplate">
+    <div class="btn-toolbar">
+        <ng-template [ngTemplateOutlet]="questinSummaryTpl"></ng-template>
+        <button class="btn btn-sm btn-outline-dark ml-auto" (click)="copyTable(table)" *ngIf="supportCopy">复制数据</button>
+    </div>
+    <table class="table table-sm table-light table-striped" #table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>选项</th>
+                <th>计数</th>
+                <th>百分比</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template [ngTemplateOutlet]="ot" [ngTemplateOutletContext]="{question: q}"></ng-template>
+        </tbody>
+    </table>
+    <ng-template [ngTemplateOutlet]="openResponseTableTpl"></ng-template>
+</ng-template>
+<ng-template #optionResultTpl>
+    <tr *ngFor="let option of question.options">
+        <th>{{option.ordinal + 1}}</th>
+        <td>{{option.content}}</td>
+        <td>{{option.responseCount}}</td>
+        <td>{{option.responseCount / question.responseCount | percent:'1.2'}}</td>
+    </tr>
+    <tr *ngIf="question.openEnded">
+        <th>{{question.options.length + 1}}</th>
+        <td>
+            {{question.openLabel ? question.openLabel : '其他'}}
+            <button class="btn btn-link" (click)="onViewOpenResponses()">{{showOpenResponses ? '隐藏' : '查看'}}用户输入</button>
+        </td>
+        <td>{{question.openResponseCount}}</td>
+        <td>{{question.openResponseCount / question.responseCount | percent:'1.2'}}</td>
+    </tr>
+</ng-template>
+<ng-template #scaleResultTpl>
+    <tr *ngFor="let v of question.scaleValues; let i = index">
+        <th>{{i + 1}}</th>
+        <td>{{v}}</td>
+        <td>{{question.getScaleCount(v)}}</td>
+        <td>{{question.getScaleCount(v) / question.responseCount | percent:'1.2'}}</td>
+    </tr>
+</ng-template>
+<ng-template #openResponseTableTpl>
+    <div *ngIf="showOpenResponses">
+        <div class="btn-toolbar">
+            <span>共<b>{{question.openResponseTotalCount}}</b>个用户输入</span>
+            <button class="btn btn-sm btn-dark ml-auto" (click)="copyTable(openResponseTable)" *ngIf="supportCopy">复制数据</button>
+        </div>
+        <div class="openResonsePane">
+            <table class="table table-sm table table-dark table-striped" #openResponseTable>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>用户输入</th>
+                        <th>计数</th>
+                        <th>百分比</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let openResponse of question.openResponses; let i = index">
+                        <th>{{i + 1}}</th>
+                        <td>{{openResponse.value}}</td>
+                        <td>{{openResponse.count}}</td>
+                        <td>{{openResponse.count / question.openResponseTotalCount | percent:'1.2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ng-template>

@@ -1,9 +1,7 @@
 <modal-dialog modalTitle="回收">
     <modal-body>
         <form #f="ngForm">
-            <div class="form-group">
-                <p class="form-control-plaintext">回收《{{options.what}}》，请填写处理意见。</p>
-            </div>
+            <p>回收《{{options.what}}》，请填写处理意见。</p>
             <div class="form-group">
                 <textarea class="form-control" rows="6" placeholder="处理意见" name="comment" [(ngModel)]="result.comment" required></textarea>
             </div>

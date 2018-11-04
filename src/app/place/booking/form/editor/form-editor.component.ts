@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 
 import { BookingForm, BookingSection, bookingSectionMap } from '../../shared/booking-form.model';
@@ -86,7 +85,7 @@ export class BookingFormEditorComponent {
             this.router.navigate(['../', id], { relativeTo: this.route });
         }, error => {
             this.saving = false;
-            alert(error);
+            alert(error.message);
         });
     }
 
@@ -96,7 +95,7 @@ export class BookingFormEditorComponent {
             this.router.navigate(['../'], { relativeTo: this.route });
         }, error => {
             this.saving = false;
-            alert(error);
+            alert(error.message);
         });
     }
 }

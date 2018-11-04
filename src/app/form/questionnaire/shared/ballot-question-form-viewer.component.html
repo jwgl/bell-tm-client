@@ -1,0 +1,35 @@
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <label for="type">投票类型</label>
+        <p class="form-control-plaintext">{{question.type | questionTypeText}}</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="stepValue">{{question.typeOptions.step.label}}</label>
+        <p class="form-control-plaintext">{{question.stepValue}}</p>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-4" *ngIf="question.typeOptions.min.default != null">
+        <label for="minValue">{{question.typeOptions.min.label}}*</label>
+        <p class="form-control-plaintext">{{question.minValue}}</p>
+    </div>
+    <div class="form-group col-md-4" *ngIf="question.typeOptions.max.default != null">
+        <label for="maxValue">{{question.typeOptions.max.label}}*</label>
+        <p class="form-control-plaintext">{{question.maxValue}}</p>
+    </div>
+</div>
+<div class="form-group">
+    <label>投票选项（共{{question.options.length}}项）</label>
+    <div class="form-row">
+        <div class="card-wrapper col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5>{{option.ordinal + 1}}、{{option.label}}</h5>
+                </div>
+                <div class="card-body">
+                    <tm-multiple-line class="card-text" [text]="option.content"></tm-multiple-line>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
