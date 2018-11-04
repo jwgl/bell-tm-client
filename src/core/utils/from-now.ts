@@ -12,7 +12,6 @@ declare module 'dayjs' {
 
 export function fromNowLabel(date: string) {
     const _date = dayjs(date);
-    console.log(_date);
     if (dayjs().diff(_date, 'day') > 25) {
         return _date.format('YYYY-MM-DD HH:mm');
     } else {
