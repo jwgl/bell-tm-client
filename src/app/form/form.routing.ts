@@ -19,13 +19,6 @@ const routes: Routes = [{
 }, {
     path: 'q/:hashId',
     loadChildren: './questionnaire/response/response-form.module#ResponseFormModule',
-
-// }, {
-//     path: 'departments/:departmentId/questionnaires',
-//     loadChildren: './questionnaire/department/department-questionnaire.module#DepartmentQuestionnaireModule',
-// }, {
-//     path: 'questionnaires',
-//     loadChildren: './questionnaire/public/questionnaires.module#QuestionnaireModule',
 }];
 
 @NgModule({
