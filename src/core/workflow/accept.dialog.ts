@@ -10,6 +10,7 @@ import { Http } from '../rest';
  * options: {whoUrl: string, does: string, what: string}
  */
 @Component({
+    styles: ['.form-control-plaintext { border:none }'],
     templateUrl: 'accept.dialog.html',
 })
 export class WorkflowAcceptDialog extends BaseDialog {

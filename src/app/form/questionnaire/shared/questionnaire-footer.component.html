@@ -1,0 +1,23 @@
+<ul class="footer">
+    <li>
+        <label>发起单位</label>
+        {{questionnaire.department.name}}
+    </li>
+    <li>
+        <label>发起人员</label>
+        <ng-container *ngIf="questionnaire.adminClass">{{questionnaire.adminClass.name}}</ng-container>
+        {{questionnaire.pollster.name}}
+    </li>
+    <li>
+        <label>{{questionnaire.surveyType | surveyTypeText: true}}范围</label>
+        {{questionnaire.surveyScope | surveyScopeText}}{{questionnaire.respondentType | respondentTypeText}}
+    </li>
+    <li *ngIf="questionnaire.surveyTypeOptions.anonymous.visible">
+        <label>{{questionnaire.surveyType | surveyTypeText: true}}形式</label>
+        {{questionnaire.anonymous ? '匿' : '实'}}名{{questionnaire.surveyType | surveyTypeText: true}}
+    </li>
+    <li>
+        <label>截止时间</label>
+        {{questionnaire.dateExpired | date: 'y-MM-dd HH:mm'}}
+    </li>
+</ul>

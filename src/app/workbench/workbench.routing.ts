@@ -34,8 +34,13 @@ const routes: Routes = [{
         path: 'dual',
         loadChildren: '../dual/dual.module#DualModule',
     }, {
+<<<<<<< HEAD
         path: 'hunt',
         loadChildren: '../hunt/hunt.module#HuntModule',
+=======
+        path: 'form',
+        loadChildren: '../form/form.module#FormModule',
+>>>>>>> upstream/master
     }, {
         path: '**',
         component: Page404Component,

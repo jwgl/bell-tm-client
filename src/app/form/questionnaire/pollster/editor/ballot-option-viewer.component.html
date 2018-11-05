@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-header d-flex">
+        <h5>{{option.ordinal + 1}}、{{option.label}}</h5>
+        <div class="btn-group ml-auto">
+            <button class="btn btn-sm btn-outline-dark" (click)="onEdit()">编辑</button>
+            <button class="btn btn-sm btn-outline-dark" (click)="onRemove()">删除</button>
+            <ng-content></ng-content>
+        </div>
+    </div>
+    <div class="card-body">
+        <tm-multiple-line class="card-text" [text]="option.content"></tm-multiple-line>
+    </div>
+</div>

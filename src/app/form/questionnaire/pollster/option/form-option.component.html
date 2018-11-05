@@ -1,0 +1,43 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-secondary" routerLink="../">取消</button>
+        <button class="btn btn-primary" (click)="onCreate()">继续</button>
+    </div>
+</div>
+<div class="row">
+    <form class="offset-md-2 offset-lg-3 col-md-8 col-lg-6" autocomplete="off">
+        <div class="form-group">
+            <label>调查类型</label>
+            <div class="form-row">
+                <div class="col" *ngFor="let type of surveyTypes">
+                    <label class="btn btn-outline-secondary" [class.active]="options.surveyType == type.value">
+                        <input type="radio" name="surveyType" [value]="type.value" [(ngModel)]="options.surveyType">
+                        {{type.label}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>调查范围</label>
+            <div class="form-row">
+                <div class="col" *ngFor="let scope of surveyScopes">
+                    <label class="btn btn-outline-secondary" [class.active]="options.surveyScope == scope.value">
+                        <input type="radio" name="surveyScope" [value]="scope.value" [(ngModel)]="options.surveyScope">
+                        {{scope.label}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="respondentTypes && respondentTypes.length > 1">
+            <label>调查对象</label>
+            <div class="form-row">
+                <div class="col" *ngFor="let type of respondentTypes">
+                    <label class="btn btn-outline-secondary" [class.active]="options.respondentType == type.value">
+                        <input type="radio" name="respondentType" [value]="type.value" [(ngModel)]="options.respondentType">
+                        {{type.label}}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

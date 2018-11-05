@@ -1,0 +1,22 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class='btn btn-secondary' routerLink="../">返回</button>
+    </div>
+</div>
+<ng-container *ngIf="questionnaire">
+    <h3 class="title">{{questionnaire.title}}</h3>
+    <tm-respondent-address [questionnaire]="questionnaire"></tm-respondent-address>
+    <tm-multiple-line [text]="questionnaire.prologue"></tm-multiple-line>
+    <tm-questionnaire-respondents [questionnaire]="questionnaire"></tm-questionnaire-respondents>
+    <ol class="questions" *ngIf="questionnaire.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
+        <li class="question" *ngFor="let question of questionnaire.questions">
+            <tm-question-response [question]="question" (viewOpenResponses)="onViewOpenResponses($event, questionResponse)"
+                #questionResponse></tm-question-response>
+        </li>
+    </ol>
+    <ng-template #ballotSheetTpl>
+        <tm-ballot-question-response [question]="questionnaire.questions[0]"></tm-ballot-question-response>
+    </ng-template>
+    <tm-multiple-line [text]="questionnaire.epilogue"></tm-multiple-line>
+    <tm-questionnaire-footer [questionnaire]="questionnaire"></tm-questionnaire-footer>
+</ng-container>

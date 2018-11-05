@@ -1,0 +1,23 @@
+:host() {
+    display: block;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.table-responsive {
+    max-height: 500px;
+}
+
+.table {
+    font-size: 0.875rem;
+}
+
+.btn-toolbar {
+    align-items: center;
+    margin-bottom: 0.5rem;
+    min-height: 31px;
+    .btn-link {
+        vertical-align: initial;
+        padding: 0;
+    }
+}

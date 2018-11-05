@@ -14,7 +14,8 @@ export class BookingFormService extends RestEditService {
 
     constructor(
         http: Http,
-        @Inject('BOOKING_FORM_API_URL') apiUrl: string,
+        @Inject('BOOKING_FORM_API_URL')
+        apiUrl: string,
         authService: AuthService,
         @Inject('DEPARTMENT_BOOKING_TYPES_API_URL')
         private departmentBookingTypesApiUrl: string,

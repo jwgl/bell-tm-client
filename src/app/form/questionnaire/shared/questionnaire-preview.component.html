@@ -1,0 +1,13 @@
+<h3 class="title">{{form.title}}</h3>
+<tm-respondent-address [questionnaire]="form"></tm-respondent-address>
+<tm-multiple-line [text]="form.prologue"></tm-multiple-line>
+<ol class="questions" *ngIf="form.surveyType !== 'BALLOT_SHEET'; else ballotSheetTpl">
+    <li class="question" *ngFor="let question of form.questions">
+        <tm-question-preview [question]="question"></tm-question-preview>
+    </li>
+</ol>
+<ng-template #ballotSheetTpl>
+    <tm-ballot-question-preview [question]="form.questions[0]"></tm-ballot-question-preview>
+</ng-template>
+<tm-multiple-line [text]="form.epilogue"></tm-multiple-line>
+<tm-questionnaire-footer [questionnaire]="form"></tm-questionnaire-footer>

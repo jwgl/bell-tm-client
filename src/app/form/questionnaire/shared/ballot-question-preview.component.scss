@@ -1,0 +1,42 @@
+h5 {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.prompt {
+    text-indent: 2rem;
+}
+
+.card-wrapper {
+    padding-bottom: 10px;
+}
+
+.card-footer {
+    display: flex;
+    border-top: none;
+    background-color: transparent;
+    padding-top: 0;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    tm-multiple-line {
+        margin-bottom: 1rem;
+    }
+    .btn-toolbar {
+        margin-top: auto;
+        margin-bottom: 0;
+        align-items: center;
+    }
+}
+
+label.btn {
+    margin-bottom: 0;
+    input[type="radio"],
+    input[type="checkbox"] {
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+        pointer-events: none;
+    }
+}

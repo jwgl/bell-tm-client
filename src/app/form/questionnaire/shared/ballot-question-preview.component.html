@@ -1,0 +1,36 @@
+<ng-container [ngSwitch]="question.type">
+    <p *ngSwitchCase="1" class="prompt">
+        本次投票为单选，每次只能选择<b>1</b>项。
+    </p>
+    <p *ngSwitchCase="2" class="prompt">
+        本次投票为多选，最少选择<b>{{question.minValue}}</b>项，最多选择<b>{{question.maxValue}}</b>项。
+    </p>
+</ng-container>
+<fieldset class="form-group">
+    <div class="form-row">
+        <div class="col-md-{{12 / question.stepValue}} card-wrapper" *ngFor="let option of question.options">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{option.label}}</h5>
+                    <tm-multiple-line class="card-text" [text]="option.content"></tm-multiple-line>
+                    <div class="btn-toolbar">
+                        <ng-container [ngSwitch]="question.type">
+                            <ng-container *ngSwitchCase="1">
+                                <label *ngIf="!disabled || option == choice" class="btn btn-sm text-monospace btn-outline-{{option == choice ? 'success' : 'secondary'}}"
+                                    [class.active]="option == choice">
+                                    <input type="radio" [name]="option.controlName" [value]="option" [(ngModel)]="choice">+1
+                                </label>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="2">
+                                <label *ngIf="!disabled || option.selected" class="btn btn-sm text-monospace btn-outline-{{option.selected ? 'success' : 'secondary'}}"
+                                    [class.active]="option.selected">
+                                    <input type="checkbox" [name]="option.controlName" [(ngModel)]="option.selected">+1
+                                </label>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
