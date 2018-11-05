@@ -7,3 +7,21 @@
 .alert {
     margin-top: 1rem;
 }
+
+.taskTitle {
+    width: 30em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+@media (max-width: 1199px) {
+    .taskTitle {
+        max-width: 22em;
+    }
+}
+
+@media (max-width: 991px) {
+    .taskTitle {
+        max-width: 15em;
+    }
+}

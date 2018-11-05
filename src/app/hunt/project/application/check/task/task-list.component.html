@@ -1,0 +1,31 @@
+<ng-container>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>任务名称</th>
+                <th>项目周期</th>
+                <th>截止日期</th>
+                <th>申报数</th>
+                <th>通过数</th>
+                <th>不通过数</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td class="taskTitle"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
+                    <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
+                    <td>{{task.endDate}}</td>
+                    <td>{{task.countProject}}</td>
+                    <td>{{task.countPass}}</td>
+                    <td>{{task.countFail}}</td>
+                    <td></td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</ng-container>
+<tm-task-form-overlay #overlay></tm-task-form-overlay>

@@ -68,6 +68,7 @@ export const PropertyComment = {
     degree: '学位',
     office: '职务',
     departmentId: '单位',
+    originId: '项目来源',
 };
 
 export class ProjectForm {

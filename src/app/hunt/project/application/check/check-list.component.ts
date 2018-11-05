@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ReviewList } from 'core/workflow';
 
-const dateLabels: {[key: string]: string} = {
+const dateLabels: { [key: string]: string } = {
     todo: '申请时间',
     done: '审核时间',
 };
@@ -16,7 +16,7 @@ export class ApplicationCheckListComponent {
     list: ReviewList;
 
     constructor(route: ActivatedRoute) {
-        route.data.subscribe((data: {list: ReviewList}) => {
+        route.data.subscribe((data: { list: ReviewList }) => {
             this.list = data.list;
         });
     }

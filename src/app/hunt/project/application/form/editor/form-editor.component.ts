@@ -1,4 +1,4 @@
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -72,10 +72,10 @@ export class ProjectFormEditorComponent {
 
     get majors(): string[] {
         const majors = _.chain(this.disciplines)
-                        .filter((discipline: any) => discipline.title === this.form.discipline)
-                        .map(data => data.majors)
-                        .flatMap()
-                        .value();
+            .filter((discipline: any) => discipline.title === this.form.discipline)
+            .map(data => data.majors)
+            .flatMap()
+            .value();
         return majors;
     }
 
@@ -89,7 +89,10 @@ export class ProjectFormEditorComponent {
             this.dialogs.error(validation);
         } else {
             this.form.reviewTaskId = this.reviewTaskId;
-            this.service.save(this.form.id, this.form.toServerDto()).subscribe(() => this.router.navigate(['/']));
+            this.service.save(this.form.id, this.form.toServerDto()).subscribe(id => {
+                this.dialogs.confirm('', `“${this.form.name}” 保存成功！`).then(() =>
+                    this.router.navigate(['../../', id], { relativeTo: this.route }));
+            });
         }
     }
 }

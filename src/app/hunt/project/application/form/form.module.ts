@@ -14,6 +14,7 @@ import { TaskModule } from './reviewtask/task.module';
     imports: [
         CommonModule,
         ProjectFormEditorModule,
+        WorkflowModule.forSubmit(ProjectFormService),
         ProjectFormItemModule,
         ProjectListModule,
         RoutingModule,
@@ -22,8 +23,8 @@ import { TaskModule } from './reviewtask/task.module';
     ],
     providers: [
         ProjectFormService,
-        {provide: 'PROJECT_API_URL', useValue: '/api/hunt/teachers/${userId}/applications'},
-        {provide: 'TASK_API_URL', useValue: '/api/hunt/settings/tasks'},
+        { provide: 'PROJECT_API_URL', useValue: '/api/hunt/teachers/${userId}/applications' },
+        { provide: 'TASK_API_URL', useValue: '/api/hunt/settings/tasks' },
     ],
 })
-export class ProjectModule {}
+export class ProjectModule { }
