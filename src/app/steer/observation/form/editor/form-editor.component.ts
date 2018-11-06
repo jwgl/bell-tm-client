@@ -31,6 +31,7 @@ export class ObservationFormEditorComponent {
     evaluationSystem: EvaluationMap[];
     observers: Observers[];
     isAdmin: boolean;
+    isCaptain: boolean;
     mydto: any;
     saving = false;
 
@@ -75,6 +76,7 @@ export class ObservationFormEditorComponent {
         this.weekOfTerms = _.range(this.term.startWeek, this.term.endWeek + 1, 1);
         this.evaluationSystem = dto.evaluationSystem;
         this.isAdmin = dto.isAdmin;
+        this.isCaptain = dto.isCaptain;
         this.observers = dto.observers;
         setTimeout(() => {
             typeahead(this.input, 2, 10000).subscribe(value => this.save());
