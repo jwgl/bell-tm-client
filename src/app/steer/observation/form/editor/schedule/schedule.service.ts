@@ -16,7 +16,8 @@ export class ScheduleService extends RestEditService {
         @Inject('TEACHER_TIMESLOT_API_URL') private teacherTimeslotApiUrl: string,
         @Inject('PLACE_TIMESLOT_API_URL') private placeTimeslotApiUrl: string,
         @Inject('SCHEDULE_API_URL') private schedulesApiUrl: string) {
-        super(http, schedulesApiUrl, { userId: authService.userInfo.id });
+        super(http, schedulesApiUrl);
+        this.apiUrl = this.apiUrl.replace('${userId}', authService.userInfo.id);
     }
 
     loadDataForCreate(): Observable<any> {

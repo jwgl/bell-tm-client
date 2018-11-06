@@ -117,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-3" *ngIf="isAdmin">
+            <div class="form-group col-md-3" *ngIf="isAdmin && !isCaptain">
                 <label class="control-label">督导老师</label>
                 <select name="observers" class="form-control" [(ngModel)]="form.observerId">
                     <option value="" disabled>请选择</option>
