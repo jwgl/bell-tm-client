@@ -12,6 +12,7 @@
                 <th>项目周期</th>
                 <th>申请截止</th>
                 <th>限制对象</th>
+                <th>已填报数</th>
                 <th></th>
             </tr>
         </thead>
@@ -23,11 +24,10 @@
                     <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
                     <td>{{task.endDate}}</td>
                     <td><span *ngIf="task.ban">{{task.ban | level: 'text'}}在研</span></td>
+                    <td>{{task.countApplication}}</td>
                     <td>
                         <button class="btn btn-outline-primary btn-sm" *ngIf="task.isApplyDateValid"
                             [routerLink]="['./create', task.id]">我要申请</button>
-                        <button class="btn btn-secondary" *ngIf="task.status"
-                            [routerLink]="[task.applicationId]">我的申请</button>
                     </td>
                 </tr>
             </ng-template>

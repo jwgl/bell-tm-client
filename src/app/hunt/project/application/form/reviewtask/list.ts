@@ -18,7 +18,7 @@ export class TaskListComponent {
         this.service.loadTaskList().subscribe((dto: any[]) => {
             this.tasks = dto.map(data => {
                 const task = new TaskForm(data);
-                task.applicationId = data.applicationId;
+                task.countApplication = data.countApplication;
                 task.status = data.status;
                 return task;
             });

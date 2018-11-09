@@ -13,10 +13,12 @@ export class ProjectFormService extends RestEditService {
         http: Http,
         authService: AuthService,
         @Inject('PROJECT_API_URL') apiUrl: string,
-        @Inject('TASK_API_URL')
+        @Inject('TASKPUBLIC_API_URL')
         private reviewTaskURL: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
+        reviewTaskURL = reviewTaskURL.replace('${userId}', authService.userInfo.id);
+        console.log(reviewTaskURL);
     }
 
     save(id: number, form: any): Observable<any> {

@@ -25,6 +25,7 @@ import { TaskModule } from './reviewtask/task.module';
         ProjectFormService,
         { provide: 'PROJECT_API_URL', useValue: '/api/hunt/teachers/${userId}/applications' },
         { provide: 'TASK_API_URL', useValue: '/api/hunt/settings/tasks' },
+        { provide: 'TASKPUBLIC_API_URL', useValue: '/api/hunt/teachers/${userId}/tasks' },
     ],
 })
 export class ProjectModule { }

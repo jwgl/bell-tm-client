@@ -78,11 +78,8 @@ const CORE_DIRECTIVES: any[] = [
     RemoveItemComponent,
     ScheduleTimetableComponent,
     ScheduleWeektabComponent,
-<<<<<<< HEAD
     TeacherSelectComponent,
-=======
     MultipleLineComponent,
->>>>>>> upstream/master
     // bootstrap form directives
     FormDirective,
     FormControlDirective,

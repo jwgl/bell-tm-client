@@ -12,13 +12,16 @@ export class CheckService extends RestShowService {
     constructor(
         http: Http,
         authService: AuthService,
+        @Inject('CHECK_API_URL')
+        apiUrl: string,
         @Inject('TASK_CHECK_API_URL')
-        private apiUrl: string,
+        private taskApiUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
+        taskApiUrl = taskApiUrl.replace('${userId}', authService.userInfo.id);
     }
 
     loadTaskList(): Observable<any> {
-        return this.http.get(`${this.apiUrl}/listForChecker`);
+        return this.http.get(`${this.taskApiUrl}`);
     }
 }
