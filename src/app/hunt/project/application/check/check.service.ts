@@ -24,4 +24,8 @@ export class CheckService extends RestShowService {
     loadTaskList(): Observable<any> {
         return this.http.get(`${this.taskApiUrl}`);
     }
+
+    loadApplicationItem(workitem: string, id: number, type: string): Observable<any> {
+        return this.http.get(`${this.api.list()}/${id}/workitems/${workitem}?type=${type}`);
+    }
 }

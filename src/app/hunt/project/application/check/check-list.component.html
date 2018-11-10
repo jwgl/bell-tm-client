@@ -1,5 +1,5 @@
 <div  class="container">
-    <table class="table" *ngIf="list.items.length > 0; else empty">
+    <table class="table" *ngIf="list; else empty">
         <thead>
             <tr>
                 <th>申请单号</th>
@@ -14,9 +14,9 @@
             </tr>
         </thead>
         <tbody>
-            <ng-template ngFor let-item [ngForOf]="list.items" let-i="index">
+            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
-                    <td><a [routerLink]="[item.id]">#{{item.id}}</a></td>
+                    <td><a [routerLink]="['applications', item.id]">#{{item.id}}</a></td>
                     <td>{{item.name}}</td>
                     <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
                     <td>{{item.phone}}</td>

@@ -7,9 +7,9 @@
                 <th>项目周期</th>
                 <th>截止日期</th>
                 <th>申报数</th>
+                <th>未审数</th>
                 <th>通过数</th>
                 <th>不通过数</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -18,11 +18,11 @@
                     <td>{{i + 1}}</td>
                     <td class="taskTitle"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
                     <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
-                    <td>{{task.endDate}}</td>
+                    <td class="date">{{task.endDate}}</td>
                     <td>{{task.countProject}}</td>
-                    <td>{{task.countPass}}</td>
-                    <td>{{task.countFail}}</td>
-                    <td></td>
+                    <td><a [routerLink]="[task.id, 'todo']">{{task.countUncheck}}</a></td>
+                    <td><a [routerLink]="[task.id, 'done']">{{task.countPass}}</a></td>
+                    <td><a [routerLink]="[task.id, 'expr']">{{task.countFail}}</a></td>
                 </tr>
             </ng-template>
         </tbody>
