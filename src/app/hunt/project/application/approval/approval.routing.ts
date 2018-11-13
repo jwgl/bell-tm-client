@@ -1,39 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { WorkflowItemResolve, WorkflowListResolve } from 'core/workflow';
+import { TaskListComponent } from './task/task-list.component';
 
 import { ApplicationApprovalItemComponent } from './approval-item.component';
 import { ApplicationApprovalListComponent } from './approval-list.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'todo', pathMatch: 'full'},
-    {
-        path: ':type',
-        children: [
-            {
-                path: '',
-                component: ApplicationApprovalListComponent,
-                resolve: {list: WorkflowListResolve},
-
-            },
-            {
-                path: ':id',
-                component: ApplicationApprovalItemComponent,
-                resolve: {item: WorkflowItemResolve},
-            },
-            {
-                path: ':id/workitems/:wi',
-                component: ApplicationApprovalItemComponent,
-                resolve: {item: WorkflowItemResolve},
-            },
-        ],
-    },
+    { path: '', component: TaskListComponent },
+    { path: ':taskId/:type/applications/:id', component: ApplicationApprovalItemComponent },
+    { path: ':taskId/:type', component: ApplicationApprovalListComponent },
+    { path: ':taskId', component: ApplicationApprovalListComponent },
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, {useHash: true}),
+        RouterModule.forChild(routes),
     ],
     exports: [
         RouterModule,

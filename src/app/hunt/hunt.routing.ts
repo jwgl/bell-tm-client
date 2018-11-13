@@ -19,6 +19,9 @@ const routes: Routes = [{
 }, {
     path: 'checkers/:userId/tasks',
     loadChildren: './project/application/check/check.module#CheckModule',
+}, {
+    path: 'approvers/:userId/tasks',
+    loadChildren: './project/application/approval/approval.module#ApprovalModule',
 }];
 
 @NgModule({

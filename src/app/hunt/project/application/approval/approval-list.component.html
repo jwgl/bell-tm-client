@@ -1,7 +1,8 @@
-<div  class="container">
-    <table class="table" *ngIf="list.items.length > 0; else empty">
+<div class="container">
+    <table class="table" *ngIf="list; else empty">
         <thead>
             <tr>
+                <th><input type="checkbox" (change)="lockAll($event.target.checked)">锁</th>
                 <th>申请单号</th>
                 <th>项目名称</th>
                 <th>负责人</th>
@@ -14,9 +15,12 @@
             </tr>
         </thead>
         <tbody>
-            <ng-template ngFor let-item [ngForOf]="list.items" let-i="index">
+            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
-                    <td><a [routerLink]="[item.id]">#{{item.id}}</a></td>
+                    <td>
+                        <input type="checkbox" (change)="lockItem(item.id, $event.target.checked)" [(ngModel)]="item.locked">{{i+1}}
+                    </td>
+                    <td><a [routerLink]="['applications', item.id]">#{{item.id}}</a></td>
                     <td>{{item.name}}</td>
                     <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
                     <td>{{item.phone}}</td>
@@ -24,10 +28,14 @@
                     <td>{{item.subtype}}</td>
                     <td>{{item.origin}}</td>
                     <td>{{item.date | date: 'y-MM-dd HH:mm'}}</td>
-                    <td><audit-status [status]="item.status"></audit-status></td>
+                    <td>
+                        <audit-status [status]="item.status"></audit-status>
+                    </td>
                 </tr>
             </ng-template>
         </tbody>
     </table>
-    <ng-template #empty><div class="alert alert-info">暂无数据</div></ng-template>
+    <ng-template #empty>
+        <div class="alert alert-info">暂无数据</div>
+    </ng-template>
 </div>

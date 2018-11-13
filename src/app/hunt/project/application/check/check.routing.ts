@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { WorkflowItemResolve, WorkflowListResolve } from 'core/workflow';
-
 import { ApplicationCheckItemComponent } from './check-item.component';
 import { ApplicationCheckListComponent } from './check-list.component';
 import { TaskListComponent } from './task/task-list.component';

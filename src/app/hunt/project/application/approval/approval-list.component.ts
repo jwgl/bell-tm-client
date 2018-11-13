@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ReviewList } from 'core/workflow';
-
+import { ApprovalService } from './approval.service';
 const dateLabels: { [key: string]: string } = {
     todo: '申请时间',
     done: '审批时间',
+    undefined: '申请时间',
 };
 
 @Component({
@@ -13,15 +13,35 @@ const dateLabels: { [key: string]: string } = {
     templateUrl: 'approval-list.component.html',
 })
 export class ApplicationApprovalListComponent {
-    list: ReviewList;
+    list: any[];
+    type: string;
 
-    constructor(route: ActivatedRoute) {
-        route.data.subscribe((data: { list: ReviewList }) => {
-            this.list = data.list;
+    constructor(
+        private service: ApprovalService,
+        route: ActivatedRoute,
+    ) {
+        route.params.subscribe(params => {
+            this.type = params['type'];
+            this.service.loadList({
+                taskId: params['taskId'],
+                type: params['type'] ? params['type'] : null,
+            }).subscribe(dto => this.list = dto);
         });
     }
 
+    // checkBox勾选锁住，取消解锁
+    lockAll(checked: boolean) {
+        const idList = this.list.map(s => s.id);
+        this.service.lockOrUnlock({ ids: idList, checked: checked }).subscribe(() => {
+            this.list.forEach(item => item.locked = checked);
+        });
+    }
+
+    lockItem(id: number, checked: boolean) {
+        this.service.lockOrUnlock({ ids: [id], checked: checked }).subscribe();
+    }
+
     get dateLabel(): string {
-        return dateLabels[this.list.type];
+        return dateLabels[this.type];
     }
 }

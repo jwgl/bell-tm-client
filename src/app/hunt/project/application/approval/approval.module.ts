@@ -11,6 +11,8 @@ import { PipesModule } from '../../../settings/shared/common-pipes';
 import { ProjectFormViewerModule } from '../form/shared/form-viewer.module';
 import { ApplicationApprovalRoutingModule } from './approval.routing';
 
+import { TaskListModule } from './task/task-list.module';
+import { ApprovalService } from './approval.service';
 import { ApplicationApprovalItemComponent } from './approval-item.component';
 import { ApplicationApprovalListComponent } from './approval-list.component';
 
@@ -27,6 +29,7 @@ import { ApplicationApprovalListComponent } from './approval-list.component';
         ProjectFormViewerModule,
         ApplicationApprovalRoutingModule,
         PipesModule,
+        TaskListModule,
     ],
     declarations: [
         ApplicationApprovalListComponent,
@@ -34,7 +37,10 @@ import { ApplicationApprovalListComponent } from './approval-list.component';
     ],
     providers: [
         Dialog,
+        ApprovalService,
         { provide: 'APPROVAL_API_URL', useValue: '/api/hunt/approvers/${userId}/applications' },
+        { provide: 'TASK_APPROVAL_API_URL', useValue: '/api/hunt/approvers/${userId}/tasks' },
+        { provide: 'TASK_API_URL', useValue: '/api/hunt/settings/tasks' },
     ],
 })
-export class ProjectApprovalModule { }
+export class ApprovalModule { }

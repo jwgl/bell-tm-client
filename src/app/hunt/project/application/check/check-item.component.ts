@@ -33,7 +33,7 @@ export class ApplicationCheckItemComponent {
     }
 
     get reviewable(): boolean {
-        return this.wi && this.form.status === 'SUBMITTED';
+        return this.wi && this.form.status === 'SUBMITTED' && this.form.isValidDate;
     }
 
     get reviewOptions(): ReviewOptions {

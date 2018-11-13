@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ReviewOptions } from 'core/workflow';
 
+import { ApprovalService } from './approval.service';
 import { ProjectForm } from '../form/shared/form.model';
 
 @Component({
@@ -15,8 +16,13 @@ export class ApplicationApprovalItemComponent {
     private prevId: number;
     private nextId: number;
 
-    constructor(route: ActivatedRoute) {
-        route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
+    constructor(
+        private service: ApprovalService,
+        route: ActivatedRoute
+    ) {
+        route.params.subscribe(params => {
+            this.service.loadApplicationItem(this.wi, params['id'], params['type']).subscribe((dto: any) => this.onItemLoaded(dto));
+        });
     }
 
     onItemLoaded(dto: any) {

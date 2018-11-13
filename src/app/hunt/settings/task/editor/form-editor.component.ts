@@ -94,7 +94,7 @@ export class TaskFormEditorComponent {
 
     update() {
         this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
-            this.router.navigate(['../', id], { relativeTo: this.route });
+            this.router.navigate(['../'], { relativeTo: this.route });
         });
     }
 }

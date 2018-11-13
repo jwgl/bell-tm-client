@@ -35,6 +35,6 @@ export class ProjectItemComponent {
     }
 
     get editAble(): boolean {
-        return this.vm.status === 'CREATED' || this.vm.status === 'REJECTED';
+        return (this.vm.status === 'CREATED' || this.vm.status === 'REJECTED') && this.vm.isValidDate;
     }
 }
