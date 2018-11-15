@@ -1,11 +1,11 @@
-import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import * as _ from 'lodash';
 
 import { CommonDialog } from 'core/common-dialogs';
 import { CheckboxSelectorComponent } from 'core/common-directives';
-import { ListGroup, ListOption } from '../common/list-group.model';
+import { ListOption } from '../common/list-group.model';
 
 import { ObservationItem } from '../../form/shared/form-list.model';
 import { ApprovalService } from '../approval.service';
@@ -29,7 +29,6 @@ export class ApprovalListComponent {
     _mode: string;
 
     constructor(
-        private router: Router,
         private route: ActivatedRoute,
         private service: ApprovalService,
         private dialog: CommonDialog) {

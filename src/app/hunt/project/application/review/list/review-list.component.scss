@@ -1,31 +1,27 @@
-@import '../shared/list-shared';
 .table {
     td {
         &:nth-child(1) {
-            width: 4rem;
-        }
-        &:nth-child(2) {
             width: 5rem;
         }
-        &:nth-child(3) {
+        &:nth-child(2) {
             width: 15rem;
         }
-        &:nth-child(4) {
+        &:nth-child(3) {
             width: 10rem;
         }
-        &:nth-child(5) {
+        &:nth-child(4) {
             width: 8rem;
         }
-        &:nth-child(6) {
+        &:nth-child(5) {
             width: 3rem;
+        }
+        &:nth-child(6) {
+            width: 8rem;
         }
         &:nth-child(7) {
             width: 8rem;
         }
         &:nth-child(8) {
-            width: 8rem;
-        }
-        &:nth-child(9) {
             width: 3rem;
         }
     }

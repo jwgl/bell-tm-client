@@ -1,17 +1,8 @@
-<div class="btn-toolbar mt-3">
-    <div class="btn-group ml-auto">
-        <button class="btn btn-secondary" (click)="lockAll(true)">锁定</button>
-        <button class="btn btn-secondary" (click)="lockAll(false)">解锁</button>
-    </div>
-    <div class="btn-group ml-2">
-        <button class="btn btn-secondary" (click)="setExpert()">设置专家</button>
-    </div>
-</div>
+<tm-nav-tabs [options]="options"></tm-nav-tabs>
 <div class="container">
     <table class="table" *ngIf="list; else empty">
         <thead>
             <tr>
-                <th><input type="checkbox" (change)="checkAll($event.target.checked)">锁</th>
                 <th>申请单号</th>
                 <th>项目名称</th>
                 <th>负责人</th>
@@ -25,10 +16,7 @@
         <tbody>
             <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
-                    <td>
-                        <checkbox-selector [data]="list"></checkbox-selector><fa-icon [icon]="lockClass(item.locked)"></fa-icon><fa-icon icon="user" *ngIf="item.countExpert"></fa-icon>
-                    </td>
-                    <td><a [routerLink]="['applications', item.id]">{{i+1}}#{{item.id}} </a></td>
+                    <td>{{i+1}}#{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
                     <td>{{item.phone}}</td>

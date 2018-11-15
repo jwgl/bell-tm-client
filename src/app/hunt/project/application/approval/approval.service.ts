@@ -16,12 +16,14 @@ export class ApprovalService extends RestShowService {
         apiUrl: string,
         @Inject('TASK_APPROVAL_API_URL')
         private taskApiUrl: string,
+        @Inject('TEAM_API_URL')
+        private teamApiUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
         taskApiUrl = taskApiUrl.replace('${userId}', authService.userInfo.id);
     }
 
-    lockOrUnlock(value: any): Observable<any> {
+    batchUpdate(value: any): Observable<any> {
         return this.http.post(this.api.list(), value);
     }
 
@@ -31,5 +33,9 @@ export class ApprovalService extends RestShowService {
 
     loadApplicationItem(workitem: string, id: number, type: string): Observable<any> {
         return this.http.get(`${this.api.list()}/${id}/workitems/${workitem}?type=${type}`);
+    }
+
+    loadTeam(): Observable<any> {
+        return this.http.get(this.teamApiUrl);
     }
 }

@@ -102,8 +102,10 @@ export class ProjectForm {
     conclusion: string;
     finalOpinion: string;
     isValidDate: boolean;
+    countExpert: number;
     workflowInstanceId: string;
     memberList: any[];
+    expertReview: any[];
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -137,7 +139,9 @@ export class ProjectForm {
         this.conclusion = dto.conclusion;
         this.finalOpinion = dto.finalOpinion;
         this.isValidDate = dto.isValidDate;
+        this.countExpert = dto.countExpert;
         this.workflowInstanceId = dto.workflowInstanceId;
+        this.expertReview = dto.expertReview;
         this.memberList = [];
         for (let i = 0; i < 6; i++) {
             this.memberList.push({ value: '' });
