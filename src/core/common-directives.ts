@@ -31,6 +31,7 @@ import { DayOfWeekPipe } from './pipes/day-of-week';
 import { FilterByPipe } from './pipes/filter-by';
 import { GroupByPipe } from './pipes/group-by';
 import { MarkdownPipe } from './pipes/markdown';
+import { WeekRangePipe} from './pipes/week-range';
 import { OddEvenPipe } from './pipes/odd-even';
 import { SectionRangePipe } from './pipes/section-range';
 import { TermNamePipe } from './pipes/term-name';
@@ -103,6 +104,7 @@ const CORE_DIRECTIVES: any[] = [
     ActionNamePipe,
     ActionClassPipe,
     MarkdownPipe,
+    WeekRangePipe,
     OddEvenPipe,
     SectionRangePipe,
     TermNamePipe,

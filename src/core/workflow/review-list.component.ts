@@ -2,7 +2,6 @@ import { Component, ContentChild, TemplateRef, Input, HostBinding } from '@angul
 import { ActivatedRoute } from '@angular/router';
 
 import { ReviewList } from './review-list.model';
-import { query } from '@angular/animations';
 
 @Component({
     selector: 'tm-workflow-list',

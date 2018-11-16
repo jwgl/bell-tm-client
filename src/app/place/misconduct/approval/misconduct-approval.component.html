@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item" *ngFor="let status of statuses">
+        <a class="nav-link" [routerLink]="['s', status.value]" routerLinkActive="active">{{status.label}}</a>
+    </li>
+</ul>
+<router-outlet></router-outlet>
