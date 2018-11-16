@@ -5,7 +5,6 @@ import * as _ from 'lodash';
 
 import { CommonDialog } from 'core/common-dialogs';
 import { CheckboxSelectorComponent } from 'core/common-directives';
-import { ListGroup, ListOption } from '../common/list-group.model';
 
 import { ObservationItem } from '../../form/shared/form-list.model';
 import { ApprovalService } from '../approval.service';
@@ -25,7 +24,10 @@ export class ApprovalListComponent {
     counts: any;
     max = 999;
 
-    options: ListOption[];
+    options = [
+        { label: '未发布', type: 'tobe', count: 0 },
+        { label: '已发布', type: 'done', count: 0 },
+    ];
     _mode: string;
 
     constructor(
@@ -61,16 +63,8 @@ export class ApprovalListComponent {
                 this.activeTermId = this._termId = dto.activeTermId;
             }
             this.counts = dto.counts;
-            this.options = [
-                {
-                    type: 'tobe', label: '未发布', class: 'badge-warning',
-                    count: this.counts.todo, active: !mode ? true : mode === 'tobe',
-                },
-                {
-                    type: 'done', label: '已发布', class: 'badge-danger', count: this.counts.done,
-                    active: !mode ? false : mode === 'done',
-                },
-            ];
+            this.options[0].count = this.counts.todo;
+            this.options[1].count = this.counts.done;
         });
     }
 

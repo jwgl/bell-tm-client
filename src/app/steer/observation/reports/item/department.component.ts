@@ -22,12 +22,13 @@ export class DepartmentReportComponent {
         private route: ActivatedRoute,
         private service: ReportService,
     ) {
-        const type: string = this.route.snapshot.params['observer-type'];
-        const countBy = type === '1' ? 'DEPARTMENT-U' : 'DEPARTMENT-C';
-        this.service.loadList({ type: countBy }).subscribe((dto: any) => {
-            this.isAdmin = dto.isAdmin;
-            this.list = dto.list;
-            this.list.sort((a, b) => a.supervisorTimes - b.supervisorTimes);
+        this.route.params.subscribe(params => {
+            const countBy = params['observer-type'] === '1' ? 'DEPARTMENT-U' : 'DEPARTMENT-C';
+            this.service.loadList({ type: countBy }).subscribe((dto: any) => {
+                this.isAdmin = dto.isAdmin;
+                this.list = dto.list;
+                this.list.sort((a, b) => a.supervisorTimes - b.supervisorTimes);
+            });
         });
     }
 }

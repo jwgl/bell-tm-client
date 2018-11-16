@@ -1,25 +1,23 @@
-<div class="row">
-    <div class="col-md-9 mx-auto" *ngIf="list && list.length>0; else empty">
-        <table class="table mt-1">
-            <thead>
+<ng-container *ngIf="list && list.length>0; else empty">
+    <table class="table mt-1">
+        <thead>
+            <tr>
+                <th>开课学院</th>
+                <th>听课次数</th>
+                <th>听课节数</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
-                    <th>开课学院</th>
-                    <th>听课次数</th>
-                    <th>听课节数</th>
+                    <td>{{item.departmentName}}</td>
+                    <td>{{item.supervisorTimes}}</td>
+                    <td>{{item.totalSection}}</td>
                 </tr>
-            </thead>
-            <tbody>
-                <ng-template ngFor let-item [ngForOf]="list" let-i="index">
-                    <tr>
-                        <td>{{item.departmentName}}</td>
-                        <td>{{item.supervisorTimes}}</td>
-                        <td>{{item.totalSection}}</td>
-                    </tr>
-                </ng-template>
-            </tbody>
-        </table>
-    </div>
-    <ng-template #empty>
-        <div class="alert alert-info">暂无数据</div>
-    </ng-template>
-</div>
+            </ng-template>
+        </tbody>
+    </table>
+</ng-container>
+<ng-template #empty>
+    <div class="alert alert-info">暂无数据</div>
+</ng-template>
