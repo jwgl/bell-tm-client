@@ -1,27 +1,24 @@
-<div class="row">
-    <div class="col-md-9 mx-auto" *ngIf="list && list.length>0">
-        <table class="table mt-1">
-            <thead>
+<ng-container *ngIf="list && list.length>0">
+    <table class="table mt-1">
+        <thead>
+            <tr>
+                <th>上课教师</th>
+                <th>{{departmentTitle}}</th>
+                <th>听课次数</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
-                    <th>上课教师</th>
-                    <th>{{departmentTitle}}</th>
-                    <th>听课次数</th>
-                </tr>
-            </thead>
-            <tbody>
-                <ng-template ngFor let-item [ngForOf]="list" let-i="index">
-                    <tr>
-                        <td>{{item.teacherName}}（{{item.teacherId}}）</td>
-                        <td>{{item.departmentName}} </td>
-                        <td><span [class.badge]="item.supervisorTimes > 1"
-                            [class.badge-danger]="item.supervisorTimes > 2"
+                    <td>{{item.teacherName}}（{{item.teacherId}}）</td>
+                    <td>{{item.departmentName}} </td>
+                    <td><span [class.badge]="item.supervisorTimes > 1" [class.badge-danger]="item.supervisorTimes > 2"
                             [class.badge-warning]="item.supervisorTimes === 2">{{item.supervisorTimes}} </span></td>
-                    </tr>
-                </ng-template>
-            </tbody>
-        </table>
-        <ul class="text-info">
-            <li *ngIf="type==='university'">注：本统计表针对<strong>校</strong>督导听课，教师被听课一次以上的才列出来！</li>
-        </ul>
-    </div>
-</div>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <ul class="text-info">
+        <li *ngIf="type==='university'">注：本统计表针对<strong>校</strong>督导听课，教师被听课一次以上的才列出来！</li>
+    </ul>
+</ng-container>

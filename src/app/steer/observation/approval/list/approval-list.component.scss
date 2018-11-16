@@ -9,3 +9,9 @@
     white-space:pre-wrap;
     word-wrap: break-word;
 }
+
+.table {
+    th {
+        border-top: none;
+    }
+}

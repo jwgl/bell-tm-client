@@ -11,9 +11,10 @@ const routes: Routes = [{
     path: '',
     component: ReportComponent,
     children: [
-        { path: 'levels/:observer-type/department', component: DepartmentReportComponent},
-        { path: 'levels/:observer-type/observer', component: ObservationReportComponent},
-        { path: 'levels/:observer-type/teacher', component: TeacherSupervisedComponent},
+        { path: '', redirectTo: 'levels/1/department', pathMatch: 'full', },
+        { path: 'levels/:observer-type/department', component: DepartmentReportComponent },
+        { path: 'levels/:observer-type/observer', component: ObservationReportComponent },
+        { path: 'levels/:observer-type/teacher', component: TeacherSupervisedComponent },
         { path: 'levels/:observer-type/reward', component: RewardListComponent },
     ]
 }];

@@ -10,13 +10,12 @@
     <label class="col-sm-3 col-form-label"  *ngIf="list && list.length>0">共{{list.length}}条记录未计酬</label>
     <a class="btn btn-secondary  ml-auto" download href="/api/steer/reports/reward?month={{month}}" *ngIf="list && list.length>0" (click)="done()">导出</a>
 </div>
-<div class="container" *ngIf="list && list.length>0; else empty">
+<ng-container *ngIf="list && list.length>0; else empty">
     <table class="table">
         <thead>
             <tr>
                 <th>教师</th>
                 <th>课程信息</th>
-                <th>上课地点</th>
                 <th>开课单位</th>
                 <th>听课时间</th>
                 <th>节数</th>
@@ -28,8 +27,7 @@
             <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
                     <td class="teacher">{{item.teacherName}}({{item.teacherId}})</td>
-                    <td class="courseName">{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}} {{item.startSection}}-{{item.startSection+item.totalSection-1}}节</td>
-                    <td>{{item.place}}</td>
+                    <td class="courseName">{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}} {{item.startSection}}-{{item.startSection+item.totalSection-1}}节 {{item.place}}</td>
                     <td>{{item.departmentName}}</td>
                     <td>{{item.supervisorDate}}</td>
                     <td>{{item.observesCount}}</td>
@@ -39,7 +37,7 @@
             </ng-template>
         </tbody>
     </table>
-</div>
+</ng-container>
 <ng-template #empty>
     <div class="alert alert-info">暂无数据</div>
 </ng-template>
