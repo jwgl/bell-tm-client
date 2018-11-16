@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
 import { Http, RestEditService } from 'core/rest';
 import { AuthService } from 'core/auth';
 
@@ -15,4 +17,8 @@ export class ReviewService extends RestEditService {
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
+
+    submit(id: number): Observable<any> {
+        return this.http.patch(`${this.api.item(id)}?op=SUBMIT`, {});
+   }
 }

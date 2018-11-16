@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 export class TaskForm {
     id: number;
@@ -22,6 +22,6 @@ export class TaskForm {
     }
 
     get isApplyDateValid(): boolean {
-        return !(moment().isBefore(this.startDate, 'day') || moment().isAfter(this.endDate, 'day'));
+        return !(dayjs().isBefore(dayjs(this.startDate)) || dayjs().isAfter(dayjs(this.endDate).add(1, 'day')));
     }
 }

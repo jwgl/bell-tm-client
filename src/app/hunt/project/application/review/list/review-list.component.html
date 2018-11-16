@@ -3,28 +3,26 @@
     <table class="table" *ngIf="list; else empty">
         <thead>
             <tr>
-                <th>申请单号</th>
+                <th>序号</th>
                 <th>项目名称</th>
                 <th>负责人</th>
-                <th>电话</th>
                 <th>等级</th>
                 <th>项目类型</th>
-                <th>{{dateLabel}}</th>
-                <th>状态</th>
+                <th>结论</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
-                    <td>{{i+1}}#{{item.id}}</td>
+                    <td>{{i+1}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
-                    <td>{{item.phone}}</td>
                     <td>{{item.level | level: 'text'}}</td>
                     <td>{{item.subtype}}</td>
-                    <td>{{item.date | date: 'y-MM-dd'}}</td>
-                    <td>
-                        <audit-status [status]="item.status"></audit-status>
+                    <td>{{item.conclusion}}</td>
+                    <td><button class="btn btn-secondary btn-sm" (click)="review(item.id)">{{item.dateReviewed ? '查看' : '评审'}}</button>
+                        <button class="btn btn-secondary btn-sm" (click)="submit(item.id)">提交</button>
                     </td>
                 </tr>
             </ng-template>

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 @Component({
     selector: 'tm-task-form-viewer',
@@ -11,6 +11,6 @@ export class FormViewerComponent {
     @Input() vm: any;
 
     expireClass(date: string): string {
-        return moment().isAfter(date) ? 'badge badge-danger' : 'badge';
+        return dayjs().isAfter(dayjs(date).add(1, 'day')) ? 'badge badge-danger' : 'badge';
     }
 }

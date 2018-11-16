@@ -6,10 +6,13 @@ import { CommonModule } from '@angular/common';
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
+import { PipesModule } from '../../../settings/shared/common-pipes';
+
 import { ReviewRoutingModule } from './review-routing.module';
 import { ReviewService } from './review.service';
 import { NavTabsComponent } from './common/nav-tabs.component';
 import { ReviewListComponent } from './list/review-list.component';
+import { ReviewDialog } from './list/review.dialog';
 import { ReviewComponent } from './review.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -26,15 +29,20 @@ library.add(faSearch);
         CommonDirectivesModule,
         CommonDialogsModule,
         FontAwesomeModule,
+        PipesModule,
     ],
     declarations: [
         ReviewListComponent,
         NavTabsComponent,
         ReviewComponent,
+        ReviewDialog,
     ],
     providers: [
         ReviewService,
         {provide: 'REVIEW_API_URL', useValue: '/api/hunt/experts/${userId}/reviews' },
+    ],
+    entryComponents: [
+        ReviewDialog,
     ],
 })
 export class ExpertReviewModule { }

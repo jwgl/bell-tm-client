@@ -8,17 +8,14 @@ const routes: Routes = [{
     path: '',
     component: ReviewComponent,
     children: [{
-        path: '', redirectTo: '1', pathMatch: 'full'
+        path: '', redirectTo: '0', pathMatch: 'full'
     }, {
         path: ':reviewType',
         children: [{
             path: '', redirectTo: 'todo', pathMatch: 'full'
         }, {
             path: ':type',
-            children: [{
-                path: '',
-                component: ReviewListComponent,
-            }],
+            component: ReviewListComponent,
         }],
     }],
 }];

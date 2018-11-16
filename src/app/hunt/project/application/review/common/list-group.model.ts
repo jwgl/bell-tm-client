@@ -2,7 +2,6 @@
 export interface ListOption {
     type: string;
     label: string;
-    class?: string;
     count?: number;
     active?: boolean;
 }
@@ -17,7 +16,6 @@ export class ListGroupItem {
     constructor(option: ListOption) {
         this.type = option.type;
         this.label = option.label;
-        this.class = option.class;
         this.count = option.count;
         this.active = option.active;
     }
