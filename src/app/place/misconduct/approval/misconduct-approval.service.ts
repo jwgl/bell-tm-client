@@ -22,4 +22,8 @@ export class MisconductApprovalService extends RestShowService {
     getPictureUrl(): string {
         return this.misconductPictureApiUrl;
     }
+
+    updateStatus(id: number, status: number, outcome: String) {
+        return this.http.patch(this.api.item(id), {status, outcome});
+    }
 }

@@ -1,34 +1,35 @@
-<table class="table table-expand">
-    <thead>
-        <tr>
-            <th>编号</th>
-            <th>违规类型</th>
-            <th>违规说明</th>
-            <th>教学场地</th>
-            <th>使用时间</th>
-            <th>使用人数</th>
-            <th>借用单位</th>
-            <th>借用人</th>
-            <th>审核人</th>
-            <th>报告人</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let form of forms">
-            <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
-            <td>{{form.type}}</td>
-            <td class="expand" title="{{form.content}}">{{form.content}}</td>
-            <td>{{form.place}}</td>
-            <td>
-                第{{form.week}}周
-                {{form.dayOfWeek | dayOfWeek}}
-                {{form.bookingSection}}
-            </td>
-            <td>{{form.numberOfUsers}}<ng-container *ngIf="form.userCount">({{form.userCount}})</ng-container></td>
-            <td>{{form.department}}</td>
-            <td>{{form.userName}}</td>
-            <td>{{form.checker}}</td>
-            <td>{{form.reporter}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="table-responsive" *ngIf="forms && forms.length > 0">
+    <table class="table table-expand">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>违规类型</th>
+                <th>教学场地</th>
+                <th>使用人数</th>
+                <th>使用时间</th>
+                <th>借用单位</th>
+                <th>借用人</th>
+                <th>审核人</th>
+                <th>报告人</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let form of forms">
+                <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
+                <td>{{form.type}}</td>
+                <td>{{form.place}}</td>
+                <td>{{form.numberOfUsers}}<ng-container *ngIf="form.userCount">({{form.userCount}})</ng-container>
+                </td>
+                <td class="expand">
+                    第{{form.week}}周
+                    {{form.dayOfWeek | dayOfWeek}}
+                    {{form.bookingSection}}
+                </td>
+                <td>{{form.department}}</td>
+                <td>{{form.userName}}</td>
+                <td>{{form.checker}}</td>
+                <td>{{form.reporter}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

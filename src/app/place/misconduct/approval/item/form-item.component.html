@@ -1,4 +1,12 @@
 <ng-container *ngIf="misconduct">
+    <div class="btn-toolbar mt-3">
+        <ng-container [ngSwitch]="misconduct.status">
+            <div class="btn-group ml-auto" *ngSwitchCase="0">
+                <button class="btn btn-secondary" (click)="forgive()">不违规</button>
+                <button class="btn btn-primary" (click)="confirm()">转学院核实</button>
+            </div>
+        </ng-container>
+    </div>
     <tm-form-title>借用项#{{booking.bookingItemId}}</tm-form-title>
     <div class="row">
         <div class="form-group col-md-4">
@@ -78,5 +86,10 @@
                 <img class="card-img" [src]="pictureUrl + '/' + picture">
             </div>
         </div>
+    </div>
+    <div class="form-group">
+        <label for="approverOutcome">教务处意见</label>
+        <textarea class="form-control" id="approverOutcome" name="approverOutcome" [(ngModel)]="approverOutcome"
+            rows="3"></textarea>
     </div>
 </ng-container>
