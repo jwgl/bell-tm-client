@@ -16,12 +16,12 @@ export class TeacherSupervisedComponent {
         private route: ActivatedRoute,
         private service: ReportService,
     ) {
-
-        const type: string = this.route.snapshot.params['observer-type'];
-        const countBy = (type === '1') ? 'TEACHER-U' : 'TEACHER-C';
-        this.service.loadList({ type: countBy }).subscribe(dto => {
-            this.list = dto;
-            this.list.sort((a, b) => b.supervisorTimes - a.supervisorTimes);
+        this.route.params.subscribe(params => {
+            const countBy = (params['observer-type'] === '1') ? 'TEACHER-U' : 'TEACHER-C';
+            this.service.loadList({ type: countBy }).subscribe(dto => {
+                this.list = dto;
+                this.list.sort((a, b) => b.supervisorTimes - a.supervisorTimes);
+            });
         });
     }
 

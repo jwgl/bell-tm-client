@@ -11,7 +11,6 @@ import { PipesModule } from '../shared/pipes/observation-pipes.module';
 
 import { ApprovalRoutingModule } from './approval-routing.module';
 import { ApprovalService } from './approval.service';
-import { NavTabsComponent } from './common/nav-tabs.component';
 import { ApprovalItemComponent } from './item/approval-item.component';
 import { ApprovalListComponent } from './list/approval-list.component';
 
@@ -35,7 +34,6 @@ library.add(faSearch);
     declarations: [
         ApprovalListComponent,
         ApprovalItemComponent,
-        NavTabsComponent,
     ],
     providers: [
         ApprovalService,

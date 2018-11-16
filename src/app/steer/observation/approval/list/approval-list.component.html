@@ -1,6 +1,11 @@
-<tm-nav-tabs [options]="options">
+<ul class="nav nav-tabs mb-p10">
+    <li *ngFor="let item of options" class="nav-item mr-1">
+        <a class="nav-link" [routerLink]="['../../list', item.type]" routerLinkActive="active">{{item.label}}
+            <span class="badge badge-pill badge-count">{{item.count}}</span>
+        </a>
+    </li>
     <li class="nav-item ml-auto">
-        <select name="term" class="form-control" [(ngModel)]="termId">
+        <select name="term" class="form-control-sm" [(ngModel)]="termId">
             <option *ngFor="let item of terms" [ngValue]="item.id">
                 {{ item.id | termLabel}}
             </option>
@@ -8,14 +13,17 @@
     </li>
     <li class="nav-item ml-2">
         <div class="input-group">
-            <input class="form-control form-control-sm" name="filterValue" type="text" [(ngModel)]="filterSelected.value" placeholder="任意字段模糊查询"/>
+            <input class="form-control form-control-sm" name="filterValue" type="text" [(ngModel)]="filterSelected.value"
+                placeholder="任意字段模糊查询" />
             <div class="input-group-append">
-                <button class="btn btn-secondary py-0 h-100" (click)="doFilter()"><fa-icon icon="search"></fa-icon></button>
+                <button class="btn btn-secondary py-0 h-100" (click)="doFilter()">
+                    <fa-icon icon="search"></fa-icon>
+                </button>
             </div>
         </div>
     </li>
-</tm-nav-tabs>
-<div class="container" *ngIf="list && list.length>0; else empty">
+</ul>
+<ng-container *ngIf="list && list.length>0; else empty">
     <table class="table">
         <thead>
             <tr>
@@ -35,8 +43,10 @@
                     <td>
                         <checkbox-selector [data]="item"></checkbox-selector>
                     </td>
-                    <td class="teacher"><a [routerLink]="['../../',item.id]">{{item.teacherName}}({{item.teacherId}})</a> </td>
-                    <td>{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}} {{item.startSection}}-{{item.startSection+item.totalSection-1}}节
+                    <td class="teacher"><a [routerLink]="['../../',item.id]">{{item.teacherName}}({{item.teacherId}})</a>
+                    </td>
+                    <td>{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}}
+                        {{item.startSection}}-{{item.startSection+item.totalSection-1}}节
                         {{item.place}}
                     </td>
                     <td>{{item.departmentName}} </td>
@@ -51,7 +61,7 @@
     <div>
         <button type="button" class="btn btn-primary" *ngIf="canFeed" (click)="feedAll()">发布</button>
     </div>
-</div>
+</ng-container>
 <ng-template #empty>
     <div class="container alert alert-info">暂无数据</div>
 </ng-template>
