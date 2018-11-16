@@ -1,19 +1,5 @@
 .table {
-    td {
-        &:nth-child(1) {
-            width: 3rem;
-        }
-        &:nth-child(2) {
-            width: 18rem;
-        }
-        &:nth-child(3) {
-            width: 15rem;
-        }
-        &:nth-child(4) {
-            width: 4rem;
-        }
-        &:nth-child(5) {
-            width: 8rem;
-        }
+    th {
+        border-top: none;
     }
 }

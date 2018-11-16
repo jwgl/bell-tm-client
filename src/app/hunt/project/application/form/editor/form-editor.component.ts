@@ -27,6 +27,7 @@ export class ProjectFormEditorComponent {
     disciplines = Disciplines;
     editMode: EditMode;
     reviewTaskId: number;
+    saving = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -88,6 +89,7 @@ export class ProjectFormEditorComponent {
         if (validation.length) {
             this.dialogs.error(validation);
         } else {
+            this.saving = true;
             this.form.reviewTaskId = this.reviewTaskId;
             this.service.save(this.form.id, this.form.toServerDto()).subscribe(id => {
                 this.dialogs.confirm('', `“${this.form.name}” 保存成功！`).then(() =>

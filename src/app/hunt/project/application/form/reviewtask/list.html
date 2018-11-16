@@ -4,7 +4,7 @@
             <button class="btn btn-secondary ml-auto" routerLink="list">我的项目</button>
         </div>
     </div>
-    <table class="table">
+    <table class="table table-expand">
         <thead>
             <tr>
                 <th>序号</th>
@@ -20,7 +20,7 @@
             <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
                 <tr>
                     <td>{{i + 1}}</td>
-                    <td class="taskTitle"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
+                    <td class="expand"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
                     <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
                     <td>{{task.endDate}}</td>
                     <td><span *ngIf="task.ban">{{task.ban | level: 'text'}}在研</span></td>

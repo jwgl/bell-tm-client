@@ -7,42 +7,42 @@
         <button class="btn btn-secondary" (click)="setExpert()">设置专家</button>
     </div>
 </div>
-<div class="container">
-    <table class="table" *ngIf="list; else empty">
-        <thead>
+<table class="table" *ngIf="list; else empty">
+    <thead>
+        <tr>
+            <th><input type="checkbox" (change)="checkAll($event.target.checked)">锁</th>
+            <th>申请单号</th>
+            <th>项目名称</th>
+            <th>负责人</th>
+            <th>电话</th>
+            <th>等级</th>
+            <th>项目类型</th>
+            <th>{{dateLabel}}</th>
+            <th>状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
             <tr>
-                <th><input type="checkbox" (change)="checkAll($event.target.checked)">锁</th>
-                <th>申请单号</th>
-                <th>项目名称</th>
-                <th>负责人</th>
-                <th>电话</th>
-                <th>等级</th>
-                <th>项目类型</th>
-                <th>{{dateLabel}}</th>
-                <th>状态</th>
+                <td>
+                    <checkbox-selector [data]="list"></checkbox-selector>
+                    <fa-icon [icon]="lockClass(item.locked)"></fa-icon>
+                    <fa-icon icon="user" *ngIf="item.countExpert"></fa-icon>
+                </td>
+                <td><a [routerLink]="['applications', item.id]">{{i+1}}#{{item.id}} </a></td>
+                <td>{{item.name}}</td>
+                <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.level | level: 'text'}}</td>
+                <td>{{item.subtype}}</td>
+                <td>{{item.date | date: 'y-MM-dd'}}</td>
+                <td>
+                    <audit-status [status]="item.status"></audit-status>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
-                <tr>
-                    <td>
-                        <checkbox-selector [data]="list"></checkbox-selector><fa-icon [icon]="lockClass(item.locked)"></fa-icon><fa-icon icon="user" *ngIf="item.countExpert"></fa-icon>
-                    </td>
-                    <td><a [routerLink]="['applications', item.id]">{{i+1}}#{{item.id}} </a></td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
-                    <td>{{item.phone}}</td>
-                    <td>{{item.level | level: 'text'}}</td>
-                    <td>{{item.subtype}}</td>
-                    <td>{{item.date | date: 'y-MM-dd'}}</td>
-                    <td>
-                        <audit-status [status]="item.status"></audit-status>
-                    </td>
-                </tr>
-            </ng-template>
-        </tbody>
-    </table>
-    <ng-template #empty>
-        <div class="alert alert-info">暂无数据</div>
-    </ng-template>
-</div>
+        </ng-template>
+    </tbody>
+</table>
+<ng-template #empty>
+    <div class="alert alert-info">暂无数据</div>
+</ng-template>

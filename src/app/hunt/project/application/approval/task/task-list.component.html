@@ -1,5 +1,5 @@
 <ng-container>
-    <table class="table">
+    <table class="table table-expand">
         <thead>
             <tr>
                 <th>序号</th>
@@ -16,7 +16,7 @@
             <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
                 <tr>
                     <td>{{i + 1}}</td>
-                    <td class="taskTitle"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
+                    <td class="expand"><a class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</a></td>
                     <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
                     <td class="date">{{task.endDate}}</td>
                     <td>{{task.countProject}}</td>

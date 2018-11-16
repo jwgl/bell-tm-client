@@ -10,7 +10,6 @@ import { PipesModule } from '../../../settings/shared/common-pipes';
 
 import { ReviewRoutingModule } from './review-routing.module';
 import { ReviewService } from './review.service';
-import { NavTabsComponent } from './common/nav-tabs.component';
 import { ReviewListComponent } from './list/review-list.component';
 import { ReviewDialog } from './list/review.dialog';
 import { ReviewComponent } from './review.component';
@@ -33,7 +32,6 @@ library.add(faSearch);
     ],
     declarations: [
         ReviewListComponent,
-        NavTabsComponent,
         ReviewComponent,
         ReviewDialog,
     ],

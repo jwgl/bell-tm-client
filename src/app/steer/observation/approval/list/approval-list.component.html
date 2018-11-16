@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs mb-p10">
     <li *ngFor="let item of options" class="nav-item mr-1">
         <a class="nav-link" [routerLink]="['../../list', item.type]" routerLinkActive="active">{{item.label}}
-            <span class="badge badge-pill badge-count">{{item.count}}</span>
+            <span class="badge badge-pill badge-secondary">{{item.count}}</span>
         </a>
     </li>
     <li class="nav-item ml-auto">

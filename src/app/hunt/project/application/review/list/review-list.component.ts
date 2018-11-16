@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Dialog } from 'core/dialogs';
 
-import { ListOption } from '../common/list-group.model';
 import { ReviewService } from '../review.service';
 
 import { ReviewDialog } from './review.dialog';
@@ -15,10 +14,14 @@ import { ReviewDialog } from './review.dialog';
 export class ReviewListComponent {
     list: any[];
 
-    options: ListOption[];
     counts: any;
     reviewType: number;
     type: string;
+
+    options = [
+        { label: '未评审', type: 'tobe', count: 0 },
+        { label: '已评审', type: 'done', count: 0 },
+    ];
 
     constructor(
         private service: ReviewService,
@@ -41,16 +44,8 @@ export class ReviewListComponent {
         }).subscribe((dto: any) => {
             this.list = dto.list;
             this.counts = dto.counts;
-            this.options = [
-                {
-                    type: 'todo', label: '未评审',
-                    count: this.counts.todo, active: mode === 'todo',
-                },
-                {
-                    type: 'done', label: '已评审',
-                    count: this.counts.done, active: mode === 'done',
-                },
-            ];
+            this.options[0].count = this.counts.todo;
+            this.options[1].count = this.counts.done;
         });
     }
 
