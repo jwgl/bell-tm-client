@@ -22,7 +22,7 @@ export class DepartmentReportComponent {
         private route: ActivatedRoute,
         private service: ReportService,
     ) {
-        this.route.params.subscribe( params => {
+        this.route.params.subscribe(params => {
             const countBy = params['observer-type'] === '1' ? 'DEPARTMENT-U' : 'DEPARTMENT-C';
             this.service.loadList({ type: countBy }).subscribe((dto: any) => {
                 this.isAdmin = dto.isAdmin;
