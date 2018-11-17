@@ -23,8 +23,8 @@
         </div>
     </li>
 </ul>
-<ng-container *ngIf="list && list.length>0; else empty">
-    <table class="table">
+<ng-container *ngIf="list && list.length>0">
+    <table class="table table-expand">
         <thead>
             <tr>
                 <th><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
@@ -43,17 +43,17 @@
                     <td>
                         <checkbox-selector [data]="item"></checkbox-selector>
                     </td>
-                    <td class="teacher"><a [routerLink]="['../../',item.id]">{{item.teacherName}}({{item.teacherId}})</a>
+                    <td class="expand"><a [routerLink]="['../../',item.id]">{{item.teacherId}} {{item.teacherName}}</a>
                     </td>
                     <td>{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}}
                         {{item.startSection}}-{{item.startSection+item.totalSection-1}}节
                         {{item.place}}
                     </td>
                     <td>{{item.departmentName}} </td>
-                    <td class="term">{{item.termId | termLabel}}</td>
+                    <td>{{item.termId | termLabel}}</td>
                     <td>{{item.supervisorDate}}</td>
                     <td>{{item.evaluateLevel}}</td>
-                    <td class="teacher">{{item.supervisorName}}({{item.supervisorId}})</td>
+                    <td>{{item.supervisorId}} {{item.supervisorName}}</td>
                 </tr>
             </ng-template>
         </tbody>
@@ -62,6 +62,3 @@
         <button type="button" class="btn btn-primary" *ngIf="canFeed" (click)="feedAll()">发布</button>
     </div>
 </ng-container>
-<ng-template #empty>
-    <div class="container alert alert-info">暂无数据</div>
-</ng-template>

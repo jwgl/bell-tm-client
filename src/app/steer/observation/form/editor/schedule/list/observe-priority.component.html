@@ -7,20 +7,27 @@
         <button type="button" class="btn btn-secondary" [routerLink]="['../unschedules']">未排实践课</button>
     </div>
     <div class="btn-group ml-auto">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2"
+            aria-haspopup="true" aria-expanded="false">
             {{filterSelected.name}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
             <button class="dropdown-item" type="button" *ngFor="let filterItem of listFilter" (click)="onFilterSelected(filterItem)">{{filterItem.name}}</button>
         </div>
-        <input class="form-control" name="filterValue" type="text" [(ngModel)]="filterSelected.value" />
-        <button type="button" class="btn btn-secondary ml-2" (click)="doFilter()"><fa-icon icon="search"></fa-icon></button>
+        <div class="input-group">
+            <input class="form-control" name="filterValue" type="text" [(ngModel)]="filterSelected.value" />
+            <div class="input-group-append">
+                <button type="button" class="btn btn-secondary" (click)="doFilter()">
+                    <fa-icon icon="search"></fa-icon>
+                </button>
+            </div>
+        </div>
     </div>
     <div class="btn-group ml-2">
         <a class="btn btn-secondary" download href="/api/steer/reports/observe-priority">导出</a>
     </div>
 </div>
-<div *ngIf="list && list.length>0; else empty">
+<div *ngIf="list && list.length>0">
     <table class="table">
         <thead>
             <tr>
@@ -48,7 +55,8 @@
                     <div class="form-group row mt-1">
                         <div class="col-md-3">总共：{{count}}条记录</div>
                         <div class="col-md-2">
-                            <tm-pager [total]="count" [max]="max" [length]="listLength" (prev)="loadData($event)" (next)="loadData($event)"></tm-pager>
+                            <tm-pager [total]="count" [max]="max" [length]="listLength" (prev)="loadData($event)"
+                                (next)="loadData($event)"></tm-pager>
                         </div>
                     </div>
                 </td>
@@ -56,6 +64,3 @@
         </tfoot>
     </table>
 </div>
-<ng-template #empty>
-    <div class="alert alert-info">暂无数据</div>
-</ng-template>
