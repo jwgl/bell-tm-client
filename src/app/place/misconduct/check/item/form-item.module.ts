@@ -7,7 +7,7 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { MisconductSharedModule } from '../../shared/misconduct-shared.module';
-import { MisconductApprovalItemComponent } from './form-item.component';
+import { MisconductCheckItemComponent } from './form-item.component';
 
 @NgModule({
     imports: [
@@ -19,10 +19,10 @@ import { MisconductApprovalItemComponent } from './form-item.component';
         MisconductSharedModule,
     ],
     declarations: [
-        MisconductApprovalItemComponent,
+        MisconductCheckItemComponent,
     ],
     exports: [
-        MisconductApprovalItemComponent,
+        MisconductCheckItemComponent,
     ],
 })
-export class MisconductApprovalItemModule { }
+export class MisconductCheckItemModule { }

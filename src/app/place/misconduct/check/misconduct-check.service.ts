@@ -7,12 +7,12 @@ import { Http, RestShowService } from 'core/rest';
 import { AuthService } from 'core/auth';
 
 @Injectable()
-export class MisconductApprovalService extends RestShowService {
-    counts: { [key: number]: number } = {};
+export class MisconductCheckService extends RestShowService {
+    counts: { [key: string]: number } = {};
 
     constructor(
         http: Http,
-        @Inject('MISCONDUCT_APPROVAL_API_URL')
+        @Inject('MISCONDUCT_CHECK_API_URL')
         apiUrl: string,
         authService: AuthService,
         @Inject('MISCONDUCT_PICTURE_API_URL')
@@ -27,7 +27,7 @@ export class MisconductApprovalService extends RestShowService {
 
     updateStatus(id: number, status: number, outcome: String): Observable<any> {
         return this.http.patch<{ count: number }>(this.api.item(id), { status, outcome }).pipe(tap(result => {
-            this.counts[status] = result.count;
+            this.counts['done'] = result.count;
         }));
     }
 

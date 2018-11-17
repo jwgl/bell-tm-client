@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { MisconductApprovalService } from '../misconduct-approval.service';
+import { MisconductCheckService } from '../misconduct-check.service';
 import { MisconductStatus } from '../../shared/misconduct.model';
 
 @Component({
     styleUrls: ['form-item.component.scss'],
     templateUrl: 'form-item.component.html',
 })
-export class MisconductApprovalItemComponent {
+export class MisconductCheckItemComponent {
     booking: any;
     misconduct: any;
     status: number;
@@ -18,7 +18,7 @@ export class MisconductApprovalItemComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: MisconductApprovalService,
+        private service: MisconductCheckService,
     ) {
         this.route.params.subscribe(params => {
             this.service.loadItem(params['id']).subscribe(dto => this.onLoadData(dto));
@@ -30,22 +30,10 @@ export class MisconductApprovalItemComponent {
         this.misconduct = dto.misconduct;
     }
 
-    onForgive() {
-        this.updateStatus(MisconductStatus.Forgive);
-    }
-
-    onConfirming() {
-        this.updateStatus(MisconductStatus.Confirming);
-    }
-
-    onConfirmed() {
-        this.updateStatus(MisconductStatus.Proccessed);
-    }
-
-    private updateStatus(status: MisconductStatus) {
+    onSubmit() {
         this.service.updateStatus(
             this.misconduct.id,
-            status,
+            MisconductStatus.Confirmed,
             this.outcome,
         ).subscribe(() => {
             this.router.navigate(['../'], { relativeTo: this.route });

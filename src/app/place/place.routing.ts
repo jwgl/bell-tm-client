@@ -17,6 +17,9 @@ const routes: Routes = [{
     path: 'keepers/:userId/bookings',
     loadChildren: './booking/keep/booking-keep.module#BookingKeepModule',
 }, {
+    path: 'checkers/:userId/misconducts',
+    loadChildren: './misconduct/check/misconduct-check.module#MisconductCheckModule',
+}, {
     path: 'approvers/:userId/misconducts',
     loadChildren: './misconduct/approval/misconduct-approval.module#MisconductApprovalModule',
 }, {

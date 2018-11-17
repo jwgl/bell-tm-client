@@ -1,7 +1,7 @@
 <div class="row" *ngIf="todos">
     <div class="col-md-3">
         <div class="list-group">
-            <a *ngFor="let item of statuses" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center "
+            <a *ngFor="let item of statuses" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                 [routerLink]="['../', item.status]" routerLinkActive="active">
                 {{item.label}}
                 <span class="badge badge-pill" [ngClass]="item.class">

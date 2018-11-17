@@ -6,8 +6,7 @@ import { RouterModule } from '@angular/router';
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
-import { MisconductSharedModule } from '../../shared/misconduct-shared.module';
-import { MisconductApprovalItemComponent } from './form-item.component';
+import { MisconductCheckListComponent } from './form-list.component';
 
 @NgModule({
     imports: [
@@ -16,13 +15,12 @@ import { MisconductApprovalItemComponent } from './form-item.component';
         RouterModule,
         CommonDirectivesModule,
         CommonDialogsModule,
-        MisconductSharedModule,
     ],
     declarations: [
-        MisconductApprovalItemComponent,
+        MisconductCheckListComponent,
     ],
     exports: [
-        MisconductApprovalItemComponent,
+        MisconductCheckListComponent,
     ],
 })
-export class MisconductApprovalItemModule { }
+export class MisconductCheckListModule { }

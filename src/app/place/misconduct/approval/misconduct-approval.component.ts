@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 
+import { MisconductApprovalService } from './misconduct-approval.service';
+
 @Component({
     styleUrls: ['./misconduct-approval.component.scss'],
     templateUrl: './misconduct-approval.component.html'
@@ -12,4 +14,13 @@ export class MisconductApprovalComponent {
         { value: 3, label: '已核实' },
         { value: 4, label: '不违规' },
     ];
+
+    constructor(public service: MisconductApprovalService) {
+        this.service.loadCounts();
+    }
+
+    statusCount(status: number): number {
+        const count = this.service.counts[status]
+        return count ? count : 0;
+    }
 }

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { MisconductApprovalService } from '../misconduct-approval.service';
+import { MisconductCheckService } from '../misconduct-check.service';
 
 @Component({
     styleUrls: ['form-list.component.scss'],
     templateUrl: 'form-list.component.html',
 })
-export class MisconductApprovalListComponent {
-    status: number;
+export class MisconductCheckListComponent {
+    status: string;
     items: any[];
     loading = false;
     totalCount: number;
@@ -16,10 +16,10 @@ export class MisconductApprovalListComponent {
 
     constructor(
         private route: ActivatedRoute,
-        private service: MisconductApprovalService,
+        private service: MisconductCheckService,
     ) {
         this.route.params.subscribe(params => {
-            this.status = +params['status'];
+            this.status = params['status'];
             this.loadList(0);
         });
     }
