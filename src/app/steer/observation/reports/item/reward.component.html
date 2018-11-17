@@ -26,12 +26,12 @@
         <tbody>
             <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
-                    <td class="teacher">{{item.teacherName}}({{item.teacherId}})</td>
+                    <td class="teacher">{{item.teacherId}} {{item.teacherName}}</td>
                     <td class="courseName">{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}} {{item.startSection}}-{{item.startSection+item.totalSection-1}}节 {{item.place}}</td>
                     <td>{{item.departmentName}}</td>
                     <td>{{item.supervisorDate}}</td>
                     <td>{{item.observesCount}}</td>
-                    <td>{{item.supervisorName}}({{item.supervisorId}})</td>
+                    <td>{{item.supervisorId}} {{item.supervisorName}}</td>
                     <td>{{item.status | statusName}}</td>
                 </tr>
             </ng-template>
