@@ -16,7 +16,7 @@
         <ng-template ngFor let-deptAdmin [ngForOf]="deptAdmins" let-i="index">
             <tr>
                 <td>{{i + 1}}</td>
-                <td>{{deptAdmin.teacherName}}({{deptAdmin.teacherId}})</td>
+                <td>{{deptAdmin.teacherId}} {{deptAdmin.teacherName}}</td>
                 <td>{{deptAdmin.departmentName}}</td>
                 <td>
                     <tm-remove-item (click)="remove(deptAdmin)"></tm-remove-item>
