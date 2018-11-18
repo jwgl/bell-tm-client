@@ -31,12 +31,13 @@ import { DayOfWeekPipe } from './pipes/day-of-week';
 import { FilterByPipe } from './pipes/filter-by';
 import { GroupByPipe } from './pipes/group-by';
 import { MarkdownPipe } from './pipes/markdown';
-import { WeekRangePipe} from './pipes/week-range';
+import { WeekRangePipe } from './pipes/week-range';
 import { OddEvenPipe } from './pipes/odd-even';
 import { SectionRangePipe } from './pipes/section-range';
 import { TermNamePipe } from './pipes/term-name';
 import { UniqueByPipe } from './pipes/unique-by';
 import { ZeroPadPipe } from './pipes/zero-pad';
+import { NilValuePipe } from './pipes/nil-value';
 
 import { ScheduleTimetableComponent } from './components/schedule-timetable/schedule-timetable.component';
 import { ScheduleWeektabComponent } from './components/schedule-timetable/schedule-weektab.component';
@@ -110,6 +111,7 @@ const CORE_DIRECTIVES: any[] = [
     TermNamePipe,
     AuditStatusTextPipe,
     UniqueByPipe,
+    NilValuePipe,
 ];
 
 @NgModule({

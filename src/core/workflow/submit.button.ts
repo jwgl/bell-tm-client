@@ -56,6 +56,6 @@ export class WorkflowSubmitButtonDirective {
 
     @HostBinding('class')
     get buttonClass() {
-        return 'btn btn-secondary';
+        return 'btn btn-primary';
     }
 }
