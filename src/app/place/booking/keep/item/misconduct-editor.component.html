@@ -1,0 +1,69 @@
+<form id="misconduct-editor" class="card bg-light" #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="card-header d-flex">
+        <h5>{{mode == 'create' ? '新建' : '编辑'}}违规记录</h5>
+        <div class="btn-toolbar mb-0 ml-auto">
+            <div class="btn-group">
+                <label class="btn btn-sm btn-secondary mb-0">
+                    <input type="file" class="d-none" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
+                        [uploadInput]="uploadInput" multiple>上传照片
+                </label>
+            </div>
+            <div class="btn-group ml-2">
+                <button class="btn btn-sm btn-secondary" (click)="onCancel()">取消</button>
+                <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid">确定</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label>违规类型</label>
+                <select class="form-control" name="type" [(ngModel)]="misconduct.type" required>
+                    <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4" *ngIf="weeks.length > 1">
+                <label>违规周次</label>
+                <select class="form-control" name="week" [(ngModel)]="misconduct.week" required>
+                    <option *ngFor="let week of weeks" [ngValue]="week">第{{week}}周</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label>实际人数</label>
+                <input class="form-control" type="number" name="userCount" [(ngModel)]="misconduct.userCount"
+                    [required]="misconduct.type == '到场人数不足'">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>违规描述</label>
+            <textarea class="form-control" name="reason" rows="3" [(ngModel)]="misconduct.content" minlength="5"
+                maxlength="500" required #reason="ngModel"></textarea>
+            <small class="text-muted">输入5-500个字符</small>
+        </div>
+        <div class="form-group">
+            <label>现场照片</label>
+            <div class="form-control pictures" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)"
+                [uploadInput]="uploadInput" style="height: initial">
+                <div class="card-columns" *ngIf="misconduct.pictures.length + files.length > 0; else emptyTpl">
+                    <div class="card mb-3" *ngFor="let picture of misconduct.pictures">
+                        <img class="card-img" [src]="pictureUrl + '/' + picture">
+                        <div class="card-img-overlay">
+                            <button type="button" class="close" (click)="removePicture(picture)">&times;</button>
+                        </div>
+                    </div>
+                    <div class="card mb-3" *ngFor="let f of files; let i = index;">
+                        <div class="card-body">
+                            <div class="card-text">{{f.name}}</div>
+                            <div class="progress" style="height: 4px;">
+                                <div class="progress-bar" role="progressbar" [style.width]="f?.progress?.data?.percentage + '%'"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #emptyTpl>
+                    拖放文件到这里或点击“上传照片”按钮。
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</form>

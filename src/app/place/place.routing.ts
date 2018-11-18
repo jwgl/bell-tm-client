@@ -14,6 +14,15 @@ const routes: Routes = [{
     path: 'bookingReports',
     loadChildren: './booking/report/booking-report.module#BookingReportModule',
 }, {
+    path: 'keepers/:userId/bookings',
+    loadChildren: './booking/keep/booking-keep.module#BookingKeepModule',
+}, {
+    path: 'checkers/:userId/misconducts',
+    loadChildren: './misconduct/check/misconduct-check.module#MisconductCheckModule',
+}, {
+    path: 'approvers/:userId/misconducts',
+    loadChildren: './misconduct/approval/misconduct-approval.module#MisconductApprovalModule',
+}, {
     path: 'settings/bookingAuths',
     loadChildren: './settings/booking-auth/booking-auth.module#BookingAuthModule',
 }, {

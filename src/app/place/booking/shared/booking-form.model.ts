@@ -1,5 +1,16 @@
 import { dayOfWeekText, weekRangeText } from 'core/utils';
 
+export interface Department {
+    id: string;
+    name: string;
+}
+
+export interface BookingType {
+    id: number;
+    name: string;
+    checker?: string;
+}
+
 export interface BookingSection {
     id: number;
     name: string;
@@ -17,11 +28,10 @@ export class BookingForm {
     userName: string;
     extraInfo: string[];
     phoneNumber: string;
-    departmentId: string;
-    departmentName: string;
-    bookingTypeId: number;
-    bookingTypeName: string;
+    department: Department;
+    bookingType: BookingType;
     reason: string;
+    numberOfUsers: number;
     status: string;
     workflowInstanceId: string;
     dateSubmitted: string;
@@ -39,11 +49,16 @@ export class BookingForm {
         this.userName = dto.userName;
         this.extraInfo = dto.extraInfo;
         this.phoneNumber = dto.phoneNumber;
-        this.departmentId = dto.departmentId;
-        this.departmentName = dto.departmentName;
-        this.bookingTypeId = dto.bookingTypeId;
-        this.bookingTypeName = dto.bookingTypeName;
+        this.department = {
+            id: dto.departmentId,
+            name: dto.departmentName,
+        };
+        this.bookingType = {
+            id: dto.bookingTypeId,
+            name: dto.bookingTypeName,
+        };
         this.reason = dto.reason;
+        this.numberOfUsers = dto.numberOfUsers;
         this.status = dto.status;
         this.workflowInstanceId = dto.workflowInstanceId;
         this.dateSubmitted = dto.dateSubmitted;
@@ -95,6 +110,20 @@ export class BookingItem {
         this.dayOfWeek = dto.dayOfWeek;
         this.section = dto.sectionId ? bookingSectionMap[dto.sectionId] : dto.section;
         this.occupied = dto.occupied;
+    }
+
+    get isExceedLimit(): boolean {
+        if (this.form.bookingType.name && this.form.bookingType.name !== '教学活动') {
+            if (this.place.seat <= 60) {
+                return this.form.numberOfUsers < 10;
+            } else if (this.place.seat <= 100) {
+                return this.form.numberOfUsers < 30
+            } else {
+                return this.form.numberOfUsers / this.place.seat < 0.5;
+            }
+        } else {
+            return false;
+        }
     }
 
     toString(): string {

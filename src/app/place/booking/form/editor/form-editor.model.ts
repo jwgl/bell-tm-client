@@ -43,16 +43,16 @@ BookingForm.prototype.conflict = function (this: BookingForm, item: BookingItem)
 
 BookingForm.prototype.isValid = function (this: BookingForm): boolean {
     return this.reason
-        && this.reason.length >= 10
         && this.reason.length <= 100
         && this.items.length > 0;
 };
 
 BookingForm.prototype.toServerDto = function (this: BookingForm): any {
     return {
-        departmentId: this.departmentId,
-        bookingTypeId: this.bookingTypeId,
+        departmentId: this.department.id,
+        bookingTypeId: this.bookingType.id,
         reason: this.reason,
+        numberOfUsers: this.numberOfUsers,
         addedItems: this.getAddedItems(),
         removedItems: this.id ? this.removedItems.map(it => it.id) : null,
     };

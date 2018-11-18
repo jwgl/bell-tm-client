@@ -1,0 +1,27 @@
+@import './misconduct-viewer.component';
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+}
+
+.card-img-overlay {
+    padding: 1rem;
+}
+
+.close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover {
+    color: red;
+}
+
+.close {
+    color: red;
+    text-shadow: 0 0 2px #ddd, 0 0 4px #eee, 0 0 8px #fff;
+}
+
+.file-name {
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
+.card-columns {
+    margin-bottom: -1rem;
+}

@@ -1,0 +1,86 @@
+<ng-container *ngIf="booking">
+    <tm-form-title>借用项#{{booking.bookingItemId}}</tm-form-title>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>借用单</label>
+            <p class="form-control-plaintext">#{{booking.bookingFormId}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>教学场地</label>
+            <p class="form-control-plaintext">{{booking.place}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>借用时间</label>
+            <p class="form-control-plaintext">
+                {{booking | weekRange}}
+                {{booking.oddEven | oddEven}}
+                {{booking.dayOfWeek | dayOfWeek}}
+                {{booking.bookingSection}}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>借用单位</label>
+            <p class="form-control-plaintext">{{booking.department}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>借用类别</label>
+            <p class="form-control-plaintext">{{booking.bookingType}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>使用人数</label>
+            <p class="form-control-plaintext">{{booking.numberOfUsers ? booking.numberOfUsers : '<空>'}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>借用人</label>
+            <p class="form-control-plaintext">{{booking.userName}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>联系电话</label>
+            <p class="form-control-plaintext">{{booking.phoneNumber}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>审核人</label>
+            <p class="form-control-plaintext">{{booking.checkerName}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>借用事由</label>
+        <p class="form-control-plaintext">{{booking.reason}}</p>
+    </div>
+    <div class="form-group">
+        <label>违规记录</label>
+        <ng-container *ngFor="let misconduct of misconducts">
+            <tm-misconduct-editor *ngIf="selectedMisconduct && selectedMisconduct.id == misconduct.id; else viewerTpl"
+                mode="edit"
+                [misconduct]="selectedMisconduct"
+                [pictureUrl]="pictureUrl"
+                [booking]="booking"
+                (confirm)="onMisconductUpdated(misconduct, $event)"
+                (cancel)="onMisconductCanceled()">
+            </tm-misconduct-editor>
+            <ng-template #viewerTpl>
+                <tm-misconduct-viewer
+                    [misconduct]="misconduct"
+                    [pictureUrl]="pictureUrl"
+                    (edit)="onEditMisconduct(misconduct)"
+                    (remove)="onRemoveMisconduct(misconduct)">
+                </tm-misconduct-viewer>
+            </ng-template>
+        </ng-container>
+        <div class="btn-toolbar" *ngIf="!selectedMisconduct">
+            <button class="btn btn-success ml-auto" type="button" (click)="onCreateMisconduct()">新建违规记录</button>
+        </div>
+        <tm-misconduct-editor *ngIf="selectedMisconduct && !selectedMisconduct.id"
+            mode="create"
+            [misconduct]="selectedMisconduct"
+            [pictureUrl]="pictureUrl"
+            [booking]="booking"
+            (confirm)="onMisconductCreated($event)"
+            (cancel)="onMisconductCanceled($event)">
+        </tm-misconduct-editor>
+    </div>
+</ng-container>

@@ -1,0 +1,64 @@
+<form *ngIf="misconduct" #form="ngForm">
+    <div class="btn-toolbar mt-3">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" routerLink="../">返回</button>
+        </div>
+    </div>
+    <tm-form-title>违规记录#{{misconduct.id}}</tm-form-title>
+    <tm-booking-viewer [booking]="booking"></tm-booking-viewer>
+    <tm-misconduct-viewer [misconduct]="misconduct" [pictureUrl]="pictureUrl"></tm-misconduct-viewer>
+    <ng-container [ngSwitch]="misconduct.status">
+        <ng-container *ngSwitchCase="0">
+            <div class="form-group">
+                <label for="outcome">处理意见</label>
+                <textarea class="form-control" id="outcome" name="outcome" [(ngModel)]="outcome" rows="3" required></textarea>
+            </div>
+            <div class="btn-toolbar">
+                <div class="btn-group ml-auto">
+                    <button class="btn btn-secondary" (click)="onForgive()" [disabled]="!form.form.valid">不违规</button>
+                    <button class="btn btn-primary" (click)="onConfirming()" [disabled]="!form.form.valid">转学院核实</button>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="1">
+            <div class="form-group">
+                <label>处理意见</label>
+                <p class="form-control-plaintext">{{misconduct.handleOutcome}}</p>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+            <div class="form-group">
+                <label>处理意见</label>
+                <p class="form-control-plaintext">{{misconduct.handleOutcome}}</p>
+            </div>
+            <div class="form-group">
+                <label>学院意见</label>
+                <p class="form-control-plaintext">{{misconduct.checkOutcome}}</p>
+            </div>
+            <div class="form-group">
+                <label for="outcome">处理决定</label>
+                <textarea class="form-control" id="outcome" name="outcome" [(ngModel)]="outcome" rows="3" required></textarea>
+            </div>
+            <div class="btn-toolbar">
+                <div class="btn-group ml-auto">
+                    <button class="btn btn-secondary" (click)="onForgive()" [disabled]="!form.form.valid">不违规</button>
+                    <button class="btn btn-primary" (click)="onConfirmed()" [disabled]="!form.form.valid">已核实</button>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <div class="form-group">
+                <label>处理意见</label>
+                <p class="form-control-plaintext">{{misconduct.handleOutcome}}</p>
+            </div>
+            <div class="form-group" *ngIf="misconduct.checkOutcome">
+                <label>学院意见</label>
+                <p class="form-control-plaintext">{{misconduct.checkOutcome}}</p>
+            </div>
+            <div class="form-group" *ngIf="misconduct.approvalOutcome">
+                <label>处理决定</label>
+                <p class="form-control-plaintext">{{misconduct.approvalOutcome}}</p>
+            </div>
+        </ng-container>
+    </ng-container>
+</form>
