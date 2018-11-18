@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Http, RestShowService } from 'core/rest';
 import { AuthService } from 'core/auth';

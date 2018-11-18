@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { EditMode } from 'core/constants';
 
-import { BookingForm, BookingSection, bookingSectionMap, BookingType } from '../../shared/booking-form.model';
+import { BookingForm, BookingSection, bookingSectionMap, BookingType, Department } from '../../shared/booking-form.model';
 import { BookingFormService } from '../booking-form.service';
 import { FindPlaceDialogService } from './find-place/find-place.service';
 import './form-editor.model';
@@ -14,7 +14,7 @@ import './form-editor.model';
 })
 export class BookingFormEditorComponent {
     form: BookingForm;
-    departments: any[];
+    departments: Department[];
     bookingTypes: BookingType[];
     findPlaceOptions: any = {};
     saving = false;
@@ -74,7 +74,7 @@ export class BookingFormEditorComponent {
                     this.form.addItem(places[i]);
                 } else {
                     setTimeout(() => {
-                        alert('借用多于8项。');
+                        alert(`借用多于${this.maxCount}项。`);
                     }, 10);
                     break;
                 }
