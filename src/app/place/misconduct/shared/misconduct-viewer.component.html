@@ -9,7 +9,7 @@
     </div>
     <div class="form-group col-md-4">
         <label>实际人数</label>
-        <p class="form-control-plaintext">{{misconduct.userCount ? misconduct.userCount : '<空>'}}</p>
+        <p class="form-control-plaintext">{{misconduct.userCount | nilValue}}</p>
     </div>
 </div>
 <div class="form-group">
@@ -24,6 +24,6 @@
         </div>
     </div>
     <ng-template #emptyPictures>
-        <p class="form-control-plaintext">&lt;空&gt;</p>
+        <p class="form-control-plaintext">{{ null | nilValue}}</p>
     </ng-template>
 </div>

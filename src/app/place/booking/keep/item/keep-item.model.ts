@@ -7,10 +7,11 @@ export class Misconduct {
     pictures: string[];
     reporterId: string;
     reporterName: string;
-    dateReported: string;
+    dateModified: string;
     week: number;
     userCount?: number;
     confirmation: number;
+    editable: boolean;
 
     constructor(dto: any) {
         if (dto) {
@@ -21,8 +22,6 @@ export class Misconduct {
     }
 
     clone() {
-        const x = new Misconduct(_.cloneDeep(this));
-        console.log("clone:" + (x.pictures === this.pictures))
-        return x;
+        return new Misconduct(_.cloneDeep(this));
     }
 }
