@@ -60,8 +60,8 @@ export class BookingFormEditorComponent {
         this.findPlaceOptions.form = this.form;
     }
 
-    onDepartmentChanged(departmentId: string) {
-        this.service.getDepartmentBookingType(departmentId).subscribe(bookingTypes => {
+    onDepartmentChanged(department: Department) {
+        this.service.getDepartmentBookingType(department.id).subscribe(bookingTypes => {
             this.bookingTypes = bookingTypes;
             this.form.bookingType = this.bookingTypes[0];
         });
