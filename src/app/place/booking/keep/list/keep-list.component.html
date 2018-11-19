@@ -3,13 +3,13 @@
         <div class="form-group">
             <label for="building">教学楼</label>
             <select class="form-control" [(ngModel)]="params.building" (ngModelChange)="buildingChanged($event)">
-                <option disabled selected hidden>选择</option>
+                <option disabled selected hidden [ngValue]="null">选择教学楼</option>
                 <option *ngFor="let building of buildings" value="{{building}}">{{building}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="building">教室</label>
-            <select class="form-control" [(ngModel)]="params.place">
+            <select class="form-control" [(ngModel)]="params.place" [disabled]="!params.building">
                 <option selected [ngValue]="null">全部</option>
                 <option *ngFor="let place of places" [ngValue]="place.id">{{place.name}} / {{place.seat}}座 / {{place.type}}</option>
             </select>
