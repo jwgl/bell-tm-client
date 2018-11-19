@@ -25,10 +25,16 @@ export class BookingKeepListComponent {
     loading = false;
 
     constructor(private service: BookingKeepService) {
-        this.params = {} as any;
         this.service.loadBuildings().subscribe(result => {
             this.buildings = result.buildings;
             this.term = result.term;
+            this.params = {
+                building: this.buildings[0],
+                place: null,
+                week: null,
+                day: null,
+                section: null,
+            };
 
             this.weeks = [];
             for (let w = this.term.startWeek; w <= this.term.maxWeek; w++) {
@@ -56,13 +62,18 @@ export class BookingKeepListComponent {
     }
 
     search() {
-        this.params = _.omitBy(this.params, _.isNil);
-        this.service.loadList(this.params).subscribe(result => {
+        this.service.loadList(_.omitBy(this.params, _.isNil)).subscribe(result => {
             this.bookings = result;
         });
     }
 
     reset() {
-        this.params = { building: this.params.building };
+        this.params = {
+            building: this.params.building,
+            place: null,
+            week: null,
+            day: null,
+            section: null,
+        };
     }
 }

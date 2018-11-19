@@ -1,38 +1,37 @@
 <div class="row">
-    <div class="col-md-4 col-lg-3">
+    <div class="col-md-4 col-lg-3" *ngIf="params">
         <div class="form-group">
             <label for="building">教学楼</label>
             <select class="form-control" [(ngModel)]="params.building" (ngModelChange)="buildingChanged($event)">
-                <option disabled selected hidden></option>
+                <option disabled selected hidden>选择</option>
                 <option *ngFor="let building of buildings" value="{{building}}">{{building}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="building">教室</label>
-            <select #placeSelect class="form-control" [(ngModel)]="params.place">
-                <option selected [ngValue]="null"></option>
-                <option *ngFor="let place of places" [ngValue]="place.id">{{place.name}} / {{place.seat}}座 /
-                    {{place.type}}</option>
+            <select class="form-control" [(ngModel)]="params.place">
+                <option selected [ngValue]="null">全部</option>
+                <option *ngFor="let place of places" [ngValue]="place.id">{{place.name}} / {{place.seat}}座 / {{place.type}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="building">周次</label>
             <select class="form-control" [(ngModel)]="params.week">
-                <option selected [ngValue]="null"></option>
+                <option selected [ngValue]="null">全部</option>
                 <option *ngFor="let w of weeks" [ngValue]="w">第{{w}}周</option>
             </select>
         </div>
         <div class="form-group">
             <label for="building">星期几</label>
             <select class="form-control" [(ngModel)]="params.day">
-                <option selected [ngValue]="null"></option>
+                <option selected [ngValue]="null">全部</option>
                 <option *ngFor="let d of days" [ngValue]="d">{{d | dayOfWeek}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="building">节次</label>
             <select class="form-control" [(ngModel)]="params.section">
-                <option selected [ngValue]="null"></option>
+                <option selected [ngValue]="null">全部</option>
                 <option *ngFor="let s of sections" [ngValue]="s">第{{s}}节</option>
             </select>
         </div>
