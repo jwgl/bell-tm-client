@@ -10,6 +10,9 @@
             <button [workflow-reject]="reviewOptions" (rejected)="onItemLoaded($event)">退回</button>
             <button [workflow-accept]="reviewOptions" (accept)="onItemLoaded($event)">同意</button>
         </div>
+        <div class="btn-group ml-2" *ngIf="rollbackAble">
+            <button [workflow-rollback]="rollbackOptions" (rollback)="onItemLoaded($event)">撤回</button>
+        </div>
     </div>
     <tm-project-form-viewer [vm]="form"></tm-project-form-viewer>
 </ng-container>

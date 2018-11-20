@@ -68,7 +68,7 @@
         <ul>
             <li *ngFor="let item of vm.expertReview">
                 <span class="text-info mr-2">{{item.teacherName}} {{item.teacherId}}：</span>
-                <span [class]="conclusionClass(item.conclusion)">{{item.conclusion}}</span> {{item.dateReviewed}}
+                <span [class]="conclusionClass(item.conclusion)">{{item.conclusion}}</span> {{item.dateReviewed | date: 'yyyy-MM-dd'}}
                 <span class="ml-3">{{item.opinion}}</span>
             </li>
         </ul>

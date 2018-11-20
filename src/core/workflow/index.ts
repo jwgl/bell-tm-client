@@ -9,6 +9,8 @@ import { WorkflowAcceptButtonDirective } from './accept.button';
 import { WorkflowAcceptDialog } from './accept.dialog';
 import { WorkflowNextButtonDirective } from './next.button';
 import { WorkflowNextDialog } from './next.dialog';
+import { WorkflowRollbackButtonDirective } from './rollback.button';
+import { WorkflowRollbackDialog } from './rollback.dialog';
 import { WorkflowRejectButtonDirective } from './reject.button';
 import { WorkflowRejectDialog } from './reject.dialog';
 import { WorkflowRevokeButtonDirective } from './revoke.button';
@@ -100,6 +102,7 @@ const WORKFLOW_DIALOGS: any[] = [
     WorkflowSubmitDialog,
     WorkflowAcceptDialog,
     WorkflowNextDialog,
+    WorkflowRollbackDialog,
     WorkflowRejectDialog,
     WorkflowRevokeDialog,
     WorkflowWorkitemsDialog,
@@ -108,6 +111,7 @@ const WORKFLOW_DIALOGS: any[] = [
 const WORKFLOW_BUTTONS: any[] = [
     WorkflowAcceptButtonDirective,
     WorkflowNextButtonDirective,
+    WorkflowRollbackButtonDirective,
     WorkflowRejectButtonDirective,
     WorkflowSubmitButtonDirective,
     WorkflowRevokeButtonDirective,

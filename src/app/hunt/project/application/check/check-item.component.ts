@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ReviewOptions } from 'core/workflow';
+import { ReviewOptions, RevokeOptions } from 'core/workflow';
 
 import { CheckService } from './check.service';
 import { ProjectForm } from '../form/shared/form.model';
@@ -15,6 +15,8 @@ export class ApplicationCheckItemComponent {
     private wi: string;
     private prevId: number;
     private nextId: number;
+
+    rollbackAble: boolean;
 
     constructor(
         private service: CheckService,
@@ -30,6 +32,7 @@ export class ApplicationCheckItemComponent {
         this.wi = dto.workitemId;
         this.prevId = dto.prevId;
         this.nextId = dto.nextId;
+        this.rollbackAble = dto.rollbackAble;
     }
 
     get reviewable(): boolean {
@@ -41,6 +44,13 @@ export class ApplicationCheckItemComponent {
             id: this.form.id,
             wi: this.wi,
             type: 'check',
+            what: this.form.name,
+        };
+    }
+
+    get rollbackOptions(): RevokeOptions {
+        return {
+            id: this.form.id,
             what: this.form.name,
         };
     }

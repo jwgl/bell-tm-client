@@ -86,6 +86,10 @@ export class ApiUrl {
         return `${this.workitem(id, wi)}?op=NEXT`;
     }
 
+    rollback(id: any) {
+        return `${this.item(id)}/workitems/undefined?op=ROLLBACK`;
+    }
+
     buildQueryString(options: { [key: string]: string }): string {
         const search: string[] = [];
         for (const key in options) {

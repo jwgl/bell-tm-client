@@ -2,11 +2,11 @@ import { Inject, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Http, RestShowService } from 'core/rest';
+import { Http, RestEditService } from 'core/rest';
 import { AuthService } from 'core/auth';
 
 @Injectable()
-export class ApprovalService extends RestShowService {
+export class ApprovalService extends RestEditService {
     list: any[];
 
     constructor(

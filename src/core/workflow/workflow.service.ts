@@ -142,6 +142,10 @@ export class Workflow {
         return this.http.patch(this.api.revoke(id), data);
     }
 
+    rollback(id: any, data: { title: string, comment: string }): Observable<any> {
+        return this.http.patch(this.api.rollback(id), data);
+    }
+
     private updateListGroup(listCounts: ListCounts): void {
         if (listCounts) {
             this.listGroup.update(listCounts);

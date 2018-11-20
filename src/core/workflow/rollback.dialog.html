@@ -1,0 +1,14 @@
+<modal-dialog modalTitle="撤回">
+    <modal-body>
+        <form #f="ngForm">
+            <p>撤回《{{options.what}}》，请填写撤回理由。</p>
+            <div class="form-group">
+                <textarea class="form-control" rows="6" placeholder="处理意见" name="comment" [(ngModel)]="result.comment" required></textarea>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="!f.valid">确定</button>
+    </modal-footer>
+</modal-dialog>
