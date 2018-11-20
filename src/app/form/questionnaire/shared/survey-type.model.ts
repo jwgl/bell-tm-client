@@ -45,4 +45,4 @@ export const SURVEY_TYPE_OPTIONS = {
     [SurveyType.INFO_COLLECTION]: {
         anonymous: { default: false, disabled: true, visible: false }
     },
-}
+};

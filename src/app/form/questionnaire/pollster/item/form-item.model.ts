@@ -16,7 +16,7 @@ declare module '../../shared/questionnaire-form.model' {
 
 Questionnaire.prototype.validate = function (this: Questionnaire): string[] {
     if (this.surveyType !== SurveyType.ENTRY_FORM && this.questions.length === 0) {
-        return [`${SURVEY_TYPE_MAP[this.surveyType]}未包含任何问题。`]
+        return [`${SURVEY_TYPE_MAP[this.surveyType]}未包含任何问题。`];
     } else {
         return this.questions.map(question => question.validate()).filter(it => !!it);
     }
@@ -24,7 +24,7 @@ Questionnaire.prototype.validate = function (this: Questionnaire): string[] {
 
 Question.prototype.validate = function (this: Question): string {
     if ((this.type === QuestionType.SINGLE || this.type === QuestionType.MUTIPLE) && this.options.length < 2) {
-        return `问题${this.ordinal + 1}的选项数不能小于2。`
+        return `问题${this.ordinal + 1}的选项数不能小于2。`;
     } else {
         return null;
     }

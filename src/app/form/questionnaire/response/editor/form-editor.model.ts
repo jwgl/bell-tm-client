@@ -53,11 +53,13 @@ ResponseItem.prototype.validate = function (this: ResponseItem): string {
 };
 
 ResponseItem.prototype.toServerDto = function (this: ResponseItem): ResponseItemDto {
-    let response
+    let response: {[key: string]: any};
+    let textValue: string;
+
     switch (this.question.type) {
         case 0:
             if (this.textValue) {
-                const textValue = this.textValue.trim();
+                textValue = this.textValue.trim();
                 if (textValue.length) {
                     response = { textValue };
                 }
@@ -67,7 +69,7 @@ ResponseItem.prototype.toServerDto = function (this: ResponseItem): ResponseItem
             if (this.choice) {
                 response = { choice: this.choice.id };
             } else if (this.question.openEnded && this.textValue) {
-                const textValue = this.textValue.trim();
+                textValue = this.textValue.trim();
                 if (textValue.length) {
                     response = { textValue };
                 }
@@ -75,7 +77,12 @@ ResponseItem.prototype.toServerDto = function (this: ResponseItem): ResponseItem
             break;
         case 2:
             const choices = this.question.options.filter(option => option.selected).map(option => option.id);
-            const textValue = this.question.openEnded && this.textValue ? this.textValue.replace(/;/g, '；').split(/；/g).map(it => it.trim()).filter(it => !!it).join('；') : null
+            if (this.question.openEnded && this.textValue) {
+                textValue = this.textValue.trim();
+                if (textValue) {
+                    textValue = this.textValue.replace(/;/g, '；').split(/；/g).map(it => it.trim()).filter(it => !!it).join('；');
+                }
+            }
             if (choices.length && textValue) {
                 response = { choices, textValue };
             } else if (choices.length) {

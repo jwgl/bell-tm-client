@@ -45,12 +45,12 @@ export class BookingFormEditorComponent {
         dto.sections.forEach((section: BookingSection) => bookingSectionMap[section.id] = section);
         this.form = new BookingForm(dto.form);
         this.departments = dto.departments;
-        this.form.department = this.departments.find((department) => department.id == dto.form.departmentId);
+        this.form.department = this.departments.find(it => it.id === dto.form.departmentId);
         this.bookingTypes = dto.bookingTypes;
         if (!this.form.id) {
             this.form.bookingType = this.bookingTypes[0];
         } else {
-            this.form.bookingType = this.bookingTypes.find((type) => type.id == dto.form.bookingTypeId);
+            this.form.bookingType = this.bookingTypes.find(it => it.id === dto.form.bookingTypeId);
         }
         this.findPlaceOptions.term = dto.term;
         this.findPlaceOptions.placeTypes = dto.placeTypes;
@@ -69,7 +69,7 @@ export class BookingFormEditorComponent {
 
     findPlace() {
         this.findPlaceDialog.open(this.findPlaceOptions).then((places: any[]) => {
-            for(let i = 0; i < places.length; i++) {
+            for (let i = 0; i < places.length; i++) {
                 if (this.form.items.length < this.maxCount) {
                     this.form.addItem(places[i]);
                 } else {

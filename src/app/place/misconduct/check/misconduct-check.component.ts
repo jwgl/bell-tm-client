@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 import { MisconductCheckService } from './misconduct-check.service';
 
@@ -17,7 +17,7 @@ export class MisconductCheckComponent {
     }
 
     statusCount(status: string): number {
-        const count = this.service.counts[status]
+        const count = this.service.counts[status];
         return count ? count : 0;
     }
 }

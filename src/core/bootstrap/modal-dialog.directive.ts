@@ -35,10 +35,10 @@ export class ModalDialogComponent {
 @Directive({
     selector: 'modal-dialog button[modalCancel]',
     host: {
-        '[attr.type]': "'button'",
+        '[attr.type]': '"button"',
         '[class.btn]': 'true',
         '[class.btn-secondary]': 'true',
-        '[attr.data-dismiss]': "'modal'",
+        '[attr.data-dismiss]': '"modal"',
     },
 })
 export class ModalCancelButtonDirective { }

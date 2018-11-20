@@ -1,6 +1,6 @@
 export interface QuestionnaireResponseStats {
     responseCount: number;
-    questionStats: { [key: number]: QuestionResponseStats }
+    questionStats: { [key: number]: QuestionResponseStats };
 }
 
 export interface QuestionResponseStats {

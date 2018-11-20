@@ -7,7 +7,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 export class CheckboxSelectorComponent {
     @ViewChild('checkbox')
     checkbox: ElementRef;
-    
+
     @Input()
     data: any;
 

@@ -54,7 +54,7 @@ export class ReissueOrder {
     }
 
     removeItem(formId: any): void {
-        const index = _.findIndex(this.items, item => item.formId === formId);
+        const index = _.findIndex(this.items, it => it.formId === formId);
 
         if (index === -1) {
             return;

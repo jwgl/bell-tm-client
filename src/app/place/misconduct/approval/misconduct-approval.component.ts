@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 import { MisconductApprovalService } from './misconduct-approval.service';
 
@@ -20,7 +20,7 @@ export class MisconductApprovalComponent {
     }
 
     statusCount(status: number): number {
-        const count = this.service.counts[status]
+        const count = this.service.counts[status];
         return count ? count : 0;
     }
 }

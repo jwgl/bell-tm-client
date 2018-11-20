@@ -9,7 +9,7 @@ export class FormControlDirective {
         @Attribute('col') col: string,
         private elementRef: ElementRef,
     ) {
-        this.col = parseInt(col, 10);
+        this.col = +col;
     }
 
     set id(value: string) {

@@ -14,7 +14,7 @@ import { Place } from '../booking-keep.model';
 export class BookingKeepListComponent {
     term: { startWeek: number, maxWeek: number };
     buildings: string[];
-    places: Place[]
+    places: Place[];
     weeks: number[];
     days: number[];
     sections: number[];
