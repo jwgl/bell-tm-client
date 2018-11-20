@@ -38,4 +38,8 @@ export class ApprovalService extends RestEditService {
     loadTeam(): Observable<any> {
         return this.http.get(this.teamApiUrl);
     }
+
+    finish(id: any, wi: string): Observable<any> {
+        return this.http.patch(`${this.api.item(id)}/workitems/${wi}?op=FINISH`, {});
+    }
 }

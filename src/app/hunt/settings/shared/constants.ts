@@ -11,6 +11,12 @@ export enum Level {
     NATION,
 }
 
+export enum Conclusion {
+    OK, // 通过
+    VETO, // 不通过
+    DELAY // 暂缓通过
+}
+
 type ReviewTypeInfo = { [key in ReviewType]: { text: string, class: string } };
 
 export const typeLabels: ReviewTypeInfo = {
@@ -28,6 +34,14 @@ export const levelLabels: LevelInfo = {
     [Level.NATION]: { text: '国家级', class: 'badge-secondary' },
 };
 
+type ConclusionInfo = { [key in Conclusion]: { text: string, class: string } };
+
+export const conclusionLabels: ConclusionInfo = {
+    [Conclusion.OK]: { text: '通过', class: 'badge-success' },
+    [Conclusion.VETO]: { text: '不通过', class: 'badge-danger' },
+    [Conclusion.DELAY]: { text: '暂缓通过', class: 'badge-warning' },
+};
+
 export const TypeList = [
     { label: '项目申请', value: 'APPLICATION' },
     { label: '项目检查', value: 'CHECK' },
@@ -39,4 +53,10 @@ export const LevelList = [
     { label: '市级', value: 'CITY' },
     { label: '省级', value: 'PROVINCE' },
     { label: '国家级', value: 'NATION' },
+];
+
+export const ConclusionList = [
+    { label: '通过', value: 'OK' },
+    { label: '不通过', value: 'VETO' },
+    { label: '暂缓通过', value: 'DELAY' },
 ];

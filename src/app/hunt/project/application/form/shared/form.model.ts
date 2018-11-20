@@ -99,8 +99,8 @@ export class ProjectForm {
     achievements: string;
     departmentConclusion: string;
     departmentOpinion: string;
-    conclusion: string;
-    finalOpinion: string;
+    conclusionOfUniversity: string;
+    opinionOfUniversity: string;
     isValidDate: boolean;
     countExpert: number;
     workflowInstanceId: string;
@@ -136,8 +136,8 @@ export class ProjectForm {
         this.achievements = dto.achievements;
         this.departmentConclusion = dto.departmentConclusion;
         this.departmentOpinion = dto.departmentOpinion;
-        this.conclusion = dto.conclusion;
-        this.finalOpinion = dto.finalOpinion;
+        this.conclusionOfUniversity = dto.conclusionOfUniversity;
+        this.opinionOfUniversity = dto.opinionOfUniversity;
         this.isValidDate = dto.isValidDate;
         this.countExpert = dto.countExpert;
         this.workflowInstanceId = dto.workflowInstanceId;

@@ -58,9 +58,9 @@
             <label class="control-label">学院意见</label>
             <div [markdown]="vm.departmentOpinion"></div>
         </div>
-        <div class="form-group col-12" *ngIf="vm.finalOpinion">
+        <div class="form-group col-12" *ngIf="vm.opinionOfUniversity">
             <label class="control-label">学校意见</label>
-            <div [markdown]="vm.finalOpinion"></div>
+            <div [markdown]="vm.opinionOfUniversity"></div>
         </div>
     </div>
     <div class="form-group" *ngIf="vm.expertReview">

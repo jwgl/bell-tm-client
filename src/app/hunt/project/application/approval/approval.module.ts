@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { CommonDirectivesModule } from 'core/common-directives';
+import { CommonDialogsModule } from 'core/common-dialogs';
 import { Dialog } from 'core/dialogs';
 import { WorkflowModule } from 'core/workflow';
 
@@ -27,6 +28,7 @@ library.add(faLock, faLockOpen, faUser);
         CommonModule,
         FormsModule,
         CommonDirectivesModule,
+        CommonDialogsModule,
         WorkflowModule,
         FontAwesomeModule,
         WorkflowModule.forReview('/api/hunt/approvers/${userId}/applications', [

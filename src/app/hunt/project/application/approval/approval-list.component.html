@@ -19,6 +19,7 @@
             <th>项目类型</th>
             <th>{{dateLabel}}</th>
             <th>状态</th>
+            <th>结论</th>
         </tr>
     </thead>
     <tbody>
@@ -39,6 +40,7 @@
                 <td>
                     <audit-status [status]="item.status"></audit-status>
                 </td>
+                <td *ngIf="item.conclusionOfUniversity">{{item.conclusionOfUniversity | conclusion : 'text'}}</td>
             </tr>
         </ng-template>
     </tbody>
