@@ -7,7 +7,6 @@ declare module '../../shared/booking-form.model' {
         addItem(dto: any): void;
         removeItem(item: BookingItem): void;
         conflict(item: BookingItem): boolean;
-        isValid(): boolean;
         toServerDto(): any;
         getAddedItems(): any[];
     }
@@ -39,12 +38,6 @@ BookingForm.prototype.conflict = function (this: BookingForm, item: BookingItem)
             && weekRangeConflict(it, item)
             && _.intersection(it.section.includes, item.section.includes).length > 0;
     });
-};
-
-BookingForm.prototype.isValid = function (this: BookingForm): boolean {
-    return this.reason
-        && this.reason.length <= 100
-        && this.items.length > 0;
 };
 
 BookingForm.prototype.toServerDto = function (this: BookingForm): any {
