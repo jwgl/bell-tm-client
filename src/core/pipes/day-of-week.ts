@@ -1,8 +1,8 @@
-import { Pipe } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { dayOfWeekText } from '../utils/day-of-week';
 
 @Pipe({ name: 'dayOfWeek' })
-export class DayOfWeekPipe {
+export class DayOfWeekPipe implements PipeTransform {
     transform(value: number, type: number) {
         switch (type) {
             case 1:

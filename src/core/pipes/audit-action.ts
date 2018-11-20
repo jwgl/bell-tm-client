@@ -1,4 +1,4 @@
-import { Pipe } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 import { AuditAction } from '../constants/audit-action';
 
@@ -19,7 +19,7 @@ const ACTION_INFO: ActionInfo = {
 };
 
 @Pipe({ name: 'actionName' })
-export class ActionNamePipe {
+export class ActionNamePipe implements PipeTransform {
     transform(value: string, arg: string) {
         if (arg) {
             if (value === 'ACCEPT') {
@@ -36,7 +36,7 @@ export class ActionNamePipe {
 
 /* tslint:disable:max-classes-per-file */
 @Pipe({ name: 'actionClass' })
-export class ActionClassPipe {
+export class ActionClassPipe implements PipeTransform {
     transform(value: any, args: any[]) {
         return ACTION_INFO[AuditAction[value]].class;
     }
