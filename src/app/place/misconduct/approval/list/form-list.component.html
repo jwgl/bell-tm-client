@@ -1,0 +1,34 @@
+<div class="table-responsive" *ngIf="items && items.length > 0; else emptyTpl">
+    <table class="table table-expand">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>违规类型</th>
+                <th>教学场地</th>
+                <th>使用人数</th>
+                <th>使用时间</th>
+                <th>借用单位</th>
+                <th>借用人</th>
+                <th>审核人</th>
+                <th>报告人</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items">
+                <td><a [routerLink]="[item.id]">#{{item.id}}</a></td>
+                <td>{{item.type}}</td>
+                <td>{{item.place}}</td>
+                <td>{{item.numberOfUsers}}<ng-container *ngIf="item.userCount">({{item.userCount}})</ng-container></td>
+                <td class="expand">第{{item.week}}周 {{item.dayOfWeek | dayOfWeek}} {{item.bookingSection}}</td>
+                <td>{{item.department}}</td>
+                <td>{{item.userName}}</td>
+                <td>{{item.checker}}</td>
+                <td>{{item.reporter}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <tm-pager [total]="totalCount" [max]="max" [length]="items.length" (prev)="loadList($event)" (next)="loadList($event)"></tm-pager>
+</div>
+<ng-template #emptyTpl>
+    <div class="alert alert-info mt-3" *ngIf="!loading">暂无数据</div>
+</ng-template>

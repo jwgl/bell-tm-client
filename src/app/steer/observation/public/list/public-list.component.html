@@ -2,7 +2,7 @@
     <label class="lebel-control col-md-3"> <span *ngIf="list">总共：{{list.length}}条记录</span> </label>
 </div>
 <ng-container *ngIf="list && list.length>0; else empty">
-    <table class="table">
+    <table class="table table-expand">
         <thead>
             <tr>
                 <th>教师</th>
@@ -18,8 +18,8 @@
             <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
                     <td>
-                        <a [routerLink]="[item.id]" *ngIf="!item.isLegacy">{{item.teacherName}}({{item.teacherId}})</a>
-                        <a [routerLink]="[item.id,'legacy']" *ngIf="item.isLegacy">{{item.teacherName}}({{item.teacherId}})</a>
+                        <a [routerLink]="[item.id]" *ngIf="!item.isLegacy">{{item.teacherId}} {{item.teacherName}}</a>
+                        <a [routerLink]="[item.id,'legacy']" *ngIf="item.isLegacy">{{item.teacherId}} {{item.teacherName}}</a>
                     </td>
                     <td>
                         {{item.course}}<br>{{item.courseOtherInfo}}

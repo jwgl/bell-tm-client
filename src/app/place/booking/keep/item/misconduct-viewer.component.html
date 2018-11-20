@@ -1,0 +1,19 @@
+<div class="misconduct card bg-light">
+    <div class="card-header d-flex">
+        <h5>#{{misconduct.id}} 第{{misconduct.week}}周 {{misconduct.type}}</h5>
+        <div class="btn-group ml-auto" *ngIf="misconduct.editable">
+            <button class="btn btn-sm btn-secondary" (click)="onEdit()">编辑</button>
+            <button class="btn btn-sm btn-secondary" (click)="onRemove()">删除</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <p class="card-text" *ngIf="misconduct.userCount">实际使用{{misconduct.userCount}}人使用。</p>
+        <p class="card-text">{{misconduct.content}}</p>
+        <div class="card-columns" *ngIf="misconduct.pictures && misconduct.pictures.length">
+            <div class="card" *ngFor="let picture of misconduct.pictures">
+                <img class="card-img" [src]="pictureUrl + '/' + picture">
+            </div>
+        </div>
+        <p class="card-text">{{misconduct.reporterName}}于{{misconduct.dateModified | date: 'y-MM-dd HH:mm'}}报告</p>
+    </div>
+</div>

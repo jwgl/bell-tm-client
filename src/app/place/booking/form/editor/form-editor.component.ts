@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { EditMode } from 'core/constants';
 
-import { BookingForm, BookingSection, bookingSectionMap } from '../../shared/booking-form.model';
+import { BookingForm, BookingSection, bookingSectionMap, BookingType, Department } from '../../shared/booking-form.model';
 import { BookingFormService } from '../booking-form.service';
 import { FindPlaceDialogService } from './find-place/find-place.service';
 import './form-editor.model';
@@ -14,10 +14,11 @@ import './form-editor.model';
 })
 export class BookingFormEditorComponent {
     form: BookingForm;
-    departments: any[];
-    bookingTypes: any[];
+    departments: Department[];
+    bookingTypes: BookingType[];
     findPlaceOptions: any = {};
     saving = false;
+    maxCount = 8;
 
     private editMode: EditMode;
 
@@ -44,7 +45,13 @@ export class BookingFormEditorComponent {
         dto.sections.forEach((section: BookingSection) => bookingSectionMap[section.id] = section);
         this.form = new BookingForm(dto.form);
         this.departments = dto.departments;
+        this.form.department = this.departments.find((department) => department.id == dto.form.departmentId);
         this.bookingTypes = dto.bookingTypes;
+        if (!this.form.id) {
+            this.form.bookingType = this.bookingTypes[0];
+        } else {
+            this.form.bookingType = this.bookingTypes.find((type) => type.id == dto.form.bookingTypeId);
+        }
         this.findPlaceOptions.term = dto.term;
         this.findPlaceOptions.placeTypes = dto.placeTypes;
         this.findPlaceOptions.sections = dto.sections;
@@ -53,18 +60,25 @@ export class BookingFormEditorComponent {
         this.findPlaceOptions.form = this.form;
     }
 
-    onDepartmentChanged(departmentId: string) {
-        this.service.getDepartmentBookingType(departmentId).subscribe(bookingTypes => {
+    onDepartmentChanged(department: Department) {
+        this.service.getDepartmentBookingType(department.id).subscribe(bookingTypes => {
             this.bookingTypes = bookingTypes;
-            this.form.bookingTypeId = this.bookingTypes[0].id;
+            this.form.bookingType = this.bookingTypes[0];
         });
     }
 
     findPlace() {
         this.findPlaceDialog.open(this.findPlaceOptions).then((places: any[]) => {
-            places.forEach(place => {
-                this.form.addItem(place);
-            });
+            for(let i = 0; i < places.length; i++) {
+                if (this.form.items.length < this.maxCount) {
+                    this.form.addItem(places[i]);
+                } else {
+                    setTimeout(() => {
+                        alert(`借用多于${this.maxCount}项。`);
+                    }, 10);
+                    break;
+                }
+            }
         });
     }
 

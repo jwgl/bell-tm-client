@@ -4,6 +4,7 @@ import { AuthService } from 'core/auth';
 
 import { NavbarService } from './navbar.service';
 import { Menu, MenuItem, isMenu } from './menu.model';
+import { timeout } from 'rxjs/operators';
 
 @Component({
     selector: 'tm-navbar',
@@ -21,6 +22,14 @@ export class NavbarComponent {
             this.buildMenu(menus.main);
             this.buildMenu(menus.user);
             this.menus = menus;
+
+            setTimeout(() => {
+                $('.dropdown-item').on('click', function () {
+                    if ($('.navbar-toggler').is(':visible')) {
+                        $('.navbar-toggler').trigger('click');
+                    }
+                });
+            }, 100);
         });
     }
 

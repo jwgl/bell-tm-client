@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-4 col-lg-3" *ngIf="params">
+        <div class="form-group">
+            <label for="building">教学楼</label>
+            <select class="form-control" [(ngModel)]="params.building" (ngModelChange)="buildingChanged($event)">
+                <option disabled selected hidden [ngValue]="null">选择教学楼</option>
+                <option *ngFor="let building of buildings" value="{{building}}">{{building}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="building">教室</label>
+            <select class="form-control" [(ngModel)]="params.place" [disabled]="!params.building">
+                <option selected [ngValue]="null">全部</option>
+                <option *ngFor="let place of places" [ngValue]="place.id">{{place.name}} / {{place.seat}}座 / {{place.type}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="building">周次</label>
+            <select class="form-control" [(ngModel)]="params.week">
+                <option selected [ngValue]="null">全部</option>
+                <option *ngFor="let w of weeks" [ngValue]="w">第{{w}}周</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="building">星期几</label>
+            <select class="form-control" [(ngModel)]="params.day">
+                <option selected [ngValue]="null">全部</option>
+                <option *ngFor="let d of days" [ngValue]="d">{{d | dayOfWeek}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="building">节次</label>
+            <select class="form-control" [(ngModel)]="params.section">
+                <option selected [ngValue]="null">全部</option>
+                <option *ngFor="let s of sections" [ngValue]="s">第{{s}}节</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-secondary" (click)="reset()">复位</button>
+            <button class="btn btn-primary ml-2" (click)="search()" [disabled]="!params.building">查询</button>
+        </div>
+    </div>
+    <div class="col-md-8 col-lg-9">
+        <div class="card-columns">
+            <div class="card" *ngFor="let booking of bookings">
+                <div class="card-body">
+                    <h5 class="card-title"><a [routerLink]="[booking.bookingItemId]">{{booking.place}}</a></h5>
+                    <p class="card-text">{{booking | weekRange}}{{booking.oddEven | oddEven}}{{booking.dayOfWeek | dayOfWeek}}{{booking.bookingSection}}</p>
+                    <p class="card-text">{{booking.reason}}</p>
+                    <p class="card-text">#{{booking.bookingFormId}} {{booking.department}}</p>
+                    <p class="card-text">{{booking.userName}} {{booking.phoneNumber}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

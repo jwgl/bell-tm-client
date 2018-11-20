@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="form-group col-md-4">
+        <label>违规类型</label>
+        <p class="form-control-plaintext">{{misconduct.type}}</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>违规周次</label>
+        <p class="form-control-plaintext">第{{misconduct.week}}周</p>
+    </div>
+    <div class="form-group col-md-4">
+        <label>实际人数</label>
+        <p class="form-control-plaintext">{{misconduct.userCount | nilValue}}</p>
+    </div>
+</div>
+<div class="form-group">
+    <label>违规描述</label>
+    <p class="form-control-plaintext">{{misconduct.content}}</p>
+</div>
+<div class="form-group">
+    <label>现场照片</label>
+    <div class="card-columns" *ngIf="misconduct.pictures && misconduct.pictures.length; else emptyPictures">
+        <div class="card mb-3" *ngFor="let picture of misconduct.pictures">
+            <img class="card-img" [src]="pictureUrl + '/' + picture">
+        </div>
+    </div>
+    <ng-template #emptyPictures>
+        <p class="form-control-plaintext">{{ null | nilValue}}</p>
+    </ng-template>
+</div>
