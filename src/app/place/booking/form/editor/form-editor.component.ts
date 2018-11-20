@@ -82,7 +82,7 @@ export class BookingFormEditorComponent {
         });
     }
 
-    save() {
+    onSubmit() {
         switch (this.editMode) {
             case EditMode.Create:
                 this.create();
