@@ -12,13 +12,13 @@ import { Subject } from 'rxjs';
 export class RowExpenderComponent {
     @Input()
     enabled = false;
-    
+
     @Input()
     expended = false;
-    
+
     @Output()
     toggle = new EventEmitter<Subject<void>>();
-    
+
     progressing = false;
     completed = new Subject<void>();
 

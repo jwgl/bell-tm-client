@@ -7,7 +7,7 @@ export type UserProperty = StudentProperty | TeacherProperty;
 export type UserScope = {[key in UserProperty]?: any};
 
 export function userScopeToString(userScope: UserScope, userType: string) {
-    var result = '';
+    let result = '';
     if (userScope['学院']) {
         result += `${userScope['学院']}`;
     }
@@ -21,7 +21,7 @@ export function userScopeToString(userScope: UserScope, userType: string) {
         result += `${userScope['班级']}班`;
     }
     if (userScope['性别']) {
-        result += `${userScope['性别']}${userType == 'TEACHER' ? '教师' : userType == 'STUDENT' ? '生' : '性'}`;
+        result += `${userScope['性别']}${userType === 'TEACHER' ? '教师' : userType === 'STUDENT' ? '生' : '性'}`;
     }
     return result;
 }

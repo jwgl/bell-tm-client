@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 
 @Directive({
-    selector: '[provide-parent-form]',
+    selector: '[provideParentForm]',
     providers: [{
         provide: ControlContainer,
         useFactory: function (form: NgForm) {

@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class UserScopeService {
-    departmentApi: ApiUrl
+    departmentApi: ApiUrl;
 
     constructor(private http: Http) {
-        this.departmentApi = new ApiUrl('/api/form/departments')
+        this.departmentApi = new ApiUrl('/api/form/departments');
     }
 
     getDepartments(userType: string): Observable<any> {

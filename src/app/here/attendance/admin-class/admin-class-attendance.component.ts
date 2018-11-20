@@ -19,10 +19,10 @@ export class AdminClassAttendanceComponent {
         private service: AdminClassAttendanceService,
     ) {
         this.route.params.subscribe(params => {
-            this.termId = parseInt(params['termId']);
+            this.termId = +params['termId'];
             iif(() => params['id'] === 'all',
                 this.service.loadAll(this.termId),
-                this.service.loadList(this.termId, parseInt(params['id']))
+                this.service.loadList(this.termId, +params['id']),
             ).subscribe(dto => this.onLoadData(dto));
         });
     }

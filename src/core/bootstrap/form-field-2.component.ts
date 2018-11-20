@@ -1,14 +1,20 @@
-import { Component, ContentChild, Directive, Input } from '@angular/core';
+import { Component, ContentChild, Directive, Input, AfterContentInit } from '@angular/core';
+
 import { FormControlDirective } from './form-control.directive';
 import { FormFieldComponent } from './form-field.component';
 
 @Directive({
     selector: '.form-field-left',
 })
-export class FormFieldLeftDirective {
-    @Input() label: string;
-    @Input() labelCol = 2;
-    @ContentChild(FormControlDirective) formControl: FormControlDirective;
+export class FormFieldLeftDirective implements AfterContentInit {
+    @Input()
+    label: string;
+
+    @Input()
+    labelCol = 2;
+
+    @ContentChild(FormControlDirective)
+    formControl: FormControlDirective;
 
     controlId: string;
     controlCol = 4;
@@ -31,10 +37,15 @@ export class FormFieldLeftDirective {
 @Directive({
     selector: '.form-field-right',
 })
-export class FormFieldRightDirective {
-    @Input() label: string;
-    @Input() labelCol = 2;
-    @ContentChild(FormControlDirective) formControl: FormControlDirective;
+export class FormFieldRightDirective implements AfterContentInit {
+    @Input()
+    label: string;
+
+    @Input()
+    labelCol = 2;
+
+    @ContentChild(FormControlDirective)
+    formControl: FormControlDirective;
 
     controlId: string;
     controlCol = 4;
@@ -72,6 +83,9 @@ export class FormFieldRightDirective {
     },
 })
 export class FormField2Component {
-    @ContentChild(FormFieldLeftDirective) left: FormFieldLeftDirective;
-    @ContentChild(FormFieldRightDirective) right: FormFieldRightDirective;
+    @ContentChild(FormFieldLeftDirective)
+    left: FormFieldLeftDirective;
+
+    @ContentChild(FormFieldRightDirective)
+    right: FormFieldRightDirective;
 }

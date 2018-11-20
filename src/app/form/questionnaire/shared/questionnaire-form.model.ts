@@ -27,7 +27,7 @@ export class Questionnaire {
 
     constructor(dto: any) {
         if (dto && dto.id) {
-            var { questions, ...others } = dto;
+            const { questions, ...others } = dto;
             Object.assign(this, others);
             this.questions = questions.map((question: any) => new Question(question));
         } else {
@@ -39,7 +39,7 @@ export class Questionnaire {
             this.restricted = [];
 
             if (this.surveyType === SurveyType.BALLOT_SHEET) {
-                const question = Question.newInstance(0)
+                const question = Question.newInstance(0);
                 question.title = 'ballot';
                 question.content = 'ballot';
                 question.stepValue = 3;
@@ -90,10 +90,10 @@ export class Question {
     maxValue: number;
     stepValue: number;
     options: QuestionOption[];
-    removedOptions: QuestionOption[]
+    removedOptions: QuestionOption[];
 
     constructor(dto: any) {
-        var { options, removedOptions, ...others } = dto;
+        const { options, removedOptions, ...others } = dto;
         Object.assign(this, others);
         this.options = options ? options.map(option => new QuestionOption(this, option)) : [];
         this.removedOptions = removedOptions ? removedOptions.map(option => new QuestionOption(this, option)) : [];
@@ -130,7 +130,7 @@ export class Question {
 
     get scaleValues(): number[] {
         const scales = [];
-        for (var i = this.minValue; i <= this.maxValue; i += this.scaleStep) {
+        for (let i = this.minValue; i <= this.maxValue; i += this.scaleStep) {
             scales.push(i);
         }
         return scales;
@@ -161,7 +161,7 @@ export class Question {
     }
 
     get textValueName() {
-        return `q-${this.ordinal}-t`
+        return `q-${this.ordinal}-t`;
     }
 }
 

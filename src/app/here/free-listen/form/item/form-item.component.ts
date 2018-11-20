@@ -12,7 +12,7 @@ import { FreeListenForm, FreeListenSettings } from '../../shared/free-listen-for
 export class FreeListenFormItemComponent {
     settings: FreeListenSettings;
     timetable: Timetable;
-    bindedConvert : any;
+    bindedConvert: any;
 
     constructor() {
         this.bindedConvert = this.convert.bind(this);

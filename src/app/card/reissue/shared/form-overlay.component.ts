@@ -40,7 +40,7 @@ export class ReissueFormOverlayComponent {
 
             const close = () => {
                 overlayRef.detach();
-            }
+            };
 
             const viewerPortal = new TemplatePortal(this.viewerTemplate, this.viewContainerRef, {
                 form: form,

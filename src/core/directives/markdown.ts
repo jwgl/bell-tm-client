@@ -1,16 +1,16 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input, AfterViewInit } from '@angular/core';
 
 @Directive({
     selector: '[markdown]',
 })
-export class Markdown {
+export class MarkdownDirective implements AfterViewInit {
     @Input()
     options: any;
+
     @Input('markdown')
     text: string;
 
-    constructor(private elementRef: ElementRef) {
-    }
+    constructor(private elementRef: ElementRef) { }
 
     ngAfterViewInit() {
         const markdown = (window as any).markdownit(this.options);

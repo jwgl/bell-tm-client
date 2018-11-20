@@ -22,7 +22,7 @@ export class ReloginInterceptor implements HttpInterceptor {
                 if (e instanceof HttpErrorResponse) {
                     switch (e.status) {
                         case 401:
-                            if (!req.url.endsWith("/uaa/login") &&
+                            if (!req.url.endsWith('/uaa/login') &&
                                 !e.url.endsWith('/login?error') &&
                                 !e.url.endsWith('/login?logout') &&
                                 !e.url.endsWith('/api/user')) {

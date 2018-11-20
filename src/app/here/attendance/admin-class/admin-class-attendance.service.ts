@@ -25,16 +25,16 @@ export class AdminClassAttendanceService {
         @Inject('IS_ATTENDANCE_ADMIN')
         isAdmin: boolean
     ) {
-        this.adminClassApi = isAdmin 
-            ? new ApiUrl(adminClassAttendanceApi, {departmentId: authService.userInfo.departmentId})
-            : new ApiUrl(adminClassAttendanceApi, {userId: authService.userInfo.id});
+        this.adminClassApi = isAdmin
+            ? new ApiUrl(adminClassAttendanceApi, { departmentId: authService.userInfo.departmentId })
+            : new ApiUrl(adminClassAttendanceApi, { userId: authService.userInfo.id });
         this.attendanceApi = new ApiUrl(attendanceAPiUrl);
         this.isAdmin = isAdmin;
     }
 
     loadTerms(): Observable<any> {
         if (this._terms) {
-            return of(this._terms)
+            return of(this._terms);
         } else {
             return this.http.get(`${this.attendanceApi.list()}/terms`).pipe(tap(terms => this._terms = terms));
         }

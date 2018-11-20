@@ -38,7 +38,7 @@ export class BallotQuestionEditorComponent implements OnInit {
 
     onCreateOption() {
         this.selectedOption = QuestionOption.newInstance(this.question);
-        this.scrollToView()
+        this.scrollToView();
     }
 
     onOptionCreated(option: QuestionOption) {
@@ -48,7 +48,7 @@ export class BallotQuestionEditorComponent implements OnInit {
 
     onEditOption(option: QuestionOption) {
         this.selectedOption = option.clone();
-        this.scrollToView()
+        this.scrollToView();
     }
 
     onOptionUpdated(option: QuestionOption) {

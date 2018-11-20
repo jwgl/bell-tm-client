@@ -14,7 +14,7 @@ export class BookingReportItemComponent {
     viewerTemplate: TemplateRef<any>;
 
     vm: BookingReport;
-    
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -24,7 +24,7 @@ export class BookingReportItemComponent {
         public bookingReportApiUrl: string,
     ) {
         this.route.params.subscribe(params => {
-            this.loadItem(parseInt(params['id']));
+            this.loadItem(+params['id']);
         });
     }
 
