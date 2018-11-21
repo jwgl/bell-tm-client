@@ -13,6 +13,7 @@ import { EvaluationItem, EvaluationMap, GRADES, ObservationForm, Observers, Term
 import './form-editor.model';
 
 import { ScheduleService } from './schedule/schedule.service';
+import { AuthService } from 'core/auth';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
@@ -39,6 +40,7 @@ export class ObservationFormEditorComponent {
         private router: Router,
         private scheduleService: ScheduleService,
         private service: ObservationFormService,
+        private authService: AuthService,
         private route: ActivatedRoute,
         private dialogs: CommonDialog,
     ) {
@@ -59,7 +61,9 @@ export class ObservationFormEditorComponent {
     }
 
     onLoadData(dto: any, week: string) {
-        if (!dto.form && dto.timeslot) {
+        if (dto.formId && dto.timeslot) {
+            this.router.navigate(['/steer/obervers/', this.authService.userInfo.id, 'observations', dto.formId]);
+        } else if (!dto.form && dto.timeslot) {
             this.form = new ObservationForm({ timeslot: dto.timeslot, observerType: dto.types[0] });
             this.form.observationWeek = _.toNumber(week);
             // 默认最少听课1节
@@ -129,7 +133,7 @@ export class ObservationFormEditorComponent {
             }
         }, error => {
             this.saving = false;
-            alert(error.json().message);
+            alert(error.message);
         });
     }
 
@@ -143,7 +147,7 @@ export class ObservationFormEditorComponent {
             }
         }, error => {
             this.saving = false;
-            alert(error.json().message);
+            alert(error.message);
         });
     }
 
