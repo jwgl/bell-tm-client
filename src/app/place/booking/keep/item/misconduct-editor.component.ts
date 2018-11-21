@@ -42,7 +42,7 @@ export class MisconductEditorComponent implements OnInit {
     options: UploaderOptions;
     _xsrfToken: string;
 
-    types = ['聚众吃喝', '未使用', '到场人数不足', '其他'];
+    types = ['人数不符', '聚众吃喝', '违规张贴', '借用未到', '乱搬桌椅', '私插乱接', '事由不符', '不当言论', '其他'];
     weeks: number[];
 
     constructor(private service: BookingKeepService) {
