@@ -8,17 +8,15 @@ export class ResponseForm {
 
     constructor(dto: { form: any, questionnaire: any }) {
         this.questionnaire = new Questionnaire(dto.questionnaire);
+
         if (dto.form.id) {
             this.id = dto.form.id;
             this.dateSubmitted = dto.form.dateSubmitted;
-            this.items = this.questionnaire.questions.map(question => {
-                return new ResponseItem(dto.form.items.find(item => item.question === question.id), question);
-            });
-        } else {
-            this.items = this.questionnaire.questions.map(question => {
-                return new ResponseItem(null, question);
-            });
         }
+
+        this.items = this.questionnaire.questions.map(question =>
+            new ResponseItem(dto.form.items ? dto.form.items.find(item => item.question === question.id) : null, question)
+        );
     }
 }
 

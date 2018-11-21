@@ -20,8 +20,8 @@
     <tm-questionnaire-footer [questionnaire]="form.questionnaire"></tm-questionnaire-footer>
     <div class="btn-toolbar" *ngIf="!form.dateSubmitted" #bottomToolbar>
         <div class="btn-group ml-auto">
-            <button class='btn btn-secondary' (click)="save()" [disabled]="saving">保存</button>
-            <button class='btn btn-primary' (click)="submit()" [disabled]="saving">提交</button>
+            <button class='btn btn-secondary' (click)="onSave()" [disabled]="saving">保存</button>
+            <button class='btn btn-primary' (click)="onSubmit()" [disabled]="saving">提交</button>
         </div>
     </div>
 </ng-container>
