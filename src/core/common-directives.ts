@@ -23,7 +23,7 @@ import { FormTitleComponent } from './components/form-title';
 import { FromNowComponent } from './components/from-now';
 import { PagerComponent } from './components/pager';
 import { RemoveItemComponent } from './components/remove-item';
-import { Markdown } from './directives/markdown';
+import { MarkdownDirective } from './directives/markdown';
 import { Spinning } from './directives/spinning';
 import { ActionClassPipe, ActionNamePipe } from './pipes/audit-action';
 import { AuditStatusTextPipe } from './pipes/audit-status';
@@ -96,7 +96,7 @@ const CORE_DIRECTIVES: any[] = [
     ModalBodyDirective,
     ModalFooterDirective,
     // other directives
-    Markdown,
+    MarkdownDirective,
     Spinning,
     ProvideParentForm,
     // pipes

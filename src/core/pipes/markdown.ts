@@ -1,7 +1,7 @@
-import { Pipe } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'markdown' })
-export class MarkdownPipe {
+export class MarkdownPipe implements PipeTransform {
     transform(text: any, args: any[]) {
         const md = (window as any).markdownit();
         if (text) {

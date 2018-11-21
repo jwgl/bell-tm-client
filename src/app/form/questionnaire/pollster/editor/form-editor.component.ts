@@ -53,7 +53,7 @@ export class QuestionnaireEditorComponent {
 
     onCreateQuestion() {
         this.selectedQuestion = Question.newInstance(this.form.questions.length);
-        this.scrollToView()
+        this.scrollToView();
     }
 
     onQuestionCreated(question: Question) {
@@ -63,7 +63,7 @@ export class QuestionnaireEditorComponent {
 
     onEditQuestion(question: Question) {
         this.selectedQuestion = question.clone();
-        this.scrollToView()
+        this.scrollToView();
     }
 
     onQuestionUpdated(question: Question) {

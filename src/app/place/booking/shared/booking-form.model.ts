@@ -117,7 +117,7 @@ export class BookingItem {
             if (this.place.seat <= 60) {
                 return this.form.numberOfUsers < 10;
             } else if (this.place.seat <= 100) {
-                return this.form.numberOfUsers < 30
+                return this.form.numberOfUsers < 30;
             } else {
                 return this.form.numberOfUsers / this.place.seat < 0.5;
             }

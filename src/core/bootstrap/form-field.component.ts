@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input } from '@angular/core';
+import { Component, ContentChild, Input, AfterContentInit } from '@angular/core';
 import { FormControlDirective } from './form-control.directive';
 
 @Component({
@@ -15,19 +15,24 @@ import { FormControlDirective } from './form-control.directive';
         '[class.row]': 'true',
     },
 })
-export class FormFieldComponent {
-    static nextId(): string {
-        return `ctrl_${FormFieldComponent._id++}`;
-    }
+export class FormFieldComponent implements AfterContentInit {
+    @Input()
+    label: string;
 
-    private static _id = 1000;
+    @Input()
+    labelCol = 2;
 
-    @Input() label: string;
-    @Input() labelCol = 2;
-    @ContentChild(FormControlDirective) formControl: FormControlDirective;
+    @ContentChild(FormControlDirective)
+    formControl: FormControlDirective;
 
     controlId: string;
     controlCol = 10;
+
+    private static _id = 1000;
+
+    static nextId(): string {
+        return `ctrl_${FormFieldComponent._id++}`;
+    }
 
     constructor() {
         this.controlId = FormFieldComponent.nextId();

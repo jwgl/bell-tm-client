@@ -24,7 +24,7 @@ export class QuestionResponseComponent {
     update() {
         if (this.question.openResponses) {
             this.showOpenResponses = true;
-            this.question.openResponseTotalCount = this.question.openResponses.reduce((sum, item) => sum + item.count, 0)
+            this.question.openResponseTotalCount = this.question.openResponses.reduce((sum, item) => sum + item.count, 0);
         }
         this.changeDetactorRef.detectChanges();
     }

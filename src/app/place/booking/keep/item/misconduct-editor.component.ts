@@ -60,17 +60,17 @@ export class MisconductEditorComponent implements OnInit {
         let startWeek = this.booking.startWeek;
         switch (this.booking.oddEven) {
             case 1:
-                if (startWeek % 2 == 0) {
+                if (startWeek % 2 === 0) {
                     startWeek++;
                 }
                 break;
             case 2:
-                if (startWeek % 2 == 1) {
+                if (startWeek % 2 === 1) {
                     startWeek++;
                 }
                 break;
         }
-        this.weeks = _.range(startWeek, this.booking.endWeek + 1, this.booking.oddEven == 0 ? 1 : 2);
+        this.weeks = _.range(startWeek, this.booking.endWeek + 1, this.booking.oddEven === 0 ? 1 : 2);
         if (this.weeks.length === 1) {
             this.misconduct.week = this.weeks[0];
         }

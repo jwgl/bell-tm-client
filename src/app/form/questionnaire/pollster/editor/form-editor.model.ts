@@ -13,6 +13,8 @@ declare module '../../shared/questionnaire-form.model' {
     }
 
     interface Question {
+        __updated: boolean;
+
         clone(): Question;
         addItem(item: QuestionOption): void;
         updateItem(item: QuestionOption): void;
@@ -21,14 +23,14 @@ declare module '../../shared/questionnaire-form.model' {
         movedownItem(item: QuestionOption): void;
         toServerDto(): any;
         markUpdated(): void;
-        __updated: boolean;
     }
 
     interface QuestionOption {
+        __updated: boolean;
+
         clone(): QuestionOption;
         toServerDto(): any;
         markUpdated(): void;
-        __updated: boolean;
     }
 }
 
@@ -49,7 +51,7 @@ Questionnaire.prototype.removeItem = function (this: Questionnaire, item: Questi
             if (it.ordinal !== index) {
                 it.ordinal = index;
                 it.markUpdated();
-            };
+            }
         });
     }
 };
@@ -119,7 +121,7 @@ Question.prototype.removeItem = function (this: Question, item: QuestionOption):
             if (it.ordinal !== index) {
                 it.ordinal = index;
                 it.markUpdated();
-            };
+            }
         });
     }
     this.markUpdated();

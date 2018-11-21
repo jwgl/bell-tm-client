@@ -87,7 +87,7 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
     private update() {
         this.saving = true;
         this.service.update(this.form.questionnaire.id, this.form.toServerDto()).subscribe(dto => {
-            this.form = new ResponseForm(dto)
+            this.form = new ResponseForm(dto);
             this.saving = false;
         }, error => {
             this.saving = false;

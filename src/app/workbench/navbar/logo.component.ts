@@ -65,8 +65,7 @@ export class LogoComponent {
                 this.next = !this.next;
                 cdr.detectChanges();
             }, 1000);
-        })
-
+        });
     }
 
     nextColor(): string {

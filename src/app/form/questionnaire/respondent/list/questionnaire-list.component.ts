@@ -24,14 +24,14 @@ export class QuestionnaireListComponent {
         this.route.data.subscribe(data => {
             this.loading = true;
             this.category = data['category'];
-            this.service.loadList({ category: this.category }).subscribe(data => {
+            this.service.loadList({ category: this.category }).subscribe(questionnaires => {
+                this.questionnaires = questionnaires;
                 this.loading = false;
-                this.questionnaires = data;
             });
         });
     }
 
     get categoryLabel(): string {
-        return this.categories.find(it => it.category == this.category).label;
+        return this.categories.find(it => it.category === this.category).label;
     }
 }

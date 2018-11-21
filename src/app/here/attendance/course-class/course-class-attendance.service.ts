@@ -13,7 +13,7 @@ export abstract class CourseClassAttendanceService {
     courseClassApi: ApiUrl;
 
     constructor(
-        public http: Http, 
+        public http: Http,
         courseClassApiUrl: string,
         isAdmin: boolean
     ) {

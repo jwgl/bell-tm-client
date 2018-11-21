@@ -18,7 +18,7 @@ export class ResponseItemEditorComponent implements AfterViewInit {
     disabled: boolean;
 
     @ViewChild('rangeElement')
-    rangeElement: ElementRef
+    rangeElement: ElementRef;
 
     constructor(private changeRef: ChangeDetectorRef) { }
 
@@ -41,11 +41,11 @@ export class ResponseItemEditorComponent implements AfterViewInit {
 
     ngAfterViewInit(): void {
         if (this.responseItem.question.type === QuestionType.SCALE) {
-            if (!this.responseItem.intValue || this.responseItem.intValue !== parseInt(this.rangeElement.nativeElement.value)) {
+            if (!this.responseItem.intValue || this.responseItem.intValue !== +this.rangeElement.nativeElement.value) {
                 setTimeout(() => {
-                    this.responseItem.intValue = parseInt(this.rangeElement.nativeElement.value);
+                    this.responseItem.intValue = +this.rangeElement.nativeElement.value;
                     this.changeRef.detectChanges();
-                }, 0)
+                }, 0);
             }
         }
     }

@@ -26,13 +26,13 @@ export class BookingKeepItemComponent {
     }
 
     onLoadData(dto: any) {
-        this.booking = dto.booking
+        this.booking = dto.booking;
         this.misconducts = dto.forms.map(misconduct => new Misconduct(misconduct));
     }
 
     onCreateMisconduct() {
         this.selectedMisconduct = new Misconduct(null);
-        this.scrollToView()
+        this.scrollToView();
     }
 
     onMisconductCreated(misconduct: Misconduct) {
@@ -44,7 +44,7 @@ export class BookingKeepItemComponent {
 
     onEditMisconduct(misconduct: Misconduct) {
         this.selectedMisconduct = misconduct.clone();
-        this.scrollToView()
+        this.scrollToView();
     }
 
     onMisconductUpdated(oldItem: Misconduct, newItem: Misconduct) {
@@ -60,7 +60,7 @@ export class BookingKeepItemComponent {
     }
 
     onRemoveMisconduct(misconduct: Misconduct) {
-        this.dialog.confirm("删除", "确定要删除吗？").then(() => {
+        this.dialog.confirm('删除', '确定要删除吗？').then(() => {
             this.service.deleteMisconduct(this.booking.bookingItemId, misconduct).subscribe(() => {
                 const index = this.misconducts.indexOf(misconduct);
                 this.misconducts = [...this.misconducts.slice(0, index), ...this.misconducts.slice(index + 1)];

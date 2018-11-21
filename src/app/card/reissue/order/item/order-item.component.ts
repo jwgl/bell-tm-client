@@ -21,7 +21,7 @@ export class ReissueOrderItemComponent {
         public reissuesOrderApiUrl: string,
     ) {
         this.route.params.subscribe(params => {
-            this.loadItem(parseInt(params['id']));
+            this.loadItem(+params['id']);
         });
     }
 

@@ -13,7 +13,7 @@ export class AdminClassAttendanceContainerComponent {
     totalCount: number;
 
     constructor(
-        private router: Router, 
+        private router: Router,
         private route: ActivatedRoute,
         private service: AdminClassAttendanceService,
     ) {
@@ -32,10 +32,10 @@ export class AdminClassAttendanceContainerComponent {
     }
 
     onTermChanged() {
-        let id = this.route.firstChild.snapshot.params['id'];
+        const id = this.route.firstChild.snapshot.params['id'];
         this.router.navigate([{ termId: this.selectedTerm }, id], { relativeTo: this.route });
     }
-    
+
     get statisReportUrl() {
         return this.service.getStatisReportUrl(this.selectedTerm);
     }

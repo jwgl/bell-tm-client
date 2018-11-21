@@ -14,7 +14,7 @@ export class MultipleLineComponent {
         if (value) {
             this.lines = value.split(/[\r\n]+/gm).map(line => line.trim()).filter(line => !!line);
         }
-    };
+    }
 
     @Input()
     empty: string;

@@ -1,7 +1,7 @@
-import { Pipe } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'zeroPad' })
-export class ZeroPadPipe {
+export class ZeroPadPipe implements PipeTransform {
     transform(data: number, size: number) {
         let s = String(data);
         while (s.length < (size || 2)) {

@@ -7,7 +7,7 @@ import { ResponseFormFinishComponent } from './finish/form-finish.component';
 const routes: Routes = [{
     path: '',
     component: ResponseFormEditorComponent,
-},{
+}, {
     path: 'finish',
     component: ResponseFormFinishComponent,
 }];

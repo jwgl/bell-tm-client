@@ -17,7 +17,7 @@ export class ReissueOrderService extends RestEditService {
         super(http, apiUrl);
         this.reissueApi = new ApiUrl(reissueApiUrl);
     }
-    
+
     receive(id: number, formId: number, received: boolean) {
         return this.http.patch<{ status: string }>(`${this.api.item(id)}`, { type: 'RECEIVE', formId, received });
     }
