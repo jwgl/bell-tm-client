@@ -18,7 +18,6 @@ export class ProjectFormService extends RestEditService {
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
         reviewTaskURL = reviewTaskURL.replace('${userId}', authService.userInfo.id);
-        console.log(reviewTaskURL);
     }
 
     save(id: number, form: any): Observable<any> {
@@ -37,4 +36,7 @@ export class ProjectFormService extends RestEditService {
         return this.http.get(`${this.reviewTaskURL}/${id}`);
     }
 
+    getUploadUrl(options: { [key: string]: any } = {}): string {
+        return `/zuul${this.api.list()}/upload?taskId=${options.taskId}`;
+    }
 }

@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { Dialog } from 'core/dialogs';
-
+import { UploaderModule } from '../../../application/shared/uploader/uploader.module';
 import { ProjectFormEditorComponent } from './form-editor.component';
 
 @NgModule({
@@ -16,6 +16,7 @@ import { ProjectFormEditorComponent } from './form-editor.component';
         RouterModule,
         CommonDirectivesModule,
         CommonDialogsModule,
+        UploaderModule,
     ],
     declarations: [
         ProjectFormEditorComponent,

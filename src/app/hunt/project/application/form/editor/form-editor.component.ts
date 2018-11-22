@@ -8,6 +8,7 @@ import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 
 import { LevelList } from '../../../../settings/shared/constants';
+import { FileTypes } from '../../shared/constants';
 
 import { ProjectFormService } from '../form.service';
 import { Degrees, Disciplines, Offices, ProjectForm, PropertyComment, Titles } from '../shared/form.model';
@@ -28,6 +29,8 @@ export class ProjectFormEditorComponent {
     editMode: EditMode;
     reviewTaskId: number;
     saving = false;
+    fileTypes = FileTypes.find(f => f.reviewType === 1).fileType;
+    fileExts = ['pdf', 'word'];
 
     constructor(
         private route: ActivatedRoute,
@@ -96,5 +99,13 @@ export class ProjectFormEditorComponent {
                     this.router.navigate(['../../', id], { relativeTo: this.route }));
             });
         }
+    }
+
+    get uploadUrl(): string {
+        return this.service.getUploadUrl({taskId: this.reviewTaskId});
+    }
+
+    onUploaded(fileNames: any) {
+        console.log(fileNames);
     }
 }

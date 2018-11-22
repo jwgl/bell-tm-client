@@ -9,7 +9,7 @@
         <div class="row">
             <div class="form-group col-md-12">
                 <label class="control-label">项目名称</label>
-                <input class="form-control" name="name" type="text" [(ngModel)]="form.name" placeholder="申报的项目名称"/>
+                <input class="form-control" name="name" type="text" [(ngModel)]="form.name" placeholder="申报的项目名称" />
             </div>
         </div>
         <div class="row">
@@ -32,11 +32,11 @@
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">Email</label>
-                <input class="form-control" name="email" type="text" [(ngModel)]="form.email" placeholder="常用电子邮箱"/>
+                <input class="form-control" name="email" type="text" [(ngModel)]="form.email" placeholder="常用电子邮箱" />
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">电话</label>
-                <input class="form-control" name="phone" type="text" [(ngModel)]="form.phone" placeholder="常用手机"/>
+                <input class="form-control" name="phone" type="text" [(ngModel)]="form.phone" placeholder="常用手机" />
             </div>
         </div>
 
@@ -93,7 +93,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">方向</label>
-                <input class="form-control" name="direction" type="text" [(ngModel)]="form.direction" placeholder="研究方向"/>
+                <input class="form-control" name="direction" type="text" [(ngModel)]="form.direction" placeholder="研究方向" />
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">来源</label>
@@ -104,17 +104,15 @@
                 </select>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="control-label">参与人</label>
-                <div class="row">
-                    <div class="col-2" *ngFor="let item of form.memberList; let i = index">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">{{i+1}}:</span>
-                                <input class="form-control" type="text" name="member{{i}}" [(ngModel)]="item.value">
-                            </div>
+        <div class="form-group">
+            <label class="control-label">参与人</label>
+            <div class="row">
+                <div class="col-2" *ngFor="let item of form.memberList; let i = index">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">{{i+1}}:</span>
                         </div>
+                        <input class="form-control" type="text" name="member{{i}}" [(ngModel)]="item.value">
                     </div>
                 </div>
             </div>
@@ -123,19 +121,34 @@
             <div class="col-6">
                 <div class="form-group">
                     <label class="control-label">主要内容</label>
-                    <textarea class="form-control" name="content" rows="10" [(ngModel)]="form.content" placeholder="请简要说明该项目的主要内容。" #suggest></textarea>
+                    <textarea class="form-control" name="content" rows="10" [(ngModel)]="form.content" placeholder="请简要说明该项目的主要内容。"
+                        #suggest></textarea>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
                     <label class="control-label">相关网址</label>
-                    <textarea class="form-control" name="urls" rows="3" [(ngModel)]="form.urls" placeholder="列举支撑本项目的相关网址，每网站占一行。" #suggest></textarea>
+                    <textarea class="form-control" name="urls" rows="3" [(ngModel)]="form.urls" placeholder="列举支撑本项目的相关网址，每网站占一行。"
+                        #suggest></textarea>
                 </div>
                 <div class="form-group mt-4">
                     <label class="control-label">预期成果</label>
-                    <textarea class="form-control" name="urls" rows="4" [(ngModel)]="form.achievements" placeholder="简略列举预期成果。" #suggest></textarea>
+                    <textarea class="form-control" name="urls" rows="4" [(ngModel)]="form.achievements" placeholder="简略列举预期成果。"
+                        #suggest></textarea>
                 </div>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header">
+                <h5>文件上传</h5>
+            </div>
+            <div class="card-body">
+                <ng-container *ngFor="let item of fileTypes;">
+                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" (fileNames)="onUploaded($event)"></tm-uploader-panel>
+                </ng-container>
+            </div>
+        </div>
+
+
     </form>
 </ng-container>
