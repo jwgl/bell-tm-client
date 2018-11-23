@@ -31,6 +31,21 @@ export class AuthService {
         this.userInfo = JSON.parse(sessionStorage.getItem('user'));
     }
 
+    get isLoggedIn(): boolean {
+        return this.userInfo !== null;
+    }
+
+    initSession(): void {
+        this.httpClient.get('/login', { headers: JsonHeader }).subscribe(result => {
+            this.csrf = result ? result['csrf'] : null;
+            if (!this.csrf) {
+                this.logout(false);
+            }
+        }, error => {
+            alert(error.message);
+        });
+    }
+
     login(username: string, password: string): Observable<boolean> {
         const body = new HttpParams({
             fromObject: {
@@ -69,21 +84,8 @@ export class AuthService {
         });
     }
 
-    invalidateSession(): void {
-        this.httpClient.get('/login', { headers: JsonHeader }).subscribe(result => {
-            this.csrf = result ? result['csrf'] : null;
-            if (!this.csrf) {
-                this.logout(false);
-            }
-        }, error => console.error(error))
-    }
-
     updatePhoneNumber(phoneNumber: string): void {
         this.userInfo.phoneNumber = phoneNumber;
         sessionStorage.setItem('user', JSON.stringify(this.userInfo));
-    }
-
-    get isLoggedIn(): boolean {
-        return this.userInfo !== null;
     }
 }

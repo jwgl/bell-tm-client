@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit(): void {
-        this.authService.invalidateSession();
+        this.authService.initSession();
     }
 
     ngAfterViewInit(): void {
