@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class LoginComponent implements OnInit, AfterViewInit {
     username: string;
     password: string;
-    loginFailed: boolean;
+    errorMessage: string;
 
     @ViewChild('u') usernameRef: ElementRef;
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     login() {
-        this.loginFailed = false;
+        this.errorMessage = null;
         this.authService.login(this.username, this.password).subscribe(() => {
             if (this.authService.isLoggedIn) {
                 const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/';
@@ -41,10 +41,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
             if (error instanceof HttpErrorResponse) {
                 switch (error.status) {
                     case 401:
-                        this.loginFailed = true;
+                        this.errorMessage = '用户名不存在或密码错误';
+                        break;
+                    case 503:
+                        this.errorMessage = '请求过于频繁，请稍后再试';
+                        break;
+                    default:
+                        this.errorMessage = error.message;
                         break;
                 }
             }
+            console.log(this.errorMessage)
+            console.log(error)
         });
     }
 }

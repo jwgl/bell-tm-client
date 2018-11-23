@@ -74,9 +74,6 @@ export class LoginDialog extends BaseDialog {
     }
 
     logout(): void {
-        this.authService.logout().subscribe(() => {
-            this.router.navigate(['/ui/login']);
-            this.close();
-        });
+        this.authService.logout();
     }
 }

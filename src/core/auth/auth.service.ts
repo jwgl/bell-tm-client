@@ -22,6 +22,7 @@ const JsonHeader = new HttpHeaders({
 @Injectable()
 export class AuthService {
     userInfo: UserInfo = null;
+    csrf: any;
 
     // store the URL so we can redirect after logging in
     redirectUrl: string;
@@ -31,22 +32,19 @@ export class AuthService {
     }
 
     login(username: string, password: string): Observable<boolean> {
-        return this.httpClient.get('/uaa/login', { headers: JsonHeader }).pipe(
+        const body = new HttpParams({
+            fromObject: {
+                username,
+                password,
+            },
+        });
+        return this.httpClient.post('/uaa/login', body.toString(), {
+            headers: JsonHeader
+                .set('Content-Type', 'application/x-www-form-urlencoded')
+                .set(this.csrf.headerName, this.csrf.token),
+            responseType: 'text',
+        }).pipe(
             switchMap(result => {
-                const csrf = result['csrf'];
-                const body = new HttpParams({
-                    fromObject: {
-                        username,
-                        password,
-                    },
-                });
-                return this.httpClient.post('/uaa/login', body.toString(), {
-                    headers: JsonHeader
-                        .set('Content-Type', 'application/x-www-form-urlencoded')
-                        .set(csrf.headerName, csrf.token),
-                    responseType: 'text',
-                });
-            }), switchMap(result => {
                 return this.httpClient.get<{ user: UserInfo }>('/api/user', { headers: JsonHeader });
             }), tap((result) => {
                 this.userInfo = result.user;
@@ -57,23 +55,27 @@ export class AuthService {
         );
     }
 
-    logout(): Observable<any> {
+    logout(redirect = true) {
         return this.httpClient.post('/logout', null, {
             headers: JsonHeader,
-            responseType: 'text',
             withCredentials: true,
-        }).pipe(
-            tap(() => {
-                this.userInfo = null;
-                sessionStorage.removeItem('user');
-            }),
-        );
+        }).subscribe(result => {
+            this.userInfo = null;
+            sessionStorage.removeItem('user');
+            this.csrf = result['csrf'];
+            if (redirect) {
+                window.location.href = '/';
+            }
+        });
     }
 
     invalidateSession(): void {
-        this.httpClient.get('/api/user', { headers: JsonHeader }).subscribe(() => {
-            this.logout().subscribe(() => { });
-        }, error => { });
+        this.httpClient.get('/login', { headers: JsonHeader }).subscribe(result => {
+            this.csrf = result ? result['csrf'] : null;
+            if (!this.csrf) {
+                this.logout(false);
+            }
+        }, error => console.error(error))
     }
 
     updatePhoneNumber(phoneNumber: string): void {

@@ -31,13 +31,13 @@ library.add(faLock, faUser);
         WorkbenchModule,
         LoginModule,
         AuthModule,
-        RestModule.forRoot([])
+        RestModule.forRoot([]),
     ],
     providers: [
         Dialog,
         AppService,
         { provide: RouteReuseStrategy, useClass: ComponentReuseStrategy },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule { }
