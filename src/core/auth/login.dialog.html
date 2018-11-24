@@ -21,8 +21,8 @@
                         <input class="form-control" placeholder="密码" name="password" [(ngModel)]="password" type="password">
                     </div>
                 </div>
-                <div class="alert alert-danger" *ngIf="loginFailed">
-                    密码错误
+                <div class="alert alert-danger" *ngIf="errorMessage">
+                    {{errorMessage}}
                 </div>
             </div>
             <div class="modal-footer">

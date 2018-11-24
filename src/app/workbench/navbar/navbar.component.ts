@@ -35,9 +35,7 @@ export class NavbarComponent {
 
     logout(event: Event): void {
         event.preventDefault();
-        this.authService.logout().subscribe(() => {
-            window.location.href = (event.target as HTMLAnchorElement).href;
-        });
+        this.authService.logout();
     }
 
     private buildMenu(items: (Menu | MenuItem)[]) {
