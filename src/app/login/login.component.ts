@@ -51,8 +51,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
                         break;
                 }
             }
-            console.log(this.errorMessage)
-            console.log(error)
         });
     }
 }

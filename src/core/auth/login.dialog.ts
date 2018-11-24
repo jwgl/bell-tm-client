@@ -1,16 +1,10 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
 import { BaseDialog } from '../dialogs';
 import { AuthService } from './auth.service';
-
-interface Csrf {
-    headerName: string;
-    token: string;
-}
 
 @Component({
     styleUrls: ['./login.dialog.scss'],
@@ -20,12 +14,9 @@ interface Csrf {
 export class LoginDialog extends BaseDialog {
     username: string;
     password: string;
-    loginFailed: boolean;
-    csrf: Csrf;
+    errorMessage: string;
 
     constructor(
-        private router: Router,
-        private httpClient: HttpClient,
         private authService: AuthService,
     ) {
         super();
@@ -37,36 +28,25 @@ export class LoginDialog extends BaseDialog {
             backdrop: 'static',
             keyboard: false,
         });
-        this.httpClient.get<{ csrf: Csrf }>('/uaa/login', {
-            headers: new HttpHeaders({
-                'X-Requested-With': 'XMLHttpRequest',
-            }),
-        }).subscribe(result => this.csrf = result.csrf);
+        this.authService.initSession();
         return null;
     }
 
     login() {
-        this.loginFailed = false;
-        const body = new HttpParams({
-            fromObject: {
-                username: this.username,
-                password: this.password,
-            }
-        });
-        this.httpClient.post('/uaa/login', body.toString(), {
-            headers: new HttpHeaders({
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-Requested-With': 'XMLHttpRequest',
-            }).set(this.csrf.headerName, this.csrf.token),
-            responseType: 'text',
-        }).subscribe(() => {
+        this.errorMessage = null;
+        this.authService.login(this.username, this.password).subscribe(() => {
             this.ok();
         }, (error) => {
             if (error instanceof HttpErrorResponse) {
                 switch (error.status) {
                     case 401:
-                        this.loginFailed = true;
+                        this.errorMessage = '用户名不存在或密码错误';
+                        break;
+                    case 503:
+                        this.errorMessage = '请求过于频繁，请稍后再试';
+                        break;
+                    default:
+                        this.errorMessage = error.message;
                         break;
                 }
             }
