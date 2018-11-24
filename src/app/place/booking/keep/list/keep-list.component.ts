@@ -17,7 +17,6 @@ export class BookingKeepListComponent {
     places: Place[];
     weeks: number[];
     days: number[];
-    sections: number[];
     bookings: any[];
 
     params: { [param: string]: string };
@@ -35,11 +34,6 @@ export class BookingKeepListComponent {
             this.days = [];
             for (let d = 1; d <= 7; d++) {
                 this.days.push(d);
-            }
-
-            this.sections = [];
-            for (let s = 1; s <= 13; s++) {
-                this.sections.push(s);
             }
 
             this.params = {
