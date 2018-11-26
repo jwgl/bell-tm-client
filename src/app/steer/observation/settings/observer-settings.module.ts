@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 
 import { CommonDialogsModule } from 'core/common-dialogs';
@@ -25,7 +24,6 @@ library.add(faTimes);
         FormsModule,
         CommonDialogsModule,
         CommonDirectivesModule,
-        HttpModule,
         AppRoutingModule,
         PipesModule,
         FontAwesomeModule,

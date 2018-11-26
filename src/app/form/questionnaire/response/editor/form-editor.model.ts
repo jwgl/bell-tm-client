@@ -1,6 +1,8 @@
 import * as _ from 'lodash';
 
 import { ResponseForm, ResponseItem, ResponseItemDto } from '../../shared/response-form.model';
+import { QuestionType } from '../../shared/question-type.model';
+import { SurveyType } from '../../shared/survey-type.model';
 
 declare module '../../shared/questionnaire-form.model' {
     interface QuestionOption {
@@ -15,13 +17,13 @@ declare module '../../shared/response-form.model' {
     }
 
     interface ResponseItem {
-        validate(): string;
+        validate(form: ResponseForm): string;
         toServerDto(): any;
     }
 }
 
 ResponseForm.prototype.validate = function (this: ResponseForm): string[] {
-    return this.items.map(it => it.validate()).filter(it => !!it);
+    return this.items.map(it => it.validate(this)).filter(it => !!it);
 };
 
 ResponseForm.prototype.toServerDto = function (this: ResponseForm): any {
@@ -30,7 +32,6 @@ ResponseForm.prototype.toServerDto = function (this: ResponseForm): any {
             client: it.clientDto,
             server: it.toServerDto(),
         })).filter(it => it.client || it.server);
-
         return {
             id: this.id,
             addedItems: items.filter(it => !it.client && it.server).map(it => it.server),
@@ -44,7 +45,19 @@ ResponseForm.prototype.toServerDto = function (this: ResponseForm): any {
     }
 };
 
-ResponseItem.prototype.validate = function (this: ResponseItem): string {
+ResponseItem.prototype.validate = function (this: ResponseItem, form: ResponseForm): string {
+    if (form.questionnaire.surveyType === SurveyType.BALLOT_SHEET) {
+        if (this.question.type === QuestionType.MUTIPLE) {
+            const choices = this.question.options.filter(option => option.selected).map(option => option.id);
+            if (choices.length < this.question.minValue) {
+                return `本次投票最少选择${this.question.minValue}项`;
+            }
+            if (choices.length > this.question.maxValue) {
+                return `本次投票最多选择${this.question.maxValue}项`;
+            }
+        }
+    }
+
     if (this.question.mandatory && !this.toServerDto()) {
         return `第${this.question.ordinal + 1}题为必选题目`;
     } else {

@@ -27,12 +27,8 @@ export class ResponseFormService {
         return this.http.post(this.getReponseFormUrl(questionnaireId), value, { submit: `${submit}` });
     }
 
-    update(questionnaireId: number, value: any): Observable<any> {
-        return this.http.put(this.getReponseFormUrl(questionnaireId), value);
-    }
-
-    submit(questionnaireId: number): Observable<any> {
-        return this.http.patch(this.getReponseFormUrl(questionnaireId), {});
+    update(questionnaireId: number, value: any, submit: boolean): Observable<any> {
+        return this.http.put(this.getReponseFormUrl(questionnaireId), value, { submit: `${submit}` });
     }
 
     private getReponseFormUrl(questionnaireId: number): string {

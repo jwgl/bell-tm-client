@@ -18,7 +18,6 @@ const routes: Routes = [{
     imports: [
         RouterModule.forRoot(routes, {
             paramsInheritanceStrategy: 'always',
-            // enableTracing: true,
         })
     ],
     exports: [RouterModule],

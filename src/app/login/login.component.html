@@ -22,7 +22,7 @@
     <div class="form-group">
         <button class="btn btn-primary form-control" (click)="login()" type="submit">登录</button>
     </div>
-    <div class="alert alert-danger" *ngIf="loginFailed">
-        用户名不存在或密码错误
+    <div class="alert alert-danger" *ngIf="errorMessage">
+        {{errorMessage}}
     </div>
 </form>

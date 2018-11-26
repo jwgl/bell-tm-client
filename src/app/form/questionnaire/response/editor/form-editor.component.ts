@@ -50,7 +50,7 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
 
     onSave() {
         if (this.form.id) {
-            this.update();
+            this.update(false);
         } else {
             this.create(false);
         }
@@ -62,7 +62,7 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
             this.dialog.error(errors);
         } else {
             if (this.form.id) {
-                this.submit();
+                this.update(true);
             } else {
                 this.create(true);
             }
@@ -72,34 +72,27 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
     private create(submit: boolean) {
         this.saving = true;
         this.service.create(this.form.questionnaire.id, this.form.toServerDto(), submit).subscribe(dto => {
+            this.saving = false;
             if (submit) {
                 this.router.navigate(['finish'], { relativeTo: this.route });
             } else {
                 this.form = new ResponseForm(dto);
             }
-            this.saving = false;
         }, error => {
             this.saving = false;
             alert(error.message);
         });
     }
 
-    private update() {
+    private update(submit: boolean) {
         this.saving = true;
-        this.service.update(this.form.questionnaire.id, this.form.toServerDto()).subscribe(dto => {
-            this.form = new ResponseForm(dto);
+        this.service.update(this.form.questionnaire.id, this.form.toServerDto(), submit).subscribe(dto => {
             this.saving = false;
-        }, error => {
-            this.saving = false;
-            alert(error.message);
-        });
-    }
-
-    private submit() {
-        this.saving = true;
-        this.service.submit(this.form.questionnaire.id).subscribe(dto => {
-            this.router.navigate(['finish'], { relativeTo: this.route });
-            this.saving = false;
+            if (submit) {
+                this.router.navigate(['finish'], { relativeTo: this.route });
+            } else {
+                this.form = new ResponseForm(dto);
+            }
         }, error => {
             this.saving = false;
             alert(error.message);
