@@ -30,7 +30,6 @@ export class ProjectFormEditorComponent {
     reviewTaskId: number;
     saving = false;
     fileTypes = FileTypes.find(f => f.reviewType === 1).fileType;
-    fileExts = ['pdf', 'word'];
 
     constructor(
         private route: ActivatedRoute,
@@ -102,10 +101,17 @@ export class ProjectFormEditorComponent {
     }
 
     get uploadUrl(): string {
-        return this.service.getUploadUrl({taskId: this.reviewTaskId});
+        return this.service.getUploadUrl({ taskId: this.reviewTaskId });
     }
 
     onUploaded(fileNames: any) {
-        console.log(fileNames);
+        switch (fileNames.prefix) {
+            case 'main':
+                this.form.mainInfoForm = fileNames.name;
+                break;
+            case 'proof':
+                this.form.proofFile = fileNames.name;
+                break;
+        }
     }
 }

@@ -106,6 +106,10 @@ export class ProjectForm {
     workflowInstanceId: string;
     memberList: any[];
     expertReview: any[];
+    reportType: number;
+    mainInfoForm: string;
+    proofFile: string;
+    summaryReport: string;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -142,6 +146,10 @@ export class ProjectForm {
         this.countExpert = dto.countExpert;
         this.workflowInstanceId = dto.workflowInstanceId;
         this.expertReview = dto.expertReview;
+        this.reportType = dto.reportType;
+        this.mainInfoForm = dto.mainInfoForm;
+        this.proofFile = dto.proofFile;
+        this.summaryReport = dto.summaryReport;
         this.memberList = [];
         for (let i = 0; i < 6; i++) {
             this.memberList.push({ value: '' });

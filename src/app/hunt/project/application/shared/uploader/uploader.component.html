@@ -1,10 +1,16 @@
 <div class="form-group">
-    <label class="btn-link">
+    <label class="btn-link" *ngIf="!fileName">
         <input type="file" class="d-none" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
             [uploadInput]="uploadInput">{{fileType.label}}
     </label>
     <div class="form-control" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
-        <ng-container *ngIf="files && files.length > 0; else emptyTpl;">
+        <ng-container *ngIf="fileName; else emptyTpl;">
+            <div class="d-flex">
+                <span class="file-type">{{fileType.label}}</span>
+                <span class="ml-3 mr-3">{{fileName.name}}</span>
+                <button class="btn btn-danger btn-sm ml-auto" (click)="remove(fileName.name)">删除</button>
+            </div>
+
             <div *ngFor="let f of files; let i = index;">
                 <p>{{f.name}}</p>
                 <div class="progress" style="height: 4px;">

@@ -144,7 +144,7 @@
             </div>
             <div class="card-body">
                 <ng-container *ngFor="let item of fileTypes;">
-                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" (fileNames)="onUploaded($event)"></tm-uploader-panel>
+                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" (uploaded)="onUploaded($event)"></tm-uploader-panel>
                 </ng-container>
             </div>
         </div>

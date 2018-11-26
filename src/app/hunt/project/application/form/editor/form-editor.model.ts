@@ -29,5 +29,8 @@ ProjectForm.prototype.toServerDto = function(this: ProjectForm): any {
         members: _.chain(this.memberList).map(data => data.value).filter(v => v !== '').join(';').value(),
         content: this.content,
         achievements: this.achievements,
+        mainInfoForm: this.mainInfoForm,
+        proofFile: this.proofFile,
+        summaryReport: this.summaryReport,
     };
 };

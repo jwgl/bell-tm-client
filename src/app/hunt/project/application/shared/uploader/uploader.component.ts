@@ -14,7 +14,7 @@ export class UploaderPanelComponent {
     @Input()
     fileType: FileType;
     @Output()
-    fileNames = new EventEmitter();
+    uploaded = new EventEmitter();
 
     _xsrfToken: string;
     options: UploaderOptions;
@@ -25,6 +25,7 @@ export class UploaderPanelComponent {
     dragOver: boolean;
     uploadAble = true;
     maxUploads = 1;
+    fileName: any;
 
     constructor() {
         this.files = []; // local uploading files array
@@ -74,13 +75,15 @@ export class UploaderPanelComponent {
                 break;
             case 'removed':
                 this.files = this.files.filter(file => file !== output.file);
+                this.uploaded.emit({ prefix: this.fileType.prefix, name: null });
                 break;
             case 'rejected':
                 alert(`最多上传${this.maxUploads}个文件。`);
                 break;
             case 'done':
                 this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
-                this.fileNames.emit(output.file.response.file);
+                this.fileName = { prefix: this.fileType.prefix, name: output.file.response.file };
+                this.uploaded.emit(this.fileName);
                 break;
         }
     }
@@ -103,5 +106,9 @@ export class UploaderPanelComponent {
         } else {
             return this.files.map(file => file.name).join(',');
         }
+    }
+
+    remove(fileName: string) {
+        this.uploadInput.emit({ type: 'removeAll' });
     }
 }
