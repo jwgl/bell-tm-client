@@ -9,6 +9,7 @@ import { FileTypes } from '../../shared/constants';
 })
 export class FormViewerComponent {
     @Input() vm: any;
+    @Input() downloadUrl: string;
 
     conclusionClass(conclusion: string) {
         return conclusion === '通过' ? 'text-success' : 'text-danger';
@@ -25,4 +26,23 @@ export class FormViewerComponent {
         }
     }
 
+    get projectName(): string {
+        if (this.vm.reportType === 1) {
+            return `${this.vm.name}-`;
+        } else {
+            return '';
+        }
+    }
+
+    get projectCode(): string {
+        if (this.vm.reportType !== 1) {
+            return `${this.vm.code}-`;
+        } else {
+            return '';
+        }
+    }
+
+    getExt(fileName: string): string {
+        return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+    }
 }

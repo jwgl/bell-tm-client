@@ -53,17 +53,18 @@
             <div [markdown]="vm.urls"></div>
         </div>
     </div>
-    <div class="form-group" *ngIf="vm.mainInfoForm">
-        <label class="control-label">{{getLabel('main')}}</label>
-        <p class="form-control-plaintext">{{vm.mainInfoForm}}</p>
-    </div>
-    <div class="form-group" *ngIf="vm.proofFile">
-        <label class="control-label">主要佐证材料</label>
-        <p class="form-control-plaintext">{{vm.proofFile}}</p>
-    </div>
-    <div class="form-group" *ngIf="vm.summaryReport">
-        <label class="control-label">总结报告</label>
-        <p class="form-control-plaintext">{{vm.summaryReport}}</p>
+    <div class="card">
+        <div class="card-header d-flex">
+            <label class="control-label">附件</label>
+            <a class="btn btn-secondary btn-sm ml-auto" download [href]="downloadUrl">下载</a>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li *ngIf="vm.mainInfoForm">{{getLabel('main')}}-{{projectName}}{{vm.level | level: 'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.mainInfoForm)}}</li>
+                <li *ngIf="vm.proofFile">主要佐证材料-{{projectName}}{{vm.level | level: 'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.proofFile)}}</li>
+                <li *ngIf="vm.summaryReport">总结报告-{{projectName}}{{vm.level | level: 'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.summaryReport)}}</li>
+            </ul>
+        </div>
     </div>
     <div class="row">
         <div class="form-group col-12" *ngIf="vm.departmentOpinion">

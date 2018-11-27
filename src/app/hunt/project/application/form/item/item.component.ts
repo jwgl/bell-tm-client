@@ -37,4 +37,8 @@ export class ProjectItemComponent {
     get editAble(): boolean {
         return (this.vm.status === 'CREATED' || this.vm.status === 'REJECTED') && this.vm.isValidDate;
     }
+
+    get downloadUrl(): string {
+        return this.service.getDownloadUrl(this.vm.id);
+    }
 }
