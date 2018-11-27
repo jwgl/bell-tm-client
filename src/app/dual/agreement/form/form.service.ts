@@ -20,7 +20,6 @@ export class AgreementFormService extends RestEditService {
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
         this.carryoutApiUrl = this.carryoutApiUrl.replace('${userId}', authService.userInfo.id);
-        // console.log(carryoutApiUrl);
     }
 
     save(id: number, form: any): Observable<any> {
@@ -36,7 +35,6 @@ export class AgreementFormService extends RestEditService {
     }
 
     loadCarryouts(): Observable<any> {
-        console.log(this.carryoutApiUrl);
         return this.http.get<object>(this.carryoutApiUrl);
     }
 
