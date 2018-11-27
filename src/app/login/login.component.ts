@@ -43,6 +43,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
                     case 401:
                         this.errorMessage = '用户名不存在或密码错误';
                         break;
+                    case 403:
+                        this.errorMessage = 'TOKEN失效，请稍后再试';
+                        this.authService.initSession();
+                        break;
                     case 503:
                         this.errorMessage = '请求过于频繁，请稍后再试';
                         break;
