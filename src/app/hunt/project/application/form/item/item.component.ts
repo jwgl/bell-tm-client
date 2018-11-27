@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import * as _ from 'lodash';
+
 import { SubmitOptions } from 'core/workflow';
 
 import { ProjectFormService } from '../form.service';
@@ -40,5 +42,9 @@ export class ProjectItemComponent {
 
     get downloadUrl(): string {
         return this.service.getDownloadUrl(this.vm.id);
+    }
+
+    get submitAble(): boolean {
+        return !_.isEmpty(this.vm.mainInfoForm);
     }
 }

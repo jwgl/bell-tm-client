@@ -109,6 +109,7 @@ export class UploaderPanelComponent {
     }
 
     remove(fileName: string) {
+        this.fileName = null;
         this.uploadInput.emit({ type: 'removeAll' });
     }
 }
