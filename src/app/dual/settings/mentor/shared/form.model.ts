@@ -6,7 +6,7 @@ export class MentorForm {
     departmentName: string;
     sex: string;
     academicTitle: string;
-    academicDegree: string;
+    vChatId: string;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -15,7 +15,7 @@ export class MentorForm {
         this.email = dto.email;
         this.departmentName = dto.departmentName;
         this.sex = dto.sex;
-        this.academicDegree = dto.academicDegree;
+        this.vChatId = dto.vChatId;
         this.academicTitle = dto.academicTitle;
     }
 }

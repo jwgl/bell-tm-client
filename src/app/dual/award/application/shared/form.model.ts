@@ -11,6 +11,7 @@ export class ApplicationForm {
     approver: string;
     paperApprover: string;
     paperApproverEmail: string;
+    paperApproverVchatId: string;
     dateApproved: string;
     universityCooperative: string;
     majorCooperative: string;
@@ -40,6 +41,7 @@ export class ApplicationForm {
         this.approver = dto.approver;
         this.paperApprover = dto.paperApprover;
         this.paperApproverEmail = dto.mentorEmail;
+        this.paperApproverVchatId = dto.mentorVchatId;
         this.dateApproved = dto.dateApproved;
         this.editable = dto.editable;
         this.bachelorYear = dto.bachelorYear;
