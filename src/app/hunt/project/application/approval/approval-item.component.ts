@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import * as _ from 'lodash';
+
 import { CommonDialog } from 'core/common-dialogs';
 import { ReviewOptions } from 'core/workflow';
 import { Dialog } from 'core/dialogs';
@@ -24,8 +26,8 @@ export class ApplicationApprovalItemComponent {
     private nextId: number;
     id: number;
     type: string;
+    projectCycle: number;
     saving = false;
-    // conclusions = ConclusionList;
 
     constructor(
         private service: ApprovalService,
@@ -42,6 +44,7 @@ export class ApplicationApprovalItemComponent {
 
     onItemLoaded(dto: any) {
         this.form = new ProjectForm(dto.form);
+        this.projectCycle = dto.form.period;
         this.conclusionForm = new ConclusionForm(dto.form);
         this.wi = dto.workitemId;
         this.prevId = dto.prevId;
@@ -85,11 +88,43 @@ export class ApplicationApprovalItemComponent {
         this.dialog.open(ConclusionDialog, {
             level: this.form.level,
             conclusions: ConclusionList,
-            conclusionForm: this.conclusionForm
-        }).then(result => this.onConclusionChanged());
+            conclusionForm: this.conclusionForm,
+            projectCycle: this.projectCycle,
+        }).then(result => {
+            const form = new ConclusionForm(result);
+            const validation = this.validate(form);
+            if (validation.length) {
+                this.dialogs.error(validation);
+            } else {
+                this.service.update(this.form.id, form).subscribe(() => {
+                    this.dialogs.confirm('', '结论保存成功！').then(() =>
+                        this.service.loadApplicationItem(this.wi, this.id, this.type).subscribe((dto: any) => this.onItemLoaded(dto))
+                    );
+                });
+            }
+        });
     }
 
     get downloadUrl(): string {
         return this.service.getDownloadUrl(this.form.id);
+    }
+
+    isEmpty(option: any): boolean {
+        return _.isUndefined(option) || _.isNull(option);
+    }
+
+    validate(data: ConclusionForm): string[] {
+        const validation: string[] = [];
+        if (this.isEmpty(data.conclusionOfUniversity) ||
+            this.isEmpty(data.opinionOfUniversity)) {
+            validation.push('请检查结论和意见是否为空！');
+        }
+        if ((this.form.level === 'PROVINCE' && data.conclusionOfProvince === 'OK') ||
+            (this.form.level === 'UNIVERSITY' && data.conclusionOfUniversity === 'OK') && (
+                this.isEmpty(data.dateStarted)
+            )) {
+            validation.push('请正确输入立项日期！');
+        }
+        return validation;
     }
 }

@@ -7,7 +7,8 @@
         </div>
         <div class="form-group col-md-6">
             <label class="control-label">负责人</label>
-            <div>{{vm.principalName}} {{vm.office}}，{{vm.title}}，{{vm.degree}}学位</div>
+            <div>{{vm.principalName}} {{vm.office}}，{{vm.title}}，{{vm.degree}}学位 {{vm.discipline}} {{vm.discipline}}
+                <span *ngIf="vm.direction">{{vm.direction}}方向</span></div>
         </div>
     </div>
     <div class="row">
@@ -16,20 +17,34 @@
             <div>{{vm.subtype}} <span class="badge badge-info">{{vm.level | level: 'text'}}</span></div>
         </div>
         <div class="form-group col-md-3">
-            <label class="control-label">Email</label>
-            <div>{{vm.email}}</div>
+            <label class="control-label">联系方式</label>
+            <div>{{vm.phone}} {{vm.email}}</div>
         </div>
         <div class="form-group col-md-3">
-            <label class="control-label">电话</label>
-            <div>{{vm.phone}}</div>
+            <label class="control-label">建设情况</label>
+            <div>{{vm.projectStatus}}</div>
+        </div>
+    </div>
+    <div class="row" *ngIf="vm.projectStatus !== 'CREATED'">
+        <div class="form-group col-md-3">
+            <label class="control-label">项目编号</label>
+            <div>{{vm.dateStarted}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">立项日期</label>
+            <div>{{vm.dateStarted}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">预期中期</label>
+            <div>{{vm.middleYear}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">预期结项</label>
+            <div>{{vm.knotYear}}</div>
         </div>
     </div>
 
     <div class="row">
-        <div class="form-group col-md-6">
-            <label class="control-label">专业</label>
-            <div>{{vm.discipline}} {{vm.discipline}} <span *ngIf="vm.direction">{{vm.direction}}方向</span></div>
-        </div>
         <div class="form-group col-md-3">
             <label class="control-label">单位</label>
             <div>{{vm.departmentName}}</div>
@@ -60,20 +75,29 @@
         </div>
         <div class="card-body">
             <ul>
-                <li *ngIf="vm.mainInfoForm">{{getLabel('main')}}-{{projectName}}{{vm.level | level: 'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.mainInfoForm)}}</li>
-                <li *ngIf="vm.proofFile">主要佐证材料-{{projectName}}{{vm.level | level: 'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.proofFile)}}</li>
-                <li *ngIf="vm.summaryReport">总结报告-{{projectName}}{{vm.level | level: 'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.summaryReport)}}</li>
+                <li *ngIf="vm.mainInfoForm">{{getLabel('main')}}-{{projectName}}{{vm.level | level:
+                    'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.mainInfoForm)}}</li>
+                <li *ngIf="vm.proofFile">主要佐证材料-{{projectName}}{{vm.level | level:
+                    'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.proofFile)}}</li>
+                <li *ngIf="vm.summaryReport">总结报告-{{projectName}}{{vm.level | level:
+                    'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.summaryReport)}}</li>
             </ul>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-12" *ngIf="vm.departmentOpinion">
             <label class="control-label">学院意见</label>
-            <div [markdown]="vm.departmentOpinion"></div>
+            <p class="form-control-plaintext">{{vm.departmentOpinion}}</p>
         </div>
-        <div class="form-group col-12" *ngIf="vm.opinionOfUniversity">
-            <label class="control-label">学校意见</label>
-            <div [markdown]="vm.opinionOfUniversity"></div>
+        <div class="form-group col-12" *ngIf="vm.conclusionOfUniversity">
+            <label class="control-label">学校意见 <span class="badge {{vm.conclusionOfUniversity | conclusion: 'class'}}">
+                    {{vm.conclusionOfUniversity | conclusion: 'text'}}</span></label>
+            <p class="form-control-plaintext">{{vm.opinionOfUniversity}}</p>
+        </div>
+        <div class="form-group col-12" *ngIf="vm.conclusionOfProvince">
+            <label class="control-label">省厅意见 <span class="badge {{vm.conclusionOfProvince | conclusion: 'class'}}">
+                    {{vm.conclusionOfProvince | conclusion: 'text'}}</span></label>
+            <p class="form-control-plaintext">{{vm.opinionOfProvince}}</p>
         </div>
     </div>
     <div class="form-group" *ngIf="vm.expertReview && vm.expertReview.length > 0">

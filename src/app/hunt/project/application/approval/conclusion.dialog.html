@@ -30,18 +30,19 @@
                     <input class="form-control" type="text" name="code" [(ngModel)]="conclusionForm.code">
                 </form-field>
                 <form-field label="立项日期">
-                    <input class="form-control" type="text" name="opinionOfProvince" [(ngModel)]="conclusionForm.dateStarted" placeholder="请严格按规范输入YYYY-MM-DD">
+                    <input class="form-control" type="text" name="dateStarted" [(ngModel)]="conclusionForm.dateStarted"
+                    (ngModelChange)="datengChange($event)" placeholder="请严格按规范输入YYYY-MM-DD">
                 </form-field>
                 <form-field label="中期年份">
-                    <input class="form-control" type="number" name="middleYear" [(ngModel)]="conclusionForm.middleYear" min="2000" max="2100">
+                    <p class="form-control-plaintext">{{conclusionForm.middleYear}}</p>
                 </form-field>
                 <form-field label="结项年份">
-                    <input class="form-control" type="number" name="knotYear" [(ngModel)]="conclusionForm.knotYear" min="2000" max="2100">
+                    <p class="form-control-plaintext">{{conclusionForm.knotYear}}</p>
                 </form-field>
             </ng-container>
         </form>
     </modal-body>
     <modal-footer>
-        <button type="button" class="btn btn-secondary" (click)="ok()" *ngIf="isDate(conclusionForm.dateStarted)">确定</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()" [disabled]="confirmAble">确定</button>
     </modal-footer>
 </modal-dialog>

@@ -111,6 +111,11 @@ export class ProjectForm {
     proofFile: string;
     summaryReport: string;
     locked: boolean;
+    projectStatus: string;
+    code: string;
+    dateStarted: string;
+    middleYear: number;
+    knotYear: number;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -152,6 +157,11 @@ export class ProjectForm {
         this.proofFile = dto.proofFile;
         this.summaryReport = dto.summaryReport;
         this.locked = dto.locked;
+        this.projectStatus = dto.projectStatus;
+        this.code = dto.code;
+        this.dateStarted = dto.dateStarted;
+        this.middleYear = dto.middleYear;
+        this.knotYear = dto.knotYear;
         this.memberList = [];
         for (let i = 0; i < 6; i++) {
             this.memberList.push({ value: '' });

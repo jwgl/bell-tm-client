@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
+import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 
 import { BaseDialog } from 'core/dialogs';
@@ -16,11 +16,13 @@ export class ConclusionDialog extends BaseDialog {
     conclusionForm: ConclusionForm;
     level: string;
     conclusions: any[];
+    projectCycle: number;
 
     protected onOpening(): Observable<any> {
         this.level = this.options.level;
         this.conclusions = this.options.conclusions;
         this.conclusionForm = new ConclusionForm(this.options.conclusionForm);
+        this.projectCycle = this.options.projectCycle;
         return null;
     }
 
@@ -45,17 +47,17 @@ export class ConclusionDialog extends BaseDialog {
         return _.isUndefined(option) || _.isNull(option);
     }
 
-    validate(): string[] {
-        const validation: string[] = [];
-        if (this.isEmpty(this.conclusionForm.conclusionOfUniversity) ||
-            this.isEmpty(this.conclusionForm.opinionOfUniversity)) {
-            validation.push('请检查结论和意见是否为空！');
+    datengChange(date: string) {
+        if (this.isDate(date)) {
+            const yearStarted = dayjs(date).year();
+            if (this.projectCycle > 1) {
+                this.conclusionForm.middleYear = yearStarted + Math.floor((this.projectCycle + 1) / 2);
+            }
+            this.conclusionForm.knotYear = yearStarted + this.projectCycle;
         }
-        if (this.finalOk && (
-            this.isEmpty(this.conclusionForm.dateStarted)
-        )) {
-            validation.push('立项日期输入不正确！');
-        }
-        return validation;
+    }
+
+    get confirmAble(): boolean {
+        return this.finalOk && (!this.isDate(this.conclusionForm.dateStarted) || this.isEmpty(this.conclusionForm.code));
     }
 }

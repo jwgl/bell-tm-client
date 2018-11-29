@@ -15,38 +15,7 @@
             <button class="btn btn-primary" (click)="finish()">提交</button>
         </div>
     </div>
-    <!-- <ng-container *ngIf="reviewable">
-        <div class="form-group">
-            <label class="control-label">学校意见</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <select name="conclusion" class="form-control" [(ngModel)]="conclusionForm.conclusionOfUniversity"
-                        (ngModelChange)="onConclusionChanged()" [disabled]="">
-                        <option *ngFor="let item of conclusions" [ngValue]="item.value">
-                            {{ item.label }}
-                        </option>
-                    </select>
-                </div>
-                <input class="form-control" name="opinionOfUniversity" [(ngModel)]="conclusionForm.opinionOfUniversity"
-                    placeholder="最少5个字" (ngModelChange)="onConclusionChanged()">
-            </div>
-        </div>
-        <div class="form-group" *ngIf="form.level === 'PROVINCE'">
-            <label class="control-label">省厅意见</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <select name="conclusionOfProvince" class="form-control" [(ngModel)]="conclusionForm.conclusionOfProvince">
-                        <option *ngFor="let item of conclusions" [ngValue]="item.value">
-                            {{ item.label }}
-                        </option>
-                    </select>
-                </div>
-                <input class="form-control" name="opinionOfProvince" [(ngModel)]="conclusionForm.opinionOfProvince"
-                    placeholder="最少5个字" (ngModelChange)="onConclusionChanged()">
-            </div>
-        </div>
-    </ng-container> -->
-    <ng-container *ngIf="!reviewable">
+    <!-- <ng-container *ngIf="!reviewable">
         <div class="form-group">
             <label class="control-label">学校意见
                 <span class="badge {{conclusionForm.conclusionOfUniversity | conclusion: 'class'}}">
@@ -57,6 +26,6 @@
             <label class="control-label">省厅意见 {{conclusionForm.conclusionOfProvince}}</label>
             <p>{{conclusionForm.opinionOfProvince}}</p>
         </div>
-    </ng-container>
+    </ng-container> -->
     <tm-project-form-viewer [vm]="form" [downloadUrl]="downloadUrl"></tm-project-form-viewer>
 </ng-container>
