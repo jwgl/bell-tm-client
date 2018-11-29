@@ -47,9 +47,10 @@ import { QuestionTypeTextPipe } from './question-type.pipe';
     ],
     exports: [
         QuestionnaireFormViewerComponent,
-        QuestionnairePreviewComponent,
         RespondentAddressComponent,
         QuestionnaireFooterComponent,
+        QuestionFormViewerComponent,
+        QuestionnairePreviewComponent,
         SurveyScopeTextPipe,
         SurveyTypeTextPipe,
         RespondentTypeTextPipe,

@@ -34,7 +34,7 @@ export class ResponseItem {
     question: Question;
     intValue: number;
     textValue: string;
-    choice: QuestionOption;
+    choice: number;
     clientDto: ResponseItemDto;
 
     constructor(dto: ResponseItemDto, question: Question) {
@@ -47,10 +47,10 @@ export class ResponseItem {
             if (dto.textValue) {
                 this.textValue = dto.textValue;
             }
+            if (dto.choice) {
+                this.choice = dto.choice;
+            }
             if (question.options) {
-                if (dto.choice) {
-                    this.choice = question.options.find(it => it.id === dto.choice);
-                }
                 if (dto.choices) {
                     dto.choices.forEach(choice => {
                         const option = question.options.find(it => it.id === choice);

@@ -80,7 +80,7 @@ ResponseItem.prototype.toServerDto = function (this: ResponseItem): ResponseItem
             break;
         case 1:
             if (this.choice) {
-                response = { choice: this.choice.id };
+                response = { choice: this.choice };
             } else if (this.question.openEnded && this.textValue) {
                 textValue = this.textValue.trim();
                 if (textValue.length) {
