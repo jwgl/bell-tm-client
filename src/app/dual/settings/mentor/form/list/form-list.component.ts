@@ -9,6 +9,7 @@ import { MentorFormDialog } from '../editor/form-editor.component';
 import { MentorFormService } from '../form.service';
 
 @Component({
+    styles: ['.link { color: #007bff; cursor: pointer; }'],
     templateUrl: 'form-list.component.html',
 })
 export class MentorListComponent {

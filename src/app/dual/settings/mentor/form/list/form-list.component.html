@@ -11,7 +11,7 @@
             <th>Email</th>
             <th>性别</th>
             <th>职称</th>
-            <th>学位</th>
+            <th>微信</th>
             <th>删除</th>
         </tr>
     </thead>
@@ -19,11 +19,11 @@
         <ng-template ngFor let-mentor [ngForOf]="mentors" let-i="index">
             <tr>
                 <td>{{i + 1}}</td>
-                <td><a href="#" (click)="edit(mentor)">{{mentor.teacherId}} {{mentor.teacherName}}</a></td>
+                <td><span class="link" (click)="edit(mentor)">{{mentor.teacherId}} {{mentor.teacherName}}</span></td>
                 <td>{{mentor.email}}</td>
                 <td>{{mentor.sex}}</td>
                 <td>{{mentor.academicTitle}}</td>
-                <td>{{mentor.academicDegree}}</td>
+                <td>{{mentor.vChatId}}</td>
                 <td>
                     <tm-remove-item (click)="remove(mentor)"></tm-remove-item>
                 </td>

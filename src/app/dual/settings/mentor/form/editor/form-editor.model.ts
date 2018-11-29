@@ -10,5 +10,6 @@ MentorForm.prototype.toServerDto = function (this: MentorForm): any {
     return {
         teacherId: this.teacherId,
         email: this.email,
+        vChatId: this.vChatId,
     };
 };
