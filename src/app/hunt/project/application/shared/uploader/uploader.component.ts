@@ -107,9 +107,4 @@ export class UploaderPanelComponent {
             return this.files.map(file => file.name).join(',');
         }
     }
-
-    remove(fileName: string) {
-        this.fileName = null;
-        this.uploadInput.emit({ type: 'removeAll' });
-    }
 }

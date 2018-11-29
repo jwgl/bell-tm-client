@@ -17,6 +17,7 @@ import { ApprovalService } from './approval.service';
 import { ApplicationApprovalItemComponent } from './approval-item.component';
 import { ApplicationApprovalListComponent } from './approval-list.component';
 import { TeamDialog } from './expert-team.dialog';
+import { ConclusionDialog } from './conclusion.dialog';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -44,6 +45,7 @@ library.add(faLock, faLockOpen, faUser);
         ApplicationApprovalListComponent,
         ApplicationApprovalItemComponent,
         TeamDialog,
+        ConclusionDialog,
     ],
     providers: [
         Dialog,
@@ -55,6 +57,7 @@ library.add(faLock, faLockOpen, faUser);
     ],
     entryComponents: [
         TeamDialog,
+        ConclusionDialog,
     ],
 })
 export class ApprovalModule { }

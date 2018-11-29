@@ -3,12 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 
 import { CommonDialog } from 'core/common-dialogs';
 import { ReviewOptions } from 'core/workflow';
+import { Dialog } from 'core/dialogs';
 
 import { ConclusionList } from '../../../settings/shared/constants';
 
 import { ApprovalService } from './approval.service';
 import { ProjectForm } from '../form/shared/form.model';
 import { ConclusionForm } from './approval.model';
+import { ConclusionDialog } from './conclusion.dialog';
 
 @Component({
     templateUrl: 'approval-item.component.html',
@@ -23,12 +25,13 @@ export class ApplicationApprovalItemComponent {
     id: number;
     type: string;
     saving = false;
-    conclusions = ConclusionList;
+    // conclusions = ConclusionList;
 
     constructor(
         private service: ApprovalService,
         route: ActivatedRoute,
         private dialogs: CommonDialog,
+        private dialog: Dialog,
     ) {
         route.params.subscribe(params => {
             this.id = params['id'];
@@ -76,5 +79,17 @@ export class ApplicationApprovalItemComponent {
 
     onConclusionChanged() {
         this.service.update(this.form.id, this.conclusionForm).subscribe(() => 1 === 1);
+    }
+
+    conclusionSetting() {
+        this.dialog.open(ConclusionDialog, {
+            level: this.form.level,
+            conclusions: ConclusionList,
+            conclusionForm: this.conclusionForm
+        }).then(result => this.onConclusionChanged());
+    }
+
+    get downloadUrl(): string {
+        return this.service.getDownloadUrl(this.form.id);
     }
 }

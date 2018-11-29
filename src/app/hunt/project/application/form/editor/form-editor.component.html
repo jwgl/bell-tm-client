@@ -144,7 +144,14 @@
             </div>
             <div class="card-body">
                 <ng-container *ngFor="let item of fileTypes;">
-                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" (uploaded)="onUploaded($event)"></tm-uploader-panel>
+                    <div class="d-flex mb-2" *ngIf="hasUploaded(item); else emptyTpl;">
+                        <span class="file-type">{{item.label}}</span>
+                        <span class="ml-3 mr-3">{{fileName(item)}}</span>
+                        <button class="btn btn-danger btn-sm ml-auto" (click)="remove(item)">删除</button>
+                    </div>
+                    <ng-template #emptyTpl>
+                        <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" (uploaded)="onUploaded($event)"></tm-uploader-panel>
+                    </ng-template>
                 </ng-container>
             </div>
         </div>

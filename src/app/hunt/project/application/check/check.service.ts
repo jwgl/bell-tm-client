@@ -28,4 +28,8 @@ export class CheckService extends RestShowService {
     loadApplicationItem(workitem: string, id: number, type: string): Observable<any> {
         return this.http.get(`${this.api.list()}/${id}/workitems/${workitem}?type=${type}`);
     }
+
+    getDownloadUrl(id: any): string {
+        return `${this.api.item(id)}/attachments`;
+    }
 }

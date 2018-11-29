@@ -110,6 +110,7 @@ export class ProjectForm {
     mainInfoForm: string;
     proofFile: string;
     summaryReport: string;
+    locked: boolean;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -150,6 +151,7 @@ export class ProjectForm {
         this.mainInfoForm = dto.mainInfoForm;
         this.proofFile = dto.proofFile;
         this.summaryReport = dto.summaryReport;
+        this.locked = dto.locked;
         this.memberList = [];
         for (let i = 0; i < 6; i++) {
             this.memberList.push({ value: '' });

@@ -1,9 +1,8 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as _ from 'lodash';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
@@ -27,7 +26,6 @@ export class TaskFormEditorComponent {
         private service: FormService,
         private route: ActivatedRoute,
         private router: Router,
-        private location: Location,
         private dialogs: CommonDialog,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
@@ -49,7 +47,7 @@ export class TaskFormEditorComponent {
     }
 
     isDate(value: string): boolean {
-        return moment(value, 'YYYY-MM-DD', true).isValid();
+        return dayjs(value).format('YYYY-MM-DD') === value;
     }
 
     checkDate(value: any, name: string): string {

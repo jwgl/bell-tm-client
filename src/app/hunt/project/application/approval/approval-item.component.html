@@ -4,6 +4,7 @@
             <tm-workflow-item-pager [prevId]="prevId" [nextId]="nextId"></tm-workflow-item-pager>
         </div>
         <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" (click)="conclusionSetting()" *ngIf="form.locked">结论</button>
             <button class="btn btn-secondary" (click)="removeExpert(form.id)" *ngIf="form.expertReview && reviewable">清除专家</button>
         </div>
         <div class="btn-group ml-2">
@@ -14,7 +15,7 @@
             <button class="btn btn-primary" (click)="finish()">提交</button>
         </div>
     </div>
-    <ng-container *ngIf="reviewable">
+    <!-- <ng-container *ngIf="reviewable">
         <div class="form-group">
             <label class="control-label">学校意见</label>
             <div class="input-group">
@@ -44,7 +45,7 @@
                     placeholder="最少5个字" (ngModelChange)="onConclusionChanged()">
             </div>
         </div>
-    </ng-container>
+    </ng-container> -->
     <ng-container *ngIf="!reviewable">
         <div class="form-group">
             <label class="control-label">学校意见
@@ -57,5 +58,5 @@
             <p>{{conclusionForm.opinionOfProvince}}</p>
         </div>
     </ng-container>
-    <tm-project-form-viewer [vm]="form"></tm-project-form-viewer>
+    <tm-project-form-viewer [vm]="form" [downloadUrl]="downloadUrl"></tm-project-form-viewer>
 </ng-container>

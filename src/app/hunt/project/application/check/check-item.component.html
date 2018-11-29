@@ -14,5 +14,5 @@
             <button [workflow-rollback]="rollbackOptions" (rollback)="onItemLoaded($event)">撤回</button>
         </div>
     </div>
-    <tm-project-form-viewer [vm]="form"></tm-project-form-viewer>
+    <tm-project-form-viewer [vm]="form" [downloadUrl]="downloadUrl"></tm-project-form-viewer>
 </ng-container>

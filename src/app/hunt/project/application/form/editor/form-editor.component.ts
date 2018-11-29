@@ -14,6 +14,7 @@ import { ProjectFormService } from '../form.service';
 import { Degrees, Disciplines, Offices, ProjectForm, PropertyComment, Titles } from '../shared/form.model';
 import './form-editor.model';
 @Component({
+    styles: ['.file-type { font-weight: bold; }'],
     templateUrl: 'form-editor.component.html',
 })
 export class ProjectFormEditorComponent {
@@ -27,7 +28,7 @@ export class ProjectFormEditorComponent {
     degrees = Degrees;
     disciplines = Disciplines;
     editMode: EditMode;
-    reviewTaskId: number;
+    // reviewTaskId: number;
     saving = false;
     fileTypes = FileTypes.find(f => f.reviewType === 1).fileType;
 
@@ -43,8 +44,10 @@ export class ProjectFormEditorComponent {
         if (this.editMode === EditMode.Edit) {
             this.service.loadItemForEdit(params['id']).subscribe(dto => this.loadData(dto));
         } else {
-            this.service.loadDataForCreate().subscribe(dto => this.loadData(dto));
-            this.reviewTaskId = params['reviewTaskId'];
+            this.service.loadDataForCreate().subscribe(dto => {
+                this.loadData(dto);
+                this.form.reviewTaskId = params['reviewTaskId'];
+            });
         }
     }
 
@@ -92,7 +95,6 @@ export class ProjectFormEditorComponent {
             this.dialogs.error(validation);
         } else {
             this.saving = true;
-            this.form.reviewTaskId = this.reviewTaskId;
             this.service.save(this.form.id, this.form.toServerDto()).subscribe(id => {
                 this.dialogs.confirm('', `“${this.form.name}” 保存成功！`).then(() =>
                     this.router.navigate(['../../', id], { relativeTo: this.route }));
@@ -101,7 +103,7 @@ export class ProjectFormEditorComponent {
     }
 
     get uploadUrl(): string {
-        return this.service.getUploadUrl({ taskId: this.reviewTaskId });
+        return this.service.getUploadUrl({ taskId: this.form.reviewTaskId });
     }
 
     onUploaded(fileNames: any) {
@@ -112,6 +114,45 @@ export class ProjectFormEditorComponent {
             case 'proof':
                 this.form.proofFile = fileNames.name;
                 break;
+        }
+    }
+
+    fileName(fileType: any): string {
+        switch (fileType.prefix) {
+            case 'main':
+                return this.form.mainInfoForm;
+            case 'proof':
+                return this.form.proofFile;
+            case 'summary':
+                return this.form.summaryReport;
+            default:
+                return null;
+        }
+    }
+
+    hasUploaded(fileType: any): boolean {
+        switch (fileType.prefix) {
+            case 'main':
+                return !_.isEmpty(this.form.mainInfoForm);
+            case 'proof':
+                return !_.isEmpty(this.form.proofFile);
+            case 'summary':
+                return !_.isEmpty(this.form.summaryReport);
+            default:
+                return true;
+        }
+    }
+
+    remove(fileType: any) {
+        switch (fileType.prefix) {
+            case 'main':
+                this.form.mainInfoForm = null;
+                break;
+            case 'proof':
+                this.form.proofFile = null;
+                break;
+            case 'summary':
+                this.form.summaryReport = null;
         }
     }
 }
