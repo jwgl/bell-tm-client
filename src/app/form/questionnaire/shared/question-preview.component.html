@@ -11,15 +11,31 @@
         <div class="form-row" *ngSwitchCase="1">
             <div class="col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="q-{{question.ordinal}}-{{option.ordinal}}" name="q-{{question.ordinal}}">
-                    <label class="form-check-label" for="q-{{question.ordinal}}-{{option.ordinal}}">{{option.content}}</label>
+                    <input class="form-check-input" type="radio"
+                        [id]="option.controlId"
+                        [name]="option.controlName"
+                        [value]="option"
+                        [(ngModel)]="selectedOption"
+                        (ngModelChange)="openTextValue = null">
+                    <label class="form-check-label" [attr.for]="option.controlId">{{option.content}}</label>
                 </div>
             </div>
             <div class="col-md-12" *ngIf="question.openEnded">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="q-{{question.ordinal}}-open" name="q-{{question.ordinal}}" #openRadio>
-                    <label class="form-check-label" for="q-{{question.ordinal}}-open">{{question.openLabel ? question.openLabel : '其他'}}</label>
-                    <input class="form-control" type="text" (keyup)="openRadio.checked = !!$event.target.value">
+                    <input class="form-check-input" type="radio"
+                        [id]="question.openControlId"
+                        [name]="question.openControlName"
+                        [value]="null"
+                        [(ngModel)]="selectedOption">
+                    <label class="form-check-label" [attr.for]="question.openControlName">
+                        {{question.openLabel ? question.openLabel : '其他'}}
+                    </label>
+                    <input class="form-control" type="text"
+                        [id]="question.openControlId"
+                        [name]="question.textValueName"
+                        [(ngModel)]="openTextValue"
+                        (ngModelChange)="selectedOption = null"
+                        #singleOpenInput>
                     <small class="text-muted">最多输入100个字符。</small>
                 </div>
             </div>
@@ -27,14 +43,16 @@
         <div class="form-row" *ngSwitchCase="2">
             <div class="col-md-{{12 / question.stepValue}}" *ngFor="let option of question.options">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="q-{{question.ordinal}}-{{option.ordinal}}">
-                    <label class="form-check-label" for="q-{{question.ordinal}}-{{option.ordinal}}">{{option.content}}</label>
+                    <input class="form-check-input" type="checkbox" [id]="option.controlId">
+                    <label class="form-check-label" [attr.for]="option.controlId">{{option.content}}</label>
                 </div>
             </div>
             <div class="col-md-12" *ngIf="question.openEnded">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="q-{{question.ordinal}}-open" #openCheckbox>
-                    <label class="form-check-label" for="q-{{question.ordinal}}-open">{{question.openLabel ? question.openLabel : '其他'}}</label>
+                    <input class="form-check-input" type="checkbox" #openCheckbox>
+                    <label class="form-check-label" [attr.for]="question.openControlId">
+                        {{question.openLabel ? question.openLabel : '其他'}}
+                    </label>
                     <input class="form-control" type="text" (keyup)="openCheckbox.checked = !!$event.target.value">
                     <small class="text-muted">使用分号分隔多个选项，最多输入100个字符。</small>
                 </div>
@@ -46,12 +64,13 @@
             </div>
         </div>
         <ng-container *ngSwitchCase="3">
-            <input type="range" class="form-control-range" id="q-{{question.ordinal}}"
-                [attr.list]="'d-' + question.ordinal"
+            <input type="range" class="form-control-range"
+                [id]="question.controlId"
+                [attr.list]="question.datalistId"
                 [min]="question.scaleMin"
                 [max]="question.scaleMax"
                 [step]="question.scaleStep">
-            <datalist id="d-{{question.ordinal}}" class="d-flex">
+            <datalist [id]="question.datalistId" class="d-flex">
                 <option *ngFor="let v of question.scaleValues; first as f; last as l" [value]="v"
                     [style.width]="(100 / (question.scaleCount - 1) / (f || l  ? 2 : 1)) + '%'">{{v}}</option>
             </datalist>

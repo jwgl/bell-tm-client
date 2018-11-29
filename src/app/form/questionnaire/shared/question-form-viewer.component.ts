@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Question } from './questionnaire-form.model';
+import { Question, QuestionOption } from './questionnaire-form.model';
 
 @Component({
     selector: 'tm-question-form-viewer',
@@ -11,4 +11,7 @@ import { Question } from './questionnaire-form.model';
 export class QuestionFormViewerComponent {
     @Input()
     question: Question;
+
+    selectedOption: QuestionOption;
+    openTextValue: string;
 }
