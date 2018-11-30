@@ -20,6 +20,7 @@ export class ApplicationItemComponent {
     award: AwardForm;
     pending: boolean;
     paperForm: any;
+    latestAnswer: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -36,11 +37,13 @@ export class ApplicationItemComponent {
             fileNames: any,
             award: any,
             paperForm: any,
+            latestAnswer: any,
         }>(id).subscribe(dto => {
             this.vm = new ApplicationForm(dto.form);
             this.fileNames = dto.fileNames;
             this.award = new AwardForm(dto.award);
             this.paperForm = dto.paperForm;
+            this.latestAnswer = dto.latestAnswer;
         });
     }
 
@@ -53,7 +56,7 @@ export class ApplicationItemComponent {
     }
 
     get editAble(): boolean {
-        return this.vm.status === 'CREATED' || this.vm.status === 'REJECTED';
+        return (this.vm.status === 'CREATED' || this.vm.status === 'REJECTED') && this.award.isApplyDateValid;
     }
 
     get paperAble(): boolean {
