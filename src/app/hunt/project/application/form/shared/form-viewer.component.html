@@ -12,14 +12,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
             <label class="control-label">项目类别</label>
             <div>{{vm.subtype}} <span class="badge badge-info">{{vm.level | level: 'text'}}</span></div>
         </div>
         <div class="form-group col-md-3">
-            <label class="control-label">联系方式</label>
-            <div>{{vm.phone}} {{vm.email}}</div>
+            <label class="control-label">电话</label>
+            <div>{{vm.phone}}</div>
         </div>
+        <div class="form-group col-md-3">
+                <label class="control-label">Email</label>
+                <div>{{vm.email}}</div>
+            </div>
         <div class="form-group col-md-3">
             <label class="control-label">建设情况</label>
             <div>{{vm.projectStatus}}</div>
@@ -28,7 +32,7 @@
     <div class="row" *ngIf="vm.projectStatus !== 'CREATED'">
         <div class="form-group col-md-3">
             <label class="control-label">项目编号</label>
-            <div>{{vm.dateStarted}}</div>
+            <div>{{vm.code}}</div>
         </div>
         <div class="form-group col-md-3">
             <label class="control-label">立项日期</label>
