@@ -140,19 +140,19 @@ export class Question {
         return QUESTION_TYPE_OPTIONS[this.type];
     }
 
-    get controlId() {
+    get controlId(): string {
         return `q-${this.ordinal}`;
     }
 
-    get controlName() {
+    get controlName(): string {
         return this.controlId;
     }
 
-    get openControlId() {
+    get openControlId(): string {
         return `q-${this.ordinal}-o`;
     }
 
-    get openControlName() {
+    get openControlName(): string {
         if (this.type === QuestionType.SINGLE) {
             return this.controlName;
         } else {
@@ -160,8 +160,12 @@ export class Question {
         }
     }
 
-    get textValueName() {
+    get textValueName(): string {
         return `q-${this.ordinal}-t`;
+    }
+
+    get datelistId(): string {
+        return `d-${this.ordinal}`;
     }
 }
 

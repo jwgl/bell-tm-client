@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 import { ResponseItem } from '../../shared/response-form.model';
 import { Question } from '../../shared/questionnaire-form.model';
@@ -8,7 +8,6 @@ import { QuestionType } from '../../shared/question-type.model';
     selector: 'tm-response-item-editor',
     styleUrls: ['response-item-editor.component.scss'],
     templateUrl: 'response-item-editor.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResponseItemEditorComponent implements AfterViewInit {
     @Input()
@@ -20,17 +19,10 @@ export class ResponseItemEditorComponent implements AfterViewInit {
     @ViewChild('rangeElement')
     rangeElement: ElementRef;
 
-    constructor(private changeRef: ChangeDetectorRef) { }
+    constructor() { }
 
     get question(): Question {
         return this.responseItem.question;
-    }
-
-    onRadioToggle(option: any) {
-        if (this.responseItem.choice === option) {
-            this.responseItem.choice = undefined;
-            this.responseItem.textValue = null;
-        }
     }
 
     onOpenCheckChanged(checked: boolean) {
@@ -44,7 +36,6 @@ export class ResponseItemEditorComponent implements AfterViewInit {
             if (!this.responseItem.intValue || this.responseItem.intValue !== +this.rangeElement.nativeElement.value) {
                 setTimeout(() => {
                     this.responseItem.intValue = +this.rangeElement.nativeElement.value;
-                    this.changeRef.detectChanges();
                 }, 0);
             }
         }
