@@ -11,6 +11,6 @@ export class AwardFormViewerComponent {
     @Input() vm: any;
 
     expireClass(date: string): string {
-        return dayjs().isAfter(dayjs(date)) ? 'badge badge-danger' : 'badge';
+        return dayjs().isAfter(dayjs(date).add(1, 'day')) ? 'badge badge-danger' : 'badge';
     }
 }
