@@ -5,10 +5,10 @@ import { RouterModule } from '@angular/router';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { TaskFormViewerModule } from '../../../../settings/task/shared/form-viewer.module';
-
 import { PipesModule } from '../../../../settings/shared/common-pipes';
 
 import { TaskListComponent } from './task-list.component';
+import { TaskItemComponent } from './task-item';
 
 @NgModule({
     imports: [
@@ -20,9 +20,11 @@ import { TaskListComponent } from './task-list.component';
     ],
     declarations: [
         TaskListComponent,
+        TaskItemComponent,
     ],
     exports: [
         TaskListComponent,
+        TaskItemComponent,
     ],
 })
 export class TaskListModule { }

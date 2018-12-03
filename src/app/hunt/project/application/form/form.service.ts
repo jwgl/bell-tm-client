@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Http, RestEditService } from 'core/rest';
 import { AuthService } from 'core/auth';
@@ -12,15 +13,17 @@ export class ProjectFormService extends RestEditService {
     constructor(
         http: Http,
         authService: AuthService,
-        @Inject('PROJECT_API_URL') apiUrl: string,
+        @Inject('PROJECT_API_URL')
+        apiUrl: string,
         @Inject('TASKPUBLIC_API_URL')
-        private reviewTaskURL: string,
+        private taskApiUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
-        reviewTaskURL = reviewTaskURL.replace('${userId}', authService.userInfo.id);
+        this.taskApiUrl = this.taskApiUrl.replace('${userId}', authService.userInfo.id);
+        console.log(this.taskApiUrl);
     }
 
-    save(id: number, form: any): Observable<any> {
+    save<T>(id: number, form: any): Observable<any> {
         if (id) {
             return this.update(id, form);
         } else {
@@ -29,18 +32,18 @@ export class ProjectFormService extends RestEditService {
     }
 
     loadTaskList(): Observable<any> {
-        return this.http.get(`${this.reviewTaskURL}`);
+        return this.http.get(`${this.taskApiUrl}`);
     }
 
-    loadTaskItem(id: number): Observable<any> {
-        return this.http.get(`${this.reviewTaskURL}/${id}`);
+    loadTaskItem<T>(id: number): Observable<any> {
+        return this.http.get(`${this.taskApiUrl}/${id}`);
     }
 
     getUploadUrl(options: { [key: string]: any } = {}): string {
         return `/zuul${this.api.list()}/upload?taskId=${options.taskId}`;
     }
 
-    getDownloadUrl(id: any): string {
+    getDownloadUrl(id: number): string {
         return `${this.api.item(id)}/attachments`;
     }
 }

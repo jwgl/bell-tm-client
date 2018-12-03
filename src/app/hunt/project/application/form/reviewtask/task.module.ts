@@ -6,8 +6,9 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { PipesModule } from '../../../../settings/shared/common-pipes';
 import { TaskFormViewerModule } from '../../../../settings/task/shared/form-viewer.module';
+import { ProjectListModule } from '../list/form-list.module';
 
-import { TaskItemComponent} from './item';
+import { TaskItemComponent } from './item';
 import { TaskListComponent } from './list';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { TaskListComponent } from './list';
         TaskFormViewerModule,
         RouterModule,
         PipesModule,
+        ProjectListModule,
     ],
     declarations: [
         TaskItemComponent,
@@ -27,4 +29,4 @@ import { TaskListComponent } from './list';
         TaskListComponent,
     ],
 })
-export class TaskModule {}
+export class TaskModule { }

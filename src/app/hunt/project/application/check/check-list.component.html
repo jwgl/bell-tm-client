@@ -1,4 +1,4 @@
-<div  class="container">
+<div class="container">
     <table class="table" *ngIf="list; else empty">
         <thead>
             <tr>
@@ -11,6 +11,7 @@
                 <th>项目来源</th>
                 <th>{{dateLabel}}</th>
                 <th>状态</th>
+                <th *ngIf="isFinal">终审结论</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +25,15 @@
                     <td>{{item.subtype}}</td>
                     <td>{{item.origin}}</td>
                     <td>{{item.date | date: 'yyyy-MM-dd'}}</td>
-                    <td><audit-status [status]="item.status"></audit-status></td>
+                    <td>
+                        <audit-status [status]="item.status"></audit-status>
+                    </td>
+                    <td *ngIf="isFinal">{{getFinalConclusion(item) | conclusion: 'text'}}</td>
                 </tr>
             </ng-template>
         </tbody>
     </table>
-    <ng-template #empty><div class="alert alert-info">暂无数据</div></ng-template>
+    <ng-template #empty>
+        <div class="alert alert-info">暂无数据</div>
+    </ng-template>
 </div>

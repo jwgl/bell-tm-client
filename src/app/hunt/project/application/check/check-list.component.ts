@@ -5,6 +5,7 @@ import { CheckService } from './check.service';
 
 const dateLabels: { [key: string]: string } = {
     todo: '申请时间',
+    next: '审核时间',
     done: '审核时间',
     undefined: '申请时间',
 };
@@ -21,6 +22,7 @@ export class ApplicationCheckListComponent {
         private service: CheckService,
         route: ActivatedRoute,
     ) {
+        console.log('list');
         route.params.subscribe(params => {
             this.type = params['type'];
             this.service.loadList({
@@ -32,5 +34,23 @@ export class ApplicationCheckListComponent {
 
     get dateLabel(): string {
         return dateLabels[this.type];
+    }
+
+    get isFinal(): boolean {
+        return this.type === 'done';
+    }
+
+    getFinalConclusion(item: any) {
+        if (item) {
+            switch (item.level) {
+                case 'UNIVERSITY':
+                    return item.conclusionOfUniversity;
+                case 'PROVINCE':
+                    return item.conclusionOfProvince;
+                default:
+                    return null;
+            }
+        }
+        return null;
     }
 }

@@ -18,11 +18,15 @@ export class CheckService extends RestShowService {
         private taskApiUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
-        taskApiUrl = taskApiUrl.replace('${userId}', authService.userInfo.id);
+        this.taskApiUrl = this.taskApiUrl.replace('${userId}', authService.userInfo.id);
     }
 
     loadTaskList(): Observable<any> {
         return this.http.get(`${this.taskApiUrl}`);
+    }
+
+    loadTaskItem<T>(id: number): Observable<any> {
+        return this.http.get(`${this.taskApiUrl}/${id}`);
     }
 
     loadApplicationItem(workitem: string, id: number, type: string): Observable<any> {

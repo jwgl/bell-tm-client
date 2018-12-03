@@ -97,7 +97,7 @@ export class ProjectFormEditorComponent {
             this.saving = true;
             this.service.save(this.form.id, this.form.toServerDto()).subscribe(id => {
                 this.dialogs.confirm('', `“${this.form.name}” 保存成功！`).then(() =>
-                    this.router.navigate(['../../', id], { relativeTo: this.route }));
+                    this.router.navigate(['../applications', id], { relativeTo: this.route }));
             });
         }
     }

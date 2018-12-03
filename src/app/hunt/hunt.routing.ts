@@ -14,7 +14,7 @@ const routes: Routes = [{
     path: 'settings/checkers',
     loadChildren: './settings/checker/form/checker.module#CheckerFormModule',
 }, {
-    path: 'teachers/:userId/applications',
+    path: 'teachers/:userId/tasks',
     loadChildren: './project/application/form/form.module#ProjectModule',
 }, {
     path: 'checkers/:userId/tasks',

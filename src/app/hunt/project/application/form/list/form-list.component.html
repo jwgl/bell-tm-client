@@ -14,7 +14,7 @@
         <ng-template ngFor let-item [ngForOf]="list" let-i="index">
             <tr>
                 <td>{{i + 1}}</td>
-                <td><a [routerLink]="['../',item.id]">{{item.name}}</a></td>
+                <td><a [routerLink]="['applications/',item.id]">{{item.name}}</a></td>
                 <td>{{item.level | level: 'text'}}</td>
                 <td>{{item.subtype}}</td>
                 <td>{{item.origin}}</td>

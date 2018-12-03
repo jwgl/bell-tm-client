@@ -17,6 +17,13 @@ export enum Conclusion {
     DELAY // 暂缓通过
 }
 
+export enum ProjectStatus {
+    CREATED, // 未立项
+    INHAND, // 在研
+    FINISHED, // 结题
+    CUTOUT // 终止
+}
+
 type ReviewTypeInfo = { [key in ReviewType]: { text: string, class: string } };
 
 export const typeLabels: ReviewTypeInfo = {
@@ -40,6 +47,15 @@ export const conclusionLabels: ConclusionInfo = {
     [Conclusion.OK]: { text: '通过', class: 'badge-success' },
     [Conclusion.VETO]: { text: '不通过', class: 'badge-danger' },
     [Conclusion.DELAY]: { text: '暂缓通过', class: 'badge-warning' },
+};
+
+type ProjectStatusInfo = { [key in ProjectStatus]: { text: string, class: string } };
+
+export const projectStatusLabels: ProjectStatusInfo = {
+    [ProjectStatus.CREATED]: { text: '未立项', class: 'badge-secondary' },
+    [ProjectStatus.INHAND]: { text: '在研', class: 'badge-info' },
+    [ProjectStatus.FINISHED]: { text: '结题', class: 'badge-success' },
+    [ProjectStatus.CUTOUT]: { text: '终止', class: 'badge-danger' },
 };
 
 export const TypeList = [

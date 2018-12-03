@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { TaskForm } from '../../../../settings/task/shared/form.model';
-import { ProjectFormService } from '../form.service';
+import { CheckService } from '../check.service';
 
 @Component({
-    templateUrl: 'item.html',
+    templateUrl: 'task-item.html',
 })
 export class TaskItemComponent {
     task: TaskForm;
@@ -13,10 +13,10 @@ export class TaskItemComponent {
 
     constructor(
         private route: ActivatedRoute,
-        private service: ProjectFormService,
+        private service: CheckService,
     ) {
         const params = this.route.snapshot.params;
-        this.service.loadTaskItem<{ task: any, applications: any }>(params['id']).subscribe(dto => {
+        this.service.loadTaskItem<{ task: any, applications: any }>(params['taskId']).subscribe(dto => {
             this.task = new TaskForm(dto.task);
             this.applications = dto.applications;
         });

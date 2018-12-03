@@ -10,22 +10,23 @@
                 <th>未审数</th>
                 <th>通过数</th>
                 <th>不通过数</th>
+                <th>终审</th>
             </tr>
         </thead>
         <tbody>
             <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
                 <tr>
                     <td>{{i + 1}}</td>
-                    <td class="expand"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
+                    <td class="expand"><a [routerLink]="[task.id]">{{task.title}}</a></td>
                     <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
                     <td class="date">{{task.endDate}}</td>
                     <td>{{task.countProject}}</td>
-                    <td><a [routerLink]="[task.id, 'todo']">{{task.countUncheck}}</a></td>
-                    <td><a [routerLink]="[task.id, 'done']">{{task.countPass}}</a></td>
-                    <td><a [routerLink]="[task.id, 'expr']">{{task.countFail}}</a></td>
+                    <td><a [routerLink]="[task.id, 'todo']"><span class="badge badge-pill badge-secondary">{{task.countUncheck}}</span></a></td>
+                    <td><a [routerLink]="[task.id, 'next']"><span class="badge badge-pill badge-success">{{task.countPass}}</span></a></td>
+                    <td><a [routerLink]="[task.id, 'expr']"><span class="badge badge-pill badge-warning">{{task.countFail}}</span></a></td>
+                    <td><a [routerLink]="[task.id, 'done']"><span class="badge badge-pill badge-info">{{task.countFinal}}</span></a></td>
                 </tr>
             </ng-template>
         </tbody>
     </table>
 </ng-container>
-<tm-task-form-overlay #overlay></tm-task-form-overlay>

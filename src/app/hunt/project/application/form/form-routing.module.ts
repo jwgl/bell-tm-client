@@ -11,11 +11,11 @@ import { TaskListComponent } from './reviewtask/list';
 
 const routes: Routes = [
     { path: '', component: TaskListComponent},
-    { path: 'taskList/:id', component: TaskItemComponent },
-    { path: 'list', component: ProjectListComponent },
-    { path: 'create/:reviewTaskId', component: ProjectFormEditorComponent, data: { mode: EditMode.Create }},
-    { path: ':id/edit', component: ProjectFormEditorComponent, data: { mode: EditMode.Edit }},
-    { path: ':id', component: ProjectItemComponent },
+    { path: ':reviewTaskId/applications/:id', component: ProjectItemComponent },
+    // { path: 'list', component: ProjectListComponent },
+    { path: ':reviewTaskId/create', component: ProjectFormEditorComponent, data: { mode: EditMode.Create }},
+    { path: ':id/applications/:applicationId/edit', component: ProjectFormEditorComponent, data: { mode: EditMode.Edit }},
+    { path: ':id', component: TaskItemComponent },
 ];
 
 @NgModule({
