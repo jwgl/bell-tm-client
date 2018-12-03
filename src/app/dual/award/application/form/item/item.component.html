@@ -15,5 +15,7 @@
             <button [workflow-next]="nextOptions" (nexted)="onItemLoaded($event)" *ngIf="nextAble">下一步</button>
         </div>
     </div>
+    <p class="form-control-plaintext text-info mb-2" *ngIf="latestAnswer">最新批复： {{latestAnswer}} <button
+            [workflow-workitems]="vm.workflowInstanceId" class="btn-sm">>>></button></p>
     <tm-application-form-viewer [vm]="vm" [fileNames]="fileNames" [paperForm]="paperForm"></tm-application-form-viewer>
 </ng-container>
