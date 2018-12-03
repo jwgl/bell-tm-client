@@ -28,11 +28,12 @@ export class ApplicationCheckItemComponent {
     }
 
     onItemLoaded(dto: any) {
+        console.log(dto);
         this.form = new ProjectForm(dto.form);
         this.wi = dto.workitemId;
         this.prevId = dto.prevId;
         this.nextId = dto.nextId;
-        this.rollbackAble = dto.rollbackAble;
+        this.rollbackAble = dto.rollbackAble && this.form.isValidDate;
     }
 
     get reviewable(): boolean {

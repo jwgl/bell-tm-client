@@ -9,7 +9,7 @@ import { WorkflowRollbackDialog } from './rollback.dialog';
 })
 export class WorkflowRollbackButtonDirective {
     @Input('workflow-rollback') options: RevokeOptions;
-    @Output() revoked = new EventEmitter<any>();
+    @Output() rollbacked = new EventEmitter<any>();
     pending = false;
 
     constructor(
@@ -28,7 +28,7 @@ export class WorkflowRollbackButtonDirective {
                 comment: result.comment,
             }).subscribe(data => {
                 this.pending = false;
-                this.revoked.emit(data);
+                this.rollbacked.emit(data);
             }, (error) => {
                 this.pending = false;
                 alert(error.message);
