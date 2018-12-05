@@ -48,7 +48,10 @@ export class BookingFormEditorComponent {
         this.form.department = this.departments.find(it => it.id === dto.form.departmentId);
         this.bookingTypes = dto.bookingTypes;
         if (!this.form.id) {
-            this.form.bookingType = this.bookingTypes[0];
+            this.form.bookingType = this.bookingTypes.find(it => it.name === '学生活动');
+            if (!this.form.bookingType) {
+                this.form.bookingType = this.bookingTypes[0];
+            }
         } else {
             this.form.bookingType = this.bookingTypes.find(it => it.id === dto.form.bookingTypeId);
         }
@@ -63,7 +66,10 @@ export class BookingFormEditorComponent {
     onDepartmentChanged(department: Department) {
         this.service.getDepartmentBookingType(department.id).subscribe(bookingTypes => {
             this.bookingTypes = bookingTypes;
-            this.form.bookingType = this.bookingTypes[0];
+            this.form.bookingType = this.bookingTypes.find(it => it.name === '学生活动');
+            if (!this.form.bookingType) {
+                this.form.bookingType = this.bookingTypes[0];
+            }
         });
     }
 
