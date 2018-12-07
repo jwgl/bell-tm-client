@@ -32,6 +32,7 @@ export class PlaceUsageComponent implements OnInit {
         pk: { label: '上课', class: 'badge-primary' },
         bk: { label: '上课', class: 'badge-primary' },
         ty: { label: '体育', class: 'badge-primary' },
+        tk: { label: '调课', class: 'badge-warning' },
         qt: { label: '其它', class: 'badge-primary' },
         ks: { label: '考试', class: 'badge-danger' },
         fsks: { label: '考试', class: 'badge-danger' },
@@ -66,8 +67,9 @@ export class PlaceUsageComponent implements OnInit {
     placeChanged(placeId: string) {
         this.usageMap = {};
         this.loading = true;
+        $('[data-toggle="tooltip"]').tooltip('dispose');
         this.service.loadUsage(this.selectedBuilding, placeId).subscribe(placeUsages => {
-            placeUsages.filter(placeUsage => placeUsage && !placeUsage.description.endsWith('【换教师】')).forEach(placeUsage => {
+            placeUsages.forEach(placeUsage => {
                 for (let section = placeUsage.startSection; section < placeUsage.startSection + placeUsage.totalSection; section++) {
                     if (!this.usageMap[section]) {
                         this.usageMap[section] = {};
@@ -86,9 +88,11 @@ export class PlaceUsageComponent implements OnInit {
                     });
                 });
             });
+
             setTimeout(() => {
                 $('[data-toggle="tooltip"]').tooltip({ html: true });
             }, 0);
+
             this.loading = false;
         });
     }
