@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-expand">
     <thead>
         <tr>
             <th>序号</th>
@@ -14,7 +14,7 @@
         <ng-template ngFor let-item [ngForOf]="list" let-i="index">
             <tr>
                 <td>{{i + 1}}</td>
-                <td><a [routerLink]="['applications/',item.id]">{{item.name}}</a></td>
+                <td class="expand"><a [routerLink]="['applications/',item.id]">{{item.name}}</a></td>
                 <td>{{item.level | level: 'text'}}</td>
                 <td>{{item.subtype}}</td>
                 <td>{{item.origin}}</td>

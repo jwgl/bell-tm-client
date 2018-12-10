@@ -21,4 +21,8 @@ export class TaskItemComponent {
             this.vm = new TaskForm(dto);
         });
     }
+
+    get selectAble(): boolean {
+        return this.vm.type === 'CHECK';
+    }
 }

@@ -1,0 +1,35 @@
+<div class="btn-toolbar">
+    <div class="ml-auto">
+        <button class="btn btn-secondary" (click)="query()">查询</button>
+    </div>
+</div>
+<table class="table table-expand">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>项目名称</th>
+            <th>项目编号</th>
+            <th>等级</th>
+            <th>项目类型</th>
+            <th>单位</th>
+            <th>立项时间</th>
+            <th>中期</th>
+            <th>结题</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td class="expand"><a [routerLink]="['applications/',item.id]">{{item.name}}</a></td>
+                <td>{{item.code}}</td>
+                <td>{{item.level | level : 'text'}}</td>
+                <td>{{item.subtype}}</td>
+                <td>{{item.departmentName}}</td>
+                <td>{{item.dateStart | date: 'yyyy-MM'}}</td>
+                <td>{{item.middleYear}}</td>
+                <td>{{item.knotYear}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

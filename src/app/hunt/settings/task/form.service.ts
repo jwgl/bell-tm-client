@@ -24,4 +24,12 @@ export class FormService extends RestEditService {
             return this.create(form);
         }
     }
+
+    loadDataForProjectOptions<T>(id: number): Observable<any> {
+        return this.http.get<T>(`${this.api.item(id)}/projects/create`);
+    }
+
+    loadProjects<T>(id: number, params?: { [param: string]: string | string[] }): Observable<any> {
+        return this.http.get<T>(`${this.api.item(id)}/projects`, params);
+    }
 }

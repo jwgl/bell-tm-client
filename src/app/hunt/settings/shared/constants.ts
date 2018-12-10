@@ -76,3 +76,9 @@ export const ConclusionList = [
     { label: '不通过', value: 'VETO' },
     { label: '暂缓通过', value: 'DELAY' },
 ];
+
+export const ReportTypeList = [
+    { label: '年度', value: 2 },
+    { label: '中期', value: 3 },
+    { label: '结题', value: 4 },
+];

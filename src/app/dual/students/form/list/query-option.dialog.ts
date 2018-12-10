@@ -14,15 +14,15 @@ export class QueryDialog extends BaseDialog {
     regions: any[];
     grades: any[];
     subjects: any[];
-    options: any = {};
+    queryOptions: any = {};
 
     constructor(private service: StudentAdminFormService) {
         super();
     }
 
     get validate(): boolean {
-        return !(this.options.groupId || this.options.subjectId ||
-            this.options.grade || this.options.studentName || this.options.studentId);
+        return !(this.queryOptions.groupId || this.queryOptions.subjectId ||
+            this.queryOptions.grade || this.queryOptions.studentName || this.queryOptions.studentId);
     }
 
     protected onOpening(): Observable<any> {
@@ -35,6 +35,6 @@ export class QueryDialog extends BaseDialog {
     }
 
     protected onConfirmed(): any {
-        return this.options;
+        return this.queryOptions;
     }
 }

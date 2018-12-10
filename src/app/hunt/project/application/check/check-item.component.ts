@@ -28,7 +28,6 @@ export class ApplicationCheckItemComponent {
     }
 
     onItemLoaded(dto: any) {
-        console.log(dto);
         this.form = new ProjectForm(dto.form);
         this.wi = dto.workitemId;
         this.prevId = dto.prevId;

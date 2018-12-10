@@ -5,12 +5,14 @@ import { EditMode } from 'core/constants';
 
 import { TaskFormEditorComponent } from './editor/form-editor.component';
 import { TaskItemComponent } from './item/item.component';
+import { ProjectSelectComponent } from './item/project-select.component';
 import { TaskListComponent } from './list/form-list.component';
 
 const routes: Routes = [
     { path: '', component: TaskListComponent },
     { path: 'editor', component: TaskFormEditorComponent, data: { mode: EditMode.Create } },
     { path: ':id/edit', component: TaskFormEditorComponent, data: { mode: EditMode.Edit } },
+    { path: ':id/projectSelect', component: ProjectSelectComponent },
     { path: ':id', component: TaskItemComponent },
 ];
 

@@ -24,7 +24,7 @@
                     <span *ngIf="type.periodOfProvince" class="mr-2">省级：{{type.periodOfProvince}} </span>
                     <span *ngIf="type.periodOfNation" class="mr-2">国家级：{{type.periodOfNation}} </span>
                 </td>
-                <td>{{type.enabled}}</td>
+                <td>{{type.enabled ? '是' : '否'}}</td>
             </tr>
         </ng-template>
     </tbody>
