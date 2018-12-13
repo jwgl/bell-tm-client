@@ -2,7 +2,6 @@ import { Component, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Dialog } from 'core/dialogs';
-
 import { CheckboxSelectorComponent } from 'core/common-directives';
 
 import { TeamDialog } from './expert-team.dialog';

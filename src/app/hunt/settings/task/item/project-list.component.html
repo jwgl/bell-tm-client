@@ -1,13 +1,13 @@
-<div class="btn-toolbar">
-    <div class="ml-auto">
-        <button class="btn btn-secondary" (click)="query()">查询</button>
-        <button class="btn btn-secondary ml-2" (click)="addForCheck()">加入检查</button>
-    </div>
-</div>
-<table class="table table-expand">
+<ul class="nav nav-tabs mb-p10">
+    <li *ngFor="let item of options" class="nav-item mr-1">
+        <a class="nav-link" [routerLink]="['../', item.type]" routerLinkActive="active">{{item.label}}
+            <span class="badge badge-pill badge-secondary">{{item.count}}</span>
+        </a>
+    </li>
+</ul>
+<table class="table table-expand" *ngIf="list">
     <thead>
         <tr>
-            <th><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
             <th>序号</th>
             <th>项目名称</th>
             <th>项目编号</th>
@@ -17,16 +17,14 @@
             <th>立项时间</th>
             <th>中期</th>
             <th>结题</th>
+            <th>状态</th>
         </tr>
     </thead>
     <tbody>
         <ng-template ngFor let-item [ngForOf]="list" let-i="index">
             <tr>
-                <td>
-                    <checkbox-selector [data]="item"></checkbox-selector>
-                </td>
-                <td>{{i + 1}}</td>
-                <td class="expand">{{item.name}}</td>
+                <td><div class="btn btn-outline-ligth btn-sm" (click)="remove(item)" *ngIf="removable(item)"> <fa-icon icon="times"></fa-icon></div>{{i + 1}}</td>
+                <td class="expand"><a [routerLink]="['../applications/',item.id]">{{item.name}}</a></td>
                 <td>{{item.code}}</td>
                 <td>{{item.level | level : 'text'}}</td>
                 <td>{{item.subtype}}</td>
@@ -34,6 +32,9 @@
                 <td>{{item.dateStart | date: 'yyyy-MM'}}</td>
                 <td>{{item.middleYear}}</td>
                 <td>{{item.knotYear}}</td>
+                <td>
+                    <audit-status [status]="item.status"></audit-status>
+                </td>
             </tr>
         </ng-template>
     </tbody>

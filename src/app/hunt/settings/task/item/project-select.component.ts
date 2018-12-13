@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Dialog } from 'core/dialogs';
+import { CheckboxSelectorComponent } from 'core/common-directives';
 
 import { ProjectOptionDialog } from './project-option.dialog';
 import { FormService } from '../form.service';
@@ -10,6 +11,7 @@ import { FormService } from '../form.service';
     templateUrl: 'project-select.component.html',
 })
 export class ProjectSelectComponent {
+    @ViewChildren(CheckboxSelectorComponent) selectors: QueryList<CheckboxSelectorComponent>;
     departments: any;
     subtypes: any;
     middleYears: any;
@@ -21,6 +23,7 @@ export class ProjectSelectComponent {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private service: FormService,
         private dialog: Dialog,
     ) {
@@ -41,8 +44,24 @@ export class ProjectSelectComponent {
             middleYears: this.middleYears,
             knotYears: this.knotYears,
         }).then(result => {
-            this.reportType = result.reportType;
-            this.service.loadProjects(this.taskId, result).subscribe(dto => this.list = dto);
+            if (result.reportType) {
+                this.reportType = result.reportType;
+                result.queryType = 'forCheck';
+                this.service.loadProjects(this.taskId, result).subscribe(dto => this.list = dto);
+            } else {
+                alert('请先选择检查阶段！');
+            }
+        });
+    }
+
+    checkAll(checked: boolean) {
+        this.selectors.forEach(checkbox => checkbox.checked = checked);
+    }
+
+    addForCheck() {
+        const idList = this.selectors.filter(d => d.checked).map(s => s.data.id);
+        this.service.batchCreateReview(this.taskId, this.reportType, idList).subscribe(() => {
+            this.router.navigate(['../'], { relativeTo: this.route });
         });
     }
 

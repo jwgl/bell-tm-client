@@ -32,4 +32,16 @@ export class FormService extends RestEditService {
     loadProjects<T>(id: number, params?: { [param: string]: string | string[] }): Observable<any> {
         return this.http.get<T>(`${this.api.item(id)}/projects`, params);
     }
+
+    batchCreateReview(taskId: number, reportType: number, ids: any): Observable<any> {
+        return this.http.post(`${this.api.item(taskId)}/projects`, {reportType: reportType, ids: ids});
+    }
+
+    loadProjectItem<T>(taskId: number, id: number): Observable<any> {
+        return this.http.get<T>(`${this.api.item(taskId)}/applications/${id}`);
+    }
+
+    getDownloadUrl(taskId: any, id: any): string {
+        return `${this.api.item(taskId)}/applications/${id}/attachments`;
+    }
 }

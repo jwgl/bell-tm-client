@@ -16,13 +16,13 @@
             <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
                 <tr>
                     <td>{{i + 1}}</td>
-                    <td class="expand"><a class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</a></td>
+                    <td class="expand"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
                     <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
                     <td class="date">{{task.endDate}}</td>
                     <td>{{task.countProject}}</td>
-                    <td><a [routerLink]="[task.id, 'todo']">{{task.countUncheck}}</a></td>
-                    <td><a [routerLink]="[task.id, 'done']">{{task.countPass}}</a></td>
-                    <td><a [routerLink]="[task.id, 'expr']">{{task.countFail}}</a></td>
+                    <td><a [routerLink]="[task.id, 'todo']"><span class="badge badge-pill badge-secondary">{{task.countUncheck}}</span></a></td>
+                    <td><a [routerLink]="[task.id, 'done']"><span class="badge badge-pill badge-secondary">{{task.countPass}}</span></a></td>
+                    <td><a [routerLink]="[task.id, 'expr']"><span class="badge badge-pill badge-secondary">{{task.countFail}}</span></a></td>
                 </tr>
             </ng-template>
         </tbody>
