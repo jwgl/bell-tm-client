@@ -18,6 +18,8 @@ import { ApplicationApprovalItemComponent } from './approval-item.component';
 import { ApplicationApprovalListComponent } from './approval-list.component';
 import { TeamDialog } from './expert-team.dialog';
 import { ConclusionDialog } from './conclusion.dialog';
+import { ApplicationAdministrationModule } from './administration/administration.module';
+import { AdministrationService } from './administration/administration.service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -40,6 +42,7 @@ library.add(faLock, faLockOpen, faUser);
         ApplicationApprovalRoutingModule,
         PipesModule,
         TaskListModule,
+        ApplicationAdministrationModule,
     ],
     declarations: [
         ApplicationApprovalListComponent,
@@ -50,6 +53,7 @@ library.add(faLock, faLockOpen, faUser);
     providers: [
         Dialog,
         ApprovalService,
+        AdministrationService,
         { provide: 'APPROVAL_API_URL', useValue: '/api/hunt/approvers/${userId}/applications' },
         { provide: 'TASK_APPROVAL_API_URL', useValue: '/api/hunt/approvers/${userId}/tasks' },
         { provide: 'TASK_API_URL', useValue: '/api/hunt/settings/tasks' },

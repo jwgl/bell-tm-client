@@ -20,7 +20,7 @@ export class ApprovalService extends RestEditService {
         private teamApiUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
-        taskApiUrl = taskApiUrl.replace('${userId}', authService.userInfo.id);
+        this.taskApiUrl = this.taskApiUrl.replace('${userId}', authService.userInfo.id);
     }
 
     batchUpdate(value: any): Observable<any> {

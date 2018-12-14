@@ -19,10 +19,10 @@
                     <td class="expand"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
                     <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
                     <td class="date">{{task.endDate}}</td>
-                    <td>{{task.countProject}}</td>
-                    <td><a [routerLink]="[task.id, 'todo']"><span class="badge badge-pill badge-secondary">{{task.countUncheck}}</span></a></td>
-                    <td><a [routerLink]="[task.id, 'done']"><span class="badge badge-pill badge-secondary">{{task.countPass}}</span></a></td>
-                    <td><a [routerLink]="[task.id, 'expr']"><span class="badge badge-pill badge-secondary">{{task.countFail}}</span></a></td>
+                    <td><a [routerLink]="[task.id, 'administration']" *ngIf="task.countProject"><span class="badge badge-pill badge-secondary">{{task.countProject}}</span></a></td>
+                    <td><a [routerLink]="[task.id, 'todo']" *ngIf="task.countUncheck"><span class="badge badge-pill badge-secondary">{{task.countUncheck}}</span></a></td>
+                    <td><a [routerLink]="[task.id, 'done']" *ngIf="task.countPass"><span class="badge badge-pill badge-secondary">{{task.countPass}}</span></a></td>
+                    <td><a [routerLink]="[task.id, 'expr']" *ngIf="task.countFail"><span class="badge badge-pill badge-secondary">{{task.countFail}}</span></a></td>
                 </tr>
             </ng-template>
         </tbody>

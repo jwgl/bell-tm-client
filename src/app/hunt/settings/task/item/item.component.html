@@ -6,5 +6,7 @@
         </div>
     </div>
     <tm-task-form-viewer [vm]="vm"></tm-task-form-viewer>
-    <router-outlet></router-outlet>
+    <ng-container *ngIf="selectAble">
+        <router-outlet></router-outlet>
+    </ng-container>
 </ng-container>

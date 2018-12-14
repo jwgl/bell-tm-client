@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Http, RestEditService } from 'core/rest';
 import { AuthService } from 'core/auth';
@@ -38,10 +39,14 @@ export class FormService extends RestEditService {
     }
 
     loadProjectItem<T>(taskId: number, id: number): Observable<any> {
-        return this.http.get<T>(`${this.api.item(taskId)}/applications/${id}`);
+        return this.http.get<T>(`${this.api.item(taskId)}/projects/${id}`);
     }
 
     getDownloadUrl(taskId: any, id: any): string {
-        return `${this.api.item(taskId)}/applications/${id}/attachments`;
+        return `${this.api.item(taskId)}/projects/${id}/attachments`;
+    }
+
+    removeProject<T>(taskId: number, id: number): Observable<any> {
+        return this.http.delete<T>(`${this.api.item(taskId)}/projects/${id}`).pipe(map(_ => id));
     }
 }
