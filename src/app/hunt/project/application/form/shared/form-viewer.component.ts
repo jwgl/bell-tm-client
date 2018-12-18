@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { FileTypes } from '../../shared/constants';
+import { FileTypes, ContentLabels } from '../../shared/constants';
 
+const TitleType = ['项目申报', '年度检查验收', '中期检查验收', '结项检查验收'];
 @Component({
     selector: 'tm-project-form-viewer',
     styleUrls: ['form-viewer.component.scss'],
@@ -40,6 +41,22 @@ export class FormViewerComponent {
         } else {
             return '';
         }
+    }
+
+    get title(): string {
+        return `${TitleType[this.vm.reportType - 1]} #${this.vm.id}`;
+    }
+
+    get contentLabel(): string {
+        return this.vm.reportType ? ContentLabels.content[this.vm.reportType] : '';
+    }
+
+    get furtherLabel(): string {
+        return this.vm.reportType ? ContentLabels.further[this.vm.reportType] : '';
+    }
+
+    get otherLabel(): string {
+        return this.vm.reportType ? ContentLabels.other[this.vm.reportType] : '';
     }
 
     getExt(fileName: string): string {

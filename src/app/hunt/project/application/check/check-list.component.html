@@ -8,7 +8,6 @@
                 <th>电话</th>
                 <th>等级</th>
                 <th>项目类型</th>
-                <th>项目来源</th>
                 <th>{{dateLabel}}</th>
                 <th>状态</th>
                 <th *ngIf="isFinal">终审结论</th>
@@ -23,7 +22,6 @@
                     <td>{{item.phone}}</td>
                     <td>{{item.level | level: 'text'}}</td>
                     <td>{{item.subtype}}</td>
-                    <td>{{item.origin}}</td>
                     <td>{{item.date | date: 'yyyy-MM-dd'}}</td>
                     <td>
                         <audit-status [status]="item.status"></audit-status>

@@ -42,7 +42,7 @@ export class ProjectFormEditorComponent {
         this.editMode = this.route.snapshot.data['mode'];
         const params = this.route.snapshot.params;
         if (this.editMode === EditMode.Edit) {
-            this.service.loadItemForEdit(params['id']).subscribe(dto => this.loadData(dto));
+            this.service.loadItemForEdit(params['applicationId']).subscribe(dto => this.loadData(dto));
         } else {
             this.service.loadDataForCreate().subscribe(dto => {
                 this.loadData(dto);
@@ -69,6 +69,12 @@ export class ProjectFormEditorComponent {
                 validation.push(`${value}为空`);
             }
         });
+        if (this.form.content && this.form.content.length > 1500) {
+            validation.push('主要内容不要超过1500字！');
+        }
+        if (this.form.achievements && this.form.achievements.length > 1500) {
+            validation.push('预期成果不要超过1500字！');
+        }
         return validation;
     }
 

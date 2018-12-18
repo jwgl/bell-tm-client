@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { WorkflowModule } from 'core/workflow';
 
+import { InspectModule } from './inspect/inspect.module';
 import { RoutingModule } from './form-routing.module';
 import { ProjectFormEditorModule } from './editor/form-editor.module';
 import { ProjectFormService } from './form.service';
@@ -19,6 +20,7 @@ import { TaskModule } from './reviewtask/task.module';
         ProjectListModule,
         RoutingModule,
         TaskModule,
+        InspectModule,
         WorkflowModule,
     ],
     providers: [

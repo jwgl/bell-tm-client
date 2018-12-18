@@ -4,8 +4,9 @@
             <button [workflow-workitems]="vm.workflowInstanceId">流程</button>
         </div>
         <div class="btn-group ml-2" *ngIf="editAble">
-            <button class="btn btn-warning" (click)="remove()">删除</button>
-            <button class="btn btn-secondary" routerLink="edit">编辑</button>
+            <button class="btn btn-secondary" (click)="inspect()" *ngIf="!removAble" [disabled]="saving">验收填报</button>
+            <button class="btn btn-warning" (click)="remove()" *ngIf="removAble">删除</button>
+            <button class="btn btn-secondary" routerLink="edit" *ngIf="removAble">编辑</button>
             <button [workflow-submit]="submitOptions" (submitted)="loadData(vm.id)" *ngIf="submitAble">提交</button>
         </div>
     </div>

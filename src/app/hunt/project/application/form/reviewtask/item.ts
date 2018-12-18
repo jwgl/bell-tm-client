@@ -21,4 +21,8 @@ export class TaskItemComponent {
             this.applications = dto.applications;
         });
     }
+
+    get creatAble(): boolean {
+        return this.task.status === 'APPLICATION';
+    }
 }
