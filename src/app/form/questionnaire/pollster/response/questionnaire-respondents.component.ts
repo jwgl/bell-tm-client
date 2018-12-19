@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+
 import { Questionnaire } from '../../shared/questionnaire-form.model';
 import { QuestionnaireFormService } from '../questionnaire-form.service';
 
@@ -14,6 +15,9 @@ export class QuestionnaireRespondentsComponent {
     respondents: any[];
     showRespondents = false;
 
+    @ViewChild('respondentTable')
+    respondentTable: ElementRef;
+
     constructor(private service: QuestionnaireFormService, ) { }
 
     onViewRespondents() {
@@ -27,7 +31,8 @@ export class QuestionnaireRespondentsComponent {
         }
     }
 
-    copyTable(table: HTMLTableElement) {
+    copyTable() {
+        const table = this.respondentTable.nativeElement;
         const selection = window.getSelection();
         selection.removeAllRanges();
         const range = document.createRange();

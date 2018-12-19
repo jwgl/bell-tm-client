@@ -6,7 +6,6 @@ import { Question } from './questionnaire-form.model';
     selector: 'tm-ballot-question-form-viewer',
     styleUrls: ['ballot-question-form-viewer.component.scss'],
     templateUrl: 'ballot-question-form-viewer.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BallotQuestionFormViewerComponent {
     @Input()

@@ -32,7 +32,9 @@ export class ResponseFormEditorComponent implements AfterViewChecked {
                 this.loading = false;
             }, error => {
                 this.loading = false;
-                alert(error);
+                if (error.status !== 404) {
+                    alert(error.message);
+                }
             });
         });
     }

@@ -1,7 +1,7 @@
 <tm-question-form-viewer [question]="question">
     <div class="btn-group ml-auto">
-        <button class="btn btn-sm btn-outline-dark" (click)="onEdit()">编辑</button>
-        <button class="btn btn-sm btn-outline-dark" (click)="onRemove()">删除</button>
+        <button class="btn btn-sm btn-outline-dark" type="button" (click)="onEdit()">编辑</button>
+        <button class="btn btn-sm btn-outline-dark" type="button" (click)="onRemove()">删除</button>
         <ng-content></ng-content>
     </div>
 </tm-question-form-viewer>
