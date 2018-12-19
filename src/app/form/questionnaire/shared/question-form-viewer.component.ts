@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Question, QuestionOption } from './questionnaire-form.model';
 
@@ -6,7 +6,6 @@ import { Question, QuestionOption } from './questionnaire-form.model';
     selector: 'tm-question-form-viewer',
     styleUrls: ['question-form-viewer.component.scss'],
     templateUrl: 'question-form-viewer.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionFormViewerComponent {
     @Input()
