@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Subject } from 'rxjs';
+
 import { AdministrationService } from './administration.service';
+import { Review } from './review.model';
 
 @Component({
     styleUrls: ['project-list.component.scss'],
     templateUrl: 'project-list.component.html',
 })
 export class ProjectListComponent {
-    list: any[];
+    list: Review[];
 
     taskId: number;
     type: string;
@@ -33,11 +36,15 @@ export class ProjectListComponent {
         );
     }
 
+    get cols(): number {
+        return this.existExpertReview ? 12 : 9;
+    }
+
     loadData() {
         this.service.loadProjects(this.taskId, {
             reportType: this.type,
         }).subscribe((dto: any) => {
-            this.list = dto.list;
+            this.list = dto.list ? dto.list.map(r => new Review(r)) : null;
             this.isCheckTime = dto.isCheckTime;
             this.existExpertReview = dto.existExpertReview;
             const counts = dto.counts;
@@ -48,5 +55,16 @@ export class ProjectListComponent {
                 }
             });
         });
+    }
+
+    toggle(subject: Subject<void>, review: Review): void {
+        if (review.expertReview) {
+            subject.next();
+        } else {
+            this.service.loadExpertReview(this.taskId, review.id).subscribe(dto => {
+                review.expertReview = dto;
+                subject.next();
+            });
+        }
     }
 }

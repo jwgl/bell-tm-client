@@ -28,7 +28,7 @@
                 <td>{{item.conclusion}}</td>
                 <td><button class="btn btn-secondary btn-sm" (click)="review(item.id)">{{item.dateReviewed ? '查看' :
                         '评审'}}</button>
-                    <button class="btn btn-secondary btn-sm ml-2" (click)="submit(item.id)" *ngIf="!item.dateReviewed">提交</button>
+                    <button class="btn btn-secondary btn-sm ml-2" (click)="submit(item.id)" *ngIf="item.submitAble">提交</button>
                 </td>
             </tr>
         </ng-template>

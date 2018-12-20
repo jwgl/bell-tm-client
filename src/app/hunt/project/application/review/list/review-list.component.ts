@@ -6,6 +6,7 @@ import { Dialog } from 'core/dialogs';
 import { ReviewService } from '../review.service';
 
 import { ReviewDialog } from './review.dialog';
+import { ExpertReview } from '../expert-review.model';
 
 @Component({
     styleUrls: ['review-list.component.scss'],
@@ -42,7 +43,7 @@ export class ReviewListComponent {
             reportType: reportTypes[reviewType],
             type: mode,
         }).subscribe((dto: any) => {
-            this.list = dto.list;
+            this.list = dto.list ? dto.list.map(r => new ExpertReview(r)) : null;
             this.counts = dto.counts;
             this.options[0].count = this.counts.todo;
             this.options[1].count = this.counts.done;
@@ -51,7 +52,7 @@ export class ReviewListComponent {
 
     review(id: number) {
         this.service.loadItem(id).subscribe(dto =>
-            this.dialog.open(ReviewDialog, {reviewInfo: dto}).then(result => {
+            this.dialog.open(ReviewDialog, { reviewInfo: dto }).then(result => {
                 this.service.update(id, result).subscribe(() => this.loadData(this.reviewType, this.type));
             })
         );

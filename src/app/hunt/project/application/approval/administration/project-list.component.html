@@ -8,6 +8,7 @@
 <table class="table table-expand" *ngIf="list">
     <thead>
         <tr>
+            <th></th>
             <th>序号</th>
             <th>项目名称</th>
             <th>项目编号</th>
@@ -27,7 +28,8 @@
     </thead>
     <tbody>
         <ng-template ngFor let-item [ngForOf]="list" let-i="index">
-            <tr>
+            <tr [ngClass]="{'table-active': e.expended}" (dblclick)="e.click()">
+                <td><tm-row-expender #e (toggle)="toggle($event, item)" [enabled]="true"></tm-row-expender></td>
                 <td> {{i + 1}} </td>
                 <td class="expand">{{item.name}}</td>
                 <td>{{item.code}}</td>
@@ -44,6 +46,26 @@
                 </ng-container>
                 <td>
                     <audit-status [status]="item.status"></audit-status>
+                </td>
+            </tr>
+            <tr *ngIf="e.expended" class="table-info">
+                <td colspan="2"></td>
+                <td [colSpan]="cols">
+                    <section>
+                        <label class="mr-2">项目名称</label>
+                        <span>{{item.name}}</span>
+                        <h6>学院意见</h6>
+                        <p>{{item.departmentOpinion}}</p>
+                    </section>
+                    <section *ngIf="existExpertReview">
+                        <h6>专家意见</h6>
+                        <ul class="list-unstyled mb-2">
+                            <li *ngFor="let expert of item.expertReview">
+                                <label class="badge badge-secondary">{{expert.name}}</label>
+                                <span class="ml-2">{{expert.opinion}}</span>
+                            </li>
+                        </ul>
+                    </section>
                 </td>
             </tr>
         </ng-template>
