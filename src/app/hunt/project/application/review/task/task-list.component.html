@@ -1,0 +1,26 @@
+<ng-container>
+    <table class="table table-expand">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>任务名称</th>
+                <th>项目周期</th>
+                <th>截止日期</th>
+                <th>项目数</th>
+                <th>未评数</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td class="expand"><a [routerLink]="[task.id]">{{task.title}}</a></td>
+                    <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
+                    <td class="date">{{task.endDate}}</td>
+                    <td><span class="badge badge-pill badge-info">{{task.countForReview}}</span></td>
+                    <td><span class="badge badge-pill badge-secondary">{{task.countUnReview}}</span></td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</ng-container>

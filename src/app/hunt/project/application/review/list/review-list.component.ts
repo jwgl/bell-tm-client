@@ -16,7 +16,8 @@ export class ReviewListComponent {
     list: any[];
 
     counts: any;
-    reviewType: number;
+    taskId: string;
+    reviewType: string;
     type: string;
 
     options = [
@@ -30,18 +31,20 @@ export class ReviewListComponent {
         private dialog: Dialog,
     ) {
         this.route.params.subscribe(params => {
+            this.taskId = params['taskId'];
             this.reviewType = params['reviewType'];
             this.type = params['type'];
-            this.loadData(this.reviewType, this.type);
+            this.loadData();
         }
         );
     }
 
-    loadData(reviewType: number, mode: string) {
-        const reportTypes = ['application', 'middle', 'knot'];
+    loadData() {
+        // const reportTypes = ['application', 'middle', 'knot'];
         this.service.loadList({
-            reportType: reportTypes[reviewType],
-            type: mode,
+            taskId: this.taskId,
+            reviewType: this.reviewType,
+            type: this.type,
         }).subscribe((dto: any) => {
             this.list = dto.list ? dto.list.map(r => new ExpertReview(r)) : null;
             this.counts = dto.counts;
@@ -53,12 +56,12 @@ export class ReviewListComponent {
     review(id: number) {
         this.service.loadItem(id).subscribe(dto =>
             this.dialog.open(ReviewDialog, { reviewInfo: dto }).then(result => {
-                this.service.update(id, result).subscribe(() => this.loadData(this.reviewType, this.type));
+                this.service.update(id, result).subscribe(() => this.loadData());
             })
         );
     }
 
     submit(id: number) {
-        this.service.submit(id).subscribe(() => this.loadData(this.reviewType, this.type));
+        this.service.submit(id).subscribe(() => this.loadData());
     }
 }

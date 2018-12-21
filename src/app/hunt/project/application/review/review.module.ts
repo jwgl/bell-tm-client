@@ -12,7 +12,7 @@ import { ReviewRoutingModule } from './review-routing.module';
 import { ReviewService } from './review.service';
 import { ReviewListComponent } from './list/review-list.component';
 import { ReviewDialog } from './list/review.dialog';
-import { ReviewComponent } from './review.component';
+import { TaskListModule } from './task/task-list.module';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -29,15 +29,16 @@ library.add(faSearch);
         CommonDialogsModule,
         FontAwesomeModule,
         PipesModule,
+        TaskListModule,
     ],
     declarations: [
         ReviewListComponent,
-        ReviewComponent,
         ReviewDialog,
     ],
     providers: [
         ReviewService,
-        {provide: 'REVIEW_API_URL', useValue: '/api/hunt/experts/${userId}/reviews' },
+        { provide: 'REVIEW_API_URL', useValue: '/api/hunt/experts/${userId}/reviews' },
+        { provide: 'TASK_EXPERT_API_URL', useValue: '/api/hunt/experts/${userId}/tasks' },
     ],
     entryComponents: [
         ReviewDialog,
