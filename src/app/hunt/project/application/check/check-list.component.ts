@@ -17,6 +17,12 @@ const dateLabels: { [key: string]: string } = {
 export class ApplicationCheckListComponent {
     list: any[];
     type: string;
+    options = [
+        { label: '未评审', type: 'todo', count: 0 },
+        { label: '通过', type: 'next', count: 0 },
+        { label: '退回', type: 'expr', count: 0 },
+        { label: '终审', type: 'done', count: 0 },
+    ];
 
     constructor(
         private service: CheckService,
@@ -27,8 +33,18 @@ export class ApplicationCheckListComponent {
             this.type = params['type'];
             this.service.loadList({
                 taskId: params['taskId'],
+                reviewType: params['reviewType'],
                 type: params['type'] ? params['type'] : null,
-            }).subscribe(dto => this.list = dto);
+            }).subscribe((dto: any) => {
+                this.list = dto.list;
+                const c = dto.counts;
+                if (c) {
+                    this.options[0].count = c.countUncheck;
+                    this.options[1].count = c.countPass;
+                    this.options[2].count = c.countFail;
+                    this.options[3].count = c.countFinal;
+                }
+            });
         });
     }
 

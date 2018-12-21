@@ -1,37 +1,42 @@
-<div class="container">
-    <table class="table" *ngIf="list; else empty">
-        <thead>
+<ul class="nav nav-tabs mb-p10">
+    <li *ngFor="let item of options" class="nav-item mr-1">
+        <a class="nav-link" [routerLink]="['../', item.type]" routerLinkActive="active">{{item.label}}
+            <span class="badge badge-pill badge-secondary">{{item.count}}</span>
+        </a>
+    </li>
+</ul>
+<table class="table table-expand" *ngIf="list; else empty">
+    <thead>
+        <tr>
+            <th>申请单号</th>
+            <th>项目名称</th>
+            <th>负责人</th>
+            <th>电话</th>
+            <th>等级</th>
+            <th>项目类型</th>
+            <th>{{dateLabel}}</th>
+            <th>状态</th>
+            <th *ngIf="isFinal">终审结论</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
             <tr>
-                <th>申请单号</th>
-                <th>项目名称</th>
-                <th>负责人</th>
-                <th>电话</th>
-                <th>等级</th>
-                <th>项目类型</th>
-                <th>{{dateLabel}}</th>
-                <th>状态</th>
-                <th *ngIf="isFinal">终审结论</th>
+                <td><a [routerLink]="['applications', item.id]">#{{item.id}}</a></td>
+                <td class="expand">{{item.name}}</td>
+                <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.level | level: 'text'}}</td>
+                <td>{{item.subtype}}</td>
+                <td>{{item.date | date: 'yyyy-MM-dd'}}</td>
+                <td>
+                    <audit-status [status]="item.status"></audit-status>
+                </td>
+                <td *ngIf="isFinal">{{getFinalConclusion(item) | conclusion: 'text'}}</td>
             </tr>
-        </thead>
-        <tbody>
-            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
-                <tr>
-                    <td><a [routerLink]="['applications', item.id]">#{{item.id}}</a></td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
-                    <td>{{item.phone}}</td>
-                    <td>{{item.level | level: 'text'}}</td>
-                    <td>{{item.subtype}}</td>
-                    <td>{{item.date | date: 'yyyy-MM-dd'}}</td>
-                    <td>
-                        <audit-status [status]="item.status"></audit-status>
-                    </td>
-                    <td *ngIf="isFinal">{{getFinalConclusion(item) | conclusion: 'text'}}</td>
-                </tr>
-            </ng-template>
-        </tbody>
-    </table>
-    <ng-template #empty>
-        <div class="alert alert-info">暂无数据</div>
-    </ng-template>
-</div>
+        </ng-template>
+    </tbody>
+</table>
+<ng-template #empty>
+    <div class="alert alert-info">暂无数据</div>
+</ng-template>

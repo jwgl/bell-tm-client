@@ -8,8 +8,22 @@ import { TaskItemComponent } from './task/task-item';
 const routes: Routes = [
     { path: '', component: TaskListComponent },
     { path: ':taskId/:type/applications/:id', component: ApplicationCheckItemComponent },
-    { path: ':taskId/:type', component: ApplicationCheckListComponent },
-    { path: ':taskId', component: TaskItemComponent },
+    // { path: ':taskId/:type', component: ApplicationCheckListComponent },
+    {
+        path: ':taskId',
+        component: TaskItemComponent,
+        children: [{
+            path: '', redirectTo: '0', pathMatch: 'full'
+        }, {
+            path: ':reviewType',
+            children: [{
+                path: '', redirectTo: 'todo', pathMatch: 'full'
+            }, {
+                path: ':type',
+                component: ApplicationCheckListComponent,
+            }],
+        }],
+    },
 ];
 
 @NgModule({

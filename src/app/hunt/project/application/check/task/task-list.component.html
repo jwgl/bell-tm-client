@@ -21,10 +21,10 @@
                     <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
                     <td class="date">{{task.endDate}}</td>
                     <td>{{task.countProject}}</td>
-                    <td><a [routerLink]="[task.id, 'todo']"><span class="badge badge-pill badge-secondary">{{task.countUncheck}}</span></a></td>
-                    <td><a [routerLink]="[task.id, 'next']"><span class="badge badge-pill badge-success">{{task.countPass}}</span></a></td>
-                    <td><a [routerLink]="[task.id, 'expr']"><span class="badge badge-pill badge-warning">{{task.countFail}}</span></a></td>
-                    <td><a [routerLink]="[task.id, 'done']"><span class="badge badge-pill badge-info">{{task.countFinal}}</span></a></td>
+                    <td><span class="badge badge-pill badge-secondary">{{task.countUncheck}}</span></td>
+                    <td><span class="badge badge-pill badge-success">{{task.countPass}}</span></td>
+                    <td><span class="badge badge-pill badge-warning">{{task.countFail}}</span></td>
+                    <td><span class="badge badge-pill badge-info">{{task.countFinal}}</span></td>
                 </tr>
             </ng-template>
         </tbody>

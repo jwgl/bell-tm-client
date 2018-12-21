@@ -8,6 +8,7 @@ import { AuthService } from 'core/auth';
 @Injectable()
 export class CheckService extends RestShowService {
     list: any[];
+    isCheckTime: boolean;
 
     constructor(
         http: Http,

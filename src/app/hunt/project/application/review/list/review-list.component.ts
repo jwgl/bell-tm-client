@@ -20,7 +20,7 @@ export class ReviewListComponent {
     type: string;
 
     options = [
-        { label: '未评审', type: 'tobe', count: 0 },
+        { label: '未评审', type: 'todo', count: 0 },
         { label: '已评审', type: 'done', count: 0 },
     ];
 

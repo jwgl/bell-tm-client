@@ -9,7 +9,8 @@ import { CheckService } from '../check.service';
 })
 export class TaskItemComponent {
     task: TaskForm;
-    applications: any[];
+    counts: any;
+    // applications: any[];
 
     constructor(
         private route: ActivatedRoute,
@@ -18,7 +19,14 @@ export class TaskItemComponent {
         const params = this.route.snapshot.params;
         this.service.loadTaskItem<{ task: any, applications: any }>(params['taskId']).subscribe(dto => {
             this.task = new TaskForm(dto.task);
-            this.applications = dto.applications;
+            this.counts = dto.counts;
+            console.log(this.counts);
+            // this.service.isCheckTime = this.task.type === 'CHECK';
+            // this.applications = dto.applications;
         });
+    }
+
+    get isCheckTime(): boolean {
+        return this.task.type === 'CHECK';
     }
 }

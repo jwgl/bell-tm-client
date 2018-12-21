@@ -9,6 +9,7 @@ import { PipesModule } from '../../../../settings/shared/common-pipes';
 
 import { TaskListComponent } from './task-list.component';
 import { TaskItemComponent } from './task-item';
+import { CheckTypeComponent } from './check-type.component';
 
 @NgModule({
     imports: [
@@ -21,10 +22,12 @@ import { TaskItemComponent } from './task-item';
     declarations: [
         TaskListComponent,
         TaskItemComponent,
+        CheckTypeComponent,
     ],
     exports: [
         TaskListComponent,
         TaskItemComponent,
+        CheckTypeComponent,
     ],
 })
 export class TaskListModule { }
