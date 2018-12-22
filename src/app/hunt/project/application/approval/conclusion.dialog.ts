@@ -17,12 +17,14 @@ export class ConclusionDialog extends BaseDialog {
     level: string;
     conclusions: any[];
     projectCycle: number;
+    reportType: number;
 
     protected onOpening(): Observable<any> {
         this.level = this.options.level;
         this.conclusions = this.options.conclusions;
         this.conclusionForm = new ConclusionForm(this.options.conclusionForm);
         this.projectCycle = this.options.projectCycle;
+        this.reportType = this.options.reportType;
         return null;
     }
 
@@ -35,8 +37,9 @@ export class ConclusionDialog extends BaseDialog {
     }
 
     get finalOk(): boolean {
-        return (this.provinceLevel && this.conclusionForm.conclusionOfProvince === 'OK') ||
-            (this.level === 'UNIVERSITY' && this.conclusionForm.conclusionOfUniversity === 'OK');
+        return this.reportType === 1 &&
+            ((this.provinceLevel && this.conclusionForm.conclusionOfProvince === 'OK') ||
+                (this.level === 'UNIVERSITY' && this.conclusionForm.conclusionOfUniversity === 'OK'));
     }
 
     isDate(value: string): boolean {

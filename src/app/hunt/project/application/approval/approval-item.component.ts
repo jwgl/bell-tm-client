@@ -90,6 +90,7 @@ export class ApplicationApprovalItemComponent {
             conclusions: ConclusionList,
             conclusionForm: this.conclusionForm,
             projectCycle: this.projectCycle,
+            reportType: this.form.reportType,
         }).then(result => {
             const form = new ConclusionForm(result);
             const validation = this.validate(form);

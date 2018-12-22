@@ -56,7 +56,12 @@ export class ProjectItemComponent {
     }
 
     get submitAble(): boolean {
-        return !_.isEmpty(this.vm.mainInfoForm);
+        const reviews = this.vm.relationReportTypes;
+        if (reviews && reviews.length > 0) {
+            const review = reviews.find((r: any) => r.reportType === this.vm.reportType);
+            return review ? !_.isEmpty(review.mainInfoForm) : false;
+        }
+        return false;
     }
 
     remove() {

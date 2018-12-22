@@ -8,7 +8,7 @@ import { TaskItemComponent } from './task/task-item';
 
 const routes: Routes = [
     { path: '', component: TaskListComponent },
-    { path: ':taskId/:type/applications/:id', component: ApplicationCheckItemComponent },
+    { path: ':taskId/:reviewType/:type/applications/:id', component: ApplicationCheckItemComponent },
     {
         path: ':taskId',
         component: TaskItemComponent,

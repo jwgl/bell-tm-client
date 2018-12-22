@@ -116,6 +116,7 @@ export class ProjectForm {
     dateStarted: string;
     middleYear: number;
     knotYear: number;
+    relationReportTypes: any;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -170,5 +171,6 @@ export class ProjectForm {
             const memberArray = this.members.split(';');
             memberArray.forEach((item, index) => this.memberList[index].value = item);
         }
+        this.relationReportTypes = dto.relationReportTypes;
     }
 }

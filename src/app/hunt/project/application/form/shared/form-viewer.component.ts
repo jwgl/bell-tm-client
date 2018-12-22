@@ -3,6 +3,16 @@ import { Component, Input } from '@angular/core';
 import { FileTypes, ContentLabels } from '../../shared/constants';
 
 const TitleType = ['项目申报', '年度检查验收', '中期检查验收', '结项检查验收'];
+const ListItems = [{
+    reportType: 1, label: '立项'
+}, {
+    reportType: 2, label: '年度'
+}, {
+    reportType: 3, label: '中期'
+}, {
+    reportType: 4, label: '结题'
+}];
+
 @Component({
     selector: 'tm-project-form-viewer',
     styleUrls: ['form-viewer.component.scss'],
@@ -24,6 +34,15 @@ export class FormViewerComponent {
             return item ? item.label : '未知文件';
         } else {
             return '未知文件';
+        }
+    }
+
+    get listItems(): any {
+        const reportTypes = this.vm.relationReportTypes;
+        if (reportTypes && reportTypes.length > 0) {
+            return ListItems.filter(item => reportTypes.some((r: any) => r.reportType === item.reportType));
+        } else {
+            return null;
         }
     }
 
@@ -59,7 +78,19 @@ export class FormViewerComponent {
         return this.vm.reportType ? ContentLabels.other[this.vm.reportType] : '';
     }
 
+    get review(): any {
+        const reviews = this.vm.relationReportTypes;
+        if (reviews && reviews.length > 0) {
+            return reviews.find((r: any) => r.reportType === this.vm.reportType);
+        }
+        return null;
+    }
+
     getExt(fileName: string): string {
         return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+    }
+
+    typeSelected(reportType: number) {
+        this.vm.reportType = reportType;
     }
 }

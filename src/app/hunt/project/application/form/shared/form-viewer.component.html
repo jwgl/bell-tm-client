@@ -57,66 +57,82 @@
             <label class="control-label">来源</label>
             <div>{{vm.origin}}</div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-12" *ngIf="vm.content">
-            <label class="control-label">{{contentLabel}}</label>
-            <div [markdown]="vm.content"></div>
-        </div>
-        <div class="form-group col-12" *ngIf="vm.achievements">
-            <label class="control-label">{{furtherLabel}}</label>
-            <div [markdown]="vm.achievements"></div>
-        </div>
-        <div class="form-group col-12" *ngIf="vm.other">
-            <label class="control-label">{{otherLabel}}</label>
-            <div [markdown]="vm.other"></div>
-        </div>
-        <div class="form-group col-12" *ngIf="vm.urls">
+        <div class="form-group col-6" *ngIf="vm.urls">
             <label class="control-label">相关网址</label>
-            <div [markdown]="vm.urls"></div>
+            <div>{{vm.urls}}</div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header d-flex">
-            <label class="control-label">附件</label>
-            <a class="btn btn-secondary btn-sm ml-auto" download [href]="downloadUrl" *ngIf="vm.mainInfoForm">下载</a>
-        </div>
-        <div class="card-body">
-            <ul>
-                <li *ngIf="vm.mainInfoForm">{{getLabel('main')}}-{{projectName}}{{vm.level | level:
-                    'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.mainInfoForm)}}</li>
-                <li *ngIf="vm.proofFile">主要佐证材料-{{projectName}}{{vm.level | level:
-                    'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.proofFile)}}</li>
-                <li *ngIf="vm.summaryReport">总结报告-{{projectName}}{{vm.level | level:
-                    'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(vm.summaryReport)}}</li>
-            </ul>
-        </div>
-    </div>
+    <hr>
     <div class="row">
-        <div class="form-group col-12" *ngIf="vm.departmentOpinion">
-            <label class="control-label">学院意见</label>
-            <p class="form-control-plaintext">{{vm.departmentOpinion}}</p>
+        <div class="form-group col-md-2">
+            <div class="list-group">
+                <ng-container *ngFor="let item of listItems">
+                    <a class="list-group-item list-group-item-action d-flex justify-content-between" [class.active]="item.reportType === vm.reportType"
+                        (click)="typeSelected(item.reportType)">
+                        {{item.label}}
+                    </a>
+                </ng-container>
+            </div>
         </div>
-        <div class="form-group col-12" *ngIf="vm.conclusionOfUniversity">
-            <label class="control-label">学校意见 <span class="badge {{vm.conclusionOfUniversity | conclusion: 'class'}}">
-                    {{vm.conclusionOfUniversity | conclusion: 'text'}}</span></label>
-            <p class="form-control-plaintext">{{vm.opinionOfUniversity}}</p>
+        <div class="form-group col-md-10" *ngIf="review">
+            <div class="row">
+                <div class="form-group col-12" *ngIf="review.content">
+                    <label class="control-label">{{contentLabel}}</label>
+                    <pre><code>{{review.content}}</code></pre>
+                </div>
+                <div class="form-group col-12" *ngIf="review.achievements">
+                    <label class="control-label">{{furtherLabel}}</label>
+                    <pre><code>{{review.achievements}}</code></pre>
+                </div>
+                <div class="form-group col-12" *ngIf="review.other">
+                    <label class="control-label">{{otherLabel}}</label>
+                    <pre><code>{{review.other}}</code></pre>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header d-flex">
+                    <label class="control-label">附件</label>
+                    <a class="btn btn-secondary btn-sm ml-auto" download [href]="downloadUrl" *ngIf="review.mainInfoForm">下载</a>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li *ngIf="review.mainInfoForm">{{getLabel('main')}}-{{projectName}}{{vm.level | level:
+                            'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(review.mainInfoForm)}}</li>
+                        <li *ngIf="review.proofFile">主要佐证材料-{{projectName}}{{vm.level | level:
+                            'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(review.proofFile)}}</li>
+                        <li *ngIf="review.summaryReport">总结报告-{{projectName}}{{vm.level | level:
+                            'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(review.summaryReport)}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12" *ngIf="review.departmentOpinion">
+                    <label class="control-label">学院意见</label>
+                    <p class="form-control-plaintext">{{review.departmentOpinion}}</p>
+                </div>
+                <div class="form-group col-12" *ngIf="review.conclusionOfUniversity">
+                    <label class="control-label">学校意见 <span class="badge {{review.conclusionOfUniversity | conclusion: 'class'}}">
+                            {{review.conclusionOfUniversity | conclusion: 'text'}}</span></label>
+                    <p class="form-control-plaintext">{{review.opinionOfUniversity}}</p>
+                </div>
+                <div class="form-group col-12" *ngIf="review.conclusionOfProvince">
+                    <label class="control-label">省厅意见 <span class="badge {{review.conclusionOfProvince | conclusion: 'class'}}">
+                            {{vm.conclusionOfProvince | conclusion: 'text'}}</span></label>
+                    <p class="form-control-plaintext">{{review.opinionOfProvince}}</p>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="vm.expertReview && vm.expertReview.length > 0">
+                <label class="control-label">专家意见</label>
+                <ul>
+                    <li *ngFor="let item of vm.expertReview">
+                        <span class="text-info mr-2">{{item.teacherName}} {{item.teacherId}}：</span>
+                        <span [class]="conclusionClass(item.conclusion)">{{item.conclusion}}</span> {{item.dateReviewed
+                        | date:
+                        'yyyy-MM-dd'}}
+                        <span class="ml-3">{{item.opinion}}</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="form-group col-12" *ngIf="vm.conclusionOfProvince">
-            <label class="control-label">省厅意见 <span class="badge {{vm.conclusionOfProvince | conclusion: 'class'}}">
-                    {{vm.conclusionOfProvince | conclusion: 'text'}}</span></label>
-            <p class="form-control-plaintext">{{vm.opinionOfProvince}}</p>
-        </div>
-    </div>
-    <div class="form-group" *ngIf="vm.expertReview && vm.expertReview.length > 0">
-        <label class="control-label">专家意见</label>
-        <ul>
-            <li *ngFor="let item of vm.expertReview">
-                <span class="text-info mr-2">{{item.teacherName}} {{item.teacherId}}：</span>
-                <span [class]="conclusionClass(item.conclusion)">{{item.conclusion}}</span> {{item.dateReviewed | date:
-                'yyyy-MM-dd'}}
-                <span class="ml-3">{{item.opinion}}</span>
-            </li>
-        </ul>
     </div>
 </ng-container>
