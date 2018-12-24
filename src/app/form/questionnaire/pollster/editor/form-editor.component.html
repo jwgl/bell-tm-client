@@ -1,7 +1,7 @@
 <form *ngIf="form" autocomplete="off" (ngSubmit)="save()" #questionnaireForm="ngForm">
     <div class="btn-toolbar">
         <div class="btn-group ml-auto">
-            <button class='btn btn-secondary' routerLink="../">取消</button>
+            <button class='btn btn-secondary' type="button" routerLink="../">取消</button>
             <button class='btn btn-primary' type="submit" [disabled]="saving || !questionnaireForm.form.valid">保存</button>
         </div>
     </div>
@@ -80,8 +80,8 @@
                     </tm-question-editor>
                     <tm-question-viewer *ngSwitchDefault [question]="question" (edit)="onEditQuestion(question)"
                         (remove)="form.removeItem(question)">
-                        <button class="btn btn-sm btn-outline-dark" (click)="form.moveupItem(question)" [disabled]="first">上移</button>
-                        <button class="btn btn-sm btn-outline-dark" (click)="form.movedownItem(question)" [disabled]="last">下移</button>
+                        <button class="btn btn-sm btn-outline-dark" type="button" (click)="form.moveupItem(question)" [disabled]="first">上移</button>
+                        <button class="btn btn-sm btn-outline-dark" type="button" (click)="form.movedownItem(question)" [disabled]="last">下移</button>
                     </tm-question-viewer>
                 </ng-container>
             </ng-container>

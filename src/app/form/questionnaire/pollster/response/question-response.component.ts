@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 
 import { Question } from '../../shared/questionnaire-form.model';
 import './questionnaire-response.model';
@@ -16,6 +16,9 @@ export class QuestionResponseComponent {
 
     @Output()
     viewOpenResponses = new EventEmitter<Question>();
+
+    @ViewChild('openResponseTable')
+    openResponseTable: ElementRef;
 
     showTitle: boolean;
     showOpenResponses: boolean;
@@ -51,6 +54,10 @@ export class QuestionResponseComponent {
         selection.addRange(range);
         document.execCommand('Copy');
         selection.removeAllRanges();
+    }
+
+    copyOpenResponseTable() {
+        this.copyTable(this.openResponseTable.nativeElement);
     }
 
     get supportCopy(): boolean {

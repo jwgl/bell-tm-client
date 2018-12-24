@@ -2,7 +2,7 @@
     <div class="card-header d-flex bg-dark text-white">
         <h5>{{question.ordinal + 1}}、{{question.title ? question.title : '新建问题标题'}} <span *ngIf="question.mandatory">*</span></h5>
         <div class="btn-group ml-auto">
-            <button class="btn btn-sm btn-outline-light" (click)="onCancel()">取消</button>
+            <button class="btn btn-sm btn-outline-light" type="button" (click)="onCancel()">取消</button>
             <button class="btn btn-sm btn-outline-light" type="submit" [disabled]="!questionForm.form.valid">确定</button>
         </div>
     </div>

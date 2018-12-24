@@ -19,14 +19,14 @@
 <ng-template #openQuestionResultTpl>
     <p>
         <ng-template [ngTemplateOutlet]="questinSummaryTpl"></ng-template>
-        <button class="btn btn-link ml-2" (click)="onViewOpenResponses()">{{showOpenResponses ? '隐藏' : '查看'}}用户输入</button>
+        <button class="btn btn-link ml-2" type="button" (click)="onViewOpenResponses()">{{showOpenResponses ? '隐藏' : '查看'}}用户输入</button>
     </p>
     <ng-template [ngTemplateOutlet]="openResponseTableTpl"></ng-template>
 </ng-template>
 <ng-template #tableResultTpl let-ot="optionTemplate">
     <div class="btn-toolbar">
         <ng-template [ngTemplateOutlet]="questinSummaryTpl"></ng-template>
-        <button class="btn btn-sm btn-outline-dark ml-auto" (click)="copyTable(table)" *ngIf="supportCopy">复制数据</button>
+        <button class="btn btn-sm btn-outline-dark ml-auto" type="button" (click)="copyTable(table)" *ngIf="supportCopy">复制数据</button>
     </div>
     <table class="table table-sm table-light table-striped" #table>
         <thead>
@@ -54,7 +54,7 @@
         <th>{{question.options.length + 1}}</th>
         <td>
             {{question.openLabel ? question.openLabel : '其他'}}
-            <button class="btn btn-link" (click)="onViewOpenResponses()">{{showOpenResponses ? '隐藏' : '查看'}}用户输入</button>
+            <button class="btn btn-link" type="button" (click)="onViewOpenResponses()">{{showOpenResponses ? '隐藏' : '查看'}}用户输入</button>
         </td>
         <td>{{question.openResponseCount}}</td>
         <td>{{question.openResponseCount / question.responseCount | percent:'1.2'}}</td>
@@ -72,7 +72,7 @@
     <div *ngIf="showOpenResponses">
         <div class="btn-toolbar">
             <span>共<b>{{question.openResponseTotalCount}}</b>个用户输入</span>
-            <button class="btn btn-sm btn-dark ml-auto" (click)="copyTable(openResponseTable)" *ngIf="supportCopy">复制数据</button>
+            <button class="btn btn-sm btn-dark ml-auto" type="button" (click)="copyOpenResponseTable()" *ngIf="supportCopy">复制数据</button>
         </div>
         <div class="openResonsePane">
             <table class="table table-sm table table-dark table-striped" #openResponseTable>

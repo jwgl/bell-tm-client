@@ -1,35 +1,33 @@
 <div class="btn-toolbar">
     共<b>{{questionnaire.responseCount}}</b>人填写此{{questionnaire.surveyType | surveyTypeText}}。
-    <button class="btn btn-link" *ngIf="!questionnaire.anonymous" (click)="onViewRespondents()">
+    <button class="btn btn-link" type="button" *ngIf="!questionnaire.anonymous" (click)="onViewRespondents()">
         {{showRespondents ? '隐藏' : '查看'}}用户名单
     </button>
-    <button class="btn btn-sm btn-dark ml-auto" (click)="copyTable(table)" *ngIf="showRespondents &&respondents && supportCopy">复制数据</button>
+    <button class="btn btn-sm btn-dark ml-auto" type="button" (click)="copyTable(respondentTable)" *ngIf="showRespondents &&respondents && supportCopy">复制数据</button>
 </div>
-<div class="wrapper" *ngIf="showRespondents && respondents">
-    <ng-container [ngSwitch]="questionnaire.respondentType">
-        <ng-container *ngSwitchCase="'TEACHER'">
-            <ng-template [ngTemplateOutlet]="respondentsTpl" [ngTemplateOutletContext]="{headerTemplate: teacherHeaderTpl, bodyTemplate: teacherBodyTpl}"></ng-template>
+<div class="table-responsive" *ngIf="showRespondents && respondents">
+    <table class="table table-sm table-dark table-striped table-expand" #respondentTable>
+        <ng-container [ngSwitch]="questionnaire.respondentType">
+            <ng-container *ngSwitchCase="'TEACHER'">
+                <ng-template [ngTemplateOutlet]="respondentsTpl" [ngTemplateOutletContext]="{headerTemplate: teacherHeaderTpl, bodyTemplate: teacherBodyTpl}"></ng-template>
+            </ng-container>
+            <ng-container *ngSwitchCase="'STUDENT'">
+                <ng-template [ngTemplateOutlet]="respondentsTpl" [ngTemplateOutletContext]="{headerTemplate: studentHeaderTpl, bodyTemplate: studentBodyTpl}"></ng-template>
+            </ng-container>
         </ng-container>
-        <ng-container *ngSwitchCase="'STUDENT'">
-            <ng-template [ngTemplateOutlet]="respondentsTpl" [ngTemplateOutletContext]="{headerTemplate: studentHeaderTpl, bodyTemplate: studentBodyTpl}"></ng-template>
-        </ng-container>
-    </ng-container>
+    </table>
 </div>
 <ng-template #respondentsTpl let-header="headerTemplate" let-body="bodyTemplate">
-    <div class="table-responsive">
-        <table class="table table-sm table-dark table-striped table-expand" #table>
-            <thead>
-                <tr>
-                    <ng-template [ngTemplateOutlet]="header"></ng-template>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let respondent of respondents">
-                    <ng-template [ngTemplateOutlet]="body" [ngTemplateOutletContext]="{respondent: respondent}"></ng-template>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <thead>
+        <tr>
+            <ng-template [ngTemplateOutlet]="header"></ng-template>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let respondent of respondents">
+            <ng-template [ngTemplateOutlet]="body" [ngTemplateOutletContext]="{respondent: respondent}"></ng-template>
+        </tr>
+    </tbody>
 </ng-template>
 <ng-template #teacherHeaderTpl>
     <th>工号</th>

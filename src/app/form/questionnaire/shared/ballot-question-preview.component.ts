@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Question, QuestionOption } from './questionnaire-form.model';
 
@@ -12,6 +12,7 @@ declare module './questionnaire-form.model' {
     selector: 'tm-ballot-question-preview',
     styleUrls: ['ballot-question-preview.component.scss'],
     templateUrl: 'ballot-question-preview.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BallotQuestionPreviewComponent {
     @Input()

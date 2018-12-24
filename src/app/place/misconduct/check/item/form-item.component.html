@@ -1,7 +1,7 @@
 <form *ngIf="misconduct" #form="ngForm" (ngSubmit)="onSubmit()">
     <div class="btn-toolbar mt-3">
         <div class="btn-group ml-auto">
-            <button class="btn btn-secondary" routerLink="../">返回</button>
+            <button class="btn btn-secondary" type="button" routerLink="../">返回</button>
         </div>
     </div>
     <tm-form-title>违规记录#{{misconduct.id}}</tm-form-title>
