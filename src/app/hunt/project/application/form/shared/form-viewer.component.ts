@@ -21,6 +21,7 @@ const ListItems = [{
 export class FormViewerComponent {
     @Input() vm: any;
     @Input() downloadUrl: string;
+    @Input() isAdmin: boolean;
 
     conclusionClass(conclusion: string) {
         return conclusion === '通过' ? 'text-success' : 'text-danger';

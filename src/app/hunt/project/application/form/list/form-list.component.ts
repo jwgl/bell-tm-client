@@ -8,4 +8,13 @@ import { Component, Input } from '@angular/core';
 
 export class ProjectListComponent {
     @Input() list: any[];
+
+    getConclusion(item: any): string {
+        switch (item.level) {
+            case 'UNIVERSITY':
+                return item.conclusionOfUniversity;
+            case 'PROVINCE':
+                return item.conclusionOfUniversity;
+        }
+    }
 }

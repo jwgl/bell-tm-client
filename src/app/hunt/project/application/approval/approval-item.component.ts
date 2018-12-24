@@ -45,10 +45,17 @@ export class ApplicationApprovalItemComponent {
     onItemLoaded(dto: any) {
         this.form = new ProjectForm(dto.form);
         this.projectCycle = dto.form.period;
-        this.conclusionForm = new ConclusionForm(dto.form);
         this.wi = dto.workitemId;
         this.prevId = dto.prevId;
         this.nextId = dto.nextId;
+        // 提取当前评审验收结论
+        const reviews = this.form.relationReportTypes;
+        if (reviews && reviews.length > 0) {
+            const review = reviews.find((r: any) => r.reportType === this.form.reportType);
+            if (review) {
+                this.conclusionForm = new ConclusionForm(review);
+            }
+        }
     }
 
     get reviewable(): boolean {
@@ -120,10 +127,10 @@ export class ApplicationApprovalItemComponent {
             this.isEmpty(data.opinionOfUniversity)) {
             validation.push('请检查结论和意见是否为空！');
         }
-        if ((this.form.level === 'PROVINCE' && data.conclusionOfProvince === 'OK') ||
-            (this.form.level === 'UNIVERSITY' && data.conclusionOfUniversity === 'OK') && (
-                this.isEmpty(data.dateStarted)
-            )) {
+        if ((this.form.reportType === 1 && this.isEmpty(data.dateStarted)) &&
+            ((this.form.level === 'PROVINCE' && data.conclusionOfProvince === 'OK') ||
+            (this.form.level === 'UNIVERSITY' && data.conclusionOfUniversity === 'OK'))) {
+                alert(this.form.reportType === 1);
             validation.push('请正确输入立项日期！');
         }
         return validation;

@@ -7,6 +7,7 @@
             <th>项目类型</th>
             <th>项目来源</th>
             <th>申请日期</th>
+            <th>结论</th>
             <th>审核进度</th>
         </tr>
     </thead>
@@ -19,6 +20,7 @@
                 <td>{{item.subtype}}</td>
                 <td>{{item.origin}}</td>
                 <td>{{item.dateSubmitted | date: 'yyyy-MM-dd'}}</td>
+                <td><span *ngIf="getConclusion(item)">{{getConclusion(item) | conclusion : 'text'}}</span></td>
                 <td><audit-status [status]="item.status"></audit-status></td>
             </tr>
         </ng-template>
