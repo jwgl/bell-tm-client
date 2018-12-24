@@ -1,9 +1,9 @@
-import { Directive, ElementRef, Input, AfterViewInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Directive({
     selector: '[markdown]',
 })
-export class MarkdownDirective implements AfterViewInit {
+export class MarkdownDirective implements OnChanges {
     @Input()
     options: any;
 
@@ -12,10 +12,11 @@ export class MarkdownDirective implements AfterViewInit {
 
     constructor(private elementRef: ElementRef) { }
 
-    ngAfterViewInit() {
-        const markdown = (window as any).markdownit(this.options);
-        if (this.text) {
-            this.elementRef.nativeElement.innerHTML = markdown.render(this.text);
+    ngOnChanges(changes: SimpleChanges) {
+        const textObj = changes['text'];
+        if (!textObj.firstChange) {
+            const markdown = (window as any).markdownit(this.options);
+            this.elementRef.nativeElement.innerHTML = markdown.render(textObj.currentValue);
         }
     }
 }
