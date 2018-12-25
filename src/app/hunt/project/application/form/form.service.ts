@@ -20,7 +20,6 @@ export class ProjectFormService extends RestEditService {
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
         this.taskApiUrl = this.taskApiUrl.replace('${userId}', authService.userInfo.id);
-        console.log(this.taskApiUrl);
     }
 
     save<T>(id: number, form: any): Observable<any> {

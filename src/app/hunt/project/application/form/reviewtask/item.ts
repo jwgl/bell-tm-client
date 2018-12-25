@@ -23,6 +23,6 @@ export class TaskItemComponent {
     }
 
     get creatAble(): boolean {
-        return this.task.status === 'APPLICATION';
+        return this.task.type === 'APPLICATION' && ! this.task.banMe;
     }
 }

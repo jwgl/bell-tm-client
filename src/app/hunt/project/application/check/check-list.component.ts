@@ -28,7 +28,6 @@ export class ApplicationCheckListComponent {
         private service: CheckService,
         route: ActivatedRoute,
     ) {
-        console.log('list');
         route.params.subscribe(params => {
             this.type = params['type'];
             this.service.loadList({

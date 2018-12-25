@@ -9,6 +9,7 @@ export class TaskForm {
     type: string;
     remind: string;
     ban: string;
+    banMe: number;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -19,6 +20,7 @@ export class TaskForm {
         this.type = dto.type;
         this.remind = dto.remind;
         this.ban = dto.ban;
+        this.banMe = dto.banMe;
     }
 
     get isApplyDateValid(): boolean {

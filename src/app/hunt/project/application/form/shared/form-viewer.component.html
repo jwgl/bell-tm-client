@@ -82,11 +82,11 @@
                 </div>
                 <div class="form-group col-12" *ngIf="review.achievements">
                     <label class="control-label">{{furtherLabel}}</label>
-                    <pre><code>{{review.achievements}}</code></pre>
+                    <div [markdown]="review.achievements"></div>
                 </div>
                 <div class="form-group col-12" *ngIf="review.other">
                     <label class="control-label">{{otherLabel}}</label>
-                    <pre><code>{{review.other}}</code></pre>
+                    <div [markdown]="review.other"></div>
                 </div>
             </div>
             <div class="card">
