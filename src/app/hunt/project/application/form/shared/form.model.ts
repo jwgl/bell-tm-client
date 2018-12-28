@@ -169,7 +169,11 @@ export class ProjectForm {
         }
         if (this.members) {
             const memberArray = this.members.split(';');
-            memberArray.forEach((item, index) => this.memberList[index].value = item);
+            memberArray.forEach((item, index) => {
+                if (index < 6) { // 最多允许6个参与人
+                    this.memberList[index].value = item;
+                }
+            });
         }
         this.relationReportTypes = dto.relationReportTypes;
     }

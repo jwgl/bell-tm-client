@@ -1,0 +1,118 @@
+<ng-container *ngIf="vm">
+    <tm-form-title>项目变更{{vm.id}}</tm-form-title>
+    <div class="card">
+        <div class="card-header">
+            <h5>基本信息</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">项目名</label>
+                    <p class="form-control-plaintext">{{vm.name}}</p>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">变更内容</label>
+                    <p class="form-control-plaintext">{{vm.type | changeType}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label">项目编号</label>
+                    <p class="form-control-plaintext">{{vm.code}}</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">项目类型</label>
+                    <p class="form-control-plaintext">{{vm.subtype}} <span class="text-info">{{vm.level | level :
+                            'text'}}</span></p>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">原负责人</label>
+                    <p class="form-control-plaintext">{{vm.principalName}}</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label">原单位</label>
+                    <p class="form-control-plaintext">{{vm.departmentName}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5>变更信息</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th colspan="2">原项目信息</th>
+                        <th colspan="2">变更为</th>
+                    </tr>
+                    <tr>
+                        <th style="width:6em">标题</th>
+                        <th style="width:30em">内容</th>
+                        <th style="width:6em">标题</th>
+                        <th style="width:30em">内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="has({ value: 1 }) && project">
+                        <td>负责人</td>
+                        <td>{{project.principalName}}</td>
+                        <td class="text-danger">负责人</td>
+                        <td class="text-danger">{{vm.principalName}}</td>
+                    </tr>
+                    <ng-container *ngIf="has({ value: 2 }) && project">
+                        <tr *ngIf="!middleChecked">
+                            <td>中期预期</td>
+                            <td>{{project.middleYear}}</td>
+                            <td class="text-danger">中期预期</td>
+                            <td class="text-danger">{{vm.middleYear}}</td>
+                        </tr>
+                        <tr>
+                            <td>结题预期</td>
+                            <td>{{project.knotYear}}</td>
+                            <td class="text-danger">结题预期</td>
+                            <td class="text-danger">{{vm.knotYear}}</td>
+                        </tr>
+                    </ng-container>
+                    <tr *ngIf="has({ value: 3 }) && project">
+                        <td>项目名称</td>
+                        <td>{{project.name}}</td>
+                        <td class="text-danger">项目名称</td>
+                        <td class="text-danger">{{vm.name}}</td>
+                    </tr>
+                    <tr *ngIf="has({ value: 4 }) && project">
+                        <td>研究内容</td>
+                        <td>{{project.content}}</td>
+                        <td class="text-danger">研究内容</td>
+                        <td><span class="text-danger">{{vm.content}}</span><span class="text-info" *ngIf="vm.content">字数（含空格）{{vm.content.length}}</span>
+                        </td>
+                    </tr>
+                    <tr *ngIf="has({ value: 6 }) && project">
+                        <td>成果形式</td>
+                        <td>{{project.achievements}}</td>
+                        <td class="text-danger">成果形式</td>
+                        <td><span class="text-danger">{{vm.achievements}}</span><span class="text-info" *ngIf="vm.achievements">字数（含空格）{{vm.achievements.length}}</span>
+                        </td>
+                    </tr>
+                    <tr *ngIf="has({ value: 7 }) && project">
+                        <td>参与人</td>
+                        <td>{{project.members}}</td>
+                        <td class="text-danger">参与人</td>
+                        <td class="text-danger">{{vm.members}}</td>
+                    </tr>
+                    <tr *ngIf="has({ value: 8 }) && project">
+                        <td></td>
+                        <td></td>
+                        <td class="text-danger">其他</td>
+                        <td class="text-danger">{{vm.other}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <label>申报书</label>
+                <p class="form-control-plaintext">{{vm.mainInfoForm}}</p>
+            </div>
+        </div>
+    </div>
+</ng-container>

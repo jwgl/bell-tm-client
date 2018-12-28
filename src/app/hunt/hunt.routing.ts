@@ -25,6 +25,9 @@ const routes: Routes = [{
 }, {
     path: 'experts/:userId/reviews',
     loadChildren: './project/application/review/review.module#ExpertReviewModule',
+}, {
+    path: 'teachers/:userId/info-changes',
+    loadChildren: './project/info-change/form/form.module#InfoChageModule',
 }];
 
 @NgModule({
