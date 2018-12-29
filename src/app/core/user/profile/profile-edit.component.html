@@ -1,11 +1,11 @@
-<div class="btn-toolbar">
-    <div class="btn-group ml-auto">
-        <button class="btn btn-secondary" routerLink="../">取消</button>
-        <button class="btn btn-primary" (click)="save()" [disabled]='saving'>保存</button>
+<form class="form-horizontal" *ngIf="user" (ngSubmit)="save()" #profileForm="ngForm">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" type="button" routerLink="../">取消</button>
+            <button class="btn btn-primary" type="submit" [disabled]='saving || !profileForm.form.valid'>保存</button>
+        </div>
     </div>
-</div>
-<div class="col-md-8 col-lg-6 mx-auto">
-    <form class="form-horizontal" *ngIf="user">
+    <div class="col-md-8 col-lg-6 mx-auto">
         <form-field label="编号">
             <p class="form-control-plaintext">{{user.id}}</p>
         </form-field>
@@ -13,16 +13,18 @@
             <p class="form-control-plaintext">{{user.name}}</p>
         </form-field>
         <form-field label="电子邮箱">
-            <input class="form-control" name="email" [(ngModel)]="user.email">
+            <input class="form-control" name="email" [(ngModel)]="user.email" type="email" email>
         </form-field>
         <form-field label="办公电话" *ngIf="user.userType != 'STUDENT'">
             <input class="form-control" name="officePhone" [(ngModel)]="user.officePhone">
         </form-field>
         <form-field label="移动电话">
-            <input class="form-control" name="longPhone" [(ngModel)]="user.longPhone">
+            <input class="form-control" name="longPhone" [(ngModel)]="user.longPhone" minlength="11" maxlength="11" pattern="\d{11}">
+            <small class="text-muted">11位数字</small>
         </form-field>
         <form-field label="手机短号">
-            <input class="form-control" name="shortPhone" [(ngModel)]="user.shortPhone">
+            <input class="form-control" name="shortPhone" [(ngModel)]="user.shortPhone" minlength="6" maxlength="6" pattern="\d{6}">
+            <small class="text-muted">6位数字</small>
         </form-field>
-    </form>
-</div>
+    </div>
+</form>

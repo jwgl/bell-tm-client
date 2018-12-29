@@ -5,7 +5,7 @@ import { UserProfileService } from './user-profile.service';
 import { AuthService } from 'core/auth';
 
 @Component({
-    styleUrls: ['profile-view.component.scss'],
+    styleUrls: ['profile-edit.component.scss'],
     templateUrl: 'profile-edit.component.html',
 })
 export class UserProfileEditComponent implements OnInit {
