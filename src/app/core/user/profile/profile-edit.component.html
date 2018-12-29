@@ -13,7 +13,7 @@
             <p class="form-control-plaintext">{{user.name}}</p>
         </form-field>
         <form-field label="电子邮箱">
-            <input class="form-control" name="email"[(ngModel)]="user.email" type="email" email>
+            <input class="form-control" name="email" [(ngModel)]="user.email" type="email" email>
         </form-field>
         <form-field label="办公电话" *ngIf="user.userType != 'STUDENT'">
             <input class="form-control" name="officePhone" [(ngModel)]="user.officePhone">
