@@ -56,6 +56,10 @@ export class CourseClassAttendanceComponent {
         });
     }
 
+    get allowedByCourse(): boolean {
+        return /体育[1234]/.test(this.courseClass.course);
+    }
+
     get reportUrl() {
         return this.service.getReportUrl();
     }
