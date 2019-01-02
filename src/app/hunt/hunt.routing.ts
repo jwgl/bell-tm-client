@@ -28,6 +28,12 @@ const routes: Routes = [{
 }, {
     path: 'teachers/:userId/info-changes',
     loadChildren: './project/info-change/form/form.module#InfoChageModule',
+}, {
+    path: 'checkers/:userId/info-changes',
+    loadChildren: './project/info-change/check/info-change-check.module#ChangeCheckModule',
+}, {
+    path: 'approvers/:userId/info-changes',
+    loadChildren: './project/info-change/approval/info-change-approval.module#ChangeApprovalModule',
 }];
 
 @NgModule({

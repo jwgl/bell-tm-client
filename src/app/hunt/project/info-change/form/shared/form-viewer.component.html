@@ -111,7 +111,7 @@
             </table>
             <div class="form-group">
                 <label>申报书</label>
-                <p class="form-control-plaintext">{{vm.mainInfoForm}}</p>
+                <p class="form-control-plaintext"><a download [href]="downloadUrl" *ngIf="vm.mainInfoForm">{{vm.mainInfoForm}}</a></p>
             </div>
         </div>
     </div>

@@ -18,6 +18,7 @@ export class ChangeForm {
     knotYear: number;
     memberList: any[];
     other: string;
+    departmentName: string;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -34,6 +35,7 @@ export class ChangeForm {
         this.achievements = dto.achievements;
         this.mainInfoForm = dto.mainInfoForm;
         this.code = dto.code;
+        this.departmentName = dto.departmentName;
         this.dateSubmitted = dto.dateSubmitted;
         this.middleYear = dto.middleYear;
         this.knotYear = dto.knotYear;
