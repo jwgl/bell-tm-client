@@ -16,13 +16,13 @@
         <div class="form-group col-md-4">
             <label>教学班名称</label>
             <p class="form-control-plaintext">{{courseClass.name ? courseClass.name : '<空>'}}</p>
-        </div>                
+        </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
             <label>开课单位</label>
             <p class="form-control-plaintext">{{courseClass.department}}</p>
-        </div>        
+        </div>
         <div class="form-group col-md-4">
             <label>开始结束周</label>
             <p class="form-control-plaintext">{{courseClass.startWeek}}-{{courseClass.endWeek}}周</p>
@@ -55,7 +55,7 @@
         <tbody>
             <ng-container *ngFor="let student of courseClass.students; let i = index">
                 <tr [ngClass]="{
-                    'table-danger': student.disqualified, 
+                    'table-danger': student.disqualified,
                     'table-warning': student.absentOverflow || student.attendOverflow,
                     'table-active' : e.expended
                 }" (dblclick)="e.click()">
@@ -72,7 +72,7 @@
                     <td>{{student.leave}}</td>
                     <td>{{student.disqualified ? '无' : '有'}}</td>
                     <td class="py-0 align-middle" *ngIf="courseClass.activeTerm">
-                        <button *ngIf="isAdmin || student.showDisqual"
+                        <button *ngIf="isAdmin || student.showDisqual || allowedByCourse"
                                 class="btn btn-sm"
                                 [ngClass]="student.disqualifyButtonClass"
                                 (click)="disqualify(student)">
