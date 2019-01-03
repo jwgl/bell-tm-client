@@ -60,7 +60,7 @@ export class ApplicationItemComponent {
     }
 
     get paperAble(): boolean {
-        return (this.vm.status === 'STEP2' && !_.isNull(this.award.paperEnd))
+        return (this.vm.status === 'STEP2' && !_.isNull(this.award.paperEnd) && this.award.isPaperDateValid)
             || (this.vm.status === 'STEP5' && this.award.isCheckDateValid);
     }
 
