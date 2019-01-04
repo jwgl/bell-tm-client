@@ -34,6 +34,10 @@ const routes: Routes = [{
 }, {
     path: 'approvers/:userId/info-changes',
     loadChildren: './project/info-change/approval/info-change-approval.module#ChangeApprovalModule',
+}, {
+    path: 'checkers/:userId/projects',
+    loadChildren: './project/view/department/viewer.module#ProjectDepartmentModule',
+
 }];
 
 @NgModule({

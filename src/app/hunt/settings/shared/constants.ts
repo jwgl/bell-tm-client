@@ -93,3 +93,9 @@ export const ChangeTypeList = [
     { label: '变更参与人', value: 7 },
     { label: '其他', value: 8 },
 ];
+
+export const projectStatusList = [
+    { label: '在研', value: 'INHAND' },
+    { label: '结题', value: 'FINISHED' },
+    { label: '终止', value: 'CUTOUT' },
+];
