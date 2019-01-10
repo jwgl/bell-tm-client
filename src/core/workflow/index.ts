@@ -17,6 +17,8 @@ import { WorkflowRevokeButtonDirective } from './revoke.button';
 import { WorkflowRevokeDialog } from './revoke.dialog';
 import { WorkflowSubmitButtonDirective } from './submit.button';
 import { WorkflowSubmitDialog } from './submit.dialog';
+import { WorkflowReviewButtonDirective } from './review.button';
+import { WorkflowReviewDialog } from './review.dialog';
 import {
     NextOptions,
     ReviewOptions,
@@ -106,6 +108,7 @@ const WORKFLOW_DIALOGS: any[] = [
     WorkflowRejectDialog,
     WorkflowRevokeDialog,
     WorkflowWorkitemsDialog,
+    WorkflowReviewDialog,
 ];
 
 const WORKFLOW_BUTTONS: any[] = [
@@ -129,6 +132,7 @@ const WORKFLOW_COMPONENTS: any[] = [
     WorkflowReviewListComponent,
     WorkflowReviewItemComponent,
     WorkflowFormItemComponent,
+    WorkflowReviewButtonDirective,
 ];
 
 @NgModule({

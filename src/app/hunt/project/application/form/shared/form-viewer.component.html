@@ -7,7 +7,10 @@
         </div>
         <div class="form-group col-md-6">
             <label class="control-label">负责人</label>
-            <div>{{vm.principalName}} {{vm.office}}，{{vm.title}}，{{vm.degree}}学位 {{vm.discipline}} {{vm.discipline}}
+            <div>{{vm.principalName}}
+                <span *ngIf="vm.office && vm.office.length > 1">{{vm.office}}，</span>
+                <span *ngIf="vm.title && vm.title.length > 1">{{vm.title}}，</span>
+                <span *ngIf="vm.degree && vm.degree.length > 1">{{vm.degree}}学位 </span>{{vm.discipline}} {{vm.discipline}}
                 <span *ngIf="vm.direction">{{vm.direction}}方向</span></div>
         </div>
     </div>

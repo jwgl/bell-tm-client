@@ -64,7 +64,11 @@ export class FormViewerComponent {
     }
 
     get title(): string {
-        return `${TitleType[this.vm.reportType - 1]} #${this.vm.id}`;
+        if (!this.vm.reportType) {
+            return `项目#${this.vm.id}`;
+        } else {
+            return `${TitleType[this.vm.reportType - 1]} #${this.vm.id}`;
+        }
     }
 
     get contentLabel(): string {
