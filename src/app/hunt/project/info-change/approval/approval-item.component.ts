@@ -19,4 +19,12 @@ export class InfoChangeApprovalItemComponent {
     get downloadUrl(): string {
         return this.service.getDownloadUrl(this.form.id);
     }
+
+    get reviewAble(): boolean {
+        if (this.form && this.form.status === 'CHECKED') {
+            return this.form.dateReviewed ? true : this.form.reviewer ? false : true;
+        } else {
+            return false;
+        }
+    }
 }

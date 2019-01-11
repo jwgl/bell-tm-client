@@ -11,7 +11,7 @@
         <button [workflow-revoke]="revokeOptions" (revoked)="onItemLoaded($event)">回收</button>
     </div>
     <div class="btn-group ml-2" *ngIf="needreview">
-        <button [workflow-review]="reviewOptions" (review)="onItemLoaded($event)">申请加签</button>
+        <button [workflow-review]="reviewOptions" (review)="onItemLoaded($event)">加签</button>
     </div>
 </div>
 <ng-template [ngTemplateOutlet]="viewerTemplate"></ng-template>

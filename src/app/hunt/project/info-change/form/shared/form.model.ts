@@ -1,6 +1,7 @@
 export class ChangeForm {
     id: number;
     projectId: number;
+    projectName: string;
     name: string;
     principalId: string;
     principalName: string;
@@ -19,12 +20,13 @@ export class ChangeForm {
     memberList: any[];
     other: string;
     departmentName: string;
-    locked: boolean;
+    reviewer: boolean;
     dateReviewed: string;
 
     constructor(dto: any) {
         this.id = dto.id;
         this.projectId = dto.projectId;
+        this.projectName = dto.projectName;
         this.name = dto.name;
         this.principalId = dto.principalId;
         this.principalName = dto.principalName;
@@ -42,7 +44,7 @@ export class ChangeForm {
         this.middleYear = dto.middleYear;
         this.knotYear = dto.knotYear;
         this.other = dto.other;
-        this.locked = dto.locked;
+        this.reviewer = dto.reviewer;
         this.dateReviewed = dto.dateReviewed;
         this.memberList = [];
         for (let i = 0; i < 6; i++) {

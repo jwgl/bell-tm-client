@@ -3,18 +3,14 @@
         <th>编号</th>
         <th>项目名称</th>
         <th>等级</th>
+        <th>项目类型</th>
         <th>变更内容</th>
-        <th>中期</th>
-        <th>结项</th>
-        <th>延期</th>
     </ng-template>
     <ng-template #tbodyTpl let-form="form">
         <td>{{form.code}}</td>
         <td class="expand">{{form.name}}</td>
         <td>{{form.level | level: 'text'}}</td>
+        <td>{{form.subtype}}</td>
         <td>{{form.type | changeType}}</td>
-        <td>{{form.middleYear}}</td>
-        <td>{{form.knotYear}}</td>
-        <td><span *ngIf="form.delayTimes">{{form.delayTimes}}次</span></td>
     </ng-template>
 </tm-workflow-list>

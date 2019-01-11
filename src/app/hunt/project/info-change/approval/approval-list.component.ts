@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 export class InfoChangeApprovalListComponent {
     reviewStatus(form: any): string {
-        return form.dateReviewed ? '已签' : form.locked ? '待签' : '';
+        return form.dateReviewed ? '已签' : form.reviewer ? '待签' : '';
     }
 }

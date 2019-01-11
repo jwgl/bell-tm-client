@@ -136,6 +136,9 @@ export class ChangeFormEditorComponent {
             }
             return validation;
         }, []);
+        if (!this.form.mainInfoForm) {
+            error.push('请先上传申报书');
+        }
         return error;
     }
 

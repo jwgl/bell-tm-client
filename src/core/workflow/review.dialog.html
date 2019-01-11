@@ -1,10 +1,10 @@
-<modal-dialog modalTitle="申请加签">
+<modal-dialog modalTitle="加签">
         <modal-body>
             <form *ngIf="options.data">
                 <ng-container [ngSwitch]="options.data.length">
                     <p *ngSwitchCase="0">未设置加签处理人，请与管理员联系。</p>
-                    <p *ngSwitchCase="1">《{{options.what}}》将发送至 <b>{{options.data[0].name}}</b> 进行加签。</p>
-                    <p *ngSwitchDefault>提交《{{options.what}}》 进行加签。<br>
+                    <p *ngSwitchCase="1">《{{options.what}}》将发送至 <b>{{options.data[0].name}}</b> 进行处理。</p>
+                    <p *ngSwitchDefault>提交《{{options.what}}》 进行处理。<br>
                         请选择处理人：
                         <select name="selected" [(ngModel)]="result.to">
                             <option *ngFor="let person of options.data" value="{{person.id}}">{{person.name}}</option>
