@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label class="control-label">原负责人</label>
-                    <p class="form-control-plaintext">{{vm.principalName}}</p>
+                    <p class="form-control-plaintext">{{project?.principalName}}</p>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="control-label">原单位</label>
@@ -41,6 +41,10 @@
             <h5>变更信息</h5>
         </div>
         <div class="card-body">
+            <div class="form-group">
+                <label class="control-label">变更原因</label>
+                <div [markdown]="vm.reason"></div>
+            </div>
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -59,7 +63,8 @@
                         <td>负责人</td>
                         <td>{{project.principalName}}</td>
                         <td class="text-danger">负责人</td>
-                        <td class="text-danger">{{vm.principalName}}</td>
+                        <td class="text-danger">{{vm.principalName}} {{vm.office}} {{vm.title}} {{vm.degree}}
+                            {{vm.phone}} {{vm.email}}</td>
                     </tr>
                     <ng-container *ngIf="has({ value: 2 }) && project">
                         <tr *ngIf="!middleChecked">

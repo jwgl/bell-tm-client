@@ -29,6 +29,12 @@
                         </span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label">变更原因</label>
+                    <textarea rows="3" class="form-control" name="reason" placeholder="请简略说明变更原因。（延期还需要写延期后的具体研究计划。可附页说明。）"
+                        [(ngModel)]="form.reason" required></textarea>
+                    <span class="text-info" *ngIf="form.reason">字数（含空格）{{form.reason.length}}</span>
+                </div>
             </div>
         </div>
         <div class="card">

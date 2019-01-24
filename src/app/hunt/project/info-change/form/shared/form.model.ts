@@ -22,6 +22,7 @@ export class ChangeForm {
     departmentName: string;
     reviewer: boolean;
     dateReviewed: string;
+    reason: String;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -46,6 +47,7 @@ export class ChangeForm {
         this.other = dto.other;
         this.reviewer = dto.reviewer;
         this.dateReviewed = dto.dateReviewed;
+        this.reason = dto.reason;
         this.memberList = [];
         for (let i = 0; i < 6; i++) {
             this.memberList.push({ value: '' });

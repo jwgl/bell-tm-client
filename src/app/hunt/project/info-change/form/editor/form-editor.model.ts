@@ -24,6 +24,7 @@ ChangeForm.prototype.toServerDto = function (this: ChangeForm): any {
         achievements: this.achievements,
         mainInfoForm: this.mainInfoForm,
         other: this.other,
+        reason: this.reason,
     };
 };
 

@@ -22,4 +22,8 @@ export class ProjectDepartmentItemComponent {
     get downloadUrl(): string {
         return this.service.getDownloadUrl(this.vm.id);
     }
+
+    get changeAble(): boolean {
+        return this.vm ? this.vm.projectStatus === 'INHAND' : false;
+    }
 }

@@ -78,10 +78,6 @@ export class ProjectFormEditorComponent {
         return validation;
     }
 
-    filterByTitle(name: string) {
-        return (discipline: any) => discipline.title === name;
-    }
-
     get majors(): string[] {
         const majors = _.chain(this.disciplines)
             .filter((discipline: any) => discipline.title === this.form.discipline)

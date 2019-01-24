@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -116,11 +115,15 @@ export class ChangeFormEditorComponent {
                 case 4:
                     if (!this.form.content) {
                         validation.push('请输入主要内容');
+                    } else if (this.form.content.length > 1500) {
+                        error.push('主要内容不要超过1500字！');
                     }
                     break;
                 case 6:
                     if (!this.form.achievements) {
                         validation.push('请输入预期成果');
+                    } else if (this.form.achievements.length > 1500) {
+                        error.push('预期成果不要超过1500字！');
                     }
                     break;
                 case 7:
@@ -131,19 +134,20 @@ export class ChangeFormEditorComponent {
                 case 8:
                     if (this.isEmpty(this.form.other)) {
                         validation.push('请输入其他变更信息');
+                    } else if (this.form.other.length > 800) {
+                        error.push('其他变更信息不要超过800字！');
                     }
                     break;
             }
             return validation;
         }, []);
+        if (!this.form.reason) {
+            error.push('请输入变更理由！');
+        }
         if (!this.form.mainInfoForm) {
             error.push('请先上传申报书');
         }
         return error;
-    }
-
-    filterByTitle(name: string) {
-        return (discipline: any) => discipline.title === name;
     }
 
     create() {

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { Dialog } from 'core/dialogs';
 
@@ -14,22 +13,21 @@ export class ProjectDepartmentListComponent {
     middleYears: any;
     knotYears: any;
     options: any;
-    taskId: number;
     list: any;
     reportType: number;
 
     constructor(
-        private route: ActivatedRoute,
         private service: ProjectDepartmentService,
         private dialog: Dialog,
     ) {
-        const params = this.route.snapshot.params;
-        this.taskId = params['id'];
-        this.service.loadDataForCreate().subscribe((dto: any) => {
-            this.subtypes = dto.subtypes;
-            this.middleYears = dto.middleYears;
-            this.knotYears = dto.knotYears;
-        });
+        this.service.loadList(this.service.queryOptions).subscribe(dto => this.loadData(dto));
+    }
+
+    loadData(dto: any) {
+        this.list = dto.list;
+        this.subtypes = dto.subtypes;
+        this.middleYears = dto.middleYears;
+        this.knotYears = dto.knotYears;
     }
 
     query() {
@@ -38,7 +36,7 @@ export class ProjectDepartmentListComponent {
             middleYears: this.middleYears,
             knotYears: this.knotYears,
         }).then(result => {
-            this.service.loadList(result).subscribe(dto => this.list = dto);
+            this.service.loadList(result).subscribe(dto => this.loadData(dto));
         });
     }
 }
