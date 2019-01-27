@@ -2,6 +2,7 @@
     <table class="table table-expand">
         <thead>
             <tr>
+                <th></th>
                 <th>序号</th>
                 <th>任务名称</th>
                 <th>项目周期</th>
@@ -14,16 +15,50 @@
         </thead>
         <tbody>
             <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
-                <tr>
-                    <td>{{i + 1}}</td>
-                    <td class="expand"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
-                    <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
-                    <td class="date">{{task.endDate}}</td>
-                    <td><a [routerLink]="[task.id, 'administration']" *ngIf="task.countProject"><span class="badge badge-pill badge-secondary">{{task.countProject}}</span></a></td>
-                    <td><a [routerLink]="[task.id, 'todo']" *ngIf="task.countUncheck"><span class="badge badge-pill badge-secondary">{{task.countUncheck}}</span></a></td>
-                    <td><a [routerLink]="[task.id, 'done']" *ngIf="task.countPass"><span class="badge badge-pill badge-secondary">{{task.countPass}}</span></a></td>
-                    <td><a [routerLink]="[task.id, 'expr']" *ngIf="task.countFail"><span class="badge badge-pill badge-secondary">{{task.countFail}}</span></a></td>
-                </tr>
+                <ng-container *ngIf="task.type === 'CHECK'; else application">
+                    <tr [ngClass]="{'table-active': e.expended}" (dblclick)="e.click()">
+                        <td>
+                            <tm-row-expender #e (toggle)="toggle($event, task)" [enabled]="true"></tm-row-expender>
+                        </td>
+                        <td>{{i + 1}}</td>
+                        <td class="expand"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
+                        <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type |
+                                reviewType:
+                                'text'}}</label></td>
+                        <td class="date">{{task.endDate}}</td>
+                        <td><a [routerLink]="[task.id, 'administration']" *ngIf="task.countProject"><span class="badge badge-pill badge-secondary">{{task.countProject}}</span></a></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <ng-container *ngIf="e.expended">
+                        <tr class="table-info" *ngFor="let countItem of task.reviewCounts">
+                            <td colspan="2"></td>
+                            <td class="expand">{{reportTypeLabels[countItem.reportType]}}</td>
+                            <td></td>
+                            <td></td>
+                            <td><span *ngIf="countItem.countProject">{{countItem.countProject}}</span></td>
+                            <td><a [routerLink]="[task.id, 'todo', countItem.reportType]" *ngIf="countItem.countUncheck"><span class="badge badge-pill badge-secondary">{{countItem.countUncheck}}</span></a></td>
+                            <td><a [routerLink]="[task.id, 'done', countItem.reportType]" *ngIf="countItem.countPass"><span class="badge badge-pill badge-secondary">{{countItem.countPass}}</span></a></td>
+                            <td><a [routerLink]="[task.id, 'expr', countItem.reportType]" *ngIf="countItem.countFail"><span class="badge badge-pill badge-secondary">{{countItem.countFail}}</span></a></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-template #application>
+                    <tr>
+                        <td></td>
+                        <td>{{i + 1}}</td>
+                        <td class="expand"><button class="btn btn-link" (click)="overlay.show(task.id)">{{task.title}}</button></td>
+                        <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type |
+                                reviewType:
+                                'text'}}</label></td>
+                        <td class="date">{{task.endDate}}</td>
+                        <td><a [routerLink]="[task.id, 'administration']" *ngIf="task.countProject"><span class="badge badge-pill badge-secondary">{{task.countProject}}</span></a></td>
+                        <td><a [routerLink]="[task.id, 'todo']" *ngIf="task.countUncheck"><span class="badge badge-pill badge-secondary">{{task.countUncheck}}</span></a></td>
+                        <td><a [routerLink]="[task.id, 'done']" *ngIf="task.countPass"><span class="badge badge-pill badge-secondary">{{task.countPass}}</span></a></td>
+                        <td><a [routerLink]="[task.id, 'expr']" *ngIf="task.countFail"><span class="badge badge-pill badge-secondary">{{task.countFail}}</span></a></td>
+                    </tr>
+                </ng-template>
             </ng-template>
         </tbody>
     </table>

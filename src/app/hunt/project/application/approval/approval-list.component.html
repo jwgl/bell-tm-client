@@ -1,4 +1,4 @@
-<div class="btn-toolbar mt-3">
+<div class="btn-toolbar mt-3" *ngIf="reviewAble">
     <div class="btn-group ml-auto">
         <button class="btn btn-secondary" (click)="lockAll(true)">锁定</button>
         <button class="btn btn-secondary" (click)="lockAll(false)">解锁</button>
@@ -32,7 +32,7 @@
                 </td>
                 <td><a [routerLink]="['applications', item.id]">{{i+1}}#{{item.id}} </a></td>
                 <td class="expand">{{item.name}}</td>
-                <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
+                <td class="expand">{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
                 <td>{{item.phone}}</td>
                 <td>{{item.level | level: 'text'}}</td>
                 <td>{{item.subtype}}</td>

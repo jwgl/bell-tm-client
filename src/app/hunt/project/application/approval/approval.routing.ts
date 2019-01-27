@@ -19,6 +19,7 @@ const routes: Routes = [
         }],
     },
     { path: ':taskId/:type/applications/:id', component: ApplicationApprovalItemComponent },
+    { path: ':taskId/:type/:reportType', component: ApplicationApprovalListComponent },
     { path: ':taskId/:type', component: ApplicationApprovalListComponent },
     { path: ':taskId', component: ApplicationApprovalListComponent },
 ];

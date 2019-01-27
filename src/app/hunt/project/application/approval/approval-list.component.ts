@@ -35,6 +35,7 @@ export class ApplicationApprovalListComponent {
             this.service.loadList({
                 taskId: params['taskId'],
                 type: params['type'] ? params['type'] : null,
+                reportType: params['reportType'] ? params['reportType'] : null,
             }).subscribe(dto => this.list = dto);
         });
     }
@@ -52,6 +53,10 @@ export class ApplicationApprovalListComponent {
 
     get dateLabel(): string {
         return dateLabels[this.type];
+    }
+
+    get reviewAble(): boolean {
+        return this.type === 'todo';
     }
 
     lockClass(status: boolean): string {

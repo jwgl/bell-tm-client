@@ -21,7 +21,9 @@ export class InfoChangeApprovalItemComponent {
     }
 
     get reviewAble(): boolean {
-        if (this.form && this.form.status === 'CHECKED') {
+        if (this.form &&
+            (this.form.status === 'CHECKED' ||
+                (this.form.status === 'SUBMITTED' && this.form.type.some(t => t === 1)))) {
             return this.form.dateReviewed ? true : this.form.reviewer ? false : true;
         } else {
             return false;

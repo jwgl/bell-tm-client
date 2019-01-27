@@ -2,11 +2,6 @@ import { ChangeForm } from '../../../info-change/form/shared/form.model';
 
 declare module '../../../info-change/form/shared/form.model' {
     interface ChangeForm {
-        title: string;
-        degree: string;
-        email: string;
-        office: string;
-        phone: string;
         toServerDto(): any;
     }
 }
