@@ -1,0 +1,14 @@
+<modal-dialog modalTitle="备注">
+    <modal-body>
+            <form>
+                <label class="label-control">{{options.project.name}}</label>
+                <div class="form-group">
+                    <textarea class="form-control" rows="4" placeholder="备注" name="comment" [(ngModel)]="comment"></textarea>
+                </div>
+            </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="comment?.length == 0">确定</button>
+    </modal-footer>
+</modal-dialog>

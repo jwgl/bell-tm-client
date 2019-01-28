@@ -40,6 +40,9 @@ const routes: Routes = [{
 }, {
     path: 'directors/:userId/info-changes',
     loadChildren: './project/info-change/review/info-change-review.module#ChangeReviewModule',
+}, {
+    path: 'users/:userId/projects',
+    loadChildren: './project/view/upper/viewer.module#ProjectModule',
 }];
 
 @NgModule({
