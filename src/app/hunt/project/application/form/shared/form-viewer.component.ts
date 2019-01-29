@@ -65,7 +65,7 @@ export class FormViewerComponent {
 
     get title(): string {
         if (!this.vm.reportType) {
-            return `项目#${this.vm.id}`;
+            return `项目#${this.vm.projectId}`;
         } else {
             return `${TitleType[this.vm.reportType - 1]} #${this.vm.id}`;
         }

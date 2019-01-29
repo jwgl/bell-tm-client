@@ -12,6 +12,7 @@ export class ProjectListComponent {
     subtypes: any;
     middleYears: any;
     knotYears: any;
+    createAble: boolean;
     options: any;
     list: any;
     reportType: number;
@@ -28,6 +29,7 @@ export class ProjectListComponent {
         this.subtypes = dto.subtypes;
         this.middleYears = dto.middleYears;
         this.knotYears = dto.knotYears;
+        this.createAble = dto.createAble;
     }
 
     query() {

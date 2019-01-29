@@ -5,6 +5,7 @@ import { ProjectRoutingModule } from './viewer-routing.module';
 import { ProjectService } from './viewer.service';
 import { ProjectListModule } from './list/project-list.module';
 import { ProjectItemModule } from './item/project-item.module';
+import { ProjectFormEditorModule } from './editor/form-editor.module';
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import { ProjectItemModule } from './item/project-item.module';
         ProjectRoutingModule,
         ProjectListModule,
         ProjectItemModule,
+        ProjectFormEditorModule,
     ],
     providers: [
         ProjectService,
