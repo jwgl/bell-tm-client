@@ -44,11 +44,17 @@ export class ProjectItemComponent {
     }
 
     get editAble(): boolean {
-        return (this.vm.status === 'CREATED' || this.vm.status === 'REJECTED') && this.vm.isValidDate;
+        if (!this.review) {
+            return (this.vm.status === 'CREATED' || this.vm.status === 'REJECTED') && this.vm.isValidDate;
+        }
+        return (this.review.status === 'CREATED' || this.review.status === 'REJECTED') && this.vm.isValidDate;
     }
 
     get removAble(): boolean {
-        return this.vm.reportType === 1;
+        if (!this.review) {
+            return this.vm.reportType === 1;
+        }
+        return this.review.reportType === 1;
     }
 
     get downloadUrl(): string {
@@ -56,12 +62,16 @@ export class ProjectItemComponent {
     }
 
     get submitAble(): boolean {
+        const review = this.review;
+        return review ? !_.isEmpty(review.mainInfoForm) : false;
+    }
+
+    get review(): any {
         const reviews = this.vm.relationReportTypes;
         if (reviews && reviews.length > 0) {
-            const review = reviews.find((r: any) => r.reportType === this.vm.reportType);
-            return review ? !_.isEmpty(review.mainInfoForm) : false;
+            return reviews.find((r: any) => r.reportType === this.vm.reportType);
         }
-        return false;
+        return null;
     }
 
     remove() {

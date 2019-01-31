@@ -9,6 +9,14 @@
                     </option>
                 </select>
             </form-field>
+            <form-field label="单位">
+                <select name="department" class="form-control" [(ngModel)]="queryOptions.departmentId">
+                    <option value="" disabled>选择所属单位</option>
+                    <option *ngFor="let item of departments" [ngValue]="item.id">
+                        {{item.name}}
+                    </option>
+                </select>
+            </form-field>
             <form-field label="等级">
                 <select name="level" class="form-control" [(ngModel)]="queryOptions.level">
                     <option value="" disabled>选择等级</option>

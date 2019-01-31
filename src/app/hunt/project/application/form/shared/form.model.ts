@@ -100,6 +100,7 @@ export class ProjectForm {
     departmentConclusion: string;
     departmentOpinion: string;
     conclusionOfUniversity: string;
+    conclusionOfProvince: string;
     opinionOfUniversity: string;
     isValidDate: boolean;
     countExpert: number;
@@ -149,6 +150,7 @@ export class ProjectForm {
         this.departmentOpinion = dto.departmentOpinion;
         this.conclusionOfUniversity = dto.conclusionOfUniversity;
         this.opinionOfUniversity = dto.opinionOfUniversity;
+        this.conclusionOfProvince = dto.conclusionOfProvince;
         this.isValidDate = dto.isValidDate;
         this.countExpert = dto.countExpert;
         this.workflowInstanceId = dto.workflowInstanceId;

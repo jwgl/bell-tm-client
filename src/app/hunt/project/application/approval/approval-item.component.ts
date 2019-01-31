@@ -130,9 +130,13 @@ export class ApplicationApprovalItemComponent {
         if ((this.form.reportType === 1 && this.isEmpty(data.dateStarted)) &&
             ((this.form.level === 'PROVINCE' && data.conclusionOfProvince === 'OK') ||
             (this.form.level === 'UNIVERSITY' && data.conclusionOfUniversity === 'OK'))) {
-                alert(this.form.reportType === 1);
             validation.push('请正确输入立项日期！');
         }
         return validation;
+    }
+
+    get finalConclusion(): boolean {
+        return (this.form.level === 'PROVINCE' && !this.isEmpty(this.conclusionForm.conclusionOfProvince)) ||
+        (this.form.level === 'UNIVERSITY' && !this.isEmpty(this.conclusionForm.conclusionOfUniversity));
     }
 }

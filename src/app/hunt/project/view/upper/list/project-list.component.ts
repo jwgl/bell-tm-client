@@ -12,6 +12,7 @@ export class ProjectListComponent {
     subtypes: any;
     middleYears: any;
     knotYears: any;
+    departments: any;
     createAble: boolean;
     options: any;
     list: any;
@@ -29,6 +30,7 @@ export class ProjectListComponent {
         this.subtypes = dto.subtypes;
         this.middleYears = dto.middleYears;
         this.knotYears = dto.knotYears;
+        this.departments = dto.departments;
         this.createAble = dto.createAble;
     }
 
@@ -37,6 +39,7 @@ export class ProjectListComponent {
             subtypes: this.subtypes,
             middleYears: this.middleYears,
             knotYears: this.knotYears,
+            departments: this.departments,
         }).then(result => {
             this.service.loadList(result).subscribe(dto => this.loadData(dto));
         });

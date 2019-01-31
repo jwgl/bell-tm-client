@@ -19,6 +19,7 @@ export class ProjectOptionDialog extends BaseDialog {
     queryOptions: any = {};
     middleYears: any;
     knotYears: any;
+    departments: any;
     subtypeSelected: any[];
     middleYearSelected: any[];
     knotYearSelected: any[];
@@ -34,6 +35,7 @@ export class ProjectOptionDialog extends BaseDialog {
         this.subtypes = this.options.subtypes;
         this.middleYears = this.options.middleYears;
         this.knotYears = this.options.knotYears;
+        this.departments = this.options.departments;
         return null;
     }
 

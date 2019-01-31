@@ -121,7 +121,7 @@
                     </div>
                     <div class="form-group col-12" *ngIf="review.conclusionOfProvince">
                         <label class="control-label">省厅意见 <span class="badge {{review.conclusionOfProvince | conclusion: 'class'}}">
-                                {{vm.conclusionOfProvince | conclusion: 'text'}}</span></label>
+                                {{review.conclusionOfProvince | conclusion: 'text'}}</span></label>
                         <p class="form-control-plaintext">{{review.opinionOfProvince}}</p>
                     </div>
                 </ng-container>
