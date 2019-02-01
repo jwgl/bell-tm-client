@@ -1,8 +1,8 @@
-<modal-dialog title="查询出国学生">
+<modal-dialog modalTitle="查询出国学生">
     <modal-body>
         <form class="form-horizontal">
             <form-field label="专业">
-                <select name="subject" class="form-control" [(ngModel)]="options.subjectId">
+                <select name="subject" class="form-control" [(ngModel)]="queryOptions.subjectId">
                     <option value="" disabled>选择专业</option>
                     <option *ngFor="let item of subjects" [ngValue]="item.id">
                         {{item.name}}
@@ -10,7 +10,7 @@
                 </select>
             </form-field>
             <form-field label="年级">
-                <select name="grade" class="form-control" [(ngModel)]="options.grade">
+                <select name="grade" class="form-control" [(ngModel)]="queryOptions.grade">
                     <option value="" disabled>选择年级</option>
                     <option *ngFor="let grade of grades" [ngValue]="grade">
                         {{grade}}
@@ -18,7 +18,7 @@
                 </select>
             </form-field>
             <form-field label="项目">
-                <select name="regions" class="form-control" [(ngModel)]="options.regionId">
+                <select name="regions" class="form-control" [(ngModel)]="queryOptions.regionId">
                     <option value="" disabled>选择项目</option>
                     <option *ngFor="let item of regions" [ngValue]="item.id">
                         {{item.name}}
@@ -26,10 +26,10 @@
                 </select>
             </form-field>
             <form-field label="学号">
-                <input type="text" name="studentId" class="form-control" [(ngModel)]="options.studentId" />
+                <input type="text" name="studentId" class="form-control" [(ngModel)]="queryOptions.studentId" />
             </form-field>
             <form-field label="姓名">
-                <input type="text" name="studentName" class="form-control" [(ngModel)]="options.studentName" />
+                <input type="text" name="studentName" class="form-control" [(ngModel)]="queryOptions.studentName" />
             </form-field>
         </form>
     </modal-body>

@@ -9,12 +9,16 @@ import { WorkflowAcceptButtonDirective } from './accept.button';
 import { WorkflowAcceptDialog } from './accept.dialog';
 import { WorkflowNextButtonDirective } from './next.button';
 import { WorkflowNextDialog } from './next.dialog';
+import { WorkflowRollbackButtonDirective } from './rollback.button';
+import { WorkflowRollbackDialog } from './rollback.dialog';
 import { WorkflowRejectButtonDirective } from './reject.button';
 import { WorkflowRejectDialog } from './reject.dialog';
 import { WorkflowRevokeButtonDirective } from './revoke.button';
 import { WorkflowRevokeDialog } from './revoke.dialog';
 import { WorkflowSubmitButtonDirective } from './submit.button';
 import { WorkflowSubmitDialog } from './submit.dialog';
+import { WorkflowReviewButtonDirective } from './review.button';
+import { WorkflowReviewDialog } from './review.dialog';
 import {
     NextOptions,
     ReviewOptions,
@@ -100,14 +104,17 @@ const WORKFLOW_DIALOGS: any[] = [
     WorkflowSubmitDialog,
     WorkflowAcceptDialog,
     WorkflowNextDialog,
+    WorkflowRollbackDialog,
     WorkflowRejectDialog,
     WorkflowRevokeDialog,
     WorkflowWorkitemsDialog,
+    WorkflowReviewDialog,
 ];
 
 const WORKFLOW_BUTTONS: any[] = [
     WorkflowAcceptButtonDirective,
     WorkflowNextButtonDirective,
+    WorkflowRollbackButtonDirective,
     WorkflowRejectButtonDirective,
     WorkflowSubmitButtonDirective,
     WorkflowRevokeButtonDirective,
@@ -125,6 +132,7 @@ const WORKFLOW_COMPONENTS: any[] = [
     WorkflowReviewListComponent,
     WorkflowReviewItemComponent,
     WorkflowFormItemComponent,
+    WorkflowReviewButtonDirective,
 ];
 
 @NgModule({

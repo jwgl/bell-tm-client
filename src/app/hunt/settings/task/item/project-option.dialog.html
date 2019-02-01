@@ -1,0 +1,73 @@
+<modal-dialog modalTitle="查询项目">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="验收阶段">
+                <select name="reportType" class="form-control" [(ngModel)]="queryOptions.reportType">
+                    <option value="" disabled>选择阶段</option>
+                    <option *ngFor="let item of reportTypes" [ngValue]="item.value">
+                        {{item.label}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="等级">
+                <select name="level" class="form-control" [(ngModel)]="queryOptions.level">
+                    <option value="" disabled>选择等级</option>
+                    <option *ngFor="let item of levels" [ngValue]="item.value">
+                        {{item.label}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="类别">
+                <ng-select name="subtype"
+                    [items]="subtypes"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [hideSelected]="true"
+                    bindLabel="name"
+                    placeholder="选择类别"
+                    [(ngModel)]="subtypeSelected">
+                </ng-select>
+            </form-field>
+            <form-field label="学院">
+                <ng-select name="department"
+                    [items]="departments"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [hideSelected]="true"
+                    bindLabel="name"
+                    placeholder="选择所在学院"
+                    [(ngModel)]="departmentSelected">
+                </ng-select>
+            </form-field>
+            <form-field label="预期中期">
+                <ng-select name="middleYear"
+                    [items]="middleYears"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [hideSelected]="true"
+                    bindLabel="middleYear"
+                    placeholder="选择中期年份"
+                    [(ngModel)]="middleYearSelected">
+                </ng-select>
+            </form-field>
+            <form-field label="预期结题">
+                <ng-select name="knotYear"
+                    [items]="knotYears"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [hideSelected]="true"
+                    bindLabel="knotYear"
+                    placeholder="选择结题年份"
+                    [(ngModel)]="knotYearSelected">
+                </ng-select>
+            </form-field>
+            <form-field label="项目编号">
+                <input type="text" name="code" class="form-control" [(ngModel)]="queryOptions.code" />
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

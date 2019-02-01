@@ -29,6 +29,9 @@ export class WorkflowReviewItemComponent implements OnInit {
     @Input()
     revokable = false;
 
+    @Input()
+    needreview = false;
+
     @Output()
     itemLoaded = new EventEmitter<any>(true);
 

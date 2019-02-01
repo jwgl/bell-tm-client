@@ -1,0 +1,25 @@
+<table class="table table-expand">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>任务名称</th>
+            <th>项目周期</th>
+            <th>申请截止</th>
+            <th>限制对象</th>
+            <th>已填报数</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td class="expand"><a [routerLink]="[task.id]">{{task.title}}</a></td>
+                <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType:
+                        'text'}}</label></td>
+                <td>{{task.endDate}}</td>
+                <td><span *ngIf="task.ban">{{task.ban | level: 'text'}}在研</span></td>
+                <td>{{task.countApplication}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

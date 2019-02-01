@@ -1,0 +1,9 @@
+<tm-workflow-item reviewType="approve"
+    [reviewable]="reviewAble"
+    [needreview]="!form?.reviewer && !form?.dateReviewed"
+    [reviewTitle]="form?.projectName"
+    (itemLoaded)="onItemLoaded($event)">
+    <ng-template #viewerTpl *ngIf="form">
+        <tm-change-form-viewer [vm]="form" [project]="project" [downloadUrl]="downloadUrl"></tm-change-form-viewer>
+    </ng-template>
+</tm-workflow-item>

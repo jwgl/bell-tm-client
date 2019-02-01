@@ -1,4 +1,4 @@
-<div class="container" *ngIf="list">
+<ng-container *ngIf="list">
     <div class="btn-group mt-2" *ngIf="mentorAble">
         <button class="btn btn-primary" (click)="open()">设置导师</button>
     </div>
@@ -44,4 +44,4 @@
     <ng-template #empty>
         <div class="alert alert-info">暂无数据</div>
     </ng-template>
-</div>
+</ng-container>

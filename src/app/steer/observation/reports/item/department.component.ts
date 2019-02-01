@@ -17,6 +17,7 @@ interface DepartmentReport {
 export class DepartmentReportComponent {
     list: DepartmentReport[];
     isAdmin: boolean;
+    token: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -27,6 +28,7 @@ export class DepartmentReportComponent {
             this.service.loadList({ type: countBy }).subscribe((dto: any) => {
                 this.isAdmin = dto.isAdmin;
                 this.list = dto.list;
+                this.token = dto.token;
                 this.list.sort((a, b) => a.supervisorTimes - b.supervisorTimes);
             });
         });

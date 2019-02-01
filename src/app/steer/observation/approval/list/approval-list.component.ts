@@ -1,5 +1,5 @@
-import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import * as _ from 'lodash';
 
@@ -31,7 +31,6 @@ export class ApprovalListComponent {
     _mode: string;
 
     constructor(
-        private router: Router,
         private route: ActivatedRoute,
         private service: ApprovalService,
         private dialog: CommonDialog) {

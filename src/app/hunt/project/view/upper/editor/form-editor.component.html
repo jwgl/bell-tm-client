@@ -1,0 +1,73 @@
+<ng-container *ngIf="form !=undefined">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving">保存</button>
+        </div>
+    </div>
+    <tm-form-title>项目创建{{form.id}}</tm-form-title>
+    <form role="form">
+        <div class="row">
+            <div class="form-group col-md-9">
+                <label class="control-label">项目名称</label>
+                <input class="form-control" name="name" type="text" [(ngModel)]="form.name" placeholder="申报的项目名称" />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">来源</label>
+                <select name="origin" class="form-control" [(ngModel)]="form.originId">
+                    <option *ngFor="let item of origins" [ngValue]="item.id">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">编号</label>
+                <input class="form-control" name="code" type="text" [(ngModel)]="form.code" placeholder="项目编号" />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">负责人</label>
+                <tm-teacher-select (selectTeacher)="onTeacherSelected($event)"></tm-teacher-select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">项目类别</label>
+                <select name="subtype" class="form-control" [(ngModel)]="form.subtypeObject">
+                    <option value="" disabled>请选择</option>
+                    <option *ngFor="let item of subtypes" [ngValue]="item">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">项目等级</label>
+                <select name="level" class="form-control" [(ngModel)]="form.level">
+                    <option *ngFor="let item of levels" [ngValue]="item.value">
+                        {{ item.label }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">单位</label>
+                <select name="department" class="form-control" [(ngModel)]="form.departmentId">
+                    <option *ngFor="let item of departments" [ngValue]="item.id">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">立项时间</label>
+                <input class="form-control" type="text" name="dateStarted" [(ngModel)]="form.dateStarted" placeholder="请严格按规范输入YYYY-MM-DD">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">中期年份</label>
+                <input class="form-control" name="middleYear" type="number" [(ngModel)]="form.middleYear" placeholder="4位数年份" />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">结项年份</label>
+                <input class="form-control" name="knotYear" type="number" [(ngModel)]="form.knotYear" placeholder="4位数年份" />
+            </div>
+        </div>
+    </form>
+</ng-container>

@@ -1,7 +1,8 @@
-<div class="container" *ngIf="list">
+<ng-container *ngIf="list">
     <div class="btn-toolbar">
         <div class="dropdown ml-auto">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 导出
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -37,7 +38,9 @@
                 <td>{{form.className}}</td>
                 <td>{{form.paperApprover}}</td>
                 <td>{{form.date | date: 'y-MM-dd HH:mm'}}</td>
-                <td><tm-dual-audit-status [status]="form.status"></tm-dual-audit-status></td>
+                <td>
+                    <tm-dual-audit-status [status]="form.status"></tm-dual-audit-status>
+                </td>
             </tr>
         </tbody>
         <tfoot>
@@ -51,5 +54,7 @@
             </tr>
         </tfoot>
     </table>
-    <ng-template #empty><div class="alert alert-info">暂无数据</div></ng-template>
-</div>
+    <ng-template #empty>
+        <div class="alert alert-info">暂无数据</div>
+    </ng-template>
+</ng-container>

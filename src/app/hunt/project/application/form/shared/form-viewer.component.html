@@ -1,0 +1,143 @@
+<ng-container *ngIf="vm">
+    <tm-form-title>{{title}}</tm-form-title>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="control-label">项目名称</label>
+            <div>{{vm.name}}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label">负责人</label>
+            <div>{{vm.principalName}}
+                <span *ngIf="vm.office && vm.office.length > 1">{{vm.office}}，</span>
+                <span *ngIf="vm.title && vm.title.length > 1">{{vm.title}}，</span>
+                <span *ngIf="vm.degree && vm.degree.length > 1">{{vm.degree}}学位 </span>{{vm.discipline}} {{vm.discipline}}
+                <span *ngIf="vm.direction">{{vm.direction}}方向</span></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">项目类别</label>
+            <div>{{vm.subtype}} <span class="badge badge-info">{{vm.level | level: 'text'}}</span></div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">电话</label>
+            <div>{{vm.phone}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">Email</label>
+            <div>{{vm.email}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">建设情况</label>
+            <div>{{vm.projectStatus | projectStatus: 'text'}}</div>
+        </div>
+    </div>
+    <div class="row" *ngIf="vm.projectStatus !== 'CREATED'">
+        <div class="form-group col-md-3">
+            <label class="control-label">项目编号</label>
+            <div>{{vm.code}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">立项日期</label>
+            <div>{{vm.dateStarted}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">预期中期</label>
+            <div>{{vm.middleYear}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">预期结项</label>
+            <div>{{vm.knotYear}}</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">单位</label>
+            <div>{{vm.departmentName}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">来源</label>
+            <div>{{vm.origin}}</div>
+        </div>
+        <div class="form-group col-6" *ngIf="vm.urls">
+            <label class="control-label">相关网址</label>
+            <div>{{vm.urls}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <div class="list-group">
+                <ng-container *ngFor="let item of listItems">
+                    <a class="list-group-item list-group-item-action d-flex justify-content-between" [class.active]="item.reportType === reportType_"
+                        (click)="typeSelected(item.reportType)">
+                        {{item.label}}
+                    </a>
+                </ng-container>
+            </div>
+        </div>
+        <div class="form-group col-md-10" *ngIf="review">
+            <div class="row">
+                <div class="form-group col-12" *ngIf="review.content">
+                    <label class="control-label">{{contentLabel}}</label>
+                    <div [markdown]="review.content"></div>
+                </div>
+                <div class="form-group col-12" *ngIf="review.achievements">
+                    <label class="control-label">{{furtherLabel}}</label>
+                    <div [markdown]="review.achievements"></div>
+                </div>
+                <div class="form-group col-12" *ngIf="review.other">
+                    <label class="control-label">{{otherLabel}}</label>
+                    <div [markdown]="review.other"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header d-flex">
+                    <label class="control-label">附件</label>
+                    <a class="btn btn-secondary btn-sm ml-auto" download [href]="downloadUrl" *ngIf="review.mainInfoForm">下载</a>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li *ngIf="review.mainInfoForm">{{getLabel('main')}}-{{projectName}}{{vm.level | level:
+                            'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(review.mainInfoForm)}}</li>
+                        <li *ngIf="review.proofFile">主要佐证材料-{{projectName}}{{vm.level | level:
+                            'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(review.proofFile)}}</li>
+                        <li *ngIf="review.summaryReport">总结报告-{{projectName}}{{vm.level | level:
+                            'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(review.summaryReport)}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12" *ngIf="review.departmentOpinion">
+                    <label class="control-label">学院意见</label>
+                    <p class="form-control-plaintext">{{review.departmentOpinion}}</p>
+                </div>
+                <ng-container *ngIf="isAdmin || review.status === 'FINISHED'">{{vm.period}}
+                    <div class="form-group col-12" *ngIf="review.conclusionOfUniversity">
+                        <label class="control-label">学校意见 <span class="badge {{review.conclusionOfUniversity | conclusion: 'class'}}">
+                                {{review.conclusionOfUniversity | conclusion: 'text'}}</span></label>
+                        <p class="form-control-plaintext">{{review.opinionOfUniversity}}</p>
+                    </div>
+                    <div class="form-group col-12" *ngIf="review.conclusionOfProvince">
+                        <label class="control-label">省厅意见 <span class="badge {{review.conclusionOfProvince | conclusion: 'class'}}">
+                                {{review.conclusionOfProvince | conclusion: 'text'}}</span></label>
+                        <p class="form-control-plaintext">{{review.opinionOfProvince}}</p>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="form-group" *ngIf="vm.expertReview && vm.expertReview.length > 0">
+                <label class="control-label">专家意见</label>
+                <ul>
+                    <li *ngFor="let item of vm.expertReview">
+                        <span class="text-info mr-2">{{item.teacherName}} {{item.teacherId}}：</span>
+                        <span [class]="conclusionClass(item.conclusion)">{{item.conclusion}}</span> {{item.dateReviewed
+                        | date:
+                        'yyyy-MM-dd'}}
+                        <span class="ml-3">{{item.opinion}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ng-container>

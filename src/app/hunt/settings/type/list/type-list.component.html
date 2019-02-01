@@ -1,0 +1,31 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-primary" (click)="open()">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>主类</th>
+            <th>类别名称</th>
+            <th>周期(年)</th>
+            <th>在用</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-type [ngForOf]="list" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{type.parentName}}</td>
+                <td><button class="btn btn-link border-0 p-0" (click)="edit(type)">{{type.name}}</button></td>
+                <td><span *ngIf="type.periodOfUniversity"class="mr-2">校级：{{type.periodOfUniversity}} </span>
+                    <span *ngIf="type.periodOfCity" class="mr-2">市级：{{type.periodOfCity}} </span>
+                    <span *ngIf="type.periodOfProvince" class="mr-2">省级：{{type.periodOfProvince}} </span>
+                    <span *ngIf="type.periodOfNation" class="mr-2">国家级：{{type.periodOfNation}} </span>
+                </td>
+                <td>{{type.enabled ? '是' : '否'}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

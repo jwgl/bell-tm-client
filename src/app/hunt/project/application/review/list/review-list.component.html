@@ -1,0 +1,39 @@
+<ul class="nav nav-tabs mb-p10">
+    <li *ngFor="let item of options" class="nav-item mr-1">
+        <a class="nav-link" [routerLink]="['../', item.type]" routerLinkActive="active">{{item.label}}
+            <span class="badge badge-pill badge-secondary">{{item.count}}</span>
+        </a>
+    </li>
+</ul>
+<table class="table table-expand" *ngIf="list; else empty">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>项目名称</th>
+            <th>负责人</th>
+            <th>等级</th>
+            <th>项目类型</th>
+            <th>结论</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+            <tr>
+                <td>{{i+1}}</td>
+                <td class="expand">{{item.name}}</td>
+                <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
+                <td>{{item.level | level: 'text'}}</td>
+                <td>{{item.subtype}}</td>
+                <td>{{item.conclusion}}</td>
+                <td><button class="btn btn-secondary btn-sm" (click)="review(item.id)">{{item.dateReviewed ? '查看' :
+                        '评审'}}</button>
+                    <button class="btn btn-secondary btn-sm ml-2" (click)="submit(item.id)" *ngIf="item.submitAble">提交</button>
+                </td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>
+<ng-template #empty>
+    <div class="alert alert-info">暂无数据</div>
+</ng-template>

@@ -4,8 +4,10 @@
         <button [workflow-workitems]="workflowInstanceId">流程</button>
     </div>
     <div class="btn-group ml-2" *ngIf="wi && reviewable">
+        <button [workflow-review]="reviewOptions" (review)="onItemLoaded($event)" *ngIf="needreview">加签</button>
         <button [workflow-reject]="reviewOptions" (rejected)="onItemLoaded($event)">退回</button>
         <button [workflow-accept]="reviewOptions" (accepted)="onItemLoaded($event)" *ngIf="acceptEnabled">同意</button>
+
     </div>
     <div class="btn-group ml-2" *ngIf="revokable">
         <button [workflow-revoke]="revokeOptions" (revoked)="onItemLoaded($event)">回收</button>

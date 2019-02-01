@@ -1,0 +1,73 @@
+<ul class="nav nav-tabs mb-p10" *ngIf="isCheckTime">
+    <li *ngFor="let item of options" class="nav-item mr-1">
+        <a class="nav-link" [routerLink]="['../', item.type]" routerLinkActive="active">{{item.label}}
+            <span class="badge badge-pill badge-secondary">{{item.count}}</span>
+        </a>
+    </li>
+</ul>
+<table class="table table-expand" *ngIf="list">
+    <thead>
+        <tr>
+            <th></th>
+            <th>序号</th>
+            <th>项目名称</th>
+            <th>项目编号</th>
+            <th>等级</th>
+            <th>项目类型</th>
+            <th>单位</th>
+            <th>姓名</th>
+            <ng-container *ngIf="existExpertReview">
+                <th>同意</th>
+                <th>不同意</th>
+                <th>弃权</th>
+                <th>未评</th>
+                <th>平均分</th>
+            </ng-container>
+            <th>状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+            <tr [ngClass]="{'table-active': e.expended}" (dblclick)="e.click()">
+                <td><tm-row-expender #e (toggle)="toggle($event, item)" [enabled]="true"></tm-row-expender></td>
+                <td> {{i + 1}} </td>
+                <td class="expand">{{item.name}}</td>
+                <td>{{item.code}}</td>
+                <td>{{item.level | level : 'text'}}</td>
+                <td>{{item.subtype}}</td>
+                <td>{{item.departmentName}}</td>
+                <td>{{item.principalName}}</td>
+                <ng-container *ngIf="existExpertReview">
+                    <td>{{item.countOk}}</td>
+                    <td>{{item.countVeto}}</td>
+                    <td>{{item.countWaiver}}</td>
+                    <td>{{item.countNull}}</td>
+                    <td>{{item.average}}</td>
+                </ng-container>
+                <td>
+                    <audit-status [status]="item.status"></audit-status>
+                </td>
+            </tr>
+            <tr *ngIf="e.expended" class="table-info">
+                <td colspan="2"></td>
+                <td [colSpan]="cols">
+                    <section>
+                        <label class="mr-2">项目名称</label>
+                        <span>{{item.name}}</span>
+                        <h6>学院意见</h6>
+                        <p>{{item.departmentOpinion}}</p>
+                    </section>
+                    <section *ngIf="existExpertReview">
+                        <h6>专家意见</h6>
+                        <ul class="list-unstyled mb-2">
+                            <li *ngFor="let expert of item.expertReview">
+                                <label class="badge badge-secondary">{{expert.name}}</label>
+                                <span class="ml-2">{{expert.opinion}}</span>
+                            </li>
+                        </ul>
+                    </section>
+                </td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

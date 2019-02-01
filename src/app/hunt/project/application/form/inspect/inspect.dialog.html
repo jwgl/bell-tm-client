@@ -1,0 +1,43 @@
+<modal-dialog modalTitle="验收填报">
+    <modal-body>
+        <form role="form">
+            <div class="form-group">
+                <label class="control-label">电话</label>
+                <input class="form-control" name="phone" type="text" [(ngModel)]="form.phone" placeholder="常用手机" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">{{contentLabel}} <span class="text-info" *ngIf="form.content">字数（含空格）{{form.content.length}}</span></label>
+                <textarea class="form-control" name="content" rows="6" [(ngModel)]="form.content" placeholder="请简要说明该项目的{{contentLabel}}。字数不超1500。"
+                    #suggest></textarea>
+            </div>
+            <div class="form-group">
+                <label class="control-label">{{furtherLabel}} <span class="text-info" *ngIf="form.achievements">字数（含空格）{{form.achievements.length}}</span></label>
+                <textarea class="form-control" name="further" rows="4" [(ngModel)]="form.achievements" placeholder="{{furtherLabel}}。字数不超1500。"
+                    #suggest></textarea>
+            </div>
+            <div class="form-group">
+                <label class="control-label">{{otherLabel}} <span class="text-info" *ngIf="form.other">字数（含空格）{{form.otherLabel.length}}</span></label>
+                <textarea class="form-control" name="other" rows="4" [(ngModel)]="form.other" placeholder="{{otherLabel}}。字数不超1500。"
+                    #suggest></textarea>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <ng-container *ngFor="let item of fileTypes;">
+                        <div class="d-flex mb-2" *ngIf="hasUploaded(item); else emptyTpl;">
+                            <span class="file-type">{{item.label}}</span>
+                            <span class="ml-3 mr-3">{{fileName(item)}}</span>
+                            <button class="btn btn-danger btn-sm ml-auto" (click)="remove(item)">删除</button>
+                        </div>
+                        <ng-template #emptyTpl>
+                            <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" (uploaded)="onUploaded($event)"></tm-uploader-panel>
+                        </ng-template>
+                    </ng-container>
+                </div>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

@@ -129,6 +129,12 @@ export class Workflow {
         );
     }
 
+    review(id: any, wi: string, data: { title: string, to: string, comment: string }): Observable<any> {
+        return this.http.patch<{ counts: ListCounts }>(this.api.review(id, wi), data).pipe(
+            tap(result => this.updateListGroup(result.counts)),
+        );
+    }
+
     getNextReviewersUrl(id: any, type: string) {
         switch (type) {
             case 'next':
@@ -138,8 +144,16 @@ export class Workflow {
         }
     }
 
+    getReviewersUrl(id: any) {
+        return this.api.reviewers(id);
+    }
+
     revoke(id: any, data: { title: string, comment: string }): Observable<any> {
         return this.http.patch(this.api.revoke(id), data);
+    }
+
+    rollback(id: any, data: { title: string, comment: string }): Observable<any> {
+        return this.http.patch(this.api.rollback(id), data);
     }
 
     private updateListGroup(listCounts: ListCounts): void {

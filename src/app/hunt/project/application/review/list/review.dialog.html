@@ -1,0 +1,24 @@
+<modal-dialog modalTitle="专家意见">
+    <modal-body>
+        <h4>{{vm.name}}</h4>
+        <div class="form-group" style="border: solid firebrick; padding: 0.5rem;">
+            <label class="control-label">注意事项</label>
+            <div>{{vm.remind}}</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">学院意见：{{vm.departmentConclusion}}</label>
+            <div>{{vm.departmentOpinion}}</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">专家意见</label>
+            <div><span *ngFor="let item of conclusions; let i = index" class="mr-3"><input type="radio" name="conclusions{{i}}"
+                        [value]="item" [(ngModel)]="conclusion">{{item}}</span>
+            </div>
+            <textarea class="form-control" name="opinion" rows="3" [(ngModel)]="opinion" placeholder="请输入意见！不少于6个字！"></textarea>
+        </div>
+
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-secondary" (click)="ok()" *ngIf="vm.editAble">确定</button>
+    </modal-footer>
+</modal-dialog>

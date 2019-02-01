@@ -1,0 +1,10 @@
+<modal-dialog modalTitle="专家分组">
+    <modal-body>
+        <dl>
+            <dd *ngFor="let item of list"><span class="mr-3"><tm-remove-item (click)="dismiss(item.id)"></tm-remove-item></span>{{item.members}}</dd>
+        </dl>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

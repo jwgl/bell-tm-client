@@ -1,0 +1,48 @@
+<modal-dialog modalTitle="终审结论">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="学校结论">
+                <select name="conclusion" class="form-control" [(ngModel)]="conclusionForm.conclusionOfUniversity">
+                    <option *ngFor="let item of conclusions" [ngValue]="item.value">
+                        {{ item.label }}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="学校意见">
+                <input class="form-control" type="text" name="opinionOfUniversity" [(ngModel)]="conclusionForm.opinionOfUniversity"
+                    placeholder="最少5个字">
+            </form-field>
+            <ng-container *ngIf="provinceLevel">
+                <form-field label="省厅结论">
+                    <select name="conclusion" class="form-control" [(ngModel)]="conclusionForm.conclusionOfProvince">
+                        <option *ngFor="let item of conclusions" [ngValue]="item.value">
+                            {{ item.label }}
+                        </option>
+                    </select>
+                </form-field>
+                <form-field label="省厅意见">
+                    <input class="form-control" type="text" name="opinionOfProvince" [(ngModel)]="conclusionForm.opinionOfProvince"
+                        placeholder="最少5个字">
+                </form-field>
+            </ng-container>
+            <ng-container *ngIf="finalOk">
+                <form-field label="项目编号">
+                    <input class="form-control" type="text" name="code" [(ngModel)]="conclusionForm.code">
+                </form-field>
+                <form-field label="立项日期">
+                    <input class="form-control" type="text" name="dateStarted" [(ngModel)]="conclusionForm.dateStarted"
+                    (ngModelChange)="datengChange($event)" placeholder="请严格按规范输入YYYY-MM-DD">
+                </form-field>
+                <form-field label="中期年份">
+                    <p class="form-control-plaintext">{{conclusionForm.middleYear}}</p>
+                </form-field>
+                <form-field label="结项年份">
+                    <p class="form-control-plaintext">{{conclusionForm.knotYear}}</p>
+                </form-field>
+            </ng-container>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-secondary" (click)="ok()" [disabled]="confirmAble">确定</button>
+    </modal-footer>
+</modal-dialog>

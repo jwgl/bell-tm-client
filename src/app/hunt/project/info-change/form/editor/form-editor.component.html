@@ -1,0 +1,140 @@
+<ng-container *ngIf="form !=undefined">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving">保存</button>
+        </div>
+    </div>
+    <tm-form-title>项目变更{{form.id}}</tm-form-title>
+    <form role="form">
+        <div class="card">
+            <div class="card-header">
+                <h5>基本信息</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="control-label">项目</label>
+                    <ng-container *ngIf="isCreateMode; else editTpl;">
+                        <tm-project-select [projects]="projects" (selectProject)="onSelectProject($event)"></tm-project-select>
+                    </ng-container>
+                    <ng-template #editTpl>
+                        <p class="form-control-plaintext">{{form.name}}</p>
+                    </ng-template>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">变更内容</label>
+                    <div>
+                        <span class="mr-4" *ngFor="let item of changeTypes">
+                            <input type="checkbox" class="mr-1" (change)="receive(item, $event.target.checked)"
+                                [checked]="has(item)">{{item.label}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">变更原因</label>
+                    <textarea rows="3" class="form-control" name="reason" placeholder="请简略说明变更原因。（延期还需要写延期后的具体研究计划。可附页说明。）"
+                        [(ngModel)]="form.reason" required></textarea>
+                    <span class="text-info" *ngIf="form.reason">字数（含空格）{{form.reason.length}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5>变更信息</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th colspan="2">原项目信息</th>
+                            <th colspan="2">变更为</th>
+                        </tr>
+                        <tr>
+                            <th style="width:6em">标题</th>
+                            <th style="width:30em">内容</th>
+                            <th style="width:6em">标题</th>
+                            <th style="width:30em">内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="has({ value: 2 }) && project">
+                            <tr *ngIf="!middleChecked">
+                                <td>中期预期</td>
+                                <td>{{project.middleYear}}</td>
+                                <td class="text-danger">中期预期</td>
+                                <td class="text-danger">{{project.middleYear + 1}}</td>
+                            </tr>
+                            <tr>
+                                <td>结题预期</td>
+                                <td>{{project.knotYear}}</td>
+                                <td class="text-danger">结题预期</td>
+                                <td class="text-danger">{{project.knotYear + 1}}</td>
+                            </tr>
+                        </ng-container>
+                        <tr *ngIf="has({ value: 3 }) && project">
+                            <td>项目名称</td>
+                            <td>{{project.name}}</td>
+                            <td class="text-danger">项目名称</td>
+                            <td><input type="text" name="projectName" class="form-control" placeholder="您的项目名称*"
+                                    [(ngModel)]="form.name" /></td>
+                        </tr>
+                        <tr *ngIf="has({ value: 4 }) && project">
+                            <td>研究内容</td>
+                            <td>{{project.content}}</td>
+                            <td class="text-danger">研究内容</td>
+                            <td><textarea rows="3" class="form-control" name="content" placeholder="简略说明主要研究内容"
+                                    [(ngModel)]="form.content" required></textarea>
+                                <span class="text-info" *ngIf="form.content">字数（含空格）{{form.content.length}}</span>
+                            </td>
+                        </tr>
+                        <tr *ngIf="has({ value: 6 }) && project">
+                            <td>成果形式</td>
+                            <td>{{project.achievements}}</td>
+                            <td class="text-danger">成果形式</td>
+                            <td><textarea rows="3" class="form-control" name="achievements" placeholder="简略列举预期成果"
+                                    [(ngModel)]="form.achievements"></textarea>
+                                <span class="text-info" *ngIf="form.achievements">字数（含空格）{{form.achievements.length}}</span>
+                            </td>
+                        </tr>
+                        <tr *ngIf="has({ value: 7 }) && project">
+                            <td>参与人</td>
+                            <td>{{project.members}}</td>
+                            <td class="text-danger">参与人</td>
+                            <td>
+                                <div class="mb-2" *ngFor="let item of form.memberList; let i = index">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">{{i+1}}:</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="member{{i}}" [(ngModel)]="item.value">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="has({ value: 8 }) && project">
+                            <td></td>
+                            <td></td>
+                            <td class="text-danger">其他</td>
+                            <td><textarea rows="3" class="form-control" name="other" placeholder="请列出要变更的其他内容"
+                                    [(ngModel)]="form.other"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5>文件上传</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex mb-2" *ngIf="form.mainInfoForm; else emptyTpl;">
+                    <span class="file-type">{{fileType.label}}</span>
+                    <span class="ml-3 mr-3">{{form.mainInfoForm}}</span>
+                    <button class="btn btn-danger btn-sm ml-auto" (click)="remove()">删除</button>
+                </div>
+                <ng-template #emptyTpl>
+                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="fileType" (uploaded)="onUploaded($event)"></tm-uploader-panel>
+                </ng-template>
+            </div>
+        </div>
+    </form>
+</ng-container>

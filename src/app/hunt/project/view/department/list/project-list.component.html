@@ -1,0 +1,42 @@
+<div class="btn-toolbar">
+    <div class="ml-auto">
+        <button class="btn btn-secondary" (click)="query()">查询</button>
+        <button class="btn btn-secondary ml-2" routerLink="replace-principal">负责人变更列表</button>
+    </div>
+</div>
+<table class="table table-expand">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>项目名称</th>
+            <th>项目编号</th>
+            <th>等级</th>
+            <th>项目类型</th>
+            <th>负责人</th>
+            <th>立项时间</th>
+            <th>中期</th>
+            <th>结题</th>
+            <th>已中检</th>
+            <th>延期</th>
+            <th>建设情况</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+            <tr>
+                <td><a [routerLink]="[item.id]">{{i + 1}}#{{item.id}}</a></td>
+                <td class="expand">{{item.name}}</td>
+                <td>{{item.code}}</td>
+                <td>{{item.level | level : 'text'}}</td>
+                <td class="expand">{{item.subtype}}</td>
+                <td>{{item.principalName}}</td>
+                <td>{{item.dateStart | date: 'yyyy-MM'}}</td>
+                <td>{{item.middleYear}}</td>
+                <td>{{item.knotYear}}</td>
+                <td>{{item.hasMid > 0 ? '是' : '否'}}</td>
+                <td><span *ngIf="item.delayTimes">{{item.delayTimes}}次</span></td>
+                <td><span class="badge badge-pill {{item.status | projectStatus: 'class'}}">{{item.status | projectStatus: 'text'}}</span></td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

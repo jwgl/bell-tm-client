@@ -41,6 +41,7 @@ import { NilValuePipe } from './pipes/nil-value';
 
 import { ScheduleTimetableComponent } from './components/schedule-timetable/schedule-timetable.component';
 import { ScheduleWeektabComponent } from './components/schedule-timetable/schedule-weektab.component';
+import { TeacherSelectComponent } from './components/teacher-select/teacher-select.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -79,6 +80,7 @@ const CORE_DIRECTIVES: any[] = [
     RemoveItemComponent,
     ScheduleTimetableComponent,
     ScheduleWeektabComponent,
+    TeacherSelectComponent,
     MultipleLineComponent,
     // bootstrap form directives
     FormDirective,

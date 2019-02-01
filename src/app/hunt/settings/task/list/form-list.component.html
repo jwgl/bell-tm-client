@@ -1,0 +1,29 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-secondary" routerLink="./editor">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>标题</th>
+            <th>申请开始</th>
+            <th>申请截止</th>
+            <th>通知类别</th>
+            <th>限制对象</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-task [ngForOf]="tasks" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td class="taskTitle"><a [routerLink]="[task.id]">{{task.title}}</a></td>
+                <td>{{task.startDate}}</td>
+                <td>{{task.endDate}}</td>
+                <td><label class="badge" ngClass="{{task.type | reviewType: 'class'}}">{{task.type | reviewType: 'text'}}</label></td>
+                <td><span *ngIf="task.ban">{{task.ban | level: 'text'}}在研</span></td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

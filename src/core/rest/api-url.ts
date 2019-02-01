@@ -66,6 +66,10 @@ export class ApiUrl {
         return `${this.item(id)}/approvers`;
     }
 
+    reviewers(id: any): string {
+        return `${this.item(id)}/reviewers`;
+    }
+
     tousers(id: any): string {
         return `${this.item(id)}/tousers`;
     }
@@ -84,6 +88,14 @@ export class ApiUrl {
 
     next(id: any, wi: any) {
         return `${this.workitem(id, wi)}?op=NEXT`;
+    }
+
+    review(id: any, wi: any) {
+        return `${this.workitem(id, wi)}?op=REVIEW`;
+    }
+
+    rollback(id: any) {
+        return `${this.item(id)}/workitems/undefined?op=ROLLBACK`;
     }
 
     buildQueryString(options: { [key: string]: string }): string {

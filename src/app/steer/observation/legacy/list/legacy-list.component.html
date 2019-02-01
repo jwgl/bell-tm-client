@@ -36,46 +36,47 @@
             </div>
         </div>
     </div>
-    <ng-container *ngIf="list && list.length>0">
-        <table class="table table-expand">
-            <thead>
+</div>
+<ng-container *ngIf="list && list.length>0">
+    <table class="table table-expand">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>教师</th>
+                <th>课程信息</th>
+                <th>开课单位</th>
+                <th>听课时间</th>
+                <th class="text-center">评价等级</th>
+                <th>督导老师</th>
+                <th class="text-center">状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                 <tr>
-                    <th>编号</th>
-                    <th>教师</th>
-                    <th>课程信息</th>
-                    <th>开课单位</th>
-                    <th>听课时间</th>
-                    <th class="text-center">评价等级</th>
-                    <th>督导老师</th>
-                    <th class="text-center">状态</th>
+                    <td><a [routerLink]="[item.id]">#{{item.id}}</a></td>
+                    <td><span *ngIf="item.teachercode">{{item.teachercode}} </span>{{item.teachername}}</td>
+                    <td class="expand">{{item.coursename}} <br>{{item.courseproperty}} {{item.classpostion}}</td>
+                    <td>{{item.collegename}} </td>
+                    <td>{{item.listentime}}</td>
+                    <td class="text-center">{{item.evaluategrade}}</td>
+                    <td>{{item.inpectorcode}} {{item.inpectorname}}<br>{{item.observerType | typeLabel}}</td>
+                    <td class="text-center">{{stateText(item.state)}}</td>
                 </tr>
-            </thead>
-            <tbody>
-                <ng-template ngFor let-item [ngForOf]="list" let-i="index">
-                    <tr>
-                        <td><a [routerLink]="[item.id]">#{{item.id}}</a></td>
-                        <td><span *ngIf="item.teachercode">{{item.teachercode}} </span>{{item.teachername}}</td>
-                        <td class="expand">{{item.coursename}} <br>{{item.courseproperty}} {{item.classpostion}}</td>
-                        <td>{{item.collegename}} </td>
-                        <td>{{item.listentime}}</td>
-                        <td class="text-center">{{item.evaluategrade}}</td>
-                        <td>{{item.inpectorcode}} {{item.inpectorname}}<br>{{item.observerType | typeLabel}}</td>
-                        <td class="text-center">{{stateText(item.state)}}</td>
-                    </tr>
-                </ng-template>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="8">
-                        <div class="form-group row mt-1">
-                            <div class="col-md-2">总共：{{count}}条记录</div>
-                            <div class="col-md-2">
-                                <tm-pager [total]="count" [max]="max" [length]="listLength" (prev)="loadData($event)"
-                                    (next)="loadData($event)"></tm-pager>
-                            </div>
+            </ng-template>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8">
+                    <div class="form-group row mt-1">
+                        <div class="col-md-2">总共：{{count}}条记录</div>
+                        <div class="col-md-2">
+                            <tm-pager [total]="count" [max]="max" [length]="listLength" (prev)="loadData($event)"
+                                (next)="loadData($event)"></tm-pager>
                         </div>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </ng-container>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</ng-container>

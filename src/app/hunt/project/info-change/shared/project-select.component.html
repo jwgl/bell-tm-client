@@ -1,0 +1,20 @@
+<div #dropdown class="dropdown input-group">
+    <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" (click)="clearProject()" readonly
+        [value]="result" placeholder="点击选择项目">
+    <div class="dropdown-menu" style="width: 100%; padding: 5px;">
+        <div class="table-wrapper" *ngIf="projects?.length > 0">
+            <table class="table table-hover">
+                <tbody>
+                    <tr *ngFor="let item of projects" (click)="projectSelected(item)" tabindex="1" style="background-color: #FFF">
+                        <td>{{item.code}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.level | level: 'text'}}</td>
+                        <td>{{item.subtype}}</td>
+                        <td>中期：{{item.middleYear}}</td>
+                        <td>结项：{{item.knotYear}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

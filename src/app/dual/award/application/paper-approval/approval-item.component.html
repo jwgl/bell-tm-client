@@ -1,4 +1,4 @@
-<div class="container" *ngIf="form">
+<ng-container *ngIf="form">
     <div class="btn-toolbar mt-3">
         <div class="btn-group">
             <tm-workflow-item-pager [prevId]="prevId" [nextId]="nextId"></tm-workflow-item-pager>        </div>
@@ -12,4 +12,4 @@
         </div>
     </div>
     <tm-application-form-viewer [vm]="form" [fileNames]="fileNames" [paperForm]="paperForm"></tm-application-form-viewer>
-</div>
+</ng-container>

@@ -1,0 +1,39 @@
+<div class="btn-toolbar">
+    <div class="ml-auto">
+        <button class="btn btn-secondary ml-2" routerLink="create">新建</button>
+    </div>
+</div>
+<table class="table table-expand">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>编号</th>
+            <th>项目名称</th>
+            <th>等级</th>
+            <th>申请日期</th>
+            <th>变更内容</th>
+            <th>中期</th>
+            <th>结项</th>
+            <th>延期</th>
+            <th>审核进度</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{item.code}}</td>
+                <td class="expand"><a [routerLink]="[item.id]">{{item.name}}</a></td>
+                <td>{{item.level | level: 'text'}}</td>
+                <td>{{item.dateSubmitted | date: 'yyyy-MM-dd'}}</td>
+                <td>{{item.type | changeType}}</td>
+                <td>{{item.middleYear}}</td>
+                <td>{{item.knotYear}}</td>
+                <td><span *ngIf="item.delayTimes">{{item.delayTimes}}次</span></td>
+                <td>
+                    <audit-status [status]="item.status"></audit-status>
+                </td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>
