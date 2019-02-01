@@ -70,7 +70,7 @@
         <div class="form-group col-md-2">
             <div class="list-group">
                 <ng-container *ngFor="let item of listItems">
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between" [class.active]="item.reportType === vm.reportType"
+                    <a class="list-group-item list-group-item-action d-flex justify-content-between" [class.active]="item.reportType === reportType_"
                         (click)="typeSelected(item.reportType)">
                         {{item.label}}
                     </a>

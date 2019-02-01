@@ -43,14 +43,16 @@ export class UploaderPanelComponent {
     onUploadOutput(output: UploadOutput): void {
         switch (output.type) {
             case 'allAddedToQueue':
-                const event: UploadInput = {
-                    type: 'uploadAll',
-                    url: this.uploadUrl,
-                    method: 'POST',
-                    data: { prefix: this.fileType.prefix },
-                    headers: { 'X-XSRF-TOKEN': this._xsrfToken },
-                };
-                this.uploadInput.emit(event);
+                if (this.uploadAble) {
+                    const event: UploadInput = {
+                        type: 'uploadAll',
+                        url: this.uploadUrl,
+                        method: 'POST',
+                        data: { prefix: this.fileType.prefix },
+                        headers: { 'X-XSRF-TOKEN': this._xsrfToken },
+                    };
+                    this.uploadInput.emit(event);
+                }
                 break;
             case 'addedToQueue':
                 if (output.file) {
@@ -63,6 +65,7 @@ export class UploaderPanelComponent {
                         alert(`文件不应大于20MB`);
                         this.uploadAble = false;
                     } else {
+                        this.uploadAble = true;
                         this.files.push(output.file);
                     }
                 }

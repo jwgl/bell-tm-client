@@ -92,6 +92,19 @@ export class InspectDialog extends BaseDialog {
         }
     }
 
+    remove(fileType: any) {
+        switch (fileType.prefix) {
+            case 'main':
+                this.form.mainInfoForm = null;
+                break;
+            case 'proof':
+                this.form.proofFile = null;
+                break;
+            case 'summary':
+                this.form.summaryReport = null;
+        }
+    }
+
     protected onOpening(): Observable<any> {
         this.form = this.options.form;
         this.uploadUrl = this.options.uploadUrl;
