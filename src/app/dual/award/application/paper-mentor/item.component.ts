@@ -52,6 +52,17 @@ export class PaperMentorItemComponent {
         };
     }
 
+    get rollbackAble(): boolean {
+        return this.form.status === 'STEP4';
+    }
+
+    get rollbackOptions(): any {
+        return {
+            id: this.form.id,
+            what: this.form.title,
+        };
+    }
+
     reject() {
         return;
     }

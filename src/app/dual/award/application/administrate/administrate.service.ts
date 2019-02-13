@@ -22,6 +22,6 @@ export class ApplicationsAdministrateService extends RestShowService {
     }
 
     loadApplicationList(options: { [key: string]: any } = {}): Observable<any> {
-        return this.http.get(`${this.api.list()}/${options.awardId}/applications`);
+        return this.http.get(`${this.api.list()}/${options.awardId}/applications?status=${options.status}`);
     }
 }

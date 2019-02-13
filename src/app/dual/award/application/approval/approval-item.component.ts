@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Dialog } from 'core/dialogs';
-import { NextOptions } from 'core/workflow/workflow.service';
+import { NextOptions, RevokeOptions } from 'core/workflow/workflow.service';
 
 import { AwardForm } from '../../shared/form.model';
 import { ApplicationForm } from '../shared/form.model';
@@ -53,6 +53,17 @@ export class ApplicationApprovalItemComponent {
 
     get mentorable(): boolean {
         return !this.form.paperApprover && this.form.status === 'STEP3';
+    }
+
+    get rollbackAble(): boolean {
+        return this.form.status === 'STEP2' || this.form.status === 'REJECTED';
+    }
+
+    get rollbackOptions(): RevokeOptions {
+        return {
+            id: this.form.id,
+            what: this.form.title,
+        };
     }
 
     setMentor() {

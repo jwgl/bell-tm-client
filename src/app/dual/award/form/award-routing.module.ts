@@ -13,8 +13,16 @@ const routes: Routes = [
     { path: '', component: AwardListComponent },
     { path: 'editor', component: AwardFormEditorComponent, data: { mode: EditMode.Create } },
     { path: ':id/edit', component: AwardFormEditorComponent, data: { mode: EditMode.Edit } },
-    { path: ':id/applications', component: ApplicationListComponent },
-    { path: ':id/applications/:applicationId', component: ApplicationsAdministrateItemComponent },
+    {
+        path: ':id/applications',
+        children: [{
+            path: '', redirectTo: 'status/STEP1', pathMatch: 'full'
+        }, {
+            path: 'status/:status',
+            component: ApplicationListComponent,
+        }]
+    },
+    { path: ':id/applications/status/:status/:applicationId', component: ApplicationsAdministrateItemComponent },
     { path: ':id', component: AwardItemComponent },
 ];
 

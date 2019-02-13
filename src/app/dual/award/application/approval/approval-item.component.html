@@ -13,6 +13,9 @@
         <div class="btn-group ml-2" *ngIf="mentorable">
             <button class="btn btn-primary" (click)="setMentor()">设置导师</button>
         </div>
+        <div class="btn-group ml-2" *ngIf="rollbackAble">
+            <button [workflow-rollback]="rollbackOptions" (rollbacked)="onItemLoaded($event)">撤回</button>
+        </div>
     </div>
     <tm-application-form-viewer [vm]="form" [fileNames]="fileNames"></tm-application-form-viewer>
 </ng-container>

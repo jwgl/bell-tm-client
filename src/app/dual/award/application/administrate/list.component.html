@@ -16,6 +16,13 @@
             </div>
         </div>
     </div>
+    <ul class="nav nav-tabs mb-p10">
+        <li *ngFor="let item of options" class="nav-item mr-1">
+            <a class="nav-link" [routerLink]="['../', item.status]" routerLinkActive="active">{{item.status | statusLabel: 'text'}}
+                <span class="badge badge-pill badge-secondary">{{item.counts}}</span>
+            </a>
+        </li>
+    </ul>
     <table class="table" *ngIf="list.length > 0; else empty">
         <thead>
             <tr>
