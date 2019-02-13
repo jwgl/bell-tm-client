@@ -13,6 +13,9 @@
         <div class="btn-group ml-2" *ngIf="reviewable">
             <button class="btn btn-success" (click)="finish()">通过</button>
         </div>
+        <div class="btn-group ml-2" *ngIf="rollbackAble">
+            <button [workflow-rollback]="rollbackOptions" (rollbacked)="onItemLoaded($event)">撤回</button>
+        </div>
     </div>
     <tm-application-form-viewer [vm]="form" [fileNames]="fileNames" [paperForm]="paperForm"></tm-application-form-viewer>
 </ng-container>
