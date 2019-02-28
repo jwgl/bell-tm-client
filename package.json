@@ -27,6 +27,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.5.0",
     "@fortawesome/free-solid-svg-icons": "^5.5.0",
     "@ng-select/ng-select": "^2.13.0",
+    "@types/markdown-it": "0.0.7",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.7",
     "dayjs": "^1.7.7",
