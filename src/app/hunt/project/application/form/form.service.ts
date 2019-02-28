@@ -40,8 +40,4 @@ export class ProjectFormService extends RestEditService {
     getUploadUrl(options: { [key: string]: any } = {}): string {
         return `/zuul${this.api.list()}/upload?taskId=${options.taskId}`;
     }
-
-    getDownloadUrl(id: number): string {
-        return `${this.api.item(id)}/attachments`;
-    }
 }

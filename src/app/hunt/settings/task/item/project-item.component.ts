@@ -18,8 +18,4 @@ export class ProjectItemComponent {
             this.vm = dto;
         });
     }
-
-    get downloadUrl(): string {
-        return this.service.getDownloadUrl(this.vm.taskId, this.vm.id);
-    }
 }

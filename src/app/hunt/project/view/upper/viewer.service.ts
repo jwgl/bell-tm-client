@@ -12,12 +12,8 @@ export class ProjectService extends RestEditService {
         http: Http,
         authService: AuthService,
         @Inject('PROJECT_API_URL')
-        apiUrl: string,
+        private apiUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
-    }
-
-    getDownloadUrl(id: number): string {
-        return `${this.api.item(id)}/attachments`;
     }
 }

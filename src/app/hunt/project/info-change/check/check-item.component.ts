@@ -15,8 +15,4 @@ export class InfoChangeCheckItemComponent {
         this.form = new ChangeForm(dto.form);
         this.project = dto.project;
     }
-
-    get downloadUrl(): string {
-        return this.service.getDownloadUrl(this.form.id);
-    }
 }

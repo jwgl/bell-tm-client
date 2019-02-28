@@ -42,10 +42,6 @@ export class FormService extends RestEditService {
         return this.http.get<T>(`${this.api.item(taskId)}/projects/${id}`);
     }
 
-    getDownloadUrl(taskId: any, id: any): string {
-        return `${this.api.item(taskId)}/projects/${id}/attachments`;
-    }
-
     removeProject<T>(taskId: number, id: number): Observable<any> {
         return this.http.delete<T>(`${this.api.item(taskId)}/projects/${id}`).pipe(map(_ => id));
     }

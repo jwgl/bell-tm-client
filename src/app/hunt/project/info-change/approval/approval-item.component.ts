@@ -16,10 +16,6 @@ export class InfoChangeApprovalItemComponent {
         this.project = dto.project;
     }
 
-    get downloadUrl(): string {
-        return this.service.getDownloadUrl(this.form.id);
-    }
-
     get reviewAble(): boolean {
         if (this.form &&
             (this.form.status === 'CHECKED' ||

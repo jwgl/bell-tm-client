@@ -57,10 +57,6 @@ export class ProjectItemComponent {
         return this.review.reportType === 1;
     }
 
-    get downloadUrl(): string {
-        return this.service.getDownloadUrl(this.vm.id);
-    }
-
     get submitAble(): boolean {
         const review = this.review;
         return review ? !_.isEmpty(review.mainInfoForm) : false;

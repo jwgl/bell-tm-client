@@ -20,7 +20,6 @@ const ListItems = [{
 })
 export class FormViewerComponent {
     @Input() vm: any;
-    @Input() downloadUrl: string;
     @Input() isAdmin: boolean;
     // 临时记录当前选择的reportType，用于分别显示不同的阶段的评审详情
     reportType_: number;
@@ -104,6 +103,10 @@ export class FormViewerComponent {
             return reviews.find((r: any) => r.reportType === this.reportType_);
         }
         return null;
+    }
+
+    get downloadUrl_(): string {
+        return `/api/hunt/attachments/${this.review ? this.review.id : ''}?type=REVIEW`;
     }
 
     getExt(fileName: string): string {

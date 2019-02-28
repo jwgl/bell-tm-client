@@ -28,10 +28,6 @@ export class ProjectItemComponent {
         });
     }
 
-    get downloadUrl(): string {
-        return this.service.getDownloadUrl(this.vm.id);
-    }
-
     memo() {
         this.dialog.open(ProjectMemoDialog, { project: this.vm }).then(result => {
             this.service.update(this.vm.projectId, {memo: result}).subscribe(() => this.loadData(this.vm.projectId));

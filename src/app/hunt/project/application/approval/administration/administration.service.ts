@@ -26,10 +26,6 @@ export class AdministrationService extends RestShowService {
         return this.http.get<T>(`${this.api.item(taskId)}/projects/${id}`);
     }
 
-    getDownloadUrl(taskId: any, id: any): string {
-        return `${this.api.item(taskId)}/projects/${id}/attachments`;
-    }
-
     loadExpertReview<T>(taskId: number, id: number): Observable<any> {
         return this.http.get<T>(`${this.api.item(taskId)}/projects/${id}/expertReviews`);
     }

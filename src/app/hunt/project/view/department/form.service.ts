@@ -21,8 +21,4 @@ export class ChangeFormService extends RestEditService {
     getUploadUrl(): string {
         return `/zuul${this.api.list()}/upload`;
     }
-
-    getDownloadUrl(id: number): string {
-        return `${this.api.item(id)}/attachments`;
-    }
 }

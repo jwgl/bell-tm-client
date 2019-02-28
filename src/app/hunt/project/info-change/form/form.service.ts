@@ -22,10 +22,6 @@ export class ChangeFormService extends RestEditService {
         return `/zuul${this.api.list()}/upload`;
     }
 
-    getDownloadUrl(id: number): string {
-        return `${this.api.item(id)}/attachments`;
-    }
-
     loadProject<T>(id: number): Observable<T> {
         return this.http.get<T>(`${this.api.list()}/project?id=${id}`);
     }
