@@ -14,7 +14,9 @@ export class MarkdownDirective implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         const textObj = changes['text'];
-        const markdown = (window as any).markdownit(this.options);
-        this.elementRef.nativeElement.innerHTML = markdown.render(textObj.currentValue);
+        if (textObj && textObj.currentValue) {
+            const markdown = (window as any).markdownit(this.options);
+            this.elementRef.nativeElement.innerHTML = markdown.render(textObj.currentValue);
+        }
     }
 }
