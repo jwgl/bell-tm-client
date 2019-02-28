@@ -1,4 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+import * as markdownit from 'markdown-it';
 
 @Directive({
     selector: '[markdown]',
@@ -14,7 +15,8 @@ export class MarkdownDirective implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         const textObj = changes['text'];
-        const markdown = (window as any).markdownit(this.options);
-        this.elementRef.nativeElement.innerHTML = markdown.render(textObj.currentValue);
+        if (textObj && textObj.currentValue) {
+            this.elementRef.nativeElement.innerHTML = markdownit(this.options).render(textObj.currentValue);
+        }
     }
 }
