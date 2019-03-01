@@ -29,7 +29,7 @@
     "@ng-select/ng-select": "^2.13.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.7",
-    "dayjs": "^1.7.7",
+    "dayjs": "^1.8.8",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11",
     "markdown-it": "^8.4.2",
