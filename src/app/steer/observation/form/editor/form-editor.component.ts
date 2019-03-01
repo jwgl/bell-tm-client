@@ -44,18 +44,18 @@ export class ObservationFormEditorComponent {
         private route: ActivatedRoute,
         private dialogs: CommonDialog,
     ) {
-        this.editMode = this.route.snapshot.data['mode'];
+        this.editMode = this.route.snapshot.data.mode;
         const params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
                 this.scheduleService.findTimeslot(
-                    params['teacherId'],
-                    params['week'],
-                    params['timeslotId'],
-                ).subscribe(dto => this.onLoadData(dto, params['week']));
+                    params.teacherId,
+                    params.week,
+                    params.timeslotId,
+                ).subscribe(dto => this.onLoadData(dto, params.week));
                 break;
             case EditMode.Edit:
-                this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto, null));
+                this.service.loadItemForEdit(params.id).subscribe(dto => this.onLoadData(dto, null));
                 break;
         }
     }

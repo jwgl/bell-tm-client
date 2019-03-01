@@ -48,10 +48,10 @@ export class ObservationSpecial {
     ) {
         this.valueFn = (item: any) => item.value;
         this.labelFn = (item: any) => item.label;
-        this.editMode = this.route.snapshot.data['mode'];
+        this.editMode = this.route.snapshot.data.mode;
         const params = this.route.snapshot.params;
-        unscheduleService.loadDtoForCreate(params['taskId'], params['teacherId']).subscribe(dto => {
-            this.onLoadData(dto, params['teacherId']);
+        unscheduleService.loadDtoForCreate(params.taskId, params.teacherId).subscribe(dto => {
+            this.onLoadData(dto, params.teacherId);
         });
     }
 
