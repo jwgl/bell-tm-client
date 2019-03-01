@@ -14,7 +14,6 @@ export class FromNowComponent {
     }
 
     get date(): string {
-        console.log(fromNowLabel(this._date))
         return fromNowLabel(this._date);
     }
 
