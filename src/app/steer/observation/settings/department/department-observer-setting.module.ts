@@ -7,7 +7,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 
 import { PipesModule } from '../../shared/pipes/observation-pipes.module';
-import { MyTeacherModule } from '../../shared/utils/my-teacher.module';
+import { ObservationCommonModule } from '../../common/observation-common.module';
 
 import { DepartmentObserverSettingRoutingModule } from './department-observer-setting-routing.module';
 import { ObserverEditorComponent } from './editor/observer-editor.component';
@@ -27,7 +27,7 @@ library.add(faTimes);
         CommonDialogsModule,
         CommonDirectivesModule,
         DepartmentObserverSettingRoutingModule,
-        MyTeacherModule,
+        ObservationCommonModule,
         PipesModule,
         FontAwesomeModule,
     ],

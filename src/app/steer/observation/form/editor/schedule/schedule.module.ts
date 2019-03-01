@@ -9,7 +9,7 @@ import { Dialog } from 'core/dialogs';
 import { ObservationFormService } from '../../form.service';
 import { ObservationFormEditorComponent } from '../form-editor.component';
 
-import { PlaceSelectModule } from '../../../common/observation-common.module';
+import { ObservationCommonModule } from '../../../common/observation-common.module';
 import { PipesModule } from '../../../shared/pipes/observation-pipes.module';
 
 import { ObservePriorityListComponent } from './list/observe-priority.component';
@@ -33,7 +33,7 @@ library.add(faSearch);
         CommonDirectivesModule,
         ScheduleRoutingModule,
         PipesModule,
-        PlaceSelectModule,
+        ObservationCommonModule,
         FontAwesomeModule,
     ],
     declarations: [

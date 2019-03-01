@@ -7,7 +7,7 @@
         <button type="button" class="btn btn-primary" [routerLink]="['../unschedules']">未排实践课</button>
     </div>
     <div class="btn-group ml-auto">
-        <tm-my-teacher-select (selectTeacher)="onTeacherSelected($event)"></tm-my-teacher-select>
+        <tm-department-teacher-select (selectTeacher)="onTeacherSelected($event)"></tm-department-teacher-select>
         <button type="button" class="btn btn-secondary" (click)="query()" [disabled]="!teacher">查询</button>
     </div>
 </div>

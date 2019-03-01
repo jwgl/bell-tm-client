@@ -86,19 +86,19 @@
                 <label class="control-label">教师出勤</label>
                 <div class="row">
                     <div class="input-group col-4">
-                        <span class="my-addon">提前</span>
-                        <input class="form-control my-input" type="number" name="earlier" [(ngModel)]="form.earlier" />
-                        <span class="my-addon">分钟</span>
+                        <span class="count-addon">提前</span>
+                        <input class="form-control count-input" type="number" name="earlier" [(ngModel)]="form.earlier" />
+                        <span class="count-addon">分钟</span>
                     </div>
                     <div class="input-group col-4">
-                        <span class="my-addon">迟到</span>
-                        <input class="form-control my-input" type="number" name="late" [(ngModel)]="form.late" />
-                        <span class="my-addon">分钟</span>
+                        <span class="count-addon">迟到</span>
+                        <input class="form-control count-input" type="number" name="late" [(ngModel)]="form.late" />
+                        <span class="count-addon">分钟</span>
                     </div>
                     <div class="input-group col-4">
-                        <span class="my-addon">早退</span>
-                        <input class="form-control my-input" type="number" name="leave" [(ngModel)]="form.leave" />
-                        <span class="my-addon">分钟</span>
+                        <span class="count-addon">早退</span>
+                        <input class="form-control count-input" type="number" name="leave" [(ngModel)]="form.leave" />
+                        <span class="count-addon">分钟</span>
                     </div>
                 </div>
             </div>
@@ -106,19 +106,19 @@
                 <label class="control-label">学生出勤（应到 {{form.schedule?.studentCount}}人）</label>
                 <div class="row">
                     <div class="input-group col-4">
-                        <span class="my-addon">实到</span>
-                        <input class="form-control my-input" type="number" name="attendantStds" [(ngModel)]="form.attendantStds" />
-                        <span class="my-addon">人<span style="visibility: hidden">人</span></span>
+                        <span class="count-addon">实到</span>
+                        <input class="form-control count-input" type="number" name="attendantStds" [(ngModel)]="form.attendantStds" />
+                        <span class="count-addon">人<span style="visibility: hidden">人</span></span>
                     </div>
                     <div class="input-group col-4">
-                        <span class="my-addon">迟到</span>
-                        <input class="form-control my-input" type="number" name="lateStds" [(ngModel)]="form.lateStds" />
-                        <span class="my-addon">人<span style="visibility: hidden">人</span></span>
+                        <span class="count-addon">迟到</span>
+                        <input class="form-control count-input" type="number" name="lateStds" [(ngModel)]="form.lateStds" />
+                        <span class="count-addon">人<span style="visibility: hidden">人</span></span>
                     </div>
                     <div class="input-group col-4">
-                        <span class="my-addon">早退</span>
-                        <input class="form-control my-input" type="number" name="leaveStds" [(ngModel)]="form.leaveStds" />
-                        <span class="my-addon">人<span style="visibility: hidden">人</span></span>
+                        <span class="count-addon">早退</span>
+                        <input class="form-control count-input" type="number" name="leaveStds" [(ngModel)]="form.leaveStds" />
+                        <span class="count-addon">人<span style="visibility: hidden">人</span></span>
                     </div>
                 </div>
             </div>

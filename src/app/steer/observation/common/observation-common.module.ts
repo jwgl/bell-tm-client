@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { PlaceSelectComponent } from './place-select.component';
+import { DepartmentTeacherSelectComponent } from './department-teacher-select.component';
 
 @NgModule({
     imports: [
@@ -16,9 +17,11 @@ import { PlaceSelectComponent } from './place-select.component';
     ],
     declarations: [
         PlaceSelectComponent,
+        DepartmentTeacherSelectComponent,
     ],
     exports: [
         PlaceSelectComponent,
+        DepartmentTeacherSelectComponent,
     ],
 })
-export class PlaceSelectModule { }
+export class ObservationCommonModule { }

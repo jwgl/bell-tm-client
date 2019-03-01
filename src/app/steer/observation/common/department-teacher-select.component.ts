@@ -6,11 +6,11 @@ import { Http } from 'core/rest';
 import { typeahead } from 'core/utils/typeahead';
 
 @Component({
-    selector: 'tm-my-teacher-select',
-    styleUrls: ['my-teacher-select.component.scss'],
-    templateUrl: 'my-teacher-select.component.html',
+    selector: 'tm-department-teacher-select',
+    styleUrls: ['common.shared.scss.scss'],
+    templateUrl: 'department-teacher-select.component.html',
 })
-export class TeacherSelectComponent implements AfterViewInit {
+export class DepartmentTeacherSelectComponent implements AfterViewInit {
     @ViewChild('search') input: ElementRef;
     @ViewChild('dropdown') dropdown: ElementRef;
     @Output() selectTeacher: EventEmitter<any> = new EventEmitter<any>();
@@ -30,7 +30,7 @@ export class TeacherSelectComponent implements AfterViewInit {
             this.input.nativeElement.focus();
         });
         typeahead(this.input).pipe(
-            switchMap(value => this.http.get<any[]>(`/api/steer/teachers?q=${encodeURIComponent(value)}`))
+            switchMap(value => this.http.get(`/api/steer/teachers?q=${encodeURIComponent(value)}`))
         ).subscribe(value => this.teachers = value);
     }
 

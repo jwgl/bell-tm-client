@@ -7,7 +7,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 
 import { PipesModule } from '../../../shared/pipes/observation-pipes.module';
-import { MyTeacherModule } from '../../../shared/utils/my-teacher.module';
+import { ObservationCommonModule } from '../../../common/observation-common.module';
 
 import { ObservationSpecial } from './form.component';
 import { TaskListComponent } from './task-list.component';
@@ -18,7 +18,7 @@ import { UnScheduleService } from './unschedule.service';
         CommonModule,
         FormsModule,
         CommonDirectivesModule,
-        MyTeacherModule,
+        ObservationCommonModule,
         PipesModule,
         RouterModule,
     ],
