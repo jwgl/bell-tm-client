@@ -46,8 +46,4 @@ export class ApprovalService extends RestEditService {
     finish(id: any, wi: string): Observable<any> {
         return this.http.patch(`${this.api.item(id)}/workitems/${wi}?op=FINISH`, {});
     }
-
-    getDownloadUrl(id: any): string {
-        return `${this.api.item(id)}/attachments`;
-    }
 }

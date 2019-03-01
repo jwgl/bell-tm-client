@@ -16,8 +16,4 @@ export class ProjectDepartmentService extends RestEditService {
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
-
-    getDownloadUrl(id: number): string {
-        return `${this.api.item(id)}/attachments`;
-    }
 }

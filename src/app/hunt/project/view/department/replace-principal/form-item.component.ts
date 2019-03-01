@@ -45,10 +45,6 @@ export class ChangeItemComponent {
         return (this.vm.status === 'CREATED' || this.vm.status === 'REJECTED');
     }
 
-    get downloadUrl(): string {
-        return this.service.getDownloadUrl(this.vm.id);
-    }
-
     remove() {
         this.dialogs.confirm('警告', `确定删除“${this.vm.name}” 吗？`).then(() =>
             this.service.delete(this.vm.id).subscribe(() =>

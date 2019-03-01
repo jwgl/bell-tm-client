@@ -13,8 +13,4 @@ export class ReviewService extends RestShowService {
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
-
-    getDownloadUrl(id: number): string {
-        return `${this.api.item(id)}/attachments`;
-    }
 }

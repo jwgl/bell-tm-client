@@ -54,8 +54,4 @@ export class ApplicationCheckItemComponent {
             what: this.form.name,
         };
     }
-
-    get downloadUrl(): string {
-        return this.service.getDownloadUrl(this.form.id);
-    }
 }

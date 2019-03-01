@@ -113,10 +113,6 @@ export class ApplicationApprovalItemComponent {
         });
     }
 
-    get downloadUrl(): string {
-        return this.service.getDownloadUrl(this.form.id);
-    }
-
     isEmpty(option: any): boolean {
         return _.isUndefined(option) || _.isNull(option);
     }

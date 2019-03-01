@@ -7,9 +7,12 @@ import { Component, Input } from '@angular/core';
 export class FormViewerComponent {
     @Input() vm: any;
     @Input() project: any;
-    @Input() downloadUrl: string;
 
     has(item: any): boolean {
         return this.vm.type.some((t: number) => t === item.value);
+    }
+
+    get downloadUrl(): string {
+        return `/api/hunt/attachments/${this.vm ? this.vm.id : ''}?type=INFO-CHANGE`;
     }
 }
