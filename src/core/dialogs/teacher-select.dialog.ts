@@ -24,7 +24,7 @@ export class TeacherSelectDialog extends BaseDialog implements AfterViewInit {
 
     ngAfterViewInit() {
         typeahead(this.input).pipe(
-            switchMap(value => this.rest.get(`/api/core/teachers?q=${encodeURIComponent(value)}`))
+            switchMap(value => this.rest.get<any[]>(`/api/core/teachers?q=${encodeURIComponent(value)}`))
         ).subscribe(value => this.teachers = value);
     }
 

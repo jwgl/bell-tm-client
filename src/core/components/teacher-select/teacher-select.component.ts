@@ -30,7 +30,7 @@ export class TeacherSelectComponent implements AfterViewInit {
             this.input.nativeElement.focus();
         });
         typeahead(this.input).pipe(
-            switchMap(value => this.http.get(`/api/core/teachers?q=${encodeURIComponent(value)}`))
+            switchMap(value => this.http.get<any[]>(`/api/core/teachers?q=${encodeURIComponent(value)}`))
         ).subscribe(value => this.teachers = value);
     }
 
