@@ -6,11 +6,11 @@ import { Http } from 'core/rest';
 import { typeahead } from 'core/utils/typeahead';
 
 @Component({
-    selector: 'tm-my-teacher-select',
-    styleUrls: ['my-teacher-select.component.scss'],
-    templateUrl: 'my-teacher-select.component.html',
+    selector: 'tm-department-teacher-select',
+    styleUrls: ['common.shared.scss'],
+    templateUrl: 'department-teacher-select.component.html',
 })
-export class TeacherSelectComponent implements AfterViewInit {
+export class DepartmentTeacherSelectComponent implements AfterViewInit {
     @ViewChild('search') input: ElementRef;
     @ViewChild('dropdown') dropdown: ElementRef;
     @Output() selectTeacher: EventEmitter<any> = new EventEmitter<any>();
