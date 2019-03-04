@@ -201,6 +201,10 @@ export class FindPlaceDialog extends BaseDialog {
                     date: bookingDay,
                 });
             }
+
+            if (this.vm.days.length > 0) {
+                this.bookingDay = this.vm.days[0];
+            }
         } else {
             this.vm.startWeeks = [];
             this.vm.endWeeks = [];
