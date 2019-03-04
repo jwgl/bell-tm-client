@@ -184,7 +184,6 @@ export class FindPlaceDialog extends BaseDialog {
                 : this.today.add(2, 'day');
             const lastDay = this.term.startDate.add(this.term.maxWeek, 'week');
 
-            const dayOfToday = (this.today.day() + 6) % 7; // mon-0;....;sun:6
             for (let i = 0; i < this.options.bookingDays; i++) {
                 const bookingDay = startDay.add(i, 'day');
 
@@ -192,16 +191,15 @@ export class FindPlaceDialog extends BaseDialog {
                     return;
                 }
 
-                const dayOfWeek = dayOfToday + bookingDay.diff(this.today, 'day');
+                // sun:0;...;sat:6 -> mon-0;....;sun:6
+                const dayOfWeek = this.today.isBefore(this.term.startDate)
+                    ? (this.term.startDate.day() + 6) % 7 + bookingDay.diff(this.term.startDate, 'day')
+                    : (this.today.day() + 6) % 7 + bookingDay.diff(this.today, 'day');
                 this.vm.days.push({
                     week: this.term.currentWeek + Math.floor(dayOfWeek / 7),
-                    dayOfWeek: (dayOfWeek) % 7 + 1,
+                    dayOfWeek: dayOfWeek % 7 + 1,
                     date: bookingDay,
                 });
-            }
-
-            if (this.vm.days.length > 0) {
-                this.bookingDay = this.vm.days[0];
             }
         } else {
             this.vm.startWeeks = [];
