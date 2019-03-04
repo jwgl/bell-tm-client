@@ -7,7 +7,7 @@ import { typeahead } from 'core/utils/typeahead';
 
 @Component({
     selector: 'tm-department-teacher-select',
-    styleUrls: ['common.shared.scss.scss'],
+    styleUrls: ['common.shared.scss'],
     templateUrl: 'department-teacher-select.component.html',
 })
 export class DepartmentTeacherSelectComponent implements AfterViewInit {
