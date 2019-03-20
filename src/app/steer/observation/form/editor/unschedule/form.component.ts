@@ -8,9 +8,11 @@ import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 import { NumberStringOption, DayOfWeekOptions } from 'core/options';
 import { typeahead } from 'core/utils/typeahead';
+import { AuthService } from 'core/auth';
 
 import { ObservationFormService } from '../../form.service';
-import { EvaluationItem, EvaluationMap, GRADES, ObservationForm, ScheduleSection, Term } from '../../shared/form.model';
+import { EvaluationItem, EvaluationMap, GRADES, ObservationForm, ScheduleSection, Term, Recommends } from '../../shared/form.model';
+import { TeachingMethods } from '../../shared/form.model';
 import '../form-editor.model';
 
 import { UnScheduleService } from './unschedule.service';
@@ -35,6 +37,12 @@ export class ObservationSpecial {
     dayOfWeeks: NumberStringOption[] = [];
     sections: ScheduleSection[] = [];
     section: ScheduleSection;
+    // 当前评价系统，还要根据不同教学形式进一步确定具体评分细则
+    activeEvaluationSystem: any[];
+    method: string;
+    teachingMethods = TeachingMethods;
+    recommendLabels = Recommends;
+    root: string;
 
     valueFn: (item: any) => string;
     labelFn: (item: any) => string;
@@ -44,8 +52,11 @@ export class ObservationSpecial {
         private unscheduleService: UnScheduleService,
         private service: ObservationFormService,
         private route: ActivatedRoute,
+        private authService: AuthService,
         private dialogs: CommonDialog,
     ) {
+        this.method = '教师讲授';
+        this.root = `/steer/obervers/${this.authService.userInfo.id}/observations`;
         this.valueFn = (item: any) => item.value;
         this.labelFn = (item: any) => item.label;
         this.editMode = this.route.snapshot.data['mode'];
@@ -59,8 +70,11 @@ export class ObservationSpecial {
         this.term = dto.term;
         this.sections = dto.sections;
         this.types = dto.types;
-        this.evaluationSystem = dto.evaluationSystem;
         this.form = new ObservationForm({ timeslot: dto.timeslot, observerType: dto.types[0] });
+        this.form.method = 1;
+        this.form.recommend = 0;
+        this.activeEvaluationSystem = dto.evaluationSystem;
+        this.evaluationSystemSelected();
         // 默认最少听课1节
         this.form.totalSection = 1;
         this.form.observationWeek = this.term.currentWeek;
@@ -108,7 +122,10 @@ export class ObservationSpecial {
         if (this.validate(this.form.schedule.place)) {
             this.dialogs.error(['上课地点不能空！']);
         } else {
-            this.form.evaluateLevel = this.evaluateLevel;
+            // 只有教师讲授时才需要计算总体评分
+            if (this.form.method === 1) {
+                this.form.evaluateLevel = this.evaluateLevel;
+            }
             this.form.schedule.startSection = this.section.start;
             if (this.editMode === EditMode.Create) {
                 this.create(this.form.toServerDto(this.evaluationSystem, this.term));
@@ -125,9 +142,8 @@ export class ObservationSpecial {
         this.service.create(form).subscribe(id => {
             this.form.id = id;
             this.editMode = EditMode.Edit;
-            // 如果提交，就导航到list
             if (this.form.status) {
-                this.router.navigate(['/']);
+                this.router.navigate([this.root, id], { relativeTo: this.route });
             }
         }, error => {
             alert(error.json().message);
@@ -139,9 +155,8 @@ export class ObservationSpecial {
             this.form.schedule.id = id;
         });
         this.service.update(this.form.id, form).subscribe(id => {
-            // 如果提交，就导航到list
             if (this.form.status) {
-                this.router.navigate(['/']);
+                this.router.navigate([this.root, id], { relativeTo: this.route });
             }
         }, error => {
             alert(error.json().message);
@@ -152,6 +167,12 @@ export class ObservationSpecial {
         const validate: string[] = [];
         if (_.some(this.evaluateList, this.validate)) {
             validate.push('请对全部评分项目都给出评分后再提交');
+        }
+        if (this.form.evaluateLevel < 0 || this.form.evaluateLevel > 5) {
+            validate.push('评分范围0~5');
+        }
+        if (this.form.recommend > 0 && this.form.evaluateLevel < 4.5) {
+            validate.push('不应推荐总评低于4.5的课程！');
         }
         if (validate.length) {
             this.dialogs.error(validate);
@@ -172,5 +193,18 @@ export class ObservationSpecial {
             place: this.form.schedule.place,
             teacherId: this.form.schedule.teacherId,
         };
+    }
+
+    onObjectSelected(object: any) {
+        this.form.method = object.value;
+        this.method = object.name;
+        this.evaluationSystemSelected();
+    }
+
+    evaluationSystemSelected() {
+        const test = this.form.method === 3 ? 2 : this.form.method;
+        if (this.activeEvaluationSystem) {
+            this.evaluationSystem = this.activeEvaluationSystem[test];
+        }
     }
 }

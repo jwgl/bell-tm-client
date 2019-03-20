@@ -7,6 +7,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { PlaceSelectComponent } from './place-select.component';
 import { DepartmentTeacherSelectComponent } from './department-teacher-select.component';
+import { SelectOrOtherComponent } from './select-or-other.component';
 
 @NgModule({
     imports: [
@@ -18,10 +19,12 @@ import { DepartmentTeacherSelectComponent } from './department-teacher-select.co
     declarations: [
         PlaceSelectComponent,
         DepartmentTeacherSelectComponent,
+        SelectOrOtherComponent,
     ],
     exports: [
         PlaceSelectComponent,
         DepartmentTeacherSelectComponent,
+        SelectOrOtherComponent,
     ],
 })
 export class ObservationCommonModule { }

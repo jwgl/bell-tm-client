@@ -88,6 +88,10 @@ export class ObservationFormEditorComponent {
             } else {
                 this.form = new ObservationForm(dto.form);
                 this.evaluationSystem = dto.evaluationSystem;
+                const r = TeachingMethods.find(m => m.value === this.form.method);
+                if (r) {
+                    this.method = r.name;
+                }
             }
             this.term = dto.term;
             this.types = dto.types;
