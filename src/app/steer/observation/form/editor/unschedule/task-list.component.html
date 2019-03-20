@@ -1,14 +1,14 @@
-<div class="btn-toolbar">
-    <div class="btn-group">
-        <button type="button" class="btn btn-secondary" [routerLink]="['../teachers']">教师周课表</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['../places']">教室周课表</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['../schedules']">列表</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['../priorities']">优先听课名单</button>
-        <button type="button" class="btn btn-primary" [routerLink]="['../unschedules']">未排实践课</button>
+<div class="row">
+    <div class="form-group">
+        <tm-nav></tm-nav>
     </div>
-    <div class="btn-group ml-auto">
-        <tm-department-teacher-select (selectTeacher)="onTeacherSelected($event)"></tm-department-teacher-select>
-        <button type="button" class="btn btn-secondary" (click)="query()" [disabled]="!teacher">查询</button>
+    <div class="form-group ml-auto">
+        <div class="input-group">
+            <tm-department-teacher-select (selectTeacher)="onTeacherSelected($event)"></tm-department-teacher-select>
+            <div class="input-group-append">
+                <button type="button" class="btn btn-secondary" (click)="query()" [disabled]="!teacher">查询</button>
+            </div>
+        </div>
     </div>
 </div>
 <ng-container *ngIf="tasks && tasks.length>0; else empty">
@@ -31,9 +31,8 @@
                     <td>{{task.teacherName}}</td>
                     <td>{{task.className}} 共{{task.studentCount}}人</td>
                     <td>{{task.credit}}</td>
-                    <td><button class="btn btn-outline-dark btn-sm"
-                        [routerLink]="['./teacher',teacher.id,'task', task.id]">
-                        听课</button>
+                    <td><button class="btn btn-outline-dark btn-sm" [routerLink]="['../teacher',teacher.id,'task', task.id]">
+                            听课</button>
                     </td>
                 </tr>
             </ng-template>
