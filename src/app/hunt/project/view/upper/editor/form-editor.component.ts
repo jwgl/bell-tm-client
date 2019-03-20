@@ -91,7 +91,6 @@ export class ProjectFormEditorComponent {
     }
 
     save() {
-        console.log(this.form);
         const validation = this.validate();
         if (validation.length) {
             this.dialogs.error(validation);

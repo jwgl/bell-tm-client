@@ -67,35 +67,16 @@ export class ObservationForm {
     observerId: string;
     isActive: boolean;
     isScheduleTemp: boolean;
+    method: number;
+    recommend: number;
+    recommendReason: string;
+    teachingEnvironment: string;
 
     constructor(dto: any) {
         if (dto.timeslot) {
             this.schedule = this.concatSchedules(dto.timeslot);
         }
-        this.id = dto.id;
-        this.teacherId = dto.teacherId;
-        this.teacherName = dto.teacherName;
-        this.observationWeek = dto.observationWeek;
-        this.totalSection = dto.totalSection;
-        this.teachingMethods = dto.teachingMethods;
-        this.supervisorDate = dto.supervisorDate;
-        this.observerType = dto.observerType;
-        this.place = dto.place;
-        this.earlier = dto.earlier;
-        this.late = dto.late;
-        this.leave = dto.leave;
-        this.dueStds = dto.dueStds;
-        this.attendantStds = dto.attendantStds;
-        this.lateStds = dto.lateStds;
-        this.leaveStds = dto.leaveStds;
-        this.evaluateLevel = dto.evaluateLevel;
-        this.evaluations = dto.evaluations;
-        this.evaluationText = dto.evaluationText;
-        this.suggest = dto.suggest;
-        this.status = dto.status;
-        this.observerId = dto.observerId;
-        this.isActive = dto.isActive;
-        this.isScheduleTemp = dto.isScheduleTemp;
+        Object.assign(this, dto);
     }
 
     concatSchedules(ss: any[]): any {
@@ -184,3 +165,11 @@ export interface Term {
     swapDates: string[];
     endWeek: number;
 }
+
+export const TeachingMethods: any[] = [
+    {name: '教师讲授', value: 1},
+    {name: '学生讨论汇报', value: 2},
+    {name: '教师讲授+学生讨论汇报', value: 3},
+];
+
+export const Recommends: any[] = ['不推荐', '典型事例', '观摩课'];

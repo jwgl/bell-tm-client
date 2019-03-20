@@ -10,7 +10,8 @@
         <div class="row">
             <div class="form-group col-md-3">
                 <label class="control-label">课程</label>
-                <p>{{form.schedule.course}}<span *ngIf="form.schedule.courseClassName"> - {{form.schedule.courseClassName}}</span></p>
+                <p>{{form.schedule.course}}<span *ngIf="form.schedule.courseClassName"> -
+                        {{form.schedule.courseClassName}}</span></p>
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">开课单位</label>
@@ -32,8 +33,10 @@
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">上课时间</label>
-                <p>{{form.schedule.startWeek}}-{{form.schedule.endWeek}}周 {{form.schedule.oddEven | oddEven}} {{form.schedule.dayOfWeek
-                    | dayOfWeek}} {{form.schedule.startSection}}-{{form.schedule.startSection+form.schedule.totalSection-1}}节</p>
+                <p>{{form.schedule.startWeek}}-{{form.schedule.endWeek}}周 {{form.schedule.oddEven | oddEven}}
+                    {{form.schedule.dayOfWeek
+                    | dayOfWeek}}
+                    {{form.schedule.startSection}}-{{form.schedule.startSection+form.schedule.totalSection-1}}节</p>
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">上课地点</label>
@@ -65,8 +68,8 @@
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">教学形式</label>
-                <input class="form-control" name="teachingMethods" type="text" [(ngModel)]="form.teachingMethods" placeholder="讲授、讨论等"
-                />
+                <tm-select-or-other [options]="teachingMethods" (selectObject)="onObjectSelected($event)"
+                    [defaultValue]="method" [disabled]="form.id"></tm-select-or-other>
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">听课类型</label>
@@ -144,25 +147,47 @@
                             <td *ngIf="j == 0" [rowSpan]="evaluation.value.length">{{evaluation.key}}</td>
                             <td>{{item.name}}</td>
                             <td *ngFor="let grade of grades; let x = index" class="radio">
-                                <input type="radio" name="inlineRadioOptions{{i}}{{j}}" [value]="grade.value" [(ngModel)]="item.value">
+                                <input type="radio" name="inlineRadioOptions{{i}}{{j}}" [value]="grade.value"
+                                    [(ngModel)]="item.value">
                             </td>
                         </tr>
                     </ng-container>
                 </ng-container>
             </tbody>
         </table>
+        <div class="form-group" *ngIf="form.method !== 1">
+            <label class="control-label">总体评分</label>
+            <input class="form-control" type="number" name="evaluateLevel" [(ngModel)]="form.evaluateLevel" placeholder="“优”[4.5 ,5]  、“良”[3.5 ,4.5)、“中”[2.5, 3.5)、“差”[0, 2.5)"/>
+        </div>
         <div class="form-group">
-            <label>综合评价：{{evaluateLevel}}</label>
-            <textarea class="form-control" name="evaluationText" rows="4" [(ngModel)]="form.evaluationText" placeholder="请对此次课进行评价。"
+            <label>综合评价：<span *ngIf="form.method === 1">{{evaluateLevel}}</span></label>
+            <textarea class="form-control" name="evaluationText" rows="4" [(ngModel)]="form.evaluationText" placeholder="参考上述指标进行综合评价。重点考察教师课堂上拓宽学生知识领域、提高学生综合素养，发展学生理性思维、促进学生独立思考等方面的教学设计与策略及其实效。"
                 #evaluationText></textarea>
-                <span *ngIf="evaluationText.errors?.required">综合评价不能为空。</span>
-                <span *ngIf="evaluationText.errors?.minlength">综合评价最少{{evaluationText.errors.minlength.requiredLength}}个字符。</span>
-                <span *ngIf="evaluationText.errors?.maxlength">综合评价最多{{evaluationText.errors.maxlength.requiredLength}}个字符。</span>
+            <span *ngIf="evaluationText.errors?.required">综合评价不能为空。</span>
+            <span *ngIf="evaluationText.errors?.minlength">综合评价最少{{evaluationText.errors.minlength.requiredLength}}个字符。</span>
+            <span *ngIf="evaluationText.errors?.maxlength">综合评价最多{{evaluationText.errors.maxlength.requiredLength}}个字符。</span>
         </div>
         <div class="form-group">
             <label>意见和建议</label>
-            <textarea class="form-control" name="suggest" rows="4" [(ngModel)]="form.suggest" placeholder="请给上课老师提宝贵意见或建议。" #suggest></textarea>
-                <span *ngIf="suggest.errors?.maxlength">意见最多{{suggest.errors.maxlength.requiredLength}}个字符。</span>
+            <textarea class="form-control" name="suggest" rows="4" [(ngModel)]="form.suggest" placeholder="请给上课老师提宝贵意见或建议。"
+                #suggest></textarea>
+            <span *ngIf="suggest.errors?.maxlength">意见最多{{suggest.errors.maxlength.requiredLength}}个字符。</span>
+        </div>
+        <div class="form-group">
+            <label>
+                典型示例及观摩课推荐
+                <ng-container *ngFor="let label of recommendLabels; let i = index">
+                    <span class="ml-3"><input type="radio" name="recommend" [value]="i" [(ngModel)]="form.recommend">{{label}}</span>
+                </ng-container>
+            </label>
+            <textarea class="form-control" name="recommendReason" rows="4" [(ngModel)]="form.recommendReason"
+                placeholder="请说明推荐理由。推荐为典型事例和观摩课的应为评价为“优”，且在某方面有较强示范作用的课程。" *ngIf="form.recommend > 0">
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label>教学环境设备情况及建议</label>
+            <textarea class="form-control" name="teachingEnvironment" rows="4" [(ngModel)]="form.teachingEnvironment"
+                placeholder="教学楼、教室的环境、卫生；文化氛围、安全设施；教室内多媒体课件播放设备的准备情况。"></textarea>
         </div>
     </form>
 </ng-container>

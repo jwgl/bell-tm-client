@@ -22,9 +22,9 @@ export class ApplicationApprovalItemComponent {
     private nextId: number;
 
     constructor(route: ActivatedRoute,
-        private dialog: Dialog,
-        private service: ApprovalService) {
-        route.data.subscribe((data: { item: any }) => this.onItemLoaded(data.item));
+                private dialog: Dialog,
+                private service: ApprovalService) {
+                route.data.subscribe((data: { item: any }) => this.onItemLoaded(data.item));
     }
 
     onItemLoaded(dto: any) {

@@ -20,6 +20,7 @@ export interface ObservationItem {
     place: string;
     termId?: number;
     isLegacy?: boolean;
+    recommend: number;
 }
 
 export const ListFilter = [
@@ -29,4 +30,6 @@ export const ListFilter = [
     { key: 'evaluateLevel', name: '评价等级' },
     { key: 'status', name: '状态' },
     { key: 'observerType', name: '督导类型' },
-    { key: 'supervisorName', name: '督导姓名' }];
+    { key: 'supervisorName', name: '督导姓名' },
+    { key: 'recommend', name: '推荐' },
+];

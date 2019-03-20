@@ -20,6 +20,8 @@ import { ScheduleRoutingModule } from './schedule-routing.module';
 import { ScheduleService } from './schedule.service';
 import { WeekScheduleComponent } from './week/form-view.component';
 
+import { NavModule } from './nav/nav.module';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -35,6 +37,7 @@ library.add(faSearch);
         PipesModule,
         ObservationCommonModule,
         FontAwesomeModule,
+        NavModule,
     ],
     declarations: [
         ObservePriorityListComponent,

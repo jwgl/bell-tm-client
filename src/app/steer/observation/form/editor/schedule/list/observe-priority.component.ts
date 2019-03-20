@@ -25,14 +25,13 @@ const ListFilter = [
 ];
 
 @Component({
-    selector: 'observe-priority-list',
     templateUrl: 'observe-priority.component.html',
 })
 export class ObservePriorityListComponent {
     list: TeacherItem[];
     count: number;
     pagerArgs: any;
-    max: number = 10;
+    max = 10;
     listFilter = ListFilter;
     filterSelected: any = {};
 

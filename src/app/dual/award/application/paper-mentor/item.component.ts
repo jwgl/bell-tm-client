@@ -23,9 +23,9 @@ export class PaperMentorItemComponent {
     private nextId: number;
 
     constructor(route: ActivatedRoute,
-        private service: PaperMentorService,
-        private dialog: Dialog) {
-        route.data.subscribe((data: { item: any }) => this.onItemLoaded(data.item));
+                private service: PaperMentorService,
+                private dialog: Dialog) {
+                route.data.subscribe((data: { item: any }) => this.onItemLoaded(data.item));
     }
 
     onItemLoaded(dto: any) {
@@ -47,7 +47,7 @@ export class PaperMentorItemComponent {
         return {
             id: this.form.id,
             wi: this.wi,
-            type: 'approve',
+            type: 'next',
             what: this.form.title,
         };
     }

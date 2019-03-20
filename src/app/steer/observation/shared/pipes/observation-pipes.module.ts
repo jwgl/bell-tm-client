@@ -6,6 +6,7 @@ import { TypeTextPipe } from './observer-type';
 import { PagerPipe } from './pager';
 import { StatusTextPipe } from './status';
 import { TermTextPipe } from './term';
+import { RecommendPipe } from './recommend';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { TermTextPipe } from './term';
         PagerPipe,
         StatusTextPipe,
         TermTextPipe,
+        RecommendPipe,
     ],
     exports: [
         ObserverGroupPipe,
@@ -24,6 +26,7 @@ import { TermTextPipe } from './term';
         PagerPipe,
         StatusTextPipe,
         TermTextPipe,
+        RecommendPipe,
     ],
 })
 export class PipesModule {}

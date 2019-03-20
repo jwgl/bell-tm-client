@@ -1,12 +1,8 @@
-<div class="btn-toolbar">
-    <div class="btn-group">
-        <button type="button" class="btn btn-secondary" [routerLink]="['../teachers']">教师周课表</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['../places']">教室周课表</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['../schedules']">列表</button>
-        <button type="button" class="btn btn-primary" [routerLink]="['../priorities']">优先听课名单</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['../unschedules']">未排实践课</button>
+<div class="row">
+    <div class="form-group">
+        <tm-nav></tm-nav>
     </div>
-    <div class="btn-group ml-auto">
+    <div class="form-group ml-auto">
         <div class="input-group">
             <div class="input-group-prepend">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2"
@@ -23,10 +19,8 @@
                     <fa-icon icon="search"></fa-icon>
                 </button>
             </div>
+            <div class="input-group-append"><a class="btn btn-secondary" download href="/api/steer/reports/observe-priority">导出</a></div>
         </div>
-    </div>
-    <div class="btn-group ml-2">
-        <a class="btn btn-secondary" download href="/api/steer/reports/observe-priority">导出</a>
     </div>
 </div>
 <div *ngIf="list && list.length>0">
@@ -43,7 +37,8 @@
         <tbody>
             <ng-container *ngFor="let item of list | pager : pagerArgs">
                 <tr>
-                    <td><a [routerLink]="['../teachers',item.teacherId]">{{item.teacherName}}（{{item.teacherId}}）</a></td>
+                    <td><a [routerLink]="['../teachers',item.teacherId]">{{item.teacherName}}（{{item.teacherId}}）</a><span
+                            class="badge badge-success" *ngIf="item.isExternal">外</span></td>
                     <td>{{item.academicTitle}}</td>
                     <td>{{item.departmentName}}</td>
                     <td>{{item.isnew ? '是' : '否'}}</td>

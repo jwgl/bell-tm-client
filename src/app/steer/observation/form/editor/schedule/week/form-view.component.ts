@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import * as _ from 'lodash';
 
+import { AuthService } from 'core/auth';
 import { Schedule, Timetable } from 'core/models';
 import './form-view.model';
 
@@ -18,12 +19,15 @@ export class WeekScheduleComponent {
     teacher: any;
     place: any;
     term: any;
+    root: string;
 
     private scheduleMode: WeekScheduleMode;
 
     constructor(
         private service: ScheduleService,
+        private authService: AuthService,
         private route: ActivatedRoute) {
+        this.root = `/steer/obervers/${this.authService.userInfo.id}/observations`;
         this.scheduleMode = this.route.snapshot.data['mode'];
         const params = this.route.snapshot.params;
         this.service.getTerm().subscribe(dto => {
