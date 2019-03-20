@@ -23,13 +23,18 @@ export class ObservationItemComponent {
         private route: ActivatedRoute,
         private service: ObservationFormService,
     ) {
-        const params = this.route.snapshot.params;
+        this.route.params.subscribe(params => {
+            this.loadData(params['id']);
+        });
+    }
+
+    loadData(id: number) {
         this.service.loadItem<{
             form: any,
             evaluationSystem: any[],
             isAdmin: any,
             activeTermId: any,
-        }>(params['id']).subscribe(dto => {
+        }>(id).subscribe(dto => {
             this.vm = new ObservationForm(dto.form);
             this.evaluationSystem = dto.evaluationSystem;
             this.isAdmin = dto.isAdmin;
@@ -48,7 +53,7 @@ export class ObservationItemComponent {
     remove(): void {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
             this.service.delete(this.vm.id).subscribe(() => {
-                this.router.navigate(['/']);
+                this.router.navigate(['../'], { relativeTo: this.route });
             });
         });
     }
@@ -56,7 +61,7 @@ export class ObservationItemComponent {
     cancel(): void {
         this.dialog.confirm('撤销', '确定要撤销提交吗？').then(() => {
             this.service.cancel(this.vm.id).subscribe(() => {
-                this.router.navigate(['/']);
+                this.loadData(this.vm.id);
             });
         });
     }
@@ -70,7 +75,7 @@ export class ObservationItemComponent {
             this.dialog.error(validate);
         } else {
             this.service.submit(this.vm.id).subscribe(() => {
-                this.router.navigate(['/']);
+                this.loadData(this.vm.id);
             });
         }
     }

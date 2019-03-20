@@ -1,30 +1,28 @@
-<div class="btn-toolbar">
-    <div class="btn-group">
-        <button type="button" class="btn" [class.btn-primary]="isTeacherMode" [class.btn-secondary]="!isTeacherMode" [routerLink]="['../teachers']">教师周课表</button>
-        <button type="button" class="btn" [class.btn-primary]="!isTeacherMode" [class.btn-secondary]="isTeacherMode" [routerLink]="['../places']">教室周课表</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['../schedules']">列表</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['../priorities']">优先听课名单</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['../unschedules']">未排实践课</button>
+<div class="row">
+    <div class="form-group">
+        <tm-nav></tm-nav>
     </div>
-    <div class="btn-group ml-auto">
-        <ng-container *ngIf="isTeacherMode">
-            <tm-teacher-select (selectTeacher)="onTeacherSelected($event)"></tm-teacher-select>
-        </ng-container>
-        <ng-container *ngIf="!isTeacherMode">
-            <tm-place-select (selectPlace)="onPlaceSelected($event)"></tm-place-select>
-        </ng-container>
-        <button type="button" class="btn btn-secondary" (click)="query()" [disabled]="(isTeacherMode && !teacher) ||(!isTeacherMode && !place)">查询</button>
+    <div class="form-group ml-auto">
+        <div class="input-group">
+            <ng-container *ngIf="isTeacherMode">
+                <tm-teacher-select (selectTeacher)="onTeacherSelected($event)"></tm-teacher-select>
+            </ng-container>
+            <ng-container *ngIf="!isTeacherMode">
+                <tm-place-select (selectPlace)="onPlaceSelected($event)"></tm-place-select>
+            </ng-container>
+            <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary" (click)="query()" [disabled]="(isTeacherMode && !teacher) ||(!isTeacherMode && !place)">查询</button>
+            </div>
+        </div>
     </div>
 </div>
 <ng-container *ngIf="timetable">
     <schedule-weektab [term]="term" #weektab></schedule-weektab>
     <schedule-timetable [timetable]="timetable" [week]="weektab.selectedWeek">
         <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
-           <div class="timeslot">
-                <button class="btn btn-secondary slotitem" *ngFor="let item of timeslot.items"
-                    [ngClass]="timeslot.getObservationClass()"
-                    [disabled]="item.getPermission()"
-                    [routerLink]="['../teacher',timeslot.getTeacherId(),'week', week, 'timeslot',  timeslot.id]">
+            <div class="timeslot">
+                <button class="btn btn-secondary slotitem" *ngFor="let item of timeslot.items" [ngClass]="timeslot.getObservationClass()"
+                    [disabled]="item.getPermission()" [routerLink]="[root, 'teacher',timeslot.getTeacherId(),'week', week, 'timeslot',  timeslot.id]">
                     <div>
                         <span class="course-name">{{item.course}}</span>
                         <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>

@@ -54,7 +54,7 @@
                 <tr>
                     <td><a [routerLink]="[item.id]">#{{item.id}}</a></td>
                     <td>{{item.teacherId}} {{item.teacherName}}</td>
-                    <td class="expand">{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}}
+                    <td class="expand">{{item.course}}<span class="badge badge-pill badge-success" *ngIf="item.recommend > 0">荐</span> <br>{{item.dayOfWeek | dayOfWeek}}
                         {{item.startSection}}-{{item.startSection+item.totalSection-1}}节 {{item.place}}</td>
                     <td>{{item.departmentName}} </td>
                     <td>{{item.supervisorDate}}</td>

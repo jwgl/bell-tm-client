@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { ObserverTypes, StatusText } from '../../shared/constant';
 import { ObservationFormService } from '../form.service';
 import { ListFilter, ObservationItem } from '../shared/form-list.model';
+import { Recommends } from '../shared/form.model';
 
 @Component({
     styleUrls: ['form-list.component.scss'],
@@ -89,6 +90,8 @@ export class ObservationListComponent {
             value = StatusText[item.status];
         } else if (this.filterSelected.key === 'observerType') {
             value = ObserverTypes.map(data => data.name)[item.observerType - 1];
+        } else if (this.filterSelected.key === 'recommend') {
+            value = Recommends[item.recommend ? item.recommend : 0 ];
         } else {
             value = item[this.filterSelected.key];
         }

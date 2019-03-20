@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs mb-p10">
+    <li *ngFor="let item of options" class="nav-item mr-1">
+        <a class="nav-link" [routerLink]="['../', item.type]" routerLinkActive="active">{{item.label}}</a>
+    </li>
+</ul>

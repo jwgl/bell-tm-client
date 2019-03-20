@@ -25,7 +25,8 @@
         </div>
         <div class="form-group col-md-3">
             <label class="control-label">上课时间</label>
-            <p>{{vm.schedule.startWeek}}-{{vm.schedule.endWeek}}周 {{vm.schedule.oddEven | oddEven}} {{vm.schedule.dayOfWeek
+            <p>{{vm.schedule.startWeek}}-{{vm.schedule.endWeek}}周 {{vm.schedule.oddEven | oddEven}}
+                {{vm.schedule.dayOfWeek
                 | dayOfWeek}} {{vm.schedule.startSection}}-{{vm.schedule.startSection+vm.schedule.totalSection-1}}节</p>
         </div>
         <div class="form-group col-md-3">
@@ -40,13 +41,15 @@
     <div class="row">
         <div class="form-group col-md-6">
             <label class="control-label">教师出勤</label>
-            <p>{{vm.earlier?'提前：'+vm.earlier+'分钟':''}} {{vm.late?'迟到：'+vm.late+'分钟':''}} {{vm.leave?'早退：'+vm.leave+'分钟':''}}
+            <p>{{vm.earlier?'提前：'+vm.earlier+'分钟':''}} {{vm.late?'迟到：'+vm.late+'分钟':''}}
+                {{vm.leave?'早退：'+vm.leave+'分钟':''}}
                 {{ !vm.earlier && !vm.late && !vm.leave ?'正常':''}}
             </p>
         </div>
         <div class="form-group col-md-6">
             <label class="control-label">学生出勤</label>
-            <p>应到人数：{{vm.dueStds}}人 {{vm.attendantStds?'实到：'+vm.attendantStds+'人':''}} {{vm.lateStds?'迟到：'+vm.lateStds+'人':''}}
+            <p>应到人数：{{vm.dueStds}}人 {{vm.attendantStds?'实到：'+vm.attendantStds+'人':''}}
+                {{vm.lateStds?'迟到：'+vm.lateStds+'人':''}}
                 {{vm.leaveStds?'早退：'+vm.leaveStds+'人':''}}
             </p>
         </div>
@@ -55,7 +58,7 @@
 
         <div class="form-group col-md-3">
             <label class="control-label">听课时间</label>
-            <p>第{{vm.observationWeek}}周  {{vm.supervisorDate}}</p>
+            <p>第{{vm.observationWeek}}周 {{vm.supervisorDate}}</p>
         </div>
         <div class="form-group col-md-3">
             <label class="control-label">听课节数</label>
@@ -67,7 +70,7 @@
         </div>
         <div class="form-group col-md-3">
             <label class="control-label">督导等级评价</label>
-            <p>{{vm.evaluateLevel}}  {{vm.observerName}}（{{vm.observerType | typeLabel}}）</p>
+            <p>{{vm.evaluateLevel}} {{vm.observerName}}（{{vm.observerType | typeLabel}}）</p>
         </div>
     </div>
     <table class="table">
@@ -97,5 +100,13 @@
     <div class="form-group">
         <label>意见和建议</label>
         <p class="form-control-plaintext">{{vm.suggest}}</p>
+    </div>
+    <div class="form-group" *ngIf="vm.recommend > 0">
+        <label>典型示例及观摩课推荐 <span class="badge badge-success">{{vm.recommend | recommendLabel}}</span></label>
+        <p class="form-control-plaintext">{{vm.recommendReason}}</p>
+    </div>
+    <div class="form-group" *ngIf="vm.teachingEnvironment">
+        <label>教学环境设备情况及建议</label>
+        <p class="form-control-plaintext">{{vm.teachingEnvironment}}</p>
     </div>
 </ng-container>

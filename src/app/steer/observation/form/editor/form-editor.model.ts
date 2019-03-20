@@ -9,7 +9,7 @@ declare module '../shared/form.model' {
     }
 }
 
-ObservationForm.prototype.getObservationDate = function (this: ObservationForm, term: Term): string {
+ObservationForm.prototype.getObservationDate = function(this: ObservationForm, term: Term): string {
     if (!term) {
         return null;
     } else {
@@ -20,7 +20,7 @@ ObservationForm.prototype.getObservationDate = function (this: ObservationForm, 
     }
 };
 
-ObservationForm.prototype.toServerDto = function (this: ObservationForm, evaluationSystem: EvaluationMap[], term: Term): any {
+ObservationForm.prototype.toServerDto = function(this: ObservationForm, evaluationSystem: EvaluationMap[], term: Term): any {
     const evList: any[] = [];
     evaluationSystem.forEach(item => {
         item.value.forEach(data => {
@@ -51,5 +51,9 @@ ObservationForm.prototype.toServerDto = function (this: ObservationForm, evaluat
         dayOfWeek: this.schedule.dayOfWeek,
         startSection: this.schedule.startSection,
         isScheduleTemp: this.isScheduleTemp,
+        method: this.method,
+        recommend: this.recommend,
+        recommendReason: this.recommendReason,
+        teachingEnvironment: this.teachingEnvironment,
     };
 };
