@@ -157,7 +157,7 @@
         </table>
         <div class="form-group" *ngIf="form.method !== 1">
             <label class="control-label">总体评分</label>
-            <input class="form-control" type="number" name="evaluateLevel" [(ngModel)]="form.evaluateLevel" placeholder="“优”[4.5 ,5]  、“良”[3.5 ,4.5)、“中”[2.5, 3.5)、“差”[0, 2.5)"/>
+            <input class="form-control" type="number" name="evaluateLevel" [(ngModel)]="form.evaluateLevel" placeholder="“优”[4.5 ,5]  、“良”[3.5 ,4.5)、“中”[2.5, 3.5)、“差”[0, 2.5)" />
         </div>
         <div class="form-group">
             <label>综合评价：<span *ngIf="form.method === 1">{{evaluateLevel}}</span></label>
@@ -181,7 +181,7 @@
                 </ng-container>
             </label>
             <textarea class="form-control" name="recommendReason" rows="4" [(ngModel)]="form.recommendReason"
-                placeholder="请说明推荐理由。推荐为典型事例和观摩课的应为评价为“优”，且在某方面有较强示范作用的课程。" *ngIf="form.recommend > 0">
+                placeholder="请说明推荐理由。推荐为典型事例或观摩课的课程评价应为“优”，且在某方面具有较强的示范作用。" *ngIf="form.recommend > 0">
             </textarea>
         </div>
         <div class="form-group">
