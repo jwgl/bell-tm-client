@@ -40,7 +40,7 @@ export class AdminClassAttendanceContainerResolve implements Resolve<{ terms: nu
             map(result => {
                 const id = route.firstChild.params['id'];
                 if (result) {
-                    if (id === 'all' || result.adminClasses.find(it => it.id === id)) {
+                    if (id === 'all' || result.adminClasses.find(it => it.id == id)) {
                         return result;
                     } else {
                         this.router.navigateByUrl(state.url.replace(id, 'all'));
