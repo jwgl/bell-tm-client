@@ -1,7 +1,7 @@
 <div class="d-flex">
     <div class="btn-group">
         <button type="button" class="btn btn-default dropdown-input" *ngIf="selectedValue != -1">{{defaultValue}}</button>
-        <input type="text" class="form-control dropdown-input" [value]="value" *ngIf="selectedValue == -1">
+        <input type="text" class="form-control dropdown-input" [(ngModel)]="value" *ngIf="selectedValue == -1" (ngModelChange)="onValueChanged()">
         <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split dropdown-input" id="dropdownMenuReference"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent" [disabled]="disabled">
             <span class="sr-only">Toggle Dropdown</span>
