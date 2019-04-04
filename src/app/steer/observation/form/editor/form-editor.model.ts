@@ -22,11 +22,13 @@ ObservationForm.prototype.getObservationDate = function(this: ObservationForm, t
 
 ObservationForm.prototype.toServerDto = function(this: ObservationForm, evaluationSystem: EvaluationMap[], term: Term): any {
     const evList: any[] = [];
-    evaluationSystem.forEach(item => {
-        item.value.forEach(data => {
-            evList.push({ id: data.id, value: data.value });
+    if (evaluationSystem) {
+        evaluationSystem.forEach(item => {
+            item.value.forEach(data => {
+                evList.push({ id: data.id, value: data.value });
+            });
         });
-    });
+    }
     return {
         teacherId: this.schedule.teacherId,
         observationWeek: this.observationWeek,

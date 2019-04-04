@@ -22,4 +22,7 @@ export class SelectOrOtherComponent {
         this.selectedValue = -1;
         this.selectObject.emit({name: this.value, value: -1});
     }
+    onValueChanged() {
+        this.selectObject.emit({name: this.value, value: -1});
+    }
 }

@@ -192,6 +192,7 @@ export class ObservationFormEditorComponent {
     onObjectSelected(object: any) {
         this.form.method = object.value;
         this.method = object.name;
+        this.form.teachingMethods = object.name;
         this.evaluationSystemSelected();
     }
 

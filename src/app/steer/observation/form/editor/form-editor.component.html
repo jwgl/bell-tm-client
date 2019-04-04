@@ -130,7 +130,7 @@
                 </select>
             </div>
         </div>
-        <table class="table">
+        <table class="table" *ngIf="evaluationSystem && evaluationSystem.length > 0">
             <thead>
                 <tr>
                     <th>评价项目</th>
