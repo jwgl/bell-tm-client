@@ -36,10 +36,19 @@ export class AuthService {
     }
 
     initSession(): void {
-        this.httpClient.get('/login', { headers: JsonHeader }).subscribe(result => {
-            this.csrf = result ? result['csrf'] : null;
-            if (!this.csrf) {
+        this.httpClient.get('/login', {
+            headers: JsonHeader,
+            observe: 'response',
+            responseType: 'text',
+        }).subscribe(response => {
+            if (response.url === `${window.location.protocol}//${window.location.host}/`) {
                 this.logout(false);
+            } else {
+                try {
+                    this.csrf = JSON.parse(response.body)['csrf'];
+                } catch (e) {
+                    alert(e.message);
+                }
             }
         }, error => {
             alert(error.message);
