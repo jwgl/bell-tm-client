@@ -18,8 +18,8 @@ export class BookingKeepListComponent {
     weeks: number[];
     days: number[];
     bookings: any[];
-
     params: { [param: string]: string };
+    paramsChanged = false;
 
     constructor(private service: BookingKeepService) {
         this.service.loadBuildings().subscribe(result => {
@@ -46,16 +46,22 @@ export class BookingKeepListComponent {
         });
     }
 
-    buildingChanged(building: string) {
+    onBuildingChanged(building: string) {
         this.params.place = null;
         this.service.loadPlaces(building).subscribe(places => {
             this.places = places;
+            this.paramsChanged = true;
         });
+    }
+
+    onParamsChanged($event) {
+        this.paramsChanged = true;
     }
 
     search() {
         this.service.loadList(_.omitBy(this.params, _.isNil)).subscribe(result => {
             this.bookings = result;
+            this.paramsChanged = false;
         });
     }
 
@@ -67,5 +73,9 @@ export class BookingKeepListComponent {
             day: null,
             section: null,
         };
+    }
+
+    get queryButtonClass(): string {
+        return this.params.building && this.paramsChanged ? 'primary' : 'secondary';
     }
 }

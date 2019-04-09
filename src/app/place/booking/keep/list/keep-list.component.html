@@ -2,35 +2,35 @@
     <div class="col-md-4 col-lg-3" *ngIf="params">
         <div class="form-group">
             <label for="building">教学楼</label>
-            <select class="form-control" [(ngModel)]="params.building" (ngModelChange)="buildingChanged($event)">
+            <select class="form-control" [(ngModel)]="params.building" (ngModelChange)="onBuildingChanged($event)">
                 <option disabled selected hidden [ngValue]="null">选择教学楼</option>
                 <option *ngFor="let building of buildings" value="{{building}}">{{building}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="building">教室</label>
-            <select class="form-control" [(ngModel)]="params.place" [disabled]="!params.building">
+            <select class="form-control" [(ngModel)]="params.place" (ngModelChange)="onParamsChanged($event)" [disabled]="!params.building">
                 <option selected [ngValue]="null">全部</option>
                 <option *ngFor="let place of places" [ngValue]="place.id">{{place.name}} / {{place.seat}}座 / {{place.type}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="building">周次</label>
-            <select class="form-control" [(ngModel)]="params.week">
+            <select class="form-control" [(ngModel)]="params.week" (ngModelChange)="onParamsChanged($event)" [disabled]="!params.building">
                 <option selected [ngValue]="null">全部</option>
                 <option *ngFor="let w of weeks" [ngValue]="w">第{{w}}周</option>
             </select>
         </div>
         <div class="form-group">
             <label for="building">星期几</label>
-            <select class="form-control" [(ngModel)]="params.day">
+            <select class="form-control" [(ngModel)]="params.day" (ngModelChange)="onParamsChanged($event)" [disabled]="!params.building">
                 <option selected [ngValue]="null">全部</option>
                 <option *ngFor="let d of days" [ngValue]="d">{{d | dayOfWeek}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="building">节次</label>
-            <select class="form-control" [(ngModel)]="params.section">
+            <select class="form-control" [(ngModel)]="params.section" (ngModelChange)="onParamsChanged($event)" [disabled]="!params.building">
                 <option selected [ngValue]="null">全部</option>
                 <option *ngFor="let s of [1,2,3,4]" [ngValue]="s">第{{s}}节</option>
                 <option [ngValue]="16">中午</option>
@@ -39,7 +39,7 @@
         </div>
         <div class="form-group">
             <button class="btn btn-secondary" (click)="reset()">复位</button>
-            <button class="btn btn-primary ml-2" (click)="search()" [disabled]="!params.building">查询</button>
+            <button class="btn btn-{{queryButtonClass}} ml-2" (click)="search()" [disabled]="!params.building">查询</button>
         </div>
     </div>
     <div class="col-md-8 col-lg-9">
