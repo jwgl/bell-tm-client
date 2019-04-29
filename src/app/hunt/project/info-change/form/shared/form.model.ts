@@ -22,7 +22,7 @@ export class ChangeForm {
     departmentName: string;
     reviewer: boolean;
     dateReviewed: string;
-    reason: String;
+    reason: string;
     title: string;
     degree: string;
     email: string;

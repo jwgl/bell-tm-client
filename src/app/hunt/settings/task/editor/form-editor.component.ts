@@ -14,6 +14,7 @@ import { TaskForm } from '../shared/form.model';
 import './form-editor.model';
 
 @Component({
+    styles: ['.file-type { font-weight: bold; }'],
     templateUrl: 'form-editor.component.html',
 })
 export class TaskFormEditorComponent {
@@ -21,6 +22,7 @@ export class TaskFormEditorComponent {
     form: TaskForm;
     types = TypeList;
     bans = LevelList;
+    taskAttach = { prefix: 'task', label: '通知附件', types: ['zip', 'rar'] };
 
     constructor(
         private service: FormService,
@@ -52,7 +54,7 @@ export class TaskFormEditorComponent {
 
     checkDate(value: any, name: string): string {
         if (this.isEmpty(value)) {
-            return  `${name} 不能为空！`;
+            return `${name} 不能为空！`;
         } else if (!this.isDate(value)) {
             return `${name} 日期格式不正确！`;
         }
@@ -62,7 +64,7 @@ export class TaskFormEditorComponent {
         const validation: string[] = [];
         if (this.isEmpty(this.form.title) ||
             this.isEmpty(this.form.content)) {
-                validation.push('请检查标题、内容等是否为空！');
+            validation.push('请检查标题、内容等是否为空！');
         }
         if (!this.isDate(this.form.startDate)) {
             validation.push('申请起始日期输入不正确！');
@@ -94,5 +96,21 @@ export class TaskFormEditorComponent {
         this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
             this.router.navigate(['../'], { relativeTo: this.route });
         });
+    }
+
+    get ploaded(): boolean {
+        return !_.isEmpty(this.form.attach);
+    }
+
+    onUploaded(fileNames: any) {
+        this.form.attach = fileNames.name;
+    }
+
+    get uploadUrl(): string {
+        return this.service.getUploadUrl();
+    }
+
+    remove() {
+        this.form.attach = null;
     }
 }

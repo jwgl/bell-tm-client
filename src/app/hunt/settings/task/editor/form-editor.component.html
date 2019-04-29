@@ -15,11 +15,13 @@
         <div class="row">
             <div class="form-group col-md-3">
                 <label class="control-label">开始日期</label>
-                <input class="form-control" name="startDate" type="text" [(ngModel)]="form.startDate" placeholder="YYYY-MM-DD" />
+                <input class="form-control" name="startDate" type="text" [(ngModel)]="form.startDate"
+                    placeholder="YYYY-MM-DD" />
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">截止日期</label>
-                <input class="form-control" name="endDate" type="text" [(ngModel)]="form.endDate" placeholder="YYYY-MM-DD" />
+                <input class="form-control" name="endDate" type="text" [(ngModel)]="form.endDate"
+                    placeholder="YYYY-MM-DD" />
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">审核类型</label>
@@ -42,11 +44,29 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label class="control-label">通知内容</label>
-                <textarea class="form-control" name="content" rows="4" [(ngModel)]="form.content" placeholder="通知详细内容"></textarea>
+                <textarea class="form-control" name="content" rows="4" [(ngModel)]="form.content"
+                    placeholder="通知详细内容"></textarea>
             </div>
             <div class="form-group col-md-6">
                 <label class="control-label">专家注意事项</label>
-                <textarea class="form-control" name="remind" rows="4" [(ngModel)]="form.remind" placeholder="专家注意事项"></textarea>
+                <textarea class="form-control" name="remind" rows="4" [(ngModel)]="form.remind"
+                    placeholder="专家注意事项"></textarea>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5>文件上传</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex mb-2" *ngIf="ploaded; else emptyTpl;">
+                    <span class="file-type">{{taskAttach.label}}</span>
+                    <span class="ml-3 mr-3">{{form.attach}}</span>
+                    <button class="btn btn-danger btn-sm ml-auto" (click)="remove()">删除</button>
+                </div>
+                <ng-template #emptyTpl>
+                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="taskAttach" (uploaded)="onUploaded($event)">
+                    </tm-uploader-panel>
+                </ng-template>
             </div>
         </div>
     </form>

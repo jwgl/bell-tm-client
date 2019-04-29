@@ -13,4 +13,8 @@ export class FormViewerComponent {
     expireClass(date: string): string {
         return dayjs().isAfter(dayjs(date).add(1, 'day')) ? 'badge badge-danger' : 'badge';
     }
+
+    get downloadUrl(): string {
+        return `/api/hunt/attachments/${this.vm.id}?type=TASK`;
+    }
 }

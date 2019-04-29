@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { CommonDirectivesModule } from 'core/common-directives';
 
+import { UploaderModule } from '../../../project/application/shared/uploader/uploader.module';
 import { TaskFormEditorComponent } from './form-editor.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { TaskFormEditorComponent } from './form-editor.component';
         FormsModule,
         RouterModule,
         CommonDirectivesModule,
+        UploaderModule,
     ],
     declarations: [
         TaskFormEditorComponent,

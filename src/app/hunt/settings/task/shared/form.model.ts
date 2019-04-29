@@ -10,17 +10,10 @@ export class TaskForm {
     remind: string;
     ban: string;
     banMe: number;
+    attach: string;
 
     constructor(dto: any) {
-        this.id = dto.id;
-        this.title = dto.title;
-        this.content = dto.content;
-        this.startDate = dto.startDate;
-        this.endDate = dto.endDate;
-        this.type = dto.type;
-        this.remind = dto.remind;
-        this.ban = dto.ban;
-        this.banMe = dto.banMe;
+        Object.assign(this, dto);
     }
 
     get isApplyDateValid(): boolean {
