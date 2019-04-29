@@ -17,6 +17,7 @@ export class ProjectListComponent {
     options: any;
     list: any;
     reportType: number;
+    q: string;
 
     constructor(
         private service: ProjectService,
@@ -43,5 +44,9 @@ export class ProjectListComponent {
         }).then(result => {
             this.service.loadList(result).subscribe(dto => this.loadData(dto));
         });
+    }
+
+    find() {
+        this.service.loadList({q: this.q}).subscribe(dto => this.loadData(dto));
     }
 }
