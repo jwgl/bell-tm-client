@@ -15,5 +15,6 @@ TaskForm.prototype.toServerDto = function(this: TaskForm): any {
         type: this.type,
         remind: this.remind,
         ban: this.ban,
+        attach: this.attach,
     };
 };

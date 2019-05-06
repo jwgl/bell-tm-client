@@ -35,7 +35,7 @@ export class FormService extends RestEditService {
     }
 
     batchCreateReview(taskId: number, reportType: number, ids: any): Observable<any> {
-        return this.http.post(`${this.api.item(taskId)}/projects`, {reportType: reportType, ids: ids});
+        return this.http.post(`${this.api.item(taskId)}/projects`, {reportType, ids});
     }
 
     loadProjectItem<T>(taskId: number, id: number): Observable<any> {
@@ -44,5 +44,9 @@ export class FormService extends RestEditService {
 
     removeProject<T>(taskId: number, id: number): Observable<any> {
         return this.http.delete<T>(`${this.api.item(taskId)}/projects/${id}`).pipe(map(_ => id));
+    }
+
+    getUploadUrl(): string {
+        return `/zuul${this.api.item(1)}/upload`;
     }
 }

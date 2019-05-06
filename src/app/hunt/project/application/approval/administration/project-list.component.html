@@ -24,6 +24,7 @@
                 <th>平均分</th>
             </ng-container>
             <th>状态</th>
+            <th>结论</th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +48,7 @@
                 <td>
                     <audit-status [status]="item.status"></audit-status>
                 </td>
+                <td>{{item.conclusion | conclusion : 'text'}}</td>
             </tr>
             <tr *ngIf="e.expended" class="table-info">
                 <td colspan="2"></td>

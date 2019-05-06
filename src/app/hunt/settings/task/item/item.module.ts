@@ -10,6 +10,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { WorkflowModule } from 'core/workflow';
 import { Dialog } from 'core/dialogs';
 
+import { TmGridModule } from '../../../components/table.module';
 import { ProjectFormViewerModule } from '../../../project/application/form/shared/form-viewer.module';
 import { PipesModule } from '../../shared/common-pipes';
 import { TaskFormViewerModule } from '../shared/form-viewer.module';
@@ -37,6 +38,7 @@ library.add(faTimes);
         PipesModule,
         ProjectFormViewerModule,
         FontAwesomeModule,
+        TmGridModule,
     ],
     declarations: [
         TaskItemComponent,

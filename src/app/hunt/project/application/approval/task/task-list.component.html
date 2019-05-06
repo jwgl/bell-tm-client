@@ -26,7 +26,7 @@
                                 reviewType:
                                 'text'}}</label></td>
                         <td class="date">{{task.endDate}}</td>
-                        <td><a [routerLink]="[task.id, 'administration']" *ngIf="task.countProject"><span class="badge badge-pill badge-secondary">{{task.countProject}}</span></a></td>
+                        <td><a [routerLink]="[task.id, 'administration', reportType(task.type)]" *ngIf="task.countProject"><span class="badge badge-pill badge-secondary">{{task.countProject}}</span></a></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -53,7 +53,7 @@
                                 reviewType:
                                 'text'}}</label></td>
                         <td class="date">{{task.endDate}}</td>
-                        <td><a [routerLink]="[task.id, 'administration']" *ngIf="task.countProject"><span class="badge badge-pill badge-secondary">{{task.countProject}}</span></a></td>
+                        <td><a [routerLink]="[task.id, 'administration', reportType(task.type)]" *ngIf="task.countProject"><span class="badge badge-pill badge-secondary">{{task.countProject}}</span></a></td>
                         <td><a [routerLink]="[task.id, 'todo']" *ngIf="task.countUncheck"><span class="badge badge-pill badge-secondary">{{task.countUncheck}}</span></a></td>
                         <td><a [routerLink]="[task.id, 'done']" *ngIf="task.countPass"><span class="badge badge-pill badge-secondary">{{task.countPass}}</span></a></td>
                         <td><a [routerLink]="[task.id, 'expr']" *ngIf="task.countFail"><span class="badge badge-pill badge-secondary">{{task.countFail}}</span></a></td>

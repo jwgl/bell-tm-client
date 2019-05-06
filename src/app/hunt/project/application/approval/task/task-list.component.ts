@@ -25,4 +25,12 @@ export class TaskListComponent {
             subject.next();
         });
     }
+
+    reportType(taskType: string): number {
+        if (taskType === 'APPLICATION') {
+            return 1;
+        } else {
+            return 3;
+        }
+    }
 }
