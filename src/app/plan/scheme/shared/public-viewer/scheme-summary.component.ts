@@ -8,7 +8,7 @@ import { Scheme } from '../scheme.model';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[scheme-summary]',
-    styles: [':host {background-color: #ddd}'],
+    styles: [':host {background-color: #e8e8e8}'],
     templateUrl: 'scheme-summary.component.html',
 })
 export class SchemeSummaryComponent {
