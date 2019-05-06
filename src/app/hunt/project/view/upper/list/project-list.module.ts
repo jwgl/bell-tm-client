@@ -8,6 +8,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 
+import { TmGridModule } from '../../../../components/table.module';
 import { PipesModule } from '../../../../settings/shared/common-pipes';
 import { ProjectListComponent } from './project-list.component';
 import { ProjectOptionDialog } from './project-option.dialog';
@@ -19,6 +20,7 @@ import { ProjectOptionDialog } from './project-option.dialog';
         CommonDirectivesModule,
         NgSelectModule,
         PipesModule,
+        TmGridModule,
     ],
     declarations: [
         ProjectListComponent,

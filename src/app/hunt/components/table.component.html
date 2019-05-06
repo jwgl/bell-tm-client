@@ -1,0 +1,28 @@
+<table class="table table-expand">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <ng-container *ngFor="let th of theads">
+                <th (click)="orderBy(th)" *ngIf="!th.filter">{{th.label}}<fa-icon
+                        icon="{{direction == -1 ? 'arrow-up' : 'arrow-down'}}" fixedWidth="true"
+                        *ngIf="th.order && orderKey === th.id"></fa-icon>
+                </th>
+                <th *ngIf="th.filter">
+                    <div class="dropdown-toggle" data-toggle="dropdown"> {{th.label}} <fa-icon icon="filter"
+                            *ngIf="hasFilter(th.id)" (click)="clearFilter(th.id)"></fa-icon>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a *ngFor="let item of baseList | uniqueBy: th.id | filterBy: filterBySelected(th.id, true)"
+                            class="dropdown-item" (click)="select(th.id, item)">{{item}}<span
+                                *ngIf="isSelected(th.id, item)">✔</span></a>
+                        <a *ngFor="let item of baseList | uniqueBy: th.id | filterBy: filterBySelected(th.id, false)"
+                            class="dropdown-item" (click)="select(th.id, item)">{{item}}</a>
+                    </div>
+                </th>
+            </ng-container>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template [ngTemplateOutlet]="bodyTemplate" [ngTemplateOutletContext]="{list: list}"></ng-template>
+    </tbody>
+</table>

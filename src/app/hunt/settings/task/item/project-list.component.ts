@@ -21,6 +21,18 @@ export class ProjectListComponent {
         { label: '结题', type: 4, count: 0 },
     ];
 
+    ths = [
+        {id: 'name', label: '项目名称', order: true},
+        {id: 'code', label: '项目编号', order: true},
+        {id: 'level', label: '等级', filter: true},
+        {id: 'subtype', label: '项目类型', filter: true},
+        {id: 'departmentName', label: '单位', filter: true},
+        {id: 'dateStart', label: '立项时间', order: true},
+        {id: 'middleYear', label: '中期', order: true},
+        {id: 'knotYear', label: '结题', order: true},
+        {id: 'status', label: '建设情况', order: true},
+    ];
+
     constructor(
         private service: FormService,
         private route: ActivatedRoute,

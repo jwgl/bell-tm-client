@@ -18,6 +18,19 @@ export class ProjectListComponent {
     list: any;
     reportType: number;
     q: string;
+    ths = [
+        {id: 'name', label: '项目名称', order: true},
+        {id: 'code', label: '项目编号', order: true},
+        {id: 'level', label: '等级', filter: true},
+        {id: 'subtype', label: '项目类型', filter: true},
+        {id: 'principalName', label: '负责人', order: true},
+        {id: 'dateStart', label: '立项时间', order: true},
+        {id: 'middleYear', label: '中期', order: true},
+        {id: 'knotYear', label: '结题', order: true},
+        {id: 'hasMid', label: '已中检', order: true},
+        {id: 'delayTimes', label: '延期', order: true},
+        {id: 'status', label: '建设情况', order: true},
+    ];
 
     constructor(
         private service: ProjectService,
