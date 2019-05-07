@@ -4,28 +4,15 @@
         <button class="btn btn-secondary ml-2" (click)="addForCheck()">加入检查</button>
     </div>
 </div>
-<table class="table table-expand">
-    <thead>
-        <tr>
-            <th><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
-            <th>序号</th>
-            <th>项目名称</th>
-            <th>项目编号</th>
-            <th>等级</th>
-            <th>项目类型</th>
-            <th>单位</th>
-            <th>立项时间</th>
-            <th>中期</th>
-            <th>结题</th>
-        </tr>
-    </thead>
-    <tbody>
-        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+
+<tm-grid [theads]="ths" [form]="list" [checkAble]="true" (checkedList)="onSelectProject($event)">
+    <ng-template #bodyTpl let-list="list">
+        <ng-container *ngFor="let item of list; let i = index">
             <tr>
                 <td>
-                    <checkbox-selector [data]="item"></checkbox-selector>
+                    <input type="checkbox" [(ngModel)]="item.checked">
                 </td>
-                <td>{{i + 1}}</td>
+                <td> {{i + 1}} </td>
                 <td class="expand">{{item.name}}</td>
                 <td>{{item.code}}</td>
                 <td>{{item.level | level : 'text'}}</td>
@@ -35,6 +22,6 @@
                 <td>{{item.middleYear}}</td>
                 <td>{{item.knotYear}}</td>
             </tr>
-        </ng-template>
-    </tbody>
-</table>
+        </ng-container>
+    </ng-template>
+</tm-grid>

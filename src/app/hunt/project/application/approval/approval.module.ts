@@ -8,7 +8,6 @@ import { Dialog } from 'core/dialogs';
 import { WorkflowModule } from 'core/workflow';
 
 import { PipesModule } from '../../../settings/shared/common-pipes';
-
 import { ProjectFormViewerModule } from '../form/shared/form-viewer.module';
 import { ApplicationApprovalRoutingModule } from './approval.routing';
 

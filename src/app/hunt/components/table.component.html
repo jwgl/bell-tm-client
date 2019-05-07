@@ -1,6 +1,7 @@
 <table class="table table-expand">
     <thead>
         <tr>
+            <th *ngIf="checkAble"><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
             <th>序号</th>
             <ng-container *ngFor="let th of theads">
                 <th (click)="orderBy(th)" *ngIf="!th.filter">{{th.label}}<fa-icon
@@ -12,6 +13,7 @@
                             *ngIf="hasFilter(th.id)" (click)="clearFilter(th.id)"></fa-icon>
                     </div>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" (click)="selectAll(th.id)">全选</a>
                         <a *ngFor="let item of baseList | uniqueBy: th.id | filterBy: filterBySelected(th.id, true)"
                             class="dropdown-item" (click)="select(th.id, item)">{{item}}<span
                                 *ngIf="isSelected(th.id, item)">✔</span></a>
