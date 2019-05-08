@@ -8,6 +8,7 @@ import { Dialog } from 'core/dialogs';
 import { WorkflowModule } from 'core/workflow';
 
 import { PipesModule } from '../../../settings/shared/common-pipes';
+import { TmGridModule } from '../../../components/table.module';
 import { ProjectFormViewerModule } from '../form/shared/form-viewer.module';
 import { ApplicationApprovalRoutingModule } from './approval.routing';
 
@@ -42,6 +43,7 @@ library.add(faLock, faLockOpen, faUser);
         PipesModule,
         TaskListModule,
         ApplicationAdministrationModule,
+        TmGridModule,
     ],
     declarations: [
         ApplicationApprovalListComponent,

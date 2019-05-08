@@ -15,6 +15,9 @@ export class Review {
     departmentOpinion: string;
     expertReview: any;
     conclusion: string;
+    opinionOfUniversity: string;
+    opinionOfProvince: string;
+    conclusionOfUniversity: string;
 
     constructor(dto: any) {
         Object.assign(this, dto);

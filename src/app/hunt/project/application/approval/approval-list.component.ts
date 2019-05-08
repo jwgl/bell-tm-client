@@ -9,6 +9,7 @@ import { ApprovalService } from './approval.service';
 const dateLabels: { [key: string]: string } = {
     todo: '申请时间',
     done: '审批时间',
+    expr: '审批时间',
     undefined: '申请时间',
 };
 
@@ -21,6 +22,17 @@ export class ApplicationApprovalListComponent {
     list: any[];
     type: string;
 
+    ths = [
+        { id: 'name', label: '项目名称', order: true },
+        { id: 'principalName', label: '负责人', order: true },
+        { id: 'phone', label: '电话', order: true },
+        { id: 'level', label: '等级', filter: true },
+        { id: 'subtype', label: '项目类型', filter: true },
+        { id: 'date', label: '申请时间', order: true },
+        { id: 'status', label: '状态', order: true },
+        { id: 'delayTimes', label: '结论', order: true },
+    ];
+
     constructor(
         private service: ApprovalService,
         private route: ActivatedRoute,
@@ -32,6 +44,8 @@ export class ApplicationApprovalListComponent {
     loadData() {
         this.route.params.subscribe(params => {
             this.type = params['type'];
+            const dateTh = this.ths.find(th => th.id === 'date');
+            dateTh.label = this.dateLabel;
             this.service.loadList({
                 taskId: params['taskId'],
                 type: params['type'] ? params['type'] : null,
@@ -46,7 +60,7 @@ export class ApplicationApprovalListComponent {
 
     lockAll(checked: boolean) {
         const idList = this.list.map(s => s.id);
-        this.service.batchUpdate({ ids: idList, checked: checked, type: 'lock' }).subscribe(() => {
+        this.service.batchUpdate({ ids: idList, checked, type: 'lock' }).subscribe(() => {
             this.list.forEach(item => item.locked = checked);
         });
     }
