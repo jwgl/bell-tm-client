@@ -58,6 +58,7 @@ export class TmGridComponent {
             this.filters.push({ id, items });
         }
         this.doFilter();
+        event.stopPropagation();
     }
 
     isSelected(id: string, item: string) {
