@@ -1,0 +1,23 @@
+<label class="btn-link">
+    <input type="file" class="d-none" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
+        [uploadInput]="uploadInput">上传Excel
+</label>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>项目编号</th>
+            <th>省（市）</th>
+            <th>学校</th>
+            <th>学院</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-fund [ngForOf]="funds">
+            <tr>
+                <td *ngFor="let item of fund">{{item}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>
+{{uploadUrl}}

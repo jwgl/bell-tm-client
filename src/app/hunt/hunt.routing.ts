@@ -43,6 +43,9 @@ const routes: Routes = [{
 }, {
     path: 'users/:userId/projects',
     loadChildren: './project/view/upper/viewer.module#ProjectModule',
+}, {
+    path: 'approvers/:userId/funds',
+    loadChildren: './fund/fund.module#FundModule',
 }];
 
 @NgModule({
