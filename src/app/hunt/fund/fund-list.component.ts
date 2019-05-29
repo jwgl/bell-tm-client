@@ -18,6 +18,7 @@ export class FundListComponent {
     humanizeBytes: (bytes: number) => string;
     maxUploads = 1;
     availableTypes = ['xls', 'xlsx'];
+    fundType: string;
 
     constructor(private service: FundService) {
         this.files = []; // local uploading files array
@@ -37,6 +38,7 @@ export class FundListComponent {
                     type: 'uploadAll',
                     url: this.uploadUrl,
                     method: 'POST',
+                    data:  { fundType: this.fundType },
                     headers: { 'X-XSRF-TOKEN': this.xsrfToken },
                 };
                 this.uploadInput.emit(event);
@@ -45,7 +47,7 @@ export class FundListComponent {
                 if (output.file) {
                     // 规定上传文件的格式
                     const type = output.file.name.slice(output.file.name.lastIndexOf('.') + 1).toLocaleLowerCase();
-                    if (this.availableTypes.some(item => item === type)) {
+                    if (!this.availableTypes.some(item => item === type)) {
                         alert(`请上传指定类型文件： ${this.availableTypes.join(' | ')}`);
                     } else {
                         this.files.push(output.file);
@@ -66,11 +68,20 @@ export class FundListComponent {
                 break;
             case 'done':
                 this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
+                const response = output.file.response;
+                this.funds = response.table;
+                if (response.error) {
+                    alert(response.message);
+                }
                 break;
         }
     }
 
     get uploadUrl(): string {
-        return `${this.service.api.list()}/upload`;
+        return `/zuul${this.service.api.list()}/upload`;
+    }
+
+    setFundType(type: string) {
+        this.fundType = type;
     }
 }

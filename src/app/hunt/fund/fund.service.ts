@@ -9,7 +9,7 @@ export class FundService extends RestEditService {
     constructor(
         http: Http,
         authService: AuthService,
-        @Inject('CHECKER_API_URL') apiUrl: string,
+        @Inject('FUND_API_URL') apiUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }

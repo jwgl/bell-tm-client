@@ -1,15 +1,30 @@
-<label class="btn-link">
+<label class="btn-link" (click)="setFundType('TRANSFER')">
     <input type="file" class="d-none" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
-        [uploadInput]="uploadInput">上传Excel
+        [uploadInput]="uploadInput">计划安排
 </label>
-<table class="table">
+<label class="btn-link ml-3" (click)="setFundType('ARRANGEMENT')">
+    <input type="file" class="d-none" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
+        [uploadInput]="uploadInput">经费划拨
+</label>
+<table class="table table-bordered table-sm" style="text-align:center;">
     <thead>
         <tr>
-            <th>序号</th>
-            <th>项目编号</th>
-            <th>省（市）</th>
-            <th>学校</th>
-            <th>学院</th>
+            <th rowspan="2">序号</th>
+            <th rowspan="2">项目编号</th>
+            <th colspan="4">省（市）</th>
+            <th colspan="4">学校</th>
+            <th colspan="4">学院</th>
+        </tr>
+        <tr>
+            <th>立项</th>
+            <th>中期</th>
+            <th>结项</th>
+            <th>立项</th>
+            <th>中期</th>
+            <th>结项</th>
+            <th>立项</th>
+            <th>中期</th>
+            <th>结项</th>
         </tr>
     </thead>
     <tbody>
@@ -20,4 +35,3 @@
         </ng-template>
     </tbody>
 </table>
-{{uploadUrl}}

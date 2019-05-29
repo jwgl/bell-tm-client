@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgxUploaderModule } from 'ngx-uploader';
 
 import { CommonDialogsModule } from 'core/common-dialogs';
 
@@ -11,6 +13,8 @@ import { FundListComponent } from './fund-list.component';
     imports: [
         CommonModule,
         CommonDialogsModule,
+        FormsModule,
+        NgxUploaderModule,
         FundRoutingModule,
     ],
     declarations: [
@@ -18,7 +22,7 @@ import { FundListComponent } from './fund-list.component';
     ],
     providers: [
         FundService,
-        { provide: 'FUND_API_URL', useValue: '/api/hunt/funds' },
+        { provide: 'FUND_API_URL', useValue: '/api/hunt/approvers/${userId}/funds' },
     ],
 })
 export class FundModule {}
