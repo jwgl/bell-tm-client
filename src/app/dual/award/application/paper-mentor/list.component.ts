@@ -20,9 +20,9 @@ export class PaperMentorListComponent {
     userId: string;
 
     constructor(private route: ActivatedRoute,
-        private router: Router,
-        private service: PaperMentorService,
-        private dialog: Dialog) {
+                private router: Router,
+                private service: PaperMentorService,
+                private dialog: Dialog) {
         this.userId = this.route.snapshot.params['userId'];
 
         route.data.subscribe((data: { list: ReviewList }) => {

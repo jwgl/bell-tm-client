@@ -24,6 +24,6 @@ export class PaperMentorService extends RestShowService {
     }
 
     getMentors(): Observable<any> {
-        return this.http.get(`${this.api.item(0)}/tousers`);
+        return this.http.get(`${this.api.item(0)}/mentorsExcept`);
     }
 }

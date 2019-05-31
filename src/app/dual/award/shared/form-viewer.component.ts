@@ -13,4 +13,8 @@ export class AwardFormViewerComponent {
     expireClass(date: string): string {
         return dayjs().isAfter(dayjs(date).add(1, 'day')) ? 'badge badge-danger' : 'badge';
     }
+
+    imgSrc(filename: string): string {
+        return `/api/dual/picture?fileName=${filename ? filename : ''}`;
+    }
 }
