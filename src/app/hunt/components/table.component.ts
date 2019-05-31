@@ -1,5 +1,4 @@
-import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
-import { filter } from 'rxjs/operators';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 import * as _ from 'lodash';
 
@@ -23,6 +22,10 @@ export class TmGridComponent {
     direction = 1;
     orderKey: string;
     filters = [];
+    @Input()
+    checkAble: boolean;
+    @Output()
+    checkedList = new EventEmitter<any>();
 
     @Input() set form(value: any[]) {
         this.baseList = value;
@@ -54,9 +57,8 @@ export class TmGridComponent {
             items.push(item);
             this.filters.push({ id, items });
         }
-        this.list = this.filters.reduce((list: any[], f) =>
-            _.intersection(list,
-                this.baseList.filter(b => f.items.some((i: string) => b[f.id] === i))), this.baseList);
+        this.doFilter();
+        event.stopPropagation();
     }
 
     isSelected(id: string, item: string) {
@@ -85,8 +87,28 @@ export class TmGridComponent {
 
     clearFilter(id: string) {
         this.filters = this.filters.filter(f => f.id !== id);
+        this.doFilter();
+    }
+
+    checkAll(checked: boolean) {
+        this.list.forEach(checkbox => checkbox.checked = checked);
+    }
+
+    selectAll(id: string) {
+        const col = this.filters.find(f => f.id === id);
+        if (col) {
+            this.filters.splice(this.filters.indexOf(col), 1);
+        }
+        const items = _.chain(this.baseList).map(data => data[id]).uniq().value();
+        this.filters.push({ id, items });
+        this.doFilter();
+    }
+
+    doFilter() {
         this.list = this.filters.reduce((list: any[], f) =>
-            _.intersection(list,
-                this.baseList.filter(b => f.items.some((i: string) => b[f.id] === i))), this.baseList);
+        _.intersection(list,
+            this.baseList.filter(b => f.items.some((i: string) => b[f.id] === i))), this.baseList);
+        this.list.sort((a, b) => String(a[this.orderKey]).localeCompare(String(b[this.orderKey])));
+        this.checkedList.emit(this.list);
     }
 }

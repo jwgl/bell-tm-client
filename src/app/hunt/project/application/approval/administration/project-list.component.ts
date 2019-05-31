@@ -24,6 +24,17 @@ export class ProjectListComponent {
         { label: '结题', type: 4, count: 0 },
     ];
 
+    ths = [
+        {id: 'name', label: '项目名称', order: true},
+        {id: 'code', label: '项目编号', order: true},
+        {id: 'level', label: '等级', filter: true},
+        {id: 'subtype', label: '项目类型', filter: true},
+        {id: 'departmentName', label: '单位', filter: true},
+        {id: 'principalName', label: '负责人', order: true},
+        {id: 'status', label: '状态', order: true},
+        {id: 'conclusion', label: '结论', order: true},
+    ];
+
     constructor(
         private service: AdministrationService,
         private route: ActivatedRoute,
@@ -37,7 +48,7 @@ export class ProjectListComponent {
     }
 
     get cols(): number {
-        return this.existExpertReview ? 12 : 9;
+        return this.existExpertReview ? 13 : 10;
     }
 
     loadData() {
@@ -47,6 +58,15 @@ export class ProjectListComponent {
             this.list = dto.list ? dto.list.map(r => new Review(r)) : null;
             this.isCheckTime = dto.isCheckTime;
             this.existExpertReview = dto.existExpertReview;
+            if (this.existExpertReview) {
+                this.ths = this.ths.concat([
+                    {id: 'countOk', label: '同意', order: true},
+                    {id: 'countVeto', label: '不同意', order: true},
+                    {id: 'countWaiver', label: '弃权', order: true},
+                    {id: 'countNull', label: '未评', order: true},
+                    {id: 'average', label: '平均分', order: true},
+                ]);
+            }
             const counts = dto.counts;
             this.options.forEach(item => {
                 const count = counts.find(c => c.reportType === item.type);
