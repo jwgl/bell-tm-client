@@ -10,7 +10,7 @@ import { Http, ApiUrl } from 'core/rest';
     templateUrl: 'form-overlay.component.html',
 })
 export class ReissueFormOverlayComponent {
-    @ViewChild('viewerTpl')
+    @ViewChild('viewerTpl', { static: true })
     viewerTemplate: TemplateRef<any>;
 
     reissueApi: ApiUrl;

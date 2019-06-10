@@ -16,7 +16,7 @@ export class ResponseItemEditorComponent implements AfterViewInit {
     @Input()
     disabled: boolean;
 
-    @ViewChild('rangeElement')
+    @ViewChild('rangeElement', { static: false })
     rangeElement: ElementRef;
 
     constructor() { }

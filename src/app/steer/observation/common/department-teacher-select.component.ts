@@ -11,8 +11,8 @@ import { typeahead } from 'core/utils/typeahead';
     templateUrl: 'department-teacher-select.component.html',
 })
 export class DepartmentTeacherSelectComponent implements AfterViewInit {
-    @ViewChild('search') input: ElementRef;
-    @ViewChild('dropdown') dropdown: ElementRef;
+    @ViewChild('search', { static: true }) input: ElementRef;
+    @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
     @Output() selectTeacher: EventEmitter<any> = new EventEmitter<any>();
 
     teachers: any[];

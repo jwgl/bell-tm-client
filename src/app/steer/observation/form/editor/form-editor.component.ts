@@ -20,8 +20,8 @@ import { AuthService } from 'core/auth';
     templateUrl: 'form-editor.component.html',
 })
 export class ObservationFormEditorComponent {
-    @ViewChild('evaluationText') input: ElementRef;
-    @ViewChild('suggest') suggest: ElementRef;
+    @ViewChild('evaluationText', { static: false }) input: ElementRef;
+    @ViewChild('suggest', { static: false }) suggest: ElementRef;
 
     editMode: EditMode;
     form: ObservationForm;

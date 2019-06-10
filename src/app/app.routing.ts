@@ -10,7 +10,7 @@ const routes: Routes = [{
     component: LoginComponent,
 }, {
     path: '',
-    loadChildren: './workbench/workbench.module#WorkbenchModule',
+    loadChildren: () => import('./workbench/workbench.module').then(m => m.WorkbenchModule),
     canLoad: [AuthGuard],
 }];
 

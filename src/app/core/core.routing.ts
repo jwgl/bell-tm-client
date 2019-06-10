@@ -3,16 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
     path: 'users/:userId/profile',
-    loadChildren: './user/profile/user-profile.module#UserProfileModule',
+    loadChildren: () => import('./user/profile/user-profile.module').then(m => m.UserProfileModule),
 }, {
     path: 'users/:userId/password',
-    loadChildren: './user/password/user-password.module#UserPasswordModule',
+    loadChildren: () => import('./user/password/user-password.module').then(m => m.UserPasswordModule),
 }, {
     path: 'students/:userId/schedules',
-    loadChildren: './user/student-timetable/student-timetable.module#StudentTimetableModule',
+    loadChildren: () => import('./user/student-timetable/student-timetable.module').then(m => m.StudentTimetableModule),
 }, {
     path: 'users/:userId/works',
-    loadChildren: './user/todo/todo.module#TodoModule',
+    loadChildren: () => import('./user/todo/todo.module').then(m => m.TodoModule),
 }];
 
 @NgModule({

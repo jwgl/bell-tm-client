@@ -5,7 +5,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
     template: '<input type="checkbox" #checkbox>',
 })
 export class CheckboxSelectorComponent {
-    @ViewChild('checkbox')
+    @ViewChild('checkbox', { static: true })
     checkbox: ElementRef;
 
     @Input()

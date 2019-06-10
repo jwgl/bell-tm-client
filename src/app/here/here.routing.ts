@@ -3,43 +3,43 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
     path: 'teachers/:userId/rollcalls',
-    loadChildren: './rollcall/form/rollcall-form.module#RollcallFormModule',
+    loadChildren: () => import('./rollcall/form/rollcall-form.module').then(m => m.RollcallFormModule),
 }, {
     path: 'students/:userId/leaves',
-    loadChildren: './leave/form/leave-form.module#LeaveFormModule',
+    loadChildren: () => import('./leave/form/leave-form.module').then(m => m.LeaveFormModule),
 }, {
     path: 'approvers/:userId/leaves',
-    loadChildren: './leave/approval/leave-approval.module#LeaveApprovalModule',
+    loadChildren: () => import('./leave/approval/leave-approval.module').then(m => m.LeaveApprovalModule),
 }, {
     path: 'leaves',
-    loadChildren: './leave/view/leave-view.module#LeaveViewModule',
+    loadChildren: () => import('./leave/view/leave-view.module').then(m => m.LeaveViewModule),
 }, {
     path: 'students/:userId/freeListens',
-    loadChildren: './free-listen/form/free-listen-form.module#FreeListenFormModule',
+    loadChildren: () => import('./free-listen/form/free-listen-form.module').then(m => m.FreeListenFormModule),
 }, {
     path: 'teachers/:userId/freeListens',
-    loadChildren: './free-listen/check/free-listen-check.module#FreeListenCheckModule',
+    loadChildren: () => import('./free-listen/check/free-listen-check.module').then(m => m.FreeListenCheckModule),
 }, {
     path: 'approvers/:userId/freeListens',
-    loadChildren: './free-listen/approval/free-listen-approval.module#FreeListenApprovalModule',
+    loadChildren: () => import('./free-listen/approval/free-listen-approval.module').then(m => m.FreeListenApprovalModule),
 }, {
     path: 'freeListens',
-    loadChildren: './free-listen/view/free-listen-view.module#FreeListenViewModule',
+    loadChildren: () => import('./free-listen/view/free-listen-view.module').then(m => m.FreeListenViewModule),
 }, {
     path: 'teachers/:userId/courseClasses',
-    loadChildren: './attendance/course-class/teacher-course-class-attendance.module#TeacherCourseClassAttendanceModule',
+    loadChildren: () => import('./attendance/course-class/teacher-course-class-attendance.module').then(m => m.TeacherCourseClassAttendanceModule),
 }, {
     path: 'departments/:departmentId/courseClasses',
-    loadChildren: './attendance/course-class/department-course-class-attendance.module#DepartmentCourseClassAttendanceModule',
+    loadChildren: () => import('./attendance/course-class/department-course-class-attendance.module').then(m => m.DepartmentCourseClassAttendanceModule),
 }, {
     path: 'teachers/:userId/adminClasses',
-    loadChildren: './attendance/admin-class/teacher-admin-class-attendance.module#TeacherAdminClassAttendanceModule',
+    loadChildren: () => import('./attendance/admin-class/teacher-admin-class-attendance.module').then(m => m.TeacherAdminClassAttendanceModule),
 }, {
     path: 'departments/:departmentId/adminClasses',
-    loadChildren: './attendance/admin-class/department-admin-class-attendance.module#DepartmentAdminClassAttendanceModule',
+    loadChildren: () => import('./attendance/admin-class/department-admin-class-attendance.module').then(m => m.DepartmentAdminClassAttendanceModule),
 }, {
     path: 'students/:userId/attendances',
-    loadChildren: './attendance/student/student-attendance.module#StudentAttendanceModule',
+    loadChildren: () => import('./attendance/student/student-attendance.module').then(m => m.StudentAttendanceModule),
 }];
 
 @NgModule({

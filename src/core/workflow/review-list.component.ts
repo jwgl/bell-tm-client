@@ -9,10 +9,10 @@ import { ReviewList } from './review-list.model';
     templateUrl: 'review-list.component.html',
 })
 export class WorkflowReviewListComponent {
-    @ContentChild('theadTpl')
+    @ContentChild('theadTpl', { static: false })
     theadTemplate: TemplateRef<any>;
 
-    @ContentChild('tbodyTpl')
+    @ContentChild('tbodyTpl', { static: false })
     tbodyTemplate: TemplateRef<any>;
 
     @Input()

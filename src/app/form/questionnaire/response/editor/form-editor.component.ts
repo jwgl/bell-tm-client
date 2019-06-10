@@ -12,7 +12,7 @@ import './form-editor.model';
     templateUrl: 'form-editor.component.html',
 })
 export class ResponseFormEditorComponent implements AfterViewChecked {
-    @ViewChild('bottomToolbar') bottomToolbar: ElementRef;
+    @ViewChild('bottomToolbar', { static: false }) bottomToolbar: ElementRef;
 
     form: ResponseForm;
     saving = false;
