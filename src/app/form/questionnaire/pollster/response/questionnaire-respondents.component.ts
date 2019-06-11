@@ -15,7 +15,7 @@ export class QuestionnaireRespondentsComponent {
     respondents: any[];
     showRespondents = false;
 
-    @ViewChild('respondentTable')
+    @ViewChild('respondentTable', { static: false })
     respondentTable: ElementRef;
 
     constructor(private service: QuestionnaireFormService, ) { }

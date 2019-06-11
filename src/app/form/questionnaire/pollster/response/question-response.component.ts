@@ -17,7 +17,7 @@ export class QuestionResponseComponent {
     @Output()
     viewOpenResponses = new EventEmitter<Question>();
 
-    @ViewChild('openResponseTable')
+    @ViewChild('openResponseTable', { static: false })
     openResponseTable: ElementRef;
 
     showTitle: boolean;

@@ -11,7 +11,7 @@ import { BaseDialog } from './base-dialog';
     templateUrl: 'teacher-select.dialog.html',
 })
 export class TeacherSelectDialog extends BaseDialog implements AfterViewInit {
-    @ViewChild('search')
+    @ViewChild('search', { static: true })
     input: ElementRef;
 
     title: string;

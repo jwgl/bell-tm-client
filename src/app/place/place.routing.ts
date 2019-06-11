@@ -3,31 +3,31 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
     path: 'users/:userId/bookings',
-    loadChildren: './booking/form/booking-form.module#BookingFormModule',
+    loadChildren: () => import('./booking/form/booking-form.module').then(m => m.BookingFormModule),
 }, {
     path: 'checkers/:userId/bookings',
-    loadChildren: './booking/check/booking-check.module#BookingCheckModule',
+    loadChildren: () => import('./booking/check/booking-check.module').then(m => m.BookingCheckModule),
 }, {
     path: 'approvers/:userId/bookings',
-    loadChildren: './booking/approval/booking-approval.module#BookingApprovalModule',
+    loadChildren: () => import('./booking/approval/booking-approval.module').then(m => m.BookingApprovalModule),
 }, {
     path: 'bookingReports',
-    loadChildren: './booking/report/booking-report.module#BookingReportModule',
+    loadChildren: () => import('./booking/report/booking-report.module').then(m => m.BookingReportModule),
 }, {
     path: 'keepers/:userId/bookings',
-    loadChildren: './booking/keep/booking-keep.module#BookingKeepModule',
+    loadChildren: () => import('./booking/keep/booking-keep.module').then(m => m.BookingKeepModule),
 }, {
     path: 'checkers/:userId/misconducts',
-    loadChildren: './misconduct/check/misconduct-check.module#MisconductCheckModule',
+    loadChildren: () => import('./misconduct/check/misconduct-check.module').then(m => m.MisconductCheckModule),
 }, {
     path: 'approvers/:userId/misconducts',
-    loadChildren: './misconduct/approval/misconduct-approval.module#MisconductApprovalModule',
+    loadChildren: () => import('./misconduct/approval/misconduct-approval.module').then(m => m.MisconductApprovalModule),
 }, {
     path: 'settings/bookingAuths',
-    loadChildren: './settings/booking-auth/booking-auth.module#BookingAuthModule',
+    loadChildren: () => import('./settings/booking-auth/booking-auth.module').then(m => m.BookingAuthModule),
 }, {
     path: 'usages',
-    loadChildren: './usages/place-usage.module#PlaceUsageModule',
+    loadChildren: () => import('./usages/place-usage.module').then(m => m.PlaceUsageModule),
 }];
 
 @NgModule({

@@ -10,9 +10,9 @@ import { Timetable } from './schedule-timetable.model';
 export class ScheduleTimetableComponent {
     @Input() timetable: Timetable;
 
-    @ContentChild('timeslotTpl') timeslotTemplate: TemplateRef<any>;
-    @ContentChild('dayOfWeekTpl') dayOfWeekTemplate: TemplateRef<any>;
-    @ContentChild('weekTpl') weekTemplate: TemplateRef<any>;
+    @ContentChild('timeslotTpl', { static: false }) timeslotTemplate: TemplateRef<any>;
+    @ContentChild('dayOfWeekTpl', { static: false }) dayOfWeekTemplate: TemplateRef<any>;
+    @ContentChild('weekTpl', { static: false }) weekTemplate: TemplateRef<any>;
 
     @Input()
     get week(): number {

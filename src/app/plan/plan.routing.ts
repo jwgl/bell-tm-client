@@ -3,40 +3,40 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
     path: 'users/:userId/schemes',
-    loadChildren: './scheme/form/scheme-form.module#SchemeFormModule',
+    loadChildren: () => import('./scheme/form/scheme-form.module').then(m => m.SchemeFormModule),
 }, {
     path: 'checkers/:userId/schemes',
-    loadChildren: './scheme/check/scheme-check.module#SchemeCheckModule',
+    loadChildren: () => import('./scheme/check/scheme-check.module').then(m => m.SchemeCheckModule),
 }, {
     path: 'approvers/:userId/schemes',
-    loadChildren: './scheme/approval/scheme-approval.module#SchemeApprovalModule',
+    loadChildren: () => import('./scheme/approval/scheme-approval.module').then(m => m.SchemeApprovalModule),
 }, {
     path: 'departments/:departmentId/schemes',
-    loadChildren: './scheme/department/scheme-department.module#SchemeDepartmentModule',
+    loadChildren: () => import('./scheme/department/scheme-department.module').then(m => m.SchemeDepartmentModule),
 }, {
     path: 'admin/schemes',
-    loadChildren: './scheme/admin/scheme-admin.module#SchemeAdminModule',
+    loadChildren: () => import('./scheme/admin/scheme-admin.module').then(m => m.SchemeAdminModule),
 }, {
     path: 'schemes',
-    loadChildren: './scheme/public/scheme-public.module#SchemePublicModule',
+    loadChildren: () => import('./scheme/public/scheme-public.module').then(m => m.SchemePublicModule),
 }, {
     path: 'users/:userId/visions',
-    loadChildren: './vision/form/vision-form.module#VisionFormModule',
+    loadChildren: () => import('./vision/form/vision-form.module').then(m => m.VisionFormModule),
 }, {
     path: 'checkers/:userId/visions',
-    loadChildren: './vision/check/vision-check.module#VisionCheckModule',
+    loadChildren: () => import('./vision/check/vision-check.module').then(m => m.VisionCheckModule),
 }, {
     path: 'approvers/:userId/visions',
-    loadChildren: './vision/approval/vision-approval.module#VisionApprovalModule',
+    loadChildren: () => import('./vision/approval/vision-approval.module').then(m => m.VisionApprovalModule),
 }, {
     path: 'visions',
-    loadChildren: './vision/public/vision-public.module#VisionPublicModule',
+    loadChildren: () => import('./vision/public/vision-public.module').then(m => m.VisionPublicModule),
 }, {
     path: 'settings/subjects',
-    loadChildren: './settings/subject/subject-director.module#SubjectDirectorModule',
+    loadChildren: () => import('./settings/subject/subject-director.module').then(m => m.SubjectDirectorModule),
 }, {
     path: 'settings/programs',
-    loadChildren: './settings/program/program-settings.module#ProgramSettingsModule',
+    loadChildren: () => import('./settings/program/program-settings.module').then(m => m.ProgramSettingsModule),
 }];
 
 @NgModule({

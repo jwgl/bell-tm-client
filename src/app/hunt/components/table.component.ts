@@ -18,7 +18,7 @@ export class TmGridComponent {
     theads: Thead[];
     baseList: any[];
     list: any[];
-    @ContentChild('bodyTpl') bodyTemplate: TemplateRef<any>;
+    @ContentChild('bodyTpl', { static: false }) bodyTemplate: TemplateRef<any>;
     direction = 1;
     orderKey: string;
     filters = [];
@@ -106,8 +106,8 @@ export class TmGridComponent {
 
     doFilter() {
         this.list = this.filters.reduce((list: any[], f) =>
-        _.intersection(list,
-            this.baseList.filter(b => f.items.some((i: string) => b[f.id] === i))), this.baseList);
+            _.intersection(list,
+                this.baseList.filter(b => f.items.some((i: string) => b[f.id] === i))), this.baseList);
         this.list.sort((a, b) => String(a[this.orderKey]).localeCompare(String(b[this.orderKey])));
         this.checkedList.emit(this.list);
     }

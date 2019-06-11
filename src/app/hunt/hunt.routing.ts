@@ -3,46 +3,46 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
     path: 'settings/types',
-    loadChildren: './settings/type/type.module#HuntTypeModule',
+    loadChildren: () => import('./settings/type/type.module').then(m => m.HuntTypeModule),
 }, {
     path: 'settings/tasks',
-    loadChildren: './settings/task/task.module#TaskFormModule',
+    loadChildren: () => import('./settings/task/task.module').then(m => m.TaskFormModule),
 }, {
     path: 'settings/experts',
-    loadChildren: './settings/expert/form/expert.module#ExpertFormModule',
+    loadChildren: () => import('./settings/expert/form/expert.module').then(m => m.ExpertFormModule),
 }, {
     path: 'settings/checkers',
-    loadChildren: './settings/checker/form/checker.module#CheckerFormModule',
+    loadChildren: () => import('./settings/checker/form/checker.module').then(m => m.CheckerFormModule),
 }, {
     path: 'teachers/:userId/tasks',
-    loadChildren: './project/application/form/form.module#ProjectModule',
+    loadChildren: () => import('./project/application/form/form.module').then(m => m.ProjectModule),
 }, {
     path: 'checkers/:userId/tasks',
-    loadChildren: './project/application/check/check.module#CheckModule',
+    loadChildren: () => import('./project/application/check/check.module').then(m => m.CheckModule),
 }, {
     path: 'approvers/:userId/tasks',
-    loadChildren: './project/application/approval/approval.module#ApprovalModule',
+    loadChildren: () => import('./project/application/approval/approval.module').then(m => m.ApprovalModule),
 }, {
     path: 'experts/:userId/reviews',
-    loadChildren: './project/application/review/review.module#ExpertReviewModule',
+    loadChildren: () => import('./project/application/review/review.module').then(m => m.ExpertReviewModule),
 }, {
     path: 'teachers/:userId/info-changes',
-    loadChildren: './project/info-change/form/form.module#InfoChageModule',
+    loadChildren: () => import('./project/info-change/form/form.module').then(m => m.InfoChageModule),
 }, {
     path: 'checkers/:userId/info-changes',
-    loadChildren: './project/info-change/check/info-change-check.module#ChangeCheckModule',
+    loadChildren: () => import('./project/info-change/check/info-change-check.module').then(m => m.ChangeCheckModule),
 }, {
     path: 'approvers/:userId/info-changes',
-    loadChildren: './project/info-change/approval/info-change-approval.module#ChangeApprovalModule',
+    loadChildren: () => import('./project/info-change/approval/info-change-approval.module').then(m => m.ChangeApprovalModule),
 }, {
     path: 'checkers/:userId/projects',
-    loadChildren: './project/view/department/viewer.module#ProjectDepartmentModule',
+    loadChildren: () => import('./project/view/department/viewer.module').then(m => m.ProjectDepartmentModule),
 }, {
     path: 'directors/:userId/info-changes',
-    loadChildren: './project/info-change/review/info-change-review.module#ChangeReviewModule',
+    loadChildren: () => import('./project/info-change/review/info-change-review.module').then(m => m.ChangeReviewModule),
 }, {
     path: 'users/:userId/projects',
-    loadChildren: './project/view/upper/viewer.module#ProjectModule',
+    loadChildren: () => import('./project/view/upper/viewer.module').then(m => m.ProjectModule),
 }];
 
 @NgModule({

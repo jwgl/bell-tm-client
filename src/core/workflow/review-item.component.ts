@@ -8,10 +8,10 @@ import { ReviewOptions, RevokeOptions } from './workflow.service';
     templateUrl: 'review-item.component.html',
 })
 export class WorkflowReviewItemComponent implements OnInit {
-    @ContentChild('toolbarTpl')
+    @ContentChild('toolbarTpl', { static: false })
     toolbarTemplate: TemplateRef<any>;
 
-    @ContentChild('viewerTpl')
+    @ContentChild('viewerTpl', { static: false })
     viewerTemplate: TemplateRef<any>;
 
     @Input()

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     password: string;
     errorMessage: string;
 
-    @ViewChild('u') usernameRef: ElementRef;
+    @ViewChild('u', { static: true }) usernameRef: ElementRef;
 
     constructor(
         public router: Router,

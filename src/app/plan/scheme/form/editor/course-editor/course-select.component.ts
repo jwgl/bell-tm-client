@@ -16,8 +16,8 @@ import { SchemeFormService } from '../../scheme-form.service';
     templateUrl: 'course-select.component.html',
 })
 export class CourseSelectComponent implements AfterViewInit {
-    @ViewChild('search') input: ElementRef;
-    @ViewChild('dropdown') dropdown: ElementRef;
+    @ViewChild('search', { static: true }) input: ElementRef;
+    @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
 
     @Input() editMode: EditMode;
     @Input() courseId: string;

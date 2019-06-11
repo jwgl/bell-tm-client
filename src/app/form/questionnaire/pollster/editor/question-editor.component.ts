@@ -26,7 +26,7 @@ export class QuestionEditorComponent implements OnInit, AfterViewInit {
     @Output()
     cancel = new EventEmitter();
 
-    @ViewChild('titleElement')
+    @ViewChild('titleElement', { static: true })
     titleElementRef: ElementRef;
 
     ngOnInit() {

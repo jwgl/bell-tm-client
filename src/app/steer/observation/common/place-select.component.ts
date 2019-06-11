@@ -12,8 +12,8 @@ import { typeahead } from 'core/utils/typeahead';
     templateUrl: 'place-select.component.html',
 })
 export class PlaceSelectComponent implements AfterViewInit {
-    @ViewChild('search') input: ElementRef;
-    @ViewChild('dropdown') dropdown: ElementRef;
+    @ViewChild('search', { static: true }) input: ElementRef;
+    @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
     @Input() building: string;
     @Output() selectPlace: EventEmitter<any> = new EventEmitter<any>();
 

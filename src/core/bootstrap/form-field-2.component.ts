@@ -13,7 +13,7 @@ export class FormFieldLeftDirective implements AfterContentInit {
     @Input()
     labelCol = 2;
 
-    @ContentChild(FormControlDirective)
+    @ContentChild(FormControlDirective, { static: false })
     formControl: FormControlDirective;
 
     controlId: string;
@@ -44,7 +44,7 @@ export class FormFieldRightDirective implements AfterContentInit {
     @Input()
     labelCol = 2;
 
-    @ContentChild(FormControlDirective)
+    @ContentChild(FormControlDirective, { static: false })
     formControl: FormControlDirective;
 
     controlId: string;
@@ -83,9 +83,9 @@ export class FormFieldRightDirective implements AfterContentInit {
     },
 })
 export class FormField2Component {
-    @ContentChild(FormFieldLeftDirective)
+    @ContentChild(FormFieldLeftDirective, { static: false })
     left: FormFieldLeftDirective;
 
-    @ContentChild(FormFieldRightDirective)
+    @ContentChild(FormFieldRightDirective, { static: false })
     right: FormFieldRightDirective;
 }
