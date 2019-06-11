@@ -9,7 +9,6 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": true,
     "importHelpers": true,
     "target": "es2015",
     "typeRoots": [
