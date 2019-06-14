@@ -69,6 +69,9 @@ export class ProjectFormEditorComponent {
                 validation.push(`${value}为空`);
             }
         });
+        if (!this.form.memberList.some(m => m.value !== '')) {
+            validation.push('参与人为空！');
+        }
         if (this.form.content && this.form.content.length > 1500) {
             validation.push('主要内容不要超过1500字！');
         }

@@ -22,7 +22,7 @@ export class TaskFormEditorComponent {
     form: TaskForm;
     types = TypeList;
     bans = LevelList;
-    taskAttach = { prefix: 'task', label: '通知附件', types: ['zip', 'rar'] };
+    taskAttach = { prefix: 'task', label: '通知附件', types: ['zip', 'rar', 'pdf', 'doc', 'docx'] };
 
     constructor(
         private service: FormService,

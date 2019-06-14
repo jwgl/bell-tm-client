@@ -69,6 +69,9 @@ export const PropertyComment = {
     office: '职务',
     departmentId: '单位',
     originId: '项目来源',
+    phone: '电话',
+    content: '主要内容',
+    achievements: '预期成果',
 };
 
 export class ProjectForm {
