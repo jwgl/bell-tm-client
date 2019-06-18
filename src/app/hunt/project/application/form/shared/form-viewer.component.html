@@ -70,7 +70,7 @@
         <div class="form-group col-md-2">
             <div class="list-group">
                 <ng-container *ngFor="let item of listItems">
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between" [class.active]="item.reportType === reportType_"
+                    <a class="list-group-item list-group-item-action d-flex justify-content-between" [class.active]="item.reportType === reportType"
                         (click)="typeSelected(item.reportType)">
                         {{item.label}}
                     </a>
@@ -129,12 +129,16 @@
             <div class="form-group" *ngIf="vm.expertReview && vm.expertReview.length > 0">
                 <label class="control-label">专家意见</label>
                 <ul>
-                    <li *ngFor="let item of vm.expertReview">
+                    <li *ngFor="let item of expertDone">
                         <span class="text-info mr-2">{{item.teacherName}} {{item.teacherId}}：</span>
-                        <span [class]="conclusionClass(item.conclusion)">{{item.conclusion}}</span> {{item.dateReviewed
-                        | date:
-                        'yyyy-MM-dd'}}
+                        <span [class]="conclusionClass(item.conclusion)">{{item.conclusion}}</span>
+                        {{item.dateReviewed | date: 'yyyy-MM-dd'}}
                         <span class="ml-3">{{item.opinion}}</span>
+                    </li>
+                    <li *ngIf="expertTodo && expertTodo.length > 0">
+                        <ng-container *ngFor="let item of expertTodo">
+                            <span class="text-info mr-2">{{item.teacherName}} {{item.teacherId}}; </span>
+                        </ng-container>
                     </li>
                 </ul>
             </div>

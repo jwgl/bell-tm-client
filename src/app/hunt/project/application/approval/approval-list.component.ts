@@ -1,8 +1,7 @@
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Dialog } from 'core/dialogs';
-import { CheckboxSelectorComponent } from 'core/common-directives';
 
 import { TeamDialog } from './expert-team.dialog';
 import { ApprovalService } from './approval.service';
@@ -18,9 +17,9 @@ const dateLabels: { [key: string]: string } = {
     templateUrl: 'approval-list.component.html',
 })
 export class ApplicationApprovalListComponent {
-    @ViewChildren(CheckboxSelectorComponent) selectors: QueryList<CheckboxSelectorComponent>;
     list: any[];
     type: string;
+    projectsSelected: any[];
 
     ths = [
         { id: 'name', label: '项目名称', order: true },
@@ -50,18 +49,25 @@ export class ApplicationApprovalListComponent {
                 taskId: params['taskId'],
                 type: params['type'] ? params['type'] : null,
                 reportType: params['reportType'] ? params['reportType'] : null,
-            }).subscribe(dto => this.list = dto);
+            }).subscribe(dto => {
+                this.list = dto;
+                this.projectsSelected = this.list;
+            });
         });
     }
 
-    checkAll(checked: boolean) {
-        this.selectors.forEach(checkbox => checkbox.checked = checked);
+    onSelectProject(checkedList: any[]) {
+        this.projectsSelected = checkedList;
     }
 
     lockAll(checked: boolean) {
-        const idList = this.list.map(s => s.id);
+        const idList = this.projectsSelected.filter(d => d.checked).map(s => s.id);
         this.service.batchUpdate({ ids: idList, checked, type: 'lock' }).subscribe(() => {
-            this.list.forEach(item => item.locked = checked);
+            this.list.forEach(item => {
+                if (idList.some(id => item.id === id)) {
+                    item.locked = checked;
+                }
+            });
         });
     }
 
@@ -78,7 +84,7 @@ export class ApplicationApprovalListComponent {
     }
 
     setExpert() {
-        const idList = this.list.map(s => s.id);
+        const idList = this.projectsSelected.filter(d => d.checked).map(s => s.id);
         this.dialog.open(TeamDialog).then(result => {
             this.service.batchUpdate({ ids: idList, teamNum: result, type: 'team' }).subscribe(() => {
                 this.loadData();

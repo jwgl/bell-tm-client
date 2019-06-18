@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+import * as _ from 'lodash';
+
 import { FileTypes, ContentLabels } from '../../shared/constants';
 
 const TitleType = ['项目申报', '年度检查验收', '中期检查验收', '结项检查验收'];
@@ -22,11 +24,11 @@ export class FormViewerComponent {
     @Input() vm: any;
     @Input() isAdmin: boolean;
     // 临时记录当前选择的reportType，用于分别显示不同的阶段的评审详情
-    reportType_: number;
+    reportType: number;
 
     checkReportType() {
-        if (!this.reportType_) {
-            this.reportType_ = this.vm.reportType;
+        if (!this.reportType) {
+            this.reportType = this.vm.reportType;
         }
     }
     conclusionClass(conclusion: string) {
@@ -35,7 +37,7 @@ export class FormViewerComponent {
 
     getLabel(prefix: string): string {
         this.checkReportType();
-        const fileTypes = FileTypes.find(f => f.reviewType === this.reportType_);
+        const fileTypes = FileTypes.find(f => f.reviewType === this.reportType);
         if (fileTypes) {
             const fileType = fileTypes.fileType;
             const item = fileType.find(i => i.prefix === prefix);
@@ -57,7 +59,7 @@ export class FormViewerComponent {
 
     get projectName(): string {
         this.checkReportType();
-        if (this.reportType_ === 1) {
+        if (this.reportType === 1) {
             return `${this.vm.name}-`;
         } else {
             return '';
@@ -66,7 +68,7 @@ export class FormViewerComponent {
 
     get projectCode(): string {
         this.checkReportType();
-        if (this.reportType_ !== 1) {
+        if (this.reportType !== 1) {
             return `${this.vm.code}-`;
         } else {
             return '';
@@ -83,24 +85,24 @@ export class FormViewerComponent {
 
     get contentLabel(): string {
         this.checkReportType();
-        return this.reportType_ ? ContentLabels.content[this.reportType_] : '';
+        return this.reportType ? ContentLabels.content[this.reportType] : '';
     }
 
     get furtherLabel(): string {
         this.checkReportType();
-        return this.reportType_ ? ContentLabels.further[this.reportType_] : '';
+        return this.reportType ? ContentLabels.further[this.reportType] : '';
     }
 
     get otherLabel(): string {
         this.checkReportType();
-        return this.reportType_ ? ContentLabels.other[this.reportType_] : '';
+        return this.reportType ? ContentLabels.other[this.reportType] : '';
     }
 
     get review(): any {
         this.checkReportType();
         const reviews = this.vm.relationReportTypes;
         if (reviews && reviews.length > 0) {
-            return reviews.find((r: any) => r.reportType === this.reportType_);
+            return reviews.find((r: any) => r.reportType === this.reportType);
         }
         return null;
     }
@@ -114,6 +116,14 @@ export class FormViewerComponent {
     }
 
     typeSelected(reportType: number) {
-        this.reportType_ = reportType;
+        this.reportType = reportType;
+    }
+
+    get expertDone(): any[] {
+        return _.filter(this.vm.expertReview, (item: any) => item.dateReviewed);
+    }
+
+    get expertTodo(): any[] {
+        return _.filter(this.vm.expertReview, (item: any) => item.dateReviewed === null);
     }
 }

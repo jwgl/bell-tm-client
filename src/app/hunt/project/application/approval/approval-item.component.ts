@@ -54,6 +54,12 @@ export class ApplicationApprovalItemComponent {
             const review = reviews.find((r: any) => r.reportType === this.form.reportType);
             if (review) {
                 this.conclusionForm = new ConclusionForm(review);
+                if (review.reportType === 1) {
+                    this.conclusionForm.code = this.form.code;
+                    this.conclusionForm.dateStarted = this.form.dateStarted;
+                    this.conclusionForm.middleYear = this.form.middleYear;
+                    this.conclusionForm.knotYear = this.form.knotYear;
+                }
             }
         }
     }
@@ -73,7 +79,7 @@ export class ApplicationApprovalItemComponent {
 
     removeExpert(id: number) {
         this.saving = true;
-        this.service.update(id, { removeExpert: true }).subscribe(() => {
+        this.service.update(id, { removeExperts: true }).subscribe(() => {
             this.service.loadApplicationItem(this.wi, this.id, this.type).subscribe((dto: any) => this.onItemLoaded(dto));
         }, error => {
             this.saving = false;

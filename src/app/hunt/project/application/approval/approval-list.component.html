@@ -7,7 +7,7 @@
         <button class="btn btn-secondary" (click)="setExpert()">设置专家</button>
     </div>
 </div>
-<tm-grid [theads]="ths" [form]="list" [checkAble]="true">
+<tm-grid [theads]="ths" [form]="list" [checkAble]="true" (checkedList)="onSelectProject($event)">
     <ng-template #bodyTpl let-list="list">
         <ng-container *ngFor="let item of list; let i = index">
             <tr>
