@@ -9,7 +9,6 @@ import { ReviewDialog } from './review.dialog';
 import { ExpertReview } from '../expert-review.model';
 
 @Component({
-    styleUrls: ['review-list.component.scss'],
     templateUrl: 'review-list.component.html',
 })
 export class ReviewListComponent {
@@ -19,10 +18,20 @@ export class ReviewListComponent {
     taskId: string;
     reviewType: string;
     type: string;
+    projectsSelected: any[];
 
     options = [
         { label: '未评审', type: 'todo', count: 0 },
         { label: '已评审', type: 'done', count: 0 },
+    ];
+    ths = [
+        { id: 'name', label: '项目名称', order: true },
+        { id: 'principalName', label: '负责人', order: true },
+        { id: 'departmentName', label: '学院', order: true },
+        { id: 'level', label: '等级', order: true },
+        { id: 'subtype', label: '项目类型', order: true },
+        { id: 'conclusion', label: '结论' },
+        { id: 'action', label: '' },
     ];
 
     constructor(
@@ -50,6 +59,7 @@ export class ReviewListComponent {
             this.counts = dto.counts;
             this.options[0].count = this.counts.todo;
             this.options[1].count = this.counts.done;
+            this.projectsSelected = this.list;
         });
     }
 
@@ -63,5 +73,16 @@ export class ReviewListComponent {
 
     submit(id: number) {
         this.service.submit(id).subscribe(() => this.loadData());
+    }
+
+    downloadUrl(): string {
+        if (this.projectsSelected && this.projectsSelected.length > 0) {
+            const idList = this.projectsSelected.filter(d => d.checked).map(s => s.id).join(';');
+            return `/api/hunt/attachments?role=EXPERT&idList=${idList}`;
+        }
+    }
+
+    onSelectProject(checkedList: any[]) {
+        this.projectsSelected = checkedList;
     }
 }

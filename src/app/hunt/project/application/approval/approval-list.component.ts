@@ -29,7 +29,7 @@ export class ApplicationApprovalListComponent {
         { id: 'subtype', label: '项目类型', filter: true },
         { id: 'date', label: '申请时间', order: true },
         { id: 'status', label: '状态', order: true },
-        { id: 'delayTimes', label: '结论', order: true },
+        { id: 'conclusionOfUniversity', label: '结论' },
     ];
 
     constructor(
