@@ -1,19 +1,15 @@
 <div class="form-group">
     <label class="btn-link" *ngIf="!fileName">
         <input type="file" class="d-none" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
-            [uploadInput]="uploadInput">{{fileType.label}}
+            [uploadInput]="uploadInput" multiple>{{fileType.label}}
     </label>
-    <div class="form-control" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
-        <ng-container *ngIf="fileName; else emptyTpl;">
-            <div *ngFor="let f of files; let i = index;">
-                <p>{{f.name}}</p>
-                <div class="progress" style="height: 4px;">
-                    <div class="progress-bar" role="progressbar" [style.width]="f?.progress?.data?.percentage + '%'"></div>
-                </div>
-            </div>
-        </ng-container>
-        <ng-template #emptyTpl>
-            <div style="line-height: 2rem; vertical-align: middle">拖放文件或点击标题上传文件，只支持{{fileType.types}}</div>
-        </ng-template>
-    </div>
+    <ng-container *ngIf="fileType.names.length > 0; else emptyTpl;">
+        <div *ngFor="let name of fileType.names; let i = index;" class="d-flex mb-1">
+            <span>{{name}}</span>
+            <button class="btn btn-danger btn-sm ml-auto" (click)="remove(name)">删除</button>
+        </div>
+    </ng-container>
+    <ng-template #emptyTpl>
+        <div style="line-height: 2rem; vertical-align: middle">点击标题上传文件，只支持{{fileType.types}}</div>
+    </ng-template>
 </div>

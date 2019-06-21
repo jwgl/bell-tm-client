@@ -85,6 +85,18 @@ export class ProjectItemComponent {
                     this.dialogs.error(result.validation);
                 } else {
                     this.saving = true;
+                    result.form.fileTypes.forEach((item: any) => {
+                        switch (item.prefix) {
+                            case 'main':
+                                result.form.mainInfoForm = item.names.length > 0 ? item.names[0] : null;
+                                break;
+                            case 'proof':
+                                result.form.proofFile = item.names;
+                                break;
+                            case 'summary':
+                                result.form.summaryReport = item.names.length > 0 ? item.names[0] : null;
+                        }
+                    });
                     this.service.update(this.vm.id, result.form).subscribe(() => {
                         this.loadData(this.vm.id);
                         this.saving = false;

@@ -13,6 +13,8 @@ export class ReviewDialog extends BaseDialog {
     conclusion: string;
     opinion: string;
     conclusions = ['同意', '不同意', '弃权'];
+    isCommit = false;
+    score: number;
 
     protected onOpening(): Observable<any> {
         this.vm = this.options.reviewInfo;
@@ -22,6 +24,18 @@ export class ReviewDialog extends BaseDialog {
     }
 
     protected onConfirmed(): any {
-        return {conclusion: this.conclusion, opinion: this.opinion};
+        if (this.conclusion === '弃权') {
+            this.score = 0;
+        }
+        return {conclusion: this.conclusion, opinion: this.opinion, score: this.score, isCommit: this.isCommit};
+    }
+
+    commit() {
+        this.isCommit = true;
+        this.ok();
+    }
+
+    get errors(): boolean {
+        return (this.score >= 60 && this.conclusion === '不同意') || (this.score < 60 && this.conclusion === '同意');
     }
 }
