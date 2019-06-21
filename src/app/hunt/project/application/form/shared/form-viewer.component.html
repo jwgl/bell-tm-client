@@ -101,8 +101,12 @@
                     <ul>
                         <li *ngIf="review.mainInfoForm">{{getLabel('main')}}-{{projectName}}{{vm.level | level:
                             'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(review.mainInfoForm)}}</li>
-                        <li *ngIf="review.proofFile">主要佐证材料-{{projectName}}{{vm.level | level:
-                            'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(review.proofFile)}}</li>
+                        <li *ngIf="review.proofFile && review.proofFile.length > 0">主要佐证材料
+                            <ul>
+                                <li *ngFor="let item of review.proofFile; let i=index;">{{i + 1}}_{{projectName}}{{vm.level | level:
+                                    'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(item)}}</li>
+                            </ul>
+                        </li>
                         <li *ngIf="review.summaryReport">总结报告-{{projectName}}{{vm.level | level:
                             'text'}}-{{projectCode}}{{vm.subtype}}-{{vm.principalName}}.{{getExt(review.summaryReport)}}</li>
                     </ul>

@@ -9,6 +9,18 @@ declare module '../shared/form.model' {
 }
 
 ProjectForm.prototype.toServerDto = function(this: ProjectForm): any {
+    this.fileTypes.forEach((item: any) => {
+        switch (item.prefix) {
+            case 'main':
+                this.mainInfoForm = item.names.length > 0 ? item.names[0] : null;
+                break;
+            case 'proof':
+                this.proofFile = item.names;
+                break;
+            case 'summary':
+                this.summaryReport = item.names.length > 0 ? item.names[0] : null;
+        }
+    });
     return {
         reviewTaskId: this.reviewTaskId,
         principalId: this.principalId,

@@ -30,7 +30,7 @@ export class ChangeItemComponent {
         return {
             id: this.vm.id,
             type: 'check',
-            what: this.vm.name,
+            what: this.vm.projectName,
         };
     }
 

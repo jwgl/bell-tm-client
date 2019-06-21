@@ -46,6 +46,7 @@ export class ChangeFormEditorComponent {
 
     loadData(dto: any) {
         this.form = new ChangeForm(dto.form);
+        this.form.tranFile(this.fileType);
         this.projects = dto.projects;
         if (dto.project) {
             this.project = new ProjectForm(dto.project);
@@ -144,7 +145,7 @@ export class ChangeFormEditorComponent {
         if (!this.form.reason) {
             error.push('请输入变更理由！');
         }
-        if (!this.form.mainInfoForm) {
+        if (!this.form.mainInfoForm && this.form.fileType.names.length === 0) {
             error.push('请先上传申报书');
         }
         return error;
@@ -192,17 +193,5 @@ export class ChangeFormEditorComponent {
 
     get uploadUrl(): string {
         return this.service.getUploadUrl();
-    }
-
-    onUploaded(fileNames: any) {
-        this.form.mainInfoForm = fileNames.name;
-    }
-
-    get hasUploaded(): boolean {
-        return !_.isEmpty(this.form.mainInfoForm);
-    }
-
-    remove() {
-        this.form.mainInfoForm = null;
     }
 }

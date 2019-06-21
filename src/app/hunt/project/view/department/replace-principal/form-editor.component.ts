@@ -57,6 +57,7 @@ export class ChangeFormEditorComponent {
 
     loadData(dto: any) {
         this.form = new ChangeForm(dto.form);
+        this.form.tranFile(this.fileType);
         this.project = new ProjectForm(dto.project);
     }
 

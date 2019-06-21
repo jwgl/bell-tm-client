@@ -1,36 +1,31 @@
-<modal-dialog modalTitle="验收填报">
+<modal-dialog modalTitle="验收填报" size="lg">
     <modal-body>
-        <form role="form">
-            <div class="form-group">
-                <label class="control-label">电话</label>
-                <input class="form-control" name="phone" type="text" [(ngModel)]="form.phone" placeholder="常用手机" />
+        <form role="form" class="row">
+            <div class="col-6" >
+                <div class="form-group">
+                    <label class="control-label">电话</label>
+                    <input class="form-control" name="phone" type="text" [(ngModel)]="form.phone" placeholder="常用手机" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{contentLabel}} <span class="text-info" *ngIf="form.content">字数（含空格）{{form.content.length}}</span></label>
+                    <textarea class="form-control" name="content" rows="6" [(ngModel)]="form.content" placeholder="请简要说明该项目的{{contentLabel}}。字数不超1500。"
+                        #suggest></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{furtherLabel}} <span class="text-info" *ngIf="form.achievements">字数（含空格）{{form.achievements.length}}</span></label>
+                    <textarea class="form-control" name="further" rows="4" [(ngModel)]="form.achievements" placeholder="{{furtherLabel}}。字数不超1500。"
+                        #suggest></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{otherLabel}} <span class="text-info" *ngIf="form.other">字数（含空格）{{form.other.length}}</span></label>
+                    <textarea class="form-control" name="other" rows="4" [(ngModel)]="form.other" placeholder="{{otherLabel}}。字数不超1500。"
+                        #suggest></textarea>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">{{contentLabel}} <span class="text-info" *ngIf="form.content">字数（含空格）{{form.content.length}}</span></label>
-                <textarea class="form-control" name="content" rows="6" [(ngModel)]="form.content" placeholder="请简要说明该项目的{{contentLabel}}。字数不超1500。"
-                    #suggest></textarea>
-            </div>
-            <div class="form-group">
-                <label class="control-label">{{furtherLabel}} <span class="text-info" *ngIf="form.achievements">字数（含空格）{{form.achievements.length}}</span></label>
-                <textarea class="form-control" name="further" rows="4" [(ngModel)]="form.achievements" placeholder="{{furtherLabel}}。字数不超1500。"
-                    #suggest></textarea>
-            </div>
-            <div class="form-group">
-                <label class="control-label">{{otherLabel}} <span class="text-info" *ngIf="form.other">字数（含空格）{{form.otherLabel.length}}</span></label>
-                <textarea class="form-control" name="other" rows="4" [(ngModel)]="form.other" placeholder="{{otherLabel}}。字数不超1500。"
-                    #suggest></textarea>
-            </div>
-            <div class="card">
+            <div class="card col-6">
                 <div class="card-body">
-                    <ng-container *ngFor="let item of fileTypes;">
-                        <div class="d-flex mb-2" *ngIf="hasUploaded(item); else emptyTpl;">
-                            <span class="file-type">{{item.label}}</span>
-                            <span class="ml-3 mr-3">{{fileName(item)}}</span>
-                            <button class="btn btn-danger btn-sm ml-auto" (click)="remove(item)">删除</button>
-                        </div>
-                        <ng-template #emptyTpl>
-                            <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" (uploaded)="onUploaded($event)"></tm-uploader-panel>
-                        </ng-template>
+                    <ng-container *ngFor="let item of form.fileTypes;">
+                        <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" [options]="uploadOptions(item)"></tm-uploader-panel>
                     </ng-container>
                 </div>
             </div>

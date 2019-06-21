@@ -22,7 +22,7 @@ export class TaskFormEditorComponent {
     form: TaskForm;
     types = TypeList;
     bans = LevelList;
-    taskAttach = { prefix: 'task', label: '通知附件', types: ['zip', 'rar', 'pdf', 'doc', 'docx'] };
+    taskAttach = { prefix: 'task', label: '通知附件', types: ['zip', 'rar', 'pdf', 'doc', 'docx'], names: [] };
 
     constructor(
         private service: FormService,
@@ -100,10 +100,6 @@ export class TaskFormEditorComponent {
 
     get ploaded(): boolean {
         return !_.isEmpty(this.form.attach);
-    }
-
-    onUploaded(fileNames: any) {
-        this.form.attach = fileNames.name;
     }
 
     get uploadUrl(): string {

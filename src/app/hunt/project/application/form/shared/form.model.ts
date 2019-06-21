@@ -112,7 +112,7 @@ export class ProjectForm {
     expertReview: any[];
     reportType: number;
     mainInfoForm: string;
-    proofFile: string;
+    proofFile: string[];
     summaryReport: string;
     locked: boolean;
     projectStatus: string;
@@ -121,53 +121,11 @@ export class ProjectForm {
     middleYear: number;
     knotYear: number;
     relationReportTypes: any;
+    fileTypes: any[];
 
     constructor(dto: any) {
-        this.id = dto.id;
-        this.principalName = dto.principalName;
+        Object.assign(this, dto);
         this.reviewTaskId = dto.taskId;
-        this.principalId = dto.principalId;
-        this.principalName = dto.principalName;
-        this.title = dto.title;
-        this.degree = dto.degree;
-        this.email = dto.email;
-        this.discipline = dto.discipline;
-        this.major = dto.major;
-        this.direction = dto.direction;
-        this.departmentId = dto.departmentId;
-        this.departmentName = dto.departmentName;
-        this.office = dto.office;
-        this.phone = dto.phone;
-        this.name = dto.name;
-        this.urls = dto.urls;
-        this.level = dto.level;
-        this.subtype = dto.subtype;
-        this.subtypeId = dto.subtypeId;
-        this.origin = dto.origin;
-        this.originId = dto.originId;
-        this.members = dto.members;
-        this.status = dto.status;
-        this.content = dto.content;
-        this.achievements = dto.achievements;
-        this.departmentConclusion = dto.departmentConclusion;
-        this.departmentOpinion = dto.departmentOpinion;
-        this.conclusionOfUniversity = dto.conclusionOfUniversity;
-        this.opinionOfUniversity = dto.opinionOfUniversity;
-        this.conclusionOfProvince = dto.conclusionOfProvince;
-        this.isValidDate = dto.isValidDate;
-        this.countExpert = dto.countExpert;
-        this.workflowInstanceId = dto.workflowInstanceId;
-        this.expertReview = dto.expertReview;
-        this.reportType = dto.reportType;
-        this.mainInfoForm = dto.mainInfoForm;
-        this.proofFile = dto.proofFile;
-        this.summaryReport = dto.summaryReport;
-        this.locked = dto.locked;
-        this.projectStatus = dto.projectStatus;
-        this.code = dto.code;
-        this.dateStarted = dto.dateStarted;
-        this.middleYear = dto.middleYear;
-        this.knotYear = dto.knotYear;
         this.memberList = [];
         for (let i = 0; i < 6; i++) {
             this.memberList.push({ value: '' });
@@ -181,5 +139,21 @@ export class ProjectForm {
             });
         }
         this.relationReportTypes = dto.relationReportTypes;
+    }
+
+    tranFile(fileType: any[]) {
+        this.fileTypes = fileType;
+        this.fileTypes.forEach((item: any) => {
+            switch (item.prefix) {
+                case 'main':
+                    item.names = this.mainInfoForm ? [this.mainInfoForm] : [];
+                    break;
+                case 'proof':
+                    item.names = this.proofFile ? this.proofFile : [];
+                    break;
+                case 'summary':
+                    item.names = this.summaryReport ? [this.summaryReport] : [];
+            }
+        });
     }
 }
