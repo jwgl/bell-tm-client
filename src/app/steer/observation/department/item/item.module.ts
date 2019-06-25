@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { CommonDirectivesModule } from 'core/common-directives';
 
+import { ObservationFormViewerModule } from '../../form/shared/form-viewer.module';
 import { PipesModule } from '../../shared/pipes/observation-pipes.module';
 
 import { DeanItemComponent } from './item.component';
@@ -16,6 +17,7 @@ import { DeanItemComponent } from './item.component';
         RouterModule,
         CommonDirectivesModule,
         PipesModule,
+        ObservationFormViewerModule,
     ],
     declarations: [
         DeanItemComponent,
@@ -24,4 +26,4 @@ import { DeanItemComponent } from './item.component';
         DeanItemComponent,
     ],
 })
-export class DeanObservationListModule { }
+export class DeanItemModule { }

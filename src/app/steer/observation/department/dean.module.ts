@@ -6,12 +6,11 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { PipesModule } from '../shared/pipes/observation-pipes.module';
-import { ObservationFormViewerModule } from '../form/shared/form-viewer.module';
 
 import { ObservationRoutingModule } from './dean-routing.module';
 import { ObservationFormService } from './dean.service';
-import { DeanItemComponent } from './item/item.component';
-import { ObservationFormListModule } from './list/form-list.module';
+import { DeanItemModule } from './item/item.module';
+import { DeanListModule } from './list/form-list.module';
 
 @NgModule({
     imports: [
@@ -21,11 +20,8 @@ import { ObservationFormListModule } from './list/form-list.module';
         CommonDirectivesModule,
         CommonDialogsModule,
         PipesModule,
-        ObservationFormListModule,
-        ObservationFormViewerModule,
-    ],
-    declarations: [
-        DeanItemComponent,
+        DeanListModule,
+        DeanItemModule,
     ],
     providers: [
         ObservationFormService,

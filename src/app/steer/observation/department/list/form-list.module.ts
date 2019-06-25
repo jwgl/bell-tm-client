@@ -31,4 +31,4 @@ library.add(faSearch);
         DeanListComponent,
     ],
 })
-export class ObservationFormListModule { }
+export class DeanListModule { }
