@@ -5,7 +5,7 @@
         </div>
         <div class="btn-group ml-auto">
             <button class="btn btn-secondary" (click)="conclusionSetting()" *ngIf="form.status === 'CHECKED'" [disabled]="!form.locked">结论</button>
-            <button class="btn btn-secondary" (click)="removeExpert(form.id)" *ngIf="form.expertReview && reviewable" [disabled]="!form.locked">清除专家</button>
+            <button class="btn btn-secondary" (click)="removeExpert(form.id)" *ngIf="form.expertReview && form.expertReview.length > 0 && reviewable" [disabled]="!form.locked">清除专家</button>
         </div>
         <div class="btn-group ml-2">
             <button [workflow-workitems]="form.workflowInstanceId">流程</button>

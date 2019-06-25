@@ -3,22 +3,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
     path: 'pollsters/:userId/questionnaires',
-    loadChildren: './questionnaire/pollster/questionnaire-form.module#QuestionnaireFormModule',
+    loadChildren: () => import('./questionnaire/pollster/questionnaire-form.module').then(m => m.QuestionnaireFormModule),
 }, {
     path: 'checkers/:userId/questionnaires',
-    loadChildren: './questionnaire/check/questionnaire-check.module#QuestionnaireCheckModule',
+    loadChildren: () => import('./questionnaire/check/questionnaire-check.module').then(m => m.QuestionnaireCheckModule),
 }, {
     path: 'approvers/:userId/questionnaires',
-    loadChildren: './questionnaire/approval/questionnaire-approval.module#QuestionnaireApprovalModule',
+    loadChildren: () => import('./questionnaire/approval/questionnaire-approval.module').then(m => m.QuestionnaireApprovalModule),
 }, {
     path: 'supervisors/:userId/questionnaires',
-    loadChildren: './questionnaire/adminClassCheck/questionnaire-admin-class-check.module#QuestionnaireAdminClassCheckModule',
+    loadChildren: () => import('./questionnaire/adminClassCheck/questionnaire-admin-class-check.module').then(m => m.QuestionnaireAdminClassCheckModule),
 }, {
     path: 'respondents/:userId/questionnaires',
-    loadChildren: './questionnaire/respondent/respondent-questionnaire.module#RespondentQuestionnaireModule',
+    loadChildren: () => import('./questionnaire/respondent/respondent-questionnaire.module').then(m => m.RespondentQuestionnaireModule),
 }, {
     path: 'q/:hashId',
-    loadChildren: './questionnaire/response/response-form.module#ResponseFormModule',
+    loadChildren: () => import('./questionnaire/response/response-form.module').then(m => m.ResponseFormModule),
 }];
 
 @NgModule({

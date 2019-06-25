@@ -6,19 +6,26 @@
             <div>{{vm.remind}}</div>
         </div>
         <div class="form-group">
-            <label class="control-label">学院意见：{{vm.departmentConclusion}}</label>
+            <label class="control-label">学院意见 {{vm.departmentConclusion}}</label>
             <div>{{vm.departmentOpinion}}</div>
         </div>
         <div class="form-group">
+            <label class="control-label">总分</label>
+            <input class="form-control" type="number" name="score" [(ngModel)]="score" max="100" min="0"
+                placeholder="不同意请填60分以下。" required>
+        </div>
+        <div class="form-group">
             <label class="control-label">专家意见</label>
-            <div><span *ngFor="let item of conclusions; let i = index" class="mr-3"><input type="radio" name="conclusions{{i}}"
-                        [value]="item" [(ngModel)]="conclusion">{{item}}</span>
+            <div><span *ngFor="let item of conclusions; let i = index" class="mr-3"><input type="radio"
+                        name="conclusions{{i}}" [value]="item" [(ngModel)]="conclusion">{{item}}</span>
             </div>
-            <textarea class="form-control" name="opinion" rows="3" [(ngModel)]="opinion" placeholder="请输入意见！不少于6个字！"></textarea>
+            <textarea class="form-control" name="opinion" rows="3" [(ngModel)]="opinion"
+                placeholder="请输入意见！不少于6个字。"></textarea>
         </div>
 
     </modal-body>
     <modal-footer>
-        <button type="button" class="btn btn-secondary" (click)="ok()" *ngIf="vm.editAble">确定</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()" *ngIf="vm.editAble" [disabled]="errors">保存</button>
+        <button type="button" class="btn btn-secondary" (click)="commit()" *ngIf="vm.editAble" [disabled]="errors">提交</button>
     </modal-footer>
 </modal-dialog>

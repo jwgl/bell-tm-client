@@ -64,7 +64,7 @@
                     <button class="btn btn-danger btn-sm ml-auto" (click)="remove()">删除</button>
                 </div>
                 <ng-template #emptyTpl>
-                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="taskAttach" (uploaded)="onUploaded($event)">
+                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="taskAttach">
                     </tm-uploader-panel>
                 </ng-template>
             </div>

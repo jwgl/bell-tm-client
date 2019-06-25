@@ -6,7 +6,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
     templateUrl: 'project-select.component.html',
 })
 export class ProjectSelectComponent {
-    @ViewChild('dropdown') dropdown: ElementRef;
+    @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
     @Input() projects: any;
     @Output() selectProject: EventEmitter<any> = new EventEmitter<any>();
 

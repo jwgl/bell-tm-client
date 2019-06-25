@@ -9,7 +9,8 @@ declare module '../shared/form.model' {
     }
 }
 
-ChangeForm.prototype.toServerDto = function (this: ChangeForm): any {
+ChangeForm.prototype.toServerDto = function(this: ChangeForm): any {
+    this.mainInfoForm = this.fileType.names.length > 0 ? this.fileType.names[0] : null;
     const members = this.type.some(t => t === 7) ?
         _.chain(this.memberList).map(data => data.value).filter(v => v !== '').join(';').value() : null;
     return {
@@ -19,7 +20,7 @@ ChangeForm.prototype.toServerDto = function (this: ChangeForm): any {
         middleYear: this.middleYear,
         knotYear: this.knotYear,
         name: this.name,
-        members: members,
+        members,
         content: this.content,
         achievements: this.achievements,
         mainInfoForm: this.mainInfoForm,
@@ -28,7 +29,7 @@ ChangeForm.prototype.toServerDto = function (this: ChangeForm): any {
     };
 };
 
-ChangeForm.prototype.checkMembers = function (this: ChangeForm): any {
+ChangeForm.prototype.checkMembers = function(this: ChangeForm): any {
     const members = _.chain(this.memberList).map(data => data.value).filter(v => v !== '').join(';').value();
     return _.isNull(members) || _.isUndefined(members) || _.isEmpty(members);
 };

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { PipesModule } from '../../../../settings/shared/common-pipes';
+import { TmGridModule } from '../../../../components/table.module';
 
 import { ProjectListComponent } from './project-list.component';
 
@@ -14,6 +15,7 @@ import { ProjectListComponent } from './project-list.component';
         RouterModule,
         CommonDirectivesModule,
         PipesModule,
+        TmGridModule,
     ],
     declarations: [
         ProjectListComponent,

@@ -53,6 +53,7 @@ export class ProjectFormEditorComponent {
 
     loadData(dto: any) {
         this.form = new ProjectForm(dto.form);
+        this.form.tranFile(this.fileTypes);
         this.departments = dto.departments;
         this.subtypes = dto.subtypes;
         this.origins = dto.origins;
@@ -69,6 +70,9 @@ export class ProjectFormEditorComponent {
                 validation.push(`${value}为空`);
             }
         });
+        if (!this.form.memberList.some(m => m.value !== '')) {
+            validation.push('参与人为空！');
+        }
         if (this.form.content && this.form.content.length > 1500) {
             validation.push('主要内容不要超过1500字！');
         }
@@ -105,57 +109,12 @@ export class ProjectFormEditorComponent {
         }
     }
 
+    uploadOptions(fileType: any): any {
+        const max = fileType.prefix === 'proof' ? 3 : 1;
+        return { concurrency: 3, maxUploads: max - fileType.names.length };
+    }
+
     get uploadUrl(): string {
         return this.service.getUploadUrl({ taskId: this.form.reviewTaskId });
-    }
-
-    onUploaded(fileNames: any) {
-        switch (fileNames.prefix) {
-            case 'main':
-                this.form.mainInfoForm = fileNames.name;
-                break;
-            case 'proof':
-                this.form.proofFile = fileNames.name;
-                break;
-        }
-    }
-
-    fileName(fileType: any): string {
-        switch (fileType.prefix) {
-            case 'main':
-                return this.form.mainInfoForm;
-            case 'proof':
-                return this.form.proofFile;
-            case 'summary':
-                return this.form.summaryReport;
-            default:
-                return null;
-        }
-    }
-
-    hasUploaded(fileType: any): boolean {
-        switch (fileType.prefix) {
-            case 'main':
-                return !_.isEmpty(this.form.mainInfoForm);
-            case 'proof':
-                return !_.isEmpty(this.form.proofFile);
-            case 'summary':
-                return !_.isEmpty(this.form.summaryReport);
-            default:
-                return true;
-        }
-    }
-
-    remove(fileType: any) {
-        switch (fileType.prefix) {
-            case 'main':
-                this.form.mainInfoForm = null;
-                break;
-            case 'proof':
-                this.form.proofFile = null;
-                break;
-            case 'summary':
-                this.form.summaryReport = null;
-        }
     }
 }

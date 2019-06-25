@@ -34,5 +34,8 @@
             <div [markdown]="vm.content"></div>
         </div>
     </div>
-    <div>图例：<span class="btn btn-danger"></span>表示已过截止日期，禁止相应操作。</div>
 </ng-container>
+<div class="card" style="align-items: center;">
+    <p>下图为申请审批流程</p>
+    <img alt="照片" [src]="imgSrc('flow.png')" width="auto" height="300" class="picture">
+</div>

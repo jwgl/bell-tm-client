@@ -7,6 +7,7 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { PipesModule } from '../../../settings/shared/common-pipes';
+import { TmGridModule } from '../../../components/table.module';
 
 import { ReviewRoutingModule } from './review-routing.module';
 import { ReviewService } from './review.service';
@@ -30,6 +31,7 @@ library.add(faSearch);
         FontAwesomeModule,
         PipesModule,
         TaskListModule,
+        TmGridModule,
     ],
     declarations: [
         ReviewListComponent,

@@ -14,7 +14,7 @@ export class ScheduleWeektabComponent implements OnChanges {
     @Input() size: string;
     @Input() showTermTab = false;
 
-    @ContentChild('weekTabTpl') weekTabTemplate: TemplateRef<any>;
+    @ContentChild('weekTabTpl', { static: false }) weekTabTemplate: TemplateRef<any>;
 
     selectedWeek: number;
     weeks: number[];

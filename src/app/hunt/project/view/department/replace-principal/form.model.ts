@@ -6,7 +6,8 @@ declare module '../../../info-change/form/shared/form.model' {
     }
 }
 
-ChangeForm.prototype.toServerDto = function (this: ChangeForm): any {
+ChangeForm.prototype.toServerDto = function(this: ChangeForm): any {
+    this.mainInfoForm = this.fileType.names.length > 0 ? this.fileType.names[0] : null;
     return {
         projectId: this.projectId,
         principalId: this.principalId,

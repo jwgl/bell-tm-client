@@ -14,31 +14,31 @@ const routes: Routes = [{
         pathMatch: 'full'
     }, {
         path: 'core',
-        loadChildren: '../core/core.module#CoreModule',
+        loadChildren: () => import('../core/core.module').then(m => m.CoreModule),
     }, {
         path: 'card',
-        loadChildren: '../card/card.module#CardModule',
+        loadChildren: () => import('../card/card.module').then(m => m.CardModule),
     }, {
         path: 'here',
-        loadChildren: '../here/here.module#HereModule',
+        loadChildren: () => import('../here/here.module').then(m => m.HereModule),
     }, {
         path: 'plan',
-        loadChildren: '../plan/plan.module#PlanModule',
+        loadChildren: () => import('../plan/plan.module').then(m => m.PlanModule),
     }, {
         path: 'place',
-        loadChildren: '../place/place.module#PlaceModule',
+        loadChildren: () => import('../place/place.module').then(m => m.PlaceModule),
     }, {
         path: 'steer',
-        loadChildren: '../steer/steer.module#SteerModule',
+        loadChildren: () => import('../steer/steer.module').then(m => m.SteerModule),
     }, {
         path: 'dual',
-        loadChildren: '../dual/dual.module#DualModule',
+        loadChildren: () => import('../dual/dual.module').then(m => m.DualModule),
     }, {
         path: 'hunt',
-        loadChildren: '../hunt/hunt.module#HuntModule',
+        loadChildren: () => import('../hunt/hunt.module').then(m => m.HuntModule),
     }, {
         path: 'form',
-        loadChildren: '../form/form.module#FormModule',
+        loadChildren: () => import('../form/form.module').then(m => m.FormModule),
     }, {
         path: '**',
         component: Page404Component,

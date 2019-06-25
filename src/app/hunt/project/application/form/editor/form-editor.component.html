@@ -133,7 +133,7 @@
                 </div>
                 <div class="form-group mt-4">
                     <label class="control-label">预期成果 <span class="text-info" *ngIf="form.achievements">字数（含空格）{{form.achievements.length}}</span></label>
-                    <textarea class="form-control" name="urls" rows="4" [(ngModel)]="form.achievements" placeholder="简略列举预期成果。字数不超1500。"
+                    <textarea class="form-control" name="achievements" rows="4" [(ngModel)]="form.achievements" placeholder="简略列举预期成果。字数不超1500。"
                         #suggest></textarea>
                 </div>
             </div>
@@ -143,15 +143,8 @@
                 <h5>文件上传</h5>
             </div>
             <div class="card-body">
-                <ng-container *ngFor="let item of fileTypes;">
-                    <div class="d-flex mb-2" *ngIf="hasUploaded(item); else emptyTpl;">
-                        <span class="file-type">{{item.label}}</span>
-                        <span class="ml-3 mr-3">{{fileName(item)}}</span>
-                        <button class="btn btn-danger btn-sm ml-auto" (click)="remove(item)">删除</button>
-                    </div>
-                    <ng-template #emptyTpl>
-                        <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" (uploaded)="onUploaded($event)"></tm-uploader-panel>
-                    </ng-template>
+                <ng-container *ngFor="let item of form.fileTypes;">
+                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="item" [options]="uploadOptions(item)"></tm-uploader-panel>
                 </ng-container>
             </div>
         </div>

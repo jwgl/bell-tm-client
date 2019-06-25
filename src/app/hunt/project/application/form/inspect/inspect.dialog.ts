@@ -6,14 +6,14 @@ import { Observable } from 'rxjs';
 import { BaseDialog } from 'core/dialogs';
 
 import { FileTypes, ContentLabels } from '../../shared/constants';
+import { ProjectForm } from '../shared/form.model';
 
 @Component({
     templateUrl: 'inspect.dialog.html',
 })
 // tslint:disable-next-line:component-class-suffix
 export class InspectDialog extends BaseDialog {
-    fileTypes: any;
-    form: any;
+    form: ProjectForm;
     uploadUrl: string;
 
     get contentLabel(): string {
@@ -52,63 +52,16 @@ export class InspectDialog extends BaseDialog {
         return validation;
     }
 
-    fileName(fileType: any): string {
-        switch (fileType.prefix) {
-            case 'main':
-                return this.form.mainInfoForm;
-            case 'proof':
-                return this.form.proofFile;
-            case 'summary':
-                return this.form.summaryReport;
-            default:
-                return null;
-        }
-    }
-
-    hasUploaded(fileType: any): boolean {
-        switch (fileType.prefix) {
-            case 'main':
-                return !_.isEmpty(this.form.mainInfoForm);
-            case 'proof':
-                return !_.isEmpty(this.form.proofFile);
-            case 'summary':
-                return !_.isEmpty(this.form.summaryReport);
-            default:
-                return true;
-        }
-    }
-
-    onUploaded(fileNames: any) {
-        switch (fileNames.prefix) {
-            case 'main':
-                this.form.mainInfoForm = fileNames.name;
-                break;
-            case 'proof':
-                this.form.proofFile = fileNames.name;
-                break;
-            case 'summary':
-                this.form.summaryReport = fileNames.name;
-                break;
-        }
-    }
-
-    remove(fileType: any) {
-        switch (fileType.prefix) {
-            case 'main':
-                this.form.mainInfoForm = null;
-                break;
-            case 'proof':
-                this.form.proofFile = null;
-                break;
-            case 'summary':
-                this.form.summaryReport = null;
-        }
+    uploadOptions(fileType: any): any {
+        const max = fileType.prefix === 'proof' ? 3 : 1;
+        return { concurrency: 3, maxUploads: max - fileType.names.length };
     }
 
     protected onOpening(): Observable<any> {
-        this.form = this.options.form;
+        this.form = new ProjectForm(this.options.form);
         this.uploadUrl = this.options.uploadUrl;
-        this.fileTypes = FileTypes.find(f => f.reviewType === this.form.reportType).fileType;
+        const fileTypes = FileTypes.find(f => f.reviewType === this.form.reportType).fileType;
+        this.form.tranFile(fileTypes);
         return null;
     }
 

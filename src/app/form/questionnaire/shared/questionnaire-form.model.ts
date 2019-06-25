@@ -31,7 +31,7 @@ export class Questionnaire {
             Object.assign(this, others);
             this.questions = questions.map((question: any) => new Question(question));
         } else {
-            Object.assign(this, ...dto);
+            Object.assign(this, dto);
             this.anonymous = this.surveyTypeOptions.anonymous.default;
             this.responseVisibility = 'INVISIBLE';
             this.questions = [];

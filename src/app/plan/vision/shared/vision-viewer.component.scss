@@ -3,7 +3,7 @@ h2 {
     margin-bottom: 1rem;
 }
 
-:host /deep/ p {
+:host ::ng-deep p {
     text-indent: 2em;
 }
 

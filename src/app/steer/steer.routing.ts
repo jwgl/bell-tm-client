@@ -3,25 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
         path: 'obervers/:userId/observations',
-        loadChildren: './observation/form/form.module#ObservationFormModule',
+        loadChildren: () => import('./observation/form/form.module').then(m => m.ObservationFormModule),
     }, {
         path: 'approvers/:userId/observations',
-        loadChildren: './observation/approval/approval.module#ApprovalModule',
+        loadChildren: () => import('./observation/approval/approval.module').then(m => m.ApprovalModule),
     }, {
         path: 'legacies',
-        loadChildren: './observation/legacy/legacy.module#LegacyModule',
+        loadChildren: () => import('./observation/legacy/legacy.module').then(m => m.LegacyModule),
     }, {
         path: 'teachers/:userId/observations',
-        loadChildren: './observation/public/public.module#PublicModule',
+        loadChildren: () => import('./observation/public/public.module').then(m => m.PublicModule),
     }, {
         path: 'reports',
-        loadChildren: './observation/reports/report.module#ReportModule',
+        loadChildren: () => import('./observation/reports/report.module').then(m => m.ReportModule),
     }, {
         path: 'settings/observers',
-        loadChildren: './observation/settings/observer-settings.module#ObserverSettingsModule',
+        loadChildren: () => import('./observation/settings/observer-settings.module').then(m => m.ObserverSettingsModule),
     }, {
         path: 'departments/:departmentId/observers',
-        loadChildren: './observation/settings/department/department-observer-setting.module#DepartmentObserverSettingModule',
+        loadChildren: () => import('./observation/settings/department/department-observer-setting.module').then(m => m.DepartmentObserverSettingModule),
 }];
 
 @NgModule({

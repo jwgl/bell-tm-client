@@ -8,8 +8,8 @@ import { typeahead } from 'core/utils/typeahead';
     templateUrl: 'university-select-component.html',
 })
 export class UniversitySelectComponent implements AfterViewInit {
-    @ViewChild('search') input: ElementRef;
-    @ViewChild('dropdown') dropdown: ElementRef;
+    @ViewChild('search', { static: true }) input: ElementRef;
+    @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
     @Input() universities: any[];
     @Output() selectUniversity: EventEmitter<any> = new EventEmitter<any>();
 

@@ -7,26 +7,12 @@
         <button class="btn btn-secondary" (click)="setExpert()">设置专家</button>
     </div>
 </div>
-<table class="table table-expand" *ngIf="list; else empty">
-    <thead>
-        <tr>
-            <th><input type="checkbox" (change)="checkAll($event.target.checked)">锁</th>
-            <th>申请单号</th>
-            <th>项目名称</th>
-            <th>负责人</th>
-            <th>电话</th>
-            <th>等级</th>
-            <th>项目类型</th>
-            <th>{{dateLabel}}</th>
-            <th>状态</th>
-            <th>结论</th>
-        </tr>
-    </thead>
-    <tbody>
-        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+<tm-grid [theads]="ths" [form]="list" [checkAble]="true" (checkedList)="onSelectProject($event)">
+    <ng-template #bodyTpl let-list="list">
+        <ng-container *ngFor="let item of list; let i = index">
             <tr>
                 <td>
-                    <checkbox-selector [data]="list"></checkbox-selector>
+                    <input type="checkbox" [(ngModel)]="item.checked">
                     <fa-icon [icon]="lockClass(item.locked)"></fa-icon>
                     <fa-icon icon="user" *ngIf="item.countExpert"></fa-icon>
                 </td>
@@ -42,9 +28,9 @@
                 </td>
                 <td *ngIf="item.conclusionOfUniversity">{{item.conclusionOfUniversity | conclusion : 'text'}}</td>
             </tr>
-        </ng-template>
-    </tbody>
-</table>
+        </ng-container>
+    </ng-template>
+</tm-grid>
 <ng-template #empty>
     <div class="alert alert-info">暂无数据</div>
 </ng-template>

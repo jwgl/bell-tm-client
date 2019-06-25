@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
     path: 'students/:userId/reissues',
-    loadChildren: './reissue/form/reissue-form.module#ReissueFormModule',
+    loadChildren: () => import('./reissue/form/reissue-form.module').then(m => m.ReissueFormModule),
 }, {
     path: 'approvers/:userId/reissues',
-    loadChildren: './reissue/approval/reissue-approval.module#ReissueApprovalModule',
+    loadChildren: () => import('./reissue/approval/reissue-approval.module').then(m => m.ReissueApprovalModule),
 }, {
     path: 'reissueOrders',
-    loadChildren: './reissue/order/reissue-order.module#ReissueOrderModule',
+    loadChildren: () => import('./reissue/order/reissue-order.module').then(m => m.ReissueOrderModule),
 }];
 
 @NgModule({

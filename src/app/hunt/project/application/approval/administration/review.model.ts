@@ -12,12 +12,17 @@ export class Review {
     countWaiver: number;
     countNull: number;
     average: number;
+    totalScore: number;
     departmentOpinion: string;
     expertReview: any;
     conclusion: string;
+    opinionOfUniversity: string;
+    opinionOfProvince: string;
+    conclusionOfUniversity: string;
 
     constructor(dto: any) {
         Object.assign(this, dto);
-        this.average = dto.average ? dto.average : 0;
+        const count = this.countOk + this.countVeto;
+        this.average = count > 0 ? this.totalScore / count : 0;
     }
 }

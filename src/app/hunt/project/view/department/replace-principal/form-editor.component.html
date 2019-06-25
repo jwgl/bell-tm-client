@@ -81,7 +81,7 @@
                     <button class="btn btn-danger btn-sm ml-auto" (click)="remove()">删除</button>
                 </div>
                 <ng-template #emptyTpl>
-                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="fileType" (uploaded)="onUploaded($event)"></tm-uploader-panel>
+                    <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="form.fileType"></tm-uploader-panel>
                 </ng-template>
             </div>
         </div>

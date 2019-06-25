@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 import { humanizeBytes, UploaderOptions, UploadFile, UploadInput, UploadOutput, UploadStatus } from 'ngx-uploader';
 
 import { FileType } from './uploader.model';
@@ -13,23 +13,22 @@ export class UploaderPanelComponent {
     uploadUrl: string;
     @Input()
     fileType: FileType;
-    @Output()
-    uploaded = new EventEmitter();
+    @Input()
+    options = { concurrency: 3, maxUploads: 1 };
+    // @Output()
+    // uploaded = new EventEmitter();
 
     _xsrfToken: string;
-    options: UploaderOptions;
     formData: FormData;
     files: UploadFile[];
     uploadInput: EventEmitter<UploadInput>;
     humanizeBytes: (bytes: number) => string;
     dragOver: boolean;
     uploadAble = true;
-    maxUploads = 1;
     fileName: any;
 
     constructor() {
         this.files = []; // local uploading files array
-        this.options = { concurrency: 3, maxUploads: this.maxUploads };
         this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
         this.humanizeBytes = humanizeBytes;
         // 从cookie中截取XSRF-TOKEN
@@ -41,6 +40,12 @@ export class UploaderPanelComponent {
     // 选择文件后触发的顺序是addedToQueue > allAddedToQueue > uploading
     // 上传的文件不依赖this.files, 就是清空了也不影响上传
     onUploadOutput(output: UploadOutput): void {
+        if (this.options.maxUploads <= 0) {
+            if (output.type === 'addedToQueue' || output.type === 'rejected') {
+                alert('上传文件数量已达最大值！');
+            }
+            return;
+        }
         switch (output.type) {
             case 'allAddedToQueue':
                 if (this.uploadAble) {
@@ -72,21 +77,21 @@ export class UploaderPanelComponent {
                 break;
             case 'uploading':
                 if (output.file) {
-                    const index = this.files.findIndex(file => file.id === output.file.id);
-                    this.files[index] = output.file;
+                    const index1 = this.files.findIndex(file => file.id === output.file.id);
+                    this.files[index1] = output.file;
                 }
                 break;
             case 'removed':
                 this.files = this.files.filter(file => file !== output.file);
-                this.uploaded.emit({ prefix: this.fileType.prefix, name: null });
+                const index = this.fileType.names.indexOf(output.file.name);
+                this.fileType.names.splice(index, 1);
                 break;
             case 'rejected':
-                alert(`最多上传${this.maxUploads}个文件。`);
+                alert(`最多上传${this.options.maxUploads}个文件。`);
                 break;
             case 'done':
                 this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
-                this.fileName = { prefix: this.fileType.prefix, name: output.file.response.file };
-                this.uploaded.emit(this.fileName);
+                this.fileType.names.push(output.file.response.file);
                 break;
         }
     }
@@ -109,5 +114,11 @@ export class UploaderPanelComponent {
         } else {
             return this.files.map(file => file.name).join(',');
         }
+    }
+
+    remove(name: string) {
+        const index = this.fileType.names.indexOf(name);
+        this.fileType.names.splice(index, 1);
+        this.files.pop();
     }
 }

@@ -10,7 +10,7 @@ import { Http, ApiUrl } from 'core/rest';
     templateUrl: 'form-overlay.component.html',
 })
 export class ApplicationFormOverlayComponent {
-    @ViewChild('viewerTpl')
+    @ViewChild('viewerTpl', { static: true })
     viewerTemplate: TemplateRef<any>;
 
     applicationApi: ApiUrl;
