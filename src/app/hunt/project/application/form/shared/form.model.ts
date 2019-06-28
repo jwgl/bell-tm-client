@@ -100,6 +100,7 @@ export class ProjectForm {
     status: string;
     content: string;
     achievements: string;
+    other: string;
     departmentConclusion: string;
     departmentOpinion: string;
     conclusionOfUniversity: string;
