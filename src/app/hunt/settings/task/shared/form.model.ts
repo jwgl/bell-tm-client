@@ -10,7 +10,7 @@ export class TaskForm {
     remind: string;
     ban: string;
     banMe: number;
-    attach: string;
+    attach: string[];
 
     constructor(dto: any) {
         Object.assign(this, dto);
