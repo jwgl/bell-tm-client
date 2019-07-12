@@ -59,19 +59,21 @@ export const Disciplines = [
 
 export const Degrees = ['大专', '本科', '硕士', '博士'];
 
-export const PropertyComment = {
+export const PropertyCommentForSave = {
     name: '项目名称',
     subtypeId: '项目类别',
     level: '项目等级',
+    departmentId: '单位',
+    originId: '项目来源',
+};
+
+export const PropertyCommentForSubmit = {
     email: 'Email',
     title: '职称',
     degree: '学位',
     office: '职务',
-    departmentId: '单位',
-    originId: '项目来源',
     phone: '电话',
-    content: '主要内容',
-    achievements: '预期成果',
+    members: '参与人',
 };
 
 export class ProjectForm {
