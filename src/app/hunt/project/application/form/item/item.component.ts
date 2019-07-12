@@ -10,6 +10,7 @@ import { WorkflowSubmitDialog } from 'core/workflow/submit.dialog';
 import { InspectDialog } from '../inspect/inspect.dialog';
 import { ProjectFormService } from '../form.service';
 import { ProjectForm, PropertyCommentForSubmit } from '../shared/form.model';
+import { ContentLabels } from '../../shared/constants';
 
 @Component({
     templateUrl: 'item.component.html',
@@ -63,18 +64,19 @@ export class ProjectItemComponent {
 
     validate(): string[] {
         const validation: string[] = [];
-        _.forEach(PropertyCommentForSubmit, (value: string, key: string) => {
-            if (this.isEmpty(this.vm[key])) {
-                console.log(this.vm);
-                validation.push(`${value}为空`);
-            }
-        });
-        if (this.vm.relationReportTypes) {
-            const review = this.vm.relationReportTypes[0];
+        if (this.vm.reportType === 1) {
+            _.forEach(PropertyCommentForSubmit, (value: string, key: string) => {
+                if (this.isEmpty(this.vm[key])) {
+                    validation.push(`${value}为空`);
+                }
+            });
+        }
+        const review = this.vm.relationReportTypes.find((item: any) => item.reportType === this.vm.reportType);
+        if (review) {
             if (this.isEmpty(review.content)) {
-                validation.push('主要内容为空！');
+                validation.push(`${ContentLabels.content[this.vm.reportType]}为空！`);
             }
-            if (this.isEmpty(review.achievements)) {
+            if (this.vm.reportType === 1 && this.isEmpty(review.achievements)) {
                 validation.push('预期成果为空！');
             }
             if (this.isEmpty(review.mainInfoForm)) {
