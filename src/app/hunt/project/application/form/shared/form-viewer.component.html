@@ -60,10 +60,14 @@
             <label class="control-label">来源</label>
             <div>{{vm.origin}}</div>
         </div>
-        <div class="form-group col-6" *ngIf="vm.urls">
-            <label class="control-label">相关网址</label>
-            <div>{{vm.urls}}</div>
+        <div class="form-group col-6" *ngIf="vm.members">
+            <label class="control-label">参与人</label>
+            <div>{{vm.members}}</div>
         </div>
+    </div>
+    <div class="form-group" *ngIf="vm.urls">
+        <label class="control-label">相关网址</label>
+        <div [markdown]="vm.urls"></div>
     </div>
     <hr>
     <div class="row">
@@ -117,7 +121,7 @@
                     <label class="control-label">学院意见</label>
                     <p class="form-control-plaintext">{{review.departmentOpinion}}</p>
                 </div>
-                <ng-container *ngIf="isAdmin || review.status === 'FINISHED'">{{vm.period}}
+                <ng-container *ngIf="isAdmin || review.status === 'FINISHED'">
                     <div class="form-group col-12" *ngIf="review.conclusionOfUniversity">
                         <label class="control-label">学校意见 <span class="badge {{review.conclusionOfUniversity | conclusion: 'class'}}">
                                 {{review.conclusionOfUniversity | conclusion: 'text'}}</span></label>

@@ -29,6 +29,10 @@ export class ProjectFormService extends RestEditService {
         }
     }
 
+    submit(id: number, options: any): Observable<any> {
+        return this.http.patch(`${this.api.item(id)}?op=SUBMIT`, options);
+   }
+
     loadTaskList(): Observable<any> {
         return this.http.get(`${this.taskApiUrl}`);
     }

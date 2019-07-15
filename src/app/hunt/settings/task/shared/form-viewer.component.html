@@ -32,9 +32,16 @@
         <label class="control-label">专家注意事项</label>
         <div [markdown]="vm.remind"></div>
     </div>
-    <div class="d-flex mb-2" *ngIf="vm.attach">
-        <label class="control-label">通知附件</label>
-        <span class="ml-3 mr-3"><a download [href]="downloadUrl">{{vm.attach}}</a></span>
+    <div class="card" *ngIf="vm.attach">
+        <div class="card-header d-flex">
+            <label class="control-label">通知附件</label>
+            <a class="btn btn-secondary btn-sm ml-auto" download [href]="downloadUrl">下载</a>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li *ngFor="let item of vm.attach">{{item}}</li>
+            </ul>
+        </div>
     </div>
     <div>图例：<span class="btn btn-danger"></span>表示已过截止日期，禁止相应操作。</div>
 </ng-container>

@@ -121,7 +121,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label class="control-label">主要内容 <span class="text-info" *ngIf="form.content">字数（含空格）{{form.content.length}}</span></label>
-                    <textarea class="form-control" name="content" rows="10" [(ngModel)]="form.content" placeholder="请简要说明该项目的主要内容。字数不超1500。"
+                    <textarea class="form-control" name="content" rows="10" [(ngModel)]="form.content" placeholder="请简要说明该项目的主要内容。字数不超600。"
                         #suggest></textarea>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                 </div>
                 <div class="form-group mt-4">
                     <label class="control-label">预期成果 <span class="text-info" *ngIf="form.achievements">字数（含空格）{{form.achievements.length}}</span></label>
-                    <textarea class="form-control" name="achievements" rows="4" [(ngModel)]="form.achievements" placeholder="简略列举预期成果。字数不超1500。"
+                    <textarea class="form-control" name="achievements" rows="4" [(ngModel)]="form.achievements" placeholder="简略列举预期成果。字数不超600。"
                         #suggest></textarea>
                 </div>
             </div>

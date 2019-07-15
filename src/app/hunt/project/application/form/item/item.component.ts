@@ -5,11 +5,12 @@ import * as _ from 'lodash';
 
 import { Dialog } from 'core/dialogs';
 import { CommonDialog } from 'core/common-dialogs';
-import { SubmitOptions } from 'core/workflow';
+import { WorkflowSubmitDialog } from 'core/workflow/submit.dialog';
 
 import { InspectDialog } from '../inspect/inspect.dialog';
 import { ProjectFormService } from '../form.service';
-import { ProjectForm } from '../shared/form.model';
+import { ProjectForm, PropertyCommentForSubmit } from '../shared/form.model';
+import { ContentLabels } from '../../shared/constants';
 
 @Component({
     templateUrl: 'item.component.html',
@@ -27,14 +28,6 @@ export class ProjectItemComponent {
     ) {
         const params = this.route.snapshot.params;
         this.loadData(params['applicationId']);
-    }
-
-    get submitOptions(): SubmitOptions {
-        return {
-            id: this.vm.id,
-            type: 'check',
-            what: this.vm.name,
-        };
     }
 
     loadData(id: number) {
@@ -57,17 +50,62 @@ export class ProjectItemComponent {
         return this.review.reportType === 1;
     }
 
-    get submitAble(): boolean {
-        const review = this.review;
-        return review ? !_.isEmpty(review.mainInfoForm) : false;
-    }
-
     get review(): any {
         const reviews = this.vm.relationReportTypes;
         if (reviews && reviews.length > 0) {
             return reviews.find((r: any) => r.reportType === this.vm.reportType);
         }
         return null;
+    }
+
+    isEmpty(option: any): boolean {
+        return _.isUndefined(option) || _.isNull(option);
+    }
+
+    validate(): string[] {
+        const validation: string[] = [];
+        if (this.vm.reportType === 1) {
+            _.forEach(PropertyCommentForSubmit, (value: string, key: string) => {
+                if (this.isEmpty(this.vm[key])) {
+                    validation.push(`${value}为空`);
+                }
+            });
+        }
+        const review = this.vm.relationReportTypes.find((item: any) => item.reportType === this.vm.reportType);
+        if (review) {
+            if (this.isEmpty(review.content)) {
+                validation.push(`${ContentLabels.content[this.vm.reportType]}为空！`);
+            }
+            if (this.vm.reportType === 1 && this.isEmpty(review.achievements)) {
+                validation.push('预期成果为空！');
+            }
+            if (this.isEmpty(review.mainInfoForm)) {
+                validation.push('申报书为空！');
+            }
+        }
+        return validation;
+    }
+
+    submit(): void {
+        const validate = this.validate();
+        if (validate.length) {
+            this.dialogs.error(validate);
+        } else {
+            this.saving = true;
+            this.dialog.open(WorkflowSubmitDialog, {
+                whoUrl: `${this.service.api.item(this.vm.id)}/checkers`,
+                does: '审核',
+                what: this.vm.name,
+            }).then(result => {
+                this.service.submit(this.vm.id, {
+                    title: result.what,
+                    to: result.to,
+                    comment: result.comment,
+                }).subscribe(() => {
+                    this.loadData(this.vm.id);
+                });
+            });
+        }
     }
 
     remove() {
@@ -79,7 +117,7 @@ export class ProjectItemComponent {
     inspect() {
         this.service.loadItemForEdit(this.vm.id).subscribe(dto => {
             const form = dto;
-            const uploadUrl = this.service.getUploadUrl({ taskId: this.vm.reviewTaskId});
+            const uploadUrl = this.service.getUploadUrl({ taskId: this.vm.reviewTaskId });
             this.dialog.open(InspectDialog, { form, uploadUrl }).then(result => {
                 if (result.validation && result.validation.length > 0) {
                     this.dialogs.error(result.validation);

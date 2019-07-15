@@ -23,6 +23,7 @@ export class TaskFormEditorComponent {
     types = TypeList;
     bans = LevelList;
     taskAttach = { prefix: 'task', label: '通知附件', types: ['zip', 'rar', 'pdf', 'doc', 'docx'], names: [] };
+    uploadOptions = { concurrency: 3, maxUploads: 10 };
 
     constructor(
         private service: FormService,
@@ -77,6 +78,7 @@ export class TaskFormEditorComponent {
 
     save() {
         const validation = this.validate();
+        this.form.attach = this.taskAttach.names;
         if (validation.length) {
             this.dialogs.error(validation);
         } else if (this.editMode === EditMode.Create) {

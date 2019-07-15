@@ -11,7 +11,7 @@ import { LevelList } from '../../../../settings/shared/constants';
 import { FileTypes } from '../../shared/constants';
 
 import { ProjectFormService } from '../form.service';
-import { Degrees, Disciplines, Offices, ProjectForm, PropertyComment, Titles } from '../shared/form.model';
+import { Degrees, Disciplines, Offices, ProjectForm, Titles, PropertyCommentForSave } from '../shared/form.model';
 import './form-editor.model';
 @Component({
     styles: ['.file-type { font-weight: bold; }'],
@@ -28,7 +28,6 @@ export class ProjectFormEditorComponent {
     degrees = Degrees;
     disciplines = Disciplines;
     editMode: EditMode;
-    // reviewTaskId: number;
     saving = false;
     fileTypes = FileTypes.find(f => f.reviewType === 1).fileType;
 
@@ -65,19 +64,16 @@ export class ProjectFormEditorComponent {
 
     validate(): string[] {
         const validation: string[] = [];
-        _.forEach(PropertyComment, (value: string, key: string) => {
+        _.forEach(PropertyCommentForSave, (value: string, key: string) => {
             if (this.isEmpty(this.form.toServerDto()[key])) {
                 validation.push(`${value}为空`);
             }
         });
-        if (!this.form.memberList.some(m => m.value !== '')) {
-            validation.push('参与人为空！');
+        if (this.form.content && this.form.content.length > 600) {
+            validation.push('主要内容不要超过600字！');
         }
-        if (this.form.content && this.form.content.length > 1500) {
-            validation.push('主要内容不要超过1500字！');
-        }
-        if (this.form.achievements && this.form.achievements.length > 1500) {
-            validation.push('预期成果不要超过1500字！');
+        if (this.form.achievements && this.form.achievements.length > 600) {
+            validation.push('预期成果不要超过600字！');
         }
         return validation;
     }

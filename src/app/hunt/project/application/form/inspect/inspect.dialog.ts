@@ -40,14 +40,14 @@ export class InspectDialog extends BaseDialog {
         if (this.isEmpty(form.content)) {
             validation.push(`请输入${this.contentLabel}！`);
         }
-        if (form.content && form.content.length > 1500) {
-            validation.push(`${this.contentLabel}不要超过1500字！`);
+        if (form.content && form.content.length > 600) {
+            validation.push(`${this.contentLabel}不要超过600字！`);
         }
-        if (form.achievements && form.achievements.length > 1500) {
-            validation.push(`${this.furtherLabel}不要超过1500字！`);
+        if (form.achievements && form.achievements.length > 600) {
+            validation.push(`${this.furtherLabel}不要超过600字！`);
         }
-        if (form.other && form.other.length > 1500) {
-            validation.push(`${this.otherLabel}不要超过1500字！`);
+        if (form.other && form.other.length > 600) {
+            validation.push(`${this.otherLabel}不要超过600字！`);
         }
         return validation;
     }

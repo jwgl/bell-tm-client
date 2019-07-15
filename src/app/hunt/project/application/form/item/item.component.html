@@ -7,9 +7,7 @@
             <button class="btn btn-secondary" (click)="inspect()" *ngIf="!removAble" [disabled]="saving">验收填报</button>
             <button class="btn btn-warning" (click)="remove()" *ngIf="removAble">删除</button>
             <button class="btn btn-secondary" routerLink="edit" *ngIf="removAble">编辑</button>
-            <button [workflow-submit]="submitOptions" (submitted)="loadData(vm.id)" *ngIf="submitAble">提交</button>
-            <button class="btn btn-secondary" disabled="true" data-toggle="tooltip" data-placement="top"
-                title="缺申报书！" *ngIf="!submitAble">提交</button>
+            <button class="btn btn-secondary" (click)="submit()">提交</button>
         </div>
     </div>
     <tm-project-form-viewer [vm]="vm"></tm-project-form-viewer>
