@@ -23,13 +23,13 @@ export class NavbarComponent {
             this.buildMenu(menus.user);
             this.menus = menus;
 
-            // setTimeout(() => {
-            //     $('.dropdown-item').on('click', function () {
-            //         if ($('.navbar-toggler').is(':visible')) {
-            //             $('.navbar-toggler').trigger('click');
-            //         }
-            //     });
-            // }, 100);
+            setTimeout(() => {
+                $('.dropdown-item').on('click', function () {
+                    if ($('.navbar-toggler').is(':visible')) {
+                        $('.navbar-toggler').trigger('click');
+                    }
+                });
+            }, 100);
         });
     }
 
