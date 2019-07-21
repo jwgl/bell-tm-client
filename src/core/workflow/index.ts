@@ -66,7 +66,7 @@ export function buildWorkflowRoutings(listType: Type<any>, itemType: Type<any>,
     return [{
         path: '',
         component: WorkflowReviewContainerComponent,
-        resolve: containerResolve,
+        resolve: containerResolve ? { config: containerResolve} : null,
         children: [{
             path: '', redirectTo: 'todo', pathMatch: 'full'
         }, {
