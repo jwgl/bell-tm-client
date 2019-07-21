@@ -18,11 +18,19 @@ export class WorkflowReviewContainerComponent {
         private workflow: Workflow,
     ) {
         this.route.data.subscribe((data: {
-            notice?: string,
-            queryable?: boolean,
+            config?: {
+                notice?: string,
+                queryable?: boolean,
+            },
         }) => {
-            this.notice = data.notice;
-            this.queryable = data.queryable;
+            if (data.config) {
+                if (data.config.notice) {
+                    this.notice = data.config.notice;
+                }
+                if (data.config.queryable) {
+                    this.queryable = data.config.queryable;
+                }
+            }
         });
     }
 
@@ -34,7 +42,7 @@ export class WorkflowReviewContainerComponent {
         if (/#\d+/.test(this.queryString)) {
             this.router.navigate([this.queryString.substring(1)], { relativeTo: this.route.firstChild });
         } else {
-            this.router.navigate(['.'], { queryParams: { query: this.queryString}, relativeTo: this.route.firstChild });
+            this.router.navigate(['.'], { queryParams: { query: this.queryString }, relativeTo: this.route.firstChild });
         }
     }
 }
