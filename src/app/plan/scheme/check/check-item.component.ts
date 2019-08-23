@@ -7,6 +7,7 @@ import { Scheme } from '../shared/scheme.model';
 })
 export class SchemeCheckItemComponent {
     form: Scheme;
+    showDiff = true;
 
     onItemLoaded(dto: any) {
         this.form = new Scheme(dto.form);
