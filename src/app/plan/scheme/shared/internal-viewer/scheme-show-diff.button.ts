@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, HostListener, HostBinding, AfterViewInit } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, HostListener, HostBinding, AfterViewInit, Output } from '@angular/core';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
@@ -31,6 +31,9 @@ export class SchemeShowDiffButton implements AfterViewInit {
         this._updateView();
     }
 
+    @Output()
+    showDiffChange = new EventEmitter<boolean>();
+
     constructor(private elementRef: ElementRef) {
         this.button = this.elementRef.nativeElement as HTMLButtonElement;
     }
@@ -45,6 +48,7 @@ export class SchemeShowDiffButton implements AfterViewInit {
     @HostListener('click')
     click() {
         this.showDiff = !this.showDiff;
+        this.showDiffChange.emit(this._showDiff);
     }
 
     private _updateView(): void {
