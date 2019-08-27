@@ -11,14 +11,14 @@ import { BookingApprovalItemComponent } from './approval-item.component';
         RouterModule.forChild(buildWorkflowRoutings(
             BookingApprovalListComponent,
             BookingApprovalItemComponent,
-            { queryable: WORKFLOW_CONTAINTER_QUERYABLE },
+            WORKFLOW_CONTAINTER_QUERYABLE,
         )),
     ],
     exports: [
         RouterModule,
     ],
     providers: [
-        { provide: WORKFLOW_CONTAINTER_QUERYABLE, useValue: () => true },
+        { provide: WORKFLOW_CONTAINTER_QUERYABLE, useValue: () => ({ queryable: true }) },
     ]
 })
 export class BookingApprovalRoutingModule { }
