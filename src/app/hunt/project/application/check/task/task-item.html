@@ -1,4 +1,9 @@
 <ng-container *ngIf="task">
+    <div class="btn-toolbar mt-3">
+        <div class="btn-group ml-auto">
+            <a class="btn btn-outline-secondary" download href="/api/hunt/reports/{{task.id}}?type=application-department">导出Excel</a>
+        </div>
+    </div>
     <tm-task-form-viewer [vm]="task"></tm-task-form-viewer>
     <div class="row mt-3" *ngIf="isCheckTime; else none">
         <div class="form-group col-md-2">
