@@ -2,7 +2,10 @@
     [reviewable]="form?.status === 'CHECKED'"
     [reviewTitle]="form?.workflowTitle"
     (itemLoaded)="onItemLoaded($event)">
+    <ng-template #toolbarTpl *ngIf="form">
+        <button [scheme-show-diff]="form.previousId" [(showDiff)]="showDiff">显示变更</button>
+    </ng-template>
     <ng-template #viewerTpl *ngIf="form">
-        <tm-scheme-viewer [scheme]="form" [showDiff]="true"></tm-scheme-viewer>
+        <tm-scheme-viewer [scheme]="form" [showDiff]="showDiff"></tm-scheme-viewer>
     </ng-template>
 </tm-workflow-item>

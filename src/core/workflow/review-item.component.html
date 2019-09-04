@@ -1,13 +1,15 @@
-<div class="btn-toolbar mt-3">
+<div class="btn-toolbar d-print-none mt-3">
     <tm-workflow-item-pager [prevId]="prevId" [nextId]="nextId"></tm-workflow-item-pager>
     <div class="btn-group ml-auto">
+        <ng-template [ngTemplateOutlet]="toolbarTemplate"></ng-template>
+    </div>
+    <div class="btn-group ml-2" *ngIf="workflowInstanceId">
         <button [workflow-workitems]="workflowInstanceId">流程</button>
     </div>
     <div class="btn-group ml-2" *ngIf="wi && reviewable">
         <button [workflow-review]="reviewOptions" (review)="onItemLoaded($event)" *ngIf="needreview">加签</button>
         <button [workflow-reject]="reviewOptions" (rejected)="onItemLoaded($event)">退回</button>
         <button [workflow-accept]="reviewOptions" (accepted)="onItemLoaded($event)" *ngIf="acceptEnabled">同意</button>
-
     </div>
     <div class="btn-group ml-2" *ngIf="revokable">
         <button [workflow-revoke]="revokeOptions" (revoked)="onItemLoaded($event)">回收</button>
