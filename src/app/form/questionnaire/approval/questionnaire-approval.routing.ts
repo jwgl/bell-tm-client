@@ -11,14 +11,14 @@ import { QuestionnaireApprovalItemComponent } from './approval-item.component';
         RouterModule.forChild(buildWorkflowRoutings(
             QuestionnaireApprovalListComponent,
             QuestionnaireApprovalItemComponent,
-            { queryable: WORKFLOW_CONTAINTER_QUERYABLE },
+            WORKFLOW_CONTAINTER_QUERYABLE,
         )),
     ],
     exports: [
         RouterModule,
     ],
     providers: [
-        { provide: WORKFLOW_CONTAINTER_QUERYABLE, useValue: () => true },
+        { provide: WORKFLOW_CONTAINTER_QUERYABLE, useValue: () => ({ queryable: true }) },
     ]
 })
 export class QuestionnaireApprovalRoutingModule { }
