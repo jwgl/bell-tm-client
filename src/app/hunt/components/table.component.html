@@ -13,7 +13,7 @@
                             *ngIf="hasFilter(th.id)" (click)="clearFilter(th.id)"></fa-icon>
                     </div>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" (click)="selectAll(th.id)">全选</a>
+                        <a class="dropdown-item" (click)="selectAll(th.id)">全选/排序</a>
                         <a *ngFor="let item of baseList | uniqueBy: th.id | filterBy: filterBySelected(th.id, true)"
                             class="dropdown-item d-flex" (click)="select(th.id, item)">{{item}}<span
                                 *ngIf="isSelected(th.id, item)" class="ml-auto">√</span></a>

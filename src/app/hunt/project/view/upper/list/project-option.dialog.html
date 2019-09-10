@@ -3,7 +3,7 @@
         <form class="form-horizontal">
             <form-field label="建设情况">
                 <select name="reportType" class="form-control" [(ngModel)]="queryOptions.status">
-                    <option value="" disabled>选择建设情况</option>
+                    <option value="">选择建设情况</option>
                     <option *ngFor="let item of projectStatuses" [ngValue]="item.value">
                         {{item.label}}
                     </option>
@@ -11,7 +11,7 @@
             </form-field>
             <form-field label="单位">
                 <select name="department" class="form-control" [(ngModel)]="queryOptions.departmentId">
-                    <option value="" disabled>选择所属单位</option>
+                    <option value="">选择所属单位</option>
                     <option *ngFor="let item of departments" [ngValue]="item.id">
                         {{item.name}}
                     </option>
@@ -19,7 +19,7 @@
             </form-field>
             <form-field label="等级">
                 <select name="level" class="form-control" [(ngModel)]="queryOptions.level">
-                    <option value="" disabled>选择等级</option>
+                    <option value="">选择等级</option>
                     <option *ngFor="let item of levels" [ngValue]="item.value">
                         {{item.label}}
                     </option>

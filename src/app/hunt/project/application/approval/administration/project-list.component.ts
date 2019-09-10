@@ -43,8 +43,7 @@ export class ProjectListComponent {
             this.taskId = params['taskId'];
             this.type = params['type'];
             this.loadData();
-        }
-        );
+        });
     }
 
     get cols(): number {

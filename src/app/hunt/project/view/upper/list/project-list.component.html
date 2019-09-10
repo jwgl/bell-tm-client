@@ -6,7 +6,19 @@
         </div>
     </div>
     <div class="ml-auto">
-        <button class="btn btn-secondary" (click)="query()">查询</button>
+        <div class="btn-group">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    导出Excel
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" download href="/api/hunt/reports?type=projects-groupby-department">分学院</a>
+                    <a class="dropdown-item" download href="/api/hunt/reports?type=projects-groupby--type">分类别</a>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-secondary ml-2" (click)="query()">查询</button>
         <button class="btn btn-secondary ml-2" routerLink="create" *ngIf="createAble">新建</button>
     </div>
 </div>
