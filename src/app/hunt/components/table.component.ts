@@ -101,6 +101,7 @@ export class TmGridComponent {
         }
         const items = _.chain(this.baseList).map(data => data[id]).uniq().value();
         this.filters.push({ id, items });
+        this.orderKey = id;
         this.doFilter();
     }
 
