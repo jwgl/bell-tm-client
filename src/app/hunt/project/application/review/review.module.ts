@@ -11,6 +11,7 @@ import { TmGridModule } from '../../../components/table.module';
 
 import { ReviewRoutingModule } from './review-routing.module';
 import { ReviewService } from './review.service';
+import { ReviewItemModule } from './item/item.module';
 import { ReviewListComponent } from './list/review-list.component';
 import { ReviewDialog } from './list/review.dialog';
 import { TaskListModule } from './task/task-list.module';
@@ -32,6 +33,7 @@ library.add(faSearch);
         PipesModule,
         TaskListModule,
         TmGridModule,
+        ReviewItemModule,
     ],
     declarations: [
         ReviewListComponent,

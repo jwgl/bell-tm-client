@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { TaskListComponent } from './task/task-list.component';
 import { TaskItemComponent } from './task/task-item';
+import { ReviewItemComponent } from './item/item.component';
 import { ReviewListComponent } from './list/review-list.component';
 
 const routes: Routes = [
@@ -21,7 +22,9 @@ const routes: Routes = [
                 component: ReviewListComponent,
             }],
         }],
-    }];
+    },
+    { path: ':taskId/:reviewType/:type/applications/:applicationId', component: ReviewItemComponent },
+];
 
 @NgModule({
     imports: [

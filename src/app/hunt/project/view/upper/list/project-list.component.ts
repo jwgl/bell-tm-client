@@ -27,7 +27,7 @@ export class ProjectListComponent {
         {id: 'dateStart', label: '立项时间', order: true},
         {id: 'middleYear', label: '中期', order: true},
         {id: 'knotYear', label: '结题', order: true},
-        {id: 'hasMid', label: '已中检', order: true},
+        {id: 'dateFinished', label: '结题时间', order: true},
         {id: 'delayTimes', label: '延期', order: true},
         {id: 'status', label: '建设情况', order: true},
     ];

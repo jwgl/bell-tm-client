@@ -1,6 +1,27 @@
 <ng-container *ngIf="task">
-    <tm-task-form-viewer [vm]="task"></tm-task-form-viewer>
-    <div class="row mt-3" *ngIf="isCheckTime; else none">
+    <tm-form-title>通知{{task.id}}</tm-form-title>
+    <div class="row">
+        <div class="form-group col-12">
+            <label class="control-label">标题</label>
+            <div>{{task.title}}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">专家注意事项</label>
+        <div [markdown]="task.remind"></div>
+    </div>
+    <div class="card mb-3" *ngIf="task.attach">
+        <div class="card-header d-flex">
+            <label class="control-label">通知附件</label>
+            <a class="btn btn-secondary btn-sm ml-auto" download href="/api/hunt/attachments/{{task.id}}?type=TASK">下载</a>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li *ngFor="let item of task.attach">{{item}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" *ngIf="isCheckTime; else none">
         <div class="form-group col-md-2">
             <div class="list-group">
                 <a [routerLink]="[0]" class="list-group-item list-group-item-action d-flex justify-content-between"
