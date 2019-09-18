@@ -13,6 +13,7 @@
                     导出Excel
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" download href="/api/hunt/reports?type=projects">总表</a>
                     <a class="dropdown-item" download href="/api/hunt/reports?type=projects-groupby-department">分学院</a>
                     <a class="dropdown-item" download href="/api/hunt/reports?type=projects-groupby--type">分类别</a>
                 </div>
@@ -28,14 +29,14 @@
             <tr>
                 <td><a [routerLink]="[item.id]">{{i + 1}}#{{item.id}}</a></td>
                 <td class="expand">{{item.name}}</td>
-                <td>{{item.code}}</td>
+                <td class="expand">{{item.code}}</td>
                 <td>{{item.level | level : 'text'}}</td>
                 <td class="expand">{{item.subtype}}</td>
                 <td>{{item.principalName}}</td>
                 <td>{{item.dateStart | date: 'yyyy-MM'}}</td>
-                <td>{{item.middleYear}}</td>
+                <td>{{item.middleYear}}<span *ngIf="item.hasMid > 0">√</span></td>
                 <td>{{item.knotYear}}</td>
-                <td>{{item.hasMid > 0 ? '是' : '否'}}</td>
+                <td>{{item.dateFinished | date: 'yyyy-MM'}}</td>
                 <td><span *ngIf="item.delayTimes">{{item.delayTimes}}次</span></td>
                 <td><span
                         class="badge badge-pill {{item.status | projectStatus: 'class'}}">{{item.status | projectStatus: 'text'}}</span>

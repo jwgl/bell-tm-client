@@ -1,31 +1,26 @@
-<div class="row">
-    <div class="col-10">
-        <ul class="nav nav-tabs mb-p10">
-            <li *ngFor="let item of options" class="nav-item mr-1">
-                <a class="nav-link" [routerLink]="['../', item.type]" routerLinkActive="active">{{item.label}}
-                    <span class="badge badge-pill badge-secondary">{{item.count}}</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-2 text-right">
-        <a class="btn btn-primary" download [href]="downloadUrl()">下载所选项目附件</a>
-    </div>
-</div>
+<ul class="nav nav-tabs mb-p10">
+    <li *ngFor="let item of options" class="nav-item mr-1">
+        <a class="nav-link" [routerLink]="['../', item.type]" routerLinkActive="active">{{item.label}}
+            <span class="badge badge-pill badge-secondary">{{item.count}}</span>
+        </a>
+    </li>
+    <li class="ml-auto"><a class="btn btn-primary" download [href]="downloadUrl()">下载所选项目附件</a></li>
+</ul>
+
 
 <tm-grid [theads]="ths" [form]="list" [checkAble]="true" (checkedList)="onSelectProject($event)">
     <ng-template #bodyTpl let-list="list">
         <ng-container *ngFor="let item of list; let i = index">
             <tr>
-                <td>{{i+1}}<input type="checkbox" [(ngModel)]="item.checked"></td>
+                <td><input type="checkbox" [(ngModel)]="item.checked"></td>
+                <td><a [routerLink]="['applications', item.id]">{{i+1}}#{{item.id}} </a></td>
                 <td class="expand">{{item.name}}</td>
                 <td>{{item.principalName}} {{item.office}}，{{item.title}}，{{item.degree}}</td>
                 <td>{{item.level | level: 'text'}}</td>
                 <td>{{item.departmentName}}</td>
                 <td>{{item.subtype}}</td>
                 <td>{{item.conclusion}}</td>
-                <td><button class="btn btn-secondary btn-sm" (click)="review(item.id)">{{item.dateReviewed ? '查看' :
-                        '评审'}}</button>
+                <td><button class="btn btn-secondary btn-sm" (click)="review(item.id)" *ngIf="item.dateReviewed">查看</button>
                 </td>
             </tr>
         </ng-container>
