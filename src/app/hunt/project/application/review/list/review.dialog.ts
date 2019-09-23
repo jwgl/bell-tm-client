@@ -36,6 +36,8 @@ export class ReviewDialog extends BaseDialog {
     }
 
     get errors(): boolean {
-        return (this.score >= 60 && this.conclusion === '不同意') || (this.score < 60 && this.conclusion === '同意');
+        return (this.score >= 60 && this.conclusion === '不同意')
+        || (this.score < 60 && this.conclusion === '同意')
+        || (this.score === undefined && this.conclusion !== '弃权');
     }
 }

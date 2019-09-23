@@ -22,7 +22,5 @@ export class Review {
 
     constructor(dto: any) {
         Object.assign(this, dto);
-        const count = this.countOk + this.countVeto;
-        this.average = count > 0 ? this.totalScore / count : 0;
     }
 }
