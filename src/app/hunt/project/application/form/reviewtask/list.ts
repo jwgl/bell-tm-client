@@ -15,9 +15,7 @@ export class TaskListComponent {
 
     constructor(
         private service: ProjectFormService) {
-        this.service.loadTaskList().subscribe((dto: any[]) => {
-            this.loadData(dto);
-        });
+        this.service.loadTaskList().subscribe((dto: any[]) => this.loadData(dto));
     }
 
     loadData(dto: any) {
@@ -30,8 +28,6 @@ export class TaskListComponent {
     }
 
     allTask() {
-        this.service.loadAllTask().subscribe((dto: any[]) => {
-            this.loadData(dto);
-        });
+        this.service.loadAllTask().subscribe((dto: any[]) => this.loadData(dto));
     }
 }
