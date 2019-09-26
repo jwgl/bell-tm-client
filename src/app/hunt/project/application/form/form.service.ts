@@ -44,4 +44,8 @@ export class ProjectFormService extends RestEditService {
     getUploadUrl(options: { [key: string]: any } = {}): string {
         return `/zuul${this.api.list()}/upload?taskId=${options.taskId}`;
     }
+
+    loadAllTask(): Observable<any> {
+        return this.http.get(`${this.taskApiUrl}?all=true`);
+    }
 }
