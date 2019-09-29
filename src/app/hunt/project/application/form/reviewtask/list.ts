@@ -15,13 +15,19 @@ export class TaskListComponent {
 
     constructor(
         private service: ProjectFormService) {
-        this.service.loadTaskList().subscribe((dto: any[]) => {
-            this.tasks = dto.map(data => {
-                const task = new TaskForm(data);
-                task.countApplication = data.countApplication;
-                task.status = data.status;
-                return task;
-            });
+        this.service.loadTaskList().subscribe((dto: any[]) => this.loadData(dto));
+    }
+
+    loadData(dto: any) {
+        this.tasks = dto.map((data: any) => {
+            const task = new TaskForm(data);
+            task.countApplication = data.countApplication;
+            task.status = data.status;
+            return task;
         });
+    }
+
+    allTask() {
+        this.service.loadAllTask().subscribe((dto: any[]) => this.loadData(dto));
     }
 }
