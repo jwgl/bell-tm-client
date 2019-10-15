@@ -6,14 +6,15 @@
     <input type="file" class="d-none" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
         [uploadInput]="uploadInput">经费划拨
 </label>
+<a class="btn-link ml-3" download href="/api/hunt/reports?type=fund-template">模版下载</a>
 <table class="table table-bordered table-sm" style="text-align:center;">
     <thead>
         <tr>
             <th rowspan="2">序号</th>
             <th rowspan="2">项目编号</th>
-            <th colspan="4">省（市）</th>
-            <th colspan="4">学校</th>
-            <th colspan="4">学院</th>
+            <th colspan="3">省（市）</th>
+            <th colspan="3">学校</th>
+            <th colspan="3">学院</th>
         </tr>
         <tr>
             <th>立项</th>

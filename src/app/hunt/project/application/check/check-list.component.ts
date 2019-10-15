@@ -18,8 +18,8 @@ export class ApplicationCheckListComponent {
     list: any[];
     type: string;
     options = [
-        { label: '未评审', type: 'todo', count: 0 },
-        { label: '通过', type: 'next', count: 0 },
+        { label: '待审核', type: 'todo', count: 0 },
+        { label: '已审核', type: 'next', count: 0 },
         { label: '退回', type: 'expr', count: 0 },
         { label: '终审', type: 'done', count: 0 },
     ];
