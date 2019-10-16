@@ -1,6 +1,6 @@
 <tm-workflow-item reviewType="approve"
     [needreview]="form?.reviewer && !form?.dateReviewed"
-    [reviewTitle]="project?.name"
+    [reviewTitle]="form?.projectName"
     (itemLoaded)="onItemLoaded($event)">
     <ng-template #viewerTpl *ngIf="form">
         <tm-change-form-viewer [vm]="form" [project]="project"></tm-change-form-viewer>
