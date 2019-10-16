@@ -24,12 +24,14 @@ export class WorkflowReviewButtonDirective {
             whoUrl: this.workflow.getReviewersUrl(this.options.id),
             does: this.workflow.getDoesLabel(this.options.type),
             what: this.options.what,
+            reviews: this.options.reviews,
         }).then(result => {
             this.pending = true;
             this.workflow.review(this.options.id, this.options.wi, {
                 title: result.what,
                 to: result.to,
                 comment: result.comment,
+                review: result.review,
             }).subscribe(data => {
                 this.pending = false;
                 this.review.emit(data);

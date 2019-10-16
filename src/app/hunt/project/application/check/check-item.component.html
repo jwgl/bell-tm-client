@@ -8,7 +8,12 @@
         </div>
         <div class="btn-group ml-2" *ngIf="reviewable">
             <button [workflow-reject]="reviewOptions" (rejected)="onItemLoaded($event)">退回</button>
-            <button [workflow-accept]="reviewOptions" (accepted)="onItemLoaded($event)">同意</button>
+            <ng-container *ngIf="form.reportType === 1; else suggestTpl;">
+                <button [workflow-accept]="reviewOptions" (accepted)="onItemLoaded($event)">同意</button>
+            </ng-container>
+            <ng-template #suggestTpl>
+                <button [workflow-review]="reviewOptions" (review)="onItemLoaded($event)">单位意见</button>
+            </ng-template>
         </div>
         <div class="btn-group ml-2" *ngIf="rollbackAble">
             <button [workflow-rollback]="rollbackOptions" (rollbacked)="onItemLoaded($event)">撤回</button>

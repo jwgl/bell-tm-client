@@ -22,6 +22,7 @@ export interface ReviewOptions {
     wi: string;
     type: 'check' | 'approve';
     what: string;
+    reviews?: any[];
 }
 
 export interface RevokeOptions {
@@ -129,7 +130,7 @@ export class Workflow {
         );
     }
 
-    review(id: any, wi: string, data: { title: string, to: string, comment: string }): Observable<any> {
+    review(id: any, wi: string, data: { title: string, to: string, comment: string, review: string }): Observable<any> {
         return this.http.patch<{ counts: ListCounts }>(this.api.review(id, wi), data).pipe(
             tap(result => this.updateListGroup(result.counts)),
         );

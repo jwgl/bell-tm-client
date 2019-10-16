@@ -60,7 +60,7 @@
             <label class="control-label">来源</label>
             <div>{{vm.origin}}</div>
         </div>
-        <div class="form-group col-6" *ngIf="vm.members">
+        <div class="form-group col-6">
             <label class="control-label">参与人</label>
             <div>{{vm.members}}</div>
         </div>
@@ -118,7 +118,8 @@
             </div>
             <div class="row">
                 <div class="form-group col-12" *ngIf="review.departmentOpinion">
-                    <label class="control-label">学院意见</label>
+                    <label class="control-label">学院意见<span class="badge {{review.departmentConclusion | conclusion: 'class'}}">
+                                {{review.departmentConclusion | conclusion: 'text'}}</span></label>
                     <p class="form-control-plaintext">{{review.departmentOpinion}}</p>
                 </div>
                 <ng-container *ngIf="isAdmin || review.status === 'FINISHED'">

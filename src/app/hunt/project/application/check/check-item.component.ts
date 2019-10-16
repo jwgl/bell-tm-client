@@ -45,6 +45,7 @@ export class ApplicationCheckItemComponent {
             wi: this.wi,
             type: 'check',
             what: this.form.name,
+            reviews: [{id: 'OK', name: '通过'}, {id: 'VETO', name: '不通过'}, {id: 'DELAY', name: '暂缓通过'}],
         };
     }
 

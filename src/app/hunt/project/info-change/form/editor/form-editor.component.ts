@@ -178,7 +178,7 @@ export class ChangeFormEditorComponent {
         } else {
             this.saving = true;
             if (this.form.type.some(t => t === 2)) {
-                if (!this.middleChecked) {
+                if (!this.middleChecked && this.project.middleYear) {
                     this.form.middleYear = this.project.middleYear + 1;
                 }
                 this.form.knotYear = this.project.knotYear + 1;

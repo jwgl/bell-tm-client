@@ -24,6 +24,7 @@ export class ProjectListComponent {
     ths = [
         {id: 'name', label: '项目名称', order: true},
         {id: 'code', label: '项目编号', order: true},
+        {id: 'principalName', label: '负责人', order: true},
         {id: 'level', label: '等级', filter: true},
         {id: 'subtype', label: '项目类型', filter: true},
         {id: 'departmentName', label: '单位', filter: true},
