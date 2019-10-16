@@ -9,8 +9,6 @@ import { WorkflowAcceptButtonDirective } from './accept.button';
 import { WorkflowAcceptDialog } from './accept.dialog';
 import { WorkflowNextButtonDirective } from './next.button';
 import { WorkflowNextDialog } from './next.dialog';
-import { WorkflowSuggestButtonDirective } from './suggest.button';
-import { WorkflowSuggestDialog } from './suggest.dialog';
 import { WorkflowRollbackButtonDirective } from './rollback.button';
 import { WorkflowRollbackDialog } from './rollback.dialog';
 import { WorkflowRejectButtonDirective } from './reject.button';
@@ -26,7 +24,6 @@ import {
     ReviewOptions,
     RevokeOptions,
     SubmitOptions,
-    SuggestOptions,
     Workflow,
 } from './workflow.service';
 import { WorkitemStatusTextPipe } from './workitem-status.pipe';
@@ -93,7 +90,6 @@ export {
     ReviewOptions,
     RevokeOptions,
     SubmitOptions,
-    SuggestOptions,
     Workflow,
     WorkflowItemResolve,
     WorkflowListResolve,
@@ -113,7 +109,6 @@ const WORKFLOW_DIALOGS: any[] = [
     WorkflowRevokeDialog,
     WorkflowWorkitemsDialog,
     WorkflowReviewDialog,
-    WorkflowSuggestDialog,
 ];
 
 const WORKFLOW_BUTTONS: any[] = [
@@ -124,7 +119,6 @@ const WORKFLOW_BUTTONS: any[] = [
     WorkflowSubmitButtonDirective,
     WorkflowRevokeButtonDirective,
     WorkflowWorkitemsButtonDirective,
-    WorkflowSuggestButtonDirective,
 ];
 
 const WORKFLOW_COMPONENTS: any[] = [

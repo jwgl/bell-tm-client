@@ -1,8 +1,8 @@
-<modal-dialog modalTitle="加签">
+<modal-dialog modalTitle="处理意见">
         <modal-body>
             <form *ngIf="options.data">
                 <ng-container [ngSwitch]="options.data.length">
-                    <p *ngSwitchCase="0">未设置加签处理人，请与管理员联系。</p>
+                    <p *ngSwitchCase="0">未设置处理人，请与管理员联系。</p>
                     <p *ngSwitchCase="1">《{{options.what}}》将发送至 <b>{{options.data[0].name}}</b> 进行处理。</p>
                     <p *ngSwitchDefault>提交《{{options.what}}》 进行处理。<br>
                         请选择处理人：
@@ -11,6 +11,14 @@
                         </select>
                     </p>
                 </ng-container>
+                <div class="form-group" *ngIf="options.reviews">
+                    <p>
+                        请选择处理意见：
+                        <select name="selected" [(ngModel)]="result.review">
+                            <option *ngFor="let review of options.reviews" value="{{review.id}}">{{review.name}}</option>
+                        </select>
+                    </p>
+                </div>
                 <div class="form-group" *ngIf="options.data.length >= 1">
                     <textarea class="form-control" rows="6" placeholder="提交说明" name="comment" [(ngModel)]="result.comment"></textarea>
                 </div>
@@ -18,6 +26,6 @@
         </modal-body>
         <modal-footer>
             <button modalCancel>取消</button>
-            <button modalOk (click)="ok()" [disabled]="options.whoUrl && options.data?.length == 0">确定</button>
+            <button modalOk (click)="ok()" [disabled]="(options.whoUrl && options.data?.length == 0) || (options.reviews != null && result.review == null)">确定</button>
         </modal-footer>
     </modal-dialog>

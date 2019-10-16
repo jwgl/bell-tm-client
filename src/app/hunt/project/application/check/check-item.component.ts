@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { SuggestOptions, RevokeOptions } from 'core/workflow';
+import { ReviewOptions, RevokeOptions } from 'core/workflow';
 
 import { CheckService } from './check.service';
 import { ProjectForm } from '../form/shared/form.model';
@@ -39,13 +39,13 @@ export class ApplicationCheckItemComponent {
         return this.wi && this.form.status === 'SUBMITTED' && this.form.isValidDate;
     }
 
-    get suggestOptions(): SuggestOptions {
+    get reviewOptions(): ReviewOptions {
         return {
             id: this.form.id,
             wi: this.wi,
             type: 'check',
             what: this.form.name,
-            suggests: [{id: 'OK', name: '通过'}, {id: 'VETO', name: '不通过'}, {id: 'DELAY', name: '暂缓通过'}],
+            reviews: [{id: 'OK', name: '通过'}, {id: 'VETO', name: '不通过'}, {id: 'DELAY', name: '暂缓通过'}],
         };
     }
 

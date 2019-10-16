@@ -12,7 +12,7 @@
                 <button [workflow-accept]="reviewOptions" (accepted)="onItemLoaded($event)">同意</button>
             </ng-container>
             <ng-template #suggestTpl>
-                <button [workflow-suggest]="suggestOptions" (suggested)="onItemLoaded($event)">单位意见</button>
+                <button [workflow-review]="reviewOptions" (review)="onItemLoaded($event)">单位意见</button>
             </ng-template>
         </div>
         <div class="btn-group ml-2" *ngIf="rollbackAble">

@@ -67,7 +67,7 @@
                             {{vm.phone}} {{vm.email}}</td>
                     </tr>
                     <ng-container *ngIf="has({ value: 2 }) && project">
-                        <tr *ngIf="!middleChecked">
+                        <tr *ngIf="!middleChecked && vm.middleYear">
                             <td>中期预期</td>
                             <td>{{project.middleYear}}</td>
                             <td class="text-danger">中期预期</td>

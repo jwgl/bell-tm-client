@@ -8,18 +8,15 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">{{contentLabel}} <span class="text-info" *ngIf="form.content">字数（含空格）{{form.content.length}}</span></label>
-                    <textarea class="form-control" name="content" rows="6" [(ngModel)]="form.content" placeholder="请简要说明该项目的{{contentLabel}}。字数不超600。"
-                        #suggest></textarea>
+                    <textarea class="form-control" name="content" rows="6" [(ngModel)]="form.content" placeholder="请简要说明该项目的{{contentLabel}}。字数不超600。"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="control-label">{{furtherLabel}} <span class="text-info" *ngIf="form.achievements">字数（含空格）{{form.achievements.length}}</span></label>
-                    <textarea class="form-control" name="further" rows="4" [(ngModel)]="form.achievements" placeholder="{{furtherLabel}}。字数不超600。"
-                        #suggest></textarea>
+                    <textarea class="form-control" name="further" rows="4" [(ngModel)]="form.achievements" placeholder="{{furtherLabel}}。字数不超600。"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="control-label">{{otherLabel}} <span class="text-info" *ngIf="form.other">字数（含空格）{{form.other.length}}</span></label>
-                    <textarea class="form-control" name="other" rows="4" [(ngModel)]="form.other" placeholder="{{otherLabel}}。字数不超600。"
-                        #suggest></textarea>
+                    <textarea class="form-control" name="other" rows="4" [(ngModel)]="form.other" placeholder="{{otherLabel}}。字数不超600。"></textarea>
                 </div>
             </div>
             <div class="card col-6">

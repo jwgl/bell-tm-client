@@ -14,11 +14,11 @@ import { Http } from '../rest';
     templateUrl: 'review.dialog.html',
 })
 export class WorkflowReviewDialog extends BaseDialog {
-    result: { what: string, to: string, comment: string };
+    result: { what: string, to: string, comment: string, review: string };
 
     constructor(private http: Http) {
         super();
-        this.result = { what: null, to: null, comment: null };
+        this.result = { what: null, to: null, comment: null, review: null };
     }
 
     protected onOpening(): Observable<any> {
