@@ -37,14 +37,6 @@ export interface NextOptions {
     what: string;
 }
 
-export interface SuggestOptions {
-    id: any;
-    wi: string;
-    type: 'check' | 'approve';
-    what: string;
-    suggests: any[];
-}
-
 @Injectable()
 export class Workflow {
     listGroup: ListGroup;
@@ -140,12 +132,6 @@ export class Workflow {
 
     review(id: any, wi: string, data: { title: string, to: string, comment: string, review: string }): Observable<any> {
         return this.http.patch<{ counts: ListCounts }>(this.api.review(id, wi), data).pipe(
-            tap(result => this.updateListGroup(result.counts)),
-        );
-    }
-
-    suggest(id: any, wi: string, data: { title: string, to: string, comment: string, suggest: string }): Observable<any> {
-        return this.http.patch<{ counts: ListCounts }>(this.api.accept(id, wi), data).pipe(
             tap(result => this.updateListGroup(result.counts)),
         );
     }
