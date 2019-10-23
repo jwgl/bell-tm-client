@@ -5,15 +5,7 @@ import * as _ from 'lodash';
 import { FileTypes, ContentLabels } from '../../shared/constants';
 
 const TitleType = ['项目申报', '年度检查验收', '中期检查验收', '结项检查验收'];
-const ListItems = [{
-    reportType: 1, label: '立项'
-}, {
-    reportType: 2, label: '年度'
-}, {
-    reportType: 3, label: '中期'
-}, {
-    reportType: 4, label: '结题'
-}];
+const ReportLabels = { 1: '立项', 2: '年度', 3: '中期', 4: '结题' };
 
 @Component({
     selector: 'tm-project-form-viewer',
@@ -25,10 +17,12 @@ export class FormViewerComponent {
     @Input() isAdmin: boolean;
     // 临时记录当前选择的reportType，用于分别显示不同的阶段的评审详情
     reportType: number;
+    reviewId: number;
 
     checkReportType() {
-        if (!this.reportType) {
+        if (!this.reviewId) {
             this.reportType = this.vm.reportType;
+            this.reviewId = this.vm.id;
         }
     }
     conclusionClass(conclusion: string) {
@@ -51,7 +45,8 @@ export class FormViewerComponent {
         const reportTypes = this.vm.relationReportTypes;
         if (reportTypes && reportTypes.length > 0) {
             this.checkReportType();
-            return ListItems.filter(item => reportTypes.some((r: any) => r.reportType === item.reportType));
+            return this.vm.relationReportTypes.map((item: any) =>
+                ({ reviewId: item.id, reportType: item.reportType, label: ReportLabels[item.reportType] }));
         } else {
             return null;
         }
@@ -102,7 +97,7 @@ export class FormViewerComponent {
         this.checkReportType();
         const reviews = this.vm.relationReportTypes;
         if (reviews && reviews.length > 0) {
-            return reviews.find((r: any) => r.reportType === this.reportType);
+            return reviews.find((r: any) => r.id === this.reviewId);
         }
         return null;
     }
@@ -115,8 +110,8 @@ export class FormViewerComponent {
         return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
     }
 
-    typeSelected(reportType: number) {
-        this.reportType = reportType;
+    typeSelected(reviewId: number) {
+        this.reviewId = reviewId;
     }
 
     get expertDone(): any[] {
