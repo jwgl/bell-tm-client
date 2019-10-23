@@ -3,6 +3,7 @@
     [reviewTitle]="form?.projectName"
     (itemLoaded)="onItemLoaded($event)">
     <ng-template #viewerTpl *ngIf="form">
+        <a class="btn-link" download href="/api/hunt/reports/{{form.id}}?type=info-change-application">导出PDF</a>
         <tm-change-form-viewer [vm]="form" [project]="project"></tm-change-form-viewer>
     </ng-template>
 </tm-workflow-item>

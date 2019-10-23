@@ -53,7 +53,7 @@ export class ProjectItemComponent {
     get review(): any {
         const reviews = this.vm.relationReportTypes;
         if (reviews && reviews.length > 0) {
-            return reviews.find((r: any) => r.reportType === this.vm.reportType);
+            return reviews.find((r: any) => r.id === this.vm.id);
         }
         return null;
     }
@@ -71,7 +71,7 @@ export class ProjectItemComponent {
                 }
             });
         }
-        const review = this.vm.relationReportTypes.find((item: any) => item.reportType === this.vm.reportType);
+        const review = this.vm.relationReportTypes.find((item: any) => item.id === this.vm.id);
         if (review) {
             if (this.isEmpty(review.content)) {
                 validation.push(`${ContentLabels.content[this.vm.reportType]}为空！`);
