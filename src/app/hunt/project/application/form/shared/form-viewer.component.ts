@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 import * as _ from 'lodash';
-import { Subject } from 'rxjs';
 
-import { FileTypes, ContentLabels, InfoChangeLabels } from '../../shared/constants';
+import { FileTypes, ContentLabels } from '../../shared/constants';
 
 const TitleType = ['项目申报', '年度检查', '中期检查', '结项验收'];
 const ReportLabels = { 1: '立项', 2: '年度', 3: '中期', 4: '结题' };
@@ -122,13 +121,5 @@ export class FormViewerComponent {
 
     get expertTodo(): any[] {
         return _.filter(this.vm.expertReview, (item: any) => item.dateReviewed === null);
-    }
-
-    toggle(subject: Subject<void>): void {
-        subject.next();
-    }
-
-    getName(key: string): string {
-        return key ? InfoChangeLabels[key] : null;
     }
 }
