@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 
 import { FileTypes, ContentLabels } from '../../shared/constants';
 
-const TitleType = ['项目申报', '年度检查验收', '中期检查验收', '结项检查验收'];
+const TitleType = ['项目申报', '年度检查', '中期检查', '结项验收'];
 const ReportLabels = { 1: '立项', 2: '年度', 3: '中期', 4: '结题' };
 
 @Component({
@@ -71,10 +71,10 @@ export class FormViewerComponent {
     }
 
     get title(): string {
-        if (!this.vm.reportType) {
+        if (!this.reportType) {
             return `项目#${this.vm.projectId}`;
         } else {
-            return `${TitleType[this.vm.reportType - 1]} #${this.vm.id}`;
+            return `${TitleType[this.reportType - 1]} #${this.reviewId}`;
         }
     }
 
@@ -110,8 +110,9 @@ export class FormViewerComponent {
         return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
     }
 
-    typeSelected(reviewId: number) {
+    typeSelected(reviewId: number, reportType: number) {
         this.reviewId = reviewId;
+        this.reportType = reportType;
     }
 
     get expertDone(): any[] {

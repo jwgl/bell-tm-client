@@ -10,6 +10,7 @@ import { ProjectFormService } from './form.service';
 import { ProjectFormItemModule } from './item/item.module';
 import { ProjectListModule } from './list/form-list.module';
 import { TaskModule } from './reviewtask/task.module';
+import { FunViewModule } from './fund/fund-view.module';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { TaskModule } from './reviewtask/task.module';
         TaskModule,
         InspectModule,
         WorkflowModule,
+        FunViewModule,
     ],
     providers: [
         ProjectFormService,

@@ -6,6 +6,7 @@ import { ProjectService } from './viewer.service';
 import { ProjectListModule } from './list/project-list.module';
 import { ProjectItemModule } from './item/project-item.module';
 import { ProjectFormEditorModule } from './editor/form-editor.module';
+import { FunViewModule } from '../../application/form/fund/fund-view.module';
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import { ProjectFormEditorModule } from './editor/form-editor.module';
         ProjectListModule,
         ProjectItemModule,
         ProjectFormEditorModule,
+        FunViewModule,
     ],
     providers: [
         ProjectService,

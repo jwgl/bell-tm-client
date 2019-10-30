@@ -24,6 +24,11 @@ export enum ProjectStatus {
     CUTOUT // 终止
 }
 
+export enum FundType {
+    TRANSFER, // 划拨经费
+    ARRANGEMENT // 计划安排
+}
+
 type ReviewTypeInfo = { [key in ReviewType]: { text: string, class: string } };
 
 export const typeLabels: ReviewTypeInfo = {
@@ -56,6 +61,13 @@ export const projectStatusLabels: ProjectStatusInfo = {
     [ProjectStatus.INHAND]: { text: '在研', class: 'badge-info' },
     [ProjectStatus.FINISHED]: { text: '结题', class: 'badge-success' },
     [ProjectStatus.CUTOUT]: { text: '终止', class: 'badge-danger' },
+};
+
+type FundTypeInfo = { [key in FundType]: { text: string, class: string } };
+
+export const fundTypeLabels: FundTypeInfo = {
+    [FundType.ARRANGEMENT]: { text: '计划安排', class: 'badge-info' },
+    [FundType.TRANSFER]: { text: '划拨经费', class: 'badge-warning' },
 };
 
 export const TypeList = [

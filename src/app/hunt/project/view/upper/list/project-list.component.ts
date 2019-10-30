@@ -18,6 +18,7 @@ export class ProjectListComponent {
     list: any;
     reportType: number;
     q: string;
+    fund: any;
     ths = [
         {id: 'name', label: '项目名称', order: true},
         {id: 'code', label: '项目编号', order: true},
@@ -46,6 +47,7 @@ export class ProjectListComponent {
         this.knotYears = dto.knotYears;
         this.departments = dto.departments;
         this.createAble = dto.createAble;
+        this.fund = dto.fund;
     }
 
     query() {
