@@ -9,6 +9,7 @@ import { ChangeFormService } from './form.service';
 import { ProjectDepartmentListModule } from './list/project-list.module';
 import { ProjectDepartmentItemModule } from './item/project-item.module';
 import { ChangeFormModule } from './replace-principal/form.module';
+import { FunViewModule } from '../../application/form/fund/fund-view.module';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { ChangeFormModule } from './replace-principal/form.module';
         ProjectDepartmentItemModule,
         ChangeFormModule,
         WorkflowModule,
+        FunViewModule,
     ],
     providers: [
         ProjectDepartmentService,

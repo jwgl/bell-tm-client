@@ -6,6 +6,7 @@ import { LevelPipe } from './pipes/level-pipe';
 import { ReviewTypePipe } from './pipes/type-pipe';
 import { ChangeTypePipe } from './pipes/change-type-pipe';
 import { ProjectStatusPipe } from './pipes/project-status-pipe';
+import { FundTypePipe } from './pipes/fund-type-pipe';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { ProjectStatusPipe } from './pipes/project-status-pipe';
         ConclusionPipe,
         ProjectStatusPipe,
         ChangeTypePipe,
+        FundTypePipe,
     ],
     exports: [
         LevelPipe,
@@ -24,6 +26,7 @@ import { ProjectStatusPipe } from './pipes/project-status-pipe';
         ConclusionPipe,
         ProjectStatusPipe,
         ChangeTypePipe,
+        FundTypePipe,
     ],
 })
 export class PipesModule { }

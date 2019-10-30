@@ -12,7 +12,7 @@ export class ProjectService extends RestEditService {
         http: Http,
         authService: AuthService,
         @Inject('PROJECT_API_URL')
-        private apiUrl: string,
+        apiUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }

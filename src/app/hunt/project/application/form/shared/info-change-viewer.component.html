@@ -1,0 +1,64 @@
+<ul *ngIf="vm; else None;">
+    <li *ngFor="let item of vm">
+        <tm-row-expender #e (toggle)="toggle($event)" [enabled]="true"></tm-row-expender>
+        变更事项：{{item.type | changeType}}
+        <span class="ml-3">申请时间：{{item.dateSubmitted | date: 'yyyy-MM-dd'}}</span>
+        <span class="ml-3">审批时间：{{item.dateApproved | date: 'yyyy-MM-dd'}}</span>
+        <span class="ml-3">
+            <audit-status [status]="item.status"></audit-status>
+        </span>
+        <div *ngIf="e.expended">
+            <p *ngIf="item.departmentOpinion">学院意见：<span class="bd-highlight">{{item.departmentOpinion}}</span></p>
+            <p *ngIf="item.departmentOpinion">学校意见：<span class="bd-highlight">{{item.opinionOfUniversity}}</span></p>
+            <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>原项目信息</th>
+                            <th>变更为</th>
+                        </tr>
+                     </thead>
+                    <tbody>
+                        <tr *ngIf="has(item, 1) && item.project">
+                            <td>负责人：{{item.project.principalName}}</td>
+                            <td class="text-danger">负责人：{{item.principalName}}</td>
+                        </tr>
+                        <ng-container *ngIf="has(item, 2) && item.project">
+                            <tr *ngIf="item.middleYear">
+                                <td>中期预期：{{item.project.middleYear}}</td>
+                                <td class="text-danger">中期预期：{{item.middleYear}}</td>
+                            </tr>
+                            <tr>
+                                <td>结题预期：{{item.project.knotYear}}</td>
+                                <td class="text-danger">结题预期：{{item.knotYear}}</td>
+                            </tr>
+                        </ng-container>
+                        <tr *ngIf="has(item, 3) && item.project">
+                            <td>项目名称：{{item.project.name}}</td>
+                            <td class="text-danger">项目名称：{{item.name}}</td>
+                        </tr>
+                        <tr *ngIf="has(item, 4) && item.project">
+                            <td>研究内容：{{item.project.content}}</td>
+                            <td class="text-danger">研究内容：{{item.content}}</td>
+                        </tr>
+                        <tr *ngIf="has(item, 6) && item.project">
+                            <td>成果形式：{{item.project.achievements}}</td>
+                            <td></td>
+                            <td class="text-danger">成果形式：{{item.achievements}}</td>
+                        </tr>
+                        <tr *ngIf="has(item, 7) && item.project">
+                            <td>参与人：{{item.project.members}}</td>
+                            <td></td>
+                            <td class="text-danger">参与人：{{item.members}}</td>
+                        </tr>
+                        <tr *ngIf="has(item, 8) && item.project">
+                            <td></td>
+                            <td class="text-danger">其他：{{item.other}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+    </li>
+</ul>
+<ng-template #None>
+    <p>无</p>
+</ng-template>
