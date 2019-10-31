@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 
 import { Http, RestEditService } from 'core/rest';
 import { AuthService } from 'core/auth';
@@ -9,6 +9,7 @@ import { AuthService } from 'core/auth';
 @Injectable()
 export class ApplicationFormService extends RestEditService {
     list: any[];
+    notice: string;
 
     constructor(
         http: Http,
@@ -38,5 +39,16 @@ export class ApplicationFormService extends RestEditService {
         return this.http.post(`${this.api.item(id)}/papers`, value).pipe(
             map((data: any) => data.id)
         );
+    }
+
+    loadNotice(): Observable<string> {
+        if (this.notice) {
+            return of(this.notice);
+        } else {
+            return this.http.get<{ notice: string }>(`${this.api.list()}/notice`).pipe(
+                tap(result => this.notice = result.notice),
+                map(result => result.notice),
+            );
+        }
     }
 }

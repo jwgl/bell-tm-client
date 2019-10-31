@@ -8,8 +8,9 @@ import { FileTypes } from '../../shared/form.model';
 
 @Component({
     template: `
-    <modal-dialog [title]="title">
+    <modal-dialog [modalTitle]="title">
         <modal-body>
+            <div [markdown]="notice" [options]="{html:true}"></div>
             <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="fileType"></tm-uploader-panel>
         </modal-body>
         <modal-footer>
@@ -23,6 +24,7 @@ export class MaterialUploaderDialog extends BaseDialog {
     prefix: 'photo' | 'certi' | 'trans1' | 'trans2' | 'trans3';
     uploadUrl: string;
     fileType: any;
+    notice: string;
 
     constructor() {
         super();
@@ -31,6 +33,7 @@ export class MaterialUploaderDialog extends BaseDialog {
     protected onOpening(): Observable<any> {
         this.prefix = this.options.prefix;
         this.uploadUrl = this.options.uploadUrl;
+        this.notice = this.options.notice;
         this.fileType = FileTypes.filter(file => file.prefix === this.prefix)[0];
         return null;
     }
