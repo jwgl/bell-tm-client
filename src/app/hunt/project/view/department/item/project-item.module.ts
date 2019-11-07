@@ -7,6 +7,7 @@ import { WorkflowModule } from 'core/workflow';
 
 import { ProjectFormViewerModule } from '../../../application/form/shared/form-viewer.module';
 import { ProjectDepartmentItemComponent } from './project-item.component';
+import { ChangeFormModule } from '../replace-principal/form.module';
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import { ProjectDepartmentItemComponent } from './project-item.component';
         RouterModule,
         WorkflowModule,
         ProjectFormViewerModule,
+        ChangeFormModule,
     ],
     declarations: [
         ProjectDepartmentItemComponent,

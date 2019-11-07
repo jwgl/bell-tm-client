@@ -6,6 +6,7 @@
         <div class="ml-2">
             <button class="btn btn-secondary ml-2" [routerLink]="['replace-principal', 'create']"
                 *ngIf="changeAble">变更负责人</button>
+            <button class="btn btn-danger ml-2" (click)="terminate()" *ngIf="vm.terminable">终止项目</button>
         </div>
     </div>
     <tm-project-form-viewer [vm]="vm"></tm-project-form-viewer>

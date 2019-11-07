@@ -15,6 +15,7 @@
                 </ng-container>
                 <div class="form-group" *ngIf="options.data.length >= 1">
                     <textarea class="form-control" rows="6" placeholder="处理意见" name="comment" [(ngModel)]="result.comment"></textarea>
+                    <p *ngIf="checkWords">提示：意见字数要求不少于{{wordsCount}}</p>
                 </div>
             </form>
         </ng-container>
@@ -29,6 +30,6 @@
     </modal-body>
     <modal-footer>
         <button modalCancel>取消</button>
-        <button modalOk (click)="ok()" [disabled]="options.whoUrl && options.data?.length == 0">确定</button>
+        <button modalOk (click)="ok()" [disabled]="options.whoUrl && options.data?.length == 0 || checkWords">确定</button>
     </modal-footer>
 </modal-dialog>

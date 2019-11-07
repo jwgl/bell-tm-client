@@ -10,6 +10,7 @@ import { WorkflowReviewDialog } from './review.dialog';
 })
 export class WorkflowReviewButtonDirective {
     @Input('workflow-review') options: ReviewOptions;
+    @Input() wordsCount = 0;
     @Output() review = new EventEmitter<any>();
     pending = false;
 
@@ -25,6 +26,7 @@ export class WorkflowReviewButtonDirective {
             does: this.workflow.getDoesLabel(this.options.type),
             what: this.options.what,
             reviews: this.options.reviews,
+            wordsCount: this.wordsCount,
         }).then(result => {
             this.pending = true;
             this.workflow.review(this.options.id, this.options.wi, {

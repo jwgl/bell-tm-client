@@ -18,7 +18,7 @@ import { ApprovalService } from './approval.service';
         WorkflowModule.forReview('/api/hunt/approvers/${userId}/infoChanges', [
             { type: 'todo', label: '待审批', dateLabel: '审核时间' },
             { type: 'done', label: '已审批', dateLabel: '审批时间' },
-            { type: 'tobe', label: '变更负责人待审', dateLabel: '审核时间' },
+            { type: 'tobe', label: '变更负责人/项目终止待审', dateLabel: '审核时间' },
         ]),
         InfoChangeApprovalRoutingModule,
         PipesModule,

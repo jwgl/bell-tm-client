@@ -6,6 +6,19 @@
                     <label class="control-label">电话</label>
                     <input class="form-control" name="phone" type="text" [(ngModel)]="form.phone" placeholder="常用手机" />
                 </div>
+                <div class="form-group" *ngIf="form.reportType === 4">
+                    <label class="control-label">参与人</label>
+                    <div class="row">
+                        <div class="col-4" *ngFor="let item of form.memberList; let i = index">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{i+1}}:</span>
+                                </div>
+                                <input class="form-control" type="text" name="member{{i}}" [(ngModel)]="item.value">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label">{{contentLabel}} <span class="text-info" *ngIf="form.content">字数（含空格）{{form.content.length}}</span></label>
                     <textarea class="form-control" name="content" rows="6" [(ngModel)]="form.content" placeholder="请简要说明该项目的{{contentLabel}}。字数不超600。"></textarea>

@@ -13,6 +13,7 @@ import { PipesModule } from '../../../../settings/shared/common-pipes';
 import { ChangeFormEditorComponent } from './form-editor.component';
 import { ChangeItemComponent } from './form-item.component';
 import { ChangeListComponent } from './form-list.component';
+import { TerminateComponent } from './terminate.dialog';
 
 @NgModule({
     imports: [
@@ -30,12 +31,17 @@ import { ChangeListComponent } from './form-list.component';
         ChangeFormEditorComponent,
         ChangeItemComponent,
         ChangeListComponent,
+        TerminateComponent,
     ],
     providers: [
         Dialog,
     ],
     exports: [
         ChangeFormEditorComponent,
+        TerminateComponent,
+    ],
+    entryComponents: [
+        TerminateComponent,
     ],
 })
 export class ChangeFormModule { }

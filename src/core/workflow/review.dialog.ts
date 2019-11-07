@@ -15,6 +15,7 @@ import { Http } from '../rest';
 })
 export class WorkflowReviewDialog extends BaseDialog {
     result: { what: string, to: string, comment: string, review: string };
+    wordsCount: number;
 
     constructor(private http: Http) {
         super();
@@ -23,6 +24,7 @@ export class WorkflowReviewDialog extends BaseDialog {
 
     protected onOpening(): Observable<any> {
         this.result.what = this.options.what;
+        this.wordsCount = this.options.wordsCount;
         if (this.options.whoUrl) {
             return this.http.get(this.options.whoUrl).pipe(tap((value: any[]) => {
                 if (value.length >= 1) {
@@ -36,5 +38,13 @@ export class WorkflowReviewDialog extends BaseDialog {
 
     protected onConfirmed(): any {
         return this.result;
+    }
+
+    get checkWords(): boolean {
+        return this.wordsCount > 0 && (!this.result.comment || this.result.comment.length < this.wordsCount);
+    }
+
+    get checkReviews(): boolean {
+        return this.options.reviews != null && this.result.review == null;
     }
 }

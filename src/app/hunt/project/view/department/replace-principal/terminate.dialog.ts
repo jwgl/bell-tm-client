@@ -2,16 +2,12 @@ import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { BaseDialog } from '../dialogs';
+import { BaseDialog } from 'core/dialogs';
 
-/**
- * options: {does: string, what: string}
- */
 @Component({
-    selector: 'workflow-reject-dialog',
-    templateUrl: 'reject.dialog.html',
+    templateUrl: 'terminate.dialog.html',
 })
-export class WorkflowRejectDialog extends BaseDialog {
+export class TerminateComponent extends BaseDialog {
     result: { what: string, comment: string };
     wordsCount: number;
 

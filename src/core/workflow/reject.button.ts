@@ -9,6 +9,7 @@ import { WorkflowRejectDialog } from './reject.dialog';
 })
 export class WorkflowRejectButtonDirective {
     @Input('workflow-reject') options: ReviewOptions;
+    @Input() wordsCount = 0;
     @Output() rejected = new EventEmitter<any>();
     pending = false;
 
@@ -22,6 +23,7 @@ export class WorkflowRejectButtonDirective {
         this.dialog.open(WorkflowRejectDialog, {
             does: this.workflow.getDoesLabel(this.options.type),
             what: this.options.what,
+            wordsCount: this.wordsCount,
         }).then(result => {
             this.pending = true;
             this.workflow.reject(this.options.id, this.options.wi, {

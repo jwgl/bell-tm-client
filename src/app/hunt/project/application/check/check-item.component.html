@@ -7,12 +7,12 @@
             <button [workflow-workitems]="form.workflowInstanceId">流程</button>
         </div>
         <div class="btn-group ml-2" *ngIf="reviewable">
-            <button [workflow-reject]="reviewOptions" (rejected)="onItemLoaded($event)">退回</button>
+            <button [workflow-reject]="reviewOptions" [wordsCount]="6" (rejected)="onItemLoaded($event)">退回</button>
             <ng-container *ngIf="form.reportType === 1; else suggestTpl;">
-                <button [workflow-accept]="reviewOptions" (accepted)="onItemLoaded($event)">同意</button>
+                <button [workflow-accept]="reviewOptions" [wordsCount]="6" (accepted)="onItemLoaded($event)">同意</button>
             </ng-container>
             <ng-template #suggestTpl>
-                <button [workflow-review]="reviewOptions" (review)="onItemLoaded($event)">单位意见</button>
+                <button [workflow-review]="reviewOptions" [wordsCount]="6" (review)="onItemLoaded($event)">单位意见</button>
             </ng-template>
         </div>
         <div class="btn-group ml-2" *ngIf="rollbackAble">

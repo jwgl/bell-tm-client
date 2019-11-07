@@ -1,0 +1,15 @@
+<modal-dialog modalTitle="终止项目">
+    <modal-body>
+        <form>
+            <p>终止《{{options.what}}》申请</p>
+            <div class="form-group">
+                <textarea class="form-control" rows="6" placeholder="终止原因" name="comment" [(ngModel)]="result.comment"></textarea>
+                <p *ngIf="checkWords">提示：字数要求不少于{{wordsCount}}</p>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="checkWords">确定</button>
+    </modal-footer>
+</modal-dialog>
