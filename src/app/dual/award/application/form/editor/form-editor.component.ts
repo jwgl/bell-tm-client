@@ -26,6 +26,7 @@ export class ApplicationFormEditorComponent {
     fileNames: any;
     awardId: number;
     formId: number;
+    notice: string;
     saving = false;
 
     constructor(
@@ -39,6 +40,7 @@ export class ApplicationFormEditorComponent {
         this.editMode = this.route.snapshot.data['mode'];
         this.awardId = params['awardId'];
         this.formId = params['id'];
+        this.service.loadNotice().subscribe(notice => this.notice = notice);
         this.refresh();
     }
     refresh() {
@@ -166,7 +168,8 @@ export class ApplicationFormEditorComponent {
     upload(prefix: string) {
         this.fileNames[prefix] = undefined;
         const uploadUrl = this.uploadUrl;
-        this.dialog.open(MaterialUploaderDialog, { prefix, uploadUrl })
+        const notice = prefix === 'photo' ? this.notice : null;
+        this.dialog.open(MaterialUploaderDialog, { prefix, uploadUrl, notice })
             .then(() => {
                 this.refresh();
                 this.form.majorCooperative = '';

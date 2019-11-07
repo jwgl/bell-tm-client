@@ -24,4 +24,8 @@ export class AwardFormService extends RestEditService {
             return this.create(form);
         }
     }
+
+    toggle(id: number, key: string): Observable<void> {
+        return this.http.patch(`${this.api.item(id)}?key=${key}`, {});
+    }
 }

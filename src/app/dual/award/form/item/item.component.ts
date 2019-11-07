@@ -21,4 +21,13 @@ export class AwardItemComponent {
             this.vm = new AwardForm(dto);
         });
     }
+
+    color(key: string) {
+        return this.vm[key] ? 'btn btn-success' : 'btn btn-secondary';
+    }
+
+    // 超级开关：给超期申请的部分同学开的绿色通道
+    toggle(key: string) {
+        this.service.toggle(this.vm.id, key).subscribe(() => this.vm[key] = !this.vm[key]);
+    }
 }

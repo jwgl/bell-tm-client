@@ -10,6 +10,7 @@ import { WorkflowAcceptDialog } from './accept.dialog';
 })
 export class WorkflowAcceptButtonDirective {
     @Input('workflow-accept') options: ReviewOptions;
+    @Input() wordsCount = 0;
     @Output() accepted = new EventEmitter<any>();
     pending = false;
 
@@ -24,6 +25,7 @@ export class WorkflowAcceptButtonDirective {
             whoUrl: this.workflow.getAccecptReviewersUrl(this.options.id, this.options.type),
             does: this.workflow.getDoesLabel(this.options.type),
             what: this.options.what,
+            wordsCount: this.wordsCount,
         }).then(result => {
             this.pending = true;
             this.workflow.accept(this.options.id, this.options.wi, {

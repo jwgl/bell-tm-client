@@ -21,6 +21,8 @@ export class ApplicationItemComponent {
     pending: boolean;
     paperForm: any;
     latestAnswer: string;
+    // 绿色通道
+    privilege: boolean;
 
     constructor(
         private route: ActivatedRoute,
@@ -38,12 +40,14 @@ export class ApplicationItemComponent {
             award: any,
             paperForm: any,
             latestAnswer: any,
+            privilege: boolean,
         }>(id).subscribe(dto => {
             this.vm = new ApplicationForm(dto.form);
             this.fileNames = dto.fileNames;
             this.award = new AwardForm(dto.award);
             this.paperForm = dto.paperForm;
             this.latestAnswer = dto.latestAnswer;
+            this.privilege = dto.privilege;
         });
     }
 
@@ -56,12 +60,14 @@ export class ApplicationItemComponent {
     }
 
     get editAble(): boolean {
-        return (this.vm.status === 'CREATED' || this.vm.status === 'REJECTED') && this.award.isApplyDateValid;
+        return ((this.vm.status === 'CREATED' || this.vm.status === 'REJECTED') && this.award.isApplyDateValid) ||
+            (this.privilege && this.award.applicationOn);
     }
 
     get paperAble(): boolean {
         return (this.vm.status === 'STEP2' && !_.isNull(this.award.paperEnd) && this.award.isPaperDateValid)
-            || (this.vm.status === 'STEP5' && this.award.isCheckDateValid);
+            || (this.vm.status === 'STEP5' && this.award.isCheckDateValid)
+            || (this.privilege && this.award.paperOn);
     }
 
     get nextAble(): boolean {

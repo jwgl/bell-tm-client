@@ -37,6 +37,9 @@ export class InspectDialog extends BaseDialog {
         if (this.isEmpty(form.phone)) {
             validation.push('请输入电话号码！');
         }
+        if (form.reportType === 4 && this.isEmpty(form.members)) {
+            validation.push('请输入参与人！');
+        }
         if (this.isEmpty(form.content)) {
             validation.push(`请输入${this.contentLabel}！`);
         }
@@ -66,6 +69,7 @@ export class InspectDialog extends BaseDialog {
     }
 
     protected onConfirmed(): any {
+        this.form.members = _.chain(this.form.memberList).map(data => data.value).filter(v => v !== '').join(';').value();
         return { form: this.form, validation: this.validate(this.form) };
     }
 }

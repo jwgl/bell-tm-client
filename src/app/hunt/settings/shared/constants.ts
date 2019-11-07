@@ -100,7 +100,7 @@ export const ChangeTypeList = [
     { label: '延期', value: 2 },
     { label: '项目名称', value: 3 },
     { label: '研究内容重大调整', value: 4 },
-    { label: '自行中止项目', value: 5 },
+    { label: '终止项目', value: 5 },
     { label: '改变成果形式', value: 6 },
     { label: '变更参与人', value: 7 },
     { label: '其他', value: 8 },

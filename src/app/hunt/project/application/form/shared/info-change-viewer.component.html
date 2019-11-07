@@ -9,7 +9,7 @@
         </span>
         <div *ngIf="e.expended">
             <p *ngIf="item.departmentOpinion">学院意见：<span class="bd-highlight">{{item.departmentOpinion}}</span></p>
-            <p *ngIf="item.departmentOpinion">学校意见：<span class="bd-highlight">{{item.opinionOfUniversity}}</span></p>
+            <p *ngIf="item.opinionOfUniversity">学校意见：<span class="bd-highlight">{{item.opinionOfUniversity}}</span></p>
             <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -42,16 +42,13 @@
                         </tr>
                         <tr *ngIf="has(item, 6) && item.project">
                             <td>成果形式：{{item.project.achievements}}</td>
-                            <td></td>
                             <td class="text-danger">成果形式：{{item.achievements}}</td>
                         </tr>
                         <tr *ngIf="has(item, 7) && item.project">
                             <td>参与人：{{item.project.members}}</td>
-                            <td></td>
                             <td class="text-danger">参与人：{{item.members}}</td>
                         </tr>
                         <tr *ngIf="has(item, 8) && item.project">
-                            <td></td>
                             <td class="text-danger">其他：{{item.other}}</td>
                         </tr>
                     </tbody>

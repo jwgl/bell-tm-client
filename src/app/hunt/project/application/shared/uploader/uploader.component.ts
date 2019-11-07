@@ -66,8 +66,8 @@ export class UploaderPanelComponent {
                     if (!this.fileType.types.some(item => item === type)) {
                         alert(`请上传指定类型文件： ${this.fileType.types.join(' | ')}`);
                         this.uploadAble = false;
-                    } else if (output.file.size > 20 * 1024 * 1024) {
-                        alert(`文件不应大于20MB`);
+                    } else if (output.file.size > 40 * 1024 * 1024) {
+                        alert(`文件不应大于40MB`);
                         this.uploadAble = false;
                     } else {
                         this.uploadAble = true;
