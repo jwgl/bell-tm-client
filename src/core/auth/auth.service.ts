@@ -47,7 +47,7 @@ export class AuthService {
                 try {
                     this.csrf = JSON.parse(response.body)['csrf'];
                 } catch (e) {
-                    alert(e.message);
+                    this.logout(false);
                 }
             }
         }, error => {
