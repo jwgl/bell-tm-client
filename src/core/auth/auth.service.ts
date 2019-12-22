@@ -36,23 +36,7 @@ export class AuthService {
     }
 
     initSession(): void {
-        this.httpClient.get('/login', {
-            headers: JsonHeader,
-            observe: 'response',
-            responseType: 'text',
-        }).subscribe(response => {
-            if (response.url === `${window.location.protocol}//${window.location.host}/`) {
-                this.logout(false);
-            } else {
-                try {
-                    this.csrf = JSON.parse(response.body)['csrf'];
-                } catch (e) {
-                    this.logout(false);
-                }
-            }
-        }, error => {
-            alert(error.message);
-        });
+        this.logout(false);
     }
 
     login(username: string, password: string): Observable<boolean> {
@@ -84,11 +68,12 @@ export class AuthService {
             headers: JsonHeader,
             withCredentials: true,
         }).subscribe(result => {
-            this.userInfo = null;
             sessionStorage.removeItem('user');
-            this.csrf = result['csrf'];
+            this.userInfo = null;
             if (redirect) {
                 window.location.href = '/';
+            } else {
+                this.csrf = result['csrf'];
             }
         });
     }
