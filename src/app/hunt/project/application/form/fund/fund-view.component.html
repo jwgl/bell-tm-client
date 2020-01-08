@@ -3,11 +3,13 @@
     <thead>
         <tr>
             <th rowspan="2">类别</th>
+            <th>单位（万元）</th>
             <th colspan="3">省（市）</th>
             <th colspan="3">学校</th>
             <th colspan="3">学院</th>
         </tr>
         <tr>
+            <th>小计</th>
             <th>立项</th>
             <th>中期</th>
             <th>结项</th>
@@ -22,10 +24,12 @@
     <tbody>
         <tr>
             <th>经费安排</th>
+            <th>{{sumByType('ARRANGEMENT')}}</th>
             <td *ngFor="let column of columns">{{getFund('ARRANGEMENT', column.level, column.reportType)}}</td>
         </tr>
         <tr>
-            <th>经费划拨</th>
+            <th>已划拨</th>
+            <th>{{sumByType('TRANSFER')}}</th>
             <td *ngFor="let column of columns">{{getFund('TRANSFER', column.level, column.reportType)}}</td>
         </tr>
     </tbody>
