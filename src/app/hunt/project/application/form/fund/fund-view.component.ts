@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import * as _ from 'lodash';
+
 import { FundViewService } from './fund-view.service';
 const Columns = [
     {level: 'PROVINCE', reportType: 1},
@@ -43,5 +45,9 @@ export class FundViewComponent {
         } else {
             return null;
         }
+    }
+
+    sumByType(type: string): number {
+        return _.sum(this.funds.filter(item => item.type === type).map(fund => fund.amount));
     }
 }
