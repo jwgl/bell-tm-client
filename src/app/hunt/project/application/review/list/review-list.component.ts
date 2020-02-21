@@ -29,7 +29,7 @@ export class ReviewListComponent {
         { id: 'principalName', label: '负责人', order: true },
         { id: 'departmentName', label: '学院', order: true },
         { id: 'level', label: '等级', order: true },
-        { id: 'subtype', label: '项目类型', order: true },
+        { id: 'subtype', label: '项目类型', filter: true },
         { id: 'conclusion', label: '结论' },
         { id: 'action', label: '' },
     ];

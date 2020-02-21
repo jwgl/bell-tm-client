@@ -20,6 +20,7 @@ export class ReviewDialog extends BaseDialog {
         this.vm = this.options.reviewInfo;
         this.opinion = this.vm.opinion;
         this.conclusion = this.vm.conclusion;
+        this.score = this.vm.score;
         return null;
     }
 
