@@ -28,25 +28,5 @@
         <span class="mr-5">{{item.type | fundType: 'text'}}：<span class="badge {{item.type | fundType: 'class'}}">{{item.total}}万</span></span>
     </ng-container>
 </div>
-<tm-grid [theads]="ths" [form]="list">
-    <ng-template #bodyTpl let-list="list">
-        <ng-container *ngFor="let item of list; let i = index">
-            <tr>
-                <td><a [routerLink]="[item.id]">{{i + 1}}#{{item.id}}</a></td>
-                <td class="expand">{{item.name}}</td>
-                <td class="expand">{{item.code}}</td>
-                <td>{{item.level | level : 'text'}}</td>
-                <td class="expand">{{item.subtype}}</td>
-                <td>{{item.principalName}}</td>
-                <td>{{item.dateStart | date: 'yyyy-MM'}}</td>
-                <td>{{item.middleYear}}<span *ngIf="item.hasMid > 0">√</span></td>
-                <td>{{item.knotYear}}</td>
-                <td>{{item.dateFinished | date: 'yyyy-MM'}}</td>
-                <td><span *ngIf="item.delayTimes">{{item.delayTimes}}次</span></td>
-                <td><span
-                        class="badge badge-pill {{item.status | projectStatus: 'class'}}">{{item.status | projectStatus: 'text'}}</span>
-                </td>
-            </tr>
-        </ng-container>
-    </ng-template>
-</tm-grid>
+
+<hunt-grid [data]="list"></hunt-grid>
