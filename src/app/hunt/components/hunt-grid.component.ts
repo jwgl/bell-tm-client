@@ -62,7 +62,7 @@ export class HuntGridComponent {
         }
     };
 
-    private frameworkComponents: any;
+    frameworkComponents: any;
 
     gridOptions = {
         defaultColDef: {
