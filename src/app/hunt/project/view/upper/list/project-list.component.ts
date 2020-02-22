@@ -9,6 +9,8 @@ import { ProjectService } from '../viewer.service';
     templateUrl: 'project-list.component.html',
 })
 export class ProjectListComponent {
+    gridApi: any;
+    gridColumnApi: any;
     subtypes: any;
     middleYears: any;
     knotYears: any;
@@ -16,29 +18,17 @@ export class ProjectListComponent {
     createAble: boolean;
     options: any;
     list: any;
+    ths = [];
     reportType: number;
     q: string;
     fund: any;
-    ths = [
-        {id: 'name', label: '项目名称', order: true},
-        {id: 'code', label: '项目编号', order: true},
-        {id: 'level', label: '等级', filter: true},
-        {id: 'subtype', label: '项目类型', filter: true},
-        {id: 'principalName', label: '负责人', order: true},
-        {id: 'dateStart', label: '立项时间', order: true},
-        {id: 'middleYear', label: '中期', order: true},
-        {id: 'knotYear', label: '结题', order: true},
-        {id: 'dateFinished', label: '结题时间', order: true},
-        {id: 'delayTimes', label: '延期', order: true},
-        {id: 'status', label: '建设情况', order: true},
-    ];
 
     constructor(
         private service: ProjectService,
         private dialog: Dialog,
     ) {
         this.service.loadList(this.service.queryOptions).subscribe(dto => this.loadData(dto));
-    }
+     }
 
     loadData(dto: any) {
         this.list = dto.list;
