@@ -20,6 +20,7 @@ export class ApplicationApprovalListComponent {
     list: any[];
     type: string;
     projectsSelected: any[];
+    ids: any[]; //for hunt-grid
 
     ths = [
         { id: 'name', label: '项目名称', order: true },
@@ -42,13 +43,14 @@ export class ApplicationApprovalListComponent {
 
     loadData() {
         this.route.params.subscribe(params => {
-            this.type = params['type'];
+            this.type = this.route.snapshot.queryParams['type'];
+            const reportType = this.route.snapshot.queryParams['reportType'];
             const dateTh = this.ths.find(th => th.id === 'date');
             dateTh.label = this.dateLabel;
             this.service.loadList({
                 taskId: params['taskId'],
-                type: params['type'] ? params['type'] : null,
-                reportType: params['reportType'] ? params['reportType'] : null,
+                type: this.type ? this.type : null,
+                reportType: reportType ? reportType : null,
             }).subscribe(dto => {
                 this.list = dto;
                 this.projectsSelected = this.list;
@@ -61,14 +63,16 @@ export class ApplicationApprovalListComponent {
     }
 
     lockAll(checked: boolean) {
-        const idList = this.projectsSelected.filter(d => d.checked).map(s => s.id);
-        this.service.batchUpdate({ ids: idList, checked, type: 'lock' }).subscribe(() => {
+        // const idList = this.projectsSelected.filter(d => d.checked).map(s => s.id); 
+        if (this.ids && this.ids.length > 0) {
+           this.service.batchUpdate({ ids: this.ids, checked, type: 'lock' }).subscribe(() => {
             this.list.forEach(item => {
-                if (idList.some(id => item.id === id)) {
+                if (this.ids.some(id => item.id === id)) {
                     item.locked = checked;
                 }
             });
-        });
+        }); 
+        }   
     }
 
     get dateLabel(): string {
@@ -84,11 +88,17 @@ export class ApplicationApprovalListComponent {
     }
 
     setExpert() {
-        const idList = this.projectsSelected.filter(d => d.checked).map(s => s.id);
-        this.dialog.open(TeamDialog).then(result => {
-            this.service.batchUpdate({ ids: idList, teamNum: result, type: 'team' }).subscribe(() => {
-                this.loadData();
+        // const idList = this.projectsSelected.filter(d => d.checked).map(s => s.id);
+        if (this.ids && this.ids.length > 0) {
+            this.dialog.open(TeamDialog).then(result => {
+                this.service.batchUpdate({ ids: this.ids, teamNum: result, type: 'team' }).subscribe(() => {
+                    this.loadData();
+                });
             });
-        });
+        }
+    }
+
+    onRowSelected(ids: any) {
+        this.ids = ids;
     }
 }

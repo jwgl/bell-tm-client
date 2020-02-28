@@ -5,5 +5,8 @@
     [rowData]="list"
     [gridOptions]="gridOptions"
     [frameworkComponents]="frameworkComponents"
+    [rowSelection]="rowSelection"
+    [enableCellTextSelection]="true"
+    (selectionChanged)="onSelectionChanged($event)"
     (gridReady)="onGridReady($event)">
 </ag-grid-angular>

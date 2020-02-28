@@ -7,7 +7,7 @@
         <button class="btn btn-secondary" (click)="setExpert()">设置专家</button>
     </div>
 </div>
-<tm-grid [theads]="ths" [form]="list" [checkAble]="true" (checkedList)="onSelectProject($event)">
+<!-- <tm-grid [theads]="ths" [form]="list" [checkAble]="true" (checkedList)="onSelectProject($event)">
     <ng-template #bodyTpl let-list="list">
         <ng-container *ngFor="let item of list; let i = index">
             <tr>
@@ -30,7 +30,8 @@
             </tr>
         </ng-container>
     </ng-template>
-</tm-grid>
+</tm-grid> -->
+<hunt-grid [data]="list" [checkboxSelection]="true" (rowSelected)="onRowSelected($event)"></hunt-grid>
 <ng-template #empty>
     <div class="alert alert-info">暂无数据</div>
 </ng-template>

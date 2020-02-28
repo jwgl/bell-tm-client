@@ -1,37 +1,52 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import * as _ from 'lodash';
 
 import { SetFilterComponent } from './set-filter.component';
-import { Level, levelLabels, ProjectStatus, projectStatusLabels } from '../settings/shared/constants';
+import { Level, levelLabels, ProjectStatus, projectStatusLabels, Conclusion, conclusionLabels } from '../settings/shared/constants';
 
 @Component({
     selector: 'hunt-grid',
     templateUrl: 'hunt-grid.component.html',
 })
-export class HuntGridComponent {
-    @Input()
-    cols: any;
+export class HuntGridComponent {    
     gridApi: any;
     gridColumnApi: any;
     list: any;
+    rowSelection = 'multiple';
+    @Output() rowSelected: EventEmitter<any> = new EventEmitter<any>();   
     
     ths = [
-        {field: 'id', headerName: 'ID', width: 80, cellRenderer: this.linkCellRender},
+        {
+            field: 'id',
+            headerName: 'ID',
+            width: 80,
+            cellRenderer: this.linkCellRender,
+            checkboxSelection: false,
+            headerCheckboxSelection: false,
+            headerCheckboxSelectionFilteredOnly: false,
+        },
+        {field: 'locked', headerName: '锁', width: 60, cellRenderer: this.lockedCellRender},
+        {field: 'countExpert', headerName: '分配专家', width: 90},
+        {field: 'departmentName', headerName: '单位', filter: "setFilterComponent", comparator: this.localComparator, width: 90},
         {field: 'name', headerName: '项目名称', comparator: this.localComparator},
         {field: 'code', headerName: '项目编号', width: 90},
         {field: 'level', headerName: '等级', valueGetter: this.levelGetter, width: 70},
+        {field: 'parentName', headerName: '项目大类', filter: "setFilterComponent", comparator: this.localComparator},
         {field: 'subtype', headerName: '项目类型', filter: "setFilterComponent", comparator: this.localComparator},
         {field: 'principalName', headerName: '负责人', comparator: this.localComparator, width: 90},
         {field: 'office', headerName: '岗位', comparator: this.localComparator, width: 90},
         {field: 'title', headerName: '职称', comparator: this.localComparator, width: 90},
         {field: 'degree', headerName: '学位', comparator: this.localComparator, width: 90},
         {field: 'dateStart', headerName: '立项时间', filter: "setFilterComponent", width: 90, valueFormatter: this.formatDate},
-        {field: 'middleYear', headerName: '中期', width: 60},
-        {field: 'knotYear', headerName: '结题', width: 60},
+        {field: 'middleYear', headerName: '拟中期', filter: "setFilterComponent", width: 60},
+        {field: 'knotYear', headerName: '拟结题', filter: "setFilterComponent", width: 60},
         {field: 'dateFinished', headerName: '结题时间', width: 90},
-        {field: 'delayTimes', headerName: '延期', width: 60},
+        {field: 'delayTimes', headerName: '延期次数', width: 60},
+        {field: 'date', headerName: '申请时间', width: 60, valueFormatter: this.formatDate},
         {field: 'status', headerName: '建设情况', valueGetter: this.statusGetter, width: 90},
+        {field: 'state', headerName: '审批状态', valueGetter: this.stateGetter, width: 90},
+        {field: 'conclusion', headerName: '结论', valueGetter: this.conclusionGetter, width: 90},
     ];
 
     initFilter(key: string) {
@@ -40,7 +55,7 @@ export class HuntGridComponent {
                     .uniq()
                     .sort()
                     .value();
-        if (filters && filters.length > 0) {
+        if (filters && filters.length > 0 && this.gridApi) {
             this.gridApi
             .getFilterInstance(key)
             .getFrameworkComponentInstance()
@@ -52,15 +67,31 @@ export class HuntGridComponent {
         this.list = value;
         if (value && value.length > 0) {
             this.ths = this.ths.filter(th => !this.list.every((data: any) => data[th.field] === undefined));
-            ['subtype', 'dateStart', 'middleYear', 'knotYear', 'delayTimes'].forEach(item => {
+            ['departmentName', 'parentName', 'subtype', 'dateStart', 'middleYear', 'knotYear', 'delayTimes']
+            .forEach(item => {
                 const th = this.ths.find(col => col.field === item);
                 if (th && th.filter === "setFilterComponent") {
-                    console.log(item);
                     this.initFilter(item);
                 }
             });
         }
-    };
+    }
+
+    @Input() set cols(value: any[]) {
+        this.ths.concat(value);
+    }
+
+    @Input()set checkboxSelection(value: boolean) {
+        if (value) {
+            const field = this.ths.find(th => th.field === 'id');
+            if (field) {
+                field.checkboxSelection = true;
+                field.headerCheckboxSelection = true;
+                field.headerCheckboxSelectionFilteredOnly = true;
+                field.width = 100;
+            }
+        }
+    }
 
     frameworkComponents: any;
 
@@ -85,12 +116,25 @@ export class HuntGridComponent {
         return String(str1).localeCompare(str2);
     }
 
+    lockedCellRender(params: any) {
+        return params.data.locked ? 'Y' : 'N';
+    }
+
     levelGetter(params: any) {
         return levelLabels[Level[params.data.level]].text;
     }
 
     statusGetter(params: any) {
         return projectStatusLabels[ProjectStatus[params.data.status]].text;
+    }
+
+    stateGetter(params: any) {
+        return {SUBMITTED: '待审核', CHECKED: '待审批', FINISHED: '完成'}[params.data.state];
+    }
+
+    conclusionGetter(params: any) {
+        const obj = conclusionLabels[Conclusion[params.data.conclusion]];
+        return obj ? obj.text: '';
     }
 
     formatDate(params: any) {
@@ -100,12 +144,15 @@ export class HuntGridComponent {
     onGridReady(params: any) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
-        // params.api.sizeColumnsToFit();
     }
 
     linkCellRender(params: any) {
         const url = window.location.pathname;
-        return `<a href="${url}/${params.value}">${params.node.rowIndex + 1} #${params.value}</a>`;
+        return `<a href="${url}/${params.value}">${params.node.rowIndex + 1} #${params.value}<fa-icon icon="user"></fa-icon></a>`;
     }
-    
+
+    onSelectionChanged(event) {
+        const ids = event.api.getSelectedNodes().map((node: any) => node.data.id);
+        this.rowSelected.emit(ids);
+    }
 }
