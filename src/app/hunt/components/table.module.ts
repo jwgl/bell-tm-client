@@ -10,9 +10,9 @@ import { HuntGridComponent } from './hunt-grid.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faLock, faLockOpen, faUser } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faFilter);
+library.add(faFilter, faLock, faLockOpen, faUser);
 @NgModule({
     imports: [
         CommonModule,

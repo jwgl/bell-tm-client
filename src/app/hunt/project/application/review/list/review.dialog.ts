@@ -15,6 +15,7 @@ export class ReviewDialog extends BaseDialog {
     conclusions = ['同意', '不同意', '弃权'];
     isCommit = false;
     score: number;
+    saving = false;
 
     protected onOpening(): Observable<any> {
         this.vm = this.options.reviewInfo;
@@ -33,12 +34,23 @@ export class ReviewDialog extends BaseDialog {
 
     commit() {
         this.isCommit = true;
-        this.ok();
+        this.save();       
+    }
+
+    save() {
+        if (this.opinion === undefined || this.opinion === null || this.opinion.length < 6) {
+            this.isCommit = false;
+            alert('请输入意见！不少于6个字');
+        } else {
+            this.saving = true;
+            this.ok();
+        } 
     }
 
     get errors(): boolean {
         return (this.score >= 60 && this.conclusion === '不同意')
         || (this.score < 60 && this.conclusion === '同意')
-        || (this.score === undefined && this.conclusion !== '弃权');
+        || (this.score === undefined && this.conclusion !== '弃权')
+        || this.conclusion === undefined || this.conclusion === null;
     }
 }
