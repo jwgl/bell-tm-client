@@ -59,19 +59,12 @@ export class ProjectListComponent {
             this.isCheckTime = dto.isCheckTime;
             this.existExpertReview = dto.existExpertReview;
             if (this.existExpertReview) {
-                // this.ths = this.ths.concat([
-                    // {id: 'countOk', label: '同意', order: true},
-                    // {id: 'countVeto', label: '不同意', order: true},
-                    // {id: 'countWaiver', label: '弃权', order: true},
-                    // {id: 'countNull', label: '未评', order: true},
-                    // {id: 'average', label: '平均分', order: true},
-                // ]);
                 this.additionalCols = [
-                    {field: 'countOk', headerName: '同意'},
-                    {field: 'countVeto', headerName: '不同意'},
-                    {field: 'countWaiver', headerName: '弃权'},
-                    {field: 'countNull', headerName: '未评'},
-                    {field: 'average', headerName: '平均分'},
+                    {field: 'countOk', headerName: '同意', width: 40 },
+                    {field: 'countVeto', headerName: '不同意', width: 40},
+                    {field: 'countWaiver', headerName: '弃权', width: 40},
+                    {field: 'countNull', headerName: '未评', width: 40},
+                    {field: 'average', headerName: '平均分', width: 40},
                 ];
             }
             const counts = dto.counts;

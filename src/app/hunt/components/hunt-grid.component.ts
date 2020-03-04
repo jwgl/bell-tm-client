@@ -13,6 +13,7 @@ export class HuntGridComponent {
     gridApi: any;
     gridColumnApi: any;
     list: any;
+    reflesh: boolean;
     rowSelection = 'multiple';
     @Output() rowSelected: EventEmitter<any> = new EventEmitter<any>();   
     
@@ -26,8 +27,8 @@ export class HuntGridComponent {
             headerCheckboxSelection: false,
             headerCheckboxSelectionFilteredOnly: false,
         },
-        {field: 'locked', headerName: '锁', width: 60, cellRenderer: this.lockedCellRender},
-        {field: 'countExpert', headerName: '分配专家', width: 90},
+        {field: 'locked', headerName: '锁', width: 40, cellRenderer: this.lockedCellRender},
+        {field: 'countExpert', headerName: '专家数', width: 60},
         {field: 'departmentName', headerName: '单位', filter: "setFilterComponent", comparator: this.localComparator, width: 90},
         {field: 'name', headerName: '项目名称', comparator: this.localComparator},
         {field: 'code', headerName: '项目编号', width: 90},
@@ -38,6 +39,7 @@ export class HuntGridComponent {
         {field: 'office', headerName: '岗位', comparator: this.localComparator, width: 90},
         {field: 'title', headerName: '职称', comparator: this.localComparator, width: 90},
         {field: 'degree', headerName: '学位', comparator: this.localComparator, width: 90},
+        {field: 'phone', headerName: '电话', width: 90},
         {field: 'dateStart', headerName: '立项时间', filter: "setFilterComponent", width: 90, valueFormatter: this.formatDate},
         {field: 'middleYear', headerName: '拟中期', filter: "setFilterComponent", width: 60},
         {field: 'knotYear', headerName: '拟结题', filter: "setFilterComponent", width: 60},
@@ -66,7 +68,9 @@ export class HuntGridComponent {
     @Input() set data(value: any[]) {
         this.list = value;
         if (value && value.length > 0) {
-            this.ths = this.ths.filter(th => !this.list.every((data: any) => data[th.field] === undefined));
+            console.log(this.ths);
+            console.log(value);
+            this.ths = this.ths.filter(th => !this.list.every((data: any) => data[th.field] === undefined || data[th.field] === null));
             ['departmentName', 'parentName', 'subtype', 'dateStart', 'middleYear', 'knotYear', 'delayTimes']
             .forEach(item => {
                 const th = this.ths.find(col => col.field === item);
@@ -77,8 +81,15 @@ export class HuntGridComponent {
         }
     }
 
-    @Input() set cols(value: any[]) {
-        this.ths.concat(value);
+    @Input() set cols(value: any[]) {    
+        this.ths = this.ths.concat(value);
+    }
+
+    @Input() set flush(value: boolean) {
+        if (this.reflesh != value) {
+            this.reflesh = value;
+            this.gridApi.refreshCells({force: true});
+        }
     }
 
     @Input()set checkboxSelection(value: boolean) {
@@ -99,12 +110,6 @@ export class HuntGridComponent {
         defaultColDef: {
             sortable: true,
             resizable: true,
-            cellClassRules: {
-                'badge badge-pill badge-secondary': params => params.value === '未立项',
-                'badge badge-pill badge-info': params => params.value === '在研',
-                'badge badge-pill badge-success': params => params.value === '结题',
-                'badge badge-pill badge-danger': params => params.value === '终止',
-            },
         },        
     };
 

@@ -21,6 +21,7 @@ export class ApplicationApprovalListComponent {
     type: string;
     projectsSelected: any[];
     ids: any[]; //for hunt-grid
+    flush: boolean;
 
     ths = [
         { id: 'name', label: '项目名称', order: true },
@@ -63,7 +64,6 @@ export class ApplicationApprovalListComponent {
     }
 
     lockAll(checked: boolean) {
-        // const idList = this.projectsSelected.filter(d => d.checked).map(s => s.id); 
         if (this.ids && this.ids.length > 0) {
            this.service.batchUpdate({ ids: this.ids, checked, type: 'lock' }).subscribe(() => {
             this.list.forEach(item => {
@@ -71,6 +71,11 @@ export class ApplicationApprovalListComponent {
                     item.locked = checked;
                 }
             });
+            if (this.flush === undefined) {
+                this.flush = true;
+            } else {
+                this.flush = !this.flush;
+            }
         }); 
         }   
     }
@@ -88,12 +93,16 @@ export class ApplicationApprovalListComponent {
     }
 
     setExpert() {
-        // const idList = this.projectsSelected.filter(d => d.checked).map(s => s.id);
         if (this.ids && this.ids.length > 0) {
             this.dialog.open(TeamDialog).then(result => {
                 this.service.batchUpdate({ ids: this.ids, teamNum: result, type: 'team' }).subscribe(() => {
                     this.loadData();
                 });
+                if (this.flush === undefined) {
+                    this.flush = true;
+                } else {
+                    this.flush = !this.flush;
+                }
             });
         }
     }
