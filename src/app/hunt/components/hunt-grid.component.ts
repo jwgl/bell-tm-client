@@ -68,8 +68,6 @@ export class HuntGridComponent {
     @Input() set data(value: any[]) {
         this.list = value;
         if (value && value.length > 0) {
-            console.log(this.ths);
-            console.log(value);
             this.ths = this.ths.filter(th => !this.list.every((data: any) => data[th.field] === undefined || data[th.field] === null));
             ['departmentName', 'parentName', 'subtype', 'dateStart', 'middleYear', 'knotYear', 'delayTimes']
             .forEach(item => {
