@@ -16,12 +16,13 @@ const routes: Routes = [
         }, {
             path: ':type',
             component: ProjectListComponent,
+        }
+        , {
+            path: ':type/:id',
+            component: ApplicationApprovalItemComponent,
         }],
     },
-    { path: ':taskId/:type/applications/:id', component: ApplicationApprovalItemComponent },
-    { path: ':taskId/:type/:reportType/applications/:id', component: ApplicationApprovalItemComponent },
-    { path: ':taskId/:type/:reportType', component: ApplicationApprovalListComponent },
-    { path: ':taskId/:type', component: ApplicationApprovalListComponent },
+    { path: ':taskId/:id', component: ApplicationApprovalItemComponent },
     { path: ':taskId', component: ApplicationApprovalListComponent },
 ];
 

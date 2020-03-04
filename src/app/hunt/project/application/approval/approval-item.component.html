@@ -1,8 +1,5 @@
 <ng-container *ngIf="form">
     <div class="btn-toolbar mt-3">
-        <div class="btn-group">
-            <tm-workflow-item-pager [prevId]="prevId" [nextId]="nextId"></tm-workflow-item-pager>
-        </div>
         <div class="btn-group ml-auto">
             <button class="btn btn-secondary" (click)="conclusionSetting()" *ngIf="form.status === 'CHECKED'" [disabled]="!form.locked">结论</button>
             <button class="btn btn-secondary" (click)="removeExpert(form.id)" *ngIf="form.expertReview && form.expertReview.length > 0 && reviewable" [disabled]="!form.locked">清除专家</button>
