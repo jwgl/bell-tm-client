@@ -29,7 +29,7 @@
         </div>
     </modal-body>
     <modal-footer>
-        <button type="button" class="btn btn-secondary" (click)="ok()" *ngIf="vm.editAble"
+        <button type="button" class="btn btn-secondary" (click)="save()" *ngIf="vm.editAble"
             [disabled]="errors">保存</button>
         <button type="button" class="btn btn-secondary" (click)="commit()" *ngIf="vm.editAble"
             [disabled]="errors">提交</button>

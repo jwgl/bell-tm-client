@@ -28,7 +28,7 @@ export class SetFilterComponent implements IFilterAngularComp {
     doesFilterPass(params: IDoesFilterPassParams): boolean {
         return this.filters
             .some((filterWord) => {
-                return this.valueGetter(params.node).toString() === filterWord;
+                return this.valueGetter(params.node) == filterWord;
             });
     }
 
