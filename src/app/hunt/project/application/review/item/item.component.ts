@@ -42,6 +42,7 @@ export class ReviewItemComponent {
                 conclusion: dto.conclusion,
                 editAble: dto.editAble,
                 opinion: dto.opinion,
+                score: dto.score,
             };
         });
     }
