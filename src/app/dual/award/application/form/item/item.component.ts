@@ -10,7 +10,6 @@ import { AwardForm } from '../../../shared/form.model';
 import { ApplicationForm, FileTypes } from '../../shared/form.model';
 import { ApplicationFormService } from '../form.service';
 import { PaperFormDialog } from '../paper/paper-form.dialog';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     templateUrl: 'item.component.html',
