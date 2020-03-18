@@ -12,7 +12,6 @@
         </div>
         <div class="btn-group ml-2" *ngIf="paperAble">
             <button class="btn btn-secondary" (click)="uploadPaper()">上传论文</button>
-            <button [workflow-next]="nextOptions" (nexted)="onItemLoaded($event)" *ngIf="nextAble">下一步</button>
         </div>
     </div>
     <p class="form-control-plaintext text-info mb-2" *ngIf="latestAnswer">最新批复： {{latestAnswer}} <button

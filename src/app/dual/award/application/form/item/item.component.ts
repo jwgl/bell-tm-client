@@ -85,10 +85,14 @@ export class ApplicationItemComponent {
             const paper = data.form ? data.form : [];
             this.dialog.open(PaperFormDialog, { paper, uploadUrl, fileType })
                 .then(result => {
-                    this.service.createPaperForm(this.vm.id, result).subscribe(() => {
-                        this.loadData(this.vm.id);
-                        this.pending = true;
-                    });
+                    this.service.createPaperForm(this.vm.id, result).subscribe(() =>
+                        this.service.next(this.vm.id, undefined, this.vm.title).subscribe(() => {
+                            this.loadData(this.vm.id);
+                            this.pending = true;
+                        }, error => {
+                            alert(`错误：${error.error.message}`);
+                        })
+                    );
                 });
         });
     }
