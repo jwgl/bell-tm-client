@@ -28,6 +28,7 @@ export class ApplicationFormEditorComponent {
     formId: number;
     notice: string;
     saving = false;
+    pass: boolean;
 
     constructor(
         private service: ApplicationFormService,
@@ -69,6 +70,7 @@ export class ApplicationFormEditorComponent {
         } else {
             this.form.awardId = this.awardId;
         }
+        this.pass = dto.pass;
     }
 
     subjects(universityName: any): any[] {
@@ -174,5 +176,14 @@ export class ApplicationFormEditorComponent {
                 this.refresh();
                 this.form.majorCooperative = '';
             });
+    }
+
+    moveIn() {
+        this.form.awardId = this.awardId;
+        this.saving = true;
+        this.service.create(this.form.toServerDto()).subscribe(id => {
+            this.dialogs.confirm('成功', '申请转入成功！').then(() =>
+                this.router.navigate(['../../', id], { relativeTo: this.route }));
+        });
     }
 }

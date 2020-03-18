@@ -17,6 +17,7 @@ export class PaperFormDialog extends BaseDialog {
     uploadUrl: string;
     fileType: any;
     types = paperTypeLabels;
+    saving = false;
 
     constructor() {
         super();
@@ -24,10 +25,6 @@ export class PaperFormDialog extends BaseDialog {
 
     isEmpty(option: any): boolean {
         return _.isUndefined(option) || _.isNull(option);
-    }
-
-    get disabled(): boolean {
-        return this.isEmpty(this.form.chineseTitle) || this.isEmpty(this.form.englishTitle);
     }
 
     protected onOpening(): Observable<any> {
@@ -42,5 +39,14 @@ export class PaperFormDialog extends BaseDialog {
 
     protected onConfirmed(): any {
         return this.form.toServerDto();
+    }
+
+    submit() {
+        if (this.isEmpty(this.form.chineseTitle) || this.isEmpty(this.form.englishTitle)) {
+            alert('请输入中英文论文题目！');
+        } else if (!this.saving) {
+            this.saving = true;
+            this.ok();
+        }
     }
 }

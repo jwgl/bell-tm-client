@@ -10,6 +10,7 @@ import { AwardForm } from '../../../shared/form.model';
 import { ApplicationForm, FileTypes } from '../../shared/form.model';
 import { ApplicationFormService } from '../form.service';
 import { PaperFormDialog } from '../paper/paper-form.dialog';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     templateUrl: 'item.component.html',
@@ -85,10 +86,14 @@ export class ApplicationItemComponent {
             const paper = data.form ? data.form : [];
             this.dialog.open(PaperFormDialog, { paper, uploadUrl, fileType })
                 .then(result => {
-                    this.service.createPaperForm(this.vm.id, result).subscribe(() => {
-                        this.loadData(this.vm.id);
-                        this.pending = true;
-                    });
+                    this.service.createPaperForm(this.vm.id, result).subscribe(() =>
+                        this.service.next(this.vm.id, undefined, this.vm.title).subscribe(() => {
+                            this.loadData(this.vm.id);
+                            this.pending = true;
+                        }, error => {
+                            alert(`错误：${error.error.message}`);
+                        })
+                    );
                 });
         });
     }
