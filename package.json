@@ -30,7 +30,7 @@
     "ag-grid-community": "^22.1.1",
     "bootstrap": "^4.3.1",
     "dayjs": "^1.8.8",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.11",
     "markdown-it": "^8.4.2",
     "ngx-clipboard": "^12.1.0",
