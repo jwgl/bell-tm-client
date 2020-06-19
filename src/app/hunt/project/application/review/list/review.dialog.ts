@@ -34,7 +34,7 @@ export class ReviewDialog extends BaseDialog {
 
     commit() {
         this.isCommit = true;
-        this.save();       
+        this.save();
     }
 
     save() {
@@ -44,7 +44,7 @@ export class ReviewDialog extends BaseDialog {
         } else {
             this.saving = true;
             this.ok();
-        } 
+        }
     }
 
     get errors(): boolean {
