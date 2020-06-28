@@ -3,11 +3,13 @@
         <form role="form">
             <div class="form-group">
                 <label class="control-label">论文英文题目</label>
-                <input class="form-control" name="englishTitle" type="text" [(ngModel)]="form.englishTitle" placeholder="输入论文英文题目" />
+                <input class="form-control" name="englishTitle" type="text" [(ngModel)]="form.englishTitle"
+                    placeholder="输入论文英文题目" />
             </div>
             <div class="form-group">
                 <label class="control-label">论文中文题目</label>
-                <input class="form-control" name="chineseTitle" type="text" [(ngModel)]="form.chineseTitle" placeholder="输入论文中文题目" />
+                <input class="form-control" name="chineseTitle" type="text" [(ngModel)]="form.chineseTitle"
+                    placeholder="输入论文中文题目" />
             </div>
             <div class="form-group">
                 <label class="control-label">选择上传论文</label>
@@ -17,6 +19,6 @@
     </modal-body>
     <modal-footer>
         <button modalCancel>取消</button>
-        <button type="button" class="btn btn-secondary" (click)="ok()" [disabled]="disabled">确定</button>
+        <button type="button" class="btn btn-secondary" (click)="submit()">提交</button>
     </modal-footer>
 </modal-dialog>
