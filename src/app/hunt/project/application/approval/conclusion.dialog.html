@@ -40,6 +40,12 @@
                     <p class="form-control-plaintext">{{conclusionForm.knotYear}}</p>
                 </form-field>
             </ng-container>
+            <ng-container *ngIf="knotOk">
+                <form-field label="结项日期">
+                    <input class="form-control" type="text" name="dateFinished" [(ngModel)]="conclusionForm.dateFinished"
+                    (ngModelChange)="datengChange($event)" placeholder="请严格按规范输入YYYY-MM-DD">
+                </form-field>
+            </ng-container>
         </form>
     </modal-body>
     <modal-footer>

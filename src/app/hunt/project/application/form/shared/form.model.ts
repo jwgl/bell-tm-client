@@ -125,6 +125,7 @@ export class ProjectForm {
     knotYear: number;
     relationReportTypes: any;
     fileTypes: any[];
+    dateFinished: string;
 
     constructor(dto: any) {
         Object.assign(this, dto);

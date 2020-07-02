@@ -60,6 +60,9 @@ export class ApplicationApprovalItemComponent {
                     this.conclusionForm.middleYear = this.form.middleYear;
                     this.conclusionForm.knotYear = this.form.knotYear;
                 }
+                if (review.reportType === 4) {
+                    this.conclusionForm.dateFinished = this.form.dateFinished;
+                }
             }
         }
     }
@@ -133,6 +136,11 @@ export class ApplicationApprovalItemComponent {
             ((this.form.level === 'PROVINCE' && data.conclusionOfProvince === 'OK') ||
             (this.form.level === 'UNIVERSITY' && data.conclusionOfUniversity === 'OK'))) {
             validation.push('请正确输入立项日期！');
+        }
+        if ((this.form.reportType === 4 && this.isEmpty(data.dateFinished)) &&
+            ((this.form.level === 'PROVINCE' && data.conclusionOfProvince === 'OK') ||
+            (this.form.level === 'UNIVERSITY' && data.conclusionOfUniversity === 'OK'))) {
+            validation.push('请正确输入结项日期！');
         }
         return validation;
     }
