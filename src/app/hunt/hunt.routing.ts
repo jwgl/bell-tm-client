@@ -46,6 +46,9 @@ const routes: Routes = [{
 }, {
     path: 'approvers/:userId/funds',
     loadChildren: () => import('./fund/fund.module').then(m => m.FundModule),
+}, {
+    path: 'teachers/:userId/projects',
+    loadChildren: () => import('./project/view/teacher/viewer.module').then(m => m.ProjectTeachertModule),
 }];
 
 @NgModule({

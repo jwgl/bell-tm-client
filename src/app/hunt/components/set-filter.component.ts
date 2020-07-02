@@ -1,9 +1,9 @@
-import {Component, ViewChild, ViewContainerRef} from "@angular/core";
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 
 import * as _ from 'lodash';
 
-import {IAfterGuiAttachedParams, IDoesFilterPassParams, IFilterParams, RowNode} from "ag-grid-community";
-import {IFilterAngularComp} from "ag-grid-angular";
+import { IAfterGuiAttachedParams, IDoesFilterPassParams, IFilterParams, RowNode } from 'ag-grid-community';
+import { IFilterAngularComp } from 'ag-grid-angular';
 
 @Component({
     selector: 'set-filter',
@@ -28,12 +28,12 @@ export class SetFilterComponent implements IFilterAngularComp {
     doesFilterPass(params: IDoesFilterPassParams): boolean {
         return this.filters
             .some((filterWord) => {
-                return this.valueGetter(params.node) == filterWord;
+                return this.valueGetter(params.node) === filterWord;
             });
     }
 
     getModel(): any {
-        return {value: this.filters};
+        return { value: this.filters };
     }
 
     setModel(model: any): void {
@@ -47,7 +47,7 @@ export class SetFilterComponent implements IFilterAngularComp {
     select(item: string) {
         const removedItem = this.filters.find(f => f === item);
         if (removedItem) {
-            this.filters.splice(this.filters.indexOf(removedItem), 1);                
+            this.filters.splice(this.filters.indexOf(removedItem), 1);
         } else {
             this.filters.push(item);
         }
@@ -59,7 +59,7 @@ export class SetFilterComponent implements IFilterAngularComp {
     }
 
     selectAll() {
-        this.filters = this.filters.length > 0 ? [] : this.items.slice(); 
+        this.filters = this.filters.length > 0 ? [] : this.items.slice();
         this.params.filterChangedCallback();
     }
 }

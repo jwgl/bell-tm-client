@@ -38,7 +38,7 @@
                             <td></td>
                             <td></td>
                             <td><span *ngIf="countItem.countProject">{{countItem.countProject}}</span></td>
-                            <td><a [routerLink]="[task.id]" [queryParams]="{type: 'todo', reportType: countItem.reportType}" *ngIf="countItem.countUncheck"><span class="badge badge-pill badge-secondary">a{{countItem.countUncheck}}</span></a></td>
+                            <td><a [routerLink]="[task.id]" [queryParams]="{type: 'todo', reportType: countItem.reportType}" *ngIf="countItem.countUncheck"><span class="badge badge-pill badge-secondary">{{countItem.countUncheck}}</span></a></td>
                             <td><a [routerLink]="[task.id]" [queryParams]="{type: 'done', reportType: countItem.reportType}" *ngIf="countItem.countPass"><span class="badge badge-pill badge-secondary">{{countItem.countPass}}</span></a></td>
                             <td><a [routerLink]="[task.id]" [queryParams]="{type: 'expr', reportType: countItem.reportType}" *ngIf="countItem.countFail"><span class="badge badge-pill badge-secondary">{{countItem.countFail}}</span></a></td>
                         </tr>

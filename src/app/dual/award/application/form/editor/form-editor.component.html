@@ -1,11 +1,12 @@
 <ng-container *ngIf="form">
     <div class="btn-toolbar">
         <div class="btn-group ml-auto">
-            <button class='btn btn-primary' (click)="save()" [disabled]="saving">保存</button>
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving" *ngIf="!pass">保存</button>
+            <button class='btn btn-primary' (click)="moveIn()" [disabled]="saving" *ngIf="pass">申请转入</button>
         </div>
     </div>
     <tm-form-title>学位申请单{{form.id}}</tm-form-title>
-    <form role="form">
+    <form role="form" *ngIf="!pass">
         <div class="row">
             <div class="col-9">
                 <div class="form-group">
