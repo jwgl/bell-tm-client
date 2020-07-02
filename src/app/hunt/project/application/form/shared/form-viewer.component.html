@@ -46,8 +46,8 @@
             <div>{{vm.middleYear}}</div>
         </div>
         <div class="form-group col-md-3">
-            <label class="control-label">预期结项</label>
-            <div>{{vm.knotYear}}</div>
+            <label class="control-label">{{vm.projectStatus === 'FINISHED' ? '结项日期' : '预期结项'}}</label>
+            <div>{{vm.projectStatus === 'FINISHED' ? vm.dateFinished : vm.knotYear}}</div>
         </div>
     </div>
 

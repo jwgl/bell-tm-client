@@ -42,6 +42,12 @@ export class ConclusionDialog extends BaseDialog {
                 (this.level === 'UNIVERSITY' && this.conclusionForm.conclusionOfUniversity === 'OK'));
     }
 
+    get knotOk(): boolean {
+        return this.reportType === 4 &&
+            ((this.provinceLevel && this.conclusionForm.conclusionOfProvince === 'OK') ||
+                (this.level === 'UNIVERSITY' && this.conclusionForm.conclusionOfUniversity === 'OK'));
+    }
+
     isDate(value: string): boolean {
         return dayjs(value).format('YYYY-MM-DD') === value;
     }
