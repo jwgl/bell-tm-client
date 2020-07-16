@@ -31,7 +31,7 @@
     "bootstrap": "^4.3.1",
     "dayjs": "^1.8.8",
     "jquery": "^3.3.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "markdown-it": "^8.4.2",
     "ngx-clipboard": "^12.1.0",
     "ngx-uploader": "^8.0.0",
