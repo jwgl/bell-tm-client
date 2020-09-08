@@ -1,87 +1,93 @@
-import {Component, EventEmitter} from '@angular/core';
+import { Component } from '@angular/core';
 
-import { humanizeBytes, UploaderOptions, UploadFile, UploadInput, UploadOutput, UploadStatus } from 'ngx-uploader';
+import * as _ from 'lodash';
 
+import { CommonDialog } from 'core/common-dialogs';
+import { Dialog } from 'core/dialogs';
+
+import { FundImportDialog } from './editor/form-editor.component';
 import { FundService } from './fund.service';
+import { isEmpty } from 'lodash';
+import { RowComp, RowPositionUtils } from 'ag-grid-community';
 
 @Component({
     templateUrl: 'fund-list.component.html',
 })
 export class FundListComponent {
     funds: any[];
-
-    xsrfToken: string;
-    options: UploaderOptions;
-    formData: FormData;
-    files: UploadFile[];
-    uploadInput: EventEmitter<UploadInput>;
-    humanizeBytes: (bytes: number) => string;
-    maxUploads = 1;
-    availableTypes = ['xls', 'xlsx'];
+    form: any;
     fundType: string;
+    reviewAble = false;
+    monthCreated = null;
+    monthes: any[];
+    list: any[];
 
-    constructor(private service: FundService) {
-        this.files = []; // local uploading files array
-        this.options = { concurrency: 3, maxUploads: this.maxUploads };
-        this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
-        this.humanizeBytes = humanizeBytes;
-        // 从cookie中截取XSRF-TOKEN
-        const cookieAttributes: string[] = document.cookie.split(';');
-        const csrf = cookieAttributes.filter((attr: string) => attr.includes('XSRF-TOKEN=')).toString();
-        this.xsrfToken = csrf.replace('XSRF-TOKEN=', '');
+    constructor(
+        private service: FundService,
+        private dialog: Dialog,
+        private dialogs: CommonDialog,
+    ) {
+        this.loadData();
     }
 
-    onUploadOutput(output: UploadOutput): void {
-        switch (output.type) {
-            case 'allAddedToQueue':
-                const event: UploadInput = {
-                    type: 'uploadAll',
-                    url: this.uploadUrl,
-                    method: 'POST',
-                    data:  { fundType: this.fundType },
-                    headers: { 'X-XSRF-TOKEN': this.xsrfToken },
-                };
-                this.uploadInput.emit(event);
-                break;
-            case 'addedToQueue':
-                if (output.file) {
-                    // 规定上传文件的格式
-                    const type = output.file.name.slice(output.file.name.lastIndexOf('.') + 1).toLocaleLowerCase();
-                    if (!this.availableTypes.some(item => item === type)) {
-                        alert(`请上传指定类型文件： ${this.availableTypes.join(' | ')}`);
-                    } else {
-                        this.files.push(output.file);
-                    }
-                }
-                break;
-            case 'uploading':
-                if (output.file) {
-                    const index = this.files.findIndex(file => file.id === output.file.id);
-                    this.files[index] = output.file;
-                }
-                break;
-            case 'removed':
-                this.files = this.files.filter(file => file !== output.file);
-                break;
-            case 'rejected':
-                alert(`最多上传${this.maxUploads}个文件。`);
-                break;
-            case 'done':
-                this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
-                const response = output.file.response;
-                this.funds = response.table;
-                if (response.error) {
-                    alert(response.message);
-                }
-                break;
-        }
+    loadData() {
+        this.service.loadList({month: this.monthCreated}).subscribe((dto: any) => {
+            this.monthes = dto.monthes ? dto.monthes.sort() : [];
+            this.list = dto.funds;
+            if (this.list && this.list.length > 0) {
+                this.funds = this.list.reduce((rows: any[], item, index) => {
+                    const array = _.fill(Array(11), 0)
+                                    .map((v, i) => i > 1 ? item[`col${i - 1}`] : v);
+                    array[0] = index + 1;
+                    array[1] = item.code;
+                    rows.push(array);
+                    return rows;
+                }, []);
+            }
+        });
     }
 
-    get uploadUrl(): string {
-        return `/zuul${this.service.api.list()}/upload`;
+    importFund() {
+        this.dialog.open(FundImportDialog).then(form => {
+            const data = form.data.split('\n');
+            this.funds = [];
+            const table = [];
+            this.reviewAble = true;
+            data.forEach((row: string, index: number) => {
+                if (!row.startsWith('序号') && row !== '') {
+                    const cells = row.split('\t');
+                    cells.forEach((item, i) => {
+                        if (i > 1 && item !== '' && !/^\d+(\.\d+)?$/.test(item)) {
+                            alert(`第${index + 1}行存在非法值‘${item}’`);
+                            this.reviewAble = false;
+                        }
+                    });
+                    this.funds.push(cells);
+                    table.push({data: cells});
+                }
+            });
+            this.form = form;
+            this.form.table = table;
+        });
     }
 
-    setFundType(type: string) {
-        this.fundType = type;
+    ok() {
+        this.service.batchSave(this.form).subscribe(dto => {
+            if (dto.error && dto.error.length > 0) {
+                this.dialogs.error(dto.error);
+            }
+            if (dto.success > 0) {
+                alert(`成功导入${dto.success}行数据`);
+            }
+            this.reviewAble = false;
+        });
+    }
+    cancel() {
+        this.form = null;
+        this.funds = [];
+        this.reviewAble = false;
+    }
+    search() {
+        this.loadData();
     }
 }
