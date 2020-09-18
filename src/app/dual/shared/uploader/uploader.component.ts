@@ -33,16 +33,16 @@ export class UploaderPanelComponent {
     // 选择文件后触发的顺序是addedToQueue > allAddedToQueue > uploading
     // 上传的文件不依赖this.files, 就是清空了也不影响上传
     onUploadOutput(output: UploadOutput): void {
+        const e: UploadInput = {
+            type: 'uploadAll',
+            url: this.uploadUrl,
+            method: 'POST',
+            data: { prefix: this.fileType.prefix },
+            headers: { 'X-XSRF-TOKEN': this._xsrfToken },
+        };
         if (output.type === 'allAddedToQueue') {
-            if (this.uploadAble) {
-                const event: UploadInput = {
-                    type: 'uploadAll',
-                    url: this.uploadUrl,
-                    method: 'POST',
-                    data: { prefix: this.fileType.prefix },
-                    headers: { 'X-XSRF-TOKEN': this._xsrfToken },
-                };
-                this.uploadInput.emit(event);
+            if (this.fileType.prefix !== 'photo' && this.uploadAble) {
+                this.uploadInput.emit(e);
             }
         } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
             // 规定上传文件的格式
@@ -53,6 +53,21 @@ export class UploaderPanelComponent {
             } else if (output.file.size > 10 * 1024 * 1024) {
                 alert(`文件不应大于10MB`);
                 this.uploadAble = false;
+            } else if (this.fileType.prefix === 'photo') {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        if (img.width !== 480 || img.height !== 640) {
+                            alert('相片尺寸不符合要求！尺寸要求宽为480像素，高为640像素');
+                        } else {
+                            this.files.push(output.file);
+                            this.uploadInput.emit(e);
+                        }
+                    };
+                    img.src = (event.target as any).result;
+                };
+                reader.readAsDataURL(output.file.nativeFile);
             } else {
                 this.files.push(output.file);
             }

@@ -62,7 +62,10 @@
                 <div class="card bg-info mb-3" style="align-items: center;">
                     <img alt="照片" [src]="imgSrc(fileNames.photo)" width="auto" height="192" class="picture">
                 </div>
-                <div><button class="btn-xs btn-info" (click)="upload('photo')">上传照片</button></div>
+                <div>
+                    <button class="btn-xs btn-info" (click)="upload('photo')">上传照片</button>
+                    <a class="ml-2" href="javascript:;" (click)="open('template')">照片要求</a>
+                </div>
             </div>
         </div>
         <div class="row">
