@@ -5,6 +5,12 @@
             <option *ngFor="let month of monthes" value="{{month}}">{{month}}</option>
         </select>
     </div>
+    <div>
+        <select class="form-control" [(ngModel)]="fundType">
+            <option value="ARRANGEMENT" selected>计划安排</option>
+            <option  value="TRANSFER">划拨经费</option>
+        </select>
+    </div>
     <button class="btn btn-secondary ml-2" (click)="search()">查看</button>
     <ng-container *ngIf="reviewAble">
         <button class="btn btn-primary ml-3" (click)="ok()">提交</button>

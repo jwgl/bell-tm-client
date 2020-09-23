@@ -16,7 +16,7 @@ import { RowComp, RowPositionUtils } from 'ag-grid-community';
 export class FundListComponent {
     funds: any[];
     form: any;
-    fundType: string;
+    fundType = 'ARRANGEMENT';
     reviewAble = false;
     monthCreated = null;
     monthes: any[];
@@ -31,7 +31,7 @@ export class FundListComponent {
     }
 
     loadData() {
-        this.service.loadList({month: this.monthCreated}).subscribe((dto: any) => {
+        this.service.loadList({month: this.monthCreated, fundType: this.fundType}).subscribe((dto: any) => {
             this.monthes = dto.monthes ? dto.monthes.sort() : [];
             this.list = dto.funds;
             if (this.list && this.list.length > 0) {
