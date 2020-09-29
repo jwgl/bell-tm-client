@@ -1,0 +1,21 @@
+<modal-dialog modalTitle="批量导入">
+    <modal-body>
+        <div class="form-group">
+            <label class="control-label">数据类型</label>
+            <select name="regions" class="form-control" [(ngModel)]="form.fundType">
+                <option value="" disabled>选择类型</option>
+                <option value="ARRANGEMENT">计划安排</option>
+                <option value="TRANSFER">已划拨</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">明细数据</label>
+            <textarea class="form-control" name="students" rows="15" [(ngModel)]="form.data" placeholder="请将在Excel模板中准备好的数据粘帖在这里，注意在空的单元格补'0'">
+            </textarea>
+        </div>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>关闭</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()" [disabled]="validate">预览</button>
+    </modal-footer>
+</modal-dialog>

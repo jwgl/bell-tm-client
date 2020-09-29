@@ -20,7 +20,7 @@ export class ApplicationApprovalListComponent {
     list: any[];
     type: string;
     projectsSelected: any[];
-    ids: any[]; //for hunt-grid
+    ids: any[]; // for hunt-grid
     flush: boolean;
 
     ths = [
@@ -76,8 +76,8 @@ export class ApplicationApprovalListComponent {
             } else {
                 this.flush = !this.flush;
             }
-        }); 
-        }   
+        });
+        }
     }
 
     get dateLabel(): string {
