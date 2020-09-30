@@ -26,6 +26,8 @@ export class StudentAdminListComponent {
             this.service.batchSave(null, form).subscribe(dto => {
                 if (dto.logs) {
                     this.dialogs.error(dto.logs);
+                } else {
+                    alert('导入成功！');
                 }
             });
         });
