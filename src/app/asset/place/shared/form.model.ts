@@ -10,6 +10,9 @@ export class Room {
     seatType: string;
     purpose: string;
     department: string;
+    note: string;
+    departmentId: string;
+    placeTypeId: number;
 
     constructor(dto: any) {
         Object.assign(this, dto);

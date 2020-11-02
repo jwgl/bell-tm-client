@@ -1,0 +1,85 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-primary' (click)="save()">保存</button>
+        </div>
+    </div>
+    <tm-form-title>场地{{form.id}}</tm-form-title>
+    <form role="form">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label class="control-label">教学楼</label>
+                <tm-select-or-other [options]="buildings" (selectObject)="onObjectSelected($event)"
+                    [defaultValue]="defualtBuilding" [disabled]="false"></tm-select-or-other>
+            </div>
+            <div class="form-group col-md-1">
+                <label class="control-label">房间号</label>
+                <input class="form-control" name="name" type="text" [(ngModel)]="form.name" placeholder="A111" />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">使用单位</label>
+                <select name="level1" class="form-control" [(ngModel)]="form.departmentId">
+                    <option *ngFor="let item of departments " [ngValue]="item.id">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">场地类别</label>
+                <select name="level1" class="form-control" [(ngModel)]="placeTypeLevel1">
+                    <option *ngFor="let level1 of placeTypes | uniqueBy: 'level1'" [ngValue]="level1">
+                        {{ level1 }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">具体类别</label>
+                <select name="level2" class="form-control" [(ngModel)]="form.placeTypeId">
+                    <option *ngFor="let item of placeTypes | filterBy: filterBySubject(placeTypeLevel1)"
+                        [ngValue]="item.id">
+                        {{ item.level2 }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">面积</label>
+                <input class="form-control" name="measure" type="number" [(ngModel)]="form.measure"
+                    placeholder="面积（平方米）" />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">座位数</label>
+                <input class="form-control" name="seat" type="number" [(ngModel)]="form.seat" placeholder="座位数" />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">桌椅类型</label>
+                <select name="level1" class="form-control" [(ngModel)]="form.seatType">
+                    <option *ngFor="let item of seatTypes " [ngValue]="item.name">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">场地状态</label>
+                <select name="level1" class="form-control" [(ngModel)]="form.status">
+                    <option value="ON">在用</option>
+                    <option value="BACKUP">储备</option>
+                    <option value="DELETED">取消</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">功能</label>
+                <ng-select name="purpose" [items]="purposes" [multiple]="true" [closeOnSelect]="false"
+                    [hideSelected]="true" bindLabel="name" placeholder="选择功能" [(ngModel)]="purposeSelected">
+                </ng-select>
+            </div>
+            <div class="form-group col-md-9">
+                <label class="control-label">备注</label>
+                <input class="form-control" name="note" type="text" [(ngModel)]="form.note" placeholder="备注" />
+            </div>
+        </div>
+    </form>
+</ng-container>
