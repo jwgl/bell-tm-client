@@ -46,8 +46,14 @@ export class PlaceFormEditorComponent {
         this.placeTypes = dto.placeTypes;
         this.purposes = dto.purposes;
         this.seatTypes = dto.seatTypes;
-        this.defualtBuilding = this.buildings[0].name;
-        this.form.building = this.defualtBuilding;
+        if (this.editMode === EditMode.Create) {
+            this.defualtBuilding = this.buildings[0].name;
+            this.form.building = this.defualtBuilding;
+        } else {
+            this.defualtBuilding = this.form.building;
+            this.placeTypeLevel1 = this.form.groups;
+            this.purposeSelected = this.form.purpose ? this.form.purpose.split(';') : [];
+        }
     }
 
     onObjectSelected(object: any) {

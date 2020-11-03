@@ -1,0 +1,45 @@
+<ng-container *ngIf="vm">
+    <tm-form-title>场地{{vm.id}}</tm-form-title>
+    <div class="row">
+        <div class="form-group col-3">
+            <label class="control-label">场地名称</label>
+            <div>{{vm.building}} {{vm.name}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">使用单位</label>
+            <div>{{vm.department}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">场地类别</label>
+            <div>{{vm.groups}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">具体类别</label>
+            <div>{{vm.roomType}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-3">
+            <label class="control-label">面积</label>
+            <div>{{vm.measure}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">座位数</label>
+            <div>{{vm.seat}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">桌椅类型</label>
+            <div>{{vm.seatType}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">功能</label>
+            <div>{{vm.purpose}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-12">
+            <label class="control-label">备注</label>
+            <div>{{vm.note}}</div>
+        </div>
+    </div>
+</ng-container>
