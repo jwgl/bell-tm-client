@@ -6,7 +6,7 @@
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent" [disabled]="disabled">
             <span class="sr-only">Toggle Dropdown</span>
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference" style="width: 100%; padding: 5px;">
             <ng-container *ngFor="let item of options">
                 <span class="dropdown-item" (click)="objectSelected(item)">{{item.name}}</span>
             </ng-container>

@@ -7,6 +7,8 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { SetFilterComponent } from './set-filter.component';
 import { PlaceGridComponent } from './place-grid.component';
 import { SelectOrOtherComponent } from './select-or-other.component';
+import { ModelSelectComponent } from './model-select.component';
+import { DeviceGridComponent } from './device-grid.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -25,10 +27,14 @@ library.add(faFilter, faLock, faLockOpen, faUser);
         SetFilterComponent,
         PlaceGridComponent,
         SelectOrOtherComponent,
+        ModelSelectComponent,
+        DeviceGridComponent,
     ],
     exports: [
         PlaceGridComponent,
         SelectOrOtherComponent,
+        ModelSelectComponent,
+        DeviceGridComponent,
     ],
 })
 export class TmAssetCommonModule { }

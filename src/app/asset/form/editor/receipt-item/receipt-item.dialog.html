@@ -1,0 +1,48 @@
+<modal-dialog modalTitle="清单">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="资产编号">
+                <input class="form-control" name="code" type="text" [(ngModel)]="item.code" placeholder="资产编号" />
+            </form-field>
+            <form-field label="资产类别">
+                <tm-select-or-other [options]="assetTypes" (selectObject)="onObjectSelected($event)"
+                    [defaultValue]="item.assetType" [disabled]="false"></tm-select-or-other>
+            </form-field>
+            <form-field label="SN编号">
+                <input class="form-control" name="sn" type="text" [(ngModel)]="item.sn" placeholder="SN编号" />
+            </form-field>
+            <form-field label="规格型号">
+                <tm-asset-model-select (selectModel)="onModelSelected($event)"></tm-asset-model-select>
+            </form-field>
+            <form-field label="单位">
+                <input class="form-control" name="unit" type="text" [(ngModel)]="item.unit" placeholder="计数单位" />
+            </form-field>
+            <form-field label="数量">
+                <input class="form-control" name="pcs" type="number" [(ngModel)]="item.pcs" placeholder="数量" />
+            </form-field>
+            <form-field label="单价">
+                <input class="form-control" name="price" type="number" [(ngModel)]="item.price" placeholder="price" />
+            </form-field>
+            <form-field label="购买时间">
+                <input class="form-control" name="dateBought" type="text" [(ngModel)]="item.dateBought" placeholder="yyyy-MM-dd" />
+            </form-field>
+            <form-field label="保质期">
+                <input class="form-control" name="qualifyMonth" type="number" [(ngModel)]="item.qualifyMonth" placeholder="保质多少个月？" />
+            </form-field>
+            <form-field label="供应商">
+                <select name="supplier" class="form-control" [(ngModel)]="item.supplierId">
+                    <option *ngFor="let supplier of suppliers " [ngValue]="supplier.id">
+                        {{ supplier.name }}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="备注">
+                <input class="form-control" name="note" type="text" [(ngModel)]="item.note" placeholder="备注" />
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="save()">确定</button>
+    </modal-footer>
+</modal-dialog>

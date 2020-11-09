@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'tm-select-or-other',
-    styleUrls: ['set-filter.component.scss'],
+    styleUrls: ['shared.scss'],
     templateUrl: 'select-or-other.component.html',
 })
 export class SelectOrOtherComponent {
