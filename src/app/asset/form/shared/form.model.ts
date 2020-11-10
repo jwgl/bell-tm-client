@@ -18,6 +18,7 @@ export class Asset {
     parameter: string;
     unit: string;
     pcs: number;
+    total: number;
     supplier: string;
     note: string;
 

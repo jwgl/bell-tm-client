@@ -27,8 +27,6 @@ ReceiptForm.prototype.addItem = function(this: ReceiptForm, item: Asset): void {
 
 ReceiptForm.prototype.removeItem = function(this: ReceiptForm, item: Asset): void {
     const asset = this.items.find(it => it.equalsTo(item));
-    console.log('asset picked');
-    console.log(asset);
     if (asset) {
         this.items.splice(this.items.indexOf(asset), 1);
         if (asset.id) {

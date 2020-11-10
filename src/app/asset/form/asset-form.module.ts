@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReceiptRoutingModule } from './asset-form.routing';
 import { ReceiptFormListModule } from './list/from-list.module';
 import { ReceiptFormEditorModule } from './editor/form-editor.module';
+import { ReceiptItemModule } from './item/item.module';
 import { AssetFormService } from './form.service';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { AssetFormService } from './form.service';
         ReceiptRoutingModule,
         ReceiptFormListModule,
         ReceiptFormEditorModule,
+        ReceiptItemModule,
     ],
     providers: [
         AssetFormService,

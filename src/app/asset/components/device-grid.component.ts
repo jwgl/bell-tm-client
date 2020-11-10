@@ -27,7 +27,7 @@ export class DeviceGridComponent {
             field: 'id',
             headerName: 'ID',
             width: 80,
-            cellRenderer: this.linkCellRender,
+            // cellRenderer: this.linkCellRender,
             checkboxSelection: false,
             headerCheckboxSelection: false,
             headerCheckboxSelectionFilteredOnly: false,
@@ -42,6 +42,7 @@ export class DeviceGridComponent {
         { field: 'unit', headerName: '单位', width: 60 },
         { field: 'pcs', headerName: '数量', width: 60 },
         { field: 'price', headerName: '单价', width: 60 },
+        { field: 'total', headerName: '金额', width: 60 },
         { field: 'dateBought', headerName: '购买时间', width: 90 },
         { field: 'qualifyMonth', headerName: '保质期', width: 90 },
         { field: 'supplier', headerName: '供应商', width: 90 },
@@ -49,7 +50,7 @@ export class DeviceGridComponent {
             field: 'state', headerName: '状态', filter: 'setFilterComponent',
             valueGetter: this.statusGetter, comparator: this.localComparator, width: 90
         },
-        { field: 'note', headerName: '备注', width: 120 },
+        { field: 'note', headerName: '备注', width: 150 },
     ];
 
     initFilter(key: string) {

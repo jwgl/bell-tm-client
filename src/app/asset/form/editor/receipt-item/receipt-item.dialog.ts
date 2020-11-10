@@ -40,7 +40,7 @@ export class ReceiptItemDialog extends BaseDialog {
             dateBought: this.item.dateBought,
             qualifyMonth: this.item.qualifyMonth,
             supplierId: this.item.supplierId,
-            assetModelId: this.model.assetModelId,
+            assetModelId: this.model.id,
             name: this.model.name,
             brand: this.model.brand,
             specs: this.model.specs,
@@ -53,10 +53,14 @@ export class ReceiptItemDialog extends BaseDialog {
     }
 
     save() {
-        if (this.model) {
-            this.ok();
-        } else {
+        if (!this.model) {
             alert('请选择规格型号！');
+        } else if (!this.item.unit) {
+            alert('单位不能为空！');
+        } else if (!this.item.pcs) {
+            alert('请输入数量！');
+        } else {
+            this.ok();
         }
     }
 

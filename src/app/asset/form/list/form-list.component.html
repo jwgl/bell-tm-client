@@ -17,7 +17,7 @@
     <tbody>
         <ng-template ngFor let-receiptFrom [ngForOf]="receiptForms" let-i="index">
             <tr>
-                <td>{{i + 1}}#{{receiptFrom.id}}</td>
+                <td><a [routerLink]="[receiptFrom.id]">{{i + 1}}#{{receiptFrom.id}}</a></td>
                 <td>{{receiptFrom.dateCheckIn}}</td>
                 <td>{{receiptFrom.operator}}</td>
                 <td>{{receiptFrom.checker}}</td>

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import * as _ from 'lodash';
-
 import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 import { Dialog } from 'core/dialogs';
@@ -46,15 +44,37 @@ export class ReceiptFormEditorComponent {
     addItem() {
         const its = this.form.items.map(item => item.id);
         this.dialog.open(ReceiptItemDialog, { assetTypes: this.assetTypes, suppliers: this.suppliers }).then(result => {
+            console.log(result);
             const item = new Asset(result);
             item.id = this.form.items.length + 1;
             this.form.addItem(item);
+            console.log(this.form);
         });
     }
 
     remove(item: any) {
         this.dialogs.confirm('警告', `确定要删除item${item.id}吗？`).then(() => {
             this.form.removeItem(item);
+        });
+    }
+
+    save() {
+        if (this.editMode === EditMode.Create) {
+            this.create();
+        } else if (this.editMode === EditMode.Edit) {
+            this.update();
+        }
+    }
+
+    create() {
+        this.service.create(this.form.toServerDto()).subscribe(id => {
+            this.router.navigate(['../', id], { relativeTo: this.route });
+        });
+    }
+
+    update() {
+        this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
+            this.router.navigate(['../'], { relativeTo: this.route });
         });
     }
 }
