@@ -14,4 +14,8 @@ export class AssetFormService extends RestEditService {
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
+
+    submit(id: number, options: any): Observable<any> {
+        return this.http.patch(`${this.api.item(id)}?op=SUBMIT`, options);
+   }
 }

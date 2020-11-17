@@ -10,6 +10,7 @@ import { ReceiptItemComponent } from './item/item.component';
 const routes: Routes = [
     { path: '', component: ReceiptFormListComponent },
     { path: 'editor', component: ReceiptFormEditorComponent, data: { mode: EditMode.Create } },
+    { path: ':id/edit', component: ReceiptFormEditorComponent, data: { mode: EditMode.Edit } },
     { path: ':id', component: ReceiptItemComponent},
 
 ];

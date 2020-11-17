@@ -1,9 +1,15 @@
-<ng-container *ngIf="vm">
+<!-- <ng-container *ngIf="vm">
     <div class="btn-toolbar">
         <div class="ml-auto">
             <button class="btn btn-secondary" routerLink="../">返回</button>
             <button class="btn btn-secondary ml-2" routerLink="edit">编辑</button>
+            <button class="btn btn-secondary" (click)="submit()">提交</button>
         </div>
     </div>
     <tm-receipt-form-viewer [vm]="vm"></tm-receipt-form-viewer>
-</ng-container>
+</ng-container> -->
+<tm-workflow-form-item reviewType="approve" [convert]="convert">
+    <ng-template #viewerTpl let-form="form">
+        <tm-receipt-form-viewer [vm]="form"></tm-receipt-form-viewer>
+    </ng-template>
+</tm-workflow-form-item>

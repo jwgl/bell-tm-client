@@ -44,16 +44,14 @@ export class ReceiptFormEditorComponent {
     addItem() {
         const its = this.form.items.map(item => item.id);
         this.dialog.open(ReceiptItemDialog, { assetTypes: this.assetTypes, suppliers: this.suppliers }).then(result => {
-            console.log(result);
             const item = new Asset(result);
-            item.id = this.form.items.length + 1;
+            // item.id = this.form.items.length + 1;
             this.form.addItem(item);
-            console.log(this.form);
         });
     }
 
     remove(item: any) {
-        this.dialogs.confirm('警告', `确定要删除item${item.id}吗？`).then(() => {
+        this.dialogs.confirm('警告', `确定要删除第${item.id}条明细吗？`).then(() => {
             this.form.removeItem(item);
         });
     }

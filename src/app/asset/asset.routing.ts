@@ -7,6 +7,9 @@ const routes: Routes = [{
 }, {
     path: 'users/:userId/receiptForms',
     loadChildren: () => import('./form/asset-form.module').then(m => m.ReceiptModule),
+}, {
+    path: 'approvers/:userId/receiptForms',
+    loadChildren: () => import('./approval/approval.module').then(m => m.ReceiptApprovalModule),
 }];
 
 @NgModule({

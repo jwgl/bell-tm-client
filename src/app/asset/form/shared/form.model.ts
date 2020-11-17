@@ -38,9 +38,11 @@ export class ReceiptForm {
     id: number;
     dateCheckIn: string;
     operator: string;
-    checker: string;
-    dateChecked: string;
+    approver: string;
+    dateApproved: string;
     note: string;
+    status: string;
+    workflowInstanceId: string;
     items: Asset[];
 
     constructor(dto: any) {
@@ -50,5 +52,9 @@ export class ReceiptForm {
         } else {
             this.items = [];
         }
+    }
+
+    get workflowTitle(): string {
+        return `入库单#${this.id}`;
     }
 }

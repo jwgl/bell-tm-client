@@ -16,7 +16,7 @@ ReceiptForm.prototype.addItem = function(this: ReceiptForm, item: Asset): void {
         return;
     }
 
-    const removedItem = this.removedItems.find(i => i.equalsTo(item));
+    const removedItem = this.removedItems.find(it => it === item);
     if (removedItem) {
         this.removedItems.splice(this.removedItems.indexOf(removedItem), 1);
         this.items.push(removedItem);
@@ -26,7 +26,7 @@ ReceiptForm.prototype.addItem = function(this: ReceiptForm, item: Asset): void {
 };
 
 ReceiptForm.prototype.removeItem = function(this: ReceiptForm, item: Asset): void {
-    const asset = this.items.find(it => it.equalsTo(item));
+    const asset = this.items.find(it => it === item);
     if (asset) {
         this.items.splice(this.items.indexOf(asset), 1);
         if (asset.id) {
