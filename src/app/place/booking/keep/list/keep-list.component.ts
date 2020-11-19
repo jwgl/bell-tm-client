@@ -14,6 +14,7 @@ import { Place } from '../booking-keep.model';
 export class BookingKeepListComponent {
     term: { startWeek: number, maxWeek: number };
     buildings: string[];
+    types: string[];
     places: Place[];
     weeks: number[];
     days: number[];
@@ -50,6 +51,10 @@ export class BookingKeepListComponent {
         this.params.place = null;
         this.service.loadPlaces(building).subscribe(places => {
             this.places = places;
+            this.types = _.uniq(this.places.map(it=> it.type));
+            if (this.types.length == 1) {
+                this.types = [];
+            }
             this.paramsChanged = true;
         });
     }
