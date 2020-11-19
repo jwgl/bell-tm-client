@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import format from 'date-fns/format';
 
 import { BaseDialog } from 'core/dialogs';
+import { Http } from 'core/rest';
 import { Asset } from '../../shared/form.model';
 
 @Component({
@@ -13,10 +14,10 @@ import { Asset } from '../../shared/form.model';
 export class ReceiptItemDialog extends BaseDialog {
     item: Asset;
     assetTypes: string[];
-    model: any;
     suppliers: any[];
+    assetModels: any;
 
-    constructor() {
+    constructor(private http: Http) {
         super();
         this.item = new Asset([]);
     }
@@ -32,6 +33,10 @@ export class ReceiptItemDialog extends BaseDialog {
     }
 
     protected onConfirmed(): any {
+        let model = {name: null, brand: null, specs: null, parameter: null};
+        if (this.assetModels && this.item.assetModelId) {
+            model = this.assetModels.find(item => item.id === this.item.assetModelId);
+        }
         return {
             id: this.item.id,
             sn: this.item.sn,
@@ -40,11 +45,11 @@ export class ReceiptItemDialog extends BaseDialog {
             dateBought: this.item.dateBought,
             qualifyMonth: this.item.qualifyMonth,
             supplierId: this.item.supplierId,
-            assetModelId: this.model.id,
-            name: this.model.name,
-            brand: this.model.brand,
-            specs: this.model.specs,
-            parameter: this.model.parameter,
+            assetModelId: this.item.assetModelId,
+            name: model.name ? model.name : this.item.name,
+            brand: model.brand,
+            specs: model.specs,
+            parameter: model.parameter,
             assetType: this.item.assetType,
             unit: this.item.unit,
             pcs: this.item.pcs,
@@ -53,9 +58,7 @@ export class ReceiptItemDialog extends BaseDialog {
     }
 
     save() {
-        if (!this.model) {
-            alert('请选择规格型号！');
-        } else if (!this.item.unit) {
+        if (!this.item.unit) {
             alert('单位不能为空！');
         } else if (!this.item.pcs) {
             alert('请输入数量！');
@@ -68,9 +71,14 @@ export class ReceiptItemDialog extends BaseDialog {
         this.item.assetType = object.name;
     }
 
-    onModelSelected(model: any): void {
-        if (model) {
-            this.model = model;
+    modelLabel(model: any): string {
+        return model ? `${model.name}\t${model.brand}\t${model.specs}\t${model.parameter}` : '空';
+    }
+
+    assetNameChange(name: string) {
+        if (name) {
+            this.http.get(`/api/asset/models?q=${encodeURIComponent(name)}`)
+            .subscribe(value => this.assetModels = value);
         }
     }
 }
