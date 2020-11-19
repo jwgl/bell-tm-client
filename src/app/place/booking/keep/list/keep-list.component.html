@@ -11,6 +11,7 @@
             <label for="building">教室</label>
             <select class="form-control" [(ngModel)]="params.place" (ngModelChange)="onParamsChanged($event)" [disabled]="!params.building">
                 <option selected [ngValue]="null">全部</option>
+                <option *ngFor="let type of types" [ngValue]="'type:' + type">全部{{type}}</option>
                 <option *ngFor="let place of places" [ngValue]="place.id">{{place.name}} / {{place.seat}}座 / {{place.type}}</option>
             </select>
         </div>
