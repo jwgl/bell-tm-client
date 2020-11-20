@@ -8,6 +8,9 @@ const routes: Routes = [{
     path: 'users/:userId/receiptForms',
     loadChildren: () => import('./form/asset-form.module').then(m => m.ReceiptModule),
 }, {
+    path: 'users/:userId/centers',
+    loadChildren: () => import('./center/center.module').then(m => m.CenterModule),
+}, {
     path: 'approvers/:userId/receiptForms',
     loadChildren: () => import('./approval/approval.module').then(m => m.ReceiptApprovalModule),
 }];

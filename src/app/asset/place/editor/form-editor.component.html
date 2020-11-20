@@ -17,7 +17,7 @@
                 <input class="form-control" name="name" type="text" [(ngModel)]="form.name" placeholder="A111" />
             </div>
             <div class="form-group col-md-3">
-                <label class="control-label">使用单位{{form.departmentId}}</label>
+                <label class="control-label">使用单位</label>
                 <select name="department" class="form-control" [(ngModel)]="form.departmentId">
                     <option *ngFor="let item of departments " [ngValue]="item.id">
                         {{ item.name }}
@@ -25,7 +25,7 @@
                 </select>
             </div>
             <div class="form-group col-md-3">
-                <label class="control-label">场地类别{{placeTypeLevel1}}</label>
+                <label class="control-label">场地类别</label>
                 <select name="groups" class="form-control" [(ngModel)]="placeTypeLevel1">
                     <option *ngFor="let level1 of placeTypes | uniqueBy: 'level1'" [ngValue]="level1">
                         {{ level1 }}
@@ -33,7 +33,7 @@
                 </select>
             </div>
             <div class="form-group col-md-3">
-                <label class="control-label">具体类别{{form.placeTypeId}}</label>
+                <label class="control-label">具体类别</label>
                 <select name="level2" class="form-control" [(ngModel)]="form.placeTypeId">
                     <option *ngFor="let item of placeTypes | filterBy: filterBySubject(placeTypeLevel1)"
                         [ngValue]="item.id">
