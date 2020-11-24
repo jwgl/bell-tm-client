@@ -9,6 +9,7 @@ export class ApprovalItemComponent {
 
     onItemLoaded(dto: any) {
         this.form = new ReceiptForm(dto.form);
+        this.form.title = '入库单';
     }
 
     get title(): string {

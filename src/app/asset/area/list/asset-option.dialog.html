@@ -1,0 +1,51 @@
+<modal-dialog modalTitle="查询设备">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="教学楼">
+                <ng-select name="building"
+                    [items]="buildings"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [hideSelected]="true"
+                    bindLabel="name"
+                    placeholder="选择教学楼"
+                    [(ngModel)]="buildingSelected"
+                    (ngModelChange)="buildingChange($event)">
+                </ng-select>
+            </form-field>
+            <form-field label="房间号">
+                <ng-select name="place"
+                    [items]="placesShow"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [hideSelected]="true"
+                    bindLabel="name"
+                    placeholder="选择房间号"
+                    [(ngModel)]="placeSelected">
+                </ng-select>
+            </form-field>
+            <form-field label="设备名称">
+                <ng-select name="assetName"
+                    [items]="assetNames"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [hideSelected]="true"
+                    bindLabel="name"
+                    placeholder="选择设备名称"
+                    [(ngModel)]="assetNameSelected">
+                </ng-select>
+            </form-field>
+            <form-field label="设备状态">
+                <select name="state" class="form-control" [(ngModel)]="stateSelected">
+                    <option *ngFor="let item of states " [ngValue]="item.value">
+                        {{ item.name | state}}
+                    </option>
+                </select>
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

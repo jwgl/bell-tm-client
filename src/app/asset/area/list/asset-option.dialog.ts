@@ -3,7 +3,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseDialog } from 'core/dialogs';
-import { CenterService } from '../center.service';
+import { AreaService } from '../area.service';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,7 +22,7 @@ export class AssetOptionDialog extends BaseDialog {
     assetNameSelected: any[];
     stateSelected: any;
 
-    constructor(private service: CenterService) {
+    constructor(private service: AreaService) {
         super();
         if (this.service.queryOptions) {
             this.queryOptions = this.service.queryOptions;

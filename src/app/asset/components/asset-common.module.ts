@@ -9,6 +9,7 @@ import { PlaceGridComponent } from './place-grid.component';
 import { SelectOrOtherComponent } from './select-or-other.component';
 import { ModelSelectComponent } from './model-select.component';
 import { DeviceGridComponent } from './device-grid.component';
+import { TransferFormGridComponent } from './transfer-form-grid.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -29,12 +30,14 @@ library.add(faFilter, faLock, faLockOpen, faUser);
         SelectOrOtherComponent,
         ModelSelectComponent,
         DeviceGridComponent,
+        TransferFormGridComponent,
     ],
     exports: [
         PlaceGridComponent,
         SelectOrOtherComponent,
         ModelSelectComponent,
         DeviceGridComponent,
+        TransferFormGridComponent,
     ],
 })
 export class TmAssetCommonModule { }

@@ -34,20 +34,25 @@ export class Asset {
     }
 }
 
-export class ReceiptForm {
+export class TransferForm {
     id: number;
-    dateCheckIn: string;
+    dateSubmitted: string;
     operator: string;
     approver: string;
     dateApproved: string;
     note: string;
     title: string;
     status: string;
+    type: string;
+    source: string;
+    target: string;
     workflowInstanceId: string;
     items: Asset[];
 
     constructor(dto: any) {
         Object.assign(this, dto);
+        // 流程中的名称
+        this.title = `${this.type}单`;
         if (dto.items) {
             this.items = dto.items.map(it => new Asset(it));
         } else {

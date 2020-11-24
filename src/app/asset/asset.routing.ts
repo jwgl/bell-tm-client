@@ -11,6 +11,9 @@ const routes: Routes = [{
     path: 'users/:userId/centers',
     loadChildren: () => import('./center/center.module').then(m => m.CenterModule),
 }, {
+    path: 'users/:userId/areas',
+    loadChildren: () => import('./area/area.module').then(m => m.AreaModule),
+}, {
     path: 'approvers/:userId/receiptForms',
     loadChildren: () => import('./approval/approval.module').then(m => m.ReceiptApprovalModule),
 }];
