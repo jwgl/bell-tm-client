@@ -42,7 +42,7 @@ export class TransferFormGridComponent {
         { field: 'note', headerName: '备注', width: 150 },
         {
             field: 'status', headerName: '状态', filter: 'setFilterComponent',
-            valueGetter: this.statusGetter, comparator: this.localComparator, width: 90
+            comparator: this.localComparator, width: 90
         },
         { field: 'note', headerName: '备注', width: 150 },
     ];
@@ -66,7 +66,7 @@ export class TransferFormGridComponent {
         this.list = value;
         if (value && value.length > 0) {
             this.ths = this.ths.filter(th => !this.list.every((data: any) => data[th.field] === undefined || data[th.field] === null));
-            ['type', 'source', 'target', 'state']
+            ['type', 'source', 'target', 'status']
                 .forEach(item => {
                     const th = this.ths.find(col => col.field === item);
                     if (th && th.filter === 'setFilterComponent') {

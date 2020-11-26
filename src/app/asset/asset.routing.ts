@@ -16,6 +16,9 @@ const routes: Routes = [{
 }, {
     path: 'approvers/:userId/receiptForms',
     loadChildren: () => import('./approval/approval.module').then(m => m.ReceiptApprovalModule),
+}, {
+    path: 'approvers/:userId/checkoutApproval',
+    loadChildren: () => import('./center/approval/approval.module').then(m => m.CheckoutApprovalModule),
 }];
 
 @NgModule({
