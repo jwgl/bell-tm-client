@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { Dialog } from 'core/dialogs';
 
 import { AreaService } from '../area.service';
+import { Asset } from '../../shared/asset-form.model';
 import { TransferFormService } from '../transfer.service';
 import { AssetOptionDialog } from './asset-option.dialog';
 import { CheckoutDialog } from './checkout.dialog';
@@ -11,7 +12,7 @@ import { CheckoutDialog } from './checkout.dialog';
     templateUrl: 'form-list.component.html',
 })
 export class AreaListComponent {
-    assets: any;
+    assets: Asset[];
     buildings: any;
     assetNames: any;
     states: any;
@@ -21,14 +22,16 @@ export class AreaListComponent {
 
     constructor(
         private service: AreaService,
-        private transferService: AreaService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private transferService: TransferFormService,
         private dialog: Dialog,
     ) {
         this.service.loadList(this.service.queryOptions).subscribe(dto => this.loadData(dto));
     }
 
     loadData(dto: any) {
-        this.assets = dto.list;
+        this.assets = dto.list.map(it => new Asset(it));
         this.assetNames = dto.assetNames;
         this.states = dto.states;
         this.buildings = dto.buildings;
@@ -52,7 +55,12 @@ export class AreaListComponent {
     }
 
     checkout() {
-        if (this.assetsSelected.some((asset: any) => asset.building !== '图书馆' || asset.place !== 'A101' || asset.state !== 'STANDBY')) {
+        if (!this.assetsSelected) {
+            alert('请先选取要领用的设备,再点“领用”按钮！');
+        }
+        if (this.assetsSelected.some((asset: any) =>
+            asset.building !== '图书馆' || asset.place !== 'A101' || asset.state !== '备用'
+        )) {
             alert('包含了不可领用的设备，请重新选择！');
         } else {
             this.dialog.open(CheckoutDialog, {
@@ -60,6 +68,7 @@ export class AreaListComponent {
                 assets: this.assetsSelected,
                 buildings: this.areas,
                 places: this.places,
+                transferType: '领用',
             }).then(result => {
                 this.create(result);
             });
@@ -67,9 +76,8 @@ export class AreaListComponent {
     }
 
     create(form: any) {
-        this.transferService.create(form).subscribe(id => {
-            return true;
-            // this.router.navigate(['../', id], { relativeTo: this.route });
-        });
+        this.transferService.create(form).subscribe(id =>
+            this.router.navigate(['../forms/', id], { relativeTo: this.route })
+        );
     }
 }

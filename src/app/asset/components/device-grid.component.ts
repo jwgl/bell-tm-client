@@ -50,7 +50,7 @@ export class DeviceGridComponent {
         { field: 'supplier', headerName: '供应商', width: 90 },
         {
             field: 'state', headerName: '状态', filter: 'setFilterComponent',
-            valueGetter: this.statusGetter, comparator: this.localComparator, width: 90
+            comparator: this.localComparator, width: 90
         },
         { field: 'note', headerName: '备注', width: 150 },
     ];

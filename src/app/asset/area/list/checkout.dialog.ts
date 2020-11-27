@@ -15,6 +15,7 @@ export class CheckoutDialog extends BaseDialog {
     buildings: any;
     places: any;
     placesShow: any;
+    transferType: string;
     form: any;
 
     constructor(private service: AreaService) {
@@ -28,6 +29,7 @@ export class CheckoutDialog extends BaseDialog {
         this.form.building = this.buildings[0];
         this.placesShow = this.places.filter(place => place.building === this.form.building);
         this.assets = this.options.assets;
+        this.transferType = this.options.transferType;
         return null;
     }
 
@@ -35,6 +37,7 @@ export class CheckoutDialog extends BaseDialog {
         return {
             note: this.form.note,
             toId: this.form.toId,
+            transferType: this.transferType,
             addedItems: this.assets.map(item => ({id: item.id})),
         };
     }

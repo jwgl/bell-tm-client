@@ -5,7 +5,7 @@ import format from 'date-fns/format';
 
 import { BaseDialog } from 'core/dialogs';
 import { Http } from 'core/rest';
-import { Asset } from '../../shared/form.model';
+import { Asset } from '../../../shared/asset-form.model';
 
 @Component({
     templateUrl: 'receipt-item.dialog.html',

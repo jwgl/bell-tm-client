@@ -5,7 +5,8 @@ import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 import { Dialog } from 'core/dialogs';
 
-import { Asset, ReceiptForm } from '../shared/form.model';
+import { ReceiptForm } from '../shared/form.model';
+import { Asset } from '../../shared/asset-form.model';
 import { AssetFormService } from '../form.service';
 import './form-editor.model';
 import { ReceiptItemDialog } from './receipt-item/receipt-item.dialog';

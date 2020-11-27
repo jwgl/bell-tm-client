@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { Dialog } from 'core/dialogs';
 
+import { Asset } from '../../shared/asset-form.model';
 import { CenterService } from '../center.service';
 import { AssetOptionDialog } from './asset-option.dialog';
 
@@ -23,7 +24,7 @@ export class CenterListComponent {
     }
 
     loadData(dto: any) {
-        this.assets = dto.list;
+        this.assets = dto.list.map(it => new Asset(it));
         this.assetNames = dto.assetNames;
         this.states = dto.states;
         this.buildings = dto.buildings;
