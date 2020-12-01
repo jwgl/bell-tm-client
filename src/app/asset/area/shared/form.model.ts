@@ -1,6 +1,6 @@
 import { Asset } from '../../shared/asset-form.model';
 
-export const statusLabel = { CREATED: '未提交', SUBMITTED: '提交', APPROVED: '同意', REJECTED: '不同意'};
+export const statusLabel = { CREATED: '未提交', SUBMITTED: '提交', APPROVED: '同意', REJECTED: '不同意', FINISHED: '完成'};
 
 export class TransferForm {
     id: number;

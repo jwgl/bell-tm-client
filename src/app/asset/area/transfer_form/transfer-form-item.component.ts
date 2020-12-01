@@ -9,8 +9,8 @@ import { TransferForm } from '../shared/form.model';
 })
 export class TransferFormItemComponent {
     vm: TransferForm;
-    saving = false;
+
     convert(dto: any): WorkflowForm {
-        return new(Editable(TransferForm))(dto.form);
+        return new (Editable(TransferForm))(dto.form);
     }
 }

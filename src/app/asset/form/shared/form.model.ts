@@ -15,6 +15,7 @@ export class ReceiptForm {
 
     constructor(dto: any) {
         Object.assign(this, dto);
+        this.title = '入库';
         if (dto.items) {
             this.items = dto.items.map(it => new Asset(it));
         } else {

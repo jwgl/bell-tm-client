@@ -54,13 +54,32 @@ export class AreaListComponent {
         this.assetsSelected = this.assets.filter((asset: any) => ids.some(id => asset.id === id));
     }
 
+    transfer() {
+        if (!this.assetsSelected) {
+            alert('请先选取要设备,再点“区内流转”按钮！');
+        }
+        console.log(this.assetsSelected);
+        console.log(this.areas);
+        if (this.assetsSelected.some((asset: any) => !this.areas.some(area => area === asset.building))) {
+            alert('包含了不属于所辖楼区内的设备，请重新选择！');
+        } else {
+            this.dialog.open(CheckoutDialog, {
+                form: {},
+                assets: this.assetsSelected,
+                buildings: this.areas,
+                places: this.places,
+                transferType: '资产流转',
+            }).then(result => {
+                this.create(result);
+            });
+        }
+    }
+
     checkout() {
         if (!this.assetsSelected) {
             alert('请先选取要领用的设备,再点“领用”按钮！');
         }
-        if (this.assetsSelected.some((asset: any) =>
-            asset.building !== '图书馆' || asset.place !== 'A101' || asset.state !== '备用'
-        )) {
+        if (this.assetsSelected.some((asset: any) => asset.roomId !== 1)) {
             alert('包含了不可领用的设备，请重新选择！');
         } else {
             this.dialog.open(CheckoutDialog, {
@@ -68,7 +87,7 @@ export class AreaListComponent {
                 assets: this.assetsSelected,
                 buildings: this.areas,
                 places: this.places,
-                transferType: '领用',
+                transferType: '领用出库',
             }).then(result => {
                 this.create(result);
             });

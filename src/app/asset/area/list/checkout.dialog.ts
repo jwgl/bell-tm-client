@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
+import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 
 import { BaseDialog } from 'core/dialogs';
@@ -34,11 +35,23 @@ export class CheckoutDialog extends BaseDialog {
     }
 
     protected onConfirmed(): any {
+        switch (this.transferType) {
+            case '领用出库':
+                this.form.fromId = 1;
+                break;
+            case '资产流转':
+                const roomIds = _.chain(this.assets).map(data => data['roomId']).uniq().value();
+                console.log(roomIds);
+                if (roomIds.length === 1) {
+                    this.form.fromId = roomIds[0];
+                }
+        }
         return {
+            fromId: this.form.fromId,
             note: this.form.note,
             toId: this.form.toId,
             transferType: this.transferType,
-            addedItems: this.assets.map(item => ({id: item.id})),
+            addedItems: this.assets.map(item => ({ id: item.id })),
         };
     }
 

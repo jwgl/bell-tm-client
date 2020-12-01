@@ -14,6 +14,9 @@ export class Asset {
     supplierId: number;
     assetModelId: number;
     assetType: string;
+    building: string;
+    place: string;
+    roomId: number;
     name: string;
     brand: string;
     specs: string;
