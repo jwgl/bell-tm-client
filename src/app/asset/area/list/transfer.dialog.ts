@@ -8,10 +8,10 @@ import { AreaService } from '../area.service';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: 'checkout.dialog.html',
+    templateUrl: 'transfer.dialog.html',
 })
 // tslint:disable-next-line:component-class-suffix
-export class CheckoutDialog extends BaseDialog {
+export class TransferDialog extends BaseDialog {
     assets: any;
     buildings: any;
     places: any;
@@ -35,16 +35,12 @@ export class CheckoutDialog extends BaseDialog {
     }
 
     protected onConfirmed(): any {
-        switch (this.transferType) {
-            case '领用出库':
-                this.form.fromId = 1;
-                break;
-            case '资产流转':
-                const roomIds = _.chain(this.assets).map(data => data['roomId']).uniq().value();
-                console.log(roomIds);
-                if (roomIds.length === 1) {
-                    this.form.fromId = roomIds[0];
-                }
+        const roomIds = _.chain(this.assets).map(data => data['roomId']).uniq().value();
+        if (roomIds.length === 1) {
+            this.form.fromId = roomIds[0];
+        }
+        if (this.transferType === '停用入库') {
+            this.form.toId = 1;
         }
         return {
             fromId: this.form.fromId,
@@ -57,5 +53,9 @@ export class CheckoutDialog extends BaseDialog {
 
     buildingChange(building: any) {
         this.placesShow = this.places.filter(place => place.building === building);
+    }
+
+    get noStop(): boolean {
+        return this.transferType !== '停用入库';
     }
 }

@@ -6,7 +6,7 @@ import { AreaService } from '../area.service';
 import { Asset } from '../../shared/asset-form.model';
 import { TransferFormService } from '../transfer.service';
 import { AssetOptionDialog } from './asset-option.dialog';
-import { CheckoutDialog } from './checkout.dialog';
+import { TransferDialog } from './transfer.dialog';
 
 @Component({
     templateUrl: 'form-list.component.html',
@@ -57,13 +57,10 @@ export class AreaListComponent {
     transfer() {
         if (!this.assetsSelected) {
             alert('请先选取要设备,再点“区内流转”按钮！');
-        }
-        console.log(this.assetsSelected);
-        console.log(this.areas);
-        if (this.assetsSelected.some((asset: any) => !this.areas.some(area => area === asset.building))) {
+        } else if (this.assetsSelected.some((asset: any) => !this.areas.some(area => area === asset.building))) {
             alert('包含了不属于所辖楼区内的设备，请重新选择！');
         } else {
-            this.dialog.open(CheckoutDialog, {
+            this.dialog.open(TransferDialog, {
                 form: {},
                 assets: this.assetsSelected,
                 buildings: this.areas,
@@ -77,17 +74,34 @@ export class AreaListComponent {
 
     checkout() {
         if (!this.assetsSelected) {
-            alert('请先选取要领用的设备,再点“领用”按钮！');
-        }
-        if (this.assetsSelected.some((asset: any) => asset.roomId !== 1)) {
+            alert('请先选取要领用的设备,再点“领用出库”按钮！');
+        } else if (this.assetsSelected.some((asset: any) => asset.roomId !== 1)) {
             alert('包含了不可领用的设备，请重新选择！');
         } else {
-            this.dialog.open(CheckoutDialog, {
+            this.dialog.open(TransferDialog, {
                 form: {},
                 assets: this.assetsSelected,
                 buildings: this.areas,
                 places: this.places,
                 transferType: '领用出库',
+            }).then(result => {
+                this.create(result);
+            });
+        }
+    }
+
+    stop() {
+        if (!this.assetsSelected) {
+            alert('请先选取要停用的设备,再点“停用入库”按钮！');
+        } else if (this.assetsSelected.some((asset: any) => !this.areas.some(area => area === asset.building))) {
+            alert('包含了不属于所辖楼区内的设备，请重新选择！');
+        }  else {
+            this.dialog.open(TransferDialog, {
+                form: {},
+                assets: this.assetsSelected,
+                buildings: this.areas,
+                places: this.places,
+                transferType: '停用入库',
             }).then(result => {
                 this.create(result);
             });

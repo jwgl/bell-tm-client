@@ -13,7 +13,7 @@ import { ApprovalItemComponent } from './approval-item.component';
     imports: [
         CommonModule,
         CommonDirectivesModule,
-        WorkflowModule.forReview('/api/asset/approvers/${userId}/checkoutApprovals', [
+        WorkflowModule.forReview('/api/asset/approvers/${userId}/transferApprovals', [
             { type: 'todo', label: '待审核', dateLabel: '提交时间' },
             { type: 'done', label: '已审核', dateLabel: '审核时间' },
         ]),
@@ -25,4 +25,4 @@ import { ApprovalItemComponent } from './approval-item.component';
         ApprovalItemComponent,
     ],
 })
-export class CheckoutApprovalModule { }
+export class TransferApprovalModule { }

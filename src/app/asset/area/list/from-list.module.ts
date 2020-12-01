@@ -11,7 +11,7 @@ import { TmAssetCommonModule } from '../../components/asset-common.module';
 import { AssetPipesModule } from '../../components/pipe/asset-pipes.module';
 import { AreaListComponent } from './form-list.component';
 import { AssetOptionDialog } from './asset-option.dialog';
-import { CheckoutDialog } from './checkout.dialog';
+import { TransferDialog } from './transfer.dialog';
 
 @NgModule({
     imports: [
@@ -26,7 +26,7 @@ import { CheckoutDialog } from './checkout.dialog';
     declarations: [
         AreaListComponent,
         AssetOptionDialog,
-        CheckoutDialog,
+        TransferDialog,
     ],
     exports: [
         AreaListComponent,
@@ -36,7 +36,7 @@ import { CheckoutDialog } from './checkout.dialog';
     ],
     entryComponents: [
         AssetOptionDialog,
-        CheckoutDialog,
+        TransferDialog,
     ],
 })
 export class AreaListModule { }

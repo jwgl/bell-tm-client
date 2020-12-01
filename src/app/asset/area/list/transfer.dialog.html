@@ -8,7 +8,7 @@
                     </option>
                 </select>
             </form-field>
-            <form-field label="使用场地">
+            <form-field label="使用场地" *ngIf="noStop">
                 <select name="palce" class="form-control" [(ngModel)]="form.toId">
                     <option *ngFor="let place of places " [ngValue]="place.id">
                         {{ place.name}}
