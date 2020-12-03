@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 
 import { Dialog } from 'core/dialogs';
+import { CommonDialog } from 'core/common-dialogs';
 
 import { Asset } from '../../shared/asset-form.model';
 import { CenterService } from '../center.service';
 import { AssetOptionDialog } from './asset-option.dialog';
+import { AssetUpdatetDialog } from './asset-update.dialog';
 
 @Component({
     templateUrl: 'form-list.component.html',
@@ -19,16 +21,19 @@ export class CenterListComponent {
     constructor(
         private service: CenterService,
         private dialog: Dialog,
+        private dialogs: CommonDialog,
     ) {
-        this.service.loadList(this.service.queryOptions).subscribe(dto => this.loadData(dto));
+        this.loadData(this.service.queryOptions);
     }
 
-    loadData(dto: any) {
-        this.assets = dto.list.map(it => new Asset(it));
-        this.assetNames = dto.assetNames;
-        this.states = dto.states;
-        this.buildings = dto.buildings;
-        this.places = dto.places;
+    loadData(query: any) {
+        this.service.loadList(query).subscribe((dto: any) => {
+            this.assets = dto.list.map(it => new Asset(it));
+            this.assetNames = dto.assetNames;
+            this.states = dto.states;
+            this.buildings = dto.buildings;
+            this.places = dto.places;
+        });
     }
 
     query() {
@@ -37,8 +42,22 @@ export class CenterListComponent {
             buildings: this.buildings,
             states: this.states,
             places: this.places,
-        }).then(result => {
-            this.service.loadList(result).subscribe(dto => this.loadData(dto));
+        }).then(result => this.loadData(result));
+    }
+
+    batchUpdate() {
+        this.dialog.open(AssetUpdatetDialog).then(result => {
+            if (result) {
+                this.service.batchSave(result).subscribe(dto => {
+                    if (dto.error && dto.error.length > 0) {
+                        this.dialogs.error(dto.error);
+                    }
+                    if (dto.success > 0) {
+                        alert(`成功录入${dto.success}个设备的资产编号和序列号`);
+                    }
+                });
+            }
+            this.loadData(this.service.queryOptions);
         });
     }
 }

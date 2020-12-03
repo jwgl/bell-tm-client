@@ -7,10 +7,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
+import { CommonDialogsModule } from 'core/common-dialogs';
+
 import { TmAssetCommonModule } from '../../components/asset-common.module';
 import { AssetPipesModule } from '../../components/pipe/asset-pipes.module';
 import { CenterListComponent } from './form-list.component';
 import { AssetOptionDialog } from './asset-option.dialog';
+import { AssetUpdatetDialog } from './asset-update.dialog';
 
 @NgModule({
     imports: [
@@ -18,6 +21,7 @@ import { AssetOptionDialog } from './asset-option.dialog';
         CommonModule,
         RouterModule,
         CommonDirectivesModule,
+        CommonDialogsModule,
         TmAssetCommonModule,
         NgSelectModule,
         AssetPipesModule,
@@ -25,6 +29,7 @@ import { AssetOptionDialog } from './asset-option.dialog';
     declarations: [
         CenterListComponent,
         AssetOptionDialog,
+        AssetUpdatetDialog,
     ],
     exports: [
         CenterListComponent,
@@ -34,6 +39,7 @@ import { AssetOptionDialog } from './asset-option.dialog';
     ],
     entryComponents: [
         AssetOptionDialog,
+        AssetUpdatetDialog,
     ],
 })
 export class CenterListModule { }
