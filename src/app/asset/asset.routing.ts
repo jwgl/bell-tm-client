@@ -19,6 +19,9 @@ const routes: Routes = [{
 }, {
     path: 'approvers/:userId/transferApproval',
     loadChildren: () => import('./center/approval/approval.module').then(m => m.TransferApprovalModule),
+}, {
+    path: 'models',
+    loadChildren: () => import('./setting/asset-model/asset-model.module').then(m => m.AssetModelModule),
 }];
 
 @NgModule({

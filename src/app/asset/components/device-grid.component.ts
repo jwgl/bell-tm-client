@@ -107,6 +107,15 @@ export class DeviceGridComponent {
         }
     }
 
+    @Input() set detailShow(value: boolean) {
+        if (value) {
+            const field = this.ths.find(th => th.field === 'id');
+            if (field) {
+                field['cellRenderer'] = this.linkCellRender;
+            }
+        }
+    }
+
     constructor() {
         this.frameworkComponents = { setFilterComponent: SetFilterComponent };
     }
@@ -116,7 +125,7 @@ export class DeviceGridComponent {
     }
 
     statusGetter(params: any) {
-        return { USING: '在用', STANDBY: '备用', REPAIRING: '维修', OFF: '报废',  CLEARANCE: '核销', LOST: '丢失'}[params.data.state];
+        return { USING: '在用', STANDBY: '备用', REPAIRING: '维修', OFF: '报废', CLEARANCE: '核销', LOST: '丢失' }[params.data.state];
     }
 
     formatDate(params: any) {
