@@ -53,7 +53,6 @@ export class ApplicationFormService extends RestEditService {
     }
 
     next(id: any, wi: string, title: string): Observable<any> {
-        console.log(title);
         return this.http.patch(`${this.api.item(id)}/workitems/${wi}?op=NEXT`, { title });
     }
 }

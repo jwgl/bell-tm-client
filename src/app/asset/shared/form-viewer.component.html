@@ -1,0 +1,61 @@
+<ng-container *ngIf="vm">
+    <tm-form-title>资产详情{{vm.id}}<span class="ml-3"><qr-code [value]="qcode" size="120" background="#f2f1f1" padding="10"></qr-code></span></tm-form-title>
+    <div class="row">
+        <div class="form-group col-2">
+            <label class="control-label">资产编号</label>
+            <div>{{vm.code}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">资产类别</label>
+            <div>{{vm.assetType}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">名称</label>
+            <div>{{vm.name}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">型号规格</label>
+            <div>{{vm.brand}} {{vm.specs}} {{vm.parameter}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">当前存放地点</label>
+            <div>{{vm.building}} {{vm.place}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">设备编号</label>
+            <div>{{vm.sn}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-2">
+            <label class="control-label">数量</label>
+            <div>{{vm.pcs}} {{vm.unit}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">购买时间</label>
+            <div>{{vm.dateBought}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">保质期</label>
+            <div>{{vm.qualifyMonth}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">报废日期</label>
+            <div>{{vm.dateForbid}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">核销日期</label>
+            <div>{{vm.dateClose}}</div>
+        </div>
+        <div class="form-group col-2">
+            <label class="control-label">资产状态</label>
+            <div>{{vm.state}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-12">
+            <label class="control-label">备注</label>
+            <div>{{vm.note}}</div>
+        </div>
+    </div>
+</ng-container>

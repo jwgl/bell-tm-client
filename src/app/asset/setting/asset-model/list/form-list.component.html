@@ -1,0 +1,27 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-primary" (click)="editor()">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>设备名称</th>
+            <th>品牌</th>
+            <th>规格型号</th>
+            <th>参数</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.brand}}</td>
+                <td>{{item.specs}}</td>
+                <td>{{item.parameter}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

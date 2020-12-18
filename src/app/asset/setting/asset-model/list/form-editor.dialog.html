@@ -1,0 +1,22 @@
+<modal-dialog modalTitle="规格型号">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="设备名称">
+                <input class="form-control" name="name" type="text" [(ngModel)]="form.name" placeholder="设备名称" />
+            </form-field>
+            <form-field label="品牌">
+                <input class="form-control" name="brand" type="text" [(ngModel)]="form.brand" placeholder="品牌" />
+            </form-field>
+            <form-field label="规格型号">
+                <input class="form-control" name="specs" type="text" [(ngModel)]="form.specs" placeholder="规格型号" />
+            </form-field>
+            <form-field label="参数">
+                <input class="form-control" name="parameter" type="text" [(ngModel)]="form.parameter" placeholder="参数" />
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

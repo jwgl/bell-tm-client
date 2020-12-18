@@ -1,0 +1,10 @@
+<ng-container *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="ml-auto">
+            <button class="btn btn-secondary" routerLink="../">返回</button>
+            <button class="btn btn-secondary ml-2" routerLink="edit" *ngIf="createAble">编辑</button>
+            <button class="btn btn-secondary ml-2" (click)="setting()" *ngIf="!createAble">编辑</button>
+        </div>
+    </div>
+    <tm-place-form-viewer [vm]="vm"></tm-place-form-viewer>
+</ng-container>

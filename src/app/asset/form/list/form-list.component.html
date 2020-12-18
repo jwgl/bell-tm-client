@@ -1,0 +1,31 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-primary" routerLink="editor">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>提交日期</th>
+            <th>经办人</th>
+            <th>审核人</th>
+            <th>审核时间</th>
+            <th>状态</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-receiptFrom [ngForOf]="receiptForms" let-i="index">
+            <tr>
+                <td><a [routerLink]="[receiptFrom.id]">{{i + 1}}#{{receiptFrom.id}}</a></td>
+                <td>{{receiptFrom.dateCheckIn}}</td>
+                <td>{{receiptFrom.operator}}</td>
+                <td>{{receiptFrom.approver}}</td>
+                <td>{{receiptFrom.dateApproved}}</td>
+                <td><audit-status [status]="receiptFrom.status"></audit-status></td>
+                <td>{{receiptFrom.note}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

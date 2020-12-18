@@ -1,0 +1,67 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-primary' (click)="save()">保存</button>
+        </div>
+    </div>
+    <tm-form-title>入库单{{form.id}}</tm-form-title>
+    <form role="form">
+        <div class="row">
+            <div class="form-group col-12">
+                <label class="control-label">说明</label>
+                <input class="form-control" name="note" type="text" [(ngModel)]="form.note" placeholder="入库单说明、备注" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-12">
+                <label class="control-label">入库单明细</label>
+                <span class="ml-2">
+                    <button class='btn btn-success btn-sm' (click)="addItem()">添加</button>
+                </span>
+                <!-- <tm-asset-device-grid [data]="form.items"></tm-asset-device-grid> -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>资产编号</th>
+                            <th>资产类别</th>
+                            <th>设备名称</th>
+                            <th>设备品牌</th>
+                            <th>设备型号</th>
+                            <th>设备参数</th>
+                            <th>设备SN</th>
+                            <th>单位</th>
+                            <th>数量</th>
+                            <th>金额</th>
+                            <th>购置时间</th>
+                            <th>保修期</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template ngFor let-item [ngForOf]="form.items" let-i="index">
+                            <tr>
+                                <td>{{i + 1}}</td>
+                                <td>{{item.code}}</td>
+                                <td>{{item.assetType}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.brand}}</td>
+                                <td>{{item.specs}}</td>
+                                <td>{{item.parameter}}</td>
+                                <td>{{item.sn}}</td>
+                                <td>{{item.unit}}</td>
+                                <td>{{item.pcs}}</td>
+                                <td>{{item.price}}</td>
+                                <td>{{item.dateBought}}</td>
+                                <td>{{item.qualifyMonth}}</td>
+                                <td>
+                                    <tm-remove-item (click)="remove(item)"></tm-remove-item>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</ng-container>

@@ -1,0 +1,28 @@
+<modal-dialog modalTitle="{{transferType}}单">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="{{transferType}}楼区">
+                <select name="building" class="form-control" [(ngModel)]="form.building" (ngModelChange)="buildingChange($event)">
+                    <option *ngFor="let building of buildings " [ngValue]="building">
+                        {{ building}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="使用场地" *ngIf="noStop">
+                <select name="palce" class="form-control" [(ngModel)]="form.toId">
+                    <option *ngFor="let place of places " [ngValue]="place.id">
+                        {{ place.name}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="{{transferType}}说明">
+                <input class="form-control" name="note" type="text" [(ngModel)]="form.note" placeholder="{{transferType}}说明、备注" />
+            </form-field>
+        </form>
+        <tm-asset-device-grid [data]="assets" ></tm-asset-device-grid>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>
