@@ -40,6 +40,9 @@ const routes: Routes = [{
         path: 'form',
         loadChildren: () => import('../form/form.module').then(m => m.FormModule),
     }, {
+        path: 'asset',
+        loadChildren: () => import('../asset/asset.module').then(m => m.AssetModule),
+    }, {
         path: '**',
         component: Page404Component,
     }],

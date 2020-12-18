@@ -1,0 +1,23 @@
+<ng-container *ngIf="vm">
+    <tm-form-title>入库单{{vm.id}}</tm-form-title>
+    <div class="row">
+        <div class="form-group col-3">
+            <label class="control-label">经办</label>
+            <div>{{vm.operator}} {{vm.dateCheckIn}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">核验</label>
+            <div>{{vm.approver}} {{vm.dateApproved}}</div>
+        </div>
+        <div class="form-group col-6">
+            <label class="control-label">入库说明</label>
+            <div>{{vm.note}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-12">
+            <label class="control-label">入库单明细</label>
+            <tm-asset-device-grid [data]="vm.items"></tm-asset-device-grid>
+        </div>
+    </div>
+</ng-container>
