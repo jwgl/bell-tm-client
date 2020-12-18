@@ -7,5 +7,5 @@
         <button class="btn btn-secondary ml-2" routerLink="../forms">流转单</button>
     </div>
 </div>
-<tm-asset-device-grid [data]="assets" [detailShow]="true" [checkboxSelection]="true" [flush]="flush" (rowSelected)="onRowSelected($event)">
+<tm-asset-device-grid [data]="assets" [detailShow]="true" [checkboxSelection]="true" [flush]="true" (rowSelected)="onRowSelected($event)">
 </tm-asset-device-grid>
