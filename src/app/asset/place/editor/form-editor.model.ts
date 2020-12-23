@@ -13,7 +13,7 @@ Room.prototype.toServerDto = function(this: Room): any {
         seat: this.seat ? this.seat : 0,
         seatType: this.seatType,
         status: this.status,
-        measure: this.measure,
+        measure: this.measure ? this.measure : 0,
         purpose: this.purpose,
         departmentId: this.departmentId,
         placeTypeId: this.placeTypeId,

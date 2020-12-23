@@ -25,6 +25,7 @@ export class TransferDialog extends BaseDialog {
 
     protected onOpening(): Observable<any> {
         this.form = this.options.form;
+        this.form.toId = '';
         this.buildings = this.options.buildings;
         this.places = this.options.places;
         this.form.building = this.buildings[0];
@@ -57,5 +58,18 @@ export class TransferDialog extends BaseDialog {
 
     get noStop(): boolean {
         return this.transferType !== '停用入库';
+    }
+
+    filterByBuilding(building: string) {
+        // 资产流转不允许流转到特殊场地
+        return (place: any) => place.building === building && !(this.transferType === '资产流转' && place.id < 5);
+    }
+
+    commit() {
+        if (this.form.toId === '') {
+            alert('请选择目标场地');
+        } else {
+            this.ok();
+        }
     }
 }

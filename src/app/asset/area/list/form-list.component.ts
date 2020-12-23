@@ -19,6 +19,7 @@ export class AreaListComponent {
     places: any;
     areas: any;
     assetsSelected: any;
+    flush: boolean;
 
     constructor(
         private service: AreaService,
@@ -70,6 +71,7 @@ export class AreaListComponent {
                 this.create(result);
             });
         }
+        this.flushAfterAction();
     }
 
     checkout() {
@@ -88,6 +90,7 @@ export class AreaListComponent {
                 this.create(result);
             });
         }
+        this.flushAfterAction();
     }
 
     stop() {
@@ -106,11 +109,20 @@ export class AreaListComponent {
                 this.create(result);
             });
         }
+        this.flushAfterAction();
     }
 
     create(form: any) {
         this.transferService.create(form).subscribe(id =>
             this.router.navigate(['../forms/', id], { relativeTo: this.route })
         );
+    }
+
+    flushAfterAction() {
+        if (this.flush === undefined) {
+            this.flush = true;
+        } else {
+            this.flush = !this.flush;
+        }
     }
 }

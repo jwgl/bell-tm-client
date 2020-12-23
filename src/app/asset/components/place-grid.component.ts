@@ -56,7 +56,7 @@ export class PlaceGridComponent {
             this.gridApi
                 .getFilterInstance(key)
                 .getFrameworkComponentInstance()
-                .setItems((filters && filters.length > 0 && typeof (filters[0]) === 'string') ? filters
+                .setItems((typeof (filters[0]) === 'string') ? filters
                     .sort((a, b) => a === null ? 1 : a.localeCompare(b)) : filters);
         }
     }

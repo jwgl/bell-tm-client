@@ -49,7 +49,7 @@ ReceiptForm.prototype.getAddedItems = function(this: ReceiptForm): any[] {
         sn: it.sn,
         code: it.code,
         name: it.name,
-        price: it.price,
+        price: it.price ? it.price : 0,
         dateBought: it.dateBought,
         qualifyMonth: it.qualifyMonth,
         supplierId: it.supplierId,
