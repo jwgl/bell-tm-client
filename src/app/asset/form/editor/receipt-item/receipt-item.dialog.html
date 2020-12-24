@@ -12,11 +12,10 @@
                 <input class="form-control" name="sn" type="text" [(ngModel)]="item.sn" placeholder="SN编号" />
             </form-field>
             <form-field label="设备名称">
-                <input class="form-control" name="name" type="text" [(ngModel)]="item.name"
-                (ngModelChange)="assetNameChange($event)" placeholder="设备名称" />
+                <tm-select-or-other [options]="assetNames" (selectObject)="onNameSelected($event)"
+                    [defaultValue]="item.name" [disabled]="false"></tm-select-or-other>
             </form-field>
             <form-field label="规格型号">
-                <!-- <tm-asset-model-select (selectModel)="onModelSelected($event)"></tm-asset-model-select> -->
                 <select name="assetModel" class="form-control" [(ngModel)]="item.assetModelId">
                     <option *ngFor="let model of assetModels " [ngValue]="model.id">
                         {{ modelLabel(model) }}

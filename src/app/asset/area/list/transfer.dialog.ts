@@ -7,7 +7,6 @@ import { BaseDialog } from 'core/dialogs';
 import { AreaService } from '../area.service';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'transfer.dialog.html',
 })
 // tslint:disable-next-line:component-class-suffix

@@ -6,7 +6,6 @@ import { BaseDialog } from 'core/dialogs';
 import { AreaService } from '../area.service';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'asset-option.dialog.html',
 })
 // tslint:disable-next-line:component-class-suffix

@@ -5,10 +5,9 @@ import { RouterModule } from '@angular/router';
 
 import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
-import { TmAssetCommonModule } from '../../../components/asset-common.module';
 
-import { AssetModelListComponent } from './form-list.component';
-import { AssetModelDialog } from './form-editor.dialog';
+import { UserAreaListComponent } from './form-list.component';
+import { UserAreaDialog } from './form-editor.dialog';
 
 @NgModule({
     imports: [
@@ -16,20 +15,19 @@ import { AssetModelDialog } from './form-editor.dialog';
         RouterModule,
         FormsModule,
         CommonDirectivesModule,
-        TmAssetCommonModule,
     ],
     declarations: [
-        AssetModelListComponent,
-        AssetModelDialog,
+        UserAreaListComponent,
+        UserAreaDialog,
     ],
     providers: [
         Dialog,
     ],
     exports: [
-        AssetModelListComponent,
+        UserAreaListComponent,
     ],
     entryComponents: [
-        AssetModelDialog,
+        UserAreaDialog,
     ],
 })
-export class AssetModelListModule { }
+export class UserAreaListModule { }

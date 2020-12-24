@@ -6,12 +6,12 @@ import { BaseDialog } from 'core/dialogs';
 import { AssetModelService } from '../asset-model.service';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'form-editor.dialog.html',
 })
 // tslint:disable-next-line:component-class-suffix
 export class AssetModelDialog extends BaseDialog {
     form: any;
+    assetNames: any[];
 
     constructor(private service: AssetModelService) {
         super();
@@ -19,10 +19,15 @@ export class AssetModelDialog extends BaseDialog {
 
     protected onOpening(): Observable<any> {
         this.form = {};
+        this.assetNames = this.options.assetNames;
         return null;
     }
 
     protected onConfirmed(): any {
         return this.form;
+    }
+
+    onNameSelected(object: any) {
+        this.form.name = object.name;
     }
 }

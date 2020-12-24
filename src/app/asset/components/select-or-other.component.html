@@ -7,11 +7,16 @@
             <span class="sr-only">Toggle Dropdown</span>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuReference" style="width: 100%; padding: 5px;">
-            <ng-container *ngFor="let item of options">
-                <span class="dropdown-item" (click)="objectSelected(item)">{{item.name}}</span>
-            </ng-container>
-            <div class="dropdown-divider"></div>
-            <span class="dropdown-item" (click)="other()">其他</span>
+            <div class="table-wrapper" *ngIf="options?.length > 0">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr *ngFor="let item of options" (click)="objectSelected(item)" tabindex="1" style="background-color: #FFF">
+                            <td>{{item.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="help-block"><span class="dropdown-item" (click)="other()">其他</span></div>
         </div>
     </div>
 </div>

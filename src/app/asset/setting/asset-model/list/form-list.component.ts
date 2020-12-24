@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import * as _ from 'lodash';
 import { Dialog } from 'core/dialogs';
 
 import { AssetModelService } from '../asset-model.service';
@@ -24,7 +25,13 @@ export class AssetModelListComponent {
     }
 
     editor() {
-        this.dialog.open(AssetModelDialog).then(result =>
+        const names = _.chain(this.list)
+            .map(data => data['name'])
+            .uniq()
+            .sort((a: string, b: string) => a.localeCompare(b))
+            .value();
+        const assetNames = names.map(item => ({ name: item, value: item }));
+        this.dialog.open(AssetModelDialog, { assetNames }).then(result =>
             this.service.create(result).subscribe(() => this.loadData())
         );
     }
