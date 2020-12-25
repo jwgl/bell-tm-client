@@ -1,4 +1,3 @@
-
 .dropdown-menu {
     border-color: #ddd;
     background-color: #fff;
@@ -8,4 +7,10 @@
     border-width: 1px;
     border-style: solid;
     border-color: #ced4da;
+}
+
+.table-wrapper {
+    overflow-y: auto;
+    border: solid 1px #ddd;
+    max-height: 320px;
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import {format, parse} from 'date-fns';
 import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 import { Dialog } from 'core/dialogs';
@@ -19,6 +19,7 @@ export class ReceiptFormEditorComponent {
     form: ReceiptForm;
     assetTypes: string[];
     suppliers: any[];
+    assetNames: any[];
 
     constructor(
         private service: AssetFormService,
@@ -39,12 +40,18 @@ export class ReceiptFormEditorComponent {
         this.form = new ReceiptForm(dto.form);
         this.assetTypes = dto.assetTypes;
         this.suppliers = dto.suppliers;
+        this.assetNames = dto.assetNames;
         this.form.removedItems = [];
     }
 
     addItem() {
+        console.log(parse('2020-12-32', 'yyyy-MM-dd', 0).toString() === 'Invalid Date');
         const its = this.form.items.map(item => item.id);
-        this.dialog.open(ReceiptItemDialog, { assetTypes: this.assetTypes, suppliers: this.suppliers }).then(result => {
+        this.dialog.open(ReceiptItemDialog, {
+            assetTypes: this.assetTypes,
+            suppliers: this.suppliers,
+            assetNames: this.assetNames,
+        }).then(result => {
             const item = new Asset(result);
             // item.id = this.form.items.length + 1;
             this.form.addItem(item);

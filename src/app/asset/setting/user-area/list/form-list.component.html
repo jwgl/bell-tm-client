@@ -1,0 +1,27 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-primary" (click)="editor()">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>老师</th>
+            <th>可管楼</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+            <tr>
+                <td>{{i + 1}}#{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.building}}</td>
+                <td>
+                    <tm-remove-item (click)="remove(item)"></tm-remove-item>
+                </td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

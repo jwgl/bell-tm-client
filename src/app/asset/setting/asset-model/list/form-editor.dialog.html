@@ -2,7 +2,8 @@
     <modal-body>
         <form class="form-horizontal">
             <form-field label="设备名称">
-                <input class="form-control" name="name" type="text" [(ngModel)]="form.name" placeholder="设备名称" />
+                <tm-select-or-other [options]="assetNames" (selectObject)="onNameSelected($event)"
+                    [defaultValue]="form.name" [disabled]="false"></tm-select-or-other>
             </form-field>
             <form-field label="品牌">
                 <input class="form-control" name="brand" type="text" [(ngModel)]="form.brand" placeholder="品牌" />

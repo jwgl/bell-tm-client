@@ -14,6 +14,7 @@ export class DeviceGridComponent {
     list: any;
     reflesh: boolean;
     rowSelection = 'multiple';
+    @Input() size: string;
     @Output() rowSelected: EventEmitter<any> = new EventEmitter<any>();
     frameworkComponents: any;
     gridOptions = {
@@ -26,7 +27,7 @@ export class DeviceGridComponent {
         {
             field: 'id',
             headerName: 'ID',
-            width: 80,
+            width: 100,
             // cellRenderer: this.linkCellRender,
             checkboxSelection: false,
             headerCheckboxSelection: false,
@@ -102,7 +103,7 @@ export class DeviceGridComponent {
                 field.checkboxSelection = true;
                 field.headerCheckboxSelection = true;
                 field.headerCheckboxSelectionFilteredOnly = true;
-                field.width = 100;
+                field.width = 130;
             }
         }
     }

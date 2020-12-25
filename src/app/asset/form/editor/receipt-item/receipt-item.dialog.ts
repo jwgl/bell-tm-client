@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import format from 'date-fns/format';
+import {format, parse} from 'date-fns';
 
 import { BaseDialog } from 'core/dialogs';
 import { Http } from 'core/rest';
@@ -16,6 +16,7 @@ export class ReceiptItemDialog extends BaseDialog {
     assetTypes: string[];
     suppliers: any[];
     assetModels: any;
+    assetNames: any[];
 
     constructor(private http: Http) {
         super();
@@ -27,6 +28,7 @@ export class ReceiptItemDialog extends BaseDialog {
             this.item = new Asset(this.options.form);
             this.suppliers = this.options.suppliers;
             this.assetTypes = this.options.assetTypes;
+            this.assetNames = this.options.assetNames;
             this.item.dateBought = format(new Date(), 'yyyy-MM-dd');
         }
         return null;
@@ -62,6 +64,8 @@ export class ReceiptItemDialog extends BaseDialog {
             alert('单位不能为空！');
         } else if (!this.item.pcs) {
             alert('请输入数量！');
+        } else if (parse(this.item.dateBought, 'yyyy-MM-dd', 0).toString() === 'Invalid Date') {
+            alert('购买日期不合法，请按照格式输入：yyyy-MM-dd');
         } else {
             this.ok();
         }
@@ -69,6 +73,13 @@ export class ReceiptItemDialog extends BaseDialog {
 
     onObjectSelected(object: any) {
         this.item.assetType = object.name;
+    }
+
+    onNameSelected(object: any) {
+        if (this.item.name !== object.name) {
+            this.assetNameChange(object.name);
+            this.item.name = object.name;
+        }
     }
 
     modelLabel(model: any): string {

@@ -1,17 +1,20 @@
-<div class="d-flex">
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-input" *ngIf="selectedValue != -1">{{defaultValue}}</button>
-        <input type="text" class="form-control dropdown-input" [(ngModel)]="value" *ngIf="selectedValue == -1" (ngModelChange)="onValueChanged()">
-        <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split dropdown-input" id="dropdownMenuReference"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent" [disabled]="disabled">
-            <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference" style="width: 100%; padding: 5px;">
-            <ng-container *ngFor="let item of options">
-                <span class="dropdown-item" (click)="objectSelected(item)">{{item.name}}</span>
-            </ng-container>
-            <div class="dropdown-divider"></div>
-            <span class="dropdown-item" (click)="other()">其他</span>
+<div class="input-group">
+    <input type="text" class="form-control dropdown-input" placeholder="请选择" value="{{defaultValue}}" readonly *ngIf="selectedValue != -1">
+    <input type="text" class="form-control dropdown-input" [(ngModel)]="value" *ngIf="selectedValue == -1" (ngModelChange)="onValueChanged()">
+    <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split dropdown-input" id="dropdownMenuReference"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent" [disabled]="disabled">
+        <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuReference" style="width: 100%; padding: 5px;">
+        <div class="table-wrapper" *ngIf="options?.length > 0">
+            <table class="table table-hover">
+                <tbody>
+                    <tr *ngFor="let item of options" (click)="objectSelected(item)" tabindex="1" style="background-color: #FFF">
+                        <td>{{item.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        <div class="text-center"><span class="dropdown-item" (click)="other()">其他</span></div>
     </div>
 </div>

@@ -22,6 +22,10 @@ const routes: Routes = [{
 }, {
     path: 'models',
     loadChildren: () => import('./setting/asset-model/asset-model.module').then(m => m.AssetModelModule),
+}, {
+    path: 'approvers/:userId/grants',
+    loadChildren: () => import('./setting/user-area/user-area.module').then(m => m.UserAreaModule),
+
 }];
 
 @NgModule({
