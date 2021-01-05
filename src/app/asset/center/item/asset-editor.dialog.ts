@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import {format, parse} from 'date-fns';
+import { parse} from 'date-fns';
 
 import { BaseDialog } from 'core/dialogs';
 import { Http } from 'core/rest';
@@ -12,10 +12,11 @@ import { Asset } from '../../shared/asset-form.model';
 })
 // tslint:disable-next-line:component-class-suffix
 export class AssetEditorDialog extends BaseDialog {
-    item: Asset;
+    item: any;
     assetTypes: string[];
     suppliers: any[];
     assetModels: any;
+    sake: string;
 
     constructor(private http: Http) {
         super();

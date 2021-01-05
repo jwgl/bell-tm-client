@@ -12,7 +12,8 @@
                 <input class="form-control" name="price" type="number" [(ngModel)]="item.price" placeholder="price" />
             </form-field>
             <form-field label="购买时间">
-                <input class="form-control" name="dateBought" type="text" [(ngModel)]="item.dateBought" placeholder="yyyy-MM-dd" />
+                <input class="form-control" name="dateBought" type="text" [(ngModel)]="item.dateBought"
+                    placeholder="yyyy-MM-dd" />
             </form-field>
             <form-field label="供应商">
                 <select name="supplier" class="form-control" [(ngModel)]="item.supplierId">
@@ -23,6 +24,10 @@
             </form-field>
             <form-field label="备注">
                 <input class="form-control" name="note" type="text" [(ngModel)]="item.note" placeholder="备注" />
+            </form-field>
+            <form-field label="变更原因">
+                <textarea class="form-control" name="sake" rows="4" [(ngModel)]="item.sake" placeholder="请说明此次变更的原因！">
+            </textarea>
             </form-field>
         </form>
     </modal-body>

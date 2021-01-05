@@ -62,14 +62,16 @@
             <div>{{vm.note}}</div>
         </div>
     </div>
-    <ng-container *ngIf="changeLogs">
+    <ng-container *ngIf="changeLogs && changeLogs.length > 0">
         <table class="table table-hover">
             <th>日期</th>
+            <th>变更原因</th>
             <th>修改前</th>
             <th>修改后</th>
             <tbody>
                 <tr *ngFor="let log of changeLogs">
                     <td>{{log.dateCreated | date: 'y-MM-dd HH:mm'}}</td>
+                    <td>{{log.sake}}</td>
                     <td>{{log.modelFrom.brand}} {{log.modelFrom.specs}} {{log.modelFrom.parameter}} <br>
                         {{log.otherFrom.dateBought}} <br>
                         ￥{{log.otherFrom.price}} <br>
