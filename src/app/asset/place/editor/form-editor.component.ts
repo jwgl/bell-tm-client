@@ -93,6 +93,8 @@ export class PlaceFormEditorComponent {
         const validation = this.validate();
         if (this.purposeSelected && this.purposeSelected.length > 0) {
             this.form.purpose = this.purposeSelected.map(item => item.name).join(';');
+        } else {
+            this.form.purpose = null;
         }
         if (validation.length) {
             this.dialogs.error(validation);

@@ -35,6 +35,7 @@ export class DeviceGridComponent {
         },
         { field: 'building', headerName: '教学楼', filter: 'setFilterComponent', comparator: this.localComparator, width: 90 },
         { field: 'place', headerName: '房间号', filter: 'setFilterComponent', comparator: this.localComparator, width: 90 },
+        { field: 'placeType', headerName: '房间类型', filter: 'setFilterComponent', comparator: this.localComparator, width: 90 },
         { field: 'code', headerName: '资产编号', width: 90 },
         { field: 'assetType', headerName: '资产类别', filter: 'setFilterComponent', comparator: this.localComparator, width: 90 },
         { field: 'name', headerName: '设备名称', filter: 'setFilterComponent', comparator: this.localComparator, width: 90 },
@@ -75,7 +76,7 @@ export class DeviceGridComponent {
         this.list = value;
         if (value && value.length > 0) {
             this.ths = this.ths.filter(th => !this.list.every((data: any) => data[th.field] === undefined || data[th.field] === null));
-            ['building', 'place', 'assetType', 'name', 'brand', 'dateBought', 'supplier', 'state']
+            ['building', 'place', 'placeType', 'assetType', 'name', 'brand', 'dateBought', 'supplier', 'state']
                 .forEach(item => {
                     const th = this.ths.find(col => col.field === item);
                     if (th && th.filter === 'setFilterComponent') {

@@ -5,6 +5,7 @@
         <button class="btn btn-secondary" (click)="stop()">停用入库</button>
         <button class="btn btn-secondary" (click)="transfer()">区内流转</button>
         <button class="btn btn-secondary ml-2" routerLink="../forms">流转单</button>
+        <a class="btn btn-primary ml-2" download href="/api/asset/output?type=device">导出设备清单</a>
     </div>
 </div>
 <tm-asset-device-grid [data]="assets" [detailShow]="true" [checkboxSelection]="true" [flush]="flush" (rowSelected)="onRowSelected($event)">
