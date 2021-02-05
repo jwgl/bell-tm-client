@@ -23,8 +23,8 @@ import { UnScheduleService } from './unschedule.service';
 })
 // tslint:disable-next-line:component-class-suffix
 export class ObservationSpecial {
-    @ViewChild('evaluationText', { static: false }) input: ElementRef;
-    @ViewChild('suggest', { static: false }) suggest: ElementRef;
+    @ViewChild('evaluationText') input: ElementRef;
+    @ViewChild('suggest') suggest: ElementRef;
 
     editMode: EditMode;
     form: ObservationForm;

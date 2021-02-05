@@ -1,4 +1,4 @@
-import { template } from 'lodash';
+import * as _ from 'lodash';
 
 const pattern = /\$\{[^\}]*\}/;
 
@@ -8,7 +8,7 @@ export class ApiUrl {
     constructor(url: string, templateParams?: object) {
         if (pattern.test(url)) {
             if (!!templateParams) {
-                this.url = `${template(url)(templateParams)}`;
+                this.url = `${_.template(url)(templateParams)}`;
             } else {
                 throw new Error('Should provide template params');
             }

@@ -43,8 +43,7 @@ import { ScheduleTimetableComponent } from './components/schedule-timetable/sche
 import { ScheduleWeektabComponent } from './components/schedule-timetable/schedule-weektab.component';
 import { TeacherSelectComponent } from './components/teacher-select/teacher-select.component';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
     faSpinner, faTimes, faPlus, faTrashAlt, faEdit,
     faArrowUp, faArrowDown, faAngleUp, faAngleDown,
@@ -56,14 +55,6 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { ProvideParentForm } from './directives/provide-parent-form';
 import { MultipleLineComponent } from './components/multiple-line.component';
-
-library.add(
-    faSpinner, faTimes, faPlus, faTrashAlt, faEdit,
-    faArrowUp, faArrowDown, faAngleUp, faAngleDown,
-    faTag, faHashtag,
-    faThumbsUp, faThumbsDown,
-    faMinusSquare, faPlusSquare,
-);
 
 export {
     CheckboxSelectorComponent,
@@ -128,4 +119,14 @@ const CORE_DIRECTIVES: any[] = [
         CORE_DIRECTIVES,
     ],
 })
-export class CommonDirectivesModule { }
+export class CommonDirectivesModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(
+            faSpinner, faTimes, faPlus, faTrashAlt, faEdit,
+            faArrowUp, faArrowDown, faAngleUp, faAngleDown,
+            faTag, faHashtag,
+            faThumbsUp, faThumbsDown,
+            faMinusSquare, faPlusSquare,
+        );
+    }
+}

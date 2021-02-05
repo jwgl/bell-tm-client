@@ -11,10 +11,10 @@ import { WorkflowForm, WorkflowFormConvert } from './form-item.model';
     templateUrl: 'form-item.component.html',
 })
 export class WorkflowFormItemComponent implements OnInit {
-    @ContentChild('toolbarTpl', { static: false })
+    @ContentChild('toolbarTpl')
     toolbarTemplate: TemplateRef<any>;
 
-    @ContentChild('viewerTpl', { static: false })
+    @ContentChild('viewerTpl')
     viewerTemplate: TemplateRef<any>;
 
     @Input()

@@ -1,7 +1,9 @@
 import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 import { ROUTE_REUSE_FLAG } from './reusable';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class ComponentReuseStrategy implements RouteReuseStrategy {
 
     handlers: { [key: string]: DetachedRouteHandle } = {};

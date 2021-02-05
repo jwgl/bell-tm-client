@@ -22,7 +22,7 @@ export class FormFieldComponent implements AfterContentInit {
     @Input()
     labelCol = 2;
 
-    @ContentChild(FormControlDirective, { static: false })
+    @ContentChild(FormControlDirective)
     formControl: FormControlDirective;
 
     controlId: string;

@@ -20,11 +20,9 @@ import { ProjectListComponent } from './project-list.component';
 import { ProjectItemComponent } from './project-item.component';
 import { ProjectOptionDialog } from './project-option.dialog';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faTimes);
 @NgModule({
     imports: [
         CommonModule,
@@ -60,4 +58,8 @@ library.add(faTimes);
         ProjectOptionDialog,
     ],
 })
-export class TaskItemModule { }
+export class TaskItemModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faTimes);
+    }
+}

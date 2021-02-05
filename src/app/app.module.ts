@@ -15,11 +15,6 @@ import { AuthModule } from 'core/auth';
 import { AppService } from './app.service';
 import { LoginModule } from './login/login.module';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faLock, faUser);
-
 @NgModule({
     declarations: [
         AppComponent,

@@ -47,11 +47,10 @@ import { AuthService } from '../auth/auth.service';
 import { ApiUrl } from '../rest';
 import { ListOption } from './list-group.model';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight, faSearch } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faChevronLeft, faChevronRight, faSearch);
+
 
 export function userIdApiUrlFactory(auth: AuthService, url: string) {
     return new ApiUrl(url, { userId: auth.userInfo.id });
@@ -163,7 +162,11 @@ const WORKFLOW_COMPONENTS: any[] = [
     ],
 })
 export class WorkflowModule {
-    static forReview(apiUrl: string, listOptions: ListOption[]): ModuleWithProviders {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faChevronLeft, faChevronRight, faSearch);
+    }
+
+    static forReview(apiUrl: string, listOptions: ListOption[]): ModuleWithProviders<WorkflowModule> {
         return {
             ngModule: WorkflowModule,
             providers: [{
@@ -183,7 +186,7 @@ export class WorkflowModule {
         };
     }
 
-    static forSubmit<T extends { api: ApiUrl }>(type: Type<T>): ModuleWithProviders {
+    static forSubmit<T extends { api: ApiUrl }>(type: Type<T>): ModuleWithProviders<WorkflowModule> {
         return {
             ngModule: WorkflowModule,
             providers: [{

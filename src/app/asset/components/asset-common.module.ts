@@ -11,11 +11,9 @@ import { ModelSelectComponent } from './model-select.component';
 import { DeviceGridComponent } from './device-grid.component';
 import { TransferFormGridComponent } from './transfer-form-grid.component';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faFilter, faLock, faLockOpen, faUser } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faFilter, faLock, faLockOpen, faUser);
 @NgModule({
     imports: [
         CommonModule,
@@ -40,4 +38,8 @@ library.add(faFilter, faLock, faLockOpen, faUser);
         TransferFormGridComponent,
     ],
 })
-export class TmAssetCommonModule { }
+export class TmAssetCommonModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faFilter, faLock, faLockOpen, faUser);
+    }
+}

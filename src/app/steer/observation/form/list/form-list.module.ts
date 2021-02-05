@@ -9,11 +9,8 @@ import { PipesModule } from '../../shared/pipes/observation-pipes.module';
 
 import { ObservationListComponent } from './form-list.component';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faSearch);
 
 @NgModule({
     imports: [
@@ -31,4 +28,8 @@ library.add(faSearch);
         ObservationListComponent,
     ],
 })
-export class ObservationFormListModule { }
+export class ObservationFormListModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faSearch);
+    }
+}

@@ -4,11 +4,9 @@ import { NgxUploaderModule } from 'ngx-uploader';
 
 import { UploaderPanelComponent } from './uploader.component';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faTimes);
 @NgModule({
   imports: [
     CommonModule,
@@ -18,4 +16,8 @@ library.add(faTimes);
   declarations: [UploaderPanelComponent],
   exports: [UploaderPanelComponent],
 })
-export class UploaderModule { }
+export class UploaderModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faTimes);
+  }
+}
