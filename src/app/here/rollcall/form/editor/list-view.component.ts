@@ -11,7 +11,7 @@ const PageSize = 5;
     templateUrl: 'list-view.component.html',
 })
 export class RollcallListViewComponent extends BaseRollcallView {
-    @ViewChild('list', { static: false }) list: ElementRef;
+    @ViewChild('list') list: ElementRef;
 
     readonly operations: {[key: string]: {fn: () => void, param?: RollcallType}} = {
         PageUp    : {fn: this.prev, param: PageSize},

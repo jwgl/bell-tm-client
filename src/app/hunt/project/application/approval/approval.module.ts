@@ -21,11 +21,9 @@ import { ConclusionDialog } from './conclusion.dialog';
 import { ApplicationAdministrationModule } from './administration/administration.module';
 import { AdministrationService } from './administration/administration.service';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faLock, faLockOpen, faUser } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faLock, faLockOpen, faUser);
 @NgModule({
     imports: [
         CommonModule,
@@ -65,4 +63,8 @@ library.add(faLock, faLockOpen, faUser);
         ConclusionDialog,
     ],
 })
-export class ApprovalModule { }
+export class ApprovalModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faLock, faLockOpen, faUser);
+    }
+}

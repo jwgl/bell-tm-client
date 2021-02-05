@@ -12,11 +12,8 @@ import { AppRoutingModule } from './observer-settings-routing.module';
 import { ObserverListComponent } from './list/observer-list.component';
 import { ObserverService } from './observer.service';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faTimes);
 
 @NgModule({
     imports: [
@@ -37,4 +34,8 @@ library.add(faTimes);
         ObserverListComponent,
     ],
 })
-export class ObserverSettingsModule { }
+export class ObserverSettingsModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faTimes);
+    }
+}

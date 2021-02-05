@@ -17,8 +17,9 @@ const routes: Routes = [{
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {
-            paramsInheritanceStrategy: 'always',
-        })
+    paramsInheritanceStrategy: 'always',
+    relativeLinkResolution: 'legacy'
+})
     ],
     exports: [RouterModule],
     providers: [AuthGuard]

@@ -1,4 +1,4 @@
-import { EventEmitter, OnInit } from '@angular/core';
+import { EventEmitter, OnInit, Directive } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface DynamicDialog {
@@ -9,6 +9,7 @@ export interface DynamicDialog {
     options: any;
 }
 
+@Directive()
 export class BaseDialog implements DynamicDialog, OnInit {
     nativeElement: any;
     $modal: JQuery;

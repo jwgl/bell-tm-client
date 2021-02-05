@@ -10,7 +10,7 @@ import { BookingReport } from '../booking-report.model';
     templateUrl: 'report-item.component.html',
 })
 export class BookingReportItemComponent {
-    @ViewChild('viewerTpl', { static: false })
+    @ViewChild('viewerTpl')
     viewerTemplate: TemplateRef<any>;
 
     vm: BookingReport;

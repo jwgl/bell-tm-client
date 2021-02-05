@@ -22,11 +22,8 @@ import { WeekScheduleComponent } from './week/form-view.component';
 
 import { NavModule } from './nav/nav.module';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faSearch);
 
 @NgModule({
     imports: [
@@ -60,4 +57,8 @@ library.add(faSearch);
         WeekScheduleComponent,
     ],
 })
-export class ScheduleModule { }
+export class ScheduleModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faSearch);
+    }
+}

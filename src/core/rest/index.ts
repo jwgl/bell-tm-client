@@ -24,7 +24,7 @@ export {
     ],
 })
 export class RestModule {
-    static forRoot(providers: Provider[]): ModuleWithProviders {
+    static forRoot(providers: Provider[]): ModuleWithProviders<RestModule> {
         return {
             ngModule: RestModule,
             providers: [
