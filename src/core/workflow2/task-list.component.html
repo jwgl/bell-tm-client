@@ -6,10 +6,9 @@
                 <small *ngIf="item.endTime; else pending">{{item.startTime | date: 'M-dd HH:mm'}}</small>
                 <ng-template #pending><small>待处理</small></ng-template>
                 <div>{{item.assigneeName}}
-                <span class="float-right" *ngIf="item.resultValue">[{{item.resultValue | workflowResultText}}]</span>
+                    <span class="float-right" *ngIf="item.resultValue">[{{item.resultValue | workflowResultText}}]</span>
                 </div>
                 <div class="comment" *ngIf="item.resultComment">{{item.resultComment}}</div>
-                
             </li>
         </ul>
     </div>

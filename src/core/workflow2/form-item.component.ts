@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { RestEditService } from '../rest';
 import { CommonDialog } from '../common-dialogs';
-import { SubmitOptions } from './workflow.service';
 import { WorkflowForm, WorkflowFormConvert } from './form-item.model';
 
 @Component({
@@ -16,9 +15,6 @@ export class WorkflowFormItemComponent implements OnInit {
 
     @ContentChild('viewerTpl')
     viewerTemplate: TemplateRef<any>;
-
-    @Input()
-    reviewType: 'check' | 'approve';
 
     @Input()
     convert: WorkflowFormConvert;
@@ -54,14 +50,5 @@ export class WorkflowFormItemComponent implements OnInit {
                 this.router.navigate(['../'], { relativeTo: this.route });
             });
         });
-    }
-
-    get submitOptions(): SubmitOptions {
-        return {
-            id: this.form.id,
-            type: this.reviewType,
-            what: this.form.workflowTitle,
-            validate: this.form.validate ? this.form.validate.bind(this.form) : null,
-        };
     }
 }

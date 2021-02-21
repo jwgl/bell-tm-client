@@ -14,6 +14,9 @@ export class StatementTaskListComponent {
     selectedTask: string;
     returnUrl: string;
     type: string;
+    page: number;
+    size = 10;
+    maxPage: number;
 
     constructor(
         private router: Router,
@@ -27,9 +30,16 @@ export class StatementTaskListComponent {
                 this.router.navigate(['./', { type: 'todo' }], { relativeTo: this.route });
             } else {
                 switch (this.type) {
-                    case 'item': this.returnUrl = params['returnUrl']; break;
-                    case 'todo': this.loadTasks(); break;
-                    case 'done': this.loadSteps(); break;
+                    case 'item':
+                        this.returnUrl = params['returnUrl'];
+                        break;
+                    case 'todo':
+                        this.loadTasks();
+                        break;
+                    case 'done':
+                        this.page = parseInt(params['page'] || '0');
+                        this.loadSteps();
+                        break;
                 }
             }
         });
@@ -47,8 +57,9 @@ export class StatementTaskListComponent {
     }
 
     loadSteps() {
-        this.stepService.loadList().subscribe(tasks => {
-            this.tasks = tasks;
+        this.stepService.loadPage(this.page, this.size).subscribe(result => {
+            this.tasks = result.items;
+            this.maxPage = Math.floor((result.totalCount - 1) / this.size);
             if (this.router.url.endsWith('/statementSteps')) {
                 if (this.tasks.length > 0) {
                     this.router.navigate([this.tasks[0].id], { relativeTo: this.route });

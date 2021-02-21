@@ -12,12 +12,14 @@ import { StatementTaskItemComponent } from './task-item.component';
 import { StatementTaskService } from './statement-task.service';
 import { StatementStepService } from './statement-step.service';
 import { StatementFormEditorModule } from '../form/editor/form-editor.module';
+import { IconModule } from 'core/icon';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         CommonDirectivesModule,
+        IconModule,
         // Workflow2Module.forReview('/api/huis/users/${userId}/bookingTasks'),
         StatementTaskRoutingModule,
         StatementSharedModule,

@@ -12,12 +12,14 @@ import { BookingTaskItemComponent } from './task-item.component';
 import { BookingTaskService } from './booking-task.service';
 import { BookingStepService } from './booking-step.service';
 import { BookingFormEditorModule } from '../form/editor/form-editor.module';
+import { IconModule } from 'core/icon';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         CommonDirectivesModule,
+        IconModule,
         // Workflow2Module.forReview('/api/huis/users/${userId}/bookingTasks'),
         BookingTaskRoutingModule,
         BookingSharedModule,

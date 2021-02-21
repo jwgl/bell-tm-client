@@ -34,8 +34,6 @@ import {
     UserTaskStatusClassPipe,
 } from './workflow-status.pipe';
 
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faChevronLeft, faChevronRight, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { WorkflowStatusComponent } from './workflow-status.component';
 import { WorkflowTaskListComponent } from './task-list.component';
 import { WorkflowResultTextPipe } from './workflow-result.pipe';
@@ -116,7 +114,6 @@ const WORKFLOW_COMPONENTS: any[] = [
         FormsModule,
         RouterModule,
         CommonDirectivesModule,
-        FontAwesomeModule,
     ],
     declarations: [
         WORKFLOW_DIALOGS,
@@ -138,10 +135,6 @@ const WORKFLOW_COMPONENTS: any[] = [
     ],
 })
 export class Workflow2Module {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faChevronLeft, faChevronRight, faSearch);
-    }
-
     static forReview(apiUrl: string): ModuleWithProviders<Workflow2Module> {
         return {
             ngModule: Workflow2Module,

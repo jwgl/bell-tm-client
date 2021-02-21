@@ -14,7 +14,10 @@ export class BookingTaskListComponent {
     selectedTask: string;
     returnUrl: string;
     type: string;
-
+    page: number;
+    size = 10;
+    maxPage: number;
+    
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -27,9 +30,16 @@ export class BookingTaskListComponent {
                 this.router.navigate(['./', { type: 'todo' }], { relativeTo: this.route });
             } else {
                 switch (this.type) {
-                    case 'item': this.returnUrl = params['returnUrl']; break;
-                    case 'todo': this.loadTasks(); break;
-                    case 'done': this.loadSteps(); break;
+                    case 'item':
+                        this.returnUrl = params['returnUrl'];
+                        break;
+                    case 'todo':
+                        this.loadTasks();
+                        break;
+                    case 'done':
+                        this.page = parseInt(params['page'] || '0');
+                        this.loadSteps();
+                        break;
                 }
             }
         });
@@ -47,8 +57,9 @@ export class BookingTaskListComponent {
     }
 
     loadSteps() {
-        this.stepService.loadList().subscribe(tasks => {
-            this.tasks = tasks;
+        this.stepService.loadPage(this.page, this.size).subscribe(result => {
+            this.tasks = result.items;
+            this.maxPage = Math.floor((result.totalCount - 1) / this.size);
             if (this.router.url.endsWith('/bookingSteps')) {
                 if (this.tasks.length > 0) {
                     this.router.navigate([this.tasks[0].id], { relativeTo: this.route });
@@ -82,5 +93,13 @@ export class BookingTaskListComponent {
 
     get itemColumnClass(): String {
         return this.type == 'item' ? 'col-md-12' : 'col-md-9';
+    }
+
+    get prevLink(): any[] {
+        return this.page <= 0 ? [] : ['./', { type: this.type, page: this.page - 1 }]
+    }
+
+    get nextLink(): any[] {
+        return this.page >= this.maxPage ? [] : ['./', { type: this.type, page: this.page + 1 }];
     }
 }
