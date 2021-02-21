@@ -43,6 +43,9 @@ const routes: Routes = [{
         path: 'asset',
         loadChildren: () => import('../asset/asset.module').then(m => m.AssetModule),
     }, {
+        path: 'huis',
+        loadChildren: () => import('../huis/huis.module').then(m => m.HuisModule),
+    }, {
         path: '**',
         component: Page404Component,
     }],

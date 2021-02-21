@@ -1,0 +1,150 @@
+<form *ngIf="form" #ngForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-secondary' type="button" routerLink="../">取消</button>
+            <button class='btn btn-primary' type="submit" [disabled]="saving || !ngForm.form.valid">保存</button>
+        </div>
+    </div>
+    <tm-form-title>{{form.title}}</tm-form-title>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>会议室</label>
+                    <p class="form-control-plaintext">{{form.room.name}}</p>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>借用时间</label>
+                    <p class="form-control-plaintext">{{form.bookingLowerTime | date:
+                        'y-MM-dd HH:mm'}}-{{form.bookingUpperTime | date: 'HH:mm'}}</p>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="actualUsed">实际使用</label>
+                    <div class="form-check pt-2">
+                        <input class="form-check-input" type="checkbox" id="actualUsed" name="actualUsed"
+                            [(ngModel)]="form.actualUsed">
+                        <label class="form-check-label" for="actualUsed"
+                            [class]="!form.actualUsed ? 'text-danger': ''">{{form.actualUsed?'是（实际使用）':'否（实际未使用）'}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="lowerDate">实际开始日期</label>
+                    <input type="date" class="form-control" id="lowerDate" name="lowerDate" [(ngModel)]="lowerDate"
+                        required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="lowerTime">实际开始时间</label>
+                    <input type="time" class="form-control" id="lowerTime" name="lowerTime" [(ngModel)]="lowerTime"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="upperDate">实际结束日期</label>
+                    <input type="date" class="form-control" id="upperDate" name="upperDate" [(ngModel)]="upperDate"
+                        required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="upperTime">实际结束时间</label>
+                    <input type="time" class="form-control" id="upperTime" name="upperTime" [(ngModel)]="upperTime"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>借用单位</label>
+                    <p class="form-control-plaintext">{{form.form.department.name}}</p>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>借用类别</label>
+                    <p class="form-control-plaintext">{{form.form.bookingType.name}}</p>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>使用人数</label>
+                    <p class="form-control-plaintext">{{form.form.attendance}}</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>内部活动</label>
+                    <p class="form-control-plaintext">
+                        {{form.form.isInternal?'是（部分会议室免费）':'否（所有会议室收费）'}}
+                    </p>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>联系人</label>
+                    <p class="form-control-plaintext">{{form.form.contact | nilValue}}</p>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>联系电话</label>
+                    <p class="form-control-plaintext">{{form.form.contactNumber | nilValue}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>会议主题</label>
+                <p class="form-control-plaintext">{{form.form.subject}}</p>
+            </div>
+            <div class="form-group">
+                <label>借用说明</label>
+                <p class="form-control-plaintext">{{form.form.description}}</p>
+            </div>
+            <div class="form-group">
+                <label>设施明细</label>
+                <table class="booking-facilities table table-sm">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>单价</th>
+                            <th>数量</th>
+                            <th>费用</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let bf of form.facilities" [class.deleted]="bf.deleted" [class.operator-data]="bf.isAdditional">
+                            <td>{{bf.facility.name}}</td>
+                            <td>¥{{bf.unitPrice}}/<ng-container *ngIf="bf.facility.id != 101001">{{bf.unitName}}·
+                                </ng-container>{{bf.timeUnit |timeUnit}}</td>
+                            <td>{{bf.quantity}}</td>
+                            <td>¥{{bf.subtotal | number: '.2-2'}}</td>
+                            <td><button [delete-item]="bf.deleted" *ngIf="bf.facility.id != 101001" (click)="form.removeFacility(bf)"></button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>小计</td>
+                            <td colspan="2">
+                                <span class="font-weight-normal time-quantity">
+                                    借用<span class="font-weight-bold">{{form.timeUnitQuantity}}</span>{{form.timeUnit |
+                                    timeUnit}}<ng-container *ngIf="form.overTimeQuantity">，超时<span
+                                    class="font-weight-bold operator-data">{{form.overTimeQuantity}}</span>小时</ng-container>
+                                </span>
+                            </td>
+                            <td>${{form.subtotal | number: '.2-2'}}</td>
+                            <td>
+                                <button add-item data-toggle="dropdown" *ngIf="extraFacilities">增加</button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" type="button"
+                                        (click)="form.addFacility(facility)"
+                                        *ngFor="let facility of extraFacilities">{{facility.name}}</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-info card bg-light mb-3">
+                <div class="card-header">表单状态</div>
+                <div class="card-body">
+                    <div class="card-text">借用人 {{form.form.user.name}} {{form.form.user.phoneNumber}}</div>
+                    <div class="card-text">借用单 {{form.form.workflowState | workflowStatusText}}</div>
+                </div>
+            </div>
+            <tm-workflow-task-list [list]="form.workflowTasks"></tm-workflow-task-list>
+        </div>
+    </div>
+</form>

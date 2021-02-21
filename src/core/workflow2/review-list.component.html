@@ -1,0 +1,22 @@
+<table class="table" [ngClass]="{'table-expand': expand}" *ngIf="list && list.items.length > 0; else empty">
+    <thead>
+        <tr>
+            <th>单号</th>
+            <ng-template [ngTemplateOutlet]="theadTemplate"></ng-template>
+            <th>{{list.dateLabel}}</th>
+            <th>状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let form of list.items">
+            <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
+            <ng-template [ngTemplateOutlet]="tbodyTemplate" [ngTemplateOutletContext]="{form: form}"></ng-template>
+            <td>{{form.date | date: 'y-MM-dd HH:mm'}}</td>
+            <td><audit-status [status]="form.status"></audit-status></td>
+        </tr>
+    </tbody>
+</table>
+<ng-template #empty>
+    <div class="alert alert-info mt-3">暂无数据</div>
+</ng-template>
+<tm-workflow-list-pager [reviewList]="list"></tm-workflow-list-pager>

@@ -1,0 +1,14 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar d-print-none">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" routerLink="../">返回</button>
+        </div>
+        <div class="btn-group ml-2">
+            <button class="btn btn-secondary" routerLink="edit" *ngIf="form.workflowAction.UPDATE">编辑</button>
+            <button class="btn btn-secondary" (click)="remove(form.id)" *ngIf="form.workflowAction.DELETE">删除</button>
+            <button [workflow-submit]="submitOptions" (submitted)="loadItem(form.id)" *ngIf="form.workflowAction.SUBMIT">提交</button>
+        </div>
+        <ng-template [ngTemplateOutlet]="toolbarTemplate" [ngTemplateOutletContext]="{form: form}"></ng-template>
+    </div>
+    <ng-template [ngTemplateOutlet]="viewerTemplate" [ngTemplateOutletContext]="{form: form}"></ng-template>
+</ng-container>

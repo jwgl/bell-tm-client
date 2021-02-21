@@ -1,0 +1,32 @@
+@import '../../shared/common';
+
+.table.statement-items {
+    font-size: 0.875rem;
+    thead {
+        th {
+            border-top: 0px;
+            border-bottom: 1px solid #dee2e6;
+        }
+    }
+
+    td, th {
+        padding-left: 0px;
+        padding-right: 0px;
+        &:nth-child(5) {
+            text-align: right;
+        }
+        &:nth-child(6) {
+            text-align: right;
+        }
+    }
+
+    tfoot {
+        td {
+            font-weight: bold;
+
+            &:nth-child(2) {
+                text-align: right;
+            }
+        }
+    }
+}

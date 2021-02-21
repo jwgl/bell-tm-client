@@ -1,0 +1,32 @@
+ul.facilities {
+    li {
+        list-style: disc;
+        &.extra {
+            list-style: circle;
+        }
+    }
+}
+ul.booked-times {
+    
+    li {
+        list-style: circle;
+        &.actual {
+            list-style: disc;
+        }    
+    }
+}
+
+ul.list-group {
+    font-size: 0.875rem;
+    ul {
+        padding-inline-start: 1.125rem;
+        padding-bottom: 0;
+    }
+    li.list-group-item{
+        background-color: transparent;
+    }
+}
+
+.card {
+    background-color: #E8F5E9;
+}

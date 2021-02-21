@@ -1,0 +1,33 @@
+@import '../../shared/form-viewer.component';
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+}
+
+.item-deleted {
+    text-decoration: line-through;
+    color: var(--danger);
+}
+
+.table.statement-items {
+    font-size: 0.875rem;
+    th {
+        &:nth-child(7) {
+            text-align: right;
+        }
+    }
+    td {
+        &:nth-child(7) {
+            padding-top: 0.125rem;
+            padding-bottom: 0.125rem;
+            text-align: right;
+        }
+    }
+    tr.deleted {
+        text-decoration: line-through;
+        color: var(--danger);
+        td {
+            color: var(--gray);
+        }
+    }
+}

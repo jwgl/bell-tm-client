@@ -1,0 +1,21 @@
+.list-group {
+	max-height: calc(100vh - 118px);
+    overflow-y: auto;
+    font-size: 0.875rem;
+}
+
+.list-group-item {
+    padding: 0.375rem 0.75rem
+}
+
+.nav-tabs {
+    font-size: 0.875rem;
+}
+
+.nav-link {
+    padding: 0.375rem 0.75rem
+}
+
+.col-md-0 {
+    display: none;
+}

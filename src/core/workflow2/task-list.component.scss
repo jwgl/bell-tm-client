@@ -1,0 +1,18 @@
+ul {
+    font-size: 0.875rem;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: circle inside;
+}
+.card-header {
+    font-size: 1rem;
+    padding: .375rem .75rem;
+}
+.card-body {
+    padding: .375rem .75rem;
+    div {
+        padding-left: 1rem;
+        border-left: dashed 1px gray;
+        margin-left: 2px;
+    }
+}

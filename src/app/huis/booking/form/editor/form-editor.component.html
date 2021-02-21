@@ -1,0 +1,83 @@
+<form *ngIf="form" #ngForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-secondary' type="button" (click)="findRoom()">选择会议室</button>
+        </div>
+        <div class="btn-group ml-2">
+            <button class='btn btn-secondary' type="button" routerLink="../">取消</button>
+            <button class='btn btn-primary' type="submit" [disabled]="saving || !ngForm.form.valid || !form.valid">保存</button>
+        </div>
+    </div>
+    <tm-form-title>{{form.title}}</tm-form-title>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="department">借用单位</label>
+                    <select class="form-control" id="department" name="department" [(ngModel)]="form.department" (ngModelChange)="onDepartmentChanged($event)">
+                        <option *ngFor="let department of departments" [ngValue]="department">{{department.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="bookingType">借用类别</label>
+                    <select class="form-control" id="bookingType" name="bookingType" [(ngModel)]="form.bookingType">
+                        <option *ngFor="let bookingType of bookingTypes" [ngValue]="bookingType">{{bookingType.name}} ({{bookingType.checker?.name}})</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="attendance">使用人数</label>
+                    <input class="form-control" type="number" id="attendance" name="attendance" [(ngModel)]="form.attendance" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="isInternal">内部活动</label>
+                    <div class="form-check pt-2">
+                        <input class="form-check-input" type="checkbox" id="isInternal" name="isInternal" [(ngModel)]="form.isInternal">
+                        <label class="form-check-label" for="isInternal">{{form.isInternal?'是（部分会议室免费）':'否（所有会议室收费）'}}</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="contact">联系人</label>
+                    <input class="form-control" id="contact" name="contact" [(ngModel)]="form.contact" maxlength="10">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="contactNumber">联系电话</label>
+                    <input class="form-control" type="tel" id="contactNumber" name="contactNumber" [(ngModel)]="form.contactNumber">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subject">会议主题</label>
+                <input class="form-control" id="subject" name="subject" [(ngModel)]="form.subject" maxlength="50" required>
+            </div>
+            <div class="form-group">
+                <label for="description">借用说明</label>
+                <textarea class="form-control" id="description" name="description" rows="4" [(ngModel)]="form.description" maxlength="200" required></textarea>
+                <small class="text-muted">请注明借用单位下属部门（班级或社团）和用途，最多200个字符。</small>
+            </div>
+            <div class="form-group">
+                <label>借用明细</label>
+                <ul class="booking-items" *ngIf="form.items.length > 0; else prompt">
+                    <li *ngFor="let item of form.items" [class]="item.deleted ? 'item-deleted': ''">
+                        <tm-booking-item-viewer [item]="item" [removable]="true" (onRemove)="form.removeItem(item)"></tm-booking-item-viewer>
+                    </li>
+                </ul>
+                <ng-template #prompt>
+                    <small class="form-text text-muted">一张借用单可借用不同时段的多个会议室，最多8项，请点击“选择会议室”按钮添加会议室。</small>
+                </ng-template>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-info card bg-light mb-3">
+                <div class="card-header">表单状态</div>
+                <div class="card-body">
+                    <div class="card-text">经办人 {{form.user.name}} {{form.user.phoneNumber}}</div>
+                    <ng-container *ngIf="form.workflowState">
+                    <div class="card-text">借用单 {{form.workflowState | statusText}}</div>
+                    </ng-container>
+                </div>
+            </div>
+            <tm-workflow-task-list [list]="form.workflowTasks"></tm-workflow-task-list>
+        </div>
+    </div>
+</form>

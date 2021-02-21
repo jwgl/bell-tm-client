@@ -1,0 +1,16 @@
+<div class="card bg-light mb-3" *ngIf="list">
+    <h5 class="card-header">审批流程</h5>
+    <div class="card-body">
+        <ul>
+            <li *ngFor="let item of list">
+                <small *ngIf="item.endTime; else pending">{{item.startTime | date: 'M-dd HH:mm'}}</small>
+                <ng-template #pending><small>待处理</small></ng-template>
+                <div>{{item.assigneeName}}
+                <span class="float-right" *ngIf="item.resultValue">[{{item.resultValue | workflowResultText}}]</span>
+                </div>
+                <div class="comment" *ngIf="item.resultComment">{{item.resultComment}}</div>
+                
+            </li>
+        </ul>
+    </div>
+</div>
