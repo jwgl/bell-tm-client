@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
 import { BaseDialog } from 'core/dialogs';
 import { Http } from 'core/rest';
@@ -64,7 +66,7 @@ export class ReceiptItemDialog extends BaseDialog {
             alert('单位不能为空！');
         } else if (!this.item.pcs) {
             alert('请输入数量！');
-        } else if (dayjs(this.item.dateBought, 'YYYY-MM-DD', true).isValid()) {
+        } else if (!dayjs(this.item.dateBought, 'YYYY-MM-DD', true).isValid()) {
             alert('购买日期不合法，请按照格式输入：yyyy-MM-dd');
         } else {
             this.ok();

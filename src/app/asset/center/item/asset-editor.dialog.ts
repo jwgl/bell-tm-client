@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
 import { BaseDialog } from 'core/dialogs';
 import { Http } from 'core/rest';
@@ -45,7 +47,7 @@ export class AssetEditorDialog extends BaseDialog {
     }
 
     save() {
-        if (dayjs(this.item.dateBought, 'YYYY-MM-DD', true).isValid()) {
+        if (!dayjs(this.item.dateBought, 'YYYY-MM-DD', true).isValid()) {
             alert('购买日期不合法，请按照格式输入：yyyy-MM-dd');
         } else {
             this.ok();
