@@ -1,8 +1,8 @@
-import { Component, ElementRef, Host, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { RollcallType, Student } from '../rollcall-form.model';
+import { RollcallFormService } from '../rollcall-form.service';
 import { BaseRollcallView } from './base-view.component';
-import { RollcallFormEditorComponent } from './rollcall-editor.component';
 
 const PageSize = 5;
 
@@ -33,8 +33,8 @@ export class RollcallListViewComponent extends BaseRollcallView {
         4         : {fn: this.toggleLocal, param: RollcallType.Attend},
     };
 
-    constructor(@Host() editor: RollcallFormEditorComponent) {
-        super(editor);
+    constructor(service: RollcallFormService) {
+        super(service.editor);
     }
 
     onClick(student: Student) {

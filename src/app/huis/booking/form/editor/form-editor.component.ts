@@ -76,7 +76,7 @@ export class BookingFormEditorComponent {
             const auth = this.bookingAuths.find(it =>
                 it.departmentId == department.id && it.bookingTypeId == bookingType.id
             ) ?? this.bookingAuths.find(it =>
-                it.departmentId == department.id && it.bookingTypeName == '*'
+                it.departmentId == department.id && it.bookingTypeId == 102
             );
 
             bookingType.checker = auth ? { id: auth.userId, name: auth.userName } : null;

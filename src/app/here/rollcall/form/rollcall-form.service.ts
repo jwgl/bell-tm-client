@@ -8,6 +8,7 @@ import { ApiUrl, Http } from 'core/rest';
 
 import { AttendanceDto, RollcallSettings } from './rollcall-form.model';
 import { AuthService } from 'core/auth';
+import { RollcallFormEditorComponent } from './editor/rollcall-editor.component';
 
 @Injectable()
 export class RollcallFormService {
@@ -67,4 +68,6 @@ export class RollcallFormService {
     private getSettingApi(): string {
         return `${this.api.list().replace('/timeslots', '/settings')}/rollcall`;
     }
+
+    editor: RollcallFormEditorComponent;
 }
