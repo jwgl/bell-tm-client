@@ -1,0 +1,108 @@
+<modal-dialog modalTitle="选择会议室" size="lg">
+    <modal-body>
+        <form #ngForm="ngForm" isConflict>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="room">会议室</label>
+                        <select class="form-control" name="room" id="room" required [(ngModel)]="selectedRoom"
+                            (ngModelChange)="onRoomChanged($event)">
+                            <option [ngValue]="null" disabled selected>选择会议室</option>
+                            <option *ngFor="let room of options.data" [ngValue]="room">{{formatRoom(room)}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingDate">借用日期</label>
+                        <input type="date" class="form-control" id="bookingDate" name="bookingDate"
+                            [(ngModel)]="bookingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lowerTime">开始时间</label>
+                        <input type="time" class="form-control" id="lowerTime" name="lowerTime" [(ngModel)]="lowerTime"
+                            #lowerTimeModel="ngModel" min="08:00" max="22:00" required>
+                        <small *ngIf="lowerTimeModel.invalid && (lowerTimeModel.dirty || lowerTimeModel.touched)"
+                            class="form-text text-danger">
+                            <ng-container *ngIf="lowerTimeModel.errors.min">
+                                开始时间不能早于{{lowerTimeModel.errors.min.value}}
+                            </ng-container>
+                            <ng-container *ngIf="lowerTimeModel.errors.max">
+                                开始时间不能晚于{{lowerTimeModel.errors.max.value}}
+                            </ng-container>
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="upperTime">结束时间</label>
+                        <input type="time" class="form-control" id="upperTime" name="upperTime" [(ngModel)]="upperTime"
+                            #upperTimeModel="ngModel" min="08:00" max="22:00" required>
+                        <small *ngIf="upperTimeModel.invalid && (upperTimeModel.dirty || upperTimeModel.touched)"
+                            class="form-text text-danger">
+                            <ng-container *ngIf="upperTimeModel.errors.min">
+                                结束时间不能早于{{upperTimeModel.errors.min.value}}
+                            </ng-container>
+                            <ng-container *ngIf="upperTimeModel.errors.max">
+                                结束时间不能晚于{{upperTimeModel.errors.max.value}}
+                            </ng-container>
+                            <ng-container *ngIf="upperTimeModel.errors.lower">
+                                结束时间等于或早于开始时间
+                            </ng-container>
+                        </small>
+                    </div>
+                    <div class="form-group" *ngIf="bookingRoom && hasExtraFacility(bookingRoom)">
+                        <label>附加服务</label>
+                        <div class="input-group mb-3"
+                            *ngFor="let facility of bookingRoom.facilities | isBasicFacility: false">
+                            <div class="input-group-prepend">
+                                <div class="form-check input-group-text" style="padding-left: 2rem">
+                                    <input class="form-check-input" type="checkbox" id="defaultCheck{{facility.id}}"
+                                        name="defaultCheck{{facility.id}}" [(ngModel)]="facility.selected">
+                                    <label class="form-check-label text-small" for="defaultCheck{{facility.id}}">
+                                        {{formatExtraFacility(facility)}}
+                                    </label>
+                                </div>
+                            </div>
+                            <input type="number" class="form-control text-right" min="1" value="1"
+                                name="facilityQuantity" [(ngModel)]="facility.quantity">
+                            <div class="input-group-append">
+                                <span class="input-group-text text-small">{{facility.unitName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="bookingRoom" [(ngModel)]="bookingRoom"/>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group ">
+                        <label>基本配置</label>
+                        <ng-container *ngIf="bookingRoom && hasBasicFacility(bookingRoom); else emptyBasic">
+                            <p class="mb-0">{{bookingRoom.area}}㎡，{{bookingRoom.furniture}}<span
+                                    *ngIf="bookingRoom.seat != bookingRoom.maxSeat">，最多{{bookingRoom.maxSeat}}座</span>。</p>
+                            <ul>
+                                <li *ngFor="let facility of bookingRoom.facilities | isBasicFacility: true">
+                                    {{formatBasicFacility(facility)}}
+                                </li>
+                            </ul>
+                        </ng-container>
+                        <ng-template #emptyBasic>
+                            <p class="mb-0">无</p>
+                        </ng-template>
+                    </div>
+                    <div class="form-group">
+                        <label>预约情况</label>
+                        <ul class="bookingTimes" *ngIf="bookingRoom && bookingRoom.bookedTimes; else emptyBookedTime"
+                            style="max-height: 264px; overflow-y: auto;">
+                            <li *ngFor="let bookedTime of bookingRoom.bookedTimes">
+                                <span [class.conflict]="bookedTime.conflict">{{bookedTime.lowerTime | date: 'y-MM-dd HH:mm'}} - {{bookedTime.upperTime | date: 'y-MM-dd HH:mm'}}</span>
+                            </li>
+                        </ul>
+                        <ng-template #emptyBookedTime>
+                            <p class="mb-0">无</p>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="!ngForm.form.valid">确定</button>
+    </modal-footer>
+</modal-dialog>

@@ -50,8 +50,6 @@ import { ListOption } from './list-group.model';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight, faSearch } from '@fortawesome/free-solid-svg-icons';
 
-
-
 export function userIdApiUrlFactory(auth: AuthService, url: string) {
     return new ApiUrl(url, { userId: auth.userInfo.id });
 }

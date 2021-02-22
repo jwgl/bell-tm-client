@@ -26,6 +26,16 @@ export class RestShowService {
         );
     }
 
+    loadPage<T> (page: number, size: number, params?: { [param: string]: string | string[] })
+    : Observable<{ items: T[], totalCount: number }> {
+    return this.http.getResponse<T[]>(this.api.list(), { page: `${page}`, size: `${size}`, ...params }).pipe(
+        map(rep => ({
+            items: rep.body,
+            totalCount: this.getTotalCountHeader(rep),
+        }))
+    );
+}
+
     loadItem<T>(id: any): Observable<T> {
         return this.http.get<T>(this.api.item(id));
     }

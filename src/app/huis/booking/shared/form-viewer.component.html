@@ -1,0 +1,62 @@
+<tm-form-title>{{form.title}}</tm-form-title>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>借用单位</label>
+                <p class="form-control-plaintext">{{form.department.name}}</p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>借用类别</label>
+                <p class="form-control-plaintext">{{form.bookingType.name}}</p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>使用人数</label>
+                <p class="form-control-plaintext">{{form.attendance}}</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>内部活动</label>
+                <p class="form-control-plaintext">
+                    {{form.isInternal?'是（部分会议室免费）':'否（所有会议室收费）'}}
+                </p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>联系人</label>
+                <p class="form-control-plaintext">{{form.contact | nilValue}}</p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>联系电话</label>
+                <p class="form-control-plaintext">{{form.contactNumber | nilValue}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>会议主题</label>
+            <p class="form-control-plaintext">{{form.subject}}</p>
+        </div>
+        <div class="form-group">
+            <label>借用说明</label>
+            <p class="form-control-plaintext">{{form.description}}</p>
+        </div>
+        <div class="form-group">
+            <label>借用明细</label>
+            <ul class="booking-items">
+                <li *ngFor="let item of form.items">
+                    <tm-booking-item-viewer [item]="item"></tm-booking-item-viewer>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <ng-template [ngTemplateOutlet]="workflowTemplate" [ngTemplateOutletContext]="{form: form}"></ng-template>
+        <div class="form-info card bg-light mb-3">
+            <div class="card-header">表单状态</div>
+            <div class="card-body">
+                <div class="card-text">经办人 {{form.user.name}} {{form.user.phoneNumber}}</div>
+                <div class="card-text">借用单 {{form.workflowState | statusText}}</div>
+            </div>
+        </div>
+        <tm-workflow-task-list [list]="form.workflowTasks"></tm-workflow-task-list>
+    </div>
+</div>

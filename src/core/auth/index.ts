@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CommonDirectivesModule } from '../common-directives';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { AuthService, UserInfo } from './auth.service';
 import { LoginService } from './login.service';
 import { LoginDialog } from './login.dialog';
+import { IconModule } from 'core/icon';
 
 export {
     AuthService,
@@ -20,7 +19,7 @@ export {
         CommonModule,
         FormsModule,
         HttpClientModule,
-        FontAwesomeModule,
+        IconModule,
         CommonDirectivesModule,
     ],
     declarations: [

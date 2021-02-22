@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <span>{{item.room.name}}（{{item.bookingLowerTime | date:
+        'y-MM-dd HH:mm'}}-{{item.bookingUpperTime | date: 'HH:mm'}}）</span>
+    <button [delete-item]="item.deleted" *ngIf="removable" (click)="remove()"></button>
+    <span *ngIf="item.isConflict" class="badge badge-danger ml-2">已占用</span>
+</div>
+<table class="booking-facilities table table-sm">
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>费用</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let bf of item.facilities" [class.inoperative]="!bf.operative" [class.operator-data]="bf.isAdditional">
+            <td>{{bf.facility.name}}</td>
+            <td>¥{{bf.unitPrice}}/<ng-container *ngIf="bf.facility.id != 101001">{{bf.unitName}}·</ng-container>{{bf.timeUnit |timeUnit}}</td>
+            <td>{{bf.quantity}}</td>
+            <td>¥{{bf.subtotal | number: '.2-2'}}</td>
+        </tr>
+    </tbody>
+    <tfoot *ngIf="item.id">
+        <tr>
+            <td>小计</td>
+            <td colspan="2">
+                <span class="font-weight-normal">
+                    预约<span class="font-weight-bold">{{item.timeUnitQuantity}}</span>{{item.timeUnit |
+                    timeUnit}}<ng-container *ngIf="item.overTimeQuantity">，超时<span
+                    class="font-weight-bold operator-data">{{item.overTimeQuantity}}</span>小时</ng-container>
+                </span>
+            </td>
+            <td>
+                <ng-container>${{item.subtotal | number: '.2-2'}}</ng-container>
+            </td>
+        </tr>
+    </tfoot>
+</table>

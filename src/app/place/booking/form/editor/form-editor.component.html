@@ -9,7 +9,7 @@
         </div>
     </div>
     <tm-form-title>{{form.title}}</tm-form-title>
-    <div class="row">
+    <div class="form-row">
         <div class="form-group col-md-4">
             <label for="department">借用单位</label>
             <select class="form-control" id="department" name="department" [(ngModel)]="form.department" (ngModelChange)="onDepartmentChanged($event)">
@@ -40,7 +40,7 @@
             <span class="ml-auto">{{form.dateSubmitted | date: 'y-MM-dd HH:mm'}}</span>
         </p>
     </div>
-    <div class="row">
+    <div class="form-row">
         <div class="form-group col-md-4" *ngIf="form.checker">
             <label>审核人</label>
             <p class="form-control-plaintext d-flex">

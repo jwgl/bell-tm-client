@@ -1,0 +1,19 @@
+<div class="card-container" *ngIf="forms">
+    <div class="card-columns">
+        <div class="card bg-light" *ngFor="let form of forms">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a [routerLink]="getItemLink(form)">{{form.room}}</a>
+                    <workflow-status [status]="form.workflowState" class="ml-2"></workflow-status>
+                </h5>
+                <p class="card-text">{{form.bookingLowerTime | date: 'y-MM-dd HH:mm'}}-{{form.bookingUpperTime | date: 'HH:mm'}}</p>
+                <p class="card-text">{{form.subject}}
+                <p class="card-text">#{{form.id}} {{form.department}}</p>
+                <div class="d-flex">
+                    <small *ngIf="form.responseCount">➥<a class="responseCount" [routerLink]="[form.id, 'responses']">{{form.responseCount}}</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <tm-pager [total]="totalCount" [max]="max" [length]="forms.length" (prev)="loadList($event)" (next)="loadList($event)"></tm-pager>
+</div>

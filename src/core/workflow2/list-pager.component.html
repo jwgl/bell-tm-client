@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-center" *ngIf="reviewList && reviewList.pagerEnabled">
+    <div class="btn-group">
+        <button class="btn btn-secondary"
+            routerLink="./" 
+            [queryParams]="reviewList.prevQueryParams" 
+            [disabled]="reviewList.prevDisabled">上一页</button>
+        <button class="btn btn-secondary"
+            routerLink="./"
+            [queryParams]="reviewList.nextQueryParams"
+            [disabled]="reviewList.nextDisabled">下一页</button>
+    </div>
+</div>
