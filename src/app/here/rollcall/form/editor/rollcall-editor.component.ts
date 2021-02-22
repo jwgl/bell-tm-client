@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Dialog } from 'core/dialogs';
@@ -24,7 +24,9 @@ export class RollcallFormEditorComponent implements OnInit {
         private route: ActivatedRoute,
         private service: RollcallFormService,
         private dialog: Dialog,
-    ) { }
+    ) { 
+        service.editor = this;
+    }
 
     ngOnInit() {
         this.route.params.subscribe(params => {

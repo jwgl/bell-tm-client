@@ -1,0 +1,34 @@
+th, td {
+	white-space: nowrap;
+}
+
+.description {
+	width: 540px;
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@media (max-width : 1199px) {
+	.description {
+		max-width: 360px;
+	}
+}
+
+@media (max-width : 991px) {
+	.description {
+		max-width: 180px;
+	}
+}
+
+@media only screen and (max-width : 767px) {
+	.description {
+		max-width: 120px;
+	}
+}
+
+@media only screen and (max-width : 543px) {
+	.description {
+		max-width: 100px;
+	}
+}

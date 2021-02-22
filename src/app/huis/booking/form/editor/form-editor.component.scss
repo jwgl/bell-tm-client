@@ -1,0 +1,6 @@
+@import '../../shared/form-viewer.component';
+
+.item-deleted {
+    text-decoration: line-through;
+    color: var(--danger);
+}

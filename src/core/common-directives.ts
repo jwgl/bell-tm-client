@@ -55,6 +55,9 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { ProvideParentForm } from './directives/provide-parent-form';
 import { MultipleLineComponent } from './components/multiple-line.component';
+import { IconModule } from './icon';
+import { DeleteItemComponent } from './components/delete-item';
+import { AddItemComponent } from './components/add-item';
 
 export {
     CheckboxSelectorComponent,
@@ -69,6 +72,8 @@ const CORE_DIRECTIVES: any[] = [
     FromNowComponent,
     PagerComponent,
     RemoveItemComponent,
+    AddItemComponent,
+    DeleteItemComponent,
     ScheduleTimetableComponent,
     ScheduleWeektabComponent,
     TeacherSelectComponent,
@@ -110,6 +115,7 @@ const CORE_DIRECTIVES: any[] = [
 @NgModule({
     imports: [
         CommonModule,
+        IconModule,
         FontAwesomeModule,
     ],
     declarations: [

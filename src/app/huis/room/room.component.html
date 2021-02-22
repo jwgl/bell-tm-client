@@ -1,0 +1,26 @@
+<div class="row grid">
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-3" *ngFor="let room of roomSchedules">
+        <div class="card" [style.background-color]="room.isInternalFree?'#E8F5E9':'#FFFDE7'">
+            <div class="card-header">{{room.name}}</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{room.area}}㎡，{{room.furniture}}，{{room.seat}}座<span
+                    *ngIf="room.seat != room.maxSeat">，最多{{room.maxSeat}}座</span><span
+                    *ngIf="room.isInternalFree">，内部使用免费</span>。</li>
+                <li class="list-group-item" *ngIf="room.facilities">
+                    <ul class="facilities">
+                        <li *ngFor="let facility of room.facilities" [class.extra]="!facility.isBasic">
+                            {{facility.name}}
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item" *ngIf="room.bookedTimes">
+                    <ul class="booked-times">
+                        <li *ngFor="let time of room.bookedTimes" [class.actual]="time.isActual">
+                            {{time.lowerTime | date: 'MM-dd HH:mm'}}-{{time.upperTime | date: 'HH:mm'}}
+                        </li>
+                    </ul>
+                </li>
+              </ul>
+        </div>
+    </div>
+</div>

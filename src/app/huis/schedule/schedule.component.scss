@@ -1,0 +1,89 @@
+.day-of-week {
+    background-color: var(--dark);
+    border-right: solid 1px var(--white);
+    border-bottom: solid 1px var(--white);
+    text-align: center;
+    color: #ddd;
+}
+
+.day {
+    background-color: var(--dark);
+    border-right: solid 1px var(--white);
+    border-bottom: solid 1px var(--white);
+    padding: 0.25rem;
+    position: relative;
+    min-height: 6rem;
+    
+    &.today {
+        background-color: var(--blue);
+    }
+
+    ul {
+        position: relative;
+        list-style: none;
+        padding-left: 0;
+        font-size: 0.75rem;
+        color:white;
+        z-index: 2;
+        opacity: 0.9;
+        margin-bottom: 0;
+    }
+
+    .date {
+        position: absolute;
+        top: calc(50% - 3.25rem);
+        font-size: 4rem;
+        width: calc(100% - 0.5rem);
+        text-align: center;
+        color: #555;
+        z-index: 1;
+        user-select: none;
+        pointer-events: none;
+        &.this-month {
+            color: #888;        
+        }
+    }
+
+    .copy {
+        position: absolute;
+        right: 2px;
+        bottom: 2px;
+        z-index: 3;
+        color: white;
+        border: none;
+        background: none;
+        margin: 0;
+        padding: 0;
+        &:hover {
+            color: #ddd;
+        }
+        &:active {
+            color: #ccc;
+        }
+    }
+}
+
+.input-group {
+    .btn-outline-secondary {
+        border-color: #ced4da;
+    }
+}
+
+@media (max-width: 767px) {
+    .day {
+        min-height: 3rem;
+        ul {
+            padding-left: 3rem;
+        }
+        .date {
+            font-size: 2rem;
+            top: 0;
+            width: 2.5rem;
+            text-align: right;
+            color:#888;
+            &.this-month {
+                color: #ddd;        
+            }
+        }
+    }
+}

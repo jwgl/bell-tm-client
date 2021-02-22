@@ -1,0 +1,74 @@
+<tm-form-title>{{form.title}}</tm-form-title>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>结算单位</label>
+                <p class="form-control-plaintext">{{form.department.name}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>结算说明</label>
+            <p class="form-control-plaintext">{{form.description}}</p>
+        </div>
+        <div class="form-group">
+            <label>结算明细</label>
+            <table class="statement-items table table-sm" *ngIf="form.items.length > 0;">
+                <thead>
+                    <th>编号</th>
+                    <th>会议室</th>
+                    <th>设施</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>费用</th>
+                </thead>
+                <thead>
+                    <ng-container *ngFor="let item of form.items">
+                        <tr>
+                            <td>#{{item.bookingItem.bookingForm.id}}-{{item.bookingItem.id}}-{{item.id}}</td>
+                            <td>{{item.bookingItem.room.name}}</td>
+                            <td>{{item.facility.name}}</td>
+                            <td>¥{{item.unitPrice}}/<ng-container *ngIf="item.facility.id != 101001">
+                                    {{item.unitName}}·</ng-container>{{item.timeUnit |timeUnit}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>¥{{item.subtotal}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="5">
+                                {{item.bookingItem.bookingForm.subject}}<br>
+                                {{item.bookingItem.bookingLowerTime | date: 'y-MM-dd
+                                MM:hh'}}-{{item.bookingItem.bookingUpperTime | date: 'MM:hh'}}
+                                借用{{item.bookingItem.timeUnitQuantity}}{{item.bookingItem.timeUnit |
+                                timeUnit}}<ng-container *ngIf="item.bookingItem.overTimeQuantity">，超时<span
+                                        class=" operator-data">{{item.bookingItem.overTimeQuantity}}</span>小时
+                                </ng-container>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td>合计</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>${{form.total | number: '.2-2'}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <ng-template [ngTemplateOutlet]="workflowTemplate" [ngTemplateOutletContext]="{form: form}"></ng-template>
+        <div class="form-info card bg-light mb-3">
+            <div class="card-header">表单状态</div>
+            <div class="card-body">
+                <div class="card-text">经办人 {{form.user.name}} {{form.user.phoneNumber}}</div>
+                <div class="card-text">结算单 {{form.workflowState | workflowStatusText}}</div>
+            </div>
+        </div>
+        <tm-workflow-task-list [list]="form.workflowTasks"></tm-workflow-task-list>
+    </div>
+</div>

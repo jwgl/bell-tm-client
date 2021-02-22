@@ -1,0 +1,40 @@
+<form class="form-inline mb-3">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" type="button" chevron-left-icon (click)="previousMonth()"></button>
+        </div>
+        <input type="month" class="form-control" name="selectedMonth" placeholder="选择月份" pattern="[0-9]{4}-[0-9]{2}"
+            [(ngModel)]="selectedMonth" (ngModelChange)="monthChanged()" required>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" chevron-right-icon (click)="nextMonth()"></button>
+        </div>
+    </div>
+</form>
+<ng-container>
+    <div class="day-of-weeks row no-gutters d-none d-md-flex">
+        <div class="day-of-week col-md">星期一</div>
+        <div class="day-of-week col-md">星期二</div>
+        <div class="day-of-week col-md">星期三</div>
+        <div class="day-of-week col-md">星期四</div>
+        <div class="day-of-week col-md">星期五</div>
+        <div class="day-of-week col-md">星期六</div>
+        <div class="day-of-week col-md">星期日</div>
+    </div>
+    <div class="row no-gutters" *ngFor="let row of rows">
+        <div class="day col-md" *ngFor="let col of cols" [class.today]="isToday(row, col)">
+            <div class="date" [class.this-month]="isThisMonth(row, col)">
+                {{getDay(row, col)}}
+            </div>
+            <ng-container *ngIf="roomSchedules">
+                <ul>
+                    <li *ngFor="let schedule of getSchedule(row,col)" title="{{schedule.subject}}">
+                        {{schedule.lowerTime}}-{{schedule.upperTime}}
+                        {{schedule.room}}<span class="d-md-none"> - {{schedule.subject}}</span>
+                    </li>
+                </ul>
+                <button type="button" class="copy" [cdkCopyToClipboard]="getClipboardText(row, col)" copy-icon
+                    *ngIf="getSchedule(row,col)"></button>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>

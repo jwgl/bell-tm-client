@@ -1,0 +1,104 @@
+<tm-form-title>{{form.title}}</tm-form-title>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>会议室</label>
+                <p class="form-control-plaintext">{{form.room.name}}</p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>借用时间</label>
+                <p class="form-control-plaintext">{{form.bookingLowerTime | date:
+                    'y-MM-dd HH:mm'}}-{{form.bookingUpperTime | date: 'HH:mm'}}</p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>实际时间</label>
+                <p class="form-control-plaintext operator-data">{{form.actualLowerTime | date:
+                    'y-MM-dd HH:mm'}}-{{form.actualUpperTime | date: 'HH:mm'}}</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>借用单位</label>
+                <p class="form-control-plaintext">{{form.form.department.name}}</p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>借用类别</label>
+                <p class="form-control-plaintext">{{form.form.bookingType.name}}</p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>使用人数</label>
+                <p class="form-control-plaintext">{{form.form.attendance}}</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>内部活动</label>
+                <p class="form-control-plaintext">
+                    {{form.form.isInternal?'是（部分会议室免费）':'否（所有会议室收费）'}}
+                </p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>联系人</label>
+                <p class="form-control-plaintext">{{form.form.contact | nilValue}}</p>
+            </div>
+            <div class="form-group col-md-4">
+                <label>联系电话</label>
+                <p class="form-control-plaintext">{{form.form.contactNumber | nilValue}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>会议主题</label>
+            <p class="form-control-plaintext">{{form.form.subject}}</p>
+        </div>
+        <div class="form-group">
+            <label>借用说明</label>
+            <p class="form-control-plaintext">{{form.form.description}}</p>
+        </div>
+        <div class="form-group">
+            <label>设施明细</label>
+            <table class="booking-facilities table table-sm">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>费用</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let bf of form.facilities" [class.inoperative]="!bf.operative" [class.operator-data]="bf.isAdditional">
+                        <td>{{bf.facility.name}}</td>
+                        <td>¥{{bf.unitPrice}}/<ng-container *ngIf="bf.facility.id != 101001">{{bf.unitName}}·</ng-container>{{bf.timeUnit |timeUnit}}</td>
+                        <td>{{bf.quantity}}</td>
+                        <td>¥{{bf.subtotal | number: '.2-2'}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>小计</td>
+                        <td colspan="2">
+                            <span class="font-weight-normal">
+                                预约<span class="font-weight-bold">{{form.timeUnitQuantity}}</span>{{form.timeUnit |
+                                timeUnit}}<ng-container *ngIf="form.overTimeQuantity">，超时<span
+                                class="font-weight-bold operator-data">{{form.overTimeQuantity}}</span>小时</ng-container>
+                            </span>
+                        </td>
+                        <td>¥{{form.subtotal | number: '.2-2'}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <ng-template [ngTemplateOutlet]="workflowTemplate" [ngTemplateOutletContext]="{form: form}"></ng-template>
+        <div class="form-info card bg-light mb-3">
+            <div class="card-header">表单状态</div>
+            <div class="card-body">
+                <div class="card-text">借用人 {{form.form.user.name}} {{form.form.user.phoneNumber}}</div>
+                <div class="card-text">借用单 {{form.form.workflowState | workflowStatusText}}</div>
+            </div>
+        </div>
+        <tm-workflow-task-list [list]="form.workflowTasks"></tm-workflow-task-list>
+    </div>
+</div>

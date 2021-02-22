@@ -1,0 +1,18 @@
+@import '../../shared/form-viewer.component';
+
+.table.booking-facilities {
+    th, td {
+        &:nth-child(5) {
+            width: 2rem;
+            text-align: right;
+        }
+    }
+
+    tr.deleted {
+        text-decoration: line-through;
+        color: var(--danger);
+        td {
+            color: var(--gray);
+        }
+    }
+}

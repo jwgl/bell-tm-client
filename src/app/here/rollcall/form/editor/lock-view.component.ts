@@ -1,14 +1,14 @@
-import { Component, Host } from '@angular/core';
+import { Component } from '@angular/core';
+import { RollcallFormService } from '../rollcall-form.service';
 
 import { BaseRollcallView } from './base-view.component';
-import { RollcallFormEditorComponent } from './rollcall-editor.component';
 
 @Component({
     styleUrls: ['lock-view.component.scss'],
     templateUrl: 'lock-view.component.html',
 })
 export class RollcallLockViewComponent extends BaseRollcallView {
-    constructor(@Host() editor: RollcallFormEditorComponent) {
-        super(editor);
+    constructor(service: RollcallFormService) {
+        super(service.editor);
     }
 }

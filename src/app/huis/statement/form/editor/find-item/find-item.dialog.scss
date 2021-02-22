@@ -1,0 +1,23 @@
+select:required:invalid {
+    color: gray;
+}
+
+option[disabled] {
+    display: none;
+}
+
+option {
+    color: #495057;
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+}
+
+modal-body > ul {
+    padding-inline-start: 0px;
+}
+
+ul {
+    list-style-type: none;
+}

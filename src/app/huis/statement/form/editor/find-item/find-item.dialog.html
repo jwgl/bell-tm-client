@@ -1,0 +1,34 @@
+<modal-dialog modalTitle="选择结算项目" size="lg">
+    <modal-body>
+        <ul *ngIf="options.data && options.data.length > 0; else empty">
+            <li *ngFor="let item of options.data">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="item_{{item.id}}"
+                        [(ngModel)]="item.selected" (ngModelChange)="onClickItem(item)">
+                    <label class="form-check-label" for="item_{{item.id}}">
+                        {{item.roomName}}（{{toDate(item.bookingLowerTime) | date: 'y-MM-dd
+                        HH:mm'}}-{{toDate(item.bookingUpperTime) | date: 'HH:mm'}}）- {{item.form.subject}}
+                    </label>
+                </div>
+                <ul>
+                    <li>
+                        <div class="form-check" *ngFor="let bf of item.facilities">
+                            <input class="form-check-input" type="checkbox" value="" id="bf_{{bf.id}}"
+                                [(ngModel)]="bf.selected">
+                            <label class="form-check-label" for="bf_{{bf.id}}">
+                                {{bf.facilityName}} ¥{{bf.subtotal}}
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ng-template #empty>暂无数据</ng-template>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-outline-secondary" (click)="selectAll(true)">全选</button>
+        <button type="button" class="btn btn-outline-secondary mr-auto" (click)="selectAll(false)">全不选</button>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="false">确定</button>
+    </modal-footer>
+</modal-dialog>
