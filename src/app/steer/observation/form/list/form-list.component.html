@@ -22,7 +22,7 @@
                 <input class="form-control" name="filterValue" type="text" [(ngModel)]="filterSelected.value" />
                 <div class="input-group-append">
                     <button type="button" class="btn btn-secondary" (click)="doFilter()">
-                        <fa-icon icon="search"></fa-icon>
+                        <span search-icon></span>
                     </button>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <ng-template ngFor let-item [ngForOf]="list| pager : pagerArgs" let-i="index">
                 <tr>
                     <td><a [routerLink]="[item.id]">#{{item.id}}</a></td>
-                    <td>{{item.teacherId}} {{item.teacherName}}</td>
+                    <td>{{item.teacherId}} <br>{{item.teacherName}}</td>
                     <td class="expand">{{item.course}}<span class="badge badge-pill badge-success" *ngIf="item.recommend > 0">荐</span> <br>{{item.dayOfWeek | dayOfWeek}}
                         {{item.startSection}}-{{item.startSection+item.totalSection-1}}节 {{item.place}}</td>
                     <td>{{item.departmentName}} </td>

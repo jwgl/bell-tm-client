@@ -64,7 +64,7 @@ export class ProjectListComponent {
     }
 
     removable(item: any): boolean {
-        return item && item.status === 'CREATED';
+        return item && item.state === 'CREATED';
     }
 
     remove(item: any) {

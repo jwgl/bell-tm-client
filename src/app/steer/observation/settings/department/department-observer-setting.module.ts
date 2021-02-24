@@ -14,9 +14,7 @@ import { ObserverEditorComponent } from './editor/observer-editor.component';
 import { ObserverListComponent } from './list/observer-list.component';
 import { ObserverService } from './observer.service';
 import { ObserverReportComponent } from './report/observer-report.component';
-
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { IconModule } from 'core/icon';
 
 @NgModule({
     imports: [
@@ -27,7 +25,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
         DepartmentObserverSettingRoutingModule,
         ObservationCommonModule,
         PipesModule,
-        FontAwesomeModule,
+        IconModule,
     ],
     providers: [
         Dialog,
@@ -44,8 +42,4 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
     ],
 })
 
-export class DepartmentObserverSettingModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faTimes);
-    }
-}
+export class DepartmentObserverSettingModule { }

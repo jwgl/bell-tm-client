@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {format, parse} from 'date-fns';
 import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 import { Dialog } from 'core/dialogs';
@@ -45,7 +44,6 @@ export class ReceiptFormEditorComponent {
     }
 
     addItem() {
-        console.log(parse('2020-12-32', 'yyyy-MM-dd', 0).toString() === 'Invalid Date');
         const its = this.form.items.map(item => item.id);
         this.dialog.open(ReceiptItemDialog, {
             assetTypes: this.assetTypes,

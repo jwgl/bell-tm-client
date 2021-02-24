@@ -15,9 +15,7 @@
             </div>
             <input class="form-control" name="filterValue" type="text" [(ngModel)]="filterSelected.value" />
             <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="doFilter()">
-                    <fa-icon icon="search"></fa-icon>
-                </button>
+                <button type="button" class="btn btn-secondary" (click)="doFilter()"><span search-icon></span></button>
             </div>
             <div class="input-group-append"><a class="btn btn-secondary" download href="/api/steer/reports/observe-priority">导出</a></div>
         </div>

@@ -149,7 +149,7 @@ export class HuntGridComponent {
 
     linkCellRender(params: any) {
         const url = window.location.pathname;
-        return `<a href="${url}/${params.value}">${params.node.rowIndex + 1} #${params.value}<fa-icon icon="user"></fa-icon></a>`;
+        return `<a href="${url}/${params.value}">${params.node.rowIndex + 1} #${params.value}</a>`;
     }
 
     onSelectionChanged(event) {
