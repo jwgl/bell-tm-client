@@ -113,6 +113,8 @@ export class BookingForm {
         this.subject = dto.subject;
         this.description = dto.description;
         this.attendance = dto.attendance;
+        this.contact = dto.contact;
+        this.contactNumber = dto.contactNumber;
         this.workflowState = dto.workflowState;
         this.workflowInstanceId = dto.workflowInstanceId;
         this.status = dto.status;

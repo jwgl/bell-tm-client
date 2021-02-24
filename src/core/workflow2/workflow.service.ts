@@ -12,8 +12,6 @@ import { ListOption } from './list-group.model';
 
 export interface SubmitOptions {
     id: any;
-    type: 'check' | 'approve';
-    what: string;
     validate?: () => string[];
 }
 

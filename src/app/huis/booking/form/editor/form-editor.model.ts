@@ -67,6 +67,8 @@ BookingForm.prototype.toServerDto = function (this: BookingForm): any {
         isInternal: this.isInternal,
         description: this.description,
         attendance: this.attendance,
+        contact: this.contact,
+        contactNumber: this.contactNumber,
         addedItems: this.items.filter(it => !it.id).map(it => ({
             id: it.id,
             roomId: it.room.id,
@@ -83,4 +85,3 @@ BookingForm.prototype.toServerDto = function (this: BookingForm): any {
         removedItems: this.id ? this.items.filter(it => it.deleted).map(it => it.id) : null,
     };
 };
-
