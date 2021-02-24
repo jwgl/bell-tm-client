@@ -18,14 +18,8 @@
                 <rollcall-status [student]="student"></rollcall-status>
                 <div class="d-flex flex-column align-items-end h-100 ml-auto p-2">
                     <div class="statis">{{student.attendances.join(' ')}}</div>
-                    <div class="mt-auto">
-                        <fa-icon icon="spinner"
-                            pulse="true"
-                            fix-width="true"
-                            [style.visibility]="student.pending ? 'visible' : 'hidden'"
-                            [style.marginLeft]="'2px'"
-                            class="text-success">
-                        </fa-icon>
+                    <div class="spinner-border spinner-border-sm text-success mt-auto"
+                        [style.visibility]="student.pending ? 'visible' : 'hidden'">
                     </div>
                 </div>
             </li>

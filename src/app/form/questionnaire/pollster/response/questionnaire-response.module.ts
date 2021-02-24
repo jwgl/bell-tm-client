@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClipboardModule } from 'ngx-clipboard';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
+import { IconModule } from 'core/icon';
 
 import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
 import { QuestionnaireResponseComponent } from './questionnaire-response.component';
@@ -20,8 +19,8 @@ import { BallotQuestionResponseComponent } from './ballot-question-response.comp
         CommonModule,
         FormsModule,
         RouterModule,
-        FontAwesomeModule,
         ClipboardModule,
+        IconModule,
         CommonDirectivesModule,
         CommonDialogsModule,
         QuestionnaireSharedModule,

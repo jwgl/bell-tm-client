@@ -46,9 +46,7 @@ import { WorkflowFormItemComponent } from './form-item.component';
 import { AuthService } from '../auth/auth.service';
 import { ApiUrl } from '../rest';
 import { ListOption } from './list-group.model';
-
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faChevronLeft, faChevronRight, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { IconModule } from 'core/icon';
 
 export function userIdApiUrlFactory(auth: AuthService, url: string) {
     return new ApiUrl(url, { userId: auth.userInfo.id });
@@ -138,7 +136,7 @@ const WORKFLOW_COMPONENTS: any[] = [
         FormsModule,
         RouterModule,
         CommonDirectivesModule,
-        FontAwesomeModule,
+        IconModule,
     ],
     declarations: [
         WORKFLOW_DIALOGS,
@@ -160,10 +158,6 @@ const WORKFLOW_COMPONENTS: any[] = [
     ],
 })
 export class WorkflowModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faChevronLeft, faChevronRight, faSearch);
-    }
-
     static forReview(apiUrl: string, listOptions: ListOption[]): ModuleWithProviders<WorkflowModule> {
         return {
             ngModule: WorkflowModule,

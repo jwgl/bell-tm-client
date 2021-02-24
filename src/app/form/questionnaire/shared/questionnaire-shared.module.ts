@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CommonDirectivesModule } from 'core/common-directives';
 
@@ -27,7 +26,6 @@ import { QuestionTypeTextPipe } from './question-type.pipe';
         FormsModule,
         OverlayModule,
         CommonDirectivesModule,
-        FontAwesomeModule,
     ],
     declarations: [
         QuestionnaireFormViewerComponent,

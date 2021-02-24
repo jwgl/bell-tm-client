@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
@@ -18,13 +16,14 @@ import { QuestionOptionCreatorComponent } from './question-option-creater.compon
 import { BallotQuestionEditorComponent } from './ballot-question-editor.component';
 import { BallotOptionEditorComponent } from './ballot-option-editor.component';
 import { BallotOptionViewerComponent } from './ballot-option-viewer.component';
+import { IconModule } from 'core/icon';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         RouterModule,
-        FontAwesomeModule,
+        IconModule,
         CommonDirectivesModule,
         CommonDialogsModule,
         QuestionnaireSharedModule,

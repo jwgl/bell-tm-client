@@ -6,7 +6,6 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { QuestionnaireFormOptionComponent } from './form-option.component';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.module';
 
 @NgModule({
@@ -14,7 +13,6 @@ import { QuestionnaireSharedModule } from '../../shared/questionnaire-shared.mod
         CommonModule,
         FormsModule,
         RouterModule,
-        FontAwesomeModule,
         CommonDirectivesModule,
         QuestionnaireSharedModule,
     ],

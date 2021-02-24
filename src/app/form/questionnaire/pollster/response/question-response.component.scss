@@ -36,6 +36,9 @@
     .btn-link {
         vertical-align: initial;
         padding: 0;
+        &:focus {
+            box-shadow: none;
+        }
     }
     .openResonsePane {
         transition: max-height 1s ease;

@@ -9,16 +9,12 @@ import { PipesModule } from '../../shared/pipes/observation-pipes.module';
 
 import { DeanListComponent } from './form-list.component';
 
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         RouterModule,
         CommonDirectivesModule,
-        FontAwesomeModule,
         PipesModule,
     ],
     declarations: [
@@ -28,8 +24,4 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         DeanListComponent,
     ],
 })
-export class DeanListModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faSearch);
-    }
-}
+export class DeanListModule { }

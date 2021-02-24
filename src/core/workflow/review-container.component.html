@@ -11,9 +11,7 @@
         <div class="input-group input-group-sm">
             <input type="text" class="form-control" placeholder="查找" [(ngModel)]="queryString">
             <div class="input-group-append">
-                <button class="btn btn-secondary" (click)="search()">
-                    <fa-icon icon="search"></fa-icon>
-                </button>
+                <button class="btn btn-secondary" (click)="search()" search-icon></button>
             </div>
         </div>
     </li>

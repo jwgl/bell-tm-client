@@ -16,9 +16,6 @@ import { ReviewListComponent } from './list/review-list.component';
 import { ReviewDialog } from './list/review.dialog';
 import { TaskListModule } from './task/task-list.module';
 
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
 @NgModule({
     imports: [
         CommonModule,
@@ -26,7 +23,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         ReviewRoutingModule,
         CommonDirectivesModule,
         CommonDialogsModule,
-        FontAwesomeModule,
         PipesModule,
         TaskListModule,
         TmGridModule,
@@ -45,8 +41,4 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         ReviewDialog,
     ],
 })
-export class ExpertReviewModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faSearch);
-    }
-}
+export class ExpertReviewModule { }

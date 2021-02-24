@@ -12,23 +12,23 @@
         <span class="dropdown ml-2 hidden-sm-down">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{timeslot.label}}</a>
             <div class="dropdown-menu">
-                <a *ngFor="let t of timeslots" class="dropdown-item" [routerLink]="['../../../..//timeslots', t.id, 'weeks', week, service.viewType]">{{t.label}}</a>
+                <a *ngFor="let t of timeslots" class="dropdown-item" [routerLink]="['../../../../timeslots', t.id, 'weeks', week, service.viewType]">{{t.label}}</a>
             </div>
         </span>
         <br>
     </div>
     <div class="btn-group ml-auto">
         <ng-container  *ngIf="!rollcallForm || !rollcallForm.locked; else locked">
-            <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'detail')"><fa-icon icon="table"></fa-icon></button>
-            <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'list')"><fa-icon icon="list"></fa-icon></button>
-            <button class="btn btn-secondary" routerLink="tile"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'tile')"><fa-icon icon="th"></fa-icon></button>
+            <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'detail')" table-icon></button>
+            <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'list')" list-icon></button>
+            <button class="btn btn-secondary" routerLink="tile"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'tile')" grid-3x3-gap-icon></button>
         </ng-container>
         <ng-template #locked>
-            <span class="ml-auto" title="已锁定"><fa-icon icon="lock"></fa-icon></span>
+            <span class="ml-auto" title="已锁定" lock-icon></span>
         </ng-template>
     </div>
     <div class="btn-group ml-2" *ngIf="!rollcallForm || !rollcallForm.locked">
-        <button class="btn btn-secondary" (click)="showSettingsDialog()"><fa-icon icon="cog"></fa-icon></button>
+        <button class="btn btn-secondary" (click)="showSettingsDialog()" gear-icon></button>
     </div>
 </div>
 <div *ngIf="rollcallForm" class="mb-2 text-center">
