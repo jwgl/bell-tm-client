@@ -10,9 +10,7 @@
         <ng-container *ngFor="let item of list; let i = index">
             <tr>
                 <td>
-                    <div class="btn btn-outline-ligth btn-sm" (click)="remove(item)" *ngIf="removable(item)">
-                        <fa-icon icon="times"></fa-icon>
-                    </div>{{i + 1}}
+                    <span (click)="remove(item)" *ngIf="removable(item)" x-square-icon></span> {{i + 1}}
                 </td>
                 <td class="expand"><a [routerLink]="['../applications/',item.id]">{{item.name}}</a></td>
                 <td>{{item.code}}</td>

@@ -4,13 +4,10 @@
             <th *ngIf="checkAble"><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
             <th>序号</th>
             <ng-container *ngFor="let th of theads">
-                <th (click)="orderBy(th)" *ngIf="!th.filter">{{th.label}}<fa-icon
-                        icon="{{direction == -1 ? 'arrow-up' : 'arrow-down'}}" fixedWidth="true"
-                        *ngIf="th.order && orderKey === th.id"></fa-icon>
+                <th (click)="orderBy(th)" *ngIf="!th.filter">{{th.label}}
                 </th>
                 <th *ngIf="th.filter">
-                    <div class="dropdown-toggle" data-toggle="dropdown"> {{th.label}} <fa-icon icon="filter"
-                            *ngIf="hasFilter(th.id)" (click)="clearFilter(th.id)"></fa-icon>
+                    <div data-toggle="dropdown"> {{th.label}} <span chevron-down-icon></span>
                     </div>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" (click)="selectAll(th.id)">全选/排序</a>

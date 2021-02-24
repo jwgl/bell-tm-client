@@ -12,9 +12,7 @@ import { LegacyRoutingModule } from './legacy-routing.module';
 import { LegacyService } from './legacy.service';
 import { LegacyListComponent } from './list/legacy-list.component';
 import { ObservationLegacyViewerModule } from './shared/form-view.module';
-
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { IconModule } from 'core/icon';
 
 @NgModule({
     imports: [
@@ -24,7 +22,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         CommonDirectivesModule,
         CommonDialogsModule,
         PipesModule,
-        FontAwesomeModule,
+        IconModule,
         ObservationLegacyViewerModule,
     ],
     declarations: [
@@ -36,8 +34,4 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         {provide: 'LEGACY_API_URL', useValue: '/api/steer/legacies'},
     ],
 })
-export class LegacyModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faSearch);
-    }
-}
+export class LegacyModule { }

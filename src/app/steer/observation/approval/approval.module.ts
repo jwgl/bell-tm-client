@@ -13,9 +13,7 @@ import { ApprovalRoutingModule } from './approval-routing.module';
 import { ApprovalService } from './approval.service';
 import { ApprovalItemComponent } from './item/approval-item.component';
 import { ApprovalListComponent } from './list/approval-list.component';
-
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { IconModule } from 'core/icon';
 
 @NgModule({
     imports: [
@@ -25,7 +23,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         CommonDirectivesModule,
         CommonDialogsModule,
         PipesModule,
-        FontAwesomeModule,
+        IconModule,
         ObservationFormViewerModule,
     ],
     declarations: [
@@ -37,8 +35,4 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         {provide: 'APPROVAL_API_URL', useValue: '/api/steer/approvers/${userId}/observations' },
     ],
 })
-export class ApprovalModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faSearch);
-    }
-}
+export class ApprovalModule { }

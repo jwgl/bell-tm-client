@@ -8,9 +8,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { PipesModule } from '../../shared/pipes/observation-pipes.module';
 
 import { ObservationListComponent } from './form-list.component';
-
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { IconModule } from 'core/icon';
 
 @NgModule({
     imports: [
@@ -18,7 +16,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         FormsModule,
         RouterModule,
         CommonDirectivesModule,
-        FontAwesomeModule,
+        IconModule,
         PipesModule,
     ],
     declarations: [
@@ -28,8 +26,4 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         ObservationListComponent,
     ],
 })
-export class ObservationFormListModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faSearch);
-    }
-}
+export class ObservationFormListModule { }

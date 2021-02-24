@@ -21,9 +21,6 @@ import { ConclusionDialog } from './conclusion.dialog';
 import { ApplicationAdministrationModule } from './administration/administration.module';
 import { AdministrationService } from './administration/administration.service';
 
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faLock, faLockOpen, faUser } from '@fortawesome/free-solid-svg-icons';
-
 @NgModule({
     imports: [
         CommonModule,
@@ -31,7 +28,6 @@ import { faLock, faLockOpen, faUser } from '@fortawesome/free-solid-svg-icons';
         CommonDirectivesModule,
         CommonDialogsModule,
         WorkflowModule,
-        FontAwesomeModule,
         WorkflowModule.forReview('/api/hunt/approvers/${userId}/applications', [
             { type: 'todo', label: '待审核', dateLabel: '申请时间' },
             { type: 'done', label: '已审', dateLabel: '审核时间' },
@@ -63,8 +59,4 @@ import { faLock, faLockOpen, faUser } from '@fortawesome/free-solid-svg-icons';
         ConclusionDialog,
     ],
 })
-export class ApprovalModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faLock, faLockOpen, faUser);
-    }
-}
+export class ApprovalModule { }

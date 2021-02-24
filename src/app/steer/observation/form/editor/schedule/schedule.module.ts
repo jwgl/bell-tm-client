@@ -19,11 +19,8 @@ import { ScheduleListComponent } from './list/schedule-list.component';
 import { ScheduleRoutingModule } from './schedule-routing.module';
 import { ScheduleService } from './schedule.service';
 import { WeekScheduleComponent } from './week/form-view.component';
-
+import { IconModule } from 'core/icon';
 import { NavModule } from './nav/nav.module';
-
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
     imports: [
@@ -33,7 +30,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         ScheduleRoutingModule,
         PipesModule,
         ObservationCommonModule,
-        FontAwesomeModule,
+        IconModule,
         NavModule,
     ],
     declarations: [
@@ -57,8 +54,4 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
         WeekScheduleComponent,
     ],
 })
-export class ScheduleModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faSearch);
-    }
-}
+export class ScheduleModule { }

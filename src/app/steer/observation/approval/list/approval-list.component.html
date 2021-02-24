@@ -16,9 +16,7 @@
             <input class="form-control form-control-sm" name="filterValue" type="text" [(ngModel)]="filterSelected.value"
                 placeholder="任意字段模糊查询" />
             <div class="input-group-append">
-                <button class="btn btn-secondary py-0 h-100" (click)="doFilter()">
-                    <fa-icon icon="search"></fa-icon>
-                </button>
+                <button class="btn btn-secondary py-0 h-100" (click)="doFilter()"><span search-icon></span></button>
             </div>
         </div>
     </li>
@@ -43,7 +41,7 @@
                     <td>
                         <checkbox-selector [data]="item"></checkbox-selector>
                     </td>
-                    <td class="expand"><a [routerLink]="['../../',item.id]">{{item.teacherId}} {{item.teacherName}}</a>
+                    <td class="expand"><a [routerLink]="['../../',item.id]">{{item.teacherId}} <br>{{item.teacherName}}</a>
                     </td>
                     <td>{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}}
                         {{item.startSection}}-{{item.startSection+item.totalSection-1}}节
