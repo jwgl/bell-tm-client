@@ -54,9 +54,9 @@ export class OperationFormEditorComponent {
         this.form.updateUpperTime(this.upperDate, this.upperTime);
         this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
             this.router.navigate(['../'], { relativeTo: this.route });
-        }, error => {
+        }, errorRsp => {
             this.saving = false;
-            alert(error.message);
+            alert(errorRsp.error.message);
         });
     }
 }

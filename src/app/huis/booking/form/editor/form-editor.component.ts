@@ -110,9 +110,9 @@ export class BookingFormEditorComponent {
         this.saving = true;
         this.service.create(this.form.toServerDto()).subscribe(id => {
             this.router.navigate(['../', id], { relativeTo: this.route });
-        }, error => {
+        }, errorRsp => {
             this.saving = false;
-            alert(error.message);
+            alert(errorRsp.error.message);
         });
     }
 
@@ -120,9 +120,9 @@ export class BookingFormEditorComponent {
         this.saving = true;
         this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
             this.router.navigate(['../'], { relativeTo: this.route });
-        }, error => {
+        }, errorRsp => {
             this.saving = false;
-            alert(error.message);
+            alert(errorRsp.error.message);
         });
     }
 }

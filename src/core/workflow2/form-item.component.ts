@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RestEditService } from '../rest';
 import { CommonDialog } from '../common-dialogs';
 import { WorkflowForm, WorkflowFormConvert } from './form-item.model';
+import { SubmitOptions } from './workflow.service';
 
 @Component({
     selector: 'tm-workflow-form-item',
@@ -50,5 +51,12 @@ export class WorkflowFormItemComponent implements OnInit {
                 this.router.navigate(['../'], { relativeTo: this.route });
             });
         });
+    }
+
+    get submitOptions(): SubmitOptions {
+        return {
+            id: this.form.id,
+            validate: this.form.validate ? this.form.validate.bind(this.form) : null,
+        };
     }
 }

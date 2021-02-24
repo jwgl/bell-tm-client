@@ -17,7 +17,7 @@ export class ConflictValidatorDirective implements Validator {
             !upperTimeControl || !upperTimeControl.value) {
             return null;
         }
-        console.log(lowerTimeControl)
+
         const bookingTime = roomControl.value.bookedTimes as any[];
         if (!bookingTime) {
             return null;
@@ -25,12 +25,10 @@ export class ConflictValidatorDirective implements Validator {
 
         const lowerTime = `${dateControl.value}T${lowerTimeControl.value}`;
         const upperTime = `${dateControl.value}T${upperTimeControl.value}`;
-
         if (lowerTime >= upperTime) {
             upperTimeControl.setErrors({ lower: true });
             return { lower: true };
         }
-
         bookingTime.forEach(it => {
             it.conflict = (it.lowerTime < upperTime && lowerTime < it.upperTime);
         });
@@ -38,7 +36,6 @@ export class ConflictValidatorDirective implements Validator {
             return { conflict: true };
         }
 
-        // If there is no validation failure, return null
         return null;
     }
 }
