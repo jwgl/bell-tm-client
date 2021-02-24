@@ -16,15 +16,13 @@ import { RollcallSummaryComponent } from './rollcall-summary.component';
 import { RollcallTileViewComponent } from './tile-view.component';
 import { RollcallToggleBarComponent } from './toggle-bar.component';
 import { FocusDirective } from './focus.directive';
-
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faTable, faList, faTh, faLock, faCog, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { IconModule } from 'core/icon';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        FontAwesomeModule,
+        IconModule,
         CommonDirectivesModule,
         CommonDialogsModule,
         RollcallFormRoutingModule,
@@ -45,8 +43,4 @@ import { faTable, faList, faTh, faLock, faCog, faSpinner } from '@fortawesome/fr
         RollcallSettingsDialog,
     ],
 })
-export class RoolcallFormEditorModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faTable, faList, faTh, faLock, faCog, faSpinner);
-    }
-}
+export class RoolcallFormEditorModule { }

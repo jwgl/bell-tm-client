@@ -1,0 +1,8 @@
+<ng-container *ngIf="enabled">
+    <div style="width: 1rem; height: 1rem;" [ngSwitch]="icon">
+        <div class="spinner-border spinner-border-sm text-success" style="vertical-align:initial;" 
+            *ngSwitchCase="'spinner'"></div>
+        <div *ngSwitchCase="'expend'" chevron-down-icon></div>
+        <div *ngSwitchCase="'collapse'" chevron-up-icon></div>
+    </div>
+</ng-container>

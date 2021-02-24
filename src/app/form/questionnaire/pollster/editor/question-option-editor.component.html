@@ -14,14 +14,8 @@
             (change)="option.markUpdated()" placeholder="标签">
         <input *ngIf="showValue" type="number" class="form-control option-value" name="value" [(ngModel)]="option.value"
             (change)="option.markUpdated()" placeholder="数值">
-        <button class="btn btn-outline-secondary" type="button" (click)="onRemove()">
-            <fa-icon icon="trash-alt" fixedWidth="true"></fa-icon>
-        </button>
-        <button class="btn btn-outline-secondary" type="button" (click)="onMoveup()" [disabled]="first">
-            <fa-icon icon="arrow-up" fixedWidth="true"></fa-icon>
-        </button>
-        <button class="btn btn-outline-secondary" type="button" (click)="onMovedown()" [disabled]="last">
-            <fa-icon icon="arrow-down" fixedWidth="true"></fa-icon>
-        </button>
+        <button class="btn btn-outline-secondary" type="button" (click)="onRemove()" trash-icon></button>
+        <button class="btn btn-outline-secondary" type="button" (click)="onMoveup()" [disabled]="first" arrow-up-icon></button>
+        <button class="btn btn-outline-secondary" type="button" (click)="onMovedown()" [disabled]="last" arrow-down-icon></button>
     </div>
 </div>

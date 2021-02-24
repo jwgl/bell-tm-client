@@ -12,15 +12,9 @@
         <div class="input-group-append">
             <input *ngIf="showLabel" type="text" class="form-control option-label" placeholder="标签" name="label" [(ngModel)]="label">
             <input *ngIf="showValue" type="number" class="form-control option-value" placeholder="数值" name="value" [(ngModel)]="value">
-            <button class="btn btn-outline-secondary" type="submit" (click)="onCreate();contentElement.focus();" [disabled]="!contentElement.value">
-                <fa-icon icon="plus" fixedWidth="true"></fa-icon>
-            </button>
-            <button class="btn btn-outline-secondary" [class.active]="showLabel" type="button" (click)="onToggleLabel()">
-                <fa-icon icon="tag" fixedWidth="true"></fa-icon>
-            </button>
-            <button class="btn btn-outline-secondary" [class.active]="showValue" type="button" (click)="onToggleValue()">
-                <fa-icon icon="hashtag" fixedWidth="true"></fa-icon>
-            </button>
+            <button class="btn btn-outline-secondary" type="submit" (click)="onCreate();contentElement.focus();" [disabled]="!contentElement.value" plus-icon></button>
+            <button class="btn btn-outline-secondary" [class.active]="showLabel" type="button" (click)="onToggleLabel()" tag-icon></button>
+            <button class="btn btn-outline-secondary" [class.active]="showValue" type="button" (click)="onToggleValue()" hash-icon></button>
         </div>
     </div>
 </form>

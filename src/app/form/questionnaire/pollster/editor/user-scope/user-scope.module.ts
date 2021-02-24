@@ -10,13 +10,13 @@ import { UserScopeEditorComponent } from './user-scope-editor.component';
 import { UserScopeSelectDialog } from './user-scope-select.dialog';
 import { UserScopeSelectDialogService } from './user-scope-select.service';
 import { UserScopeService } from './user-scope.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from 'core/icon';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        FontAwesomeModule,
+        IconModule,
         CommonDirectivesModule,
         CommonDialogsModule,
         QuestionnaireSharedModule,

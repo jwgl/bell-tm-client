@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 
 @Component({
     selector: 'tm-row-expender',
-    template: '<fa-icon *ngIf="enabled" fixedWidth="true" size="1" [icon]="icon" [spin]="progressing"></fa-icon>',
+    templateUrl: 'row-expender.html',
     host: {
         'class.display': 'inline-block',
     },
@@ -45,11 +45,7 @@ export class RowExpenderComponent {
         }
     }
 
-    get icon(): string[] {
-        return this.progressing
-                ? ['fas', 'spinner']
-                : this.expended
-                    ? ['far', 'minus-square']
-                    : ['far', 'plus-square'];
+    get icon(): string {
+        return this.progressing ? 'spinner' : this.expended ? 'collapse' : 'expend';
     }
 }

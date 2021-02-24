@@ -18,13 +18,8 @@
             <div class="card-block">
                 <h5 class="student-name">{{student.name}}</h5>
                 <div>{{student.attendances.join(' / ')}}</div>
-                <div>
-                    <fa-icon icon="spinner"
-                        pulse="true"
-                        fix-width="true"
-                        [style.visibility]="student.pending ? 'visible' : 'hidden'"
-                        class="text-success">
-                    </fa-icon>
+                <div class="spinner-border spinner-border-sm text-success"
+                    [style.visibility]="student.pending ? 'visible' : 'hidden'">
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <ng-container *ngIf="vm">
     <div class="btn-toolbar">
         <div class="btn-group ml-auto">
-            <button class="btn btn-primary" (click)="review()" *ngIf="editAble">评审</button>
+            <button class="btn btn-primary" (click)="review()" *ngIf="editable">评审</button>
         </div>
     </div>
     <tm-project-form-viewer [vm]="vm"></tm-project-form-viewer>

@@ -1,8 +1,9 @@
 <div class="question">
     <p class="title">
         {{question.title}} <span *ngIf="question.mandatory">*</span>
-        <button class="btn btn-link ml-1" type="button" (click)="toggleTitle()" [title]="showTitle ? '隐藏问题内容' : '显示问题内容'">
-            <fa-icon [icon]="showTitle ? 'angle-up' : 'angle-down'" fixedWidth="true"></fa-icon>
+        <button class="btn btn-link ml-1 btn-show" type="button" (click)="toggleTitle()" [title]="showTitle ? '隐藏问题内容' : '显示问题内容'">
+            <span chevron-up-icon *ngIf="showTitle"></span>
+            <span chevron-down-icon *ngIf="!showTitle"></span>
         </button>
     </p>
     <p class="content" *ngIf="showTitle">{{question.content}}</p>

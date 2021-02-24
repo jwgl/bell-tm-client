@@ -16,7 +16,7 @@ import { ReviewDialog } from '../list/review.dialog';
 export class ReviewItemComponent {
     vm: ProjectForm;
     saving = false;
-    editAble = false;
+    editable = false;
     reviewInfo: any;
 
     constructor(
@@ -33,7 +33,7 @@ export class ReviewItemComponent {
     loadData(id: number) {
         this.service.loadItem(id).subscribe((dto: any) => {
             this.vm = new ProjectForm(dto.form);
-            this.editAble = dto.editAble;
+            this.editable = dto.editAble;
             this.reviewInfo = {
                 remind: dto.remind,
                 name: dto.name,
@@ -49,7 +49,7 @@ export class ReviewItemComponent {
 
     review() {
         this.dialog.open(ReviewDialog, { reviewInfo: this.reviewInfo }).then(result =>
-            this.service.update(this.vm.id, result).subscribe(() => this.editAble = false)
+            this.service.update(this.vm.id, result).subscribe(() => this.editable = false)
         );
     }
 

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'tm-remove-item',
-    styles: ['fa-icon:hover { color: #dc3545 }'],
-    template: '<fa-icon icon="times"></fa-icon>',
+    styleUrls: ['remove-item.scss'],
+    templateUrl: 'remove-item.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
 export class RemoveItemComponent { }

@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 
@@ -18,7 +16,6 @@ import { BallotResponseItemEditorComponent } from './ballot-response-item-editor
         CommonModule,
         FormsModule,
         RouterModule,
-        FontAwesomeModule,
         CommonDirectivesModule,
         CommonDialogsModule,
         QuestionnaireSharedModule,
