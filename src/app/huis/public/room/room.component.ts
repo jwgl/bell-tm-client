@@ -9,13 +9,14 @@ import { PublicRoomService } from './room.service';
 })
 export class PublicRoomComponent {
     roomSchedules: any[];
+
     constructor(private service: PublicRoomService) {
         this.service.loadList().subscribe((data: any[]) => {
             this.roomSchedules = data;
             setTimeout(() => {
-                var msnry = new Masonry( '.grid', {
+                new Masonry('.grid', {
                     "percentPosition": true
-                  });
+                });
             });
         });
     }

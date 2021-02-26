@@ -6,8 +6,10 @@ ul.facilities {
         }
     }
 }
+
 ul.booked-times {
-    
+    max-height: 7.5rem;
+    overflow-y: auto;
     li {
         list-style: circle;
         &.actual {
