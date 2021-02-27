@@ -1,4 +1,8 @@
 :host {
     float:initial;
-    font-size:1rem
+    font-size:1rem;
+    vertical-align: 0.1rem;
+    &:active {
+        opacity: 1 !important;
+    }
 }

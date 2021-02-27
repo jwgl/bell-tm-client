@@ -1,0 +1,31 @@
+ul.facilities {
+    padding-left: 1.125rem;
+    margin-bottom: 0;
+    li {
+        list-style: disc;
+        &.extra {
+            list-style: circle;
+        }
+    }
+}
+
+ul.reservations {
+    padding-left: 1.125rem;
+    margin-bottom: 0;
+}
+
+ul.schedules {
+    padding-left: 1.125rem;
+    margin-bottom: 0;
+}
+
+.btn-link {
+    user-select: none;
+    cursor: pointer;
+    &:hover {
+        text-decoration: none;
+    }
+    &.active {
+        border-bottom: solid 2px #f9826c;
+    }
+}

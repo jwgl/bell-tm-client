@@ -20,8 +20,8 @@ export class FindRoomDialog extends BaseDialog {
     selectedRoom: Room;
     bookingRoom: BookingRoomView;
     bookingDate: string;
-    lowerTime: Time;
-    upperTime: Time;
+    lowerTime: string;
+    upperTime: string;
 
     constructor(private service: BookingFormService) {
         super();
