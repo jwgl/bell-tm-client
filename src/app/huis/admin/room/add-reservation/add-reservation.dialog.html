@@ -1,0 +1,61 @@
+<modal-dialog modalTitle="{{options.room}}">
+    <modal-body>
+        <form #ngForm="ngForm">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="lowerDate">开始日期</label>
+                    <input type="date" class="form-control" id="lowerDate" name="lowerDate" [(ngModel)]="lowerDate" required>
+                </div>
+                <div class="form-group col">
+                    <label for="upperDate">结束日期</label>
+                    <input type="date" class="form-control" id="upperDate" name="upperDate" [(ngModel)]="upperDate" required>
+                </div>    
+            </div>
+            <div class="form-group">
+                <label for="dateInterval">日期间隔</label>
+                <input type="number" class="form-control" id="dateInterval" name="dateInterval" min="1" [(ngModel)]="dateInterval" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="lowerTime">开始时间</label>
+                    <input type="time" class="form-control" id="lowerTime" name="lowerTime" [(ngModel)]="lowerTime"
+                        #lowerTimeModel="ngModel" min="08:00" max="22:00" required>
+                    <small *ngIf="lowerTimeModel.invalid && (lowerTimeModel.dirty || lowerTimeModel.touched)"
+                        class="form-text text-danger">
+                        <ng-container *ngIf="lowerTimeModel.errors.min">
+                            开始时间不能早于{{lowerTimeModel.errors.min.value}}
+                        </ng-container>
+                        <ng-container *ngIf="lowerTimeModel.errors.max">
+                            开始时间不能晚于{{lowerTimeModel.errors.max.value}}
+                        </ng-container>
+                    </small>
+                </div>
+                <div class="form-group col">
+                    <label for="upperTime">结束时间</label>
+                    <input type="time" class="form-control" id="upperTime" name="upperTime" [(ngModel)]="upperTime"
+                        #upperTimeModel="ngModel" min="08:00" max="22:00" required>
+                    <small *ngIf="upperTimeModel.invalid && (upperTimeModel.dirty || upperTimeModel.touched)"
+                        class="form-text text-danger">
+                        <ng-container *ngIf="upperTimeModel.errors.min">
+                            结束时间不能早于{{upperTimeModel.errors.min.value}}
+                        </ng-container>
+                        <ng-container *ngIf="upperTimeModel.errors.max">
+                            结束时间不能晚于{{upperTimeModel.errors.max.value}}
+                        </ng-container>
+                        <ng-container *ngIf="upperTimeModel.errors.lower">
+                            结束时间等于或早于开始时间
+                        </ng-container>
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="note">备注</label>
+                <input type="text" class="form-control" id="note" name="note" [(ngModel)]="note">
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="!ngForm.form.valid">确定</button>
+    </modal-footer>
+</modal-dialog>

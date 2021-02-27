@@ -25,6 +25,9 @@ const routes: Routes = [{
 },{
     path: 'users/:userId/roomSchedules',
     loadChildren: () => import('./schedule/schedule.module').then(m => m.RoomScheduleModule),
+},{
+    path: 'departments/:departmentId/rooms',
+    loadChildren: () => import('./admin/room/room-setting.module').then(m => m.RoomSettingModule),
 }];
 
 @NgModule({
