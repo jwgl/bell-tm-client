@@ -77,6 +77,7 @@ export class ProjectSelectComponent {
     }
 
     onSelectProject(checkedList: any[]) {
+        console.log(checkedList);
         this.projectsSelected = checkedList;
     }
 }

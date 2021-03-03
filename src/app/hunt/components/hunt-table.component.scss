@@ -1,0 +1,22 @@
+.datatable-header {
+    position: relative  !important;
+    z-index: 5 !important;
+}
+
+.datatable-header-cell {
+  overflow: visible !important;
+}
+.datatable-body {
+    top: -600px!important ;
+  position: relative !important;
+  z-index: 110 !important;
+}
+
+.ngx-datatable {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+}
+
+.aaa {
+    color: red;
+}
