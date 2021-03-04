@@ -22,12 +22,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let form of forms">
-                    <td>
-                        <a [routerLink]="[form.id]" *ngIf="!form.workflowTaskId; else taskLink">#{{form.id}}</a>
-                        <ng-template #taskLink>
-                            <a [routerLink]="['../../statementTasks', {return: 'list'}, form.workflowTaskId]">#{{form.id}}</a>
-                        </ng-template>
-                    </td>
+                    <td><a [routerLink]="getItemLink(form)">#{{form.id}}</a></td>
                     <td>{{form.department}}</td>
                     <td><div class="description">{{form.description}}</div></td>
                     <td>{{form.dateUpdated | date: 'y-MM-dd HH:mm'}}</td>

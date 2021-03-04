@@ -1,19 +1,29 @@
-<div class="card-container" *ngIf="forms">
-    <div class="card-columns">
-        <div class="card bg-light" *ngFor="let form of forms">
+<ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['./', {type:'todo'}]" [class.active]="type=='todo'">待办</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['./', {type:'done'}]" [class.active]="type=='done'">已办</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['./', {type:'free'}]" [class.active]="type=='free'">免费</a>
+    </li>
+</ul>
+<div class="form-row grid">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let form of forms">
+        <div class="card bg-light">
             <div class="card-body">
                 <h5 class="card-title">
                     <a [routerLink]="getItemLink(form)">{{form.room}}</a>
                     <workflow-status [status]="form.workflowState" class="ml-2"></workflow-status>
                 </h5>
-                <p class="card-text">{{form.bookingLowerTime | date: 'y-MM-dd HH:mm'}}-{{form.bookingUpperTime | date: 'HH:mm'}}</p>
+                <p class="card-text">{{form.bookingLowerTime | date: 'y-MM-dd HH:mm'}}-{{form.bookingUpperTime | date:
+                    'HH:mm'}}</p>
                 <p class="card-text">{{form.subject}}
                 <p class="card-text">#{{form.id}} {{form.department}}</p>
-                <div class="d-flex">
-                    <small *ngIf="form.responseCount">➥<a class="responseCount" [routerLink]="[form.id, 'responses']">{{form.responseCount}}</a></small>
-                </div>
             </div>
         </div>
     </div>
-    <tm-pager [total]="totalCount" [max]="max" [length]="forms.length" (prev)="loadList($event)" (next)="loadList($event)"></tm-pager>
 </div>
+<tm-pager [total]="totalCount" [max]="max" [length]="forms.length" [offset]="offset" (prev)="loadList($event)"
+    (next)="loadList($event)" *ngIf="forms"></tm-pager>

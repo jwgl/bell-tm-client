@@ -17,7 +17,7 @@ export class BookingTaskListComponent {
     page: number;
     size = 10;
     maxPage: number;
-    
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -30,9 +30,6 @@ export class BookingTaskListComponent {
                 this.router.navigate(['./', { type: 'todo' }], { relativeTo: this.route });
             } else {
                 switch (this.type) {
-                    case 'item':
-                        this.returnUrl = params['returnUrl'];
-                        break;
                     case 'todo':
                         this.loadTasks();
                         break;
@@ -75,24 +72,15 @@ export class BookingTaskListComponent {
                     const task = this.tasks.find(it => it.id == taskId);
                     const index = this.tasks.indexOf(task);
                     this.tasks.splice(index, 1);
-                    this.router.navigate([this.tasks.length > index
-                        ? this.tasks[index].id
+                    const next = this.tasks.length > index
+                        ? this.tasks[index]
                         : this.tasks.length > 0
-                            ? this.tasks[0].id
-                            : './'], { relativeTo: this.route });
-                } else if (this.type == 'item' && this.returnUrl) {
-                    this.router.navigate(['../', this.returnUrl], { relativeTo: this.route });
+                            ? this.tasks[0]
+                            : null;
+                    this.router.navigate(next ? [next.id, { formId: next.formId }] : ['./'], { relativeTo: this.route });
                 }
             });
         }
-    }
-
-    get listColumnClass(): String {
-        return this.type == 'item' ? 'col-md-0' : 'col-md-3';
-    }
-
-    get itemColumnClass(): String {
-        return this.type == 'item' ? 'col-md-12' : 'col-md-9';
     }
 
     get prevLink(): any[] {
