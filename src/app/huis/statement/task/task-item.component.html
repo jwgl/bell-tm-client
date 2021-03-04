@@ -1,7 +1,7 @@
 <ng-container *ngIf="form">
     <tm-statement-form-viewer [form]="form">
         <ng-template #workflowTpl>
-            <form *ngIf="variable">
+            <form *ngIf="taskVariable">
                 <div class="form-group">
                     <label for="comment">审核意见</label>
                     <textarea class="form-control" name="comment" id="comment" rows="4"
@@ -9,7 +9,7 @@
                 </div>
                 <div class="btn-toolbar">
                     <div class="btn-group btn-group-sm ml-auto">
-                        <button type="button" class="btn btn-outline-dark" *ngFor="let value of variable.values"
+                        <button type="button" class="btn btn-outline-dark" *ngFor="let value of taskVariable.values"
                             (click)="onClick(value)">{{getLabel(value)}}</button>
                     </div>
                 </div>

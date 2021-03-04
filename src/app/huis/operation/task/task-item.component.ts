@@ -16,7 +16,7 @@ export class OperationTaskItemComponent {
     form: OperationForm;
     type: string;
     comment: string;
-    variable: {
+    taskVariable: {
         name: string;
         values: string[];
     };
@@ -43,14 +43,14 @@ export class OperationTaskItemComponent {
 
     loadTask() {
         this.taskService.loadTask(this.taskId, this.formId).subscribe((dto: any) => {
-            this.variable = dto.variable;
+            this.taskVariable = dto.taskVariable;
             this.form = new OperationForm(dto.form);
         });
     }
 
     loadStep() {
         this.stepService.loadStep(this.taskId, this.formId).subscribe((dto: any) => {
-            this.variable = dto.variable;
+            this.taskVariable = dto.taskVariable;
             this.form = new OperationForm(dto.form);
         });
     }
@@ -58,7 +58,7 @@ export class OperationTaskItemComponent {
     onClick(action: string) {
         this.taskService.complete(this.taskId, {
             result: {
-                key: this.variable.name,
+                key: this.taskVariable.name,
                 value: action
             },
             comment: this.comment,
