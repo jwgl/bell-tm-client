@@ -33,7 +33,7 @@
                     <label class="form-label">预留时间</label><button class="ml-2" add-item (click)="addReservation()"></button>
                     <ul class="reservations">
                         <li *ngFor="let reservation of selectedRoom.reservations">
-                            {{reservation.lowerDate}}至{{reservation.lowerDate}}每{{reservation.dateInterval}}天的{{reservation.lowerTime
+                            {{reservation.lowerDate}}至{{reservation.upperDate}}每{{reservation.dateInterval}}天的{{reservation.lowerTime
                             | slice:0:5}}至{{reservation.upperTime | slice:0:5}}
                             <button class="ml-2" delete-item (click)="deleteReservation(reservation)"></button>
                             <div *ngIf="reservation.note">{{reservation.note}}</div>

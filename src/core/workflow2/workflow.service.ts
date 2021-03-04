@@ -15,12 +15,14 @@ export interface SubmitOptions {
     validate?: () => string[];
 }
 
-export interface ReviewOptions {
+export interface InitiatorCompleteOptions {
     id: any;
-    wi: string;
-    type: 'check' | 'approve';
-    what: string;
-    reviews?: any[];
+    workflowTaskId: string;
+    result: {
+        key: string,
+        value: string,
+    },
+    validate?: () => string[];
 }
 
 export interface RevokeOptions {
@@ -52,7 +54,6 @@ export class Workflow {
 
     loadList(options: { [key: string]: any } = {}): Observable<any> {
         return this.http.get<{ forms: any[], counts: ListCounts }>(this.api.list(options)).pipe(
-            tap(result => this.updateListGroup(result.counts)),
             map(result => new ReviewList({
                 type: options.type,
                 query: options.query,
@@ -66,50 +67,19 @@ export class Workflow {
     }
 
     loadItem(type: string, id: any, wi: string, query: string): Observable<any> {
-        return this.http.get<{ counts: ListCounts }>(`${this.api.workitem(id, wi)}?type=${type}&query=${query}`).pipe(
-            tap(result => this.updateListGroup(result.counts)),
-        );
+        return this.http.get<{ counts: ListCounts }>(`${this.api.workitem(id, wi)}?type=${type}&query=${query}`);
     }
 
     submit(id: any): Observable<any> {
-        return this.http.patch(`${this.api.item(id)}/submit`, {});
+        return this.http.patch(this.api.submit2(id), {});
     }
 
-    accept(id: any, wi: string, data: { title: string, to: string, comment: string }): Observable<any> {
-        return this.http.patch<{ counts: ListCounts }>(this.api.accept(id, wi), data).pipe(
-            tap(result => this.updateListGroup(result.counts)),
+    complete(id: any, wi: string, data: { title: string, to: string, comment: string }): Observable<any> {
+        return this.http.patch(this.api.complete(id), data).pipe(
         );
     }
 
-    reject(id: any, wi: string, data: { title: string, comment: string }): Observable<any> {
-        return this.http.patch<{ counts: ListCounts }>(this.api.reject(id, wi), data).pipe(
-            tap(result => this.updateListGroup(result.counts)),
-        );
-    }
-
-    next(id: any, wi: string, data: { title: string, to: string, comment: string }): Observable<any> {
-        return this.http.patch<{ counts: ListCounts }>(this.api.next(id, wi), data).pipe(
-            tap(result => this.updateListGroup(result.counts)),
-        );
-    }
-
-    review(id: any, wi: string, data: { title: string, to: string, comment: string, review: string }): Observable<any> {
-        return this.http.patch<{ counts: ListCounts }>(this.api.review(id, wi), data).pipe(
-            tap(result => this.updateListGroup(result.counts)),
-        );
-    }
-
-    revoke(id: any, data: { title: string, comment: string }): Observable<any> {
-        return this.http.patch(this.api.revoke(id), data);
-    }
-
-    rollback(id: any, data: { title: string, comment: string }): Observable<any> {
-        return this.http.patch(this.api.rollback(id), data);
-    }
-
-    private updateListGroup(listCounts: ListCounts): void {
-        if (listCounts) {
-            this.listGroup.update(listCounts);
-        }
+    completeByInitiator(id: any, workflowTaskId: string, data: { result: { key: string, value: string }, comment?: string }): Observable<any> {
+        return this.http.patch(this.api.completeByInitiator(id, workflowTaskId), data);
     }
 }

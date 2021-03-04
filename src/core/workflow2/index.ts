@@ -7,10 +7,8 @@ import { CommonDirectivesModule } from '../common-directives';
 import { Dialog } from '../dialogs';
 import { WorkflowSubmitButtonDirective } from './submit.button';
 import {
-    NextOptions,
-    ReviewOptions,
-    RevokeOptions,
     SubmitOptions,
+    InitiatorCompleteOptions,
     Workflow,
 } from './workflow.service';
 
@@ -37,6 +35,8 @@ import {
 import { WorkflowStatusComponent } from './workflow-status.component';
 import { WorkflowTaskListComponent } from './task-list.component';
 import { WorkflowResultTextPipe } from './workflow-result.pipe';
+import { WorkflowInitiatorCompleteButtonDirective } from './initiator-complete.button';
+import { WorkflowInitiatorCompleteDialog } from './initiator-complete.dialog';
 
 export function userIdApiUrlFactory(auth: AuthService, url: string) {
     return new ApiUrl(url, { userId: auth.userInfo.id });
@@ -71,10 +71,8 @@ export function buildWorkflowRoutings(listType: Type<any>, itemType: Type<any>,
 }
 
 export {
-    NextOptions,
-    ReviewOptions,
-    RevokeOptions,
     SubmitOptions,
+    InitiatorCompleteOptions,
     Workflow,
     WorkflowItemResolve,
     WorkflowListResolve,
@@ -86,10 +84,12 @@ export * from './list-group.model';
 export const WORKFLOW_CONTAINTER_QUERYABLE = new InjectionToken('WORKFLOW_CONTAINTER_QUERYABLE');
 
 const WORKFLOW_DIALOGS: any[] = [
+    WorkflowInitiatorCompleteDialog,
 ];
 
 const WORKFLOW_BUTTONS: any[] = [
     WorkflowSubmitButtonDirective,
+    WorkflowInitiatorCompleteButtonDirective,
 ];
 
 const WORKFLOW_COMPONENTS: any[] = [

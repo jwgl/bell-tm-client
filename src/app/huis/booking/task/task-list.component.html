@@ -1,5 +1,5 @@
 <div class="row">
-    <div [class]="listColumnClass">
+    <div class="col-md-3">
         <ul class="nav nav-tabs mb-3">
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['./', {type:'todo'}]" [class.active]="type=='todo'">待办</a>
@@ -30,7 +30,7 @@
             暂无数据
         </div>
     </div>
-    <div [class]="itemColumnClass">
+    <div class="col-md-9">
         <router-outlet (activate)="onActivate($event)"></router-outlet>
     </div>
 </div>

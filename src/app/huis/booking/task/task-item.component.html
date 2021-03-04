@@ -9,8 +9,6 @@
                 </div>
                 <div class="btn-toolbar">
                     <div class="btn-group btn-group-sm ml-auto">
-                        <button type="button" class="btn btn-outline-primary" routerLink="edit"
-                            [queryParams]="{formId: form.id}" *ngIf="variable.name=='submitResult'">编辑</button>
                         <button type="button" class="btn btn-outline-dark" *ngFor="let value of variable.values"
                             (click)="onClick(value)">{{getLabel(value)}}</button>
                     </div>

@@ -2,8 +2,7 @@
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/variables';
 
-.card-columns {
-    column-gap: 10px;
+.grid {
     .card {
         margin-bottom: 10px;
         h5 {

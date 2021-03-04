@@ -24,6 +24,12 @@ export class BookingFormListComponent implements OnInit {
         });
     }
 
+    getItemLink(form: any): String[] {
+        return form.workflowTaskId
+            ? [form.id, { workflowTaskId: form.workflowTaskId }]
+            : [form.id];
+    }
+
     get phoneNumber(): string {
         return this.service.userInfo.phoneNumber;
     }

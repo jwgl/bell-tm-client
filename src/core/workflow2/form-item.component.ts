@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RestEditService } from '../rest';
 import { CommonDialog } from '../common-dialogs';
 import { WorkflowForm, WorkflowFormConvert } from './form-item.model';
-import { SubmitOptions } from './workflow.service';
+import { InitiatorCompleteOptions, SubmitOptions } from './workflow.service';
 
 @Component({
     selector: 'tm-workflow-form-item',
@@ -25,6 +25,9 @@ export class WorkflowFormItemComponent implements OnInit {
     @Output()
     itemLoaded = new EventEmitter<any>(true);
 
+    itemId: any;
+    workflowTaskId: string;
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -35,19 +38,24 @@ export class WorkflowFormItemComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
-            this.loadItem(params['id']);
+            this.itemId = params['id'];
+            this.loadItem(params['workflowTaskId']);
         });
     }
 
-    loadItem(id: any) {
-        this.itemService.loadItem(id).subscribe(dto => {
+    loadItem(workflowTaskId?: string) {
+        this.workflowTaskId = workflowTaskId;
+        (this.workflowTaskId
+            ? this.itemService.loadItem(this.itemId, { workflowTaskId: this.workflowTaskId })
+            : this.itemService.loadItem(this.itemId)
+        ).subscribe(dto => {
             this.form = this.convert(dto);
         });
     }
 
-    remove(id: any) {
+    remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
-            this.itemService.delete(id).subscribe(() => {
+            this.itemService.delete(this.itemId).subscribe(() => {
                 this.router.navigate(['../'], { relativeTo: this.route });
             });
         });
@@ -58,5 +66,31 @@ export class WorkflowFormItemComponent implements OnInit {
             id: this.form.id,
             validate: this.form.validate ? this.form.validate.bind(this.form) : null,
         };
+    }
+
+    onCompleted() {
+        this.router.navigate(['../', this.itemId], { relativeTo: this.route });
+    }
+
+    getCompleteOptions(action: string): InitiatorCompleteOptions {
+        return {
+            id: this.itemId,
+            workflowTaskId: this.workflowTaskId,
+            result: {
+                key: this.form.taskVariable.name,
+                value: action
+            },
+            validate: this.form.validate ? this.form.validate.bind(this.form) : null,
+        };
+    }
+
+    getCompleteLabel(action: string) {
+        switch(action) {
+            case 'ACCEPT': return '同意';
+            case 'REJECT': return '退回';
+            case 'SUBMIT': return '提交';
+            case 'SEND_BACK': return '驳回';
+            case 'TERMINATE': return '终止';
+        }
     }
 }
