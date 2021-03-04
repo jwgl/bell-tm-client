@@ -4,12 +4,12 @@
             <button class="btn btn-secondary" routerLink="../">返回</button>
         </div>
         <div class="btn-group ml-2">
-            <button class="btn btn-secondary" routerLink="edit" *ngIf="form.workflowAction.UPDATE">编辑</button>
-            <button class="btn btn-secondary" (click)="remove()" *ngIf="form.workflowAction.DELETE">删除</button>
+            <button class="btn btn-secondary" routerLink="edit" *ngIf="form.formActions.UPDATE">编辑</button>
+            <button class="btn btn-secondary" (click)="remove()" *ngIf="form.formActions.DELETE">删除</button>
             <button [workflow-submit]="submitOptions" (submitted)="loadItem()"
-                *ngIf="form.workflowAction.SUBMIT">提交</button>
+                *ngIf="form.formActions.SUBMIT">提交</button>
         </div>
-        <div class="btn-group ml-2" *ngIf="form.workflowAction.COMPLETE && form.taskVariable">
+        <div class="btn-group ml-2" *ngIf="form.formActions.COMPLETE && form.taskVariable">
             <button type="button" class="btn btn-secondary" *ngFor="let value of form.taskVariable.values"
                 [workflow-initiator-complete]="getCompleteOptions(value)"
                 (completed)="onCompleted()">{{getCompleteLabel(value)}}</button>

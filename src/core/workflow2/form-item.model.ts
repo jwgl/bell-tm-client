@@ -1,4 +1,4 @@
-export interface WorkflowAction {
+export interface FormActions {
     UPDATE: boolean;
     DELETE: boolean;
     SUBMIT: boolean;
@@ -8,7 +8,7 @@ export interface WorkflowAction {
 export interface WorkflowForm {
     id: any;
     workflowInstanceId: string;
-    workflowAction: WorkflowAction;
+    formActions: FormActions;
     taskVariable: TaskVariable;
     validate?: () => string[];
 }
@@ -23,19 +23,19 @@ export type WorkflowFormConvert = (dto: any) => WorkflowForm;
 type Constructor<T> = new(...args: any[]) => T;
 
 export interface Actionable {
-    workflowAction: WorkflowAction;
+    formActions: FormActions;
     taskVariable: TaskVariable;
 }
 
 export function Actionable<T extends Constructor<{}>>(Base: T): Constructor<Actionable> & T {
     return class extends Base {
-        workflowAction: WorkflowAction;
+        formActions: FormActions;
         taskVariable: TaskVariable;
         constructor(...args: any[]) {
-            super(...args);
-            this.workflowAction = args[0].workflowAction;
+            const form = args[0].form;
+            super(form);
+            this.formActions = args[0].formActions;
             this.taskVariable = args[0].taskVariable;
         }
     };
 }
-
