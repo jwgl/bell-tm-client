@@ -39,9 +39,6 @@ export class TransferDialog extends BaseDialog {
         if (roomIds.length === 1) {
             this.form.fromId = roomIds[0];
         }
-        if (this.transferType === '停用入库') {
-            this.form.toId = 1;
-        }
         return {
             fromId: this.form.fromId,
             note: this.form.note,
@@ -65,6 +62,9 @@ export class TransferDialog extends BaseDialog {
     }
 
     commit() {
+        if (this.transferType === '停用入库') {
+            this.form.toId = 1;
+        }
         if (this.form.toId === '') {
             alert('请选择目标场地');
         } else {
