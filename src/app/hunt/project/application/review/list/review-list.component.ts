@@ -30,7 +30,7 @@ export class ReviewListComponent {
         { id: 'departmentName', label: '学院', order: true },
         { id: 'level', label: '等级', order: true },
         { id: 'subtype', label: '项目类型', filter: true },
-        { id: 'conclusion', label: '结论' },
+        { id: 'conclusion', label: '结论', order: true },
         { id: 'action', label: '' },
     ];
 

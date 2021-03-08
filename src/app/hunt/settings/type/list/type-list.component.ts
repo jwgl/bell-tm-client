@@ -12,7 +12,12 @@ import { TypeService } from '../type.service';
 })
 export class TypeComponent {
     list: Type[];
-
+    ths = [
+        { id: 'parentName', label: '主类', order: true, filter: true },
+        { id: 'name', label: '类别名称', order: true },
+        { id: 'periodOfUniversity', label: '周期(年)' },
+        { id: 'enabled', label: '在用', order: true },
+    ];
     constructor(private service: TypeService, private dialog: Dialog) {
         this.loadData();
     }
