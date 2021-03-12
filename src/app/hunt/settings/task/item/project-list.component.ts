@@ -31,7 +31,7 @@ export class ProjectListComponent {
         {id: 'dateStart', label: '立项时间', order: true},
         {id: 'middleYear', label: '中期', order: true},
         {id: 'knotYear', label: '结题', order: true},
-        {id: 'status', label: '建设情况', order: true},
+        {id: 'status', label: '审批状态', order: true},
     ];
 
     constructor(

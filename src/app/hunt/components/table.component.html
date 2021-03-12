@@ -9,7 +9,7 @@
                 <th *ngIf="th.filter">
                     <div data-toggle="dropdown"> {{th.label}} <span chevron-down-icon></span>
                     </div>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu" style="overflow-y: scroll; max-height: 200px;">
                         <a class="dropdown-item" (click)="selectAll(th.id)">全选/排序</a>
                         <a *ngFor="let item of baseList | uniqueBy: th.id | filterBy: filterBySelected(th.id, true)"
                             class="dropdown-item d-flex" (click)="select(th.id, item)">{{item}}<span

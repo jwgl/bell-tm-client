@@ -6,7 +6,6 @@ import { CommonDirectivesModule } from 'core/common-directives';
 
 import { TmGridComponent } from './table.component';
 import { SetFilterComponent } from './set-filter.component';
-import { HuntGridComponent } from './hunt-grid.component';
 import { HuntTableComponent } from './hunt-table.component';
 import { IconModule } from 'core/icon';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -22,12 +21,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     declarations: [
         TmGridComponent,
         SetFilterComponent,
-        HuntGridComponent,
         HuntTableComponent,
     ],
     exports: [
         TmGridComponent,
-        HuntGridComponent,
         HuntTableComponent,
     ],
 })

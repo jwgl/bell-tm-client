@@ -1,22 +1,18 @@
-.datatable-header {
-    position: relative  !important;
-    z-index: 5 !important;
+.filter-box {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border: 1px solid #e1e4e8;
+    background-color: #f6f8fa;
 }
 
-.datatable-header-cell {
-  overflow: visible !important;
-}
-.datatable-body {
-    top: -600px!important ;
-  position: relative !important;
-  z-index: 110 !important;
+.box-header {
+    color: #586069;
+    padding: 16px;
+    font-size: 14px;
 }
 
-.ngx-datatable {
-    overflow-x: visible !important;
-    overflow-y: visible !important;
-}
-
-.aaa {
-    color: red;
+.div-inline {
+    display: inline!important;
 }

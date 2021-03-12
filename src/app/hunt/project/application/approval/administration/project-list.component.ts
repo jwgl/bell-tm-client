@@ -25,17 +25,6 @@ export class ProjectListComponent {
         { label: '结题', type: 4, count: 0 },
     ];
 
-    ths = [
-        {id: 'name', label: '项目名称', order: true},
-        {id: 'code', label: '项目编号', order: true},
-        {id: 'level', label: '等级', filter: true},
-        {id: 'subtype', label: '项目类型', filter: true},
-        {id: 'departmentName', label: '单位', filter: true},
-        {id: 'principalName', label: '负责人', order: true},
-        {id: 'status', label: '状态', order: true},
-        {id: 'conclusion', label: '结论', order: true},
-    ];
-
     constructor(
         private service: AdministrationService,
         private route: ActivatedRoute,
@@ -47,10 +36,6 @@ export class ProjectListComponent {
         });
     }
 
-    get cols(): number {
-        return this.existExpertReview ? 13 : 10;
-    }
-
     loadData() {
         this.service.loadProjects(this.taskId, {
             reportType: this.type,
@@ -60,11 +45,11 @@ export class ProjectListComponent {
             this.existExpertReview = dto.existExpertReview;
             if (this.existExpertReview) {
                 this.additionalCols = [
-                    {field: 'countOk', headerName: '同意', width: 40 },
-                    {field: 'countVeto', headerName: '不同意', width: 40},
-                    {field: 'countWaiver', headerName: '弃权', width: 40},
-                    {field: 'countNull', headerName: '未评', width: 40},
-                    {field: 'average', headerName: '平均分', width: 40},
+                    {prop: 'countOk', name: '同意', width: 50 },
+                    {prop: 'countVeto', name: '不同意', width: 50},
+                    {prop: 'countWaiver', name: '弃权', width: 50},
+                    {prop: 'countNull', name: '未评', width: 50},
+                    {prop: 'average', name: '平均分', width: 50},
                 ];
             }
             const counts = dto.counts;

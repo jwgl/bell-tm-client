@@ -5,26 +5,4 @@
     </div>
 </div>
 
-<!-- <tm-grid [theads]="ths" [form]="list" [checkAble]="true" (checkedList)="onSelectProject($event)">
-    <ng-template #bodyTpl let-list="list">
-        <ng-container *ngFor="let item of list; let i = index">
-            <tr>
-                <td>
-                    <input type="checkbox" [(ngModel)]="item.checked">
-                </td>
-                <td> {{i + 1}} </td>
-                <td class="expand">{{item.name}}</td>
-                <td>{{item.code}}</td>
-                <td>{{item.principalName}}</td>
-                <td>{{item.level | level : 'text'}}</td>
-                <td>{{item.subtype}}</td>
-                <td>{{item.departmentName}}</td>
-                <td>{{item.dateStart | date: 'yyyy-MM'}}</td>
-                <td>{{item.middleYear}}</td>
-                <td>{{item.knotYear}}</td>
-            </tr>
-        </ng-container>
-    </ng-template>
-</tm-grid> -->
-
 <hunt-table [data]="list" [checkAble]="true" (checkedList)="onSelectProject($event)"></hunt-table>

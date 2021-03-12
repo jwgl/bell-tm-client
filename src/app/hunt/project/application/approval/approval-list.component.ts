@@ -64,6 +64,7 @@ export class ApplicationApprovalListComponent {
     }
 
     lockAll(checked: boolean) {
+        console.log(this.ids);
         if (this.ids && this.ids.length > 0) {
            this.service.batchUpdate({ ids: this.ids, checked, type: 'lock' }).subscribe(() => {
             this.list.forEach(item => {
@@ -108,6 +109,8 @@ export class ApplicationApprovalListComponent {
     }
 
     onRowSelected(ids: any) {
-        this.ids = ids;
+        if (ids && ids.length > 0) {
+            this.ids = ids.filter(d => d.checked).map(s => s.id);
+        }
     }
 }

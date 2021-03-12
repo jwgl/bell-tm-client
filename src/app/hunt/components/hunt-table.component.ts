@@ -10,11 +10,13 @@ import { Level, levelLabels, ProjectStatus, projectStatusLabels, Conclusion, con
 })
 export class HuntTableComponent implements OnInit {
   @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
+  @ViewChild('lockTmpl', { static: true }) lockTmpl: TemplateRef<any>;
   @ViewChild('levelTmpl', { static: true }) levelTmpl: TemplateRef<any>;
   @ViewChild('statusTmpl', { static: true }) statusTmpl: TemplateRef<any>;
-  // @ViewChild('hdrTmpl', { static: true }) hdrTmpl: TemplateRef<any>;
+  @ViewChild('stateTmpl', { static: true }) stateTmpl: TemplateRef<any>;
   rows = [];
   columns = [];
+  filterColumns = [];
   filters = [];
   baseList = [];
   selected = [];
@@ -22,9 +24,23 @@ export class HuntTableComponent implements OnInit {
 
   @Input() set data(value: any[]) {
     if (value) {
+      this.filterColumns = [
+        { name: 'departmentName', label: '单位' },
+        { name: 'level', label: '等级' },
+        { name: 'parentName', label: '项目大类' },
+        { name: 'subtype', label: '项目类别' },
+        { name: 'dateStart', label: '立项时间' },
+        { name: 'middleYear', label: '拟中期' },
+        { name: 'knotYear', label: '拟结题' },
+        { name: 'status', label: '建设情况' },
+        { name: 'state', label: '审批状态' }
+      ];
       this.rows = value;
+      this.baseList = value;
       this.columns = this.columns.filter(th => th.headerCheckboxable
         || !this.rows.every((data: any) => data[th.prop] === undefined || data[th.prop] === null));
+      this.filterColumns = this.filterColumns.filter(col =>
+        !this.rows.every((data: any) => data[col.name] === undefined || data[col.name] === null));
     }
   }
 
@@ -35,7 +51,7 @@ export class HuntTableComponent implements OnInit {
     this.columns = [
       { draggable: false, sortable: false, headerCheckboxable: this.checkAble, width: 30, checkboxable: true },
       { draggable: false, name: 'ID', prop: 'id', width: 80, cellTemplate: this.idTmpl },
-      { draggable: false, name: '锁', prop: 'locked', width: 40 },
+      { draggable: false, name: '锁', prop: 'locked', cellTemplate: this.lockTmpl, width: 40 },
       { draggable: false, name: '专家数', prop: 'countExpert', width: 60 },
       {
         draggable: false,
@@ -43,7 +59,6 @@ export class HuntTableComponent implements OnInit {
         prop: 'departmentName',
         width: 90,
         comparator: this.localComparator.bind(this),
-        // headerTemplate: this.hdrTmpl
       },
       { draggable: false, name: '项目名称', prop: 'name', comparator: this.localComparator.bind(this) },
       { draggable: false, name: '项目编号', prop: 'code', width: 90 },
@@ -62,9 +77,13 @@ export class HuntTableComponent implements OnInit {
       { draggable: false, name: '延期', prop: 'delayTimes', width: 60 },
       { draggable: false, name: '申请时间', prop: 'date', width: 90 },
       { draggable: false, name: '建设情况', prop: 'status', cellTemplate: this.statusTmpl, width: 90 },
-      { draggable: false, name: '审批状态', prop: 'state', width: 90 },
+      { draggable: false, name: '审批状态', prop: 'state', cellTemplate: this.stateTmpl, width: 90 },
       { draggable: false, name: '结论', prop: 'conclusion', width: 90 },
     ];
+  }
+
+  @Input() set cols(value: any[]) {
+    this.columns = this.columns.concat(value);
   }
 
   levelGetter(value: any) {
@@ -73,6 +92,10 @@ export class HuntTableComponent implements OnInit {
 
   statusGetter(value: any) {
     return projectStatusLabels[ProjectStatus[value]].text;
+  }
+
+  stateGetter(value: any) {
+    return { SUBMITTED: '待审核', CHECKED: '待审批', FINISHED: '完成' }[value];
   }
 
   localComparator(str1: string, str2: string): number {
@@ -137,16 +160,6 @@ export class HuntTableComponent implements OnInit {
     this.rows.forEach(checkbox => checkbox.checked = checked);
   }
 
-  selectAll(id: string) {
-    const col = this.filters.find(f => f.id === id);
-    if (col) {
-      this.filters.splice(this.filters.indexOf(col), 1);
-    }
-    const items = _.chain(this.baseList).map(data => data[id]).uniq().value();
-    this.filters.push({ id, items });
-    this.doFilter();
-  }
-
   doFilter() {
     this.rows = this.filters.reduce((list: any[], f) =>
       _.intersection(list,
@@ -154,15 +167,18 @@ export class HuntTableComponent implements OnInit {
   }
 
   onSelect({ selected }) {
-    // console.log('Select Event', selected, this.selected);
-
     this.selected.splice(0, this.selected.length);
     selected.forEach(t => t.checked = true);
     this.selected.push(...selected);
-    console.log('Select Event', selected, this.selected);
     this.checkedList.emit(this.selected);
   }
-  // onActivate(event) {
-  //   console.log('Activate Event', event);
-  // }
+
+  label(id: string, value: string): string {
+    switch (id) {
+      case 'level': return levelLabels[Level[value]].text;
+      case 'status': return projectStatusLabels[ProjectStatus[value]].text;
+      case 'state': return this.stateGetter(value);
+      default: return value;
+    }
+  }
 }

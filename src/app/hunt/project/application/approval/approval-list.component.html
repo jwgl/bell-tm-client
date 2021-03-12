@@ -8,12 +8,4 @@
     </div>
 </div>
 
-<hunt-grid
-    [data]="list"
-    [checkboxSelection]="true"
-    [flush]="flush"
-    (rowSelected)="onRowSelected($event)">
-</hunt-grid>
-<ng-template #empty>
-    <div class="alert alert-info">暂无数据</div>
-</ng-template>
+<hunt-table [data]="list" [checkAble]="true" (checkedList)="onRowSelected($event)"></hunt-table>

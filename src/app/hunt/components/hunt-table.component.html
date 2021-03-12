@@ -1,46 +1,52 @@
+<div class="filter-box" style="width: 100%;">
+    <div class="box-header btn-toolbar mb-0">
+        <div class="div-inline">筛选条件：</div>
+        <div class="btn-group ml-auto">
+            <ng-container *ngFor="let col of filterColumns">
+                <div class="mr-3">
+                    <div data-toggle="dropdown">
+                        {{col.label}} <span chevron-down-icon></span>
+                    </div>
+                    <div class="dropdown-menu" style="overflow-y: scroll; max-height: 250px;">
+                        <a class="dropdown-item" (click)="clearFilter(col.name)">全选</a>
+                        <a *ngFor="let item of baseList | uniqueBy: col.name | filterBy: filterBySelected(col.name, true)"
+                                class="dropdown-item d-flex" (click)="select(col.name, item)">{{label(col.name, item)}}<span
+                                    *ngIf="isSelected(col.name, item)" class="ml-auto">√</span></a>
+                        <a *ngFor="let item of baseList | uniqueBy: col.name | filterBy: filterBySelected(col.name, false)"
+                            class="dropdown-item" (click)="select(col.name, item)">{{label(col.name, item)}}</a>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
 <div>
-    <ngx-datatable
-      class="material"
-      style="height: 650px;"
-      [rows]="rows"
-      columnMode="force"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [rowHeight]="50"
-      [scrollbarV]="true"
-      [scrollbarH]="true"
-      [columns]="columns"
-      [selected]="selected"
-      [selectionType]="SelectionType.checkbox"
-      (select)="onSelect($event)"
-      [selectAllRowsOnPage]="false"
-    >
-    <!-- <ng-template #hdrTmpl let-column="column">
-        <div class="d-inline-block">
-            <span data-toggle="dropdown" >{{column.name}} <span chevron-down-icon></span></span>
-        <div class="dropdown-menu">
-                <a class="dropdown-item">Action 1</a>
-                <a class="dropdown-item">Action 2</a>
-        </div>
-        </div>
-
-    </ng-template> -->
-    <ngx-datatable-footer>
-        <ng-template ngx-datatable-footer-template let-rowCount="rowCount">
-            <div style="padding: 5px 10px">
-                <div>共 {{rowCount}} 个项目</div>
-            </div>
-        </ng-template>
-    </ngx-datatable-footer>
+    <ngx-datatable class="material" style="height: 650px;" [rows]="rows" columnMode="force" [headerHeight]="50"
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [columns]="columns"
+        [selected]="selected" [selectionType]="SelectionType.checkbox" (select)="onSelect($event)"
+        [selectAllRowsOnPage]="false">
+        <ngx-datatable-footer>
+            <ng-template ngx-datatable-footer-template let-rowCount="rowCount">
+                <div style="padding: 5px 10px">
+                    <div>共 {{rowCount}} 个项目</div>
+                </div>
+            </ng-template>
+        </ngx-datatable-footer>
     </ngx-datatable>
 </div>
 
 <ng-template #idTmpl let-rowIndex="rowIndex" let-value="value">
     <a href="{{link(value)}}">{{rowIndex + 1}} #{{value}}</a>
 </ng-template>
-<ng-template #levelTmpl let-row="row" let-value="value">
+<ng-template #lockTmpl let-value="value">
+    {{value ? 'Y' : 'N'}}
+</ng-template>
+<ng-template #levelTmpl let-value="value">
     {{levelGetter(value)}}
 </ng-template>
-<ng-template #statusTmpl let-row="row" let-value="value">
+<ng-template #statusTmpl let-value="value">
     {{statusGetter(value)}}
+</ng-template>
+<ng-template #stateTmpl let-value="value">
+    {{stateGetter(value)}}
 </ng-template>
