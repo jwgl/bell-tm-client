@@ -89,4 +89,11 @@ label {
     }
 }
 
+.list-group-sm {
+    font-size: 0.875rem;
+    .list-group-item {
+        padding: 0.375rem 0.75rem;
+    }    
+}
+
 @include cdk-overlay()

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { WorkflowModule } from 'core/workflow';
+import { Workflow2Module } from 'core/workflow2';
 
 import { BookingFormRoutingModule } from './booking-form.routing';
 import { BookingFormService } from './booking-form.service';
@@ -13,7 +13,7 @@ import { BookingFormNoticeModule } from './notice/form-notice.module';
 @NgModule({
     imports: [
         CommonModule,
-        WorkflowModule.forSubmit(BookingFormService),
+        Workflow2Module.forSubmit(BookingFormService),
         BookingFormRoutingModule,
         BookingFormListModule,
         BookingFormItemModule,

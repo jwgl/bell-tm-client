@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CommonDirectivesModule } from 'core/common-directives';
 
 import { TimeUnitPipe } from './time-unit.pipe';
+import { TimeValidator } from './time-validator';
 
 @NgModule({
     imports: [
@@ -12,9 +13,11 @@ import { TimeUnitPipe } from './time-unit.pipe';
     ],
     declarations: [
         TimeUnitPipe,
+        TimeValidator,
     ],
     exports: [
         TimeUnitPipe,
+        TimeValidator,
     ],
 })
 export class HuisSharedModule { }

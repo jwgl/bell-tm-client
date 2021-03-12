@@ -23,12 +23,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let form of forms">
-                    <td>
-                        <a [routerLink]="[form.id]" *ngIf="!form.workflowTaskId; else taskLink">#{{form.id}}</a>
-                        <ng-template #taskLink>
-                            <a [routerLink]="['../bookingTasks', {type: 'item', returnUrl: 'bookingForms'}, form.workflowTaskId, {formId: form.id}]">#{{form.id}}</a>
-                        </ng-template>
-                    </td>
+                    <td><a [routerLink]="getItemLink(form)">#{{form.id}}</a></td>
                     <td>{{form.department}}</td>
                     <td>{{form.type}}</td>
                     <td><div class="subject">{{form.subject}}</div></td>

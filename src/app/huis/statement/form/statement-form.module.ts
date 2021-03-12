@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { WorkflowModule } from 'core/workflow';
+import { Workflow2Module } from 'core/workflow2';
 
 import { StatementFormRoutingModule } from './statement-form.routing';
 import { StatementFormService } from './statement-form.service';
@@ -12,7 +12,7 @@ import { StatementFormEditorModule } from './editor/form-editor.module';
 @NgModule({
     imports: [
         CommonModule,
-        WorkflowModule.forSubmit(StatementFormService),
+        Workflow2Module.forSubmit(StatementFormService),
         StatementFormRoutingModule,
         StatementFormListModule,
         StatementFormItemModule,

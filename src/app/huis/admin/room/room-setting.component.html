@@ -1,0 +1,69 @@
+<form>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group list-group-sm">
+                <button type="button" class="list-group-item list-group-item-action" *ngFor="let room of rooms"
+                    (click)="roomSelected(room)" [class.active]="selectedRoom == room">
+                    {{room.name}}
+                </button>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <ng-container *ngIf="selectedRoom">
+                <div class="form-group">
+                    <label class="form-label">会议室</label>
+                    <p class="form-control-plaintext">{{selectedRoom.name}}</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">基本情况</label>
+                    <p class="form-control-plaintext">
+                        {{selectedRoom.area}}㎡，{{selectedRoom.furniture}}，{{selectedRoom.seat}}座<span
+                            *ngIf="selectedRoom.seat != selectedRoom.maxSeat">，最多{{selectedRoom.maxSeat}}座</span>，{{selectedRoom.unitPrice}}元/{{selectedRoom.timeUnit
+                        | timeUnit}}<span *ngIf="selectedRoom.isInternalFree">，内部使用免费</span>。</p>
+                </div>
+                <div class="form-group" *ngIf="selectedRoom.facilities">
+                    <label class="form-label">配套设施</label>
+                    <ul class="facilities">
+                        <li *ngFor="let facility of selectedRoom.facilities" [class.extra]="!facility.isBasic">
+                            {{facility.name}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">预留时间</label><button class="ml-2" add-item (click)="addReservation()"></button>
+                    <ul class="reservations">
+                        <li *ngFor="let reservation of selectedRoom.reservations">
+                            {{reservation.lowerDate}}至{{reservation.upperDate}}每{{reservation.dateInterval}}天的{{reservation.lowerTime
+                            | slice:0:5}}至{{reservation.upperTime | slice:0:5}}
+                            <button class="ml-2" delete-item (click)="deleteReservation(reservation)"></button>
+                            <div *ngIf="reservation.note">{{reservation.note}}</div>
+                        </li>
+                        <li *ngIf="!selectedRoom.reservations">
+                            <空>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">借用情况</label>
+                    <a class="btn-link ml-2" [class.active]="day==-30" (click)="getSchedules(-30)">过去30天</a>
+                    <a class="btn-link ml-2" [class.active]="day==-7" (click)="getSchedules(-7)">过去7天</a>
+                    <a class="btn-link ml-2" [class.active]="day==7" (click)="getSchedules(7)">未来7天</a>
+                    <a class="btn-link ml-2" [class.active]="day==30" (click)="getSchedules(30)">未来30天</a>
+                    <a class="btn-link ml-2" [class.active]="day==0" (click)="getSchedules(0)">全部</a>
+                    <ul class="schedules">
+                        <li *ngFor="let schedule of schedules">{{schedule.bookedDate}}
+                            <ul>
+                                <li *ngFor="let bookedTime of schedule.bookedTimes">
+                                    {{bookedTime.lowerTime}}-{{bookedTime.upperTime}} - {{bookedTime.subject}}
+                                </li>
+                            </ul>
+                        </li>
+                        <li *ngIf="!schedules || schedules.length == 0">
+                            <空>
+                        </li>
+                    </ul>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</form>

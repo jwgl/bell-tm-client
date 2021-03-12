@@ -21,10 +21,13 @@ const routes: Routes = [{
     loadChildren: () => import('./statement/task/statement-task.module').then(m => m.StatementTaskModule),
 },{
     path: 'users/:userId/publicRooms',
-    loadChildren: () => import('./room/room.module').then(m => m.PublicRoomModule),
+    loadChildren: () => import('./public/room/room.module').then(m => m.PublicRoomModule),
 },{
     path: 'users/:userId/roomSchedules',
     loadChildren: () => import('./schedule/schedule.module').then(m => m.RoomScheduleModule),
+},{
+    path: 'departments/:departmentId/rooms',
+    loadChildren: () => import('./admin/room/room-setting.module').then(m => m.RoomSettingModule),
 }];
 
 @NgModule({

@@ -98,6 +98,27 @@ export class ApiUrl {
         return `${this.item(id)}/workitems/undefined?op=ROLLBACK`;
     }
 
+    submit2(id: any): string {
+        return `${this.item(id)}/submit`;
+    }
+
+    /**
+     * 完成任务
+     * @param id workflowTaskId
+     */
+    complete(id: any): string {
+        return `${this.item(id)}/complete`;
+    }
+
+    /**
+     * 发起人完成任务
+     * @param id 表单ID
+     * @param workflowTaskId workflowTaskId
+     */
+    completeByInitiator(id: any, workflowTaskId: string): string {
+        return `${this.item(id)}/complete?workflowTaskId=${workflowTaskId}`;
+    }
+
     buildQueryString(options: { [key: string]: string }): string {
         const search: string[] = [];
         for (const key in options) {

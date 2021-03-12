@@ -1,0 +1,14 @@
+<modal-dialog modalTitle="处理意见">
+    <modal-body>
+        <form>
+            <div class="form-group">
+                <textarea class="form-control" rows="6" placeholder="提交说明" name="comment"
+                    [(ngModel)]="result.comment"></textarea>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

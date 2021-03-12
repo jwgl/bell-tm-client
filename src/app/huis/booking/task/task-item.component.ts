@@ -16,7 +16,7 @@ export class BookingTaskItemComponent {
     form: BookingForm;
     comment: string;
     type: string;
-    variable: {
+    taskVariable: {
         name: string;
         values: string[];
     };
@@ -43,14 +43,14 @@ export class BookingTaskItemComponent {
 
     loadTask() {
         this.taskService.loadTask(this.taskId, this.formId).subscribe((dto: any) => {
-            this.variable = dto.variable;
+            this.taskVariable = dto.taskVariable;
             this.form = new BookingForm(dto.form);
         });
     }
 
     loadStep() {
         this.stepService.loadStep(this.taskId, this.formId).subscribe((dto: any) => {
-            this.variable = dto.variable;
+            this.taskVariable = dto.taskVariable;
             this.form = new BookingForm(dto.form);
         });
     }
@@ -58,7 +58,7 @@ export class BookingTaskItemComponent {
     onClick(action: string) {
         this.taskService.complete(this.taskId, {
             result: {
-                key: this.variable.name,
+                key: this.taskVariable.name,
                 value: action
             },
             comment: this.comment,

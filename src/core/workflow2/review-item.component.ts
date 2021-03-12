@@ -1,7 +1,7 @@
 import { Component, ContentChild, TemplateRef, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ReviewOptions, RevokeOptions } from './workflow.service';
+import { RevokeOptions } from './workflow.service';
 
 @Component({
     selector: 'tm-workflow-item',
@@ -56,14 +56,14 @@ export class WorkflowReviewItemComponent implements OnInit {
         this.itemLoaded.emit(dto);
     }
 
-    get reviewOptions(): ReviewOptions {
-        return {
-            id: this.id,
-            wi: this.wi,
-            type: this.reviewType,
-            what: this.reviewTitle,
-        };
-    }
+    // get reviewOptions(): ReviewOptions {
+    //     return {
+    //         id: this.id,
+    //         wi: this.wi,
+    //         type: this.reviewType,
+    //         what: this.reviewTitle,
+    //     };
+    // }
 
     get revokeOptions(): RevokeOptions {
         return {
