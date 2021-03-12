@@ -1,8 +1,0 @@
-<div>
-    <a class="filter-item" (click)="selectAll()">全选</a>
-    <a *ngFor="let item of filters"
-        class="filter-item d-flex" (click)="select(item)">{{item}}
-        <span class="ml-auto">√</span></a>  
-    <a *ngFor="let item of notSelected()"
-        class="filter-item d-flex" (click)="select(item)">{{item}}</a>        
-</div>

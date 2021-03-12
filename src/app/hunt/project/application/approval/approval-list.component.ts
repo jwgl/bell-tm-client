@@ -20,7 +20,7 @@ export class ApplicationApprovalListComponent {
     list: any[];
     type: string;
     projectsSelected: any[];
-    ids: any[]; // for hunt-grid
+    ids: any[];
     flush: boolean;
 
     ths = [
@@ -64,7 +64,6 @@ export class ApplicationApprovalListComponent {
     }
 
     lockAll(checked: boolean) {
-        console.log(this.ids);
         if (this.ids && this.ids.length > 0) {
            this.service.batchUpdate({ ids: this.ids, checked, type: 'lock' }).subscribe(() => {
             this.list.forEach(item => {

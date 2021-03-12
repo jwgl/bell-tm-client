@@ -10,12 +10,15 @@ import { SelectOrOtherComponent } from './select-or-other.component';
 import { ModelSelectComponent } from './model-select.component';
 import { DeviceGridComponent } from './device-grid.component';
 import { TransferFormGridComponent } from './transfer-form-grid.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { DeviceTableComponent } from './device-table.component';
 
 @NgModule({
     imports: [
         CommonModule,
         CommonDirectivesModule,
         FormsModule,
+        NgxDatatableModule,
         AgGridModule.withComponents([SetFilterComponent]),
     ],
     declarations: [
@@ -25,6 +28,7 @@ import { TransferFormGridComponent } from './transfer-form-grid.component';
         ModelSelectComponent,
         DeviceGridComponent,
         TransferFormGridComponent,
+        DeviceTableComponent,
     ],
     exports: [
         PlaceGridComponent,
@@ -32,6 +36,7 @@ import { TransferFormGridComponent } from './transfer-form-grid.component';
         ModelSelectComponent,
         DeviceGridComponent,
         TransferFormGridComponent,
+        DeviceTableComponent,
     ],
 })
 export class TmAssetCommonModule { }
