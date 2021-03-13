@@ -59,3 +59,8 @@ export function workflowStatusClass(status: string): string {
 export function userTaskStatusText(status: string): string {
     return STATUS_INFO[WorkflowStatus[status]].userTask;
 }
+
+export interface StatusConverter {
+    toText(status: string): string;
+    toClass(status: string): string;
+}

@@ -1,0 +1,10 @@
+<nav>
+    <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="page <= 0">
+            <a class="page-link" [routerLink]="prevLink" tabindex="-1">上一页</a>
+        </li>
+        <li class="page-item" [class.disabled]="page >= maxPage - 1">
+            <a class="page-link" [routerLink]="nextLink">下一页</a>
+        </li>
+    </ul>
+</nav>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Masonry from 'masonry-layout';
 
+import { ItemStatusConverter } from '../../../shared/common.model';
 import { OperationFormService } from '../operation-form.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { OperationFormService } from '../operation-form.service';
     templateUrl: 'form-list.component.html',
 })
 export class OperationFormListComponent {
+    itemStatusConverter = new ItemStatusConverter();
     forms: any[];
     type: string;
     totalCount: number;

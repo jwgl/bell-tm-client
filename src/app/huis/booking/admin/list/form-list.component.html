@@ -1,0 +1,28 @@
+<ng-container *ngIf="forms">
+    <form class="form-inline mb-3">
+        <div class="input-group imput-group-sm ml-auto">
+            <input type="text" size="23" class="form-control" name="queryString" placeholder="按#编号,@借用人,主题查询"
+                [(ngModel)]="queryString">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" search-icon
+                    [routerLink]="searchLink"></button>
+            </div>
+        </div>
+    </form>
+    <div class="form-row grid">
+        <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let form of forms">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a [routerLink]="form.id">#{{form.id}}</a>
+                        <tm-workflow-status [status]="form.workflowState" [formStatus]="form.status" class="ml-2"></tm-workflow-status>
+                    </h5>
+                    <p class="card-text">{{form.department}} / {{form.user}}</p>
+                    <p class="card-text"><small>{{form.subject}}</small></p>
+                    <p class="card-text mb-0">{{form.dateUpdated | date: 'y-MM-dd HH:mm'}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <tm-link-pager [total]="totalCount" [page]="page" [size]="size" [extra]="extraLink"></tm-link-pager>
+</ng-container>

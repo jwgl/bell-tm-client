@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ProgramSettingRoutingModule } from 'app/plan/settings/program/program-settings.routing';
 
 @Injectable()
 export class Http {
@@ -47,6 +48,7 @@ export class Http {
         params?: HttpParams | { [param: string]: string | string[] };
     } {
         if (!!params) {
+            this.deleteEmptyProperties(params);
             return {
                 headers: this.commonHeaders,
                 params: params,

@@ -32,6 +32,11 @@ import {
     UserTaskStatusClassPipe,
 } from './workflow-status.pipe';
 
+import {
+    FormStatusTextPipe,
+    FormStatusClassPipe,
+} from './form-status.pipe';
+
 import { WorkflowStatusComponent } from './workflow-status.component';
 import { WorkflowTaskListComponent } from './task-list.component';
 import { WorkflowResultTextPipe } from './workflow-result.pipe';
@@ -97,6 +102,8 @@ const WORKFLOW_COMPONENTS: any[] = [
     WorkflowStatusTextPipe,
     WorkflowStatusClassPipe,
     UserTaskStatusClassPipe,
+    FormStatusTextPipe,
+    FormStatusClassPipe,
     WorkflowListGroupComponent,
     WorkflowNavTabsComponent,
     WorkflowListPagerComponent,

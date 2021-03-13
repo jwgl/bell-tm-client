@@ -1,0 +1,11 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar d-print-none">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" routerLink="../">返回</button>
+        </div>
+        <div class="btn-group ml-2">
+            <button class="btn btn-danger" (click)="revoke()" *ngIf="formActions.REVOKE">回收</button>
+        </div>
+    </div>
+    <tm-booking-form-viewer [form]="form"></tm-booking-form-viewer>
+</ng-container>

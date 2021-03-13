@@ -26,7 +26,7 @@
                     <td>{{form.department}}</td>
                     <td><div class="description">{{form.description}}</div></td>
                     <td>{{form.dateUpdated | date: 'y-MM-dd HH:mm'}}</td>
-                    <td><workflow-status [status]="form.workflowState"></workflow-status></td>
+                    <td><tm-workflow-status [status]="form.workflowState" [formStatus]="form.status"></tm-workflow-status></td>
                 </tr>
             </tbody>
         </table>
