@@ -1,5 +1,3 @@
-import { DatePipe } from "@angular/common";
-import { AuditStatus } from "core/constants/audit-status";
 import { WorkflowTask } from 'core/workflow2/task-list.model';
 
 export interface Department {
@@ -194,7 +192,7 @@ export class BookingItem {
     }
 
     get subtotal(): number {
-        return this.facilities.reduce((acc, bf) => acc + bf.subtotal, 0);
+        return this.facilities.filter(it => it.operative).reduce((acc, bf) => acc + bf.subtotal, 0);
     }
 }
 

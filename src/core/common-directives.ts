@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { FormControlDirective } from './bootstrap/form-control.directive';
 import {
@@ -48,6 +49,7 @@ import { MultipleLineComponent } from './components/multiple-line.component';
 import { IconModule } from './icon';
 import { DeleteItemComponent } from './components/delete-item';
 import { AddItemComponent } from './components/add-item';
+import { LinkPagerComponent } from './components/link-pager';
 
 export {
     CheckboxSelectorComponent,
@@ -61,6 +63,7 @@ const CORE_DIRECTIVES: any[] = [
     FormTitleComponent,
     FromNowComponent,
     PagerComponent,
+    LinkPagerComponent,
     RemoveItemComponent,
     AddItemComponent,
     DeleteItemComponent,
@@ -105,6 +108,7 @@ const CORE_DIRECTIVES: any[] = [
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule,
         IconModule,
     ],
     declarations: [

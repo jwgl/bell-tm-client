@@ -15,7 +15,8 @@
             <div class="card-body">
                 <h5 class="card-title">
                     <a [routerLink]="getItemLink(form)">{{form.room}}</a>
-                    <workflow-status [status]="form.workflowState" class="ml-2"></workflow-status>
+                    <tm-workflow-status [status]="form.workflowState" [workflowStatusConverter]="itemStatusConverter"
+                        [formStatus]="form.status" class="ml-2"></tm-workflow-status>
                 </h5>
                 <p class="card-text">{{form.bookingLowerTime | date: 'y-MM-dd HH:mm'}}-{{form.bookingUpperTime | date:
                     'HH:mm'}}</p>

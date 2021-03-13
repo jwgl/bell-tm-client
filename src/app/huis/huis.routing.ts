@@ -8,6 +8,9 @@ const routes: Routes = [{
     path: 'users/:userId/bookingTasks',
     loadChildren: () => import('./booking/task/booking-task.module').then(m => m.BookingTaskModule),
 },{
+    path: 'departments/:departmentId/bookingForms',
+    loadChildren: () => import('./booking/admin/booking-admin.module').then(m => m.BookingAdminModule),
+},{
     path: 'users/:userId/operationForms',
     loadChildren: () => import('./operation/form/operation-form.module').then(m => m.OperationFormModule),
 },{
