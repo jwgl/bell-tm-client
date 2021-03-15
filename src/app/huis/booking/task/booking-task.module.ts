@@ -1,39 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { CommonDirectivesModule } from 'core/common-directives';
-import { Workflow2Module } from 'core/workflow2';
+import { buildReviewRoutings, Workflow2Module } from 'core/workflow2';
 
 import { BookingSharedModule } from '../shared/booking-shared.module';
-import { BookingTaskRoutingModule } from './booking-task.routing';
-import { BookingTaskListComponent } from './task-list.component';
-import { BookingTaskItemComponent } from './task-item.component';
-import { BookingTaskService } from './booking-task.service';
-import { BookingStepService } from './booking-step.service';
-import { BookingFormEditorModule } from '../form/editor/form-editor.module';
-import { IconModule } from 'core/icon';
+import { BookingFormViewerComponent } from '../shared/form-viewer.component';
+import { BookingForm } from '../shared/booking-form.model';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         CommonDirectivesModule,
-        IconModule,
-        // Workflow2Module.forReview('/api/huis/users/${userId}/bookingTasks'),
-        BookingTaskRoutingModule,
         BookingSharedModule,
-        BookingFormEditorModule
-    ],
-    declarations: [
-        BookingTaskListComponent,
-        BookingTaskItemComponent,
-    ],
-    providers: [
-        BookingTaskService,
-        BookingStepService,
-        { provide: 'BOOKING_TASK_API_URL', useValue: '/api/huis/users/${userId}/bookingTasks' },
-        { provide: 'BOOKING_STEP_API_URL', useValue: '/api/huis/users/${userId}/bookingSteps' },
+        RouterModule.forChild(buildReviewRoutings()),
+        Workflow2Module.forReview(
+            '/api/huis/users/${userId}/bookingTasks',
+            '/api/huis/users/${userId}/bookingSteps',
+            BookingFormViewerComponent,
+            BookingForm,
+        ),
     ],
 })
 export class BookingTaskModule { }

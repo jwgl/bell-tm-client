@@ -29,10 +29,10 @@ export class RoomScheduleComponent {
         const dayOfWeek = firstDayOfMonth.day() ? firstDayOfMonth.day() - 1 : 6;
         this.firstDay = firstDayOfMonth.subtract(dayOfWeek, 'day');
         const lastDay = this.firstDay.add(this.rows.length * this.cols.length - 1, 'day');
-        this.service.loadList({ 
+        this.service.loadList({
             start: this.firstDay.format('YYYY-MM-DD'),
             end: lastDay.format('YYYY-MM-DD'),
-         }).subscribe((data: any[]) => {
+        }).subscribe((data: any[]) => {
             this.roomSchedules = data;
         });
     }

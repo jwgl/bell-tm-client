@@ -1,7 +1,0 @@
-<div class="list-group">
-    <a *ngFor="let item of group.items" class="list-group-item list-group-item-action justify-content-between" [routerLink]="['/list', item.type]"
-        [class.active]="item.active">
-        {{item.label}}
-        <span>{{item.count}}</span>
-    </a>
-</div>

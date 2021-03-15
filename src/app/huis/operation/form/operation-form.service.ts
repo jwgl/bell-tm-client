@@ -37,7 +37,7 @@ export class OperationFormService extends RestEditService {
         if (this.notice) {
             return of(this.notice);
         } else {
-            return this.http.get<{notice: string}>(`${this.api.list()}/notice`).pipe(
+            return this.http.get<{ notice: string }>(`${this.api.list()}/notice`).pipe(
                 map(result => result.notice),
                 tap(notice => this.notice = notice),
             );

@@ -1,7 +1,7 @@
 import { Directive, EventEmitter, Input, Output, HostListener, HostBinding } from '@angular/core';
 
 import { CommonDialog } from '../common-dialogs';
-import { SubmitOptions, Workflow } from './workflow.service';
+import { SubmitOptions, WorkflowSubmitService } from './workflow-submit.service';
 
 @Directive({
     selector: 'button[workflow-submit]',
@@ -13,7 +13,7 @@ export class WorkflowSubmitButtonDirective {
 
     constructor(
         private dialog: CommonDialog,
-        private workflow: Workflow,
+        private workflow: WorkflowSubmitService,
     ) { }
 
     @HostListener('click')

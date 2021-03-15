@@ -2,8 +2,9 @@ import { Directive, EventEmitter, Input, Output, HostListener, HostBinding } fro
 
 import { CommonDialog } from 'core/common-dialogs';
 import { Dialog } from '../dialogs';
-import { InitiatorCompleteOptions, Workflow } from './workflow.service';
+import { completeActionClass, completeActionText } from './complete-action';
 import { WorkflowInitiatorCompleteDialog } from './initiator-complete.dialog';
+import { InitiatorCompleteOptions, WorkflowSubmitService } from './workflow-submit.service';
 
 
 @Directive({
@@ -18,7 +19,7 @@ export class WorkflowInitiatorCompleteButtonDirective {
     constructor(
         private commonDialog: CommonDialog,
         private dialog: Dialog,
-        private workflow: Workflow,
+        private workflow: WorkflowSubmitService,
     ) { }
 
     @HostListener('click')
@@ -26,36 +27,31 @@ export class WorkflowInitiatorCompleteButtonDirective {
         switch (this.options.result.value) {
             case "SUBMIT":
                 this.dialog.open(WorkflowInitiatorCompleteDialog, {
-                    wordsCount: this.wordsCount,
+                    action: completeActionText(this.options.result.value),
                 }).then(result => {
-                    this.pending = true;
-                    this.workflow.completeByInitiator(this.options.id, this.options.workflowTaskId, {
-                        result: this.options.result,
-                        comment: result.comment,
-                    }).subscribe(data => {
-                        this.pending = false;
-                        this.completed.emit(data);
-                    }, errorRsp => {
-                        this.pending = false;
-                        alert(errorRsp.error.message);
-                    });
+                    this.complete(result.comment);
                 });
                 break;
             case "TERMINATE":
                 this.commonDialog.confirm("终止流程", "确定要终止流程吗？").then(() => {
-                    this.pending = true;
-                    this.workflow.completeByInitiator(this.options.id, this.options.workflowTaskId, {
-                        result: this.options.result
-                    }).subscribe(data => {
-                        this.pending = false;
-                        this.completed.emit(data);
-                    }, errorRsp => {
-                        this.pending = false;
-                        alert(errorRsp.error.message);
-                    });
+                    this.complete(null);
                 });
                 break;
         }
+    }
+
+    complete(comment: string) {
+        this.pending = true;
+        this.workflow.completeByInitiator(this.options.id, this.options.workflowTaskId, {
+            result: this.options.result,
+            comment: comment,
+        }).subscribe(data => {
+            this.pending = false;
+            this.completed.emit(data);
+        }, errorRsp => {
+            this.pending = false;
+            alert(errorRsp.error.message);
+        });
     }
 
     @HostBinding('disabled')
@@ -65,6 +61,6 @@ export class WorkflowInitiatorCompleteButtonDirective {
 
     @HostBinding('class')
     get buttonClass() {
-        return 'btn btn-secondary';
+        return `btn btn-${completeActionClass(this.options.result.value)}`;
     }
 }

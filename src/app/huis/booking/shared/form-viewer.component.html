@@ -49,13 +49,13 @@
         </div>
     </div>
     <div class="col-lg-4">
-        <ng-template [ngTemplateOutlet]="workflowTemplate" [ngTemplateOutletContext]="{form: form}"></ng-template>
         <div class="form-info card bg-light mb-3">
             <div class="card-header">表单状态</div>
             <div class="card-body">
                 <div class="card-text">经办人 {{form.user.name}} {{form.user.phoneNumber}}</div>
                 <div class="card-text">借用单 {{form.workflowState | workflowStatusText}}
-                    <span class="text-{{form.status | formStatusClass}}">{{form.status | formStatusText}}</span></div>
+                    <span class="text-{{form.status | formStatusClass}}">{{form.status | formStatusText}}</span>
+                </div>
             </div>
         </div>
         <tm-workflow-task-list [list]="form.workflowTasks"></tm-workflow-task-list>

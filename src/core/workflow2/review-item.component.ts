@@ -1,74 +1,69 @@
-import { Component, ContentChild, TemplateRef, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Type, ComponentFactoryResolver, ViewChild, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Dialog } from 'core/dialogs';
 
-import { RevokeOptions } from './workflow.service';
+import { WorkflowService } from './workflow-review.service';
+import { WorkflowCompleteDialog } from './complete.dialog';
+
+import { WorkflowReviewItemFormViewDirective, WorkflowReviewItemTaskEditorDirective } from './review-item.directive';
+import { ReviewInfo, ReviewItem } from './review-item.model';
+import { completeActionText } from './complete-action';
 
 @Component({
     selector: 'tm-workflow-item',
     templateUrl: 'review-item.component.html',
 })
 export class WorkflowReviewItemComponent implements OnInit {
-    @ContentChild('toolbarTpl')
-    toolbarTemplate: TemplateRef<any>;
+    @Output() onComplete = new EventEmitter<string>();
 
-    @ContentChild('viewerTpl')
-    viewerTemplate: TemplateRef<any>;
+    @ViewChild(WorkflowReviewItemTaskEditorDirective, { static: true })
+    workflowTemplate: WorkflowReviewItemTaskEditorDirective;
 
-    @Input()
-    reviewable: boolean;
+    @ViewChild(WorkflowReviewItemFormViewDirective, { static: true })
+    viewerHost: WorkflowReviewItemFormViewDirective;
 
-    @Input()
-    reviewType: 'check' | 'approve';
+    reviewInfo: ReviewInfo;
+    pending = false;
 
-    @Input()
-    reviewTitle: string;
-
-    @Input()
-    acceptEnabled = true;
-
-    @Input()
-    revokable = false;
-
-    @Input()
-    needreview = false;
-
-    @Output()
-    itemLoaded = new EventEmitter<any>(true);
-
-    id: any;
-    wi: string;
-    prevId: number;
-    nextId: number;
-    workflowInstanceId: string;
-
-    constructor(private route: ActivatedRoute) { }
+    constructor(
+        private route: ActivatedRoute,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        @Inject('WORKFLOW_ITEM_VIEWER')
+        private viewerType: Type<any>,
+        @Inject('WORKFLOW_ITEM_CONSTRUCTOR')
+        private itemConstructor: new (any) => any,
+        private dialog: Dialog,
+        private workflow: WorkflowService,
+    ) { }
 
     ngOnInit(): void {
-        this.route.params.subscribe(params => this.id = params['id']);
-        this.route.data.subscribe((data: { item: any }) => this.onItemLoaded(data.item));
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.viewerType);
+        this.viewerHost.viewContainerRef.clear();
+        const conmponentRef = this.viewerHost.viewContainerRef.createComponent(componentFactory);
+        this.route.data.subscribe((data: { item: ReviewItem }) => {
+            conmponentRef.instance.form = new this.itemConstructor(data.item.form);
+            this.reviewInfo = data.item.reviewInfo;
+        });
     }
 
-    onItemLoaded(dto: any) {
-        this.wi = dto.workitemId;
-        this.prevId = dto.prevId;
-        this.nextId = dto.nextId;
-        this.workflowInstanceId = dto.form.workflowInstanceId;
-        this.itemLoaded.emit(dto);
-    }
-
-    // get reviewOptions(): ReviewOptions {
-    //     return {
-    //         id: this.id,
-    //         wi: this.wi,
-    //         type: this.reviewType,
-    //         what: this.reviewTitle,
-    //     };
-    // }
-
-    get revokeOptions(): RevokeOptions {
-        return {
-            id: this.id,
-            what: this.reviewTitle,
-        };
+    onClick(action: string) {
+        this.dialog.open(WorkflowCompleteDialog, {
+            action: completeActionText(action)
+        }).then(result => {
+            this.pending = true;
+            this.workflow.complete(this.reviewInfo.taskId, {
+                result: {
+                    key: this.reviewInfo.taskVariable.name,
+                    value: action,
+                },
+                comment: result.comment,
+            }).subscribe(() => {
+                this.pending = false;
+                this.onComplete.emit(this.reviewInfo.taskId);
+            }, errorRsp => {
+                this.pending = false;
+                alert(errorRsp.error.message);
+            });
+        });
     }
 }
