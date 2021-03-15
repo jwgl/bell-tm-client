@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CommonDirectivesModule } from 'core/common-directives';
+import { Workflow2Module } from 'core/workflow2';
 
 import { OperationFormViewerComponent } from './form-viewer.component';
-import { Workflow2Module } from 'core/workflow2';
-import { HuisSharedModule } from 'app/huis/shared/huis-shared.module';
+import { HuisSharedModule } from '../../shared/huis-shared.module';
 
 @NgModule({
     imports: [

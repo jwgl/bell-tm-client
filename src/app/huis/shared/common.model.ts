@@ -9,6 +9,7 @@ export enum ItemWorkflowStatus {
     CREATED,
     SUBMITTED,
     CONFIRMED,
+    REJECTED,
     TERMINATED,
     CLOSED,
 }
@@ -19,6 +20,7 @@ const ITEM_STATUS_INFO: ItemStatusInfo = {
     [ItemWorkflowStatus.CREATED]:   { class: null,        text: null},
     [ItemWorkflowStatus.SUBMITTED]: { class: 'info',      text: '待确认'},
     [ItemWorkflowStatus.CONFIRMED]: { class: 'success',   text: '已确认'},
+    [ItemWorkflowStatus.REJECTED]:  { class: 'warning',   text: '退回'  },
     [ItemWorkflowStatus.TERMINATED]:{ class: 'danger',    text: '已终止'},
     [ItemWorkflowStatus.CLOSED]:    { class: 'danger',    text: '关闭'  },
 };

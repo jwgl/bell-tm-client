@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'tm-booking-form-viewer',
@@ -7,5 +7,4 @@ import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 })
 export class BookingFormViewerComponent {
     @Input() form: any;
-    @ContentChild('workflowTpl') workflowTemplate: TemplateRef<any>;
 }

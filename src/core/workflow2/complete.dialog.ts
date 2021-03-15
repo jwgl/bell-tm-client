@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { BaseDialog } from '../dialogs';
 
 @Component({
-    templateUrl: 'initiator-complete.dialog.html',
+    templateUrl: 'complete.dialog.html',
 })
-export class WorkflowInitiatorCompleteDialog extends BaseDialog {
+export class WorkflowCompleteDialog extends BaseDialog {
     result: { comment: string };
     action: string;
 

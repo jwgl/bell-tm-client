@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RestEditService } from '../rest';
 import { CommonDialog } from '../common-dialogs';
 import { WorkflowForm, WorkflowFormConvert } from './form-item.model';
-import { InitiatorCompleteOptions, SubmitOptions } from './workflow.service';
+import { InitiatorCompleteOptions, SubmitOptions } from './workflow-submit.service';
 
 @Component({
     selector: 'tm-workflow-form-item',
@@ -82,15 +82,5 @@ export class WorkflowFormItemComponent implements OnInit {
             },
             validate: this.form.validate ? this.form.validate.bind(this.form) : null,
         };
-    }
-
-    getCompleteLabel(action: string) {
-        switch(action) {
-            case 'ACCEPT': return '同意';
-            case 'REJECT': return '退回';
-            case 'SUBMIT': return '提交';
-            case 'SEND_BACK': return '驳回';
-            case 'TERMINATE': return '终止';
-        }
     }
 }

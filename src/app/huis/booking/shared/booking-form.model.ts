@@ -97,7 +97,7 @@ export class BookingForm {
             id: dto.userId,
             name: dto.userName,
             phoneNumber: dto.userPhoneNumber,
-            departmentId: dto.userDepartmentId
+            departmentId: dto.userDepartmentId,
         }
         this.department = {
             id: dto.departmentId,

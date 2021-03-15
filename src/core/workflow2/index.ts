@@ -3,93 +3,55 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes, Resolve, ResolveData } from '@angular/router';
 
+import { IconModule } from '../icon';
 import { CommonDirectivesModule } from '../common-directives';
 import { Dialog } from '../dialogs';
-import { WorkflowSubmitButtonDirective } from './submit.button';
-import {
-    SubmitOptions,
-    InitiatorCompleteOptions,
-    Workflow,
-} from './workflow.service';
-
-import { WorkflowItemResolve } from './item.resolve';
-import { WorkflowListResolve } from './list.resolve';
-
-import { WorkflowListGroupComponent } from './list-group.component';
-import { WorkflowNavTabsComponent } from './nav-tabs.component';
-import { WorkflowListPagerComponent } from './list-pager.component';
-import { WorkflowReviewContainerComponent } from './review-container.component';
-import { WorkflowReviewListComponent } from './review-list.component';
-import { WorkflowReviewItemComponent } from './review-item.component';
-import { WorkflowFormItemComponent } from './form-item.component';
-
 import { AuthService } from '../auth/auth.service';
 import { ApiUrl } from '../rest';
 
-import {
-    WorkflowStatusTextPipe,
-    WorkflowStatusClassPipe,
-    UserTaskStatusClassPipe,
-} from './workflow-status.pipe';
-
-import {
-    FormStatusTextPipe,
-    FormStatusClassPipe,
-} from './form-status.pipe';
-
+import { ReviewItemResolve } from './review-item.resolve';
+import { ReviewListResolve } from './review-list.resolve';
+import { WorkflowReviewListComponent } from './review-list.component';
+import { WorkflowReviewItemComponent } from './review-item.component';
+import { WorkflowFormItemComponent } from './form-item.component';
+import { WorkflowStatusTextPipe, WorkflowStatusClassPipe, UserTaskStatusClassPipe} from './workflow-status.pipe';
+import { FormStatusTextPipe, FormStatusClassPipe } from './form-status.pipe';
 import { WorkflowStatusComponent } from './workflow-status.component';
 import { WorkflowTaskListComponent } from './task-list.component';
 import { WorkflowResultTextPipe } from './workflow-result.pipe';
 import { WorkflowInitiatorCompleteButtonDirective } from './initiator-complete.button';
 import { WorkflowInitiatorCompleteDialog } from './initiator-complete.dialog';
+import { WorkflowSubmitButtonDirective } from './submit.button';
+import { SubmitOptions, InitiatorCompleteOptions, WorkflowSubmitService} from './workflow-submit.service'; 
+import { WorkflowReviewItemFormViewDirective, WorkflowReviewItemTaskEditorDirective } from './review-item.directive';
+import { WorkflowCompleteDialog } from './complete.dialog';
+import { WorkflowService } from './workflow-review.service';
+import { CompleteActionClassPipe, CompleteActionTextPipe } from './complete-action.pipe';
 
-export function userIdApiUrlFactory(auth: AuthService, url: string) {
+function userIdApiUrlFactory(auth: AuthService, url: string) {
     return new ApiUrl(url, { userId: auth.userInfo.id });
 }
 
-export function apiServiceFactory(service: { api: ApiUrl }) {
+function apiServiceFactory(service: { api: ApiUrl }) {
     return service.api;
 }
 
-export function buildWorkflowRoutings(listType: Type<any>, itemType: Type<any>,
-    containerResolve?: ResolveData): Routes {
+export function buildReviewRoutings(): Routes {
     return [{
         path: '',
-        component: WorkflowReviewContainerComponent,
-        resolve: containerResolve ? { config: containerResolve} : null,
+        component: WorkflowReviewListComponent,
+        resolve: { list: ReviewListResolve },
         children: [{
-            path: '', redirectTo: 'todo', pathMatch: 'full'
-        }, {
-            path: ':type',
-            children: [{
-                path: '',
-                component: listType,
-                resolve: { list: WorkflowListResolve },
-                runGuardsAndResolvers: 'always',
-            }, {
-                path: ':id',
-                component: itemType,
-                resolve: { item: WorkflowItemResolve },
-            }],
+            path: ':id',
+            component: WorkflowReviewItemComponent,// itemType,
+            resolve: { item: ReviewItemResolve },
         }],
     }];
 }
 
-export {
-    SubmitOptions,
-    InitiatorCompleteOptions,
-    Workflow,
-    WorkflowItemResolve,
-    WorkflowListResolve,
-};
-
-export * from './list-group.model';
-
-
-export const WORKFLOW_CONTAINTER_QUERYABLE = new InjectionToken('WORKFLOW_CONTAINTER_QUERYABLE');
-
 const WORKFLOW_DIALOGS: any[] = [
     WorkflowInitiatorCompleteDialog,
+    WorkflowCompleteDialog,
 ];
 
 const WORKFLOW_BUTTONS: any[] = [
@@ -98,21 +60,21 @@ const WORKFLOW_BUTTONS: any[] = [
 ];
 
 const WORKFLOW_COMPONENTS: any[] = [
+    CompleteActionClassPipe,
+    CompleteActionTextPipe,
+    FormStatusClassPipe,
+    FormStatusTextPipe,
+    UserTaskStatusClassPipe,
+    WorkflowFormItemComponent,
+    WorkflowResultTextPipe,
+    WorkflowReviewItemComponent,
+    WorkflowReviewItemFormViewDirective,
+    WorkflowReviewItemTaskEditorDirective,
+    WorkflowReviewListComponent,
+    WorkflowStatusClassPipe,
     WorkflowStatusComponent,
     WorkflowStatusTextPipe,
-    WorkflowStatusClassPipe,
-    UserTaskStatusClassPipe,
-    FormStatusTextPipe,
-    FormStatusClassPipe,
-    WorkflowListGroupComponent,
-    WorkflowNavTabsComponent,
-    WorkflowListPagerComponent,
-    WorkflowReviewContainerComponent,
-    WorkflowReviewListComponent,
-    WorkflowReviewItemComponent,
-    WorkflowFormItemComponent,
     WorkflowTaskListComponent,
-    WorkflowResultTextPipe,
 ];
 
 @NgModule({
@@ -120,6 +82,7 @@ const WORKFLOW_COMPONENTS: any[] = [
         CommonModule,
         FormsModule,
         RouterModule,
+        IconModule,
         CommonDirectivesModule,
     ],
     declarations: [
@@ -129,9 +92,10 @@ const WORKFLOW_COMPONENTS: any[] = [
     ],
     providers: [
         Dialog,
-        Workflow,
-        WorkflowItemResolve,
-        WorkflowListResolve,
+        WorkflowService,
+        WorkflowSubmitService,
+        ReviewItemResolve,
+        ReviewListResolve,
     ],
     exports: [
         WORKFLOW_BUTTONS,
@@ -142,33 +106,49 @@ const WORKFLOW_COMPONENTS: any[] = [
     ],
 })
 export class Workflow2Module {
-    static forReview(apiUrl: string): ModuleWithProviders<Workflow2Module> {
+    static forReview(taskUrl: string, stepUrl: string, viewer: Type<any> = null, itemConstructor:new (any) => any = null): ModuleWithProviders<Workflow2Module> {
         return {
             ngModule: Workflow2Module,
             providers: [{
-                provide: '__WORKFLOW_API_URL_INTERNAL__',
-                useValue: apiUrl,
+                provide: '__WORKFLOW_TASK_API_URL_INTERNAL__',
+                useValue: taskUrl,
             }, {
-                provide: 'WORKFLOW_API_URL',
+                provide: 'WORKFLOW_TASK_API_URL',
                 useFactory: userIdApiUrlFactory,
                 deps: [
                     AuthService,
-                    '__WORKFLOW_API_URL_INTERNAL__'
+                    '__WORKFLOW_TASK_API_URL_INTERNAL__'
                 ],
+            }, {
+                provide: '__WORKFLOW_STEP_API_URL_INTERNAL__',
+                useValue: stepUrl,
+            }, {
+                provide: 'WORKFLOW_STEP_API_URL',
+                useFactory: userIdApiUrlFactory,
+                deps: [
+                    AuthService,
+                    '__WORKFLOW_STEP_API_URL_INTERNAL__',
+                ],
+            }, {
+                provide: 'WORKFLOW_ITEM_VIEWER',
+                useValue: viewer,
+            }, {
+                provide: 'WORKFLOW_ITEM_CONSTRUCTOR',
+                useValue: itemConstructor,
             }],
         };
     }
 
-    static forSubmit<T extends { api: ApiUrl }>(type: Type<T>): ModuleWithProviders<Workflow2Module> {
+    static forSubmit<T extends { api: ApiUrl }>(serviceType: Type<T>): ModuleWithProviders<Workflow2Module> {
         return {
             ngModule: Workflow2Module,
             providers: [{
                 provide: 'WORKFLOW_ITEM_SERVICE',
-                useExisting: type,
+                useExisting: serviceType,
             }, {
-                provide: 'WORKFLOW_API_URL',
+                provide: 'WORKFLOW_SUBMIT_API_URL',
                 useFactory: apiServiceFactory,
-                deps: [type],
+                deps: [serviceType],
             }],
         };
     }
