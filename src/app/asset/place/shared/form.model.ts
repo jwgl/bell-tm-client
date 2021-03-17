@@ -16,5 +16,8 @@ export class Room {
 
     constructor(dto: any) {
         Object.assign(this, dto);
+        if (this.status) {
+            this.status = { ON: '在用', BACKUP: '储备', DELETED: '取消' }[this.status];
+        }
     }
 }

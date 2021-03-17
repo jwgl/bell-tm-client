@@ -7,8 +7,6 @@ import { Dialog } from 'core/dialogs';
 
 import { FundImportDialog } from './editor/form-editor.component';
 import { FundService } from './fund.service';
-import { isEmpty } from 'lodash';
-import { RowComp, RowPositionUtils } from 'ag-grid-community';
 
 @Component({
     templateUrl: 'fund-list.component.html',

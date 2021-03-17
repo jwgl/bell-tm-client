@@ -1,4 +1,4 @@
-<div class="filter-box" style="width: 100%;" *ngIf="size === undefined">
+<div class="filter-box" style="width: 100%;">
     <div class="box-header btn-toolbar mb-0">
         <div class="div-inline">筛选条件：</div>
         <div class="btn-group ml-auto">
@@ -21,7 +21,7 @@
     </div>
 </div>
 <div>
-    <ngx-datatable class="material" [ngStyle]="{'height': size === 'sm' ? '250px' : '650px'}" [rows]="rows"
+    <ngx-datatable class="material" style="height: 650px;" [rows]="rows"
         columnMode="force" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
         [scrollbarH]="true" [columns]="columns" [selected]="selected" [selectionType]="SelectionType.checkbox"
         (select)="onSelect($event)" [selectAllRowsOnPage]="false">
@@ -37,7 +37,4 @@
 
 <ng-template #idTmpl let-rowIndex="rowIndex" let-value="value">
     <a href="{{link(value)}}">{{rowIndex + 1}} #{{value}}</a>
-</ng-template>
-<ng-template #stateTmpl let-value="value">
-    {{stateGetter(value)}}
 </ng-template>
