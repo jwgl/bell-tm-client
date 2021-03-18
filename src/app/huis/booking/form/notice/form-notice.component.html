@@ -3,9 +3,12 @@
         <div class="btn-group ml-auto">
             <button class="btn btn-secondary" routerLink="../">返回</button>
         </div>
-        <div class="btn-group ml-2">
+        <div class="btn-group ml-2" *ngIf="unsettled.unsettledCount == 0">
             <button class="btn btn-primary" routerLink="../create">继续</button>
         </div>
+    </div>
+    <div class="alert alert-warning" *ngIf="unsettled.unsettledCount > 0">
+        贵单位有<b>{{unsettled.unsettledCount}}</b>个未结算项目，在<b>{{unsettled.statementManager}}</b>完成结算后，方可继续借用。
     </div>
     <tm-form-title>会议室借用须知</tm-form-title>
     <div [markdown]="notice"></div>
