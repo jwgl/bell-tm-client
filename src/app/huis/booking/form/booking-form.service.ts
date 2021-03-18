@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { ApiUrl, Http, RestEditService } from 'core/rest';
 import { AuthService, UserInfo } from 'core/auth';
@@ -10,7 +9,6 @@ import { AuthService, UserInfo } from 'core/auth';
 export class BookingFormService extends RestEditService {
     userInfo: UserInfo;
     roomApi: ApiUrl;
-    notice: string;
 
     constructor(
         http: Http,
@@ -33,14 +31,7 @@ export class BookingFormService extends RestEditService {
         return this.http.get(this.roomApi.item(id));
     }
 
-    getNotice(): Observable<string> {
-        if (this.notice) {
-            return of(this.notice);
-        } else {
-            return this.http.get<{notice: string}>(`${this.api.list()}/notice`).pipe(
-                map(result => result.notice),
-                tap(notice => this.notice = notice),
-            );
-        }
+    getNotice(): Observable<any> {
+        return this.http.get<{ notice: string }>(`${this.api.list()}/notice`);
     }
 }
