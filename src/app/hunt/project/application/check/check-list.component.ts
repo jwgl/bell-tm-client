@@ -18,6 +18,7 @@ export class ApplicationCheckListComponent {
     list: any[];
     type: string;
     options = [
+        { label: '应审核', type: 'tobe', count: 0 },
         { label: '待审核', type: 'todo', count: 0 },
         { label: '已审核', type: 'next', count: 0 },
         { label: '退回', type: 'expr', count: 0 },
@@ -38,10 +39,11 @@ export class ApplicationCheckListComponent {
                 this.list = dto.list;
                 const c = dto.counts;
                 if (c) {
-                    this.options[0].count = c.countUncheck;
-                    this.options[1].count = c.countPass;
-                    this.options[2].count = c.countFail;
-                    this.options[3].count = c.countFinal;
+                    this.options[1].count = c.countUncheck;
+                    this.options[2].count = c.countPass;
+                    this.options[3].count = c.countFail;
+                    this.options[4].count = c.countFinal;
+                    this.options[0].count = c.countPlan;
                 }
             });
         });

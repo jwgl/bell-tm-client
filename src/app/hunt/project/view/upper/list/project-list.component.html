@@ -1,5 +1,5 @@
 <div class="btn-toolbar">
-    <div class="input-group col-5">
+    <div class="input-group" style="width: 40%;">
         <input type="text" name="query" class="form-control" [(ngModel)]="q" placeholder="关键字搜索" />
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="find()">搜索</button>
@@ -29,4 +29,4 @@
     </ng-container>
 </div>
 
-<hunt-grid [data]="list"></hunt-grid>
+<hunt-table [data]="list"></hunt-table>

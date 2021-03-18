@@ -2,8 +2,9 @@
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/variables';
 @import '~@angular/cdk/_overlay.scss';
-@import "~ag-grid-community/dist/styles/ag-grid.css";
-@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
 
 body {
     overflow-y: scroll;
@@ -90,7 +91,7 @@ label {
     font-size: 0.875rem;
     .list-group-item {
         padding: 0.375rem 0.75rem;
-    }    
+    }
 }
 
 @include cdk-overlay()

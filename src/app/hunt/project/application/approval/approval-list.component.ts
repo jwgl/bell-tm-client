@@ -20,7 +20,7 @@ export class ApplicationApprovalListComponent {
     list: any[];
     type: string;
     projectsSelected: any[];
-    ids: any[]; // for hunt-grid
+    ids: any[];
     flush: boolean;
 
     ths = [
@@ -108,6 +108,8 @@ export class ApplicationApprovalListComponent {
     }
 
     onRowSelected(ids: any) {
-        this.ids = ids;
+        if (ids && ids.length > 0) {
+            this.ids = ids.filter(d => d.checked).map(s => s.id);
+        }
     }
 }

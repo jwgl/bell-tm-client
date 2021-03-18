@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { CommonDirectivesModule } from 'core/common-directives';
+import { TmGridModule } from '../../../components/table.module';
 
 import { TypeComponent } from './type-list.component';
 
@@ -11,6 +12,7 @@ import { TypeComponent } from './type-list.component';
         CommonModule,
         RouterModule,
         CommonDirectivesModule,
+        TmGridModule,
     ],
     declarations: [
         TypeComponent,

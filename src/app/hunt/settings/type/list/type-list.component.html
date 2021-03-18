@@ -3,7 +3,7 @@
         <button class="btn btn-primary" (click)="open()">新建</button>
     </div>
 </div>
-<table class="table">
+<!-- <table class="table">
     <thead>
         <tr>
             <th>序号</th>
@@ -28,4 +28,21 @@
             </tr>
         </ng-template>
     </tbody>
-</table>
+</table> -->
+<tm-grid [theads]="ths" [form]="list">
+    <ng-template #bodyTpl let-list="list">
+        <ng-container *ngFor="let item of list; let i = index">
+            <tr>
+                <td>{{i+1}}</td>
+                <td>{{item.parentName}}</td>
+                <td><button class="btn btn-link border-0 p-0" (click)="edit(item)">{{item.name}}</button></td>
+                <td><span *ngIf="item.periodOfUniversity"class="mr-2">校级：{{item.periodOfUniversity}} </span>
+                    <span *ngIf="item.periodOfCity" class="mr-2">市级：{{item.periodOfCity}} </span>
+                    <span *ngIf="item.periodOfProvince" class="mr-2">省级：{{item.periodOfProvince}} </span>
+                    <span *ngIf="item.periodOfNation" class="mr-2">国家级：{{item.periodOfNation}} </span>
+                </td>
+                <td>{{item.enabled ? '是' : '否'}}</td>
+            </tr>
+        </ng-container>
+    </ng-template>
+</tm-grid>

@@ -52,7 +52,7 @@ export class AreaListComponent {
     }
 
     onRowSelected(ids: any) {
-        this.assetsSelected = this.assets.filter((asset: any) => ids.some(id => asset.id === id));
+        this.assetsSelected = this.assets.filter((asset: any) => ids.some(item => asset.id === item.id));
     }
 
     transfer() {
