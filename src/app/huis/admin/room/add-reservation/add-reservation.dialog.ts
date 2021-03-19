@@ -1,11 +1,8 @@
-import { Time } from '@angular/common';
 import { Component } from '@angular/core';
-import { ItemsRangeResult } from '@ng-select/ng-select/lib/ng-dropdown-panel.service';
 import { BaseDialog } from 'core/dialogs';
 
 import * as dayjs from 'dayjs';
 import { Observable } from 'rxjs';
-
 
 @Component({
     styleUrls: ['add-reservation.dialog.scss'],
