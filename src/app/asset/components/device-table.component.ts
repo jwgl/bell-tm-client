@@ -70,4 +70,13 @@ export class DeviceTableComponent extends BaseTable implements OnInit {
     this.selected.push(...selected);
     this.checkedList.emit(this.selected);
   }
+
+  summary(): string {
+    const countAll = this.rows.reduce((sum: any, row) => {
+      const mount = sum.mount + row.price * row.pcs;
+      const count = sum.count + row.pcs;
+      return {mount, count};
+    }, {mount: 0, count: 0});
+    return `总金额：${countAll.mount} 总数量：${countAll.count}`;
+  }
 }

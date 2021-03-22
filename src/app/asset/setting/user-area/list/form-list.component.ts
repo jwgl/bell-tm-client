@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Dialog } from 'core/dialogs';
+import { CommonDialog } from 'core/common-dialogs';
 
 import { UserAreaService } from '../user-area.service';
 import { UserAreaDialog } from './form-editor.dialog';
@@ -13,6 +14,7 @@ export class UserAreaListComponent {
 
     constructor(
         private service: UserAreaService,
+        private dialogs: CommonDialog,
         private dialog: Dialog) {
         this.loadData();
     }
@@ -31,6 +33,8 @@ export class UserAreaListComponent {
     }
 
     remove(item: any) {
-        this.service.delete(item.id).subscribe(() => this.loadData());
+        this.dialogs.confirm('删除', '确定要删除吗？').then(() =>
+            this.service.delete(item.id).subscribe(() => this.loadData())
+        );
     }
 }
