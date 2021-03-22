@@ -7,10 +7,17 @@ import { BookingFormService } from '../booking-form.service';
 })
 export class BookingFormNoticeComponent implements OnInit {
     notice: string;
+    unsettled: {
+        unsettledCount: number,
+        statementManager: string,
+    };
 
     constructor(private service: BookingFormService) { }
 
     ngOnInit(): void {
-        this.service.getNotice().subscribe(notice => this.notice = notice);
+        this.service.getNotice().subscribe(result => {
+            this.notice = result.notice;
+            this.unsettled = result.unsettled;
+        });
     }
 }
