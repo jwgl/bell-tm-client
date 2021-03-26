@@ -26,10 +26,15 @@ export class WorkflowStatusComponent {
         if (this.formStatus) {
             value = this.formStatusConverter.toClass(this.formStatus);
         }
-        if (!value) {
+        if (!value && this.status) {
             value = this.workflowStatusConverter.toClass(this.status);
         }
-        return `badge badge-${value}`;
+        if (value) {
+            return `badge badge-${value}`;
+        }
+        else {
+            return null;
+        }
     }
 
     get label(): string {
@@ -37,7 +42,7 @@ export class WorkflowStatusComponent {
         if (this.formStatus) {
             value = this.formStatusConverter.toText(this.formStatus);
         }
-        if (!value) {
+        if (!value && this.status) {
             value =  this.workflowStatusConverter.toText(this.status);
         }
         return value;
