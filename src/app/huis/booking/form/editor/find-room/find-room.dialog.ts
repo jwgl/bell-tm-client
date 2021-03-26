@@ -31,6 +31,8 @@ export class FindRoomDialog extends BaseDialog {
         this.form = this.options.form;
         this.selectedRoom = null;
         this.bookingDate = dayjs(new Date()).format('YYYY-MM-DD');
+        this.lowerTime = '08:00';
+        this.upperTime = '22:00'
         return this.service.loadRooms();
     }
 
