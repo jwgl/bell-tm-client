@@ -28,7 +28,7 @@
         <ngx-datatable-footer>
             <ng-template ngx-datatable-footer-template let-rowCount="rowCount">
                 <div style="padding: 5px 10px">
-                    <div>共 {{rowCount}} 个</div>
+                    <div>共 {{rowCount}} 条记录 <span class="ml-3">{{summary()}}</span></div>
                 </div>
             </ng-template>
         </ngx-datatable-footer>

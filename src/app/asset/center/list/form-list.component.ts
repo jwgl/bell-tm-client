@@ -55,9 +55,9 @@ export class CenterListComponent {
                     if (dto.success > 0) {
                         alert(`成功录入${dto.success}个设备的资产编号和序列号`);
                     }
+                    this.loadData(this.service.queryOptions);
                 });
             }
-            this.loadData(this.service.queryOptions);
         });
     }
 }

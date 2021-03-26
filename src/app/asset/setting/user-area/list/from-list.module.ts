@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 
@@ -14,6 +15,7 @@ import { UserAreaDialog } from './form-editor.dialog';
         CommonModule,
         RouterModule,
         FormsModule,
+        CommonDialogsModule,
         CommonDirectivesModule,
     ],
     declarations: [
