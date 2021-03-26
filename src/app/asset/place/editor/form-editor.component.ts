@@ -32,11 +32,13 @@ export class PlaceFormEditorComponent {
         private dialogs: CommonDialog,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
-        const params = this.route.snapshot.params;
-        this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
-        if (this.editMode === EditMode.Edit) {
-            this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
-        }
+        this.route.params.subscribe(params => {
+            if (this.editMode === EditMode.Create) {
+                this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
+            } else if (this.editMode === EditMode.Edit) {
+                this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
+            }
+        });
     }
 
     onLoadData(dto: any) {
@@ -63,6 +65,13 @@ export class PlaceFormEditorComponent {
 
     filterBySubject(name: string) {
         return (placeType: any) => placeType.level1 === name;
+    }
+
+    level1Change(level1: string) {
+        const type = this.placeTypes.find((t: any) => t.level1 === level1);
+        if (type) {
+            this.form.placeTypeId = type.id;
+        }
     }
 
     isEmpty(option: any): boolean {

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, TemplateRef, ViewChild, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
 import { BaseTable } from './baseTable';
 
 @Component({
@@ -6,7 +6,7 @@ import { BaseTable } from './baseTable';
   styleUrls: ['filter-group.scss'],
   templateUrl: 'device-table.component.html',
 })
-export class DeviceTableComponent extends BaseTable implements OnInit {
+export class DeviceTableComponent extends BaseTable {
   @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
   @ViewChild('stateTmpl', { static: true }) stateTmpl: TemplateRef<any>;
 
@@ -29,7 +29,8 @@ export class DeviceTableComponent extends BaseTable implements OnInit {
   @Input() size: string;
   @Output() checkedList = new EventEmitter<any>();
 
-  ngOnInit() {
+  constructor() {
+    super();
     this.columns = [
       { draggable: false, sortable: false, headerCheckboxable: this.checkAble, width: 30, checkboxable: this.checkAble },
       { draggable: false, name: 'ID', prop: 'id', width: 80 },
@@ -57,9 +58,9 @@ export class DeviceTableComponent extends BaseTable implements OnInit {
 
   @Input() set detailShow(value: boolean) {
     if (value) {
-      const field = this.columns.find(th => th.field === 'id');
-      if (field) {
-        field['cellTemplate'] = this.idTmpl;
+      const prop = this.columns.find(th => th.prop === 'id');
+      if (prop) {
+        prop['cellTemplate'] = this.idTmpl;
       }
     }
   }
@@ -75,8 +76,8 @@ export class DeviceTableComponent extends BaseTable implements OnInit {
     const countAll = this.rows.reduce((sum: any, row) => {
       const mount = sum.mount + row.price * row.pcs;
       const count = sum.count + row.pcs;
-      return {mount, count};
-    }, {mount: 0, count: 0});
+      return { mount, count };
+    }, { mount: 0, count: 0 });
     return `总金额：${countAll.mount} 总数量：${countAll.count}`;
   }
 }

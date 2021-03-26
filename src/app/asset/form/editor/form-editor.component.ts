@@ -28,11 +28,13 @@ export class ReceiptFormEditorComponent {
         private dialog: Dialog,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
-        const params = this.route.snapshot.params;
-        this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
-        if (this.editMode === EditMode.Edit) {
-            this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
-        }
+        this.route.params.subscribe(params => {
+            if (this.editMode === EditMode.Create) {
+                this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
+            } else if (this.editMode === EditMode.Edit) {
+                this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
+            }
+        });
     }
 
     onLoadData(dto: any) {

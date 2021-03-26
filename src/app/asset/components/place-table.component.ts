@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, TemplateRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { BaseTable } from './baseTable';
 
 @Component({
@@ -6,12 +6,13 @@ import { BaseTable } from './baseTable';
     styleUrls: ['filter-group.scss'],
     templateUrl: 'place-table.component.html',
 })
-export class PlaceTableComponent extends BaseTable implements OnInit {
+export class PlaceTableComponent extends BaseTable {
     @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
     @Output() checkedList = new EventEmitter<any>();
     @Input() checkAble: boolean;
 
-    ngOnInit() {
+    constructor() {
+        super();
         this.columns = [
             { draggable: false, sortable: false, headerCheckboxable: this.checkAble, width: 30, checkboxable: this.checkAble },
             { draggable: false, name: 'ID', prop: 'id', cellTemplate: this.idTmpl, width: 80 },
@@ -24,9 +25,18 @@ export class PlaceTableComponent extends BaseTable implements OnInit {
             { prop: 'seat', name: '座位数', width: 60 },
             { prop: 'seatType', name: '桌椅类型', comparator: this.localComparator },
             { prop: 'department', name: '使用单位', comparator: this.localComparator, width: 90 },
-            { prop: 'status', name: '状态', comparator: this.localComparator, width: 90 },
+            { prop: 'statusLabel', name: '状态', comparator: this.localComparator, width: 90 },
             { prop: 'note', name: '备注', width: 120 },
         ];
+    }
+
+    @Input() set detailShow(value: boolean) {
+        if (value) {
+            const prop = this.columns.find(th => th.prop === 'id');
+            if (prop) {
+                prop['cellTemplate'] = this.idTmpl;
+            }
+        }
     }
 
     @Input() set data(value: any[]) {
@@ -39,7 +49,7 @@ export class PlaceTableComponent extends BaseTable implements OnInit {
                 { name: 'purpose', label: '功能' },
                 { name: 'seatType', label: '桌椅类型' },
                 { name: 'department', label: '使用单位' },
-                { name: 'status', label: '状态' }
+                { name: 'statusLabel', label: '状态' }
             ];
             this.setData(value, filterColumns, this.checkAble);
         }

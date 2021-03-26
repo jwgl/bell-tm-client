@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, TemplateRef, ViewChild, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
 import { BaseTable } from './baseTable';
 
 @Component({
@@ -6,7 +6,7 @@ import { BaseTable } from './baseTable';
     styleUrls: ['filter-group.scss'],
     templateUrl: 'transfer-form-table.component.html',
 })
-export class TransferFormTableComponent extends BaseTable implements OnInit {
+export class TransferFormTableComponent extends BaseTable {
     @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
 
     @Input() set data(value: any[]) {
@@ -25,7 +25,8 @@ export class TransferFormTableComponent extends BaseTable implements OnInit {
     @Input() size: string;
     @Output() checkedList = new EventEmitter<any>();
 
-    ngOnInit() {
+    constructor() {
+        super();
         this.columns = [
             { draggable: false, sortable: false, headerCheckboxable: this.checkAble, width: 30, checkboxable: this.checkAble },
             { draggable: false, name: 'ID', prop: 'id', cellTemplate: this.idTmpl, width: 80 },

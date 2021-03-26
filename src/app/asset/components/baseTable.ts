@@ -17,9 +17,9 @@ export class BaseTable {
             this.rows = value;
             this.baseList = value;
             this.columns = this.columns.filter(th => (th.prop === undefined && checkAble)
-                || !this.rows.every((data: any) => data[th.prop] === undefined || data[th.prop] === null));
+                || _.some(this.rows, it => it[th.prop] !== undefined && it[th.prop] !== null));
             this.filterColumns = this.filterColumns.filter(col =>
-                !this.rows.every((data: any) => data[col.name] === undefined || data[col.name] === null));
+                _.some(this.rows, it => it[col.name] !== undefined && it[col.name] !== null));
         }
     }
 

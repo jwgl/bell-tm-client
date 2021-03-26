@@ -2,8 +2,8 @@
     <tm-form-title>场地{{vm.id}}</tm-form-title>
     <div class="row">
         <div class="form-group col-3">
-            <label class="control-label">场地名称</label>
-            <div>{{vm.building}} {{vm.name}}</div>
+            <label class="control-label">场地名称及状态</label>
+            <div>{{vm.building}} {{vm.name}} <span class="badge badge-pill badge-primary" >{{vm.statusLabel}}</span></div>
         </div>
         <div class="form-group col-3">
             <label class="control-label">使用单位</label>
@@ -42,4 +42,34 @@
             <div>{{vm.note}}</div>
         </div>
     </div>
+    <ng-container *ngIf="vm.logs && vm.logs.length > 0">
+        <table class="table table-hover">
+            <th>日期</th>
+            <th>修改前</th>
+            <th>修改后</th>
+            <tbody>
+                <tr *ngFor="let log of vm.logs">
+                    <td>{{log.dateCreated | date: 'y-MM-dd HH:mm'}}</td>
+                    <td>{{log.from.building}} <br>
+                        {{log.from.department}} <br>
+                        {{log.from.measure}} <br>
+                        {{log.from.name}} <br>
+                        {{log.from.placeType}} <br>
+                        {{log.from.seat}} <br>
+                        {{log.from.seatType}} <br>
+                        {{log.from.status}}
+                    </td>
+                    <td><span [ngClass]="log.from.building !== log.to.building ? 'text-danger' : 'text-default'">{{log.to.building}}</span> <br>
+                        <span [ngClass]="log.from.department !== log.to.department ? 'text-danger' : 'text-default'">{{log.to.department}}</span> <br>
+                        <span [ngClass]="log.from.measure !== log.to.measure ? 'text-danger' : 'text-default'">{{log.to.measure}}</span> <br>
+                        <span [ngClass]="log.from.name !== log.to.name ? 'text-danger' : 'text-default'">{{log.to.name}}</span> <br>
+                        <span [ngClass]="log.from.placeType !== log.to.placeType ? 'text-danger' : 'text-default'">{{log.to.placeType}}</span><br>
+                        <span [ngClass]="log.from.seat !== log.to.seat ? 'text-danger' : 'text-default'">{{log.to.seat}}</span><br>
+                        <span [ngClass]="log.from.seatType !== log.to.seatType ? 'text-danger' : 'text-default'">{{log.to.seatType}}</span><br>
+                        <span [ngClass]="log.from.status !== log.to.status ? 'text-danger' : 'text-default'">{{log.to.status}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
 </ng-container>

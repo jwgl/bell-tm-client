@@ -26,7 +26,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">场地类别</label>
-                <select name="groups" class="form-control" [(ngModel)]="placeTypeLevel1">
+                <select name="groups" class="form-control" [(ngModel)]="placeTypeLevel1" (ngModelChange)="level1Change($event)">
                     <option *ngFor="let level1 of placeTypes | uniqueBy: 'level1'" [ngValue]="level1">
                         {{ level1 }}
                     </option>

@@ -75,6 +75,7 @@ export class ObservationFormEditorComponent {
             if (!dto.form && dto.timeslot) {
                 this.form = new ObservationForm({ timeslot: dto.timeslot, observerType: dto.types[0] });
                 this.form.method = 1;
+                this.form.teachingMethods = '教师讲授';
                 this.form.recommend = 0;
                 this.activeEvaluationSystem = dto.evaluationSystem;
                 this.evaluationSystemSelected();

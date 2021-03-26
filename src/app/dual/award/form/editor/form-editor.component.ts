@@ -26,11 +26,12 @@ export class AwardFormEditorComponent {
         private dialogs: CommonDialog,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
-        const params = this.route.snapshot.params;
-        this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
-        if (this.editMode === EditMode.Edit) {
-            this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
-        }
+        this.route.params.subscribe(params => {
+            this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
+            if (this.editMode === EditMode.Edit) {
+                this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
+            }
+        });
     }
 
     onLoadData(dto: any) {

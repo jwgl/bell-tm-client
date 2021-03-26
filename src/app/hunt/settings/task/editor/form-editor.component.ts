@@ -32,9 +32,9 @@ export class TaskFormEditorComponent {
         private dialogs: CommonDialog,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
-        const params = this.route.snapshot.params;
         if (this.editMode === EditMode.Edit) {
-            this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
+            this.route.params.subscribe(params =>
+                this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto)));
         } else {
             this.form = new TaskForm([]);
             this.form.type = 'APPLICATION';
