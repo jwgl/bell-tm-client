@@ -30,7 +30,6 @@ export class DeviceTableComponent extends BaseTable {
       this.columns = [{ draggable: false, sortable: false, headerCheckboxable: true, width: 30, checkboxable: true }]
         .concat(this.columns);
     }
-    console.log(this.columns);
   }
 
   @Input() size: string;
