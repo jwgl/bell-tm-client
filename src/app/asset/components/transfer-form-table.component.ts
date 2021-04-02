@@ -17,7 +17,7 @@ export class TransferFormTableComponent extends BaseTable {
                 { name: 'target', label: '目标地址' },
                 { name: 'status', label: '状态' }
             ];
-            this.setData(value, filterColumns, this.checkAble);
+            this.setData(value, filterColumns);
         }
     }
 

@@ -9,12 +9,17 @@ import { BaseTable } from './baseTable';
 export class PlaceTableComponent extends BaseTable {
     @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
     @Output() checkedList = new EventEmitter<any>();
-    @Input() checkAble: boolean;
+
+    @Input() set checkAble(value: boolean) {
+        if (value) {
+            this.columns = [{ draggable: false, sortable: false, headerCheckboxable: true, width: 30, checkboxable: true }]
+                .concat(this.columns);
+        }
+    }
 
     constructor() {
         super();
         this.columns = [
-            { draggable: false, sortable: false, headerCheckboxable: this.checkAble, width: 30, checkboxable: this.checkAble },
             { draggable: false, name: 'ID', prop: 'id', cellTemplate: this.idTmpl, width: 80 },
             { prop: 'building', name: '教学楼', width: 90 },
             { prop: 'groups', name: '一级分类', comparator: this.localComparator, width: 90 },
@@ -51,7 +56,7 @@ export class PlaceTableComponent extends BaseTable {
                 { name: 'department', label: '使用单位' },
                 { name: 'statusLabel', label: '状态' }
             ];
-            this.setData(value, filterColumns, this.checkAble);
+            this.setData(value, filterColumns);
         }
     }
 
