@@ -21,18 +21,24 @@ export class DeviceTableComponent extends BaseTable {
         { name: 'brand', label: '品牌' },
         { name: 'state', label: '状态' }
       ];
-      this.setData(value, filterColumns, this.checkAble);
+      this.setData(value, filterColumns);
     }
   }
 
-  @Input() checkAble: boolean;
+  @Input() set checkAble(value: boolean) {
+    if (value) {
+      this.columns = [{ draggable: false, sortable: false, headerCheckboxable: true, width: 30, checkboxable: true }]
+        .concat(this.columns);
+    }
+    console.log(this.columns);
+  }
+
   @Input() size: string;
   @Output() checkedList = new EventEmitter<any>();
 
   constructor() {
     super();
     this.columns = [
-      { draggable: false, sortable: false, headerCheckboxable: this.checkAble, width: 30, checkboxable: this.checkAble },
       { draggable: false, name: 'ID', prop: 'id', width: 80 },
       { prop: 'building', name: '教学楼', comparator: this.localComparator, width: 90 },
       { prop: 'place', name: '房间号', comparator: this.localComparator, width: 90 },
@@ -78,6 +84,10 @@ export class DeviceTableComponent extends BaseTable {
       const count = sum.count + row.pcs;
       return { mount, count };
     }, { mount: 0, count: 0 });
-    return `总金额：${countAll.mount} 总数量：${countAll.count}`;
+    if (countAll.mount) {
+      return `总数量：${countAll.count} 总金额：${countAll.mount}(元)`;
+    } else {
+      return `总数量：${countAll.count}`;
+    }
   }
 }

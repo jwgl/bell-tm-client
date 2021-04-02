@@ -11,12 +11,12 @@ export class BaseTable {
     selected = [];
     SelectionType = SelectionType;
 
-    setData(value: any[], filterColumns: any[], checkAble: boolean) {
+    setData(value: any[], filterColumns: any[]) {
         if (value) {
             this.filterColumns = filterColumns;
             this.rows = value;
             this.baseList = value;
-            this.columns = this.columns.filter(th => (th.prop === undefined && checkAble)
+            this.columns = this.columns.filter(th => th.prop === undefined
                 || _.some(this.rows, it => it[th.prop] !== undefined && it[th.prop] !== null));
             this.filterColumns = this.filterColumns.filter(col =>
                 _.some(this.rows, it => it[col.name] !== undefined && it[col.name] !== null));
