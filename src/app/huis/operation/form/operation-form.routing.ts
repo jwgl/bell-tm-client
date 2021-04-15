@@ -13,7 +13,6 @@ const routes: Routes = [{
 }, {
     path: ':id/edit',
     component: OperationFormEditorComponent,
-    data: { mode: EditMode.Edit },
 }, {
     path: ':id',
     component: OperationFormItemComponent,

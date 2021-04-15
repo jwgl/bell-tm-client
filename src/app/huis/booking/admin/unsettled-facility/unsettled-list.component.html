@@ -1,0 +1,40 @@
+<ng-container *ngIf="forms">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-secondary' type="button" routerLink="../">返回</button>
+        </div>
+    </div>
+    <div class="form-row grid">
+        <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let form of forms">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a [routerLink]="['../', form.bookingItemId]">#{{form.bookingFormId}}-{{form.bookingItemId}}-{{form.id}}</a>
+                        <tm-workflow-status [status]="form.workflowState" [formStatus]="form.status" class="ml-2"></tm-workflow-status>
+                    </h5>
+                    <p class="card-text">{{form.departmentName}} / {{form.userName}}</p>
+                    <p class="card-text"><small>{{form.subject}}</small></p>
+                    <p class="card-text">{{form.room}}</p>
+                    <p class="card-text">{{form.facility}}：¥{{form.subtotal}}</p>
+                    <div class="card-text d-flex">
+                        <div>借用时间：</div>
+                        <div class="flex-grow-1">{{form.bookingLowerTime | date: 'y-MM-dd HH:mm'}}<br>
+                            {{form.bookingUpperTime | date: 'y-MM-dd HH:mm'}}</div>
+                    </div>
+                    <div class="card-text d-flex">
+                        <div>确认时间：</div>
+                        <div class="flex-grow-1">{{form.dateConfirm | date: 'y-MM-dd HH:mm'}}<br>
+                            {{duration(form.dateConfirm)}}
+                            <tm-workflow-status [status]="form.itemWorkflowState" [workflowStatusConverter]="itemStatusConverter" class="ml-2"></tm-workflow-status>
+                        </div>
+                    </div>
+                    <p class="card-text mb-0">结算单号：<ng-container *ngIf="form.statementFormId; else emptyStatementTpl">{{form.statementFormId}}
+                            <tm-workflow-status [status]="form.statementWorkflowState" class="ml-2"></tm-workflow-status>
+                        </ng-container>
+                        <ng-template #emptyStatementTpl>未结算</ng-template>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
