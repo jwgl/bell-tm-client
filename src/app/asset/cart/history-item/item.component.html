@@ -1,0 +1,9 @@
+<ng-container *ngIf="assets">
+    <div class="btn-toolbar">
+        <div class="ml-auto">
+            <button class="btn btn-secondary" routerLink="../">返回</button>
+            <a class="btn btn-primary ml-2" download href="{{href}}">导出设备清单</a>
+        </div>
+    </div>
+    <tm-asset-device-table [data]="assets"> </tm-asset-device-table>
+</ng-container>

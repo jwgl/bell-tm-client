@@ -25,7 +25,9 @@ const routes: Routes = [{
 }, {
     path: 'approvers/:userId/grants',
     loadChildren: () => import('./setting/user-area/user-area.module').then(m => m.UserAreaModule),
-
+}, {
+    path: 'users/:userId/carts',
+    loadChildren: () => import('./cart/cart.module').then(m => m.CartModule),
 }];
 
 @NgModule({

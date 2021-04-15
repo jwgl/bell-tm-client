@@ -18,8 +18,9 @@ export class AreaListComponent {
     states: any;
     places: any;
     areas: any;
-    assetsSelected: any;
+    assetsSelected: any[];
     flush: boolean;
+    ids = '';
 
     constructor(
         private service: AreaService,
@@ -53,6 +54,7 @@ export class AreaListComponent {
 
     onRowSelected(ids: any) {
         this.assetsSelected = this.assets.filter((asset: any) => ids.some(item => asset.id === item.id));
+        this.ids = this.assetsSelected ? this.assetsSelected.map(item => item.id).join('-') : '';
     }
 
     transfer() {
@@ -124,5 +126,9 @@ export class AreaListComponent {
         } else {
             this.flush = !this.flush;
         }
+    }
+
+    get href(): string {
+        return `/api/asset/output?type=device&ids=${this.ids}`;
     }
 }

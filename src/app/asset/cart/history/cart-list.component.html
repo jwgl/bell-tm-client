@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>名称</th>
+            <th>创建日期</th>
+            <th>设备数量</th>
+            <th>所有人</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cart of carts; let i = index">
+            <td>{{i + 1}}</td>
+            <td><a [routerLink]="[cart.name]">#{{cart.name}}</a></td>
+            <td>{{cart.dateCreated | date: 'y-MM-dd HH:mm'}}</td>
+            <td>{{cart.counts}}</td>
+            <td>{{cart.userName}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -24,6 +24,7 @@ export class PlaceFormEditorComponent {
     defualtBuilding: string;
     placeTypeLevel1: string;
     purposeSelected: any[];
+    deleteAble: boolean;
 
     constructor(
         private service: RoomFormService,
@@ -48,6 +49,7 @@ export class PlaceFormEditorComponent {
         this.placeTypes = dto.placeTypes;
         this.purposes = dto.purposes;
         this.seatTypes = dto.seatTypes;
+        this.deleteAble = dto.deleteAble;
         if (this.editMode === EditMode.Create) {
             this.defualtBuilding = this.buildings[0].name;
             this.form.building = this.defualtBuilding;
@@ -121,8 +123,12 @@ export class PlaceFormEditorComponent {
     }
 
     update() {
-        this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
-            this.router.navigate(['../'], { relativeTo: this.route });
-        });
+        if (this.form.status === 'DELETED' && !this.deleteAble) {
+            alert('该场地还有设备，请先将设备移除再取消！');
+        } else {
+            this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
+                this.router.navigate(['../'], { relativeTo: this.route });
+            });
+        }
     }
 }
