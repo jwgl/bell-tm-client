@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BookingFormRoutingModule } from './booking-admin.routing';
+import { BookingAdminRoutingModule } from './booking-admin.routing';
 import { BookingAdminService } from './booking-admin.service';
 import { BookingAdminListModule } from './list/form-list.module';
 import { BookingAdminItemModule } from './item/form-item.module';
-
+import { UnsettledFacilityListModule } from './unsettled-facility/unsettled-list.module';
 
 @NgModule({
     imports: [
         CommonModule,
-        BookingFormRoutingModule,
+        BookingAdminRoutingModule,
         BookingAdminListModule,
         BookingAdminItemModule,
+        UnsettledFacilityListModule,
     ],
     providers: [
         BookingAdminService,

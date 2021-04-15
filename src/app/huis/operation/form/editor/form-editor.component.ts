@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { EditMode } from 'core/constants';
-
 import { OperationForm } from '../../shared/operation-form.model';
 import { OperationFormService } from '../operation-form.service';
 import './form-editor.model';
@@ -14,17 +12,15 @@ import * as dayjs from 'dayjs';
     templateUrl: 'form-editor.component.html',
 })
 export class OperationFormEditorComponent {
+    formId: number;
     form: OperationForm;
     extraFacilities: any[];
     zoneOffset: string;
     saving = false;
-    maxCount = 8;
     lowerDate: string;
     lowerTime: string;
     upperDate: string;
     upperTime: string;
-
-    private editMode: EditMode;
 
     constructor(
         private router: Router,
@@ -32,20 +28,27 @@ export class OperationFormEditorComponent {
         private service: OperationFormService,
     ) {
         this.route.params.subscribe(params => {
-            this.editMode = this.route.snapshot.data['mode'];
-            const id = params['id'] ?? this.route.snapshot.queryParams['formId']
-            this.service.loadItemForEdit(id).subscribe(dto => this.onLoadData(dto));
+            this.formId = +(params['id'] ?? this.route.snapshot.queryParams['formId']);
+            this.loadItem();
         });
     }
 
-    onLoadData(dto: any) {
-        this.form = new OperationForm(dto.form);
-        this.form.zoneOffset = dto.zoneOffset;
-        this.extraFacilities = dto.extraFacilities;
-        this.lowerDate = dayjs(this.form.actualLowerTime ?? this.form.bookingLowerTime).format('YYYY-MM-DD')
-        this.lowerTime = dayjs(this.form.actualLowerTime ?? this.form.bookingLowerTime).format('HH:mm')
-        this.upperDate = dayjs(this.form.actualUpperTime ?? this.form.bookingUpperTime).format('YYYY-MM-DD')
-        this.upperTime = dayjs(this.form.actualUpperTime ?? this.form.bookingUpperTime).format('HH:mm')
+    loadItem() {
+        this.service.loadItemForEdit<any>(this.formId).subscribe(dto => {
+            this.form = new OperationForm(dto.form);
+            this.form.zoneOffset = dto.zoneOffset;
+            this.extraFacilities = dto.extraFacilities;
+            this.lowerDate = dayjs(this.form.actualLowerTime ?? this.form.bookingLowerTime).format('YYYY-MM-DD')
+            this.lowerTime = dayjs(this.form.actualLowerTime ?? this.form.bookingLowerTime).format('HH:mm')
+            this.upperDate = dayjs(this.form.actualUpperTime ?? this.form.bookingUpperTime).format('YYYY-MM-DD')
+            this.upperTime = dayjs(this.form.actualUpperTime ?? this.form.bookingUpperTime).format('HH:mm')
+        });
+    }
+
+    toggleUsed() {
+        this.service.updateUsage(this.formId, !this.form.actualUsed).subscribe(() => {
+            this.loadItem();
+        });
     }
 
     onSubmit() {

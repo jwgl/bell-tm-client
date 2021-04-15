@@ -21,7 +21,6 @@ import { OperationFormEditorModule } from './editor/form-editor.module';
     providers: [
         OperationFormService,
         { provide: 'OPERATION_FORM_API_URL', useValue: '/api/huis/users/${userId}/operationForms' },
-        { provide: 'OPERATION_ROOM_API_URL', useValue: '/api/huis/users/${userId}/operationRooms' },
     ],
 })
 export class OperationFormModule { }

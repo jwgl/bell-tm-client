@@ -1,0 +1,29 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+
+.grid {
+    .card {
+        margin-bottom: 10px;
+        h5 {
+            font-weight: bold;
+            font-size: 100%;
+        }
+		p, div {
+			margin-bottom: 0.5rem;
+			font-size: 0.875rem;
+		}
+    }
+    @include media-breakpoint-only(sm) {
+        column-count: 1;
+    }
+    @include media-breakpoint-only(md) {
+        column-count: 2;
+    }
+    @include media-breakpoint-only(lg) {
+        column-count: 3;
+    }
+    @include media-breakpoint-only(xl) {
+        column-count: 4;
+    }
+}

@@ -19,4 +19,8 @@ export class BookingAdminService extends RestEditService {
     revoke(id: any): Observable<any> {
         return this.http.patch(`${this.api.item(id)}/revoke`, {});
     }
+
+    listUnsettledFacilities(): Observable<any> {
+        return this.http.get(`${this.api.list()}/unsettledFacilities`);
+    }
 }
