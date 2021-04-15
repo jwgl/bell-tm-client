@@ -10,6 +10,7 @@ export class BaseTable {
     baseList = [];
     selected = [];
     SelectionType = SelectionType;
+    searchStr: string;
 
     setData(value: any[], filterColumns: any[]) {
         if (value) {
@@ -50,6 +51,7 @@ export class BaseTable {
             this.filters.push({ id, items });
         }
         this.doFilter();
+        this.searchStr = null;
     }
 
     isSelected(id: string, item: string) {
@@ -71,7 +73,9 @@ export class BaseTable {
             if (selected) {
                 return col && col.items.some((i: string) => i === item);
             } else {
-                return !col || !col.items.some((i: string) => i === item);
+               // console.log(`${item}: ${ this.searchStr ? item.indexOf(this.searchStr) : -1}`);
+                return !(col && col.items.some((i: string) => i === item)) &&
+                    (!this.searchStr || item.indexOf(this.searchStr) >= 0);
             }
         };
     }

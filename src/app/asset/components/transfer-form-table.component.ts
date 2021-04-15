@@ -28,8 +28,7 @@ export class TransferFormTableComponent extends BaseTable {
     constructor() {
         super();
         this.columns = [
-            { draggable: false, sortable: false, headerCheckboxable: this.checkAble, width: 30, checkboxable: this.checkAble },
-            { draggable: false, name: 'ID', prop: 'id', cellTemplate: this.idTmpl, width: 80 },
+            { draggable: false, name: 'ID', prop: 'id', width: 80 },
             { prop: 'type', name: '流转单类型', comparator: this.localComparator, width: 90 },
             { prop: 'dateSubmitted', name: '提交时间', width: 90 },
             { prop: 'operator', name: '申请人', width: 90 },
@@ -42,10 +41,18 @@ export class TransferFormTableComponent extends BaseTable {
         ];
     }
 
+    @Input() set detailShow(value: boolean) {
+        if (value) {
+            const prop = this.columns.find(th => th.prop === 'id');
+            if (prop) {
+                prop['cellTemplate'] = this.idTmpl;
+            }
+        }
+    }
     onSelect({ selected }) {
         this.selected.splice(0, this.selected.length);
         selected.forEach(t => t.checked = true);
         this.selected.push(...selected);
         this.checkedList.emit(this.selected);
-      }
+    }
 }
