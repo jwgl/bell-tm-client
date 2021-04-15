@@ -73,7 +73,6 @@ export class BaseTable {
             if (selected) {
                 return col && col.items.some((i: string) => i === item);
             } else {
-               // console.log(`${item}: ${ this.searchStr ? item.indexOf(this.searchStr) : -1}`);
                 return !(col && col.items.some((i: string) => i === item)) &&
                     (!this.searchStr || item.indexOf(this.searchStr) >= 0);
             }
