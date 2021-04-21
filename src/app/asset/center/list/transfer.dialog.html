@@ -1,0 +1,15 @@
+<modal-dialog modalTitle="{{transferType}}单">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="{{transferType}}说明">
+                <input class="form-control" name="note" type="text" [(ngModel)]="form.note"
+                    placeholder="{{transferType}}说明、备注" />
+            </form-field>
+        </form>
+        <tm-asset-device-table [data]="assets" [size]="'sm'"></tm-asset-device-table>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="commit()">确定</button>
+    </modal-footer>
+</modal-dialog>

@@ -1,0 +1,12 @@
+<tm-workflow-list>
+    <ng-template #theadTpl>
+        <th>经办人</th>
+        <th>审核人</th>
+        <th>备注</th>
+    </ng-template>
+    <ng-template #tbodyTpl let-form="form">
+        <td>{{form.operator}}</td>
+        <td>{{form.approver}}</td>
+        <td class="expand">{{form.note}}</td>
+    </ng-template>
+</tm-workflow-list>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ReceiptForm } from '../form/shared/form.model';
+import { ReceiptForm } from '../../form/shared/form.model';
 @Component({
     templateUrl: 'approval-item.component.html',
 })

@@ -15,7 +15,10 @@ const routes: Routes = [{
     loadChildren: () => import('./area/area.module').then(m => m.AreaModule),
 }, {
     path: 'approvers/:userId/receiptForms',
-    loadChildren: () => import('./approval/approval.module').then(m => m.ReceiptApprovalModule),
+    loadChildren: () => import('./approval/receipt/approval.module').then(m => m.ExceptionApprovalModule),
+}, {
+    path: 'approvers/:userId/exceptionForms',
+    loadChildren: () => import('./approval/exception/approval.module').then(m => m.ExceptionApprovalModule),
 }, {
     path: 'approvers/:userId/transferApproval',
     loadChildren: () => import('./center/approval/approval.module').then(m => m.TransferApprovalModule),

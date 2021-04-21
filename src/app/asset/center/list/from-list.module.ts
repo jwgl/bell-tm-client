@@ -14,6 +14,7 @@ import { AssetPipesModule } from '../../components/pipe/asset-pipes.module';
 import { CenterListComponent } from './form-list.component';
 import { AssetOptionDialog } from './asset-option.dialog';
 import { AssetUpdatetDialog } from './asset-update.dialog';
+import { TransferDialog } from './transfer.dialog';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { AssetUpdatetDialog } from './asset-update.dialog';
         CenterListComponent,
         AssetOptionDialog,
         AssetUpdatetDialog,
+        TransferDialog,
     ],
     exports: [
         CenterListComponent,
@@ -40,6 +42,7 @@ import { AssetUpdatetDialog } from './asset-update.dialog';
     entryComponents: [
         AssetOptionDialog,
         AssetUpdatetDialog,
+        TransferDialog,
     ],
 })
 export class CenterListModule { }
