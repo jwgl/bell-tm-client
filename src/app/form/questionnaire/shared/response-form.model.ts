@@ -1,4 +1,4 @@
-import { Questionnaire, Question, QuestionOption } from './questionnaire-form.model';
+import { Questionnaire, Question } from './questionnaire-form.model';
 
 export class ResponseForm {
     id: number;
@@ -34,7 +34,7 @@ export class ResponseItem {
     question: Question;
     intValue: number;
     textValue: string;
-    choice: number;
+    choice: number | any;
     clientDto: ResponseItemDto;
 
     constructor(dto: ResponseItemDto, question: Question) {
@@ -47,21 +47,18 @@ export class ResponseItem {
             if (dto.textValue) {
                 this.textValue = dto.textValue;
             }
-            if (dto.choice) {
-                this.choice = dto.choice;
+            if (dto.choice && question.options) {
+                this.choice = question.options.find(it => it.id === dto.choice);
             }
-            if (question.options) {
-                if (dto.choices) {
-                    dto.choices.forEach(choice => {
-                        const option = question.options.find(it => it.id === choice);
-                        if (option) {
-                            option.selected = true;
-                        }
-                    });
-                }
+            if (dto.choices && question.options) {
+                dto.choices.forEach(choice => {
+                    const option = question.options.find(it => it.id === choice);
+                    if (option) {
+                        option.selected = true;
+                    }
+                });
             }
             this.clientDto = dto;
         }
     }
 }
-
