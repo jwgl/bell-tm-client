@@ -9,7 +9,7 @@
             <div class="card bg-light">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a [routerLink]="['../', form.bookingItemId]">#{{form.bookingFormId}}-{{form.bookingItemId}}-{{form.id}}</a>
+                        <a [routerLink]="['../', form.bookingFormId]">#{{form.bookingFormId}}-{{form.bookingItemId}}-{{form.id}}</a>
                         <tm-workflow-status [status]="form.workflowState" [formStatus]="form.status" class="ml-2"></tm-workflow-status>
                     </h5>
                     <p class="card-text">{{form.departmentName}} / {{form.userName}}</p>
