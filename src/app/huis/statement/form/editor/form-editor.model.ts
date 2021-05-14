@@ -34,10 +34,8 @@ StatementForm.prototype.addItem = function (this: StatementForm, dto: any): void
 };
 
 StatementForm.prototype.removeItem = function (this: StatementForm, item: StatementItem): void {
-    console.log(item)
     if (item.statementFormId) {
         item.deleted = !item.deleted;
-        console.log(item)
     } else {
         this.items.splice(this.items.indexOf(item), 1);
     }
