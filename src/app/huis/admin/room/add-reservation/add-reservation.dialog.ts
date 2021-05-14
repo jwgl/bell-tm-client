@@ -20,7 +20,6 @@ export class AddReservationDialog extends BaseDialog {
     }
 
     protected onOpening(): Observable<any> {
-        console.log(this.options)
         this.lowerDate = dayjs().format('YYYY-MM-DD');
         this.upperDate = dayjs().format('YYYY-MM-DD')
         this.dateInterval = 1;

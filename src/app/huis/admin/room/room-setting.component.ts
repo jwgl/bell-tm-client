@@ -39,7 +39,6 @@ export class RoomSettingComponent {
                     this.selectedRoom.reservations = [];
                 }
                 this.selectedRoom.reservations.push({ ...id, ...result });
-                console.log(this.selectedRoom.reservations)
             }, errorRsp => {
                 alert(errorRsp.error.message);
             });

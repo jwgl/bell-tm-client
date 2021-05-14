@@ -1,4 +1,3 @@
-import { Time } from '@angular/common';
 import { Component } from '@angular/core';
 import { BaseDialog } from 'core/dialogs';
 
@@ -110,9 +109,6 @@ export class FindRoomDialog extends BaseDialog {
         const result = this.bookingRoom && this.bookingRoom.bookedTimes.every(it =>
             !(it.lowerTime < upperTime && lowerTime < it.upperTime)
         );
-        console.log(lowerTime)
-        console.log(upperTime)
-        console.log(!result)
         return !result;
     }
 }
