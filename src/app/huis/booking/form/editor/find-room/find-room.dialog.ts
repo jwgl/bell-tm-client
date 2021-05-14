@@ -52,16 +52,19 @@ export class FindRoomDialog extends BaseDialog {
                 quantity: 1,
                 isAdditional: false,
                 note: '',
-            }].concat(this.bookingRoom.facilities.filter(it => !it.isBasic && it.selected).map(it => ({
-                facilityId: it.id,
-                facilityName: it.name,
-                unitPrice: it.unitPrice,
-                unitName: it.unitName,
-                timeUnit: it.timeUnit,
-                quantity: it.quantity,
-                isAdditional: false,
-                note: it.note,
-            }))),
+            }].concat(this.bookingRoom.facilities
+                ? this.bookingRoom.facilities.filter(it => !it.isBasic && it.selected).map(it => ({
+                    facilityId: it.id,
+                    facilityName: it.name,
+                    unitPrice: it.unitPrice,
+                    unitName: it.unitName,
+                    timeUnit: it.timeUnit,
+                    quantity: it.quantity,
+                    isAdditional: false,
+                    note: it.note,
+                }))
+                : []
+            ),
         };
     }
 
@@ -80,7 +83,7 @@ export class FindRoomDialog extends BaseDialog {
             return `${facility.name}`;
         }
     }
-     
+
     formatExtraFacility(facility: RoomFacilityView): string {
         if (facility.quantity > 1) {
             return `${facility.name}（${facility.unitPrice}元/${facility.quantity}${facility.unitName}·${formatTimeUnit(facility.timeUnit)}）`;
@@ -104,7 +107,7 @@ export class FindRoomDialog extends BaseDialog {
     get isConflict(): boolean {
         const lowerTime = new Date(`${this.bookingDate}T${this.lowerTime}`);
         const upperTime = new Date(`${this.bookingDate}T${this.upperTime}`);
-        const result = this.bookingRoom && this.bookingRoom.bookedTimes.every(it => 
+        const result = this.bookingRoom && this.bookingRoom.bookedTimes.every(it =>
             !(it.lowerTime < upperTime && lowerTime < it.upperTime)
         );
         console.log(lowerTime)
