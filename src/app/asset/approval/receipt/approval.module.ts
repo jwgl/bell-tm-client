@@ -25,4 +25,4 @@ import { ApprovalItemComponent } from './approval-item.component';
         ApprovalItemComponent,
     ],
 })
-export class ExceptionApprovalModule { }
+export class ReceiptApprovalModule { }
