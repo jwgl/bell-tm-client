@@ -7,6 +7,7 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 
+import { TmAssetCommonModule } from '../.././../components/asset-common.module';
 import { UserAreaListComponent } from './form-list.component';
 import { UserAreaDialog } from './form-editor.dialog';
 
@@ -17,6 +18,7 @@ import { UserAreaDialog } from './form-editor.dialog';
         FormsModule,
         CommonDialogsModule,
         CommonDirectivesModule,
+        TmAssetCommonModule,
     ],
     declarations: [
         UserAreaListComponent,

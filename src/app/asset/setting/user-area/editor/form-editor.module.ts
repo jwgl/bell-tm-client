@@ -1,0 +1,30 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
+
+import { CommonDirectivesModule } from 'core/common-directives';
+import { CommonDialogsModule } from 'core/common-dialogs';
+import { TmAssetCommonModule } from '../.././../components/asset-common.module';
+
+import { UserAreaEditorComponent } from './form-editor.component';
+
+@NgModule({
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule,
+        CommonDirectivesModule,
+        CommonDialogsModule,
+        TmAssetCommonModule,
+        NgSelectModule,
+    ],
+    declarations: [
+        UserAreaEditorComponent,
+    ],
+    exports: [
+        UserAreaEditorComponent,
+    ],
+})
+export class UserAreaEditorModule { }

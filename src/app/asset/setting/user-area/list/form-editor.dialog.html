@@ -1,18 +1,13 @@
 <modal-dialog modalTitle="楼区授权">
     <modal-body>
-        <form class="form-horizontal">
-            <form-field label="老师">
-                <tm-teacher-select (selectTeacher)="onTeacherSelected($event)"></tm-teacher-select>
-            </form-field>
-            <form-field label="楼区">
-                <div>
-                    <span class="mr-4" *ngFor="let item of buildings">
-                        <input type="checkbox" class="mr-1" (change)="receive(item, $event.target.checked)"
-                            [checked]="has(item)">{{item.value}}
-                    </span>
-                </div>
-            </form-field>
-        </form>
+        <div class="form-group">
+            <label class="control-label">老师</label>
+            <tm-teacher-select (selectTeacher)="onTeacherSelected($event)"></tm-teacher-select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">可管场地</label>
+            <tm-asset-place-table [data]="rooms" [checkAble]="true" (checkedList)="onRowSelected($event)"></tm-asset-place-table>
+        </div>
     </modal-body>
     <modal-footer>
         <button modalCancel>取消</button>

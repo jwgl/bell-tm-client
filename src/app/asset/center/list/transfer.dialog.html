@@ -1,10 +1,15 @@
 <modal-dialog modalTitle="{{transferType}}单">
     <modal-body>
-        <form class="form-horizontal">
-            <form-field label="{{transferType}}说明">
+        <form role="form">
+            <div class="form-group">
+                <label class="control-label">{{transferType}}说明</label>
                 <input class="form-control" name="note" type="text" [(ngModel)]="form.note"
                     placeholder="{{transferType}}说明、备注" />
-            </form-field>
+            </div>
+            <div class="form-group">
+                <label class="control-label">上传核销单凭据</label>
+                <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="fileType"></tm-uploader-panel>
+            </div>
         </form>
         <tm-asset-device-table [data]="assets" [size]="'sm'"></tm-asset-device-table>
     </modal-body>

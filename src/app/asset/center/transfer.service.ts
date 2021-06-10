@@ -14,4 +14,8 @@ export class TransferFormService extends RestEditService {
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
     }
+
+    getUploadUrl(): string {
+        return `/zuul${this.api.list()}/upload`;
+    }
 }

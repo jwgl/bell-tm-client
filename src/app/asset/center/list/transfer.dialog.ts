@@ -13,6 +13,8 @@ export class TransferDialog extends BaseDialog {
     assets: any;
     transferType: string;
     form: any;
+    uploadUrl: string;
+    fileType: any;
 
     constructor() {
         super();
@@ -20,6 +22,8 @@ export class TransferDialog extends BaseDialog {
 
     protected onOpening(): Observable<any> {
         this.form = this.options.form;
+        this.uploadUrl = this.options.uploadUrl;
+        this.fileType = this.options.fileType;
         this.form.toId = '';
         this.assets = this.options.assets;
         this.transferType = this.options.transferType;

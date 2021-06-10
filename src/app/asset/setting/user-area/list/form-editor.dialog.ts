@@ -11,7 +11,7 @@ import { UserAreaService } from '../user-area.service';
 // tslint:disable-next-line:component-class-suffix
 export class UserAreaDialog extends BaseDialog {
     form: any;
-    buildings: any;
+    rooms: any;
     teacher: any;
 
     constructor(private service: UserAreaService) {
@@ -20,7 +20,7 @@ export class UserAreaDialog extends BaseDialog {
 
     protected onOpening(): Observable<any> {
         this.form = this.options.form;
-        this.buildings = this.options.buildings;
+        this.rooms = this.options.rooms;
         return null;
     }
 
@@ -34,21 +34,9 @@ export class UserAreaDialog extends BaseDialog {
         }
     }
 
-    receive(item: any, checked: boolean) {
-        if (!this.form.buildings) {
-            this.form.buildings = [];
-        }
-        if (checked) {
-            this.form.buildings.push(item.value);
-        } else {
-            const building = this.form.buildings.find(t => t === item.value);
-            if (building) {
-                this.form.buildings.splice(this.form.buildings.indexOf(building));
-            }
-        }
-    }
-
-    has(item: any): boolean {
-        return this.form.buildings && this.form.buildings.some(t => t === item.value);
+    onRowSelected(roomsSelected: any) {
+        this.form.rooms =
+            this.rooms.filter((room: any) => roomsSelected.some(item => room.id === item.id))
+                .map(room => room.id);
     }
 }

@@ -71,7 +71,7 @@ export class CenterListComponent {
         this.assetsSelected = this.assets.filter((asset: any) => ids.some(item => asset.id === item.id));
     }
 
-    transfer() {
+    scrap() {
         if (!this.assetsSelected) {
             alert('请先选取要设备,再点“内部报废”按钮！');
         } else if (this.assetsSelected.some((asset: any) => asset.place !== '中心库房')) {
@@ -80,8 +80,30 @@ export class CenterListComponent {
             this.dialog.open(TransferDialog, {
                 form: {},
                 assets: this.assetsSelected,
-                places: this.places,
                 transferType: '内部报废',
+            }).then(result => {
+                this.create(result);
+            });
+        }
+    }
+
+    close() {
+        if (!this.assetsSelected) {
+            alert('请先选取要设备,再点“核销”按钮！');
+        } else if (this.assetsSelected.some((asset: any) => asset.place !== '报废库房')) {
+            alert('包含了不属于报废库房的设备，请重新选择！');
+        } else {
+            this.dialog.open(TransferDialog, {
+                form: {},
+                assets: this.assetsSelected,
+                uploadUrl: this.transferService.getUploadUrl(),
+                fileType: {
+                    prefix: 'close',
+                    label: '核销单',
+                    types: ['pdf', 'jpg', 'jpeg'],
+                    names: [],
+                },
+                transferType: '核销',
             }).then(result => {
                 this.create(result);
             });
@@ -93,4 +115,5 @@ export class CenterListComponent {
             this.router.navigate(['../forms/', id], { relativeTo: this.route })
         );
     }
+
 }
