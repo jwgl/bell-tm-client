@@ -1,0 +1,20 @@
+<modal-dialog modalTitle="{{transferType}}单">
+    <modal-body>
+        <form role="form">
+            <div class="form-group">
+                <label class="control-label">{{transferType}}说明</label>
+                <input class="form-control" name="note" type="text" [(ngModel)]="form.note"
+                    placeholder="{{transferType}}说明、备注" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">上传核销单凭据</label>
+                <tm-uploader-panel [uploadUrl]="uploadUrl" [fileType]="fileType"></tm-uploader-panel>
+            </div>
+        </form>
+        <tm-asset-device-table [data]="assets" [size]="'sm'"></tm-asset-device-table>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="commit()">确定</button>
+    </modal-footer>
+</modal-dialog>

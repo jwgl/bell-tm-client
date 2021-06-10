@@ -17,7 +17,7 @@ export class AreaListComponent {
     assetNames: any;
     states: any;
     places: any;
-    areas: any;
+    // areas: any;
     assetsSelected: any[];
     flush: boolean;
     ids = '';
@@ -38,7 +38,7 @@ export class AreaListComponent {
         this.states = dto.states;
         this.buildings = dto.buildings;
         this.places = dto.places;
-        this.areas = dto.areas;
+        // this.areas = dto.areas;
     }
 
     query() {
@@ -60,13 +60,13 @@ export class AreaListComponent {
     transfer() {
         if (!this.assetsSelected) {
             alert('请先选取要设备,再点“区内流转”按钮！');
-        } else if (this.assetsSelected.some((asset: any) => !this.areas.some(area => area === asset.building))) {
+        } else if (this.assetsSelected.some((asset: any) => !this.places.some((place: any) => place.id === asset.roomId))) {
             alert('包含了不属于所辖楼区内的设备，请重新选择！');
         } else {
             this.dialog.open(TransferDialog, {
                 form: {},
                 assets: this.assetsSelected,
-                buildings: this.areas,
+                buildings: this.buildings,
                 places: this.places,
                 transferType: '资产流转',
             }).then(result => {
@@ -85,7 +85,7 @@ export class AreaListComponent {
             this.dialog.open(TransferDialog, {
                 form: {},
                 assets: this.assetsSelected,
-                buildings: this.areas,
+                buildings: this.buildings,
                 places: this.places,
                 transferType: '领用出库',
             }).then(result => {
@@ -98,13 +98,13 @@ export class AreaListComponent {
     stop() {
         if (!this.assetsSelected) {
             alert('请先选取要停用的设备,再点“停用入库”按钮！');
-        } else if (this.assetsSelected.some((asset: any) => !this.areas.some(area => area === asset.building))) {
+        } else if (this.assetsSelected.some((asset: any) => !this.places.some((place: any) => place.id === asset.roomId))) {
             alert('包含了不属于所辖楼区内的设备，请重新选择！');
         }  else {
             this.dialog.open(TransferDialog, {
                 form: {},
                 assets: this.assetsSelected,
-                buildings: this.areas,
+                buildings: this.buildings,
                 places: this.places,
                 transferType: '停用入库',
             }).then(result => {

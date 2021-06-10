@@ -11,9 +11,11 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 
 import { TmAssetCommonModule } from '../../components/asset-common.module';
 import { AssetPipesModule } from '../../components/pipe/asset-pipes.module';
+import { UploaderModule } from '../../components/uploader/uploader.module';
 import { CenterListComponent } from './form-list.component';
 import { AssetOptionDialog } from './asset-option.dialog';
 import { AssetUpdatetDialog } from './asset-update.dialog';
+import { TransferDialog } from './transfer.dialog';
 
 @NgModule({
     imports: [
@@ -25,11 +27,13 @@ import { AssetUpdatetDialog } from './asset-update.dialog';
         TmAssetCommonModule,
         NgSelectModule,
         AssetPipesModule,
+        UploaderModule,
     ],
     declarations: [
         CenterListComponent,
         AssetOptionDialog,
         AssetUpdatetDialog,
+        TransferDialog,
     ],
     exports: [
         CenterListComponent,
@@ -40,6 +44,7 @@ import { AssetUpdatetDialog } from './asset-update.dialog';
     entryComponents: [
         AssetOptionDialog,
         AssetUpdatetDialog,
+        TransferDialog,
     ],
 })
 export class CenterListModule { }

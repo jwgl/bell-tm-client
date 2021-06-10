@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { WorkflowModule } from 'core/workflow';
 
-import { ReceiptFormViewerModule } from '../form/shared/form-viewer.module';
+import { ReceiptFormViewerModule } from '../../form/shared/form-viewer.module';
 import { ApprovalRoutingModule } from './approval.routing';
 import { ApprovalListComponent } from './approval-list.component';
 import { ApprovalItemComponent } from './approval-item.component';

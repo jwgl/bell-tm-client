@@ -25,13 +25,6 @@ export class UserAreaListComponent {
         });
     }
 
-    editor() {
-        this.service.loadDataForCreate().subscribe((dto: any) => {
-            this.dialog.open(UserAreaDialog, { buildings: dto.buildings, form: dto.form })
-                .then(result => this.service.create(result).subscribe(() => this.loadData()));
-        });
-    }
-
     remove(item: any) {
         this.dialogs.confirm('删除', '确定要删除吗？').then(() =>
             this.service.delete(item.id).subscribe(() => this.loadData())

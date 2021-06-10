@@ -13,10 +13,9 @@ import { ApprovalItemComponent } from './approval-item.component';
     imports: [
         CommonModule,
         CommonDirectivesModule,
-        WorkflowModule.forReview('/api/asset/approvers/${userId}/transferApprovals', [
-            { type: 'tobe', label: '未提交', dateLabel: '新建时间' },
+        WorkflowModule.forReview('/api/asset/approvers/${userId}/scrapApprovals', [
             { type: 'todo', label: '待审核', dateLabel: '提交时间' },
-            { type: 'done', label: '已审核', dateLabel: '提交时间' },
+            { type: 'done', label: '已审核', dateLabel: '审核时间' },
         ]),
         ApprovalRoutingModule,
         TransferFormViewerModule,
@@ -26,4 +25,4 @@ import { ApprovalItemComponent } from './approval-item.component';
         ApprovalItemComponent,
     ],
 })
-export class TransferApprovalModule { }
+export class ExceptionApprovalModule { }
