@@ -7,6 +7,8 @@ import { UserAreaService } from '../user-area.service';
 import { UserAreaDialog } from './form-editor.dialog';
 
 @Component({
+    styles: [`
+        td{word-break:break-all;}`],
     templateUrl: 'form-list.component.html',
 })
 export class UserAreaListComponent {

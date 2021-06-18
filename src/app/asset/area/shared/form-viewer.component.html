@@ -23,6 +23,10 @@
             <label class="control-label">{{vm.type}}说明</label>
             <div>{{vm.note}}</div>
         </div>
+        <div class="form-group col-12" *ngIf="vm.fileName">
+            <label class="control-label">核销单</label>
+            <div><a download href="/api/asset/attachments/?fileName={{vm.fileName}}">{{vm.fileName}}</a></div>
+        </div>
     </div>
     <div class="row">
         <div class="form-group col-12">
