@@ -40,6 +40,7 @@ export class TransferDialog extends BaseDialog {
             note: this.form.note,
             toId: this.form.toId,
             transferType: this.transferType,
+            fileName: (this.fileType.names && this.fileType.names.length > 0) ? this.fileType.names[0] : '',
             addedItems: this.assets.map(item => ({ id: item.id })),
         };
     }
@@ -47,6 +48,8 @@ export class TransferDialog extends BaseDialog {
     commit() {
         if (this.transferType === '内部报废') {
             this.form.toId = 2;
+        }else if (this.transferType === '核销') {
+            this.form.toId = 3;
         }
         if (this.form.toId === '') {
             alert('请选择目标场地');

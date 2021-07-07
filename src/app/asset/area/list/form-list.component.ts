@@ -129,6 +129,10 @@ export class AreaListComponent {
     }
 
     get href(): string {
-        return `/api/asset/output?type=device&ids=${this.ids}`;
+        if (this.ids === '' || this.ids.length > 600) {
+            return `/api/asset/output?type=device-area`;
+        } else {
+            return `/api/asset/output?type=device&ids=${this.ids}`;
+        }
     }
 }

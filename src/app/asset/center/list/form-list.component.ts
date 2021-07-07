@@ -111,8 +111,9 @@ export class CenterListComponent {
     }
 
     create(form: any) {
+        const path = (form.transferType === '内部报废' || form.transferType === '核销') ? '../scraps/' : '../forms/';
         this.transferService.create(form).subscribe(id =>
-            this.router.navigate(['../forms/', id], { relativeTo: this.route })
+            this.router.navigate([path, id], { relativeTo: this.route })
         );
     }
 
