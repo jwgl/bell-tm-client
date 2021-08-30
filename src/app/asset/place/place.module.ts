@@ -6,6 +6,8 @@ import { PlaceListModule } from './list/from-list.module';
 import { PlaceFormEditorModule } from './editor/form-editor.module';
 import { PlaceItemModule } from './item/item.module';
 import { RoomFormService } from './form.service';
+import { PlanService } from './plan.service';
+import { PlanEditorModule } from './plan/plan-editor.module';
 
 @NgModule({
     imports: [
@@ -14,10 +16,15 @@ import { RoomFormService } from './form.service';
         PlaceListModule,
         PlaceFormEditorModule,
         PlaceItemModule,
+        PlanEditorModule,
     ],
     providers: [
         RoomFormService,
+        PlanService,
         { provide: 'ROOM_API_URL', useValue: '/api/asset/users/${userId}/places' },
+        { provide: 'LABEL_API_URL', useValue: '/api/asset/users/${userId}/labelAdmins' },
+        { provide: 'LABELLING_API_URL', useValue: '/api/asset/users/${userId}/labellings' },
+        { provide: 'PLAN_API_URL', useValue: '/api/asset/users/${userId}/roomLifes' },
     ],
 })
 export class PlaceModule { }

@@ -1,0 +1,100 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving">保存</button>
+        </div>
+    </div>
+    <tm-form-title>{{termName}}</tm-form-title>
+    <form role="form">
+        <div class="row">
+            <div class="form-group col-3">
+                <label class="control-label">场地变动方式</label>
+                <select name="action" class="form-control" [(ngModel)]="form.action" (ngModelChange)="actionChange($event)">
+                    <option [value]="undefined">请选择</option>
+                    <option *ngFor="let item of actions " [ngValue]="item.name">
+                        {{ item.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-3" *ngIf="form.action === 'SEPARATE'">
+                <label class="control-label">分拆数量</label>
+                <input class="form-control" name="counts" type="number" [(ngModel)]="form.counts"
+                (ngModelChange)="countsChange($event)" placeholder="分拆成多少房间？" />
+            </div>
+            <div class="form-group col-3" *ngIf="form.action === 'MERGE'">
+                <label class="control-label">其他房间</label>
+                <div class="mr-3" #dropdown>
+                    <div data-toggle="dropdown">
+                        {{placeNames}} <span chevron-down-icon></span>
+                    </div>
+                    <div class="dropdown-menu" style="overflow-y: scroll; max-height: 250px; padding: 5px;">
+                        <input type="text" name="searchStr" class="form-control form-control-sm w-100" #search placeholder="搜索" [(ngModel)]="searchStr">
+                        <a *ngFor="let item of places | filterBy: filterBySelected(true)"
+                            class="dropdown-item d-flex" (click)="select(item)">{{item.name}}<span
+                                *ngIf="isSelected(item)" class="ml-auto">√</span></a>
+                        <a *ngFor="let item of places | filterBy: filterBySelected(false)"
+                            class="dropdown-item" (click)="select(item)">{{item.name}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">场地类别</label>
+                <select name="groups" class="form-control" [(ngModel)]="placeTypeLevel1" (ngModelChange)="level1Change($event)">
+                    <option *ngFor="let level1 of placeTypes | uniqueBy: 'level1'" [ngValue]="level1">
+                        {{ level1 }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">具体类别</label>
+                <select name="level2" class="form-control" [(ngModel)]="form.placeTypeId">
+                    <option *ngFor="let item of placeTypes | filterBy: filterBySubject(placeTypeLevel1)"
+                        [ngValue]="item.id">
+                        {{ item.level2 }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-2">
+                <label class="control-label">房间号</label>
+                <input class="form-control" name="name" type="text" [(ngModel)]="form.name" placeholder="新名称" />
+            </div>
+            <div class="form-group col-2">
+                <label class="control-label">{{measureLabel}}</label>
+                <input class="form-control" name="measure" type="number" [(ngModel)]="measure"
+                    placeholder="面积（平方米）" />
+            </div>
+            <div class="form-group col-2">
+                <label class="control-label">座位数</label>
+                <input class="form-control" name="seat" type="number" [(ngModel)]="form.seat" placeholder="座位数" />
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">{{statusLabel}}</label>
+                <select name="status" class="form-control" [(ngModel)]="form.status">
+                    <option value="ON">在用</option>
+                    <option value="BACKUP">储备</option>
+                    <option value="DELETED">取消</option>
+                </select>
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">使用单位</label>
+                <select name="department" class="form-control" [(ngModel)]="form.departmentId">
+                    <option *ngFor="let item of departments " [ngValue]="item.id">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">标签</label>
+            <ng-select name="label" [items]="labels" [multiple]="true" [closeOnSelect]="false"
+                [hideSelected]="true" bindLabel="name" placeholder="选择标签" [(ngModel)]="form.labels">
+            </ng-select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">备注</label>
+            <input class="form-control" name="note" type="text" [(ngModel)]="form.note" placeholder="备注" />
+        </div>
+    </form>
+</ng-container>

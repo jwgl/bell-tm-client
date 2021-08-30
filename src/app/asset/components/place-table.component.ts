@@ -1,12 +1,16 @@
-import { Component, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
 import { BaseTable } from './baseTable';
+import { typeahead } from 'core/utils/typeahead';
 
 @Component({
     selector: 'tm-asset-place-table',
     styleUrls: ['filter-group.scss'],
     templateUrl: 'place-table.component.html',
 })
-export class PlaceTableComponent extends BaseTable {
+export class PlaceTableComponent extends BaseTable implements AfterViewInit {
+    @ViewChild('search', { static: true }) input: ElementRef;
+    @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
     @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
     @Output() checkedList = new EventEmitter<any>();
 
@@ -59,6 +63,19 @@ export class PlaceTableComponent extends BaseTable {
             this.setData(value, filterColumns);
         }
     }
+
+    ngAfterViewInit() {
+        if (this.dropdown) {
+          $(this.dropdown.nativeElement).on('shown.bs.dropdown', () => {
+            this.input.nativeElement.focus();
+          });
+        }
+        if (this.input) {
+          typeahead(this.input).pipe(
+            switchMap(value => this.searchStr = value)
+          ).subscribe(value => value);
+        }
+      }
 
     onSelect({ selected }) {
         this.selected.splice(0, this.selected.length);

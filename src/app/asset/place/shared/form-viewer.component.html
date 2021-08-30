@@ -36,7 +36,25 @@
             <div>{{vm.purpose}}</div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="vm.labels && vm.labels.length > 0">
+        <div class="form-group col-12">
+            <label class="control-label">标签
+                <button type="button" class="btn btn-secondary btn-sm mb-2" (click)="labelAll()" *ngIf="labelAdmin">显示全部</button>
+            </label>
+            <div *ngIf="common; else showAll">
+                <span class="label {{label.color}}" *ngFor="let label of vm.labels | filterBy: filterByUserId()">{{label.type}}：{{label.labelName}}</span>
+            </div>
+            <ng-template #showAll>
+                <ul>
+                    <li *ngFor="let business of vm.labels | uniqueBy: 'business'">
+                        {{business}} <span class="label {{label.color}}" *ngFor="let label of vm.labels | filterBy: filterByBusiness(business)">
+                            {{labelStr(label)}}</span>
+                    </li>
+                </ul>
+            </ng-template>
+        </div>
+    </div>
+    <div class="row" *ngIf="vm.note">
         <div class="form-group col-12">
             <label class="control-label">备注</label>
             <div>{{vm.note}}</div>

@@ -1,0 +1,16 @@
+<modal-dialog modalTitle="设置面积与座位">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="面积">
+                <input class="form-control" name="measure" type="number" [(ngModel)]="form.measure" placeholder="面积" />
+            </form-field>
+            <form-field label="座位数">
+                <input class="form-control" name="seat" type="number" [(ngModel)]="form.seat" placeholder="座位数" />
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>关闭</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

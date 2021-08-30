@@ -15,6 +15,7 @@ export class Room {
     departmentId: string;
     placeTypeId: number;
     logs: any;
+    labels: any;
 
     constructor(dto: any) {
         Object.assign(this, dto);

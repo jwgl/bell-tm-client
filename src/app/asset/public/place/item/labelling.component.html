@@ -1,0 +1,33 @@
+<modal-dialog modalTitle="使用标签">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="业务类型">
+                <select name="business" class="form-control" [(ngModel)]="form.business">
+                    <option value="">请选择</option>
+                    <option *ngFor="let item of business" [ngValue]="item"> {{item}} </option>
+                </select>
+            </form-field>
+            <form-field label="标签类别">
+                <select name="labelType" class="form-control" [(ngModel)]="form.type">
+                    <option value="">请选择</option>
+                    <option *ngFor="let item of labels |filterBy: filterByBusiness(form.business) |uniqueBy: 'type'" [ngValue]="item">
+                        {{item}} </option>
+                </select>
+            </form-field>
+            <form-field label="标签">
+                <select name="labelType" class="form-control" [(ngModel)]="form.id">
+                    <option value="">请选择</option>
+                    <option *ngFor="let item of labels |filterBy: filterByBusiness(form.business) |filterBy: filterByType(form.type)" [ngValue]="item.id">
+                        {{item.labelName}} </option>
+                </select>
+            </form-field>
+            <form-field label="失效日期">
+                <input name="expire" class="form-control" type="date" [(ngModel)]="form.dateExpire"/>
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="onSubmit()">确定</button>
+    </modal-footer>
+</modal-dialog>

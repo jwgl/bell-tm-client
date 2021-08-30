@@ -3,8 +3,11 @@
         <div class="ml-auto">
             <button class="btn btn-secondary" routerLink="../">返回</button>
             <button class="btn btn-secondary ml-2" routerLink="edit" *ngIf="createAble">编辑</button>
+            <button class="btn btn-secondary ml-2" routerLink="plan" *ngIf="createAble">计划</button>
             <button class="btn btn-secondary ml-2" (click)="setting()" *ngIf="!createAble">编辑</button>
+            <button class="btn btn-secondary ml-2" (click)="labelCreate()" >新建标签名</button>
+            <button class="btn btn-primary" (click)="labelling()" >使用标签</button>
         </div>
     </div>
-    <tm-place-form-viewer [vm]="vm"></tm-place-form-viewer>
+    <tm-place-form-viewer [vm]="vm" [labelAdmin]="createAble" [userId]="userId"></tm-place-form-viewer>
 </ng-container>

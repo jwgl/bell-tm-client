@@ -1,0 +1,59 @@
+<modal-dialog modalTitle="新标签">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="标签名">
+                <input class="form-control" name="labelName" type="text" [(ngModel)]="form.name"/>
+            </form-field>
+            <form-field label="业务类型">
+                <select name="business" class="form-control" [(ngModel)]="form.business">
+                    <option value="">请选择</option>
+                    <option *ngFor="let item of business" [ngValue]="item"> {{item}} </option>
+                </select>
+            </form-field>
+            <form-field label="标签类别">
+                <select name="labelType" class="form-control" [(ngModel)]="form.typeId">
+                    <option value="">请选择</option>
+                    <option *ngFor="let item of labelTypes" [ngValue]="item.id"> {{item.name}} </option>
+                </select>
+            </form-field>
+            <button type="button" class="btn btn-success btn-sm mb-2" (click)="showNewType()">添加标签类别</button>
+            <ng-container *ngIf="newType">
+                <form-field label="类别名称">
+                    <input class="form-control" name="type" type="text" [(ngModel)]="form.typeName"/>
+                </form-field>
+                <form-field label="是否私有">
+                    <div class="row" style="padding-top: 0.5rem;">
+                        <div class="col-6">
+                            <input name="single" type="radio" [value]="true" [(ngModel)]="form.single" />是
+                        </div>
+                        <div class="col-6">
+                            <input name="single" type="radio" [value]="false" [(ngModel)]="form.single" />否
+                        </div>
+                    </div>
+                </form-field>
+                <form-field label="颜色">
+                    <div style="padding-top: 0.5rem;">
+                        <div data-toggle="dropdown"> {{form.color ? form.color : '请选择颜色'}} <span chevron-down-icon></span> </div>
+                        <div class="dropdown-menu" style="overflow-y: scroll; max-height: 150px; padding: 5px;">
+                            <a *ngFor="let item of colors" class="dropdown-item d-flex label {{colorName(item)}}" (click)="colorSelect(item)">{{colorName(item)}}</a>
+                        </div>
+                    </div>
+                </form-field>
+                <form-field label="同类标签">
+                    <div class="row" style="padding-top: 0.5rem;">
+                        <div class="col-6">
+                            <input name="multiSelect" type="radio" [value]="true" [(ngModel)]="form.multiSelect" />不排斥
+                        </div>
+                        <div class="col-6">
+                            <input name="multiSelect" type="radio" [value]="false" [(ngModel)]="form.multiSelect" />排斥
+                        </div>
+                    </div>
+                </form-field>
+            </ng-container>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()" [disabled]="!valid">确定</button>
+    </modal-footer>
+</modal-dialog>
