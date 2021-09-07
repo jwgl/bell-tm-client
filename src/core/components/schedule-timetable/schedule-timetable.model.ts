@@ -14,8 +14,8 @@ export const SPANS: {[key: number]: {
     label: string,
 }} = {
     1  : {span: 4, label: '上午'},
-    5  : {span: 5, label: '下午'},
-    10 : {span: 4, label: '晚上'},
+    5  : {span: 4, label: '下午'},
+    9  : {span: 4, label: '晚上'},
 };
 
 const SECTION_COUNT = _.chain(SPANS).mapValues((it: any) => it.span).values().sum().value();

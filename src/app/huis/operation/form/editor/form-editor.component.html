@@ -68,7 +68,7 @@
                 <div class="form-group col-md-4">
                     <label>内部活动</label>
                     <p class="form-control-plaintext">
-                        {{form.form.isInternal?'是（部分会议室免费）':'否（所有会议室收费）'}}
+                        {{form.form.isInternal?'是（部分免费）':'否（全部收费）'}}
                     </p>
                 </div>
                 <div class="form-group col-md-4">
@@ -120,7 +120,7 @@
                                     class="font-weight-bold operator-data">{{form.overTimeQuantity}}</span>小时</ng-container>
                                 </span>
                             </td>
-                            <td>${{form.subtotal | number: '.2-2'}}</td>
+                            <td>¥{{form.subtotal | number: '.2-2'}}</td>
                             <td>
                                 <button add-item data-toggle="dropdown" *ngIf="form.actualUsed && extraFacilities">增加</button>
                                 <div class="dropdown-menu">

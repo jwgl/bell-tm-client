@@ -18,13 +18,13 @@ export class PlaceUsageComponent implements OnInit {
 
     usageMap: { [key: number]: { [key: number]: PlaceUsage[] } };
 
-    rows = [1, 2, 3, 4, 0, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    rows = [1, 2, 3, 4, 0, 5, 6, 7, 8, 9, 10, 11, 12];
     cols = [1, 2, 3, 4, 5, 6, 7];
     spans = {
         1: { span: 4, text: '上午' },
         0: { span: 1, text: '中午' },
-        5: { span: 5, text: '下午' },
-        10: { span: 4, text: '晚上' },
+        5: { span: 4, text: '下午' },
+        9: { span: 4, text: '晚上' },
     };
 
     TYPES = {
