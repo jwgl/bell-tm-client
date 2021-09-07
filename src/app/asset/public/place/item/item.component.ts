@@ -10,8 +10,7 @@ import { RoomFormService } from '../form.service';
 export class PlaceItemComponent {
     vm: Room;
     createAble: boolean;
-    labels: any;
-    labelTypes: any;
+    userId: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -19,14 +18,13 @@ export class PlaceItemComponent {
     ) {
         const params = this.route.snapshot.params;
         this.loadData(params['id']);
+        this.userId = this.service.userId;
     }
 
     loadData(id: number) {
         this.service.loadItem(id).subscribe((dto: any) => {
             this.vm = new Room(dto.form);
             this.createAble = dto.createAble;
-            this.labels = dto.labels ? dto.labels : [];
-            this.labelTypes = dto.labelTypes ? dto.labelTypes : [];
         });
     }
 }

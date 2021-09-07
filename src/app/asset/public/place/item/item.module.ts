@@ -9,6 +9,7 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 import { WorkflowModule } from 'core/workflow';
 
+import { PlaceFormViewerModule } from '../../../place/shared/form-viewer.module';
 import { PlaceItemComponent } from './item.component';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { PlaceItemComponent } from './item.component';
         CommonDirectivesModule,
         WorkflowModule,
         IconModule,
+        PlaceFormViewerModule,
     ],
     declarations: [
         PlaceItemComponent,

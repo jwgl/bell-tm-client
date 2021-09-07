@@ -16,6 +16,7 @@ export class Room {
     placeTypeId: number;
     logs: any;
     labels: any;
+    labelStr: string;
 
     constructor(dto: any) {
         Object.assign(this, dto);
@@ -25,6 +26,9 @@ export class Room {
         if (this.logs) {
             this.logs = this.logs.map(log =>
                 ({dateCreated: log.dateCreated, from: JSON.parse(log.fromValue), to: JSON.parse(log.toValue)}));
+        }
+        if (this.labels) {
+            this.labelStr = this.labels.map((label: any) => `${label.business}：${label.typeName}：${label.labelName}`).join('；');
         }
     }
 }

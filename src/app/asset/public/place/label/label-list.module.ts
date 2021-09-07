@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { TmAssetCommonModule } from '../../../components/asset-common.module';
-import { PlaceListComponent } from './form-list.component';
+import { LabelListComponent } from './label-list.component';
 
 @NgModule({
     imports: [
@@ -17,10 +17,10 @@ import { PlaceListComponent } from './form-list.component';
         NgSelectModule,
     ],
     declarations: [
-        PlaceListComponent,
+        LabelListComponent,
     ],
     exports: [
-        PlaceListComponent,
+        LabelListComponent,
     ],
 })
-export class PlaceListModule { }
+export class LabelListModule { }

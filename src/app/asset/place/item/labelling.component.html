@@ -15,7 +15,7 @@
                 </select>
             </form-field>
             <form-field label="标签">
-                <select name="labelType" class="form-control" [(ngModel)]="form.id">
+                <select name="label" class="form-control" [(ngModel)]="form.id">
                     <option value="">请选择</option>
                     <option *ngFor="let item of labels |filterBy: filterByBusiness(form.business) |filterBy: filterByType(form.type)" [ngValue]="item.id">
                         {{item.labelName}} </option>

@@ -35,6 +35,7 @@ export class PlaceTableComponent extends BaseTable implements AfterViewInit {
             { prop: 'seatType', name: '桌椅类型', comparator: this.localComparator },
             { prop: 'department', name: '使用单位', comparator: this.localComparator, width: 90 },
             { prop: 'statusLabel', name: '状态', comparator: this.localComparator, width: 90 },
+            { prop: 'labelStr', name: '标签', comparator: this.localComparator, width: 180 },
             { prop: 'note', name: '备注', width: 120 },
         ];
     }

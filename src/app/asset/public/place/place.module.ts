@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PlacePubicRoutingModule } from './place.routing';
 import { PlaceListModule } from './list/from-list.module';
 import { PlaceItemModule } from './item/item.module';
+import { LabelListModule } from './label/label-list.module';
 import { RoomFormService } from './form.service';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { RoomFormService } from './form.service';
         PlacePubicRoutingModule,
         PlaceListModule,
         PlaceItemModule,
+        LabelListModule,
     ],
     providers: [
         RoomFormService,

@@ -1,10 +1,17 @@
 <div class="btn-toolbar">
     <div class="ml-auto">
-        <button class="btn btn-secondary" routerLink="../labelSearch">标签查询</button>
+        <button class="btn btn-secondary" routerLink="../">返回</button>
     </div>
 </div>
 <div class="row">
     <div class="col-2">
+        <div class="form-group">
+            <label>学期</label>
+            <select name="level1" class="form-control" [(ngModel)]="queryOptions.termId">
+                <option [value]="undefined" disabled>请选择</option>
+                <option *ngFor="let item of terms" [ngValue]="item.id">{{item.name}}</option>
+            </select>
+        </div>
         <div class="form-group">
             <label>教学楼</label>
             <ng-select name="building"
@@ -14,39 +21,7 @@
                 [hideSelected]="true"
                 bindLabel="name"
                 placeholder="选择教学楼"
-                [(ngModel)]="buildingSelected"
-                (ngModelChange)="buildingChange($event)">
-            </ng-select>
-        </div>
-        <div class="form-group">
-            <label>场地一级分类</label>
-            <select name="level1" class="form-control" [(ngModel)]="queryOptions.groups">
-                <option [value]="undefined" disabled>请选择</option>
-                <option *ngFor="let item of placeTypes" [ngValue]="item.name">{{item.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>使用单位</label>
-            <ng-select name="department"
-                [items]="departments"
-                [multiple]="true"
-                [closeOnSelect]="false"
-                [hideSelected]="true"
-                bindLabel="name"
-                placeholder="选择使用单位"
-                [(ngModel)]="departmentSelected">
-            </ng-select>
-        </div>
-        <div class="form-group">
-            <label>房间号</label>
-            <ng-select name="place"
-                [items]="placesShow"
-                [multiple]="true"
-                [closeOnSelect]="false"
-                [hideSelected]="true"
-                bindLabel="name"
-                placeholder="选择房间号"
-                [(ngModel)]="placeSelected">
+                [(ngModel)]="buildingSelected">
             </ng-select>
         </div>
         <div class="form-group">
@@ -68,6 +43,28 @@
                 </div>
                 <input type="number" class="form-control" aria-label="大" aria-describedby="addon12" [(ngModel)]="queryOptions.seatH">
               </div>
+        </div>
+        <div class="form-group">
+            <label>业务类型</label>
+            <select name="business" class="form-control" [(ngModel)]="queryOptions.business">
+                <option value="">请选择</option>
+                <option *ngFor="let item of business" [ngValue]="item"> {{item}} </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>标签类别</label>
+            <select name="labelType" class="form-control" [(ngModel)]="queryOptions.typeId">
+                <option value="">请选择</option>
+                <option *ngFor="let item of labelTypes" [ngValue]="item.id"> {{item.name}} </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>标签</label>
+            <select name="label" class="form-control" [(ngModel)]="queryOptions.labelId">
+                <option value="">请选择</option>
+                <option *ngFor="let item of labels |filterBy: filterByBusiness(queryOptions.business) |filterBy: filterByType(queryOptions.typeId)" [ngValue]="item.id">
+                    {{item.labelName}} </option>
+            </select>
         </div>
         <button class="btn btn-secondary" (click)="query()">查询</button>
     </div>
