@@ -36,7 +36,7 @@
                 "inject": true
               },
               {
-                "input": "node_modules/@ng-select/ng-select/themes/material.theme.css",
+                "input": "node_modules/@ng-select/ng-select/themes/default.theme.css",
                 "inject": true
               },
               "src/styles.scss"

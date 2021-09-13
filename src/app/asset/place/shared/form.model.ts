@@ -28,7 +28,7 @@ export class Room {
                 ({dateCreated: log.dateCreated, from: JSON.parse(log.fromValue), to: JSON.parse(log.toValue)}));
         }
         if (this.labels) {
-            this.labelStr = this.labels.map((label: any) => `${label.business}：${label.typeName}：${label.labelName}`).join('；');
+            this.labelStr = this.labels.map((label: any) => `${label.business}-${label.typeName}-${label.labelName}`).join('；');
         }
     }
 }

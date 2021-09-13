@@ -7,7 +7,8 @@ import { LabelListComponent } from './label/label-list.component';
 
 const routes: Routes = [
     { path: '', component: PlaceListComponent },
-    { path: '/labelSearch', component: LabelListComponent },
+    { path: 'labelSearch', component: LabelListComponent },
+    { path: 'labelSearch/:id', component: PlaceItemComponent },
     { path: ':id', component: PlaceItemComponent }
 ];
 

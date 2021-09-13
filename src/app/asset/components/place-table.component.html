@@ -39,3 +39,7 @@
 <ng-template #idTmpl let-rowIndex="rowIndex" let-value="value">
     <a href="{{link(value)}}">{{rowIndex + 1}} #{{value}}</a>
 </ng-template>
+
+<ng-template #labelTmpl let-value="value">
+    <span class="label {{label.color}}" *ngFor="let label of value">{{label.typeName}}：{{label.labelName}}</span>
+</ng-template>

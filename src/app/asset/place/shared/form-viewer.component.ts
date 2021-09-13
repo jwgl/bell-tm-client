@@ -12,7 +12,6 @@ export class PlaceFormViewerComponent {
 
     common = true;
     labelAll() {
-        console.log(this.userId);
         this.common = false;
     }
 

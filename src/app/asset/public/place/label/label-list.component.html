@@ -1,4 +1,12 @@
 <div class="btn-toolbar">
+    <div>
+        <label>标签</label>
+        <select name="label" class="form-control" [(ngModel)]="queryOptions.labelId">
+            <option value="">请选择</option>
+            <option *ngFor="let item of labels [ngValue]="item.id">
+                {{item.labelName}} </option>
+        </select>
+    </div>
     <div class="ml-auto">
         <button class="btn btn-secondary" routerLink="../">返回</button>
     </div>
@@ -9,7 +17,7 @@
             <label>学期</label>
             <select name="level1" class="form-control" [(ngModel)]="queryOptions.termId">
                 <option [value]="undefined" disabled>请选择</option>
-                <option *ngFor="let item of terms" [ngValue]="item.id">{{item.name}}</option>
+                <option *ngFor="let item of terms" [ngValue]="item">{{termText(item)}}</option>
             </select>
         </div>
         <div class="form-group">
@@ -62,7 +70,7 @@
             <label>标签</label>
             <select name="label" class="form-control" [(ngModel)]="queryOptions.labelId">
                 <option value="">请选择</option>
-                <option *ngFor="let item of labels |filterBy: filterByBusiness(queryOptions.business) |filterBy: filterByType(queryOptions.typeId)" [ngValue]="item.id">
+                <option *ngFor="let item of labels |filterBy: filterByType(queryOptions.typeId, queryOptions.business)" [ngValue]="item.id">
                     {{item.labelName}} </option>
             </select>
         </div>
