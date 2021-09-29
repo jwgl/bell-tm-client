@@ -7,6 +7,7 @@ import { Workflow2Module } from 'core/workflow2';
 import { IconModule } from 'core/icon';
 
 import { UnsettledFacilityListComponent } from './unsettled-list.component';
+import { HuisSharedModule } from 'app/huis/shared/huis-shared.module';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { UnsettledFacilityListComponent } from './unsettled-list.component';
         IconModule,
         CommonDirectivesModule,
         Workflow2Module,
+        HuisSharedModule
     ],
     declarations: [
         UnsettledFacilityListComponent,

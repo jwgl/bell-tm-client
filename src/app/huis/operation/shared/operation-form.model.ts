@@ -171,6 +171,7 @@ export class BookingFacility {
         id: number,
         name: string,
     }
+    basePrice: number;
     unitPrice: number;
     unitName: string;
     timeUnit: number;
@@ -188,6 +189,7 @@ export class BookingFacility {
             id: dto.facilityId,
             name: dto.facilityName,
         };
+        this.basePrice = dto.basePrice;
         this.unitPrice = dto.unitPrice;
         this.unitName = dto.unitName;
         this.timeUnit = dto.timeUnit;
