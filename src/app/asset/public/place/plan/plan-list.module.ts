@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { TmAssetCommonModule } from '../../../components/asset-common.module';
-import { LabelListComponent } from './label-list.component';
+import { PlanListComponent } from './plan-list.component';
 
 @NgModule({
     imports: [
@@ -17,10 +17,10 @@ import { LabelListComponent } from './label-list.component';
         NgSelectModule,
     ],
     declarations: [
-        LabelListComponent,
+        PlanListComponent,
     ],
     exports: [
-        LabelListComponent,
+        PlanListComponent,
     ],
 })
-export class LabelListModule { }
+export class PlanListModule { }

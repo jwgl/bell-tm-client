@@ -1,6 +1,18 @@
 <div class="btn-toolbar">
+    <div class="form-inline">
+        <label class="control-label mr-2">标签</label>
+        <ng-select name="label"
+            [items]="labels"
+            [multiple]="true"
+            [closeOnSelect]="false"
+            [hideSelected]="true"
+            bindLabel="fullName"
+            placeholder="选择标签"
+            [(ngModel)]="labelSelected">
+        </ng-select>
+</div>
     <div class="ml-auto">
-        <button class="btn btn-secondary" routerLink="labelSearch">标签查询</button>
+        <button class="btn btn-secondary" routerLink="labelSearch">计划查询</button>
     </div>
 </div>
 <div class="row">

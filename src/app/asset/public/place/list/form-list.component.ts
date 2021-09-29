@@ -18,6 +18,8 @@ export class PlaceListComponent {
     placeTypes: any;
     departments: any;
     departmentSelected: any[];
+    labels: any = [];
+    labelSelected: any[];
 
     constructor(private service: RoomFormService) {
         this.loadData(null);
@@ -32,6 +34,10 @@ export class PlaceListComponent {
             this.placesShow = dto.places;
             this.placeTypes = dto.placeTypes;
             this.departments = dto.departments;
+            this.labels = dto.labels ? dto.labels.map(it => ({
+                id: it.id,
+                fullName: `${it.business}-${it.type}-${it.labelName}`
+            })) : null;
         });
     }
 
@@ -46,10 +52,15 @@ export class PlaceListComponent {
         this.queryOptions.buildings = this.toValue(this.buildingSelected);
         this.queryOptions.roomNames = this.toValue(this.placeSelected);
         this.queryOptions.departments = this.toValue(this.departmentSelected);
+        this.queryOptions.labels = this.toId(this.labelSelected);
         this.loadData(this.queryOptions);
     }
 
     toValue(object: any): any {
         return object ? object.map(o => o.name) : null;
+    }
+
+    toId(object: any): any {
+        return object ? object.map(o => o.id) : null;
     }
 }

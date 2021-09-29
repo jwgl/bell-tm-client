@@ -1,0 +1,24 @@
+<div class="btn-toolbar">
+    <div class="form-inline">
+            <label class="control-label mr-2">学期</label>
+            <select name="level1" class="form-control" [(ngModel)]="queryOptions.termId">
+                <option [value]="undefined" disabled>请选择</option>
+                <option *ngFor="let item of terms" [ngValue]="item">{{termText(item)}}</option>
+            </select>
+            <label class="control-label ml-2 mr-2">标签</label>
+            <ng-select name="label"
+                [items]="labels"
+                [multiple]="true"
+                [closeOnSelect]="false"
+                [hideSelected]="true"
+                bindLabel="fullName"
+                placeholder="选择标签"
+                [(ngModel)]="labelSelected">
+            </ng-select>
+    </div>
+    <div class="ml-auto">
+        <button class="btn btn-primary" (click)="query()">查询</button>
+        <button class="btn btn-secondary" routerLink="../">返回</button>
+    </div>
+</div>
+<tm-asset-place-table [data]="rooms" [detailShow]="true"></tm-asset-place-table>

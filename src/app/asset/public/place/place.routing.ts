@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PlaceListComponent } from './list/form-list.component';
 import { PlaceItemComponent } from './item/item.component';
-import { LabelListComponent } from './label/label-list.component';
+import { PlanListComponent } from './plan/plan-list.component';
 
 const routes: Routes = [
     { path: '', component: PlaceListComponent },
-    { path: 'labelSearch', component: LabelListComponent },
+    { path: 'labelSearch', component: PlanListComponent },
     { path: 'labelSearch/:id', component: PlaceItemComponent },
     { path: ':id', component: PlaceItemComponent }
 ];

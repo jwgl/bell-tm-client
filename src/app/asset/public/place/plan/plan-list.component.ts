@@ -1,59 +1,47 @@
 import { Component } from '@angular/core';
 
-import { Business } from '../../../place/shared/label.model';
 import { Room } from '../../../place/shared/form.model';
 import { RoomFormService } from '../form.service';
 
 @Component({
-    templateUrl: 'label-list.component.html',
+    templateUrl: 'plan-list.component.html',
 })
-export class LabelListComponent {
+export class PlanListComponent {
     rooms: any[];
     queryOptions: any;
     labels: any = [];
-    buildings: any;
-    buildingSelected: any[];
     terms: any;
-    labelTypes: any;
-    business = Business;
+    labelSelected: any[];
 
     constructor(private service: RoomFormService) {
         this.loadData(null);
         this.queryOptions = {
-            business: '排课',
-            forLabel: true,
+            forPlan: true,
         };
     }
 
     loadData(options: any) {
         this.service.loadList(options).subscribe((dto: any) => {
             this.rooms = dto.rooms ? dto.rooms.map(it => new Room(it)) : null;
-            this.labels = dto.labels;
-            this.buildings = dto.buildings;
+            this.labels = dto.labels ? dto.labels.map(it => ({
+                id: it.id,
+                fullName: `${it.business}-${it.type}-${it.labelName}`
+            })) : null;
             this.terms = dto.terms;
-            this.labelTypes = dto.labelTypes;
         });
-    }
-
-    filterByBusiness(business: string) {
-        return (label: any) => label.business === business;
-    }
-
-    filterByType(typeId: number, business: string) {
-        return (label: any) => (business ? label.business === business : true) && (typeId ? label.typeId === typeId : true);
     }
 
     query() {
         if (!this.queryOptions.termId) {
             alert('请选择学期');
         } else {
-            this.queryOptions.buildings = this.toValue(this.buildingSelected);
+            this.queryOptions.labels = this.toId(this.labelSelected);
             this.loadData(this.queryOptions);
         }
     }
 
-    toValue(object: any): any {
-        return object ? object.map(o => o.name) : null;
+    toId(object: any): any {
+        return object ? object.map(o => o.id) : null;
     }
 
     termText(id: number): string {
