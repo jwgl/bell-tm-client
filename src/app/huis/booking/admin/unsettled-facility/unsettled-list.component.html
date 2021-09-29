@@ -15,7 +15,7 @@
                     <p class="card-text">{{form.departmentName}} / {{form.userName}}</p>
                     <p class="card-text"><small>{{form.subject}}</small></p>
                     <p class="card-text">{{form.room}}</p>
-                    <p class="card-text">{{form.facility}}：¥{{form.subtotal}}</p>
+                    <p class="card-text">{{form.facility}}：{{form | facilitySubtotal}}</p>
                     <div class="card-text d-flex">
                         <div>借用时间：</div>
                         <div class="flex-grow-1">{{form.bookingLowerTime | date: 'y-MM-dd HH:mm'}}<br>

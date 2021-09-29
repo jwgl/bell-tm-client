@@ -28,10 +28,9 @@
                             <td>#{{item.bookingItem.bookingForm.id}}-{{item.bookingItem.id}}-{{item.id}}</td>
                             <td>{{item.bookingItem.room.name}}</td>
                             <td>{{item.facility.name}}</td>
-                            <td>¥{{item.unitPrice}}/<ng-container *ngIf="item.facility.id != 101001">
-                                    {{item.unitName}}·</ng-container>{{item.timeUnit |timeUnit}}</td>
+                            <td>{{item | facilityPrice}}</td>
                             <td>{{item.quantity}}</td>
-                            <td>¥{{item.subtotal}}</td>
+                            <td>{{item | facilitySubtotal}}</td>
                         </tr>
                         <tr>
                             <td></td>

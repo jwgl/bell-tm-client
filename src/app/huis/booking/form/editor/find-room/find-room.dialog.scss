@@ -14,10 +14,20 @@ option {
     border-left: 5px solid #a94442;
 }
 
+.facilityGroup {
+    &.required{
+        color: #a94442;
+    }
+}
+
 ul.bookingTimes {
     padding-left: 0;
     list-style: inside;
     .conflict {
         color: var(--danger);
     }
+}
+
+.form-check-input {
+    margin-top: 0.4rem
 }

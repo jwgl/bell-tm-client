@@ -4,7 +4,8 @@ import { BaseDialog } from 'core/dialogs';
 import * as dayjs from 'dayjs';
 import { Observable } from 'rxjs';
 
-import { BookingForm, BookingRoomView, formatTimeUnit, RoomFacilityView } from '../../../shared/booking-form.model';
+import { formatTimeUnit } from '../../../../shared/common.model';
+import { BookingForm, BookingRoomView, RoomFacilityView } from '../../../shared/booking-form.model';
 import { BookingFormService } from '../../booking-form.service';
 import { Room } from './find-room.model';
 
@@ -21,6 +22,7 @@ export class FindRoomDialog extends BaseDialog {
     bookingDate: string;
     lowerTime: string;
     upperTime: string;
+    requiredSelection: any = {};
 
     constructor(private service: BookingFormService) {
         super();
@@ -51,27 +53,52 @@ export class FindRoomDialog extends BaseDialog {
                 quantity: 1,
                 isAdditional: false,
                 note: '',
-            }].concat(this.bookingRoom.facilities
-                ? this.bookingRoom.facilities.filter(it => !it.isBasic && it.selected).map(it => ({
-                    facilityId: it.id,
-                    facilityName: it.name,
-                    unitPrice: it.unitPrice,
-                    unitName: it.unitName,
-                    timeUnit: it.timeUnit,
-                    quantity: it.quantity,
-                    isAdditional: false,
-                    note: it.note,
-                }))
-                : []
+            }].concat(
+                this.bookingRoom.facilities
+                    ? this.bookingRoom.facilities.filter(it => !it.isBasic && it.selected)
+                        .map(it => ({
+                            facilityId: it.id,
+                            facilityName: it.name,
+                            unitPrice: it.unitPrice,
+                            unitName: it.unitName,
+                            timeUnit: it.timeUnit,
+                            quantity: it.quantity,
+                            isAdditional: true,
+                            note: it.note,
+                        }))
+                    : []
+            ).concat(
+                this.bookingRoom.facilities
+                    ? Object.keys(this.requiredSelection)
+                        .map(key => this.requiredSelection[key])
+                        .filter(id => !!id)
+                        .flatMap(id => this.bookingRoom.facilities.filter(it => it.id == id)
+                            .map(it => ({
+                                    facilityId: it.id,
+                                    facilityName: it.name,
+                                    unitPrice: it.unitPrice,
+                                    unitName: it.unitName,
+                                    timeUnit: it.timeUnit,
+                                    quantity: it.quantity,
+                                    isAdditional: true,
+                                    note: it.note,
+                                })
+                            )
+                        )
+                    : []
             ),
         };
+    }
+
+    formatRequiredSelection(): string {
+        return Object.keys(this.requiredSelection).join(",")
     }
 
     formatRoom(room: Room): string {
         if (this.form.isInternal && room.isInternalFree) {
             return `${room.name}（${room.seat}座）`;
         } else {
-            return `${room.name}（${room.seat}座，${room.unitPrice}元/${formatTimeUnit(room.timeUnit)}）`;
+            return `${room.name}（${room.seat}座，¥${room.unitPrice}/${formatTimeUnit(room.timeUnit)}）`;
         }
     }
 
@@ -83,24 +110,42 @@ export class FindRoomDialog extends BaseDialog {
         }
     }
 
-    formatExtraFacility(facility: RoomFacilityView): string {
-        if (facility.quantity > 1) {
-            return `${facility.name}（${facility.unitPrice}元/${facility.quantity}${facility.unitName}·${formatTimeUnit(facility.timeUnit)}）`;
+    formatFacilityPrice(facility: RoomFacilityView): string {
+        if (facility.basePrice > 0) {
+            return `¥${facility.basePrice}/${facility.unitName} + ¥${facility.unitPrice}/${facility.unitName}·${formatTimeUnit(facility.timeUnit)}`;
         } else {
-            return `${facility.name}（${facility.unitPrice}元/${facility.unitName}·${formatTimeUnit(facility.timeUnit)}）`;
+            return `¥${facility.unitPrice}/${facility.unitName}·${formatTimeUnit(facility.timeUnit)}`;
         }
     }
 
+    isQuantityHidden(facility: RoomFacilityView): boolean {
+        return facility.quantity == 1 && facility.quantity == facility.quantityLimit;
+    }
+
     hasBasicFacility(bookingRoom: BookingRoomView): boolean {
-        return bookingRoom.facilities && bookingRoom.facilities.filter(it => !it.isBasic).length > 0;
+        return bookingRoom.facilities && bookingRoom.facilities.filter(it => it.isBasic).length > 0;
     }
 
     hasExtraFacility(bookingRoom: BookingRoomView): boolean {
-        return bookingRoom.facilities && bookingRoom.facilities.filter(it => !it.isBasic).length > 0;
+        return bookingRoom.facilities && bookingRoom.facilities.filter(it => !it.isBasic && !it.requiredGroup).length > 0;
+    }
+
+    hasRequiredFacility(bookingRoom: BookingRoomView): boolean {
+        return bookingRoom.facilities && bookingRoom.facilities.filter(it => !it.isBasic && !!it.requiredGroup).length > 0;
     }
 
     onRoomChanged(room: Room) {
-        this.service.loadRoom(room.id).subscribe(result => this.bookingRoom = result);
+        this.service.loadRoom(room.id).subscribe(result => {
+            this.bookingRoom = result;
+            this.requiredSelection = {};
+            if (this.bookingRoom.facilities) {
+                this.bookingRoom.facilities.forEach(it => {
+                    if (it.requiredGroup) {
+                        this.requiredSelection[it.requiredGroup] = null;
+                    }
+                });
+            }
+        });
     }
 
     get isConflict(): boolean {
@@ -110,5 +155,10 @@ export class FindRoomDialog extends BaseDialog {
             !(it.lowerTime < upperTime && lowerTime < it.upperTime)
         );
         return !result;
+    }
+
+    get requiredSelected(): boolean {
+        const keys = Object.keys(this.requiredSelection);
+        return keys.length == 0 || keys.every(key => !!this.requiredSelection[key]);
     }
 }

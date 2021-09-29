@@ -55,7 +55,6 @@ export class StatementFormEditorComponent {
             result.forEach(it => {
                 this.form.addItem(it);
             });
-            console.log(this.form)
         });
     }
 

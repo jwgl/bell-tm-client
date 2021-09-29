@@ -16,7 +16,7 @@
                             <input class="form-check-input" type="checkbox" value="" id="bf_{{bf.id}}"
                                 [(ngModel)]="bf.selected">
                             <label class="form-check-label" for="bf_{{bf.id}}">
-                                {{bf.facilityName}} ¥{{bf.subtotal}}
+                                {{bf.facilityName}} {{bf | facilitySubtotal}}
                             </label>
                         </div>
                     </li>
