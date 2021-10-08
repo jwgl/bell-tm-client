@@ -103,10 +103,9 @@
                     <tbody>
                         <tr *ngFor="let bf of form.facilities" [class.deleted]="bf.deleted" [class.operator-data]="bf.isAdditional">
                             <td>{{bf.facility.name}}</td>
-                            <td>¥{{bf.unitPrice}}/<ng-container *ngIf="bf.facility.id != 101001">{{bf.unitName}}·
-                                </ng-container>{{bf.timeUnit |timeUnit}}</td>
+                            <td>{{bf | facilityPrice}}</td>
                             <td>{{bf.quantity}}</td>
-                            <td>¥{{bf.subtotal | number: '.2-2'}}</td>
+                            <td>{{bf | facilitySubtotal}}</td>
                             <td><button [delete-item]="bf.deleted" *ngIf="bf.facility.id != 101001" (click)="form.removeFacility(bf)"></button></td>
                         </tr>
                     </tbody>
@@ -120,7 +119,7 @@
                                     class="font-weight-bold operator-data">{{form.overTimeQuantity}}</span>小时</ng-container>
                                 </span>
                             </td>
-                            <td>¥{{form.subtotal | number: '.2-2'}}</td>
+                            <td>{{form | facilitySubtotal}}</td>
                             <td>
                                 <button add-item data-toggle="dropdown" *ngIf="form.actualUsed && extraFacilities">增加</button>
                                 <div class="dropdown-menu">

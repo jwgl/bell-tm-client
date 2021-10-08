@@ -114,6 +114,7 @@ export class StatementItem {
         id: number,
         name: string,
     }
+    basePrice: number;
     unitPrice: number;
     unitName: string;
     timeUnit: number;
@@ -133,6 +134,7 @@ export class StatementItem {
             id: dto.facilityId,
             name: dto.facilityName,
         };
+        this.basePrice = dto.basePrice;
         this.unitPrice = dto.unitPrice;
         this.unitName = dto.unitName;
         this.timeUnit = dto.timeUnit;

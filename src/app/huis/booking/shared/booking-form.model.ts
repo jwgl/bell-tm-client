@@ -21,14 +21,6 @@ export interface BookingUser {
     departmentId: string;
 }
 
-export function formatTimeUnit(timeUnit: number): string {
-    switch(timeUnit) {
-        case 1: return '小时';
-        case 4: return '单元';
-        default: throw new Error(`Unsupported timeUnit: ${timeUnit}`);        
-    }
-}
-
 export interface BookingRoomView {
     id: number;
     name: string;
@@ -49,11 +41,14 @@ export interface BookingRoomView {
 export interface RoomFacilityView {
     id: number;
     name: string;
+    basePrice: number;
     unitPrice: number;
     unitName: string;
     timeUnit: number;
     quantity: number;
+    quantityLimit: number;
     isBasic: boolean;
+    requiredGroup?: number;
     selected?: boolean;
     note?: string
 }
@@ -203,6 +198,7 @@ export class BookingFacility {
         id: number,
         name: string,
     }
+    basePrice: number;
     unitPrice: number;
     unitName: string;
     timeUnit: number;
@@ -221,6 +217,7 @@ export class BookingFacility {
             id: dto.facilityId,
             name: dto.facilityName,
         };
+        this.basePrice = dto.basePrice;
         this.unitPrice = dto.unitPrice;
         this.unitName = dto.unitName;
         this.timeUnit = dto.timeUnit;

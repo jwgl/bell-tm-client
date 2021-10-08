@@ -33,3 +33,11 @@ export class ItemStatusConverter implements StatusConverter {
         return ITEM_STATUS_INFO[ItemWorkflowStatus[status]].class;
     }
 }
+
+export function formatTimeUnit(timeUnit: number): string {
+    switch(timeUnit) {
+        case 1: return '小时';
+        case 4: return '单元';
+        default: throw new Error(`Unsupported timeUnit: ${timeUnit}`);
+    }
+}

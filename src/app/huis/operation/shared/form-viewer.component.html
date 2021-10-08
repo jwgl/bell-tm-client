@@ -69,9 +69,9 @@
                 <tbody>
                     <tr *ngFor="let bf of form.facilities" [class.inoperative]="!bf.operative" [class.operator-data]="bf.isAdditional">
                         <td>{{bf.facility.name}}</td>
-                        <td>¥{{bf.unitPrice}}/<ng-container *ngIf="bf.facility.id != 101001">{{bf.unitName}}·</ng-container>{{bf.timeUnit |timeUnit}}</td>
+                        <td>{{bf | facilityPrice}}</td>
                         <td>{{bf.quantity}}</td>
-                        <td>¥{{bf.subtotal | number: '.2-2'}}</td>
+                        <td>{{bf | facilitySubtotal}}</td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -84,7 +84,7 @@
                                 class="font-weight-bold operator-data">{{form.overTimeQuantity}}</span>小时</ng-container>
                             </span>
                         </td>
-                        <td>¥{{form.subtotal | number: '.2-2'}}</td>
+                        <td>{{form | facilitySubtotal}}</td>
                     </tr>
                 </tfoot>
             </table>
