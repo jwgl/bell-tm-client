@@ -5,6 +5,9 @@ const routes: Routes = [{
     path: 'users/:userId/places',
     loadChildren: () => import('./place/place.module').then(m => m.PlaceModule),
 }, {
+    path: 'users/:userId/placePublics',
+    loadChildren: () => import('./public/place/place.module').then(m => m.PlacePublicModule),
+}, {
     path: 'users/:userId/receiptForms',
     loadChildren: () => import('./form/asset-form.module').then(m => m.ReceiptModule),
 }, {

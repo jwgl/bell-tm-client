@@ -9,11 +9,8 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 import { WorkflowModule } from 'core/workflow';
 
-import { PlaceFormViewerModule } from '../shared/form-viewer.module';
+import { PlaceFormViewerModule } from '../../../place/shared/form-viewer.module';
 import { PlaceItemComponent } from './item.component';
-import { PlaceUpdatetDialog } from './place-update.dialog';
-import { LabelComponent } from './label.component';
-import { LabellingComponent } from './labelling.component';
 
 @NgModule({
     imports: [
@@ -23,25 +20,17 @@ import { LabellingComponent } from './labelling.component';
         CommonDialogsModule,
         CommonDirectivesModule,
         WorkflowModule,
-        PlaceFormViewerModule,
         IconModule,
+        PlaceFormViewerModule,
     ],
     declarations: [
         PlaceItemComponent,
-        PlaceUpdatetDialog,
-        LabelComponent,
-        LabellingComponent,
     ],
     exports: [
         PlaceItemComponent,
     ],
     providers: [
         Dialog,
-    ],
-    entryComponents: [
-        PlaceUpdatetDialog,
-        LabelComponent,
-        LabellingComponent,
     ],
 })
 export class PlaceItemModule { }
