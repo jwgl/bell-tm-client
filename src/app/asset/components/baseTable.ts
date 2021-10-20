@@ -74,7 +74,7 @@ export class BaseTable {
                 return col && col.items.some((i: string) => i === item);
             } else {
                 return !(col && col.items.some((i: string) => i === item)) &&
-                    (!this.searchStr || item.indexOf(this.searchStr) >= 0);
+                    (!this.searchStr || !item || item.indexOf(this.searchStr) >= 0);
             }
         };
     }

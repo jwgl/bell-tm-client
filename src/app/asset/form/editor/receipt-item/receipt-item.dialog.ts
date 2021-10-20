@@ -31,6 +31,7 @@ export class ReceiptItemDialog extends BaseDialog {
             this.suppliers = this.options.suppliers;
             this.assetTypes = this.options.assetTypes;
             this.assetNames = this.options.assetNames;
+            this.assetNames = this.assetNames ? this.assetNames.sort((a: string, b: string) => String(a).localeCompare(b)) : null;
             this.item.dateBought = dayjs().format('YYYY-MM-DD');
         }
         return null;
