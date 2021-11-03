@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { CommonDialog } from 'core/common-dialogs';
 
-import { BookingForm } from '../../../booking/shared/booking-form.model';
+import { BookingForm, BookingItem } from '../../../booking/shared/booking-form.model';
 import { BookingAdminService } from '../booking-admin.service';
+import './form-item.model';
 
 @Component({
     templateUrl: 'form-item.component.html',
@@ -15,7 +16,6 @@ export class BookingAdminItemComponent implements OnInit {
     formActions: any;
 
     constructor(
-        private router: Router,
         private route: ActivatedRoute,
         private dialog: CommonDialog,
         private service: BookingAdminService,
@@ -41,5 +41,19 @@ export class BookingAdminItemComponent implements OnInit {
                 this.loadItem();
             });
         });
+    }
+
+    revokeItem(item: BookingItem) {
+        let revoke = item.status != 'REVOKED'
+        let prompt = revoke ? '回收' : '恢复';
+        this.dialog.confirm(`${prompt}借用项`, `确定要${prompt}吗？`).then(() => {
+            this.service.revokeItem(this.form.id, item.id, revoke).subscribe(() => {
+                this.loadItem();
+            });
+        });
+    }
+
+    get itemRevokable(): boolean {
+        return this.formActions.REVOKE;
     }
 }

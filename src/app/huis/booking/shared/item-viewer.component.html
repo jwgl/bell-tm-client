@@ -2,6 +2,7 @@
     <span>{{item.room.name}}（{{item.bookingLowerTime | date:
         'y-MM-dd HH:mm'}}-{{item.bookingUpperTime | date: 'HH:mm'}}）</span>
     <button [delete-item]="item.deleted" *ngIf="removable" (click)="remove()"></button>
+    <button [delete-item]="item.revoked" *ngIf="revokable" (click)="revoke()"></button>
     <span *ngIf="item.isConflict" class="badge badge-danger ml-2">已占用</span>
     <tm-workflow-status [status]="item.workflowState" [workflowStatusConverter]="itemStatusConverter"
         [formStatus]="item.status" class="ml-2"></tm-workflow-status>

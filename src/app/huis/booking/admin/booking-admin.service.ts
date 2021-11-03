@@ -20,6 +20,10 @@ export class BookingAdminService extends RestEditService {
         return this.http.patch(`${this.api.item(id)}/revoke`, {});
     }
 
+    revokeItem(id: any, itemId: any, revoke: boolean): Observable<any> {
+        return this.http.patch(`${this.api.item(id)}/revoke/${itemId}`, {revoke});
+    }
+
     listUnsettledFacilities(): Observable<any> {
         return this.http.get(`${this.api.list()}/unsettledFacilities`);
     }
