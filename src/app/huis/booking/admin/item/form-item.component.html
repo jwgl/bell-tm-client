@@ -7,5 +7,7 @@
             <button class="btn btn-danger" (click)="revoke()" *ngIf="formActions.REVOKE">回收</button>
         </div>
     </div>
-    <tm-booking-form-viewer [form]="form"></tm-booking-form-viewer>
+    <tm-booking-form-viewer [form]="form"
+        [revokable]="formActions.REVOKE"
+        (onRevokeItem)="revokeItem($event)"></tm-booking-form-viewer>
 </ng-container>

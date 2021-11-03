@@ -10,11 +10,17 @@ import { BookingItem } from './booking-form.model';
 export class BookingItemViewerComponent {
     @Input() item: BookingItem;
     @Input() removable: boolean = false;
-    @Output("onRemove") onRemove: EventEmitter<void> = new EventEmitter<void>();
+    @Input() revokable: boolean = false;
+    @Output("onRemove") onRemove = new EventEmitter<void>();
+    @Output("onRevoke") onRevoke = new EventEmitter<void>();
 
     itemStatusConverter = new ItemStatusConverter();
 
     remove() {
         this.onRemove.emit();
+    }
+
+    revoke() {
+        this.onRevoke.emit();
     }
 }

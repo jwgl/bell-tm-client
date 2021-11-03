@@ -43,7 +43,9 @@
             <label>借用明细</label>
             <ul class="booking-items">
                 <li *ngFor="let item of form.items">
-                    <tm-booking-item-viewer [item]="item"></tm-booking-item-viewer>
+                    <tm-booking-item-viewer [item]="item"
+                        [revokable]="itemRevokable(item)"
+                        (onRevoke)="revokeItem(item)"></tm-booking-item-viewer>
                 </li>
             </ul>
         </div>
