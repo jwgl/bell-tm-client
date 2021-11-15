@@ -21,7 +21,7 @@ export class Room {
     constructor(dto: any) {
         Object.assign(this, dto);
         if (this.status) {
-            this.statusLabel = { ON: '在用', BACKUP: '储备', DELETED: '取消' }[this.status];
+            this.statusLabel = { ON: '在用', BACKUP: '储备', DELETED: '取消', RAW: '未创建' }[this.status];
         }
         if (this.logs) {
             this.logs = this.logs.map(log =>

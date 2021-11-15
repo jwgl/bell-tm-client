@@ -12,7 +12,6 @@ export class AssetModelTableComponent extends BaseTable implements AfterViewInit
     @ViewChild('search', { static: true }) input: ElementRef;
     @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
     @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
-    @ViewChild('labelTmpl', { static: true }) labelTmpl: TemplateRef<any>;
     @Output() checkedList = new EventEmitter<any>();
 
     @Input() set checkAble(value: boolean) {
@@ -26,45 +25,20 @@ export class AssetModelTableComponent extends BaseTable implements AfterViewInit
         super();
         this.columns = [
             { draggable: false, name: 'ID', prop: 'id', cellTemplate: this.idTmpl, width: 80 },
-            { prop: 'building', name: '教学楼', width: 90 },
-            { prop: 'groups', name: '一级分类', comparator: this.localComparator, width: 90 },
-            { prop: 'roomType', name: '二级分类', comparator: this.localComparator, width: 90 },
-            { prop: 'name', name: '房间号', width: 60 },
-            { prop: 'purpose', name: '功能', width: 90 },
-            { prop: 'measure', name: '面积', width: 60 },
-            { prop: 'seat', name: '座位数', width: 60 },
-            { prop: 'seatType', name: '桌椅类型', comparator: this.localComparator },
-            { prop: 'department', name: '使用单位', comparator: this.localComparator, width: 90 },
-            { prop: 'statusLabel', name: '状态', comparator: this.localComparator, width: 90 },
-            { prop: 'labels', name: '标签', comparator: this.localComparator, cellTemplate: this.labelTmpl, width: 480 },
-            { prop: 'note', name: '备注', width: 120 },
+            { prop: 'name', name: '设备名称', comparator: this.localComparator, width: 90 },
+            { prop: 'brand', name: '品牌', comparator: this.localComparator, width: 90 },
+            { prop: 'specs', name: '规格型号', width: 200 },
+            { prop: 'parameter', name: '参数', width: 200 },
         ];
-    }
-
-    @Input() set detailShow(value: boolean) {
-        if (value) {
-            let prop = this.columns.find(th => th.prop === 'id');
-            if (prop) {
-                prop['cellTemplate'] = this.idTmpl;
-            }
-            prop = this.columns.find(th => th.prop === 'labels');
-            if (prop) {
-                prop['cellTemplate'] = this.labelTmpl;
-            }
-        }
     }
 
     @Input() set data(value: any[]) {
         if (value) {
             const filterColumns = [
-                { name: 'building', label: '教学楼' },
-                { name: 'groups', label: '一级分类' },
-                { name: 'roomType', label: '二级分类' },
-                { name: 'name', label: '房间号' },
-                { name: 'purpose', label: '功能' },
-                { name: 'seatType', label: '桌椅类型' },
-                { name: 'department', label: '使用单位' },
-                { name: 'statusLabel', label: '状态' }
+                { name: 'name', label: '设备名称' },
+                { name: 'brand', label: '品牌' },
+                { name: 'specs', label: '规格型号' },
+                { name: 'state', label: '状态' }
             ];
             this.setData(value, filterColumns);
         }

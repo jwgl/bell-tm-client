@@ -6,6 +6,8 @@ declare module '../shared/form.model' {
         labels: any;
         counts: number;
         otherPlaces: any;
+        placeTypeLevel1: any;
+        rooms: any;
         toServerDto(): any;
     }
 }
@@ -15,14 +17,15 @@ Room.prototype.toServerDto = function(this: Room): any {
         id: this.id,
         name: this.name,
         action: this.action,
-        seat: this.seat ? this.seat : 0,
+        // seat: this.seat ? this.seat : 0,
         labels: this.labels ? this.labels.map((label: any) => label.id) : null,
-        status: this.status,
-        departmentId: this.departmentId,
-        placeTypeId: this.placeTypeId,
-        measure: this.measure,
+        // status: this.status,
+        // departmentId: this.departmentId,
+        // placeTypeId: this.placeTypeId,
+        // measure: this.measure,
         counts: this.counts,
         otherPlaces: this.otherPlaces ? this.otherPlaces.map((place: any) => place.id) : null,
         note: this.note,
+        rooms: this.rooms,
     };
 };
