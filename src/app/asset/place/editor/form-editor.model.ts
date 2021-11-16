@@ -2,11 +2,11 @@ import { Room } from '../shared/form.model';
 
 declare module '../shared/form.model' {
     interface Room {
-        toServerDto(): any;
+        toDto(): any;
     }
 }
 
-Room.prototype.toServerDto = function(this: Room): any {
+Room.prototype.toDto = function (this: Room): any {
     return {
         name:　this.name,
         building: this.building,

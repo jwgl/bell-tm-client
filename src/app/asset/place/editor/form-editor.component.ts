@@ -7,8 +7,8 @@ import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 
 import { Room } from '../shared/form.model';
-import { RoomFormService } from '../form.service';
 import './form-editor.model';
+import { RoomFormService } from '../form.service';
 
 @Component({
     templateUrl: 'form-editor.component.html',
@@ -110,6 +110,7 @@ export class PlaceFormEditorComponent {
         if (validation.length) {
             this.dialogs.error(validation);
         } else if (this.editMode === EditMode.Create) {
+            console.log(this.form);
             this.create();
         } else if (this.editMode === EditMode.Edit) {
             this.update();
@@ -117,7 +118,8 @@ export class PlaceFormEditorComponent {
     }
 
     create() {
-        this.service.create(this.form.toServerDto()).subscribe(id => {
+        alert('create');
+        this.service.create(this.form.toDto()).subscribe(id => {
             this.router.navigate(['../', id], { relativeTo: this.route });
         });
     }
@@ -126,7 +128,7 @@ export class PlaceFormEditorComponent {
         if (this.form.status === 'DELETED' && !this.deleteAble) {
             alert('该场地还有设备，请先将设备移除再取消！');
         } else {
-            this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
+            this.service.update(this.form.id, this.form.toDto()).subscribe(id => {
                 this.router.navigate(['../'], { relativeTo: this.route });
             });
         }
