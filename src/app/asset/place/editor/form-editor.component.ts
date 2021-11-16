@@ -110,7 +110,6 @@ export class PlaceFormEditorComponent {
         if (validation.length) {
             this.dialogs.error(validation);
         } else if (this.editMode === EditMode.Create) {
-            console.log(this.form);
             this.create();
         } else if (this.editMode === EditMode.Edit) {
             this.update();
@@ -118,7 +117,6 @@ export class PlaceFormEditorComponent {
     }
 
     create() {
-        alert('create');
         this.service.create(this.form.toDto()).subscribe(id => {
             this.router.navigate(['../', id], { relativeTo: this.route });
         });
