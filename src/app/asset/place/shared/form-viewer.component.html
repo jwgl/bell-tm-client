@@ -1,66 +1,97 @@
 <ng-container *ngIf="vm">
     <tm-form-title>场地{{vm.id}}</tm-form-title>
     <div class="row">
-        <div class="form-group col-3">
-            <label class="control-label">场地名称及状态</label>
-            <div>{{vm.building}} {{vm.name}} <span class="badge badge-pill badge-primary" >{{vm.statusLabel}}</span></div>
-        </div>
-        <div class="form-group col-3">
-            <label class="control-label">使用单位</label>
-            <div>{{vm.department}}</div>
-        </div>
-        <div class="form-group col-3">
-            <label class="control-label">场地类别</label>
-            <div>{{vm.groups}}</div>
-        </div>
-        <div class="form-group col-3">
-            <label class="control-label">具体类别</label>
-            <div>{{vm.roomType}}</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-3">
-            <label class="control-label">面积</label>
-            <div>{{vm.measure}}</div>
-        </div>
-        <div class="form-group col-3">
-            <label class="control-label">座位数</label>
-            <div>{{vm.seat}}</div>
-        </div>
-        <div class="form-group col-3">
-            <label class="control-label">桌椅类型</label>
-            <div>{{vm.seatType}}</div>
-        </div>
-        <div class="form-group col-3">
-            <label class="control-label">功能</label>
-            <div>{{vm.purpose}}</div>
-        </div>
-    </div>
-    <div class="row" *ngIf="vm.labels && vm.labels.length > 0">
-        <div class="form-group col-12">
-            <label class="control-label">标签
-                <button type="button" class="btn btn-secondary btn-sm mb-2" (click)="labelAll()" *ngIf="labelAdmin">显示全部</button>
-            </label>
-            <div *ngIf="common; else showAll">
-                <span class="label {{label.color}}" *ngFor="let label of vm.labels | filterBy: filterByUserId()">{{label.type}}：{{label.labelName}}</span>
+        <div class="row col-9">
+            <div class="form-group col-3">
+                <label class="control-label">场地名称及状态</label>
+                <div>{{vm.building}} {{vm.name}} <span class="badge badge-pill badge-primary" >{{vm.status | status}}</span></div>
             </div>
-            <ng-template #showAll>
-                <ul>
-                    <li *ngFor="let business of vm.labels | uniqueBy: 'business'">
-                        {{business}} <span class="label {{label.color}}" *ngFor="let label of vm.labels | filterBy: filterByBusiness(business)">
-                            {{labelStr(label)}}</span>
-                    </li>
-                </ul>
-            </ng-template>
+            <div class="form-group col-3">
+                <label class="control-label">使用单位</label>
+                <div>{{vm.department}}</div>
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">场地类别</label>
+                <div>{{vm.groups}}</div>
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">具体类别</label>
+                <div>{{vm.roomType}}</div>
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">面积</label>
+                <div>{{vm.measure}}</div>
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">座位数</label>
+                <div>{{vm.seat}}</div>
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">桌椅类型</label>
+                <div>{{vm.seatType}}</div>
+            </div>
+            <div class="form-group col-3">
+                <label class="control-label">功能</label>
+                <div>{{vm.purpose}}</div>
+            </div>
+        </div>
+        <div class="form-group col-3" *ngIf="vm.labels && vm.labels.length > 0">
+            <div class="form-group col-12">
+                <label class="control-label">标签
+                    <button type="button" class="btn btn-secondary btn-sm mb-2" (click)="labelAll()" *ngIf="labelAdmin">全部</button>
+                </label>
+                <div *ngIf="common; else showAll">
+                    <p class="label {{label.color}}" *ngFor="let label of vm.labels | filterBy: filterByUserId()">{{label.type}}：{{label.labelName}}</p>
+                </div>
+                <ng-template #showAll>
+                    <ul>
+                        <li *ngFor="let business of vm.labels | uniqueBy: 'business'">
+                            {{business}} <p class="label {{label.color}}" *ngFor="let label of vm.labels | filterBy: filterByBusiness(business)">
+                                {{labelStr(label)}}</p>
+                        </li>
+                    </ul>
+                </ng-template>
+            </div>
+            <div class="form-group col-12" *ngIf="vm.note">
+                <label class="control-label">备注</label>
+                <div>{{vm.note}}</div>
+            </div>
         </div>
     </div>
-    <div class="row" *ngIf="vm.note">
-        <div class="form-group col-12">
-            <label class="control-label">备注</label>
-            <div>{{vm.note}}</div>
-        </div>
-    </div>
+
+    <ng-container *ngFor="let plan of vm.plans">
+        <ul>
+            <li><strong>变更计划名称：</strong>{{plan.name}}</li>
+            <li><strong>变更类型：</strong>{{plan.action | planAction}}</li>
+            <li><strong>实施学期：</strong>{{plan.termId | term}}</li>
+            <li><strong>计划执行情况：</strong><span class="badge badge-pill badge-danger">{{plan.status | planStatus}}</span></li>
+            <li><strong>计划创建时间：</strong>{{plan.dateCreated | date: 'y-MM-dd'}}</li>
+        </ul>
+        <h5>计划改造后场地</h5>
+        <table class="table table-hover">
+            <th>房号</th>
+            <th>面积</th>
+            <th>座位数</th>
+            <th>计划执行后状态</th>
+            <th>使用单位</th>
+            <th>场地类别</th>
+            <th>标签</th>
+            <tbody>
+                <tr *ngFor="let room of plan.rooms">
+                    <td>{{room.name}}</td>
+                    <td>{{room.measure}}</td>
+                    <td>{{room.seat}}</td>
+                    <td>{{room.status | status}}</td>
+                    <td>{{room.department}}</td>
+                    <td>{{room.placeType}}</td>
+                    <td>{{toLabelStrings(room.labels)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
     <ng-container *ngIf="vm.logs && vm.logs.length > 0">
+        <h5>场地变更日志</h5>
         <table class="table table-hover">
             <th>日期</th>
             <th>修改前</th>

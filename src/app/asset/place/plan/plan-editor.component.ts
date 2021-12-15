@@ -24,6 +24,7 @@ export class PlanEditorComponent implements AfterViewInit {
     departments: any[];
     placeTypes: any[];
     places: any[];
+    buildings: any[];
     placeTypeLevel1: string;
     actions = [
         { name: 'CREATE', label: '新增' },
@@ -68,10 +69,12 @@ export class PlanEditorComponent implements AfterViewInit {
 
     onLoadData(dto: any) {
         this.form = new Room(dto.form);
+        this.form.name = null;
         this.measure = this.form.measure;
         this.departments = dto.departments;
         this.placeTypes = dto.placeTypes;
         this.places = dto.places;
+        this.buildings = dto.buildings;
         this.termName = dto.termId ? `${Math.round(dto.termId / 10)}-${Math.round(dto.termId / 10) + 1}-${dto.termId % 10}学期` : null;
         this.placeTypeLevel1 = this.form.groups;
         this.labels = dto.labels.map((label: any) => ({ id: label.id, name: `${label.business}：${label.type}：${label.labelName}` }));
@@ -128,7 +131,9 @@ export class PlanEditorComponent implements AfterViewInit {
     save() {
         if (this.isEmpty(this.form.action)) {
             this.dialogs.error(['请选择场地变动方式']);
-        } else {
+        } else if (this.isEmpty(this.form.name)) {
+            this.dialogs.error(['请输入计划名称']);
+        }else {
             this.rooms.forEach((item: any, index: number) => {
                 const validation = this.validate(item, index);
                 if (validation.length) {
@@ -144,10 +149,17 @@ export class PlanEditorComponent implements AfterViewInit {
 
     update() {
         this.saving = true;
-        this.rooms.forEach((item: Room) => item.building = this.form.building);
+        this.rooms.forEach((item: any) => {
+            item.building = this.form.building;
+            item.labels = item.labelItems ? item.labelItems.map((label: any) => label.id) : null;
+            item.department = this.departments.find(d => d.id === item.departmentId).name;
+            item.placeType = this.placeTypes.find(t => t.id === item.placeTypeId).level2;
+        });
         this.form.rooms = this.rooms;
-        // this.form.measure = this.measure;
-        this.form.otherPlaces = this.selected;
+        this.form.relativePlaces = this.selected ? this.selected.map((place: any) => place.id) : [];
+        if (this.form.action !== 'CREATE') {
+            this.form.relativePlaces.push(this.form.id);
+        }
         // console.log(this.form.toServerDto());
         this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
             this.router.navigate(['../'], { relativeTo: this.route });

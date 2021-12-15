@@ -8,11 +8,23 @@
     <form role="form">
         <div class="row">
             <div class="form-group col-3">
+                <label class="control-label">计划名称</label>
+                <input class="form-control" name="name" type="text" [(ngModel)]="form.name" required/>
+            </div>
+            <div class="form-group col-3">
                 <label class="control-label">场地变动方式</label>
                 <select name="action" class="form-control" [(ngModel)]="form.action">
                     <option [value]="undefined">请选择</option>
                     <option *ngFor="let item of actions " [ngValue]="item.name">
                         {{ item.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-3" *ngIf="form.action === 'CREATE'">
+                <label class="control-label">教学楼</label>
+                <select name="building" class="form-control" [(ngModel)]="form.building">
+                    <option *ngFor="let item of buildings " [ngValue]="item.value">
+                        {{ item.name }}
                     </option>
                 </select>
             </div>
@@ -90,7 +102,7 @@
                 <div class="form-group col-12">
                     <label class="control-label">标签</label>
                     <ng-select name="label{{i}}" [items]="labels" [multiple]="true" [closeOnSelect]="false"
-                        [hideSelected]="true" bindLabel="name" placeholder="选择标签" [(ngModel)]="room.labels">
+                        [hideSelected]="true" bindLabel="name" placeholder="选择标签" [(ngModel)]="room.labelItems">
                     </ng-select>
                 </div>
                 <div class="form-group col-12">

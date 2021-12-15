@@ -16,6 +16,7 @@ export class Room {
     placeTypeId: number;
     logs: any;
     labels: any;
+    plans: any;
     labelStr: string;
 
     constructor(dto: any) {
@@ -29,6 +30,11 @@ export class Room {
         }
         if (this.labels) {
             this.labelStr = this.labels.map((label: any) => `${label.business}-${label.typeName}-${label.labelName}`).join('；');
+        }
+        if (this.plans) {
+            this.plans = this.plans.map(plan =>
+                ({dateCreated: plan.dateCreated, name: plan.name, status: plan.status, termId: plan.termId, action: plan.action,
+                rooms: JSON.parse(plan.info)}));
         }
     }
 }

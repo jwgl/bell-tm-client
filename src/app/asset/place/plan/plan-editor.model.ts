@@ -5,7 +5,7 @@ declare module '../shared/form.model' {
         action: string;
         labels: any;
         counts: number;
-        otherPlaces: any;
+        relativePlaces: any;
         placeTypeLevel1: any;
         rooms: any;
         toServerDto(): any;
@@ -24,7 +24,7 @@ Room.prototype.toServerDto = function(this: Room): any {
         // placeTypeId: this.placeTypeId,
         // measure: this.measure,
         counts: this.counts,
-        otherPlaces: this.otherPlaces ? this.otherPlaces.map((place: any) => place.id) : null,
+        relativePlaces: this.relativePlaces,
         note: this.note,
         rooms: this.rooms,
     };
