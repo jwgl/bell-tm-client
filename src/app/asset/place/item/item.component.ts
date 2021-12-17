@@ -38,7 +38,6 @@ export class PlaceItemComponent {
             this.labels = dto.labels ? dto.labels : [];
             this.labelTypes = dto.labelTypes ? dto.labelTypes : [];
             this.planAble = dto.planAble;
-            console.log(this.labels);
         });
     }
 

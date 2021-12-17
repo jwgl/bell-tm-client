@@ -7,9 +7,9 @@ import { switchMap } from 'rxjs/operators';
 import { CommonDialog } from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 import { typeahead } from 'core/utils/typeahead';
-import { Room } from '../shared/form.model';
+import { Room } from '../../shared/form.model';
 import './plan-editor.model';
-import { PlanService } from '../plan.service';
+import { PlanService } from '../../plan.service';
 
 @Component({
     styleUrls: ['plan-editor.component.scss'],

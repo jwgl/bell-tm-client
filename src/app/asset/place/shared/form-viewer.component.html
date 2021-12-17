@@ -62,7 +62,7 @@
     <ng-container *ngFor="let plan of vm.plans">
         <ul>
             <li><strong>变更计划名称：</strong>{{plan.name}}</li>
-            <li><strong>变更类型：</strong>{{plan.action | planAction}}</li>
+            <li><strong>计划类型：</strong>{{plan.action | planAction}}</li>
             <li><strong>实施学期：</strong>{{plan.termId | term}}</li>
             <li><strong>计划执行情况：</strong><span class="badge badge-pill badge-danger">{{plan.status | planStatus}}</span></li>
             <li><strong>计划创建时间：</strong>{{plan.dateCreated | date: 'y-MM-dd'}}</li>

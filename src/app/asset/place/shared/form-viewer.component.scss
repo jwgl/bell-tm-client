@@ -5,3 +5,7 @@
 h5 {
     text-decoration: underline;
 }
+
+.form-control-plaintext:not(.text-muted) {
+    border-bottom: solid 1px rgba(0,0,0,.15);
+}

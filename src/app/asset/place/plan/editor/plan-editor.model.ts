@@ -1,6 +1,6 @@
-import { Room } from '../shared/form.model';
+import { Room } from '../../shared/form.model';
 
-declare module '../shared/form.model' {
+declare module '../../shared/form.model' {
     interface Room {
         action: string;
         labels: any;
@@ -23,9 +23,9 @@ Room.prototype.toServerDto = function(this: Room): any {
         // departmentId: this.departmentId,
         // placeTypeId: this.placeTypeId,
         // measure: this.measure,
-        counts: this.counts,
+        // counts: this.counts,
         relativePlaces: this.relativePlaces,
-        note: this.note,
+        // note: this.note,
         rooms: this.rooms,
     };
 };
