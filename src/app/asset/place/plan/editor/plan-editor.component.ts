@@ -160,7 +160,6 @@ export class PlanEditorComponent implements AfterViewInit {
         if (this.form.action !== 'CREATE') {
             this.form.relativePlaces.push(this.form.id);
         }
-        // console.log(this.form.toServerDto());
         this.service.update(this.form.id, this.form.toServerDto()).subscribe(id => {
             this.router.navigate(['../'], { relativeTo: this.route });
         });
@@ -168,11 +167,9 @@ export class PlanEditorComponent implements AfterViewInit {
 
     select(item: any) {
         if (this.selected.some(it => item === it)) {
-            // this.measure = this.measure - item.measure;
             this.selected.splice(this.selected.indexOf(item), 1);
         } else {
             this.selected.push(item);
-            // this.measure = this.measure + item.measure;
         }
         this.searchStr = null;
     }

@@ -5,6 +5,7 @@ import { PlacePubicRoutingModule } from './place.routing';
 import { PlaceListModule } from './list/from-list.module';
 import { PlaceItemModule } from './item/item.module';
 import { PlanListModule } from './plan/plan-list.module';
+import { PlanItemModule } from './plan/plan-item.module';
 import { RoomFormService } from './form.service';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { RoomFormService } from './form.service';
         PlaceListModule,
         PlaceItemModule,
         PlanListModule,
+        PlanItemModule,
     ],
     providers: [
         RoomFormService,

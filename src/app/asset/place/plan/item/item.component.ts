@@ -6,7 +6,6 @@ import { CommonDialog } from 'core/common-dialogs';
 import { PlanService } from '../../plan.service';
 
 @Component({
-    styleUrls: ['item.component.scss'],
     templateUrl: 'item.component.html',
 })
 export class PlanItemComponent {
@@ -45,15 +44,5 @@ export class PlanItemComponent {
         this.dialog.confirm('取消', '确定取消计划吗？').then(() => {
             this.service.cancel(this.vm.id).subscribe(() => this.loadData(this.vm.id));
         });
-    }
-
-    toLabelStrings(ids: any): string {
-        if (ids) {
-            return this.labels.filter(item => ids.some(id => id === item.id))
-                .map(label => label.labelName)
-                .join(';');
-        } else {
-            return '';
-        }
     }
 }
