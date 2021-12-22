@@ -38,6 +38,7 @@ export class PlanEditorComponent implements AfterViewInit {
     measure: number;
     selected = [];
     searchStr: string;
+    labelsOld: any;
 
     constructor(
         private service: PlanService,
@@ -78,6 +79,9 @@ export class PlanEditorComponent implements AfterViewInit {
         this.termName = dto.termId ? `${Math.round(dto.termId / 10)}-${Math.round(dto.termId / 10) + 1}-${dto.termId % 10}学期` : null;
         this.placeTypeLevel1 = this.form.groups;
         this.labels = dto.labels.map((label: any) => ({ id: label.id, name: `${label.business}：${label.type}：${label.labelName}` }));
+        this.labelsOld = this.labels.filter((label: any) =>
+                this.form.labels != null && this.form.labels.some(it => it.id === label.id));
+        this.rooms[0].labelItems = this.labelsOld;
     }
 
     filterBySubject(name: string) {
@@ -96,6 +100,7 @@ export class PlanEditorComponent implements AfterViewInit {
             this.rooms = [];
             for (let i = 0; i < counts; i++) {
                 const room = new Room({});
+                room.labelItems = this.labelsOld;
                 this.rooms.push(room);
             }
         } else {
