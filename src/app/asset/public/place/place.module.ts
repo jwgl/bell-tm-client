@@ -20,6 +20,7 @@ import { RoomFormService } from './form.service';
     providers: [
         RoomFormService,
         { provide: 'ROOM_API_URL', useValue: '/api/asset/users/${userId}/placePublics' },
+        { provide: 'HINDFIELD_API_URL', useValue: '/api/asset/users/${userId}/hindFields' },
     ],
 })
 export class PlacePublicModule { }

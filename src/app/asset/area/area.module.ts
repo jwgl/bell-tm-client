@@ -23,6 +23,7 @@ import { AssetItemModule } from './item/item.module';
         TransferFormService,
         { provide: 'AREA_API_URL', useValue: '/api/asset/users/${userId}/areas' },
         { provide: 'TRANSFER_API_URL', useValue: '/api/asset/users/${userId}/transferForms' },
+        { provide: 'HINDFIELD_API_URL', useValue: '/api/asset/users/${userId}/hindFields' },
     ],
 })
 export class AreaModule { }

@@ -20,6 +20,7 @@ export class PlaceListComponent {
     departmentSelected: any[];
     labels: any = [];
     labelSelected: any[];
+    fields: any;
 
     constructor(private service: RoomFormService) {
         this.loadData(null);
@@ -34,6 +35,7 @@ export class PlaceListComponent {
             this.placesShow = dto.places;
             this.placeTypes = dto.placeTypes;
             this.departments = dto.departments;
+            this.fields = dto.fields;
             this.labels = dto.labels ? dto.labels.map(it => ({
                 id: it.id,
                 fullName: `${it.business}-${it.type}-${it.labelName}`
@@ -62,5 +64,9 @@ export class PlaceListComponent {
 
     toId(object: any): any {
         return object ? object.map(o => o.id) : null;
+    }
+
+    saveFields(fields: any) {
+        this.service.createHindField({ tableName: 'room', fields }).subscribe();
     }
 }

@@ -8,4 +8,5 @@
         <a class="btn btn-primary ml-2" download href="/api/asset/output?type=device-all">导出设备清单</a>
     </div>
 </div>
-<tm-asset-device-table [data]="assets" [detailShow]="true" [checkAble]="true" (checkedList)="onRowSelected($event)"></tm-asset-device-table>
+<tm-asset-device-table [data]="assets" [detailShow]="true" [checkAble]="true" (checkedList)="onRowSelected($event)"
+    [hindFields]="fields" (fieldsForSave)="saveFields($event)"></tm-asset-device-table>

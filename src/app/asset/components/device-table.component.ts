@@ -13,7 +13,10 @@ export class DeviceTableComponent extends BaseTable implements AfterViewInit {
   @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
   @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
   @ViewChild('stateTmpl', { static: true }) stateTmpl: TemplateRef<any>;
-
+  @Output() fieldsForSave = new EventEmitter<any>();
+  @Input() set hindFields(value: any) {
+    this.hinds = value;
+  }
   @Input() set data(value: any[]) {
     if (value) {
       const filterColumns = [
@@ -106,5 +109,9 @@ export class DeviceTableComponent extends BaseTable implements AfterViewInit {
     } else {
       return `总数量：${countAll.count}`;
     }
+  }
+
+  saveHindField() {
+    this.fieldsForSave.emit(this.hinds);
   }
 }

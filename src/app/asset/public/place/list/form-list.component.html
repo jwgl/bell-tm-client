@@ -84,6 +84,6 @@
         <button class="btn btn-secondary" (click)="query()">查询</button>
     </div>
     <div class="col-10">
-        <tm-asset-place-table [data]="rooms" [detailShow]="true"></tm-asset-place-table>
+        <tm-asset-place-table [data]="rooms" [detailShow]="true" [hindFields]="fields" (fieldsForSave)="saveFields($event)"></tm-asset-place-table>
     </div>
 </div>

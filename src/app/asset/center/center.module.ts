@@ -37,6 +37,7 @@ import { TransferItemModule } from './scrap_form/item.module';
         TransferFormService,
         { provide: 'CENTER_API_URL', useValue: '/api/asset/users/${userId}/centers' },
         { provide: 'SCRAP_API_URL', useValue: '/api/asset/users/${userId}/scraps' },
+        { provide: 'HINDFIELD_API_URL', useValue: '/api/asset/users/${userId}/hindFields' },
     ],
 })
 export class CenterModule { }
