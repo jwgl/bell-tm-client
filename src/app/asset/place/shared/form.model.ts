@@ -19,6 +19,7 @@ export class Room {
     plans: any;
     labelStr: string;
     labelItems: any;
+    planning: boolean;
 
     constructor(dto: any) {
         Object.assign(this, dto);

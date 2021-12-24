@@ -29,6 +29,7 @@ import { PlanItemModule } from './plan/item/item.module';
         { provide: 'LABEL_API_URL', useValue: '/api/asset/users/${userId}/labelAdmins' },
         { provide: 'LABELLING_API_URL', useValue: '/api/asset/users/${userId}/labellings' },
         { provide: 'PLAN_API_URL', useValue: '/api/asset/users/${userId}/plans' },
+        { provide: 'HINDFIELD_API_URL', useValue: '/api/asset/users/${userId}/hindFields' },
     ],
 })
 export class PlaceModule { }

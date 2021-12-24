@@ -63,9 +63,4 @@ export class AssetModelTableComponent extends BaseTable implements AfterViewInit
         this.selected.push(...selected);
         this.checkedList.emit(this.selected);
     }
-
-    log(value: any): string {
-        console.log(value);
-        return 'log';
-    }
 }

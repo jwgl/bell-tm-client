@@ -11,9 +11,12 @@ import { typeahead } from 'core/utils/typeahead';
 export class PlaceTableComponent extends BaseTable implements AfterViewInit {
     @ViewChild('search', { static: true }) input: ElementRef;
     @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
+    @ViewChild('hinder', { static: true }) hinder: ElementRef;
     @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
     @ViewChild('labelTmpl', { static: true }) labelTmpl: TemplateRef<any>;
     @Output() checkedList = new EventEmitter<any>();
+    @Input() hindFields: any[];
+    @Output() fieldsForSave = new EventEmitter<any>();
 
     @Input() set checkAble(value: boolean) {
         if (value) {
@@ -88,5 +91,31 @@ export class PlaceTableComponent extends BaseTable implements AfterViewInit {
         selected.forEach(t => t.checked = true);
         this.selected.push(...selected);
         this.checkedList.emit(this.selected);
+    }
+
+    hind(field: any) {
+        if (!this.hindFields) {
+            this.hindFields = [];
+            this.hindFields.push(field.prop);
+        } else {
+            const col = this.hindFields.find(f => f === field.prop);
+            if (col) {
+                this.hindFields.splice(this.hindFields.indexOf(col), 1);
+            } else {
+                this.hindFields.push(field.prop);
+            }
+        }
+    }
+
+    isHind(field: any): boolean {
+        return this.hindFields && this.hindFields.some(item => item === field.prop || item === field.name);
+    }
+
+    filterByHinder() {
+        return (item: string) => !this.isHind(item);
+    }
+
+    saveHindField() {
+        this.fieldsForSave.emit(this.hindFields);
     }
 }

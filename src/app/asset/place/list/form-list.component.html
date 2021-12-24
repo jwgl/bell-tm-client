@@ -5,4 +5,4 @@
         <a class="btn btn-secondary ml-2" download href="/api/asset/output?type=room">导出场地清单</a>
     </div>
 </div>
-<tm-asset-place-table [data]="rooms" [detailShow]="true"></tm-asset-place-table>
+<tm-asset-place-table [data]="rooms" [detailShow]="true" [hindFields]="fields" (fieldsForSave)="saveFields($event)"></tm-asset-place-table>

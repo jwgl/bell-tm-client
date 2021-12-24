@@ -2,7 +2,7 @@
     <div class="box-header btn-toolbar mb-0">
         <div class="div-inline">筛选条件：</div>
         <div class="btn-group ml-auto">
-            <ng-container *ngFor="let col of filterColumns">
+            <ng-container *ngFor="let col of filterColumns |filterBy: filterByHinder()">
                 <div class="mr-3" #dropdown>
                     <div data-toggle="dropdown">
                         {{col.label}} <span chevron-down-icon></span>
@@ -12,19 +12,30 @@
                             [(ngModel)]="searchStr">
                         <a class="dropdown-item" (click)="clearFilter(col.name)">全选</a>
                         <a *ngFor="let item of baseList | uniqueBy: col.name | filterBy: filterBySelected(col.name, true)"
-                            class="dropdown-item d-flex" (click)="select(col.name, item)">{{item}}<span
+                            class="dropdown-item d-flex" (click)="$event.stopPropagation();select(col.name, item)">{{item}}<span
                                 *ngIf="isSelected(col.name, item)" class="ml-auto">√</span></a>
                         <a *ngFor="let item of baseList | uniqueBy: col.name | filterBy: filterBySelected(col.name, false)"
-                            class="dropdown-item" (click)="select(col.name, item)">{{item}}</a>
+                            class="dropdown-item" (click)="$event.stopPropagation();select(col.name, item)">{{item}}</a>
                     </div>
                 </div>
             </ng-container>
+        </div>
+        <div class="btn-group">
+            <div #hinder>
+                <div data-toggle="dropdown"> <span class="hinder">隐藏列</span> <span chevron-down-icon></span>
+                </div>
+                <div class="dropdown-menu" style="padding: 5px;">
+                    <a *ngFor="let item of columns" class="dropdown-item d-flex" (click)="$event.stopPropagation();hind(item)">{{item.name}}
+                        <span *ngIf="isHind(item)" class="ml-auto">√</span></a>
+                    <a class="dropdown-item hinder-save" (click)="saveHindField()">保存</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <div>
     <ngx-datatable class="material" style="height: 650px;" [rows]="rows" columnMode="force" [headerHeight]="50"
-        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [columns]="columns"
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [columns]="columns | filterBy: filterByHinder()"
         [selected]="selected" [selectionType]="SelectionType.checkbox" (select)="onSelect($event)"
         [selectAllRowsOnPage]="false">
         <ngx-datatable-footer>

@@ -9,6 +9,7 @@ export class BaseTable {
     filters = [];
     baseList = [];
     selected = [];
+    hinds: any[];
     SelectionType = SelectionType;
     searchStr: string;
 
@@ -93,4 +94,27 @@ export class BaseTable {
             _.intersection(list,
                 this.baseList.filter(b => f.items.some((i: string) => b[f.id] === i))), this.baseList);
     }
+
+    hind(field: any) {
+        if (!this.hinds) {
+            this.hinds = [];
+            this.hinds.push(field.prop);
+        } else {
+            const col = this.hinds.find(f => f === field.prop);
+            if (col) {
+                this.hinds.splice(this.hinds.indexOf(col), 1);
+            } else {
+                this.hinds.push(field.prop);
+            }
+        }
+    }
+
+    isHind(field: any): boolean {
+        return this.hinds && this.hinds.some(item => item === field.prop || item === field.name);
+    }
+
+    filterByHinder() {
+        return (item: string) => !this.isHind(item);
+    }
+
 }
