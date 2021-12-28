@@ -1,0 +1,15 @@
+<div class="misconduct card bg-light">
+    <div class="card-header d-flex">
+        <h5>场地照片</h5>
+        <div class="btn-group ml-auto" *ngIf="editable">
+            <button class="btn btn-sm btn-secondary" (click)="onEdit()">编辑</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-columns" *ngIf="pictures && pictures.length">
+            <div class="card" *ngFor="let picture of pictures">
+                <img class="card-img" [src]="pictureUrl + '/' + picture">
+            </div>
+        </div>
+    </div>
+</div>

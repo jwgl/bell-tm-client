@@ -40,7 +40,7 @@ export class TransferDialog extends BaseDialog {
             note: this.form.note,
             toId: this.form.toId,
             transferType: this.transferType,
-            fileName: (this.fileType.names && this.fileType.names.length > 0) ? this.fileType.names[0] : '',
+            fileName: (this.fileType && this.fileType.names && this.fileType.names.length > 0) ? this.fileType.names[0] : '',
             addedItems: this.assets.map(item => ({ id: item.id })),
         };
     }

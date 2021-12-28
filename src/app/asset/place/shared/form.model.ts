@@ -20,6 +20,7 @@ export class Room {
     labelStr: string;
     labelItems: any;
     planning: boolean;
+    pictures: string[];
 
     constructor(dto: any) {
         Object.assign(this, dto);

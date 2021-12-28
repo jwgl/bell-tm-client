@@ -10,4 +10,22 @@
         </div>
     </div>
     <tm-place-form-viewer [vm]="vm" [labelAdmin]="createAble" [userId]="userId" [labels]="labels"></tm-place-form-viewer>
+    <div class="btn-toolbar" *ngIf="!selectedPicture">
+        <button class="btn btn-success ml-auto" type="button" (click)="onCreatePicture()">上传照片</button>
+    </div>
+    <tm-picture-editor *ngIf="selectedPicture; else viewerTpl"
+        mode="create"
+        [pictures]="pictures"
+        [pictureUrl]="pictureUrl"
+        (confirm)="onPictureCreated($event)"
+        (cancel)="onPictureCanceled($event)">
+    </tm-picture-editor>
+    <ng-template #viewerTpl>
+        <tm-picture-viewer
+            [pictures]="pictures"
+            [editable]="true"
+            [pictureUrl]="pictureUrl"
+            (edit)="onEditPicture(pictures)">
+        </tm-picture-viewer>
+    </ng-template>
 </ng-container>
