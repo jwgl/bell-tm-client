@@ -18,6 +18,9 @@ export class PlaceItemComponent {
     createAble: boolean;
     labels: any;
     labelTypes: any;
+    planAble: boolean;
+    pictures: any;
+    selectedPicture = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -36,6 +39,8 @@ export class PlaceItemComponent {
             this.createAble = dto.createAble;
             this.labels = dto.labels ? dto.labels : [];
             this.labelTypes = dto.labelTypes ? dto.labelTypes : [];
+            this.planAble = dto.planAble;
+            this.pictures = this.vm.pictures;
         });
     }
 
@@ -69,5 +74,38 @@ export class PlaceItemComponent {
 
     get userId(): string {
         return this.service.userId;
+    }
+
+    onCreatePicture() {
+        this.pictures = [];
+        this.selectedPicture = true;
+        this.scrollToView();
+    }
+
+    onEditPicture(pics: any) {
+        this.pictures = pics;
+        this.selectedPicture = true;
+        this.scrollToView();
+    }
+
+    onPictureCreated(pictures: any) {
+        this.service.createPicture(this.vm.id, pictures).subscribe(result => {
+            this.pictures.concat(result);
+            this.selectedPicture = false;
+        });
+    }
+
+    onPictureCanceled() {
+        this.selectedPicture = false;
+    }
+
+    get pictureUrl(): string {
+        return this.service.getPictureUrl();
+    }
+
+    private scrollToView(): void {
+        setTimeout(() => {
+            document.getElementById('picture-editor').scrollIntoView();
+        }, 1);
     }
 }

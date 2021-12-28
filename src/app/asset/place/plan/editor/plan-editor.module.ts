@@ -7,7 +7,7 @@ import { IconModule } from 'core/icon';
 
 import { CommonDirectivesModule } from 'core/common-directives';
 import { CommonDialogsModule } from 'core/common-dialogs';
-import { TmAssetCommonModule } from '../../components/asset-common.module';
+import { TmAssetCommonModule } from '../../../components/asset-common.module';
 
 import { PlanEditorComponent } from './plan-editor.component';
 

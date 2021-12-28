@@ -11,9 +11,14 @@ import { typeahead } from 'core/utils/typeahead';
 export class PlaceTableComponent extends BaseTable implements AfterViewInit {
     @ViewChild('search', { static: true }) input: ElementRef;
     @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
+    @ViewChild('hinder', { static: true }) hinder: ElementRef;
     @ViewChild('idTmpl', { static: true }) idTmpl: TemplateRef<any>;
     @ViewChild('labelTmpl', { static: true }) labelTmpl: TemplateRef<any>;
     @Output() checkedList = new EventEmitter<any>();
+    @Input() set hindFields(value: any) {
+        this.hinds = value;
+    }
+    @Output() fieldsForSave = new EventEmitter<any>();
 
     @Input() set checkAble(value: boolean) {
         if (value) {
@@ -90,8 +95,7 @@ export class PlaceTableComponent extends BaseTable implements AfterViewInit {
         this.checkedList.emit(this.selected);
     }
 
-    log(value: any): string {
-        console.log(value);
-        return 'log';
+    saveHindField() {
+        this.fieldsForSave.emit(this.hinds);
     }
 }

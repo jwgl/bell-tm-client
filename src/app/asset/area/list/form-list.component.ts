@@ -21,6 +21,7 @@ export class AreaListComponent {
     assetsSelected: any[];
     flush: boolean;
     ids = '';
+    fields: any;
 
     constructor(
         private service: AreaService,
@@ -39,6 +40,7 @@ export class AreaListComponent {
         this.buildings = dto.buildings;
         this.places = dto.places;
         // this.areas = dto.areas;
+        this.fields = dto.fields;
     }
 
     query() {
@@ -134,5 +136,9 @@ export class AreaListComponent {
         } else {
             return `/api/asset/output?type=device&ids=${this.ids}`;
         }
+    }
+
+    saveFields(fields: any) {
+        this.service.createHindField({ tableName: 'asset', fields }).subscribe();
     }
 }

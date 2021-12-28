@@ -1,0 +1,41 @@
+<form id="picture-editor" class="card bg-light" #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="card-header d-flex">
+        <h5>场地照片</h5>
+        <div class="btn-toolbar mb-0 ml-auto">
+            <div class="btn-group ml-2">
+                <button class="btn btn-sm btn-secondary" (click)="onCancel()">取消</button>
+                <button class="btn btn-sm btn-primary" type="submit">确定</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="form-group mb-0">
+            <label class="btn-link">
+                <input type="file" class="d-none" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
+                    [uploadInput]="uploadInput" multiple>场地照片
+            </label>
+            <div class="form-control pictures" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)"
+                [uploadInput]="uploadInput">
+                <div class="card-columns" *ngIf="pictures?.length + files?.length > 0; else emptyTpl">
+                    <div class="card" *ngFor="let picture of pictures">
+                        <img class="card-img" [src]="pictureUrl + '/' + picture">
+                        <div class="card-img-overlay">
+                            <button type="button" class="close" (click)="removePicture(picture)">&times;</button>
+                        </div>
+                    </div>
+                    <div class="card" *ngFor="let f of files; let i = index;">
+                        <div class="card-body">
+                            <div class="card-text">{{f.name}}</div>
+                            <div class="progress" style="height: 4px;">
+                                <div class="progress-bar" role="progressbar" [style.width]="f?.progress?.data?.percentage + '%'"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #emptyTpl>
+                    <div style="line-height: 2rem; vertical-align: middle">拖放文件或点击“场地照片”上传图片。</div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</form>

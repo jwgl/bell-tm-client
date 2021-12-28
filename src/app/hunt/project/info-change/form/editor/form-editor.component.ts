@@ -148,6 +148,9 @@ export class ChangeFormEditorComponent {
         if (!this.form.mainInfoForm && this.form.fileType.names.length === 0) {
             error.push('请先上传申报书');
         }
+        if (!this.form.projectId) {
+            error.push('请选择要变更的项目！');
+        }
         return error;
     }
 

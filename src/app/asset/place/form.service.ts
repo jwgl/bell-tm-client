@@ -18,6 +18,10 @@ export class RoomFormService extends RestEditService {
         private labelApiUrl: string,
         @Inject('LABELLING_API_URL')
         private labellingApiUrl: string,
+        @Inject('HINDFIELD_API_URL')
+        private hindFieldApiUrl: string,
+        @Inject('PICTURE_URL')
+        private pictureUrl: string,
     ) {
         super(http, apiUrl, { userId: authService.userInfo.id });
         this.labelApiUrl = this.labelApiUrl.replace('${userId}', authService.userInfo.id);
@@ -31,5 +35,17 @@ export class RoomFormService extends RestEditService {
 
     createRoomLabel<T>(value: any): Observable<T> {
         return this.http.post<{ id: T }>(this.labellingApiUrl, value).pipe(map(data => data.id));
+    }
+
+    createHindField<T>(value: any): Observable<T> {
+        return this.http.post<{ id: T }>(this.hindFieldApiUrl, value).pipe(map(data => data.id));
+    }
+
+    createPicture(id: number, pictures: any): Observable<any> {
+        return this.http.post(`${this.api.item(id)}/pictures`, pictures);
+    }
+
+    getPictureUrl(): string {
+        return this.pictureUrl;
     }
 }

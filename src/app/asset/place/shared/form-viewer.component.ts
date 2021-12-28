@@ -9,6 +9,7 @@ export class PlaceFormViewerComponent {
     @Input() vm: any;
     @Input() labelAdmin = false;
     @Input() userId: any;
+    @Input() labels: any;
 
     common = true;
     labelAll() {
@@ -25,5 +26,15 @@ export class PlaceFormViewerComponent {
 
     labelStr(label: any): string {
         return label ? `${label.type}：${label.labelName} ${label.single ? label.creator : ''}` : null;
+    }
+
+    toLabelStrings(ids: any): string {
+        if (ids) {
+            return this.labels.filter(item => ids.some(id => id === item.id))
+                .map(label => label.labelName)
+                .join(';');
+        } else {
+            return '';
+        }
     }
 }

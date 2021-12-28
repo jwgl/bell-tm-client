@@ -1,24 +1,35 @@
 <div class="btn-toolbar">
     <div class="form-inline">
             <label class="control-label mr-2">学期</label>
-            <select name="level1" class="form-control" [(ngModel)]="queryOptions.termId">
+            <select name="termId" class="form-control" [(ngModel)]="termId">
                 <option [value]="undefined" disabled>请选择</option>
-                <option *ngFor="let item of terms" [ngValue]="item">{{termText(item)}}</option>
+                <option *ngFor="let item of plans | uniqueBy: 'termId'" [ngValue]="item">{{item | term}}</option>
             </select>
-            <label class="control-label ml-2 mr-2">标签</label>
-            <ng-select name="label"
-                [items]="labels"
-                [multiple]="true"
-                [closeOnSelect]="false"
-                [hideSelected]="true"
-                bindLabel="fullName"
-                placeholder="选择标签"
-                [(ngModel)]="labelSelected">
-            </ng-select>
     </div>
     <div class="ml-auto">
-        <button class="btn btn-primary" (click)="query()">查询</button>
         <button class="btn btn-secondary" routerLink="../">返回</button>
     </div>
 </div>
-<tm-asset-place-table [data]="rooms" [detailShow]="true"></tm-asset-place-table>
+<ng-container *ngIf="plans && plans.length > 0">
+    <table class="table table-hover">
+        <th>ID</th>
+        <th>计划名称</th>
+        <th>计划创建时间</th>
+        <th>计划类型</th>
+        <th>受影响场地</th>
+        <th>实施学期</th>
+        <th>计划状态</th>
+        <th>处理时间</th>
+        <tbody>
+            <tr *ngFor="let plan of plans | filterBy: filterByTermId(termId); let i = index">
+                <td><a [routerLink]="[plan.id]">{{i + 1}} #{{plan.id}}</a></td>
+                <td>{{plan.name}}</td>
+                <td>{{plan.dateCreated | date: 'y-MM-dd'}}</td>
+                <td>{{plan.action | planAction}}</td>
+                <td>{{plan.roomRelative}}</td>
+                <td>{{plan.termId | term}}</td>
+                <td>{{plan.status | planStatus}}</td>
+                <td>{{plan.dateProcessed | date: 'y-MM-dd'}}</td>
+            </tr>
+        </tbody>
+    </table>

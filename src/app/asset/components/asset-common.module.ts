@@ -9,6 +9,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DeviceTableComponent } from './device-table.component';
 import { PlaceTableComponent } from './place-table.component';
 import { TransferFormTableComponent } from './transfer-form-table.component';
+import { AssetModelTableComponent } from './asset-model-table.component';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import { TransferFormTableComponent } from './transfer-form-table.component';
         DeviceTableComponent,
         PlaceTableComponent,
         TransferFormTableComponent,
+        AssetModelTableComponent,
     ],
     exports: [
         SelectOrOtherComponent,
@@ -31,6 +33,7 @@ import { TransferFormTableComponent } from './transfer-form-table.component';
         DeviceTableComponent,
         PlaceTableComponent,
         TransferFormTableComponent,
+        AssetModelTableComponent,
     ],
 })
 export class TmAssetCommonModule { }

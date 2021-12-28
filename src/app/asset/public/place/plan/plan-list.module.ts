@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonDirectivesModule } from 'core/common-directives';
-import { TmAssetCommonModule } from '../../../components/asset-common.module';
+import { PlaceFormViewerModule } from 'app/asset/place/shared/form-viewer.module';
 import { PlanListComponent } from './plan-list.component';
 
 @NgModule({
@@ -13,7 +13,7 @@ import { PlanListComponent } from './plan-list.component';
         FormsModule,
         RouterModule,
         CommonDirectivesModule,
-        TmAssetCommonModule,
+        PlaceFormViewerModule,
         NgSelectModule,
     ],
     declarations: [

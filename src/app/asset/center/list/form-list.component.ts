@@ -19,6 +19,7 @@ export class CenterListComponent {
     assetNames: any;
     states: any;
     places: any;
+    fields: any;
     assetsSelected: any[];
 
     constructor(
@@ -39,6 +40,7 @@ export class CenterListComponent {
             this.states = dto.states;
             this.buildings = dto.buildings;
             this.places = dto.places;
+            this.fields = dto.fields;
         });
     }
 
@@ -115,6 +117,10 @@ export class CenterListComponent {
         this.transferService.create(form).subscribe(id =>
             this.router.navigate([path, id], { relativeTo: this.route })
         );
+    }
+
+    saveFields(fields: any) {
+        this.service.createHindField({ tableName: 'asset', fields }).subscribe();
     }
 
 }
