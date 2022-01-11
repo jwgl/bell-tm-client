@@ -13,7 +13,7 @@
                     </div>
                     <div class="form-group">
                         <label for="bookingDate">借用日期</label>
-                        <input type="date" class="form-control" id="bookingDate" name="bookingDate"
+                        <input type="date" [min]="today" [max]="maxday" class="form-control" id="bookingDate" name="bookingDate"
                             [(ngModel)]="bookingDate" required>
                     </div>
                     <div class="form-group">
