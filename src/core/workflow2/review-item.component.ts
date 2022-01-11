@@ -59,6 +59,14 @@ export class WorkflowReviewItemComponent implements OnInit {
                 comment: result.comment,
             }).subscribe(() => {
                 this.pending = false;
+                if (this.reviewInfo.taskVariable.name === 'approvalResult') {
+                    this.workflow.message({
+                        formId: this.reviewInfo.formId,
+                        source: this.workflow.taskUrl,
+                        status: this.reviewInfo.taskVariable.name,
+                        action
+                    }).subscribe();
+                }
                 this.onComplete.emit(this.reviewInfo.taskId);
             }, errorRsp => {
                 this.pending = false;
