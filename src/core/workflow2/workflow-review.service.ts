@@ -18,12 +18,15 @@ export interface CompleteOptions {
 @Injectable()
 export class WorkflowService {
     pending = false;
+    taskUrl: string;
 
     constructor(
         private http: Http,
         @Inject('WORKFLOW_TASK_API_URL') private taskApi: ApiUrl,
         @Inject('WORKFLOW_STEP_API_URL') private stepApi: ApiUrl,
-    ) { }
+    ) {
+        this.taskUrl = this.taskApi.list();
+     }
 
     loadTasks<T>(params?: { [param: string]: string | string[] }): Observable<T[]> {
         return this.http.get<T[]>(this.taskApi.list(), params);
@@ -49,6 +52,10 @@ export class WorkflowService {
 
     complete(id: string, data: any): Observable<any> {
         return this.http.patch(`${this.taskApi.item(id)}/complete`, data)
+    }
+
+    message(data: any): Observable<any> {
+        return this.http.post('/api/asset/messages', data);
     }
 
     private getTotalCountHeader(response: HttpResponse<any>): number {

@@ -161,4 +161,12 @@ export class FindRoomDialog extends BaseDialog {
         const keys = Object.keys(this.requiredSelection);
         return keys.length == 0 || keys.every(key => !!this.requiredSelection[key]);
     }
+
+    get today(): string {
+        return dayjs().format('YYYY-MM-DD');
+    }
+
+    get maxday(): string {
+        return dayjs().add(20, 'day').format('YYYY-MM-DD');
+    }
 }
