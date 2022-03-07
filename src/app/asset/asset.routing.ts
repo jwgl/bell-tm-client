@@ -34,6 +34,9 @@ const routes: Routes = [{
 }, {
     path: 'users/:userId/carts',
     loadChildren: () => import('./cart/cart.module').then(m => m.CartModule),
+}, {
+    path: 'users/:userId/placeServices',
+    loadChildren: () => import('./service-log/service-log.module').then(m => m.ServiceLogModule),
 }];
 
 @NgModule({

@@ -10,6 +10,7 @@ import { DeviceTableComponent } from './device-table.component';
 import { PlaceTableComponent } from './place-table.component';
 import { TransferFormTableComponent } from './transfer-form-table.component';
 import { AssetModelTableComponent } from './asset-model-table.component';
+import { ServiceLogTableComponent } from './service-log-table.component';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { AssetModelTableComponent } from './asset-model-table.component';
         PlaceTableComponent,
         TransferFormTableComponent,
         AssetModelTableComponent,
+        ServiceLogTableComponent,
     ],
     exports: [
         SelectOrOtherComponent,
@@ -34,6 +36,7 @@ import { AssetModelTableComponent } from './asset-model-table.component';
         PlaceTableComponent,
         TransferFormTableComponent,
         AssetModelTableComponent,
+        ServiceLogTableComponent,
     ],
 })
 export class TmAssetCommonModule { }

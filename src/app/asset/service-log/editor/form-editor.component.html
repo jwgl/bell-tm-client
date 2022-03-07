@@ -1,0 +1,84 @@
+<form *ngIf="form" #ngForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-primary' type="submit" [disabled]="saving || !ngForm.form.valid">保存</button>
+        </div>
+    </div>
+    <tm-form-title>保障服务单{{form.id}}</tm-form-title>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="bookingType">场地</label>
+                    <div class="mr-3">
+                        <tm-place-select (selectPlace)="onPlaceSelected($event)"></tm-place-select>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="logDate">报修日期</label>
+                    <input type="date" [min]="termStart" [max]="today" class="form-control" id="logDate" name="logDate"
+                        [(ngModel)]="form.logDate" (ngModelChange)="onDateChange($event)" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="bookingType">节次</label>
+                    <select class="form-control" id="section" name="section" [(ngModel)]="form.section"
+                        (ngModelChange)="onSectionChange($event)" required>
+                        <option *ngFor="let item of sections" [ngValue]="item">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="department">报修部门</label>
+                    <select class="form-control" id="department" name="department" [(ngModel)]="form.department"
+                        required>
+                        <option *ngFor="let department of departments" [ngValue]="department.id">{{department.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="bookingType">报修人</label>
+                    <input class="form-control" type="text" id="contact" name="contact" [(ngModel)]="form.contact"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="type">服务保障类型</label>
+                    <select class="form-control" id="type" name="type" [(ngModel)]="form.type" required>
+                        <option *ngFor="let item of types" [ngValue]="item">{{item}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="item">服务保障项目</label>
+                    <select class="form-control" id="item" name="item" [(ngModel)]="form.item" required>
+                        <option *ngFor="let item of items" [ngValue]="item">{{item}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dateFinished">完成时间</label>
+                    <input type="date" [min]="form.logDate" [max]="today" class="form-control" id="dateFinished" name="dateFinished"
+                    [(ngModel)]="form.dateFinished" (ngModelChange)="onDateChange($event)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">备注</label>
+                <textarea class="form-control" id="description" name="description" rows="4"
+                    [(ngModel)]="form.description" maxlength="200"></textarea>
+                <small class="text-muted">如有特殊说明，最多200个字符。</small>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-info card bg-light mb-3">
+                <div class="card-header">场地配置</div>
+                <div class="card-body">
+                    <ul class="asset" *ngIf="form.roomName && assets" style="max-height: 290px; overflow-y: auto;">
+                        <li *ngFor="let asset of assets">{{asset.name}} {{asset.specs}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
