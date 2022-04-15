@@ -59,6 +59,7 @@ export class FindPlaceDialog extends BaseDialog {
 
     places: any[] = [];
     finding = false;
+    singleWeek = false;
 
     constructor(private service: BookingFormService) {
         super();
@@ -80,6 +81,9 @@ export class FindPlaceDialog extends BaseDialog {
     startWeekChanged(newValue: number) {
         if (newValue > this.queryOptions.endWeek) {
             this.queryOptions.endWeek = newValue;
+        } else if (newValue - this.queryOptions.endWeek === 0) {
+            this.queryOptions.oddEven = 0;
+            this.singleWeek = false;
         }
         this.queryOptions.startWeek = newValue;
         this.places = [];
@@ -88,6 +92,9 @@ export class FindPlaceDialog extends BaseDialog {
     endWeekChanged(newValue: number) {
         if (newValue < this.queryOptions.startWeek) {
             this.queryOptions.startWeek = newValue;
+        } else if (newValue - this.queryOptions.startWeek === 0) {
+            this.queryOptions.oddEven = 0;
+            this.singleWeek = false;
         }
         this.queryOptions.endWeek = newValue;
         this.places = [];

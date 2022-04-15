@@ -7,13 +7,17 @@ import { ServiceLogFormService } from '../form.service';
 })
 export class ServiceLogFormListComponent {
     logs: ServiceLogForm[];
+    fields: any;
 
     constructor(private service: ServiceLogFormService) {
         this.loadData();
     }
 
     loadData() {
-        this.service.loadList().subscribe((dto: any) => this.logs = dto.logs.map(it => new ServiceLogForm(it)));
+        this.service.loadList().subscribe((dto: any) => {
+            this.logs = dto.logs.map(it => new ServiceLogForm(it));
+            this.fields = dto.fields;
+        });
     }
 
     saveFields(fields: any) {

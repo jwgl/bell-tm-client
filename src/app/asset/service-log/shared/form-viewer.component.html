@@ -1,0 +1,53 @@
+<ng-container *ngIf="vm">
+    <tm-form-title>服务保障日志{{vm.id}}</tm-form-title>
+    <div class="row">
+        <div class="row col-lg-8">
+            <div class="form-group col-4">
+                <label class="control-label">场地名称</label>
+                <p class="form-control-plaintext">{{vm.building}} {{vm.roomName}} </p>
+            </div>
+            <div class="form-group col-4">
+                <label class="control-label">报修日期</label>
+                <p class="form-control-plaintext">{{vm.logDate | date: 'y-MM-dd'}}</p>
+            </div>
+            <div class="form-group col-4">
+                <label class="control-label">节次</label>
+                <p class="form-control-plaintext">{{vm.section}}</p>
+            </div>
+            <div class="form-group col-4">
+                <label class="control-label">报修部门</label>
+                <p class="form-control-plaintext">{{vm.departmentName}}</p>
+            </div>
+            <div class="form-group col-4">
+                <label class="control-label">报修人</label>
+                <p class="form-control-plaintext">{{vm.contact}}</p>
+            </div>
+            <div class="form-group col-4">
+                <label class="control-label">服务保障类型</label>
+                <p class="form-control-plaintext">{{vm.type}}</p>
+            </div>
+            <div class="form-group col-4">
+                <label class="control-label">服务保障项目</label>
+                <p class="form-control-plaintext">{{vm.item}}</p>
+            </div>
+            <div class="form-group col-4">
+                <label class="control-label">状态</label>
+                <p class="form-control-plaintext"><span class="badge badge-pill badge-primary">{{vm.status}}</span></p>
+            </div>
+            <div class="form-group">
+                <label for="description">备注</label>
+                <div>{{vm.note}}</div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-info card bg-light mb-3">
+                <div class="card-header">场地配置</div>
+                <div class="card-body">
+                    <ul class="asset" *ngIf="assets" style="max-height: 290px; overflow-y: auto;">
+                        <li *ngFor="let asset of assets">{{asset.name}} {{asset.specs}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
