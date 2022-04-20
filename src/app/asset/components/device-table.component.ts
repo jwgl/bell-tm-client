@@ -24,6 +24,7 @@ export class DeviceTableComponent extends BaseTable implements AfterViewInit {
         { name: 'place', label: '房间号' },
         { name: 'placeType', label: '房间类型' },
         { name: 'assetType', label: '资产类别' },
+        { name: 'sn', label: '设备编号'},
         { name: 'name', label: '设备名称' },
         { name: 'brand', label: '品牌' },
         { name: 'specs', label: '规格型号' },
