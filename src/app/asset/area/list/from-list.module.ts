@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { NgSelectModule } from '@ng-select/ng-select';
-
 import { CommonDirectivesModule } from 'core/common-directives';
 import { Dialog } from 'core/dialogs';
 import { TmAssetCommonModule } from '../../components/asset-common.module';

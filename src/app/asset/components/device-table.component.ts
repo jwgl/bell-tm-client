@@ -16,6 +16,9 @@ export class DeviceTableComponent extends BaseTable implements AfterViewInit {
   @Output() fieldsForSave = new EventEmitter<any>();
   @Input() set hindFields(value: any) {
     this.hinds = value;
+    if (value) {
+      this.columnForShow = this.columns.filter((col: any) => !this.hinds.some((item: string) => item === col.prop || item === col.name));
+    }
   }
   @Input() set data(value: any[]) {
     if (value) {
@@ -68,6 +71,7 @@ export class DeviceTableComponent extends BaseTable implements AfterViewInit {
       { prop: 'state', name: '状态', comparator: this.localComparator, width: 90 },
       { prop: 'note', name: '备注', width: 150 },
     ];
+    this.columnForShow = this.columns;
   }
 
   @Input() set detailShow(value: boolean) {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Dialog } from 'core/dialogs';
-
+import { SelectionType, ColumnMode } from '@swimlane/ngx-datatable';
 import { AreaService } from '../area.service';
 import { Asset } from '../../shared/asset-form.model';
 import { TransferFormService } from '../transfer.service';
@@ -15,14 +15,15 @@ export class AreaListComponent {
     assets: Asset[];
     buildings: any;
     assetNames: any;
-    states: any;
+    states = [{name: '在用', value: 'USING'}, {name: '备用', value: 'STANDBY'}];
     places: any;
     // areas: any;
     assetsSelected: any[];
     flush: boolean;
     ids = '';
     fields: any;
-
+    ColumnMode = ColumnMode;
+    q: string;
     constructor(
         private service: AreaService,
         private route: ActivatedRoute,
@@ -36,7 +37,6 @@ export class AreaListComponent {
     loadData(dto: any) {
         this.assets = dto.list.map(it => new Asset(it));
         this.assetNames = dto.assetNames;
-        this.states = dto.states;
         this.buildings = dto.buildings;
         this.places = dto.places;
         // this.areas = dto.areas;
@@ -140,5 +140,13 @@ export class AreaListComponent {
 
     saveFields(fields: any) {
         this.service.createHindField({ tableName: 'asset', fields }).subscribe();
+    }
+
+    localComparator(str1: string, str2: string): number {
+        return String(str1).localeCompare(str2);
+    }
+
+    find() {
+        this.service.loadList({q: this.q}).subscribe(dto => this.loadData(dto));
     }
 }

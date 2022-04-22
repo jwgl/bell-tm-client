@@ -33,7 +33,7 @@
     </div>
 </div>
 <div>
-    <ngx-datatable class="material" [ngStyle]="{'height': size === 'sm' ? '250px' : '650px'}" [rows]="rows"
+    <!-- <ngx-datatable class="material" [ngStyle]="{'height': size === 'sm' ? '250px' : '650px'}" [rows]="rows"
         columnMode="force" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
         [scrollbarH]="true" [columns]="columns | filterBy: filterByHinder()" [selected]="selected" [selectionType]="SelectionType.checkbox"
         (select)="onSelect($event)" [selectAllRowsOnPage]="false">
@@ -44,7 +44,24 @@
                 </div>
             </ng-template>
         </ngx-datatable-footer>
-    </ngx-datatable>
+    </ngx-datatable> -->
+    <ngx-datatable
+    class="material"
+    [rows]="rows"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="50"
+    [scrollbarV]="true"
+    [scrollbarH]="true"
+    [limit]="10"
+    [ngStyle]="{'height': size === 'sm' ? '250px' : '650px'}"
+    [selected]="selected" [selectionType]="SelectionType.checkbox" (select)="onSelect($event)"
+    >
+    <ngx-datatable-column *ngFor="let col of columnForShow" [name]="col.name"
+    [prop]="col.prop" [draggable]="col.draggable" [headerCheckboxable]="col.headerCheckboxable"
+    [width]="col.width" [checkboxable]="col.checkboxable" (comparator)="localComparator()"> </ngx-datatable-column>
+</ngx-datatable>
 </div>
 
 <ng-template #idTmpl let-rowIndex="rowIndex" let-value="value">
