@@ -5,8 +5,8 @@
                 <form-field label="{{transferType}}楼区">
                     <select name="building" class="form-control" [(ngModel)]="form.building"
                         (ngModelChange)="buildingChange($event)">
-                        <option *ngFor="let building of buildings " [ngValue]="building">
-                            {{ building}}
+                        <option *ngFor="let building of buildings " [ngValue]="building.value">
+                            {{ building.name}}
                         </option>
                     </select>
                 </form-field>

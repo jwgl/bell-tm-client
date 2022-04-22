@@ -17,10 +17,11 @@ export class CenterListComponent {
     assets: any;
     buildings: any;
     assetNames: any;
-    states: any;
+    states = [{name: '在用', value: 'USING'}, {name: '备用', value: 'STANDBY'}];
     places: any;
     fields: any;
     assetsSelected: any[];
+    q: string;
 
     constructor(
         private service: CenterService,
@@ -30,18 +31,15 @@ export class CenterListComponent {
         private dialog: Dialog,
         private dialogs: CommonDialog,
     ) {
-        this.loadData(this.service.queryOptions);
+        this.service.loadList(this.service.queryOptions).subscribe(dto => this.loadData(dto));
     }
 
-    loadData(query: any) {
-        this.service.loadList(query).subscribe((dto: any) => {
+    loadData(dto: any) {
             this.assets = dto.list.map(it => new Asset(it));
             this.assetNames = dto.assetNames;
-            this.states = dto.states;
             this.buildings = dto.buildings;
             this.places = dto.places;
             this.fields = dto.fields;
-        });
     }
 
     query() {
@@ -50,7 +48,7 @@ export class CenterListComponent {
             buildings: this.buildings,
             states: this.states,
             places: this.places,
-        }).then(result => this.loadData(result));
+        }).then(result => this.service.loadList(result).subscribe(dto => this.loadData(dto)));
     }
 
     batchUpdate() {
@@ -63,7 +61,7 @@ export class CenterListComponent {
                     if (dto.success > 0) {
                         alert(`成功录入${dto.success}个设备的资产编号和序列号`);
                     }
-                    this.loadData(this.service.queryOptions);
+                    this.service.loadList(this.service.queryOptions).subscribe(dtoServer => this.loadData(dtoServer));
                 });
             }
         });
@@ -121,6 +119,10 @@ export class CenterListComponent {
 
     saveFields(fields: any) {
         this.service.createHindField({ tableName: 'asset', fields }).subscribe();
+    }
+
+    find() {
+        this.service.loadList({q: this.q}).subscribe(dto => this.loadData(dto));
     }
 
 }

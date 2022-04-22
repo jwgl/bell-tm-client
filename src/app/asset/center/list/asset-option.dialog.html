@@ -38,7 +38,7 @@
             <form-field label="设备状态">
                 <select name="department" class="form-control" [(ngModel)]="stateSelected">
                     <option *ngFor="let item of states " [ngValue]="item.value">
-                        {{ item.name | state}}
+                        {{ item.name }}
                     </option>
                 </select>
             </form-field>
