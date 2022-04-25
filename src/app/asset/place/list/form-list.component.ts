@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { SelectionType, ColumnMode } from '@swimlane/ngx-datatable';
 import { Room } from '../shared/form.model';
 
 import { RoomFormService } from '../form.service';
@@ -11,6 +11,7 @@ export class PlaceListComponent {
     rooms: Room[];
     createAble: boolean;
     fields: any;
+    ColumnMode = ColumnMode;
 
     constructor(private service: RoomFormService) {
         this.loadData();

@@ -7,9 +7,10 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuReference" style="width: 100%; padding: 5px;">
         <div class="table-wrapper" *ngIf="options?.length > 0">
+            <input type="text" class="form-control form-control-sm w-100" #search placeholder="搜索" [(ngModel)]="searchStr">
             <table class="table table-hover">
                 <tbody>
-                    <tr *ngFor="let item of options" (click)="objectSelected(item)" tabindex="1" style="background-color: #FFF">
+                    <tr *ngFor="let item of sort(options) | filterBy: filterByKey()" (click)="objectSelected(item)" tabindex="1" style="background-color: #FFF">
                         <td>{{item.name}}</td>
                     </tr>
                 </tbody>

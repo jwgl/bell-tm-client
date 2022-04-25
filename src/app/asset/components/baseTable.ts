@@ -1,10 +1,11 @@
-import { SelectionType } from '@swimlane/ngx-datatable';
+import { SelectionType, ColumnMode } from '@swimlane/ngx-datatable';
 import * as _ from 'lodash';
 
 // tslint:disable-next-line:component-class-suffix
 export class BaseTable {
     rows = [];
     columns = [];
+    columnForShow = [];
     filterColumns = [];
     filters = [];
     baseList = [];
@@ -12,16 +13,17 @@ export class BaseTable {
     hinds: any[];
     SelectionType = SelectionType;
     searchStr: string;
+    ColumnMode = ColumnMode;
 
     setData(value: any[], filterColumns: any[]) {
         if (value) {
             this.filterColumns = filterColumns;
             this.rows = value;
             this.baseList = value;
-            this.columns = this.columns.filter(th => th.prop === undefined
-                || _.some(this.rows, it => it[th.prop] !== undefined && it[th.prop] !== null));
-            this.filterColumns = this.filterColumns.filter(col =>
-                _.some(this.rows, it => it[col.name] !== undefined && it[col.name] !== null));
+            // this.columns = this.columns.filter(th => th.prop === undefined
+            //     || _.some(this.rows, it => it[th.prop] !== undefined && it[th.prop] !== null));
+            // this.filterColumns = this.filterColumns.filter(col =>
+            //     _.some(this.rows, it => it[col.name] !== undefined && it[col.name] !== null));
         }
     }
 
@@ -106,6 +108,10 @@ export class BaseTable {
             } else {
                 this.hinds.push(field.prop);
             }
+        }
+        if (this.hinds) {
+            this.columnForShow = this.columns.filter((col: any) =>
+                !this.hinds.some((item: string) => item === col.prop || item === col.name));
         }
     }
 

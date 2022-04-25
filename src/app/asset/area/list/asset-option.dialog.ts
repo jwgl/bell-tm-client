@@ -53,9 +53,11 @@ export class AssetOptionDialog extends BaseDialog {
     }
 
     buildingChange(event: any) {
+        console.log(this.buildingSelected);
         if (this.buildingSelected && this.buildingSelected.length > 0) {
             this.placesShow = this.places.filter(place =>
                 this.buildingSelected.some(building => building.name === place.building));
+            console.log(this.placesShow);
         }
     }
 }

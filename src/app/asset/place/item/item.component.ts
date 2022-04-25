@@ -66,7 +66,7 @@ export class PlaceItemComponent {
             this.service.createRoomLabel({
                 labelId: result.id,
                 roomId: this.vm.id,
-                dateExpire: result.dateExpire,
+                dateExpire: result.dateExpire ? result.dateExpire : '2099-12-30',
             }).subscribe(() => this.loadData(this.vm.id)
                 , error => alert(`错误：${error.error.message}`));
         });

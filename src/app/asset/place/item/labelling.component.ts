@@ -37,8 +37,8 @@ export class LabellingComponent extends BaseDialog {
     }
 
     onSubmit() {
-        if (!this.form.id || !this.form.dateExpire) {
-            alert('标签或失效日期不能空！');
+        if (!this.form.id) {
+            alert('标签不能空！');
         } else {
             this.ok();
         }
