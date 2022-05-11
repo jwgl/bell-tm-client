@@ -1,6 +1,6 @@
 <div class="btn-toolbar">
     <div class="btn-group ml-auto">
-        <button class="btn btn-primary" routerLink="editor">新建</button>
+        <button class="btn btn-primary" routerLink="editor" *ngIf="isEditor">新建</button>
     </div>
 </div>
-<tm-asset-service-log-table [data]="logs" [hindFields]="fields" (fieldsForSave)="saveFields($event)"></tm-asset-service-log-table>
+<tm-asset-service-log-table [data]="logs" [hindFields]="fields" (fieldsForSave)="saveFields($event)" [detailShow]="true"></tm-asset-service-log-table>

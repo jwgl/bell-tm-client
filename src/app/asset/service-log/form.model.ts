@@ -1,6 +1,7 @@
 export class ServiceLogForm {
     id: number;
     roomId: number;
+    termId: number;
     building: string;
     roomName: string;
     dateCreated: string;

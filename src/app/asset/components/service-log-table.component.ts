@@ -31,11 +31,12 @@ export class ServiceLogTableComponent extends BaseTable implements AfterViewInit
         super();
         this.columns = [
             { draggable: false, name: 'ID', prop: 'id', cellTemplate: this.idTmpl, width: 80 },
+            { prop: 'termId', name: '学期', width: 90 },
             { prop: 'building', name: '教学楼', width: 90 },
             { prop: 'roomName', name: '房间号', width: 60 },
             { prop: 'logDate', name: '报修日期', width: 90 },
             { prop: 'section', name: '节次', width: 60 },
-            { prop: 'department', name: '报修单位', comparator: this.localComparator, width: 90 },
+            { prop: 'departmentName', name: '报修单位', comparator: this.localComparator, width: 90 },
             { prop: 'contact', name: '报修人', comparator: this.localComparator, width: 90 },
             { prop: 'userName', name: '值班人', comparator: this.localComparator, width: 90 },
             { prop: 'type', name: '服务保障类型', comparator: this.localComparator },
@@ -62,10 +63,11 @@ export class ServiceLogTableComponent extends BaseTable implements AfterViewInit
     @Input() set data(value: any[]) {
         if (value) {
             const filterColumns = [
+                { name: 'termId', label: '学期' },
                 { name: 'building', label: '教学楼' },
                 { name: 'roomName', label: '房间号' },
                 { name: 'logDate', label: '报修日期' },
-                { name: 'department', label: '报修单位' },
+                { name: 'departmentName', label: '报修单位' },
                 { name: 'userName', label: '值班人' },
                 { name: 'type', label: '服务保障类型' },
                 { name: 'item', label: '服务保障项目' },

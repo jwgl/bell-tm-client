@@ -9,7 +9,7 @@
         <div class="col-lg-8">
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="bookingType">场地</label>
+                    <label>场地 <span class="room ml-5">{{form.roomName}}  </span></label>
                     <div class="mr-3">
                         <tm-place-select (selectPlace)="onPlaceSelected($event)"></tm-place-select>
                     </div>
@@ -20,7 +20,7 @@
                         [(ngModel)]="form.logDate" (ngModelChange)="onDateChange($event)" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="bookingType">节次</label>
+                    <label>节次</label>
                     <select class="form-control" id="section" name="section" [(ngModel)]="form.section"
                         (ngModelChange)="onSectionChange($event)" required>
                         <option *ngFor="let item of sections" [ngValue]="item">{{item}}</option>
@@ -37,7 +37,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="bookingType">报修人</label>
+                    <label>报修人</label>
                     <input class="form-control" type="text" id="contact" name="contact" [(ngModel)]="form.contact"
                         required>
                 </div>

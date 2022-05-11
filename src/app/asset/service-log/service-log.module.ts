@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ServiceLogRoutingModule } from './service-log.routing';
 import { ServiceLogFormListModule } from './list/from-list.module';
 import { ServiceLogFormEditorModule } from './editor/form-editor.module';
+import { ServiceLogItemModule } from './item/item.module';
 import { ServiceLogFormService } from './form.service';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { ServiceLogFormService } from './form.service';
         ServiceLogRoutingModule,
         ServiceLogFormListModule,
         ServiceLogFormEditorModule,
+        ServiceLogItemModule,
     ],
     providers: [
         ServiceLogFormService,
