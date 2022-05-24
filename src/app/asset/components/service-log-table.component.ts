@@ -45,6 +45,7 @@ export class ServiceLogTableComponent extends BaseTable implements AfterViewInit
             { prop: 'dateFinished', name: '完成日期', width: 90 },
             { prop: 'note', name: '备注', width: 120 },
         ];
+        this.columnForShow = this.columns;
     }
 
     @Input() set detailShow(value: boolean) {

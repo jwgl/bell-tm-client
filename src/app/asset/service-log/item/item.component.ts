@@ -11,6 +11,7 @@ export class ServiceLogItemComponent {
     vm: ServiceLogForm;
     createAble: boolean;
     userId: string;
+    assets: any[];
 
     constructor(
         private route: ActivatedRoute,
@@ -24,6 +25,7 @@ export class ServiceLogItemComponent {
         this.service.loadItem(id).subscribe((dto: any) => {
             this.vm = new ServiceLogForm(dto.form);
             this.createAble = dto.createAble;
+            this.assets = dto.assets;
         });
     }
 }

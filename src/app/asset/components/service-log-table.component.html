@@ -35,7 +35,7 @@
 </div>
 <div>
     <ngx-datatable class="material" style="height: 650px;" [rows]="rows" columnMode="force" [headerHeight]="50"
-        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [columns]="columns | filterBy: filterByHinder()"
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [columns]="columnForShow"
         [selected]="selected" [selectionType]="SelectionType.checkbox" (select)="onSelect($event)"
         [selectAllRowsOnPage]="false">
         <ngx-datatable-footer>
