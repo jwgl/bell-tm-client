@@ -1,0 +1,9 @@
+<div *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="ml-auto">
+            <button class="btn btn-secondary" routerLink="../">返回</button>
+            <button class="btn btn-secondary ml-2"  routerLink="edit" *ngIf="createAble">编辑</button>
+        </div>
+    </div>
+    <tm-service-log-viewer [vm]="vm" [assets]="assets"></tm-service-log-viewer>
+</div>

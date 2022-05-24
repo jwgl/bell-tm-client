@@ -5,18 +5,4 @@
         <a class="btn btn-secondary ml-2" download href="/api/asset/output?type=room">导出场地清单</a>
     </div>
 </div>
-<!-- <tm-asset-place-table [data]="rooms" [detailShow]="true" [hindFields]="fields" (fieldsForSave)="saveFields($event)"></tm-asset-place-table> -->
-<ngx-datatable
-    class="material"
-    [rows]="rooms"
-    [columns]="[{ name: 'id' }, { name: 'building' }, { name: 'groups' },
-        { name: 'roomType' }, { name: 'name' }, { name: 'measure' },
-        { name: 'seat' }, { name: 'seatType' }, { name: 'department' },
-        { name: 'statusLabel' }]"
-    [columnMode]="ColumnMode.force"
-    [headerHeight]="50"
-    [footerHeight]="50"
-    rowHeight="auto"
-    [limit]="10"
-    >
-</ngx-datatable>
+<tm-asset-place-table [data]="rooms" [detailShow]="true" [hindFields]="fields" (fieldsForSave)="saveFields($event)"></tm-asset-place-table>
