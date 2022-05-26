@@ -32,7 +32,7 @@ export class ServiceLogFormComponent {
         private route: ActivatedRoute,
         private service: ServiceLogFormService,
     ) {
-        this.sections = _.range(1, 13, 1);
+        this.sections = _.range(0, 13, 1);
         this.editMode = this.route.snapshot.data['mode'];
         this.route.params.subscribe(params => {
             if (this.editMode === EditMode.Create) {
@@ -66,7 +66,7 @@ export class ServiceLogFormComponent {
     }
 
     loadContact() {
-        if (this.form.roomName && this.form.logDate && this.form.section) {
+        if (this.form.roomName && this.form.logDate && this.form.section !== undefined) {
             this.service.findContact({
                 roomName: this.form.roomName,
                 logDate: this.form.logDate,

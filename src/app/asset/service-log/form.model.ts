@@ -50,5 +50,8 @@ export const ServiceItem = [
     '软件安装',
     '虚拟机问题',
     '课件处理',
+    '录播设备',
+    '直播设备',
+    '其他',
 ];
 export const Status = ['待完成', '完成'];

@@ -16,7 +16,10 @@ export class ServiceLogTableComponent extends BaseTable implements AfterViewInit
     @ViewChild('labelTmpl', { static: true }) labelTmpl: TemplateRef<any>;
     @Output() checkedList = new EventEmitter<any>();
     @Input() set hindFields(value: any) {
-        this.hinds = value;
+      this.hinds = value;
+      if (value) {
+        this.columnForShow = this.columns.filter((col: any) => !this.hinds.some((item: string) => item === col.prop || item === col.name));
+      }
     }
     @Output() fieldsForSave = new EventEmitter<any>();
 

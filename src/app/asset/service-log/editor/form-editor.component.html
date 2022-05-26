@@ -23,7 +23,7 @@
                     <label>节次</label>
                     <select class="form-control" id="section" name="section" [(ngModel)]="form.section"
                         (ngModelChange)="onSectionChange($event)" required>
-                        <option *ngFor="let item of sections" [ngValue]="item">{{item}}</option>
+                        <option *ngFor="let item of sections" [ngValue]="item">{{item === 0 ? '中午' : item}}</option>
                     </select>
                 </div>
             </div>
