@@ -1,6 +1,7 @@
 <div class="btn-toolbar">
     <div class="btn-group ml-auto">
         <button class="btn btn-primary" routerLink="editor" *ngIf="isEditor">新建</button>
+        <a class="btn btn-secondary ml-2" download href="/api/asset/output?type=service-log">导出</a>
     </div>
 </div>
 <tm-asset-service-log-table [data]="logs" [hindFields]="fields" (fieldsForSave)="saveFields($event)" [detailShow]="true"></tm-asset-service-log-table>
